@@ -10,7 +10,7 @@ class Controller_Core extends  Controller_Template{
     protected $resource_prefixes = array('default');
     // check Acl access (true means do the check)
     protected $check_access = true;
-    
+
     public $view = null;
     // contains null or array with [directory/]controller/action parts
     // gathered in string in after() method
@@ -190,8 +190,11 @@ class Controller_Core extends  Controller_Template{
     {
         $structure = $this->current_request_structure();
         $directory = NULL;
-        count($structure) < 3 ?: $directory = array_shift($structure);
-        $file_name = (! $directory? '': $directory .DIRECTORY_SEPARATOR ) .  implode('.', $structure);
+        if ( Arr::get($structure, 0))
+        {
+            $directory = array_shift($structure) . '/';
+        }
+        $file_name = $directory .  implode('.', $structure);
         $this->register_css_file($file_name, '', TRUE);
         $this->register_js_file($file_name, TRUE);
     }
