@@ -2,14 +2,15 @@
 
 class Auth extends Singleton{
 
-    public function authorize($user = '')
+    public function authorize(&$user)
     {
-        Session::instance()->set('user','blabla');
+        Session::instance()->set('auth', array('current_user' => $user));
     }
 
     public function current_user()
     {
-
+        $user = Session::instance()->get('auth.current_user');
+        return is_object($user)? clone $user: NULL;
     }
 
     public function logout()
@@ -18,7 +19,7 @@ class Auth extends Singleton{
     }
 
     public function logged_in()
-    {
-        return Session::instance()->get('user');
+    {var_dump(Session::instance()->as_array());
+        return ! is_null(Session::instance()->get('auth'));
     }
 }

@@ -76,15 +76,21 @@ class Model extends Kohana_Model
         if ( ! Arr::is_array($arguments))
                 throw new Kohana_Exception('must be an array');
 
-        if (Arr::is_assoc($arguments))
+        if ( ! Arr::is_assoc($arguments))
         {
-            $this->db_query->where_open();
-            foreach($arguments as $key => $value)
+            $fields = array();
+            foreach($arguments as $field)
             {
-                $this->db_query->where($key, '=', $value);
+                $fields[$field] = $this->$field;
             }
-            $this->db_query->where_close();
+            $arguments = $fields;
         }
+        $this->db_query->where_open();
+        foreach($arguments as $key => $value)
+        {
+           $this->db_query->where($key, '=', $value);
+        }
+        $this->db_query->where_close();
     }
 
     public function select($select_args = '*')
