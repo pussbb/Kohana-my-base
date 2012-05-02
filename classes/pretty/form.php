@@ -108,6 +108,35 @@ class Pretty_Form extends Singleton{
         return $result;
     }
 
+    public function password($params)
+    {
+        $attr = Arr::get($params, 'attr', array());
+        $attr['type'] = 'password';
+        $params['attr'] = $attr;
+        return $this->input($params);
+    }
+    public function checkbox($params)
+    {
+        if ($this->template) {
+            $template = Arr::get($params, 'template', 'checkbox');
+            return $this->render_template($template, $params);
+        }
+        $label_ = NULL;
+        $input_ = NULL;
+
+        $value = $this->value($params);
+        extract(Arr::extract($params, array('name','label','attr')));
+        if ( $label)
+        {
+            $label_ = $this->label($name, $label);
+            $input_ = Form::checkbox($name, $value, !is_null($value), $this->for_label($name, $attr));
+        }
+        else
+        {
+            $input_ = Form::checkbox($name, $value, empty($value), $attr);
+        }
+        return $label_ .  PHP_EOL . $input_;
+    }
     private function value($params)
     {
         $value = Arr::get($params, 'value');
