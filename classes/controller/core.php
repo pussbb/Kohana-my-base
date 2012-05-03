@@ -59,7 +59,7 @@ class Controller_Core extends  Controller_Template{
         // we are here because access is denied
         // redirect to not_logged_in if needed
         if ( $this->request->is_ajax())
-            throw new Exception(__('access_deny'), 403);
+            throw new HTTP_Exception_403(__('access_deny'));
 
         // rememeber the url
         Cookie::set(
@@ -75,7 +75,7 @@ class Controller_Core extends  Controller_Template{
 
         // ok, logged, in
         // then rejected
-        throw new Exception(__('access_deny'), 403);
+        throw new HTTP_Exception_403(__('access_deny'));
         return;
     }
 

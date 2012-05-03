@@ -37,7 +37,7 @@ class Error
             // Create a text version of the exception
             $error->text = $e->getMessage();
 
-            if (Kohana::$is_cli) 
+            if (Kohana::$is_cli)
             {
                 // Just display the text of the exception
                 echo "\n{$error->text}\n";
@@ -48,21 +48,21 @@ class Error
             // Get the exception backtrace
             $error->trace = $e->getTrace();
 
-            if ($e instanceof ErrorException) 
+            if ($e instanceof ErrorException)
             {
-                if (isset(Kohana_Exception::$php_errors[$error->code])) 
+                if (isset(Kohana_Exception::$php_errors[$error->code]))
                 {
                     // Use the human-readable error name
                     $error->code = Kohana_Exception::$php_errors[$error->code];
                 }
 
-                if (version_compare(PHP_VERSION, '5.3', '<')) 
+                if (version_compare(PHP_VERSION, '5.3', '<'))
                 {
                     // Workaround for a bug in ErrorException::getTrace() that exists in
                     // all PHP 5.2 versions. @see http://bugs.php.net/bug.php?id=45895
                     for ($i = count($error->trace) - 1; $i > 0; --$i)
                     {
-                        if (isset($error->trace[$i - 1]['args'])) 
+                        if (isset($error->trace[$i - 1]['args']))
                         {
                             // Re-position the args
                             $error->trace[$i]['args'] = $error->trace[$i - 1]['args'];
@@ -74,21 +74,27 @@ class Error
                 }
             }
             /// need to rewrite next block
-            if ( ! headers_sent()) 
+            if ( ! headers_sent())
             {
                 // Make sure the proper content type is sent with a 500 status
                 $status = 500;
-                if ($error->code == 404)
-                    $status = 404;
-                header('Content-Type: text/html; charset=' . Kohana::$charset, TRUE, $status);
+                if (Arr::get(Response::$messages, $error->code))
+                {
+                     $status =  $error->code;
+                }
+                header('Content-Type: text/html; charset=' . Kohana::$charset, TRUE, $status );
             }
             if ( Request::$current !== NULL && Request::current()->is_ajax() === TRUE)
             {
-                // Just display the text of the exception
-                echo "\n{$error->text}\n";
+
+                        // Just display the text of the exception
+                if ( Kohana::$environment == Kohana::DEVELOPMENT)
+                        echo "\n{$error->text}\n\n{$error->line}\n\n{$error->file}\n";
+                else
+                        echo "\n{$error->text}\n";
                 exit(1);
             }
-            
+
             // Get the contents of the output buffer
             $error->display = $error->render();
             // Log the error
@@ -122,7 +128,7 @@ class Error
      */
     public static function shutdown_handler()
     {
-        if (Kohana::$errors AND $error = error_get_last() AND (error_reporting() & $error['type'])) 
+        if (Kohana::$errors AND $error = error_get_last() AND (error_reporting() & $error['type']))
         {
             // If an output buffer exists, clear it
             ob_get_level() and ob_clean();
@@ -193,7 +199,7 @@ class Error
      */
     public function log()
     {
-        if ($this->config('log', TRUE) AND is_object(Kohana::$log)) 
+        if ($this->config('log', TRUE) AND is_object(Kohana::$log))
         {
             Kohana::$log->add(Log::ERROR, $this->text);
         }
@@ -212,7 +218,7 @@ class Error
             return;
 
         $email_available = class_exists('Mailer');
-        if ( ! $email_available) 
+        if ( ! $email_available)
         {
             throw new Exception('The email functionality of the Synapse Studios Error module requires the Synapse Studios Email module.');
         }
@@ -265,7 +271,7 @@ class Error
      */
     protected function _action_redirect(array $options = array())
     {
-        if ($this->code === 'Parse Error') 
+        if ($this->code === 'Parse Error')
         {
             echo '<p><strong>NOTE:</strong> Cannot redirect on a parse error, because it might cause a redirect loop.</p>';
             echo $this->display;
@@ -274,13 +280,13 @@ class Error
 
         $notices_available = (class_exists('Flash') AND method_exists('Flash', 'set'));
         $message = Arr::get($options, 'message', FALSE);
-        if ($notices_available AND $message) 
+        if ($notices_available AND $message)
         {
             Flash::set('error', $message);
         }
 
         $url = Arr::get($options, 'url');
-        if ( strpos($url, '://') === FALSE) 
+        if ( strpos($url, '://') === FALSE)
         {
             // Make the URI into a URL
             $url = URL::site($url, TRUE);
@@ -314,7 +320,7 @@ class Error
     {
         $callback = Arr::get($options, 'callback');
         @list($method,) = Arr::callback($callback);
-        if ( is_callable($method)) 
+        if ( is_callable($method))
         {
             call_user_func($method, $this);
         }
