@@ -27,7 +27,7 @@ class Controller_User extends Controller_Core {
             $uri = Kohana::$config->load('user.login_success_uri');
             if ( ! $uri)
                 $uri = Kohana::$base_url;
-            $this->redirect(URL::site($uri));
+            $this->redirect($uri);
         }
     }
 
@@ -53,7 +53,7 @@ class Controller_User extends Controller_Core {
             $uri = Kohana::$config->load('user.register_success_uri');
             if ( ! $uri)
                 $uri = Kohana::$base_url;
-            $this->redirect(URL::site($uri));
+            $this->redirect($uri);
         }
 
     }

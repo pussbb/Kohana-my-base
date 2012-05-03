@@ -231,7 +231,7 @@ class Controller_Core extends  Controller_Template{
     {
         $this->check_auto_render();
         $this->auto_render = FALSE;
-        $this->request->redirect(URL::base(TRUE, TRUE).$url, $code);
+        $this->request->redirect(URL::site($url), $code);
     }
 
     public function render_json($data)
