@@ -2,11 +2,11 @@
 
 class ACL extends Singleton{
 
-    public function allowed($core, $user=null)
+    public function allowed($core)
     {
-        //$request
-        ///echo '<pre>';
-        //var_dump($core);exit;
+        $user = Auth::instance()->current_user();
+        if ( ! is_object($user))
+            return FALSE;
         return TRUE;
     }
 }

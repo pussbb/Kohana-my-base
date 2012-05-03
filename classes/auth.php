@@ -9,8 +9,8 @@ class Auth extends Singleton{
 
     public function current_user()
     {
-        $user = Session::instance()->get('auth.current_user');
-        return is_object($user)? clone $user: NULL;
+        $user = Arr::get(Session::instance()->get('auth'), 'current_user');
+        return is_object($user) ? clone $user: NULL;
     }
 
     public function logout()

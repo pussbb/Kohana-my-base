@@ -9,7 +9,7 @@ class Controller_Core extends  Controller_Template{
     // if needed IN CONSTRUCTOR (to not damage changes in parent class)
     protected $resource_prefixes = array('default');
     // check Acl access (true means do the check)
-    protected $check_access = true;
+    protected $check_access = TRUE;
 
     public $view = null;
     // contains null or array with [directory/]controller/action parts
@@ -64,19 +64,19 @@ class Controller_Core extends  Controller_Template{
         // rememeber the url
         Cookie::set(
             'return_url',
-            Url::path('root').$this->request->url()
+            Url::base(TRUE, TRUE).$this->request->url()
         );
 
         if ( ! Auth::instance()->logged_in())
         {
-            $this->redirect(array('user_session/not_logged_in'));
-            exit;
+            $this->redirect('welcome/login');
+            return;
         }
 
         // ok, logged, in
         // then rejected
-        $this->redirect(array('user_session/not_authorized'), 403);
-        exit;
+        $this->redirect('', 403);
+        return;
     }
 
 
@@ -231,7 +231,7 @@ class Controller_Core extends  Controller_Template{
     {
         $this->check_auto_render();
         $this->auto_render = FALSE;
-        $this->request->redirect($url, $code);
+        $this->request->redirect(URL::base(TRUE, TRUE).$url, $code);
     }
 
     public function render_json($data)
