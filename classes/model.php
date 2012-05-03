@@ -24,9 +24,10 @@ class Model extends Kohana_Model
         {
             $this->data[$this->primary_key] = $params;
         }
-
-        $kclass_pieces = preg_split('/(?=[A-Z])/', get_called_class());
-        $this->db_table = strtolower( end($kclass_pieces));
+        $kclass_pieces = explode('_', get_called_class());
+        //$kclass_pieces = preg_split('/(?=[A-Z])/', get_called_class());
+        unset($kclass_pieces[0]);//  = Model
+        $this->db_table = strtolower( implode('_',$kclass_pieces));
     }
 
     public function __set($name, $value)
