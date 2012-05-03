@@ -12,7 +12,7 @@ class Model extends Kohana_Model
     protected $last_inserted_id = NULL;
     private $errors = NULL;
     protected $auto_clean = TRUE;
-    private $last_query = NULL;
+    public $last_query = NULL;
 
     public function __construct($params = NULL)
     {
@@ -74,6 +74,19 @@ class Model extends Kohana_Model
         return $kclass;
     }
 
+    public static function find_all($arguments)
+    {
+        if ( ! $arguments || ! Arr::is_array($arguments) || ! Arr::is_assoc($arguments))
+            throw new Exception('must_assoc_array');
+
+        $kclass_name = get_called_class();
+        $kclass = new $kclass_name();
+        $kclass->select();
+        $kclass->where($arguments);
+
+        $result = $kclass->exec();
+        return $kclass;
+    }
     public function where($arguments)
     {
         if ( ! Arr::is_array($arguments))

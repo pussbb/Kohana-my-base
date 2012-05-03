@@ -2,20 +2,25 @@
 
 class Model_Access_Rules extends Model
 {
+    const ROLE_GUEST = 0;
+    const ROLE_USER = 1;
+    const ROLE_ADMIN = 2;
 
-    public function get_rules($role_id = NULL)
+    public static function roles_collection($translation = FALSE)
     {
-        $this->select();
-        $this->role_id = $role_id;
-        $this->where(array('role_id'));
-
-        $result = $this->exec();
-
-        if ( ! $result->valid())
-        {
-            return array();
-        }
-        return $result->as_array();
+        return array(
+            self::ROLE_GUEST => $translation ? __('guest') : 'guest',
+            self::ROLE_USER => $translation ? __('user') : 'user',
+            self::ROLE_ADMIN => $translation ? __('admin') : 'admin',
+        );
     }
 
+
+    public function check_access()
+    {
+        $this->select()->cached(56565656565);
+        $this->where(array('role_id', 'directory', 'controller', 'action'));
+        $result = $this->exec();
+        return $result->valid();
+    }
 }
