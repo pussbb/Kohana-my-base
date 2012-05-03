@@ -11,6 +11,8 @@ class Model extends Kohana_Model
     protected $query_str = NULL;
     protected $last_inserted_id = NULL;
     private $errors = NULL;
+    protected $auto_clean = TRUE;
+    private $last_query = NULL;
 
     public function __construct($params = NULL)
     {
@@ -197,9 +199,16 @@ class Model extends Kohana_Model
             $this->db_query->as_object();
 
         $result = $this->db_query->execute();
-
+        $this->last_query = (string) $this->db_query;
+        if ( $this->auto_clean)
+            $this->clean();
 
         return $this->after_exec($result);
+    }
+
+    private function clean()
+    {
+        $this->db_query = NULL;
     }
 
     protected  function after_exec($result)

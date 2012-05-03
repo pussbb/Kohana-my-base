@@ -19,7 +19,7 @@ class Auth extends Singleton{
     }
 
     public function logged_in()
-    {var_dump(Session::instance()->as_array());
+    {
         return ! is_null(Session::instance()->get('auth'));
     }
 }
