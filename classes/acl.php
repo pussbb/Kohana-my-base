@@ -8,6 +8,11 @@ class ACL extends Singleton{
         if ( ! is_object($user))
             return FALSE;
 
+        if ($user->role_id == Model_Users::ROLE_ADMIN)
+        {
+            return TRUE;
+        }
+
         $access_model = new Model_Access_Rules();
         $rules = $access_model->get_rules($user->role_id);
         $current_path = implode('/', $core->current_request_structure());
