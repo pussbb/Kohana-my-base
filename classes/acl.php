@@ -11,9 +11,8 @@ class ACL extends Singleton{
             $role_id = $user->role_id;
 
 
-         if ($user->role_id == Model_Access_Rules::ROLE_ADMIN)
+         if ($role_id == Model_Access_Rules::ROLE_ADMIN)
             return TRUE;
-
 
 //         $model = Model_Access_Rules::find_all(array('role_id' => $role_id));
 //         $rules =$model->records;

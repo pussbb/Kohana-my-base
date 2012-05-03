@@ -15,7 +15,6 @@ class Model_Access_Rules extends Model
         );
     }
 
-
     public function check_access()
     {
         $this->select()->cached(56565656565);
