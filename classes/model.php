@@ -255,4 +255,11 @@ class Model extends Kohana_Model
         return $result;
     }
 
+    public function update_params($array)
+    {
+        foreach($array as $key => $value)
+        {
+            $this->$key = $value;
+        }
+    }
 }

@@ -107,6 +107,28 @@ class Pretty_Form extends Singleton{
         }
         return $result;
     }
+    public function select($params)
+    {
+        if ( $this->template) {
+            $template = Arr::get($params, 'template', 'select');
+            return $this->render_template($template, $params);
+        }
+        $label_ = NULL;
+        $input_ = NULL;
+
+        $value = $this->value($params);
+        extract(Arr::extract($params, array('name','label','attr', 'buttons')));
+        if ( $label)
+        {
+            $label_ = $this->label($name, $label);
+            $input_ = Form::select($name, buttons, $value, $attr);
+        }
+        else
+        {
+            $input_ = Form::select($name, buttons, $value, $attr);
+        }
+        return $label_ .  PHP_EOL . $input_;
+    }
 
     public function password($params)
     {
@@ -115,6 +137,7 @@ class Pretty_Form extends Singleton{
         $params['attr'] = $attr;
         return $this->input($params);
     }
+
     public function checkbox($params)
     {
         if ($this->template) {
@@ -137,6 +160,7 @@ class Pretty_Form extends Singleton{
         }
         return $label_ .  PHP_EOL . $input_;
     }
+
     private function value($params)
     {
         $value = Arr::get($params, 'value');
