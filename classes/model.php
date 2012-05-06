@@ -104,7 +104,10 @@ class Model extends Kohana_Model
         $this->db_query->where_open();
         foreach($arguments as $key => $value)
         {
-           $this->db_query->where($key, '=', $value);
+           $comparison_key = '=';
+           if ( Arr::is_array($value))
+               $comparison_key = 'IN';
+           $this->db_query->where($key, $comparison_key, $value);
         }
         $this->db_query->where_close();
     }
@@ -234,6 +237,8 @@ class Model extends Kohana_Model
                 $result = TRUE;
                 break;
             case 'select':
+                $this->total_count = $result->count();
+                $this->records = $result->as_array();
                 if ($result->count() === 1){
                     $item  = $result->current();
                     if ( ! Arr::is_array($item) && ! Arr::is_assoc($item))
@@ -242,10 +247,6 @@ class Model extends Kohana_Model
                     foreach($item as $key => $value) {
                         $this->$key = $value;
                     }
-                }
-                else {
-                    $this->total_count = $result->count();
-                    $this->records = $result->as_array();
                 }
                 break;
             default:
