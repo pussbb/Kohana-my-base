@@ -101,12 +101,18 @@ class Model extends Kohana_Model
             }
             $arguments = $fields;
         }
+        if ( ! array_filter($arguments))
+            return;
         $this->db_query->where_open();
         foreach($arguments as $key => $value)
         {
            $comparison_key = '=';
            if ( Arr::is_array($value))
+           {
+               if (! $value)
+                   continue;
                $comparison_key = 'IN';
+           }
            $this->db_query->where($key, $comparison_key, $value);
         }
         $this->db_query->where_close();
