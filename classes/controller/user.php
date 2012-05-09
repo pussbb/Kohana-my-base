@@ -60,7 +60,10 @@ class Controller_User extends Controller_Core {
 
     public function action_account_info()
     {
-      $this->render_nothing();
+
+      if ( $this->is_ajax())
+          $this->render_partial();
+
     }
 
     public function action_settings()
