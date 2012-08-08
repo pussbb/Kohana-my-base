@@ -23,14 +23,18 @@ class Controller_User extends Controller_Core {
         {
             $this->view->errors = $model->errors();
         }
-        else {
-            $uri = Kohana::$config->load('user.login_success_uri');
-            if ( ! $uri)
-                $uri = Kohana::$base_url;
-            $this->redirect($uri);
+        else
+        {
+            $this->redirect_user('login_success_uri');
         }
     }
 
+    private function redirect_user($condition)
+    {
+        $uri = Kohana::$config->load('user.'.$condition);
+        $this->redirect($uri?:Kohana::$base_url);
+    }
+    
     public function action_register()
     {
         $this->view->errors = array();
@@ -49,11 +53,9 @@ class Controller_User extends Controller_Core {
         {
             $this->view->errors = $model->errors();
         }
-        else {
-            $uri = Kohana::$config->load('user.register_success_uri');
-            if ( ! $uri)
-                $uri = Kohana::$base_url;
-            $this->redirect($uri);
+        else
+        {
+            $this->redirect_user('register_success_uri');
         }
 
     }
@@ -68,6 +70,6 @@ class Controller_User extends Controller_Core {
 
     public function action_settings()
     {
-      $this->render_nothing();
+        $this->render_nothing();
     }
 }

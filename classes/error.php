@@ -66,7 +66,6 @@ class Error
                         {
                             // Re-position the args
                             $error->trace[$i]['args'] = $error->trace[$i - 1]['args'];
-
                             // Remove the args
                             unset($error->trace[$i - 1]['args']);
                         }
@@ -78,23 +77,28 @@ class Error
             {
                 // Make sure the proper content type is sent with a 500 status
                 $status = 500;
-                if (Arr::get(Response::$messages, $error->code))
+                if ( Arr::get(Response::$messages, $error->code))
                 {
                      $status =  $error->code;
                 }
-                header('Content-Type: text/html; charset=' . Kohana::$charset, TRUE, $status );
+                header(
+                    'Content-Type: text/html; charset=' . Kohana::$charset,
+                    TRUE,
+                    $status
+                );
             }
-            if ( Request::$current !== NULL && Request::current()->is_ajax() === TRUE)
+            if ( Request::$current !== NULL
+                && Request::current()->is_ajax() === TRUE)
             {
-
-                        // Just display the text of the exception
-                if ( Kohana::$environment == Kohana::DEVELOPMENT)
-                        echo "\n{$error->text}\n\n{$error->line}\n\n{$error->file}\n";
-                else
-                        echo "\n{$error->text}\n";
+                if ( Kohana::$environment != Kohana::PRODUCTION)
+                {
+                    // Just display the text of the exception
+                    echo "\n{$error->text}\n\n{$error->line}\n\n{$error->file}\n";
+                }
                 exit(1);
             }
 
+            I18n::lang('en-en');
             // Get the contents of the output buffer
             $error->display = $error->render();
             // Log the error
@@ -132,10 +136,14 @@ class Error
         {
             // If an output buffer exists, clear it
             ob_get_level() and ob_clean();
-
             // Fake an exception for nice debugging
-            Error::handler(new ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']));
-
+            Error::handler(new ErrorException(
+                $error['message'],
+                $error['type'],
+                0,
+                $error['file'],
+                $error['line'])
+            );
             // Shutdown now to avoid a "death loop"
             exit(1);
         }
@@ -184,12 +192,16 @@ class Error
             return ob_get_clean();
         }
 
+        if ( in_array($this->code, Kohana_Exception::$php_errors))
+        {
+            $this->code = 500;
+        }
+
         $file = Kohana::find_file('views', $view);
         $file = !empty($file) ? $file : Kohana::find_file('views', 'errors/' . strtolower($this->type) . '/' . $this->code);
         $file = !empty($file) ? $file : Kohana::find_file('views', 'errors/' . strtolower($this->type));
         $file = !empty($file) ? $file : Kohana::find_file('views', 'errors/' . strtolower($this->code));
-
-        include !empty($file) ? $file : Kohana::find_file('views', 'kohana/error');
+        include !empty($file) ? $file : Kohana::find_file('views', 'errors/default');
         // Get the contents of the output buffer
         return ob_get_clean();
     }
@@ -353,61 +365,61 @@ class Error
 }
 /*
 // ERROR HANDLING SETTINGS
-	'_default' => array
-	(
-		 * LOGGING
-		 *
-		 * If `log` is TRUE, then the error will be logged. If FALSE, then it
-		 * will not be logged.
+    '_default' => array
+    (
+         * LOGGING
+         *
+         * If `log` is TRUE, then the error will be logged. If FALSE, then it
+         * will not be logged.
 
-		'log'    => TRUE,
+        'log'    => TRUE,
 
-		 * EMAIL
-		 *
-		 * If `email` is TRUE, then the default email will be sent. If FALSE,
-		 * no email will be sent. If it is a string, then the string will
-		 * be treated as a path to a view which will replace the default email.
-		'email'  => FALSE,
+         * EMAIL
+         *
+         * If `email` is TRUE, then the default email will be sent. If FALSE,
+         * no email will be sent. If it is a string, then the string will
+         * be treated as a path to a view which will replace the default email.
+        'email'  => FALSE,
 
-		 * ACTION
-		 *
-		 * If `action` is not an array or has an invalid or missing type, then
-		 * the error will be displayed just like the normal
-		 * `Kohana::exception_handler`. If it is an array, then the specified
-		 * action will be taken with the options specified.
+         * ACTION
+         *
+         * If `action` is not an array or has an invalid or missing type, then
+         * the error will be displayed just like the normal
+         * `Kohana::exception_handler`. If it is an array, then the specified
+         * action will be taken with the options specified.
 
-		'action' => array
-		(
+        'action' => array
+        (
 // -----------------------------------------------------------------------------
 // EXAMPLE: "display"
 // -----------------------------------------------------------------------------
-//			'type'    => 'display',
-//			'options' => array
-//			(
-//				// View used to replace the default error display
-//				'view'     => 'errors/_default',
-//			),
+//          'type'    => 'display',
+//          'options' => array
+//          (
+//              // View used to replace the default error display
+//              'view'     => 'errors/_default',
+//          ),
 
 // -----------------------------------------------------------------------------
 // EXAMPLE: "callback"
 // -----------------------------------------------------------------------------
-//			'type'    => 'callback',
-//			'options' => array
-//			(
-//				// Callback to apply to the error (uses `Arr::callback` syntax)
-//				'callback' => 'Error::demo_callback',
-//			),
+//          'type'    => 'callback',
+//          'options' => array
+//          (
+//              // Callback to apply to the error (uses `Arr::callback` syntax)
+//              'callback' => 'Error::demo_callback',
+//          ),
 
 // -----------------------------------------------------------------------------
 // EXAMPLE: "redirect"
 // -----------------------------------------------------------------------------
-//			'type'    => 'redirect',
-//			'options' => array
-//			(
-//				// This is where the user will be redirected to
-//				'url'     => 'welcome/index',
+//          'type'    => 'redirect',
+//          'options' => array
+//          (
+//              // This is where the user will be redirected to
+//              'url'     => 'welcome/index',
 //
-//				// The message to be sent as a Notice (requires Notices module)
-//				'message' => 'There was an error which prevented the page you requested from being loaded.',
-//			),
+//              // The message to be sent as a Notice (requires Notices module)
+//              'message' => 'There was an error which prevented the page you requested from being loaded.',
+//          ),
 */
