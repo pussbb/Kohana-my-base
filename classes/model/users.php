@@ -5,7 +5,8 @@ class Model_Users extends Model
     public function login()
     {
         $this->password = md5($this->password);
-        $result = $this->select()->where(array('email', 'password'))->exec();
+        $this->select();
+        $result = $this->filter(array('email', 'password'))->save();
         if ( ! $result->valid())
         {
             $this->add_error('general', __('user_not_found_or_wrong_password'));
@@ -56,9 +57,9 @@ class Model_Users extends Model
         $this->insert(array('login', 'email', 'password', 'api_key'));
         $this->api_key = uniqid();
         $this->password = md5($this->password);
-        $this->role_id = self::ROLE_USER;
+        $this->role_id = Model_Access_Rules::ROLE_USER;
 
-        $result = $this->exec();
+        $result = $this->save();
         return $result;
     }
 

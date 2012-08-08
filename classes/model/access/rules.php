@@ -18,8 +18,7 @@ class Model_Access_Rules extends Model
     public function check_access()
     {
         $this->select()->cached(56565656565);
-        $this->where(array('role_id', 'directory', 'controller', 'action'));
-        $result = $this->exec();
+        $result = $this->filter(array('role_id', 'directory', 'controller', 'action'))->save();
         return $result->valid();
     }
 }

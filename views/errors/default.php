@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><?php echo mb_ucfirst(__('oops,_an_error_occurred')) ;?></title>
+    <title><?php echo UTF8::ucfirst(__('oops,_an_error_occurred')) ;?></title>
     <meta content="">
     <style media="screen" type="text/css">
         html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6,
@@ -64,18 +64,18 @@
     <div class="content">
         <div class="error-container">
             <?php 
-            echo '<h1>'. mb_ucfirst(__('oops,_an_error_occurred')) . '.</h1>';
+            echo '<h1>'. UTF8::ucfirst(__('oops,_an_error_occurred')) . '.</h1>';
             
             echo '<hr/>';
             echo '<div class="text">';
                 echo  Arr::get( $error, 'message');
             echo '</div>';
             echo '<div class="links">';
-                echo Url::link_to('root', mb_ucfirst(__('home')));
+                echo HTML::anchor(URL::site('/'), UTF8::ucfirst(__('home')));
                 $referer = Arr::get($_SERVER, 'HTTP_REFERER');
                 if ( $referer)
                 {
-                    echo HTML::anchor($referer, mb_ucfirst(__('back')));
+                    echo HTML::anchor($referer, UTF8::ucfirst(__('back')));
                 }
             echo '</div>';
             ?>

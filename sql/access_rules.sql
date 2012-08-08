@@ -20,12 +20,12 @@ CREATE TABLE IF NOT EXISTS `access_rules` (
 -- Database table dump `access_rules`
 --
 
-INSERT INTO `access_rules` (`id`, `role_id`, `directory`, `controller`, `action`) VALUES
-(1, 0, NULL, 'user', 'login'),
-(2, 0, NULL, 'user', 'register'),
-(3, 1, NULL, 'user', 'logout'),
-(4, 1, NULL, 'user', 'account_info'),
-(5, 1, NULL, 'user', 'settings');
+INSERT INTO `access_rules` ( `role_id`, `directory`, `controller`, `action`) VALUES
+(0, NULL, 'user', 'login'),
+(0, NULL, 'user', 'register'),
+(1, NULL, 'user', 'logout'),
+(1, NULL, 'user', 'account_info'),
+(1, NULL, 'user', 'settings');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
