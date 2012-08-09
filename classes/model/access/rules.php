@@ -14,11 +14,4 @@ class Model_Access_Rules extends Model
             self::ROLE_ADMIN => $translation ? __('admin') : 'admin',
         );
     }
-
-    public function check_access()
-    {
-        $this->select()->cached(56565656565);
-        $result = $this->filter(array('role_id', 'directory', 'controller', 'action'))->exec();
-        return $result->valid();
-    }
 }

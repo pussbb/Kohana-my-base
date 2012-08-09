@@ -6,7 +6,9 @@ class Model_Users extends Model
     {
         $this->password = md5($this->password);
         $this->select();
-        $result = $this->filter(array('email', 'password'))->save();
+        if ( ! $this->validate_login())
+            return FALSE;
+        $result = $this->filter(array('email', 'password'))->exec();
         if ( ! $result->valid())
         {
             $this->add_error('general', __('user_not_found_or_wrong_password'));
@@ -16,7 +18,7 @@ class Model_Users extends Model
         return TRUE;
     }
 
-    public function validate_login()
+    private function validate_login()
     {
         if ( ! Valid::email($this->email))
             $this->add_error('email', __('must_be_valid_email'));

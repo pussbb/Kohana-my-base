@@ -19,7 +19,7 @@ class Controller_User extends Controller_Core {
             'email' => Arr::get($_REQUEST, 'email'),
             'password' => Arr::get($_REQUEST, 'pswd'),
         ));
-        if ( ! $model->validate_login() || ! $model->login())
+        if ( ! $model->login())
         {
             $this->view->errors = $model->errors();
         }
@@ -34,7 +34,7 @@ class Controller_User extends Controller_Core {
         $uri = Kohana::$config->load('user.'.$condition);
         $this->redirect($uri?:Kohana::$base_url);
     }
-    
+
     public function action_register()
     {
         $this->view->errors = array();
