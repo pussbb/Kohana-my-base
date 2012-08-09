@@ -53,9 +53,9 @@ class Model extends Kohana_Model
     }
 
 
-    public static function find($arguments)
+    public static function find($filter)
     {
-        $kclass_name = get_called_class();
+ /*       $kclass_name = get_called_class();
         $kclass = new $kclass_name();
         $kclass->select()->limit(1);
         if ( is_numeric($arguments))
@@ -67,44 +67,59 @@ class Model extends Kohana_Model
             $kclass->filter($arguments);
         }
 
-        $result = $kclass->save();
+        $result = $kclass->exec();
         if ( ! $result->valid())
             throw new Kohana_Exception('record_not_found');
-        return $kclass;
+        return $kclass;*/
+        $kclass_name = get_called_class();
+        $kclass = new $kclass_name;
+        if (is_numeric($filter)) {
+            $filter = array($kclass->primary_key => $filter);
+        }
+        $result = $kclass::find_all($filter, 1);
+        return Arr::get($result->records, 0, FALSE);
     }
 
-    public static function find_all($arguments)
+    public static function find_all($filter = array(), $limit = NULL)
     {
-        if ( ! $arguments || ! Arr::is_array($arguments) || ! Arr::is_assoc($arguments))
-            throw new Exception('must be assoc array');
- 
         $kclass_name = get_called_class();
         $kclass = new $kclass_name();
-        $kclass->select();
-        $result = $kclass->filter($arguments)->save();
+        $kclass->select()->limit($limit);
+        $kclass->filter($filter)->exec();
         return $kclass;
     }
 
-    public function filter($arguments)
+    public static function destroy_where($filter = NULL)
+    {/*
+        $kclass = get_called_class();
+        $records = $kclass::find_all($filter)->records;
+        if ( ! $records)
+            return;
+        foreach($records as $record) {
+            $record->delete();
+        }*/
+
+    }
+    public function filter($filter)
     {
-        if ( ! Arr::is_array($arguments))
+        if ( ! Arr::is_array($filter))
                 throw new Kohana_Exception('must be an array');
 
-        if ( ! Arr::is_assoc($arguments))
+        if ( ! Arr::is_assoc($filter))
         {
             $fields = array();
-            foreach($arguments as $field)
+            foreach($filter as $field)
             {
                 $fields[$field] = $this->$field;
             }
-            $arguments = $fields;
+            $filter = $fields;
         }
 
-        if ( ! array_filter($arguments))
+        if ( ! array_filter($filter))
             return $this;
 
         $this->db_query->where_open();
-        foreach($arguments as $key => $value)
+        foreach($filter as $key => $value)
         {
            $comparison_key = '=';
            if ( Arr::is_array($value))
@@ -143,17 +158,6 @@ class Model extends Kohana_Model
     {
         $this->db_query = DB::delete($this->db_table);
         return $this->filter(array($this->primary_key))->save();
-    }
-
-    public static function destroy_where($filter = NULL)
-    {
-        $kclass = get_called_class();
-        $records = $kclass::find_all($filter)->records;
-        if ( ! $records)
-            return;
-        foreach($records as $record) {
-            $record->delete();
-        }
     }
 
     public function errors()
@@ -230,22 +234,27 @@ class Model extends Kohana_Model
         //user manipulations
     }
 
-    public function save($is_assoc = TRUE)
+    public function save()
     {
         if ( ! $this->db_query)
                 return;
 
-        $kclass_pieces = preg_split('/(?=[A-Z])/', get_class($this->db_query));
-        $this->query_type = strtolower(end($kclass_pieces));
-
         $this->prepare_for_query();
         $this->before_save();
 
-        if ( $is_assoc)
-            $this->db_query->as_assoc();
-        else
-            $this->db_query->as_object();
+        $responce = $this->exec();
 
+        $this->after_save();
+        return $responce;
+    }
+
+    protected function exec()
+    {
+
+        $kclass_pieces = preg_split('/(?=[A-Z])/', get_class($this->db_query));
+        $this->query_type = strtolower(end($kclass_pieces));
+
+        $this->db_query->as_assoc();
         $result = $this->db_query->execute();
         $this->last_query = (string) $this->db_query;
         if ( $this->auto_clean)
@@ -263,23 +272,23 @@ class Model extends Kohana_Model
                 $result = TRUE;
                 break;
             case 'select':
+                if ($result->count() == 0 )
+                    break;
+                $kclass = get_called_class();
                 $this->total_count = $result->count();
-                $this->records = $result->as_array();
-                if ($result->count() === 1){
-                    $item  = $result->current();
-                    if ( ! Arr::is_array($item) && ! Arr::is_assoc($item))
+                $records = array();
+                foreach($result->as_array() as $record) {
+                    if ( ! Arr::is_array($record) && ! Arr::is_assoc($record))
                         break;
-                    foreach($item as $key => $value) {
-                        $this->$key = $value;
-                    }
+                    $records[] = new $kclass($record);
                 }
+                $this->records = $records;
                 break;
             case 'delete':
             case 'update':
                 return $result > 0;
             default:
                 break;
-
         }
         return $result;
     }
