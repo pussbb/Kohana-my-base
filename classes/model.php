@@ -2,7 +2,6 @@
 
 class Model extends Kohana_Model
 {
-
     private $data = array();
     protected $primary_key = 'id';
     protected $db_table = NULL;
@@ -13,7 +12,6 @@ class Model extends Kohana_Model
     private $errors = NULL;
     protected $auto_clean = TRUE;
     public $last_query = NULL;
-    protected $raw_responce = NULL;
 
     public function __construct($params = NULL)
     {
@@ -76,11 +74,9 @@ class Model extends Kohana_Model
             case 'destroy':
                 $kclass_name = get_called_class();
                 $kclass = new $kclass_name;
-                return $kclass->delete($arguments);
+                return $kclass->destroy($arguments[0]);
             default:
-                
                 break;
-            
         }
     }
     
@@ -103,22 +99,11 @@ class Model extends Kohana_Model
     {
         $kclass_name = get_called_class();
         $kclass = new $kclass_name();
-        $kclass->select()->limit($limit)->offset($offset)->cached($cache);
+        $kclass->select('*', $limit, $offset, $cache);
         $kclass->filter($filter)->exec();
         return $kclass;
     }
 
-    public static function destroy_where($filter = NULL)
-    {/*
-        $kclass = get_called_class();
-        $records = $kclass::find_all($filter)->records;
-        if ( ! $records)
-            return;
-        foreach($records as $record) {
-            $record->delete();
-        }*/
-
-    }
     public function filter($filter)
     {
         if ( ! Arr::is_array($filter))
@@ -153,11 +138,11 @@ class Model extends Kohana_Model
         return $this;
     }
 
-    
-    public function select($select_args = '*')
+    public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
     {
         $select_args = !Arr::is_array($select_args) ? $select_args : extract($select_args);
         $this->db_query = DB::select()->from($this->db_table);
+        $this->db_query->limit($limit)->offset($offset)->cached($cache);
         return $this->db_query;
     }
 
@@ -178,7 +163,7 @@ class Model extends Kohana_Model
         $this->db_query = DB::delete($this->db_table);
         if ( ! $filter )
             $filter = array($this->primary_key);
-        return $this->filter(array($this->primary_key))->save();
+        return $this->filter($filter)->save();
     }
 
     public function errors()
@@ -191,26 +176,15 @@ class Model extends Kohana_Model
         $this->errors[$key] = $msg;
     }
 
-    public function exists($where)
+    public static function exists($where)
     {
-        $query = DB::select()->from($this->db_table);
-        $fields = $where;
-        if ( ! Arr::is_assoc($where))
-        {
-            $fields = array();
-            foreach($where as $field)
-            {
-                $fields[$field] = $this->$field;
-            }
+        $kclass_name = get_called_class();
+        try {
+            $kclass_name::find($where);
+            return TRUE;
+        } catch(Exception $e) {
+            return FALSE;
         }
-        $query->where_open();
-        foreach($fields as $key => $value)
-        {
-           $query->where($key, '=', $value);
-        }
-        $query->where_close();
-        $result = $query->as_assoc()->execute();
-        return $result->count() > 0;
     }
 
     private function get_private_properties($obj)
@@ -259,34 +233,27 @@ class Model extends Kohana_Model
     {
         if ( ! $this->db_query)
                 return;
-
         $this->prepare_for_query();
         $this->before_save();
-
         $responce = $this->exec();
-
         $this->after_save();
         return $responce;
     }
 
     protected function exec()
     {
-
         $kclass_pieces = preg_split('/(?=[A-Z])/', get_class($this->db_query));
         $this->query_type = strtolower(end($kclass_pieces));
-
         $this->db_query->as_assoc();
         $result = $this->db_query->execute();
         $this->last_query = (string) $this->db_query;
         if ( $this->auto_clean)
             $this->clean();
-
         return $this->parse_responce($result);
     }
 
     private function parse_responce($result)
     {
-        $this->raw_responce = $result;
         switch ($this->query_type)
         {
             case 'insert':
@@ -327,7 +294,7 @@ class Model extends Kohana_Model
     {
         //user manipulations
     }
-    
+
     private function clean()
     {
         $this->db_query = NULL;

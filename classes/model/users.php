@@ -9,7 +9,7 @@ class Model_Users extends Model
         if ( ! $this->validate_login())
             return FALSE;
         $result = $this->filter(array('email', 'password'))->exec();
-        if ( ! $result->valid())
+        if ( ! $result)
         {
             $this->add_error('general', __('user_not_found_or_wrong_password'));
             return FALSE;
