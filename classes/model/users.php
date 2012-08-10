@@ -5,10 +5,11 @@ class Model_Users extends Model
     public function login()
     {
         $this->password = md5($this->password);
-        $this->select();
+
         if ( ! $this->validate_login())
             return FALSE;
-        $result = $this->filter(array('email', 'password'))->exec();
+
+        $result = $this->select()->filter(array('email', 'password'))->exec();
         if ( ! $result)
         {
             $this->add_error('general', __('user_not_found_or_wrong_password'));

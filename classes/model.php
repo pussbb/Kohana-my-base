@@ -6,8 +6,6 @@ class Model extends Kohana_Model
     protected $primary_key = 'id';
     protected $db_table = NULL;
     protected $db_query = NULL;
-    protected $query_type = NULL;
-    protected $query_str = NULL;
     protected $last_inserted_id = NULL;
     private $errors = NULL;
     protected $auto_clean = TRUE;
@@ -70,11 +68,16 @@ class Model extends Kohana_Model
     }
 
     public static function __callStatic($name, $arguments) {
+        $kclass_name = get_called_class();
         switch($name) {
             case 'destroy':
-                $kclass_name = get_called_class();
                 $kclass = new $kclass_name;
                 return $kclass->destroy($arguments[0]);
+                break;
+            case 'exists':
+                $kclass = new $kclass_name;
+                return $kclass->exists(Arr::get($arguments, 0), Arr::get($arguments, 1), Arr::get($arguments, 2));
+                break;
             default:
                 break;
         }
@@ -143,22 +146,22 @@ class Model extends Kohana_Model
         $select_args = !Arr::is_array($select_args) ? $select_args : extract($select_args);
         $this->db_query = DB::select()->from($this->db_table);
         $this->db_query->limit($limit)->offset($offset)->cached($cache);
-        return $this->db_query;
+        return $this;
     }
 
     public function insert($fields = NULL)
     {
         $this->db_query = DB::insert($this->db_table, $fields);
-        return $this->db_query;
+        return $this;
     }
 
     public function update()
     {
         $this->db_query = DB::insert($this->db_table);
-        return $this->db_query;
+        return $this;
     }
 
-    private function destroy($filter = NULL)
+    protected function destroy($filter = NULL)
     {
         $this->db_query = DB::delete($this->db_table);
         if ( ! $filter )
@@ -176,15 +179,12 @@ class Model extends Kohana_Model
         $this->errors[$key] = $msg;
     }
 
-    public static function exists($where)
+    protected function exists($filter = NULL, $limit = NULL, $cache = NULL)
     {
-        $kclass_name = get_called_class();
-        try {
-            $kclass_name::find($where);
-            return TRUE;
-        } catch(Exception $e) {
-            return FALSE;
-        }
+        $this->select('*', $limit, NULL, $cache);
+        if ( ! $filter )
+            $filter = array($this->primary_key);
+        return $this->filter($filter)->exec();
     }
 
     private function get_private_properties($obj)
@@ -202,7 +202,7 @@ class Model extends Kohana_Model
 
     private function prepare_for_query()
     {
-        switch ($this->query_type)
+        switch ($this->query_type())
         {
             case 'insert':
             case 'update':
@@ -240,21 +240,26 @@ class Model extends Kohana_Model
         return $responce;
     }
 
-    protected function exec()
+    private function query_type()
     {
         $kclass_pieces = preg_split('/(?=[A-Z])/', get_class($this->db_query));
-        $this->query_type = strtolower(end($kclass_pieces));
+        return strtolower(end($kclass_pieces));
+    }
+
+    protected function exec()
+    {
         $this->db_query->as_assoc();
         $result = $this->db_query->execute();
         $this->last_query = (string) $this->db_query;
+        $responce = $this->parse_responce($result);
         if ( $this->auto_clean)
             $this->clean();
-        return $this->parse_responce($result);
+        return $responce;
     }
 
     private function parse_responce($result)
     {
-        switch ($this->query_type)
+        switch ($this->query_type())
         {
             case 'insert':
                 $this->last_inserted_id = $result[0];
@@ -267,6 +272,7 @@ class Model extends Kohana_Model
                 }
                 if ($result->count() == 1) {
                     $this->update_params($result->current());
+                    ///break;
                 }
                 $kclass = get_called_class();
                 $this->total_count = $result->count();

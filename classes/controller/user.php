@@ -57,15 +57,12 @@ class Controller_User extends Controller_Core {
         {
             $this->redirect_user('register_success_uri');
         }
-
     }
 
     public function action_account_info()
     {
-
       if ( $this->is_ajax())
           $this->render_partial();
-
     }
 
     public function action_settings()

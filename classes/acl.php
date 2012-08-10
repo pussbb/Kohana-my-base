@@ -12,16 +12,12 @@ class ACL extends Singleton{
 
         $current_request = $core->current_request_structure();
 
-        try {
-            Model_Access_Rules::find(array(
-                    'role_id' => $role_id,
-                    'directory' => Arr::get($current_request, 0),
-                    'controller' => Arr::get($current_request, 1),
-                    'action' => Arr::get($current_request, 2),
-            ), 30000);
-            return TRUE;
-        } catch(Exception $e) {}
-        return  FALSE;
+        return Model_Access_Rules::exists(array(
+            'role_id' => $role_id,
+            'directory' => Arr::get($current_request, 0),
+            'controller' => Arr::get($current_request, 1),
+            'action' => Arr::get($current_request, 2),
+        ), 1, 30000);
     }
 
 }
