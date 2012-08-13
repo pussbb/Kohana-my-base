@@ -7,8 +7,9 @@ class Model extends Kohana_Model
     protected $db_table = NULL;
     protected $db_query = NULL;
     protected $last_inserted_id = NULL;
-    private $errors = NULL;
-    protected $validate_columns = TRUE;
+    private $errors = array();
+    private $db_validation = NULL;
+    protected $validate = TRUE;
     protected $auto_clean = TRUE;
     public $last_query = NULL;
 
@@ -23,6 +24,7 @@ class Model extends Kohana_Model
             $this->data[$this->primary_key] = $params;
         }
         $this->db_table = self::db_table_name();
+        $this->db_validation = new Validation_Db($this);
     }
 
 
@@ -48,7 +50,7 @@ class Model extends Kohana_Model
         if (isset($this->$name))
             return $this->data[$name];
         else
-            throw new Kohana_Exception('property not exists' . $name);
+            throw new Kohana_Exception('property_not_exists_' . $name);
     }
 
     public function __isset($name)
@@ -237,7 +239,7 @@ class Model extends Kohana_Model
                     $data = array();
                     foreach($columns as $field)
                     {
-                        $data[] = $this->$field;
+                        $data[] = $this->$field;//Database::instance()->escape();
                     }
                     $this->db_query->values($data);
                 }
@@ -272,13 +274,15 @@ class Model extends Kohana_Model
     public function save()
     {
     
-        if ( $this->new_record()) {
+        /*if ( $this->new_record()) {
             $this->insert($this->data_keys($this->data));
         }
         else {
             $this->update($this->data_keys($this->data));
-        }
+        }*/
         $this->prepare_for_query();
+        if ( ! $this->db_validation->check() || ! $this->validate())
+            return FALSE;
         $this->before_save();
         $responce = $this->exec();
         $this->after_save();
@@ -294,8 +298,6 @@ class Model extends Kohana_Model
     protected function exec()
     {
         $this->db_query->as_assoc();
-        if ( ! $this->validate())
-            return FALSE;
         $result = $this->db_query->execute();
         $this->last_query = (string) $this->db_query;
         $responce = $this->parse_responce($result);
@@ -304,74 +306,32 @@ class Model extends Kohana_Model
         return $responce;
     }
 
-    private function validate()
+    public function validate()
     {
-        if ( ! $this->validate_columns)
-            return TRUE;
-        $kclass_name = get_called_class();
-        $columns = $kclass_name::columns()?:$kclass_name::table_columns();
-        $rules = $kclass_name::rules();
-        if ( ! $columns && ! $rules)
-            return TRUE;
-
-        $this->db_rules_validation($columns);
-        $this->custom_validation($rules);
-        return empty($this->errors);
-    }
-
-    private function db_rules_validation($columns)
-    {
-        foreach($columns as $key => $rules) {
-            if ( ! isset($this->$key))
-                continue;
-            $type = Arr::get($rules, 'type');
-            switch($type){
-                case 'int':
-                    if ( ! Valid::numeric($this->$key)) {
-                        $this->add_error($key, __('must_be_valid_integer'));
-                        break;
-                    }
-                    if (Arr::get($rules, 'is_nullable')
-                        && ! Valid::not_empty($this->$key)) {
-                        $this->add_error($key, __('must_not_be_empty'));
-                        break;
-                    }
-                    $min = Arr::get($rules, 'min');
-                    $max = Arr::get($rules, 'max');
-                    if (($min && $max) && ! Valid::range($this->$key,$min, $max)) {
-                        $this->add_error($key, __('must_be_between_%1_and_%2', array('%1' => $min, '%2' => $max)));
-                        break;
-                    }
-                    if ($min && ($min > $this->$key)) {
-                        $this->add_error($key, __('must_be_greater_than_'.$min));
-                        break;
-                    }
-                    if ($max && ($max < $this->$key)) {
-                        $this->add_error($key, __('must_be_less_than_'.$max));
-                        break;
-                    }
-                case 'string':
-                    if (Arr::get($rules, 'is_nullable')
-                        && ! Valid::not_empty($this->$key)) {
-                        $this->add_error($key, __('must_not_be_empty'));
-                        break;
-                    }
-                    $max = Arr::get($rules, 'max');
-                    if ($max && ! Valid::max_length($this->$key, $max)) {
-                        $this->add_error($key, __('must_be_less_than_'.$max));
-                        break;
-                    }
-                    $this->$key = Database::instance()->escape($this->$key);
-                    break;
-                default:
-                    break;
+        $validator = Validation::factory($this->data);
+        foreach ($this->rules() as $key => $rules)
+        {
+            foreach ($rules as $rule)
+            {
+                if ( ! is_array($rule))
+                {
+                    $validator->rule($key, $rule);
+                    continue;
+                }
+                $validator->rule(
+                    $key,
+                    Arr::get($rule, 0, NULL),
+                    Arr::get($rule, 1, NULL)
+                );
             }
         }
-    }
-
-    private function custom_validation($items)
-    {
-
+        $validator->labels($this->labels());
+        if ($validator->check())
+            return TRUE;
+        $errors = $validator->errors('', FALSE);
+        if (Arr::is_assoc($errors))
+          $this->errors = Arr::merge($this->errors, $errors);
+        return FALSE;
     }
 
     private function parse_responce($result)
@@ -422,6 +382,7 @@ class Model extends Kohana_Model
     private function clean()
     {
         $this->db_query = NULL;
+        $this->errors = NULL;
     }
 
     public function update_params($array)
@@ -440,5 +401,10 @@ class Model extends Kohana_Model
     public function rules()
     {
         return array();
+    }
+
+    public function labels()
+    {
+      return array();
     }
 }

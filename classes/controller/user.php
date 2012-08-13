@@ -49,12 +49,12 @@ class Controller_User extends Controller_Core {
             'terms_of_use' => Arr::get($_REQUEST, 'terms_of_use'),
             'pswd_confirmation' => Arr::get($_REQUEST, 'pswd_confirmation'),
         ));
-        if ( ! $model->validate_registration() || ! $model->register())
+        if ( ! $model->register())
         {
             $this->view->errors = $model->errors();
         }
         else
-        {
+        {exit;
             $this->redirect_user('register_success_uri');
         }
     }

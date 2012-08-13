@@ -6,7 +6,7 @@ class Model_Access_Rules extends Model
     const ROLE_USER = 1;
     const ROLE_ADMIN = 2;
 
-    protected $validate_columns = FALSE;
+    protected $validate = FALSE;
 
     public static function roles_collection($translation = FALSE)
     {
