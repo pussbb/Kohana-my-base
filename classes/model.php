@@ -8,6 +8,7 @@ class Model extends Kohana_Model
     protected $db_query = NULL;
     protected $last_inserted_id = NULL;
     private $errors = NULL;
+    protected $validate_columns = TRUE;
     protected $auto_clean = TRUE;
     public $last_query = NULL;
 
@@ -36,7 +37,7 @@ class Model extends Kohana_Model
     {
         return strtolower(self::module_name($glue));
     }
-    
+
     public function __set($name, $value)
     {
         $this->data[$name] = $value;
@@ -62,7 +63,7 @@ class Model extends Kohana_Model
 
     public function __call($name, $arguments) {
         if ( method_exists($this, $name))
-            return;//call_user_func_array($this, $name, $arguments);
+            return;
         if ( method_exists($this->db_query, $name))
             return  call_user_func_array($this->db_query->$name,  $arguments);
     }
@@ -105,6 +106,26 @@ class Model extends Kohana_Model
         $kclass->select('*', $limit, $offset, $cache);
         $kclass->filter($filter)->exec();
         return $kclass;
+    }
+
+
+    public static function table_columns($table = NULL)
+    {
+        if ( ! $table)
+        {
+            $kclass_name = get_called_class();
+            $table = $kclass_name::db_table_name();
+        }
+        $columns = Kohana::cache($table.'_columns');
+        if ( ! $columns ) {
+            $columns = Database::instance()->list_columns($table);
+            foreach($columns as $key => $values) {
+                if (Arr::get($values, 'character_maximum_length'))
+                    $columns[$key]['max'] = $values['character_maximum_length'];
+            }
+            Kohana::cache($table.'_columns', $columns , 3600 * 24 * 30);
+        }
+        return $columns;
     }
 
     public function filter($filter)
@@ -251,12 +272,26 @@ class Model extends Kohana_Model
     protected function exec()
     {
         $this->db_query->as_assoc();
+        if ( ! $this->validate())
+            return FALSE;
         $result = $this->db_query->execute();
         $this->last_query = (string) $this->db_query;
         $responce = $this->parse_responce($result);
         if ( $this->auto_clean)
             $this->clean();
         return $responce;
+    }
+
+    private function validate()
+    {
+        if ( ! $this->validate_columns)
+            return TRUE;
+        $kclass_name = get_called_class();
+        $columns = $kclass_name::columns()?:$kclass_name::table_columns();
+        $rules = $kclass_name::rules();
+        if ( ! $columns && ! $rules)
+            return TRUE;
+        return TRUE;
     }
 
     private function parse_responce($result)
@@ -315,5 +350,15 @@ class Model extends Kohana_Model
         {
             $this->$key = $value;
         }
+    }
+
+    public static function columns()
+    {
+        return array();
+    }
+
+    public static function rules()
+    {
+        return array();
     }
 }

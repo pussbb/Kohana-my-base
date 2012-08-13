@@ -2,6 +2,27 @@
 
 class Model_Users extends Model
 {
+
+    public static function _columns ()
+    {
+        return array(
+            'email' => array(
+                'type' => 'string',
+                'max' => 434,
+            ),
+        );
+    }
+
+    public static function rules()
+    {
+        return array(
+            'email' => array(
+                'not_empty',
+                'email',
+            ),
+        );
+    }
+    
     public function login()
     {
         $this->password = md5($this->password);
