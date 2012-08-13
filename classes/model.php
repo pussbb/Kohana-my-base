@@ -145,7 +145,9 @@ class Model extends Kohana_Model
     {
         $select_args = !Arr::is_array($select_args) ? $select_args : extract($select_args);
         $this->db_query = DB::select()->from($this->db_table);
-        $this->db_query->limit($limit)->offset($offset)->cached($cache);
+        $this->db_query->limit($limit)->offset($offset);
+        if ($cache)
+            $this->db_query->cached($cache);
         return $this;
     }
 
@@ -266,10 +268,6 @@ class Model extends Kohana_Model
                 $result = TRUE;
                 break;
             case 'select':
-                if ($result->count() == 0 ) {
-                    $result = FALSE;
-                    break;
-                }
                 if ($result->count() == 1) {
                     $this->update_params($result->current());
                     ///break;
@@ -283,7 +281,12 @@ class Model extends Kohana_Model
                     $records[] = new $kclass($record);
                 }
                 $this->records = $records;
-                $result = TRUE;
+                if ($result->count() == 0 ) {
+                    $result = FALSE;
+                }
+                else {
+                    $result = TRUE;
+                }
                 break;
             case 'delete':
             case 'update':
