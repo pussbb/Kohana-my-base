@@ -3,7 +3,7 @@
 class Model_Users extends Model
 {
 
-    public static function _columns ()
+    public function _columns ()
     {
         return array(
             'email' => array(
@@ -13,7 +13,7 @@ class Model_Users extends Model
         );
     }
 
-    public static function rules()
+    public function rules()
     {
         return array(
             'email' => array(

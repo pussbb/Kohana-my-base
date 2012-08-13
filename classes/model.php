@@ -180,7 +180,7 @@ class Model extends Kohana_Model
 
     public function update()
     {
-        $this->db_query = DB::insert($this->db_table);
+        $this->db_query = DB::update($this->db_table)->where($this->primary_key, '=',$this->{$this->primary_key});
         return $this;
     }
 
@@ -252,10 +252,32 @@ class Model extends Kohana_Model
         //user manipulations
     }
 
+    public function new_record()
+    {
+        return ! isset($this->{$this->primary_key});
+    }
+
+    private function data_keys()
+    {
+        $system = array('records', 'total_count');
+        $keys = array();
+        foreach($this->data as $key => $value) {
+            if (in_array($key, $system))
+                continue;
+            $keys[] = $key;
+        }
+        return array_filter($keys);
+    }
+
     public function save()
     {
-        if ( ! $this->db_query)
-                return;
+    
+        if ( $this->new_record()) {
+            $this->insert($this->data_keys($this->data));
+        }
+        else {
+            $this->update($this->data_keys($this->data));
+        }
         $this->prepare_for_query();
         $this->before_save();
         $responce = $this->exec();
@@ -291,7 +313,65 @@ class Model extends Kohana_Model
         $rules = $kclass_name::rules();
         if ( ! $columns && ! $rules)
             return TRUE;
-        return TRUE;
+
+        $this->db_rules_validation($columns);
+        $this->custom_validation($rules);
+        return empty($this->errors);
+    }
+
+    private function db_rules_validation($columns)
+    {
+        foreach($columns as $key => $rules) {
+            if ( ! isset($this->$key))
+                continue;
+            $type = Arr::get($rules, 'type');
+            switch($type){
+                case 'int':
+                    if ( ! Valid::numeric($this->$key)) {
+                        $this->add_error($key, __('must_be_valid_integer'));
+                        break;
+                    }
+                    if (Arr::get($rules, 'is_nullable')
+                        && ! Valid::not_empty($this->$key)) {
+                        $this->add_error($key, __('must_not_be_empty'));
+                        break;
+                    }
+                    $min = Arr::get($rules, 'min');
+                    $max = Arr::get($rules, 'max');
+                    if (($min && $max) && ! Valid::range($this->$key,$min, $max)) {
+                        $this->add_error($key, __('must_be_between_%1_and_%2', array('%1' => $min, '%2' => $max)));
+                        break;
+                    }
+                    if ($min && ($min > $this->$key)) {
+                        $this->add_error($key, __('must_be_greater_than_'.$min));
+                        break;
+                    }
+                    if ($max && ($max < $this->$key)) {
+                        $this->add_error($key, __('must_be_less_than_'.$max));
+                        break;
+                    }
+                case 'string':
+                    if (Arr::get($rules, 'is_nullable')
+                        && ! Valid::not_empty($this->$key)) {
+                        $this->add_error($key, __('must_not_be_empty'));
+                        break;
+                    }
+                    $max = Arr::get($rules, 'max');
+                    if ($max && ! Valid::max_length($this->$key, $max)) {
+                        $this->add_error($key, __('must_be_less_than_'.$max));
+                        break;
+                    }
+                    $this->$key = Database::instance()->escape($this->$key);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private function custom_validation($items)
+    {
+
     }
 
     private function parse_responce($result)
@@ -352,12 +432,12 @@ class Model extends Kohana_Model
         }
     }
 
-    public static function columns()
+    public function columns()
     {
         return array();
     }
 
-    public static function rules()
+    public function rules()
     {
         return array();
     }
