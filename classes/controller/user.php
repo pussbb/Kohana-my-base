@@ -54,7 +54,7 @@ class Controller_User extends Controller_Core {
             $this->view->errors = $model->errors();
         }
         else
-        {exit;
+        {
             $this->redirect_user('register_success_uri');
         }
     }

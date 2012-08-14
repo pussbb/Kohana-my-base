@@ -259,12 +259,11 @@ class Model extends Kohana_Model
         return ! isset($this->{$this->primary_key});
     }
 
-    private function data_keys()
+    private function table_fields()
     {
-        $system = array('records', 'total_count');
-        $keys = array();
+        $table_columns = $this->get_table_columns();
         foreach($this->data as $key => $value) {
-            if (in_array($key, $system))
+            if ( ! array_key_exists($key, $table_columns))
                 continue;
             $keys[] = $key;
         }
@@ -273,13 +272,15 @@ class Model extends Kohana_Model
 
     public function save()
     {
-    
-        /*if ( $this->new_record()) {
-            $this->insert($this->data_keys($this->data));
+
+        if ( ! $this->query_type())
+        {
+            if ( $this->new_record())
+                $this->insert($this->table_fields());
+            else
+                $this->update($this->table_fields());
         }
-        else {
-            $this->update($this->data_keys($this->data));
-        }*/
+
         $this->prepare_for_query();
         if ( ! $this->db_validation->check() || ! $this->validate())
             return FALSE;
@@ -289,6 +290,11 @@ class Model extends Kohana_Model
         return $responce;
     }
 
+    public function get_table_columns()
+    {
+        return $this->columns()?:self::table_columns();
+    }
+    
     private function query_type()
     {
         $kclass_pieces = preg_split('/(?=[A-Z])/', get_class($this->db_query));
@@ -306,7 +312,7 @@ class Model extends Kohana_Model
         return $responce;
     }
 
-    public function validate()
+    private function validate()
     {
         $validator = Validation::factory($this->data);
         foreach ($this->rules() as $key => $rules)

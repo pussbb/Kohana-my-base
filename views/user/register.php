@@ -1,6 +1,7 @@
 
 <div class="reg-form">
 <?php
+debug($errors);
 $general = Arr::get($errors, 'general');
 
 if ( $general)

@@ -7,7 +7,7 @@ class Validation_Db
 
   public function __construct(&$model)
   {
-    $this->db_columns = $model->columns()?:$model::table_columns();
+    $this->db_columns = $model->get_table_columns();
     $this->_model = $model;
   }
 
@@ -15,6 +15,13 @@ class Validation_Db
   {
     $is_nullable = (bool)Arr::get($rules, 'is_nullable');
     if ($is_nullable) return TRUE;
+
+    $extra = Arr::get($rules, 'extra');
+    if ($extra) { 
+        if (preg_match('/auto_increment/i', $extra)
+            && $this->_model->new_record())
+            return TRUE;
+    }
 
     if ( ! $is_nullable && ! Valid::not_empty($value)) {
         $this->_model->add_error($key, __('must_not_be_empty'));
@@ -46,7 +53,7 @@ class Validation_Db
   {
     $is_nullable = (bool)Arr::get($rules, 'is_nullable');
     if ($is_nullable) return TRUE;
-    if ( ! $is_nullable && ! Valid::not_empty($value)) {
+    if ( ! Valid::not_empty($value)) {
         $this->_model->add_error($key, __('must_not_be_empty'));
         return FALSE;
     }
@@ -60,12 +67,11 @@ class Validation_Db
 
   public function check()
   {
-
     $result = TRUE;
     foreach($this->db_columns as $key => $rules) {
-        $type = (string)Arr::get($rules, 'type');
+        $type = Arr::get($rules, 'type');
         if (method_exists($this, $type)){
-            $value = isset($this->_model->$key)?:NULL;
+            $value = isset($this->_model->$key)?$this->_model->$key:NULL;
             $result &= $this->$type($key, $value, $rules);
         }
     }

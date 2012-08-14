@@ -82,6 +82,7 @@ class Model_Users extends Model
         $this->api_key = uniqid();
         $this->password = md5($this->password);
         $this->role_id = Model_Access_Rules::ROLE_USER;
+        $this->meta_data = json_encode(array());
 
         return $this->save();
 
