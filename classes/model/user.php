@@ -16,10 +16,18 @@ class Model_User extends Model
     public function rules()
     {
         return array(
-            'email' => array(
+            'login' => array(
                 'not_empty',
-                'email',
             ),
+            'email' => array(
+                array('email', array($this->email, TRUE)),
+                'email_domain',
+                'unique',
+            ),
+            'password' => array(
+                'not_empty',
+                array('min_length', array($this->password, 6)),
+            )
         );
     }
 
@@ -52,14 +60,34 @@ class Model_User extends Model
         return TRUE;
     }
 
+    public function registration_rules()
+    {
+        return array(
+            'pswd_confirmation' => array(
+                'not_empty',
+                array('equals', array($this->pswd_confirmation, $this->password, 'password'))
+            ),
+            'terms_of_use' => array(
+                'not_empty'
+            ),
+        );
+    }
+
+    public function bafore_save()
+    {
+        if (md5($this->password) !== $this->password)
+            $this->password = md5($this->password);
+    }
+    
     public function register()
     {
         $this->insert(array('login', 'email', 'password', 'api_key'));
         $this->api_key = uniqid();
-        $this->password = md5($this->password);
         $this->role_id = Model_Access_Rules::ROLE_USER;
         $this->meta_data = json_encode(array());
 
+        if ( ! $this->validate($this->registration_rules()+$this->rules()))
+            return FALSE;
         return $this->save();
 
     }

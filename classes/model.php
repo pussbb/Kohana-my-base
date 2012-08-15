@@ -2,16 +2,23 @@
 
 class Model extends Kohana_Model
 {
-    private $data = array();
+
+    public $records = NULL;
+    public $per_page = NULL;
+    public $count = NULL;
+
     protected $primary_key = 'id';
     protected $db_table = NULL;
     protected $db_query = NULL;
     protected $last_inserted_id = NULL;
-    private $errors = array();
-
     protected $validate = TRUE;
     protected $auto_clean = TRUE;
-    public $last_query = NULL;
+
+    private $errors = array();
+    private $last_query = NULL;
+    private $data = array();
+
+    
 
     public function __construct($params = NULL)
     {
@@ -96,8 +103,8 @@ class Model extends Kohana_Model
         $result = $kclass::find_all($filter, 1, NULL, $cache);
         if ( ! isset($result->{$kclass->primary_key}))
             throw new Exception('record_not_found', 10);
-        unset($result->records);
-        unset($result->count);
+        $result->records = NULL;
+        $result->count = NULL;
         return $result;
     }
 
@@ -204,11 +211,12 @@ class Model extends Kohana_Model
         $this->errors[$key] = $msg;
     }
 
-    protected function exists($filter = NULL, $limit = NULL, $cache = NULL)
+    protected function exists($filter = NULL, $limit = 1, $cache = NULL)
     {
         $this->select('*', $limit, NULL, $cache);
         if ( ! $filter )
             $filter = array($this->primary_key);
+
         return $this->filter($filter)->exec();
     }
 
@@ -249,6 +257,40 @@ class Model extends Kohana_Model
         }
     }
 
+    public function validate(array $rules = NULL,array $data = NULL)
+    {
+        $data = $data?$data:$this->data;
+        $rules = $rules?$rules:$this->rules();
+        $validator = Validation::factory($data);
+        foreach ($rules as $key => $rules)
+        {
+            foreach ($rules as $rule)
+            {
+                if ($rule === 'unique')
+                    $rule = array(array($this, 'unique_validation'), array(':validation', ':field'));
+
+                if ( ! is_array($rule)) {
+                    $validator->rule($key, $rule);
+                    continue;
+                }
+                $validator->rule(
+                    $key,
+                    Arr::get($rule, 0, NULL),
+                    Arr::get($rule, 1, NULL)
+                );
+            }
+        }
+        $validator->labels($this->labels());
+        if ($validator->check())
+            return TRUE;
+
+        $errors = $validator->errors('', FALSE);
+        if (Arr::is_assoc($errors))
+          $this->errors = Arr::merge($this->errors, $errors);
+
+        return FALSE;
+    }
+
     protected function before_save()
     {
         //user manipulations
@@ -272,7 +314,6 @@ class Model extends Kohana_Model
 
     public function save()
     {
-
         if ( ! $this->query_type())
         {
             if ( $this->new_record())
@@ -284,7 +325,6 @@ class Model extends Kohana_Model
         $this->prepare_for_query();
         if ( ! Validation_Db::check($this) || ! $this->validate())
             return FALSE;
-            debug($this,1);
         $this->before_save();
         $responce = $this->exec();
         $this->after_save();
@@ -313,34 +353,6 @@ class Model extends Kohana_Model
         return $responce;
     }
 
-    private function validate()
-    {
-        $validator = Validation::factory($this->data);
-        foreach ($this->rules() as $key => $rules)
-        {
-            foreach ($rules as $rule)
-            {
-                if ( ! is_array($rule))
-                {
-                    $validator->rule($key, $rule);
-                    continue;
-                }
-                $validator->rule(
-                    $key,
-                    Arr::get($rule, 0, NULL),
-                    Arr::get($rule, 1, NULL)
-                );
-            }
-        }
-        $validator->labels($this->labels());
-        if ($validator->check())
-            return TRUE;
-        $errors = $validator->errors('', FALSE);
-        if (Arr::is_assoc($errors))
-          $this->errors = Arr::merge($this->errors, $errors);
-        return FALSE;
-    }
-
     private function parse_responce($result)
     {
         switch ($this->query_type())
@@ -352,23 +364,15 @@ class Model extends Kohana_Model
             case 'select':
                 if ($result->count() == 1) {
                     $this->update_params($result->current());
-                    ///break;
                 }
                 $kclass = get_called_class();
-                $this->total_count = $result->count();
-                $records = array();
+                $this->count = $result->count();
                 foreach($result->as_array() as $record) {
                     if ( ! Arr::is_array($record) && ! Arr::is_assoc($record))
                         break;
-                    $records[] = new $kclass($record);
+                    $this->records[] = new $kclass($record);
                 }
-                $this->records = $records;
-                if ($result->count() == 0 ) {
-                    $result = FALSE;
-                }
-                else {
-                    $result = TRUE;
-                }
+                $result = $result->count() > 0;
                 break;
             case 'delete':
             case 'update':
@@ -413,5 +417,16 @@ class Model extends Kohana_Model
     public function labels()
     {
       return array();
+    }
+
+    public function unique_validation($validation, $field)
+    {
+        $kclass = get_called_class();
+        $result = $kclass::exists(array($field));
+        if ($result)
+            return TRUE;
+        $validation->error($field, ' '.__("already exists"));
+        return FALSE;
+        
     }
 }
