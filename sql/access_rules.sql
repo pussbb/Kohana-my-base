@@ -21,11 +21,11 @@ CREATE TABLE IF NOT EXISTS `access_rules` (
 --
 
 INSERT INTO `access_rules` ( `role_id`, `directory`, `controller`, `action`) VALUES
-(0, NULL, 'user', 'login'),
-(0, NULL, 'user', 'register'),
-(1, NULL, 'user', 'logout'),
-(1, NULL, 'user', 'account_info'),
-(1, NULL, 'user', 'settings');
+(0, NULL, 'users', 'login'),
+(0, NULL, 'users', 'register'),
+(1, NULL, 'users', 'logout'),
+(1, NULL, 'users', 'account_info'),
+(1, NULL, 'users', 'settings');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

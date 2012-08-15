@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_User extends Controller_Core {
+class Controller_Users extends Controller_Core {
 
     public function action_logout()
     {
@@ -15,7 +15,7 @@ class Controller_User extends Controller_Core {
         if ( ! $_REQUEST)
             return ;
 
-        $model = new Model_Users(array(
+        $model = new Model_User(array(
             'email' => Arr::get($_REQUEST, 'email'),
             'password' => Arr::get($_REQUEST, 'pswd'),
         ));
@@ -42,8 +42,8 @@ class Controller_User extends Controller_Core {
         if ( ! $_REQUEST)
             return ;
 
-        $model = new Model_Users(array(
-            'login' => Arr::get($_REQUEST, 'user_name'),
+        $model = new Model_User(array(
+            'login' => Arr::get($_REQUEST, 'login'),
             'email' => Arr::get($_REQUEST, 'email'),
             'password' => Arr::get($_REQUEST, 'pswd'),
             'terms_of_use' => Arr::get($_REQUEST, 'terms_of_use'),

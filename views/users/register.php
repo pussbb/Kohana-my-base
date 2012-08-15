@@ -1,7 +1,7 @@
 
 <div class="reg-form">
 <?php
-debug($errors);
+var_dump($errors);
 $general = Arr::get($errors, 'general');
 
 if ( $general)
@@ -17,10 +17,10 @@ $form = new Pretty_Form(array(
     'errors' => $errors,
     'template' => 'twitter_bootstrap',
 ));
-echo $form->open( Url::site('user/register'), array('class' => 'form-horizontal'));
+echo $form->open( Url::site('users/register'), array('class' => 'form-horizontal'));
 echo $form->legend(__('registration'));
 echo $form->input(array(
-    'name' => 'user_name',
+    'name' => 'login',
     'label' => 'login',
     'attr' => array( 'class' => 'input-xlarge' ),
     'info' => __('your_login')

@@ -2,5 +2,5 @@
 
 return array(
     'login_success_uri' => '/',
-    'register_success_uri' => 'user/login',
+    'register_success_uri' => 'users/login',
 );

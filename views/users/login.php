@@ -15,7 +15,7 @@ $form = new Pretty_Form(array(
     'errors' => $errors,
     'template' => 'twitter_bootstrap',
 ));
-echo $form->open( Url::site('user/login'), array('class' => 'form-horizontal'));
+echo $form->open( Url::site('users/login'), array('class' => 'form-horizontal'));
 echo $form->input(array(
     'name' => 'email',
     'template' => 'input_for_mail',
