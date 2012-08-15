@@ -2,77 +2,68 @@
 
 class Validation_Db
 {
-  private $db_columns = NULL;
-  private $_model = NULL;
-
-  public function __construct(&$model)
-  {
-    $this->db_columns = $model->get_table_columns();
-    $this->_model = $model;
-  }
-
-  public  function int($key, $value,$rules)
+  private static $new_record = FALSE;
+  
+  public static function int($key, $value, $rules)
   {
     $is_nullable = (bool)Arr::get($rules, 'is_nullable');
-    if ($is_nullable) return TRUE;
+    if ($is_nullable) return NULL;
 
     $extra = Arr::get($rules, 'extra');
     if ($extra) { 
         if (preg_match('/auto_increment/i', $extra)
-            && $this->_model->new_record())
-            return TRUE;
+            && Validation_Db::$new_record)
+            return NULL;
     }
 
-    if ( ! $is_nullable && ! Valid::not_empty($value)) {
-        $this->_model->add_error($key, __('must_not_be_empty'));
-        return FALSE;
-    }
-    if ( ! Valid::numeric($value)) {
-        $this->_model->add_error($key, __('must_be_valid_integer'));
-        return FALSE;
-    }
+    if ( ! $is_nullable && ! Valid::not_empty($value))
+        return __('must_not_be_empty');
+
+    if ( ! Valid::numeric($value))
+        return __('must_be_valid_integer');
 
     $min = Arr::get($rules, 'min');
     $max = Arr::get($rules, 'max');
-    if (($min && $max) && ! Valid::range($value,$min, $max)) {
-        $this->_model->add_error($key, __('must_be_between_%1_and_%2', array('%1' => $min, '%2' => $max)));
-        return FALSE;
-    }
-    if ($min && ($min > $value)) {
-        $this->_model->add_error($key, __('must_be_greater_than_'.$min));
-        return FALSE;
-    }
-    if ($max && ($max < $value)) {
-        $this->_model->add_error($key, __('must_be_less_than_'.$max));
-        return FALSE;
-    }
-    return TRUE;
+    if (($min && $max) && ! Valid::range($value,$min, $max))
+        return  __('must_be_between_%1_and_%2', array('%1' => $min, '%2' => $max));
+
+    if ($min && ($min > $value))
+        return __('must_be_greater_than_'.$min);
+
+    if ($max && ($max < $value))
+        return __('must_be_less_than_'.$max);
+
+    return NULL;
   }
 
-  public function string($key, $value, $rules)
+  public static function string($key, $value, $rules)
   {
     $is_nullable = (bool)Arr::get($rules, 'is_nullable');
-    if ($is_nullable) return TRUE;
-    if ( ! Valid::not_empty($value)) {
-        $this->_model->add_error($key, __('must_not_be_empty'));
-        return FALSE;
-    }
+    if ($is_nullable) return NULL;
+
+    if ( ! Valid::not_empty($value))
+        return __('must_not_be_empty');
+
     $max = Arr::get($rules, 'max');
-    if ($max && ! Valid::max_length($value, $max)) {
-        $this->_model->add_error($key, __('must_be_less_than_'.$max));
-        return FALSE;
-    }
-    return TRUE;
+    if ($max && ! Valid::max_length($value, $max))
+        return __('must_be_less_than_'.$max);
+
+    return NULL;
   }
 
-  public function check()
+  public static function check(&$model)
   {
+    Validation_Db::$new_record = $model->new_record();
     $result = TRUE;
-    foreach($this->db_columns as $key => $rules) {
+    foreach($model->get_table_columns() as $key => $rules) {
         $type = Arr::get($rules, 'type');
-        if (method_exists($this, $type)){
-            $value = isset($this->_model->$key)?$this->_model->$key:NULL;
-            $result &= $this->$type($key, $value, $rules);
+        if (method_exists('Validation_Db', $type)){
+            $value = isset($model->$key)?$model->$key:NULL;
+            $_result = Validation_Db::$type($key, $value, $rules);
+            if ($_result) {
+                $model->add_error($key, $_result);
+                $result = FALSE;
+            }
         }
     }
     return $result;

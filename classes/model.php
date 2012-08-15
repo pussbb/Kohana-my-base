@@ -8,7 +8,7 @@ class Model extends Kohana_Model
     protected $db_query = NULL;
     protected $last_inserted_id = NULL;
     private $errors = array();
-    private $db_validation = NULL;
+
     protected $validate = TRUE;
     protected $auto_clean = TRUE;
     public $last_query = NULL;
@@ -24,7 +24,7 @@ class Model extends Kohana_Model
             $this->data[$this->primary_key] = $params;
         }
         $this->db_table = self::db_table_name();
-        $this->db_validation = new Validation_Db($this);
+
     }
 
 
@@ -282,8 +282,9 @@ class Model extends Kohana_Model
         }
 
         $this->prepare_for_query();
-        if ( ! $this->db_validation->check() || ! $this->validate())
+        if ( ! Validation_Db::check($this) || ! $this->validate())
             return FALSE;
+            debug($this,1);
         $this->before_save();
         $responce = $this->exec();
         $this->after_save();

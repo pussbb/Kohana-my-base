@@ -22,7 +22,7 @@ class Model_User extends Model
             ),
         );
     }
-    
+
     public function login()
     {
         $this->password = md5($this->password);

@@ -69,7 +69,7 @@ class Controller_Core extends  Controller_Template{
 
         if ( ! Auth::instance()->logged_in())
         {
-            $this->redirect('user/login');
+            $this->redirect('users/login');
             return;
         }
 
