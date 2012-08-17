@@ -393,7 +393,7 @@ class Model extends Kohana_Model
     private function clean()
     {
         $this->db_query = NULL;
-        $this->errors = NULL;
+        $this->errors = array();
     }
 
     public function update_params($array)
