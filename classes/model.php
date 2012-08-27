@@ -18,7 +18,7 @@ class Model extends Kohana_Model
     private $last_query = NULL;
     private $data = array();
 
-    
+
 
     public function __construct($params = NULL)
     {
@@ -92,7 +92,7 @@ class Model extends Kohana_Model
                 break;
         }
     }
-    
+
     public static function find($filter, $cache = NULL)
     {
         $kclass_name = get_called_class();
@@ -334,7 +334,7 @@ class Model extends Kohana_Model
     {
         return $this->columns()?:self::table_columns();
     }
-    
+
     private function query_type()
     {
         $kclass_pieces = preg_split('/(?=[A-Z])/', get_class($this->db_query));
@@ -420,12 +420,10 @@ class Model extends Kohana_Model
 
     public function unique_validation($validation, $field)
     {
-        $kclass = get_called_class();
-        $result = $kclass::exists(array($field));
-        if ($result)
-            return TRUE;
-        $validation->error($field, ' '.__("already exists"));
-        return FALSE;
-        
+        $kclass = clone $this;
+        if ($kclass->exists(array($field))){
+            $validation->error($field, ' '.__("already exists"));
+            return;
+        }
     }
 }
