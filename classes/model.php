@@ -421,12 +421,10 @@ class Model extends Kohana_Model
 
     public function unique_validation($validation, $field)
     {
-        $klass = clone $this;
-        $result = $klass->exists(array($field));
-        if ( ! $result)
-            return TRUE;
-        $validation->error($field, ' '.__("already exists"));
-        return FALSE;
-
+        $kclass = clone $this;
+        if ($kclass->exists(array($field))){
+            $validation->error($field, ' '.__("already exists"));
+            return;
+        }
     }
 }
