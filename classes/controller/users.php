@@ -46,7 +46,7 @@ class Controller_Users extends Controller_Core {
             'login' => Arr::get($_REQUEST, 'login'),
             'email' => Arr::get($_REQUEST, 'email'),
             'password' => Arr::get($_REQUEST, 'pswd'),
-            'terms_of_use' => Arr::get($_REQUEST, 'terms_of_use'),
+//            'terms_of_use' => Arr::get($_REQUEST, 'terms_of_use'),
             'pswd_confirmation' => Arr::get($_REQUEST, 'pswd_confirmation'),
         ));
         if ( ! $model->register())
