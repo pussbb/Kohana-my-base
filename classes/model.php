@@ -117,7 +117,6 @@ class Model extends Kohana_Model
         return $kclass;
     }
 
-
     public static function table_columns($table = NULL)
     {
         if ( ! $table)

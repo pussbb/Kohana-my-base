@@ -120,25 +120,7 @@ class Controller_Core extends  Controller_Template{
     // registeres the needed resources from config file
     public function register_resources($identifier)
     {
-        $media = Kohana::$config->load('media.'.$identifier);
-        // reverse because we're not appending, but prepending
-        $files = array_reverse(
-            Arr::get($media, 'css', array())
-        );
-        foreach($files as $file => $media_type)
-        {
-            $this->register_css_file($file, $media_type, false, true);
-        }
-
-        // reverse because we're not appending, but prepending
-        $files = array_reverse(
-            Arr::get($media, 'js', array())
-        );
-
-        foreach ($files as $file)
-        {
-            $this->register_js_file($file, false, true);
-        }
+        Media::instance()->bundle($identifier);      
     }
 
     public function register_css_file($name, $media = '', $check_file = false, $insert_from_beginning = false)
@@ -165,6 +147,7 @@ class Controller_Core extends  Controller_Template{
     public function register_js_file($name, $check_file = false, $insert_from_beginning = false)
     {
 
+        
         CoffeeScript::build_if_needed($name);
         $file_name = 'media/js/'.$name.'.js';
 
