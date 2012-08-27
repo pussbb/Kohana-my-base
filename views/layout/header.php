@@ -8,16 +8,17 @@ echo '<title>', $title, '</title>', PHP_EOL;
 if ($favicon) {
     echo '<link rel ="shortcut icon" href="' .URL::base(TRUE, FALSE) . $favicon. '" type="image/x-icon" />';
 }
-
+$media = Media::instance();
 foreach (array('keywords', 'description') as $property) {
     if (!$property)
         continue;
     echo '<meta name="'. $property.'" content="' .$property.'"/>';
 }
 
-foreach ($styles as $file => $type) {
+foreach ($media->styles() as $file => $type) {
     echo HTML::style($file, array('media' => $type)), PHP_EOL;
 }
+echo $media->inline_style();
 $development_mode = isset(Kohana::$environment) && Kohana::$environment == Kohana::DEVELOPMENT;
 ?>
 
@@ -27,9 +28,10 @@ $development_mode = isset(Kohana::$environment) && Kohana::$environment == Kohan
 </script>
 
 <?php
-foreach ($scripts as $file) {
+foreach ($media->scripts() as $file) {
     echo HTML::script($file), PHP_EOL;
 }
+echo $media->inline_script();
 ?>
 </head>
     <body>

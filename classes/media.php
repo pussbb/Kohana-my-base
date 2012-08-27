@@ -4,6 +4,8 @@ class Media extends Singleton{
 
     private $config = NULL;
     private $styles = array();
+    private $inline_style = '';
+    private $inline_script = '';
     private $scripts = array();
     private $path = NULL;
 
@@ -33,19 +35,35 @@ class Media extends Singleton{
         }
     }
 
-    public function append($key, $name, $media = NULL)
+    public function append($key, $name, $media = NULL, $check = FALSE)
     {
+        if (Arr::is_array($key))
+        {
+            foreach ($key as $_key) {
+                $this->append($_key, $name, $media ,$check);
+            }
+            return;
+        }
         switch($key) {
             case 'css':
             case 'style':
-                $this->append_style($name, $media);
+                $this->append_style($name, $media, $check);
                 break;
             case 'js':
             case 'script':
-                $this->append_script($name);
+                $this->append_script($name, $check);
             default;
                 break;
         }
+    }
+
+    public function find_file($name, $prefix)
+    {
+        $path = $this->config('core.path');
+        $file = $path.$prefix.DIRECTORY_SEPARATOR.$name.'.'.$prefix;
+        if (file_exists($file))
+            return $file;
+        return Kohana::find_file('media',$name, $prefix);
     }
 
     private function is_url($uri)
@@ -62,12 +80,21 @@ class Media extends Singleton{
         return Url::base(TRUE,TRUE).$this->config('core.uri').$prefix.'/'.$file_name.'.'.$prefix;
     }
 
-    public function append_style($file_name, $media = NULL)
+    public function append_style($file_name, $media = NULL, $check = FALSE)
     {
+        if ($check && ! $this->find_file($file_name, 'css'))
+            return;
         $this->styles[$this->resource($file_name, 'css')]= $media;
     }
 
-    public function append_script($file_name)
+    public function append_inline_style($css)
+    {
+        if ( ! $css)
+            return;
+        $this->inline_style .= $css;
+    }
+
+    public function append_script($file_name, $check = FALSE)
     {
         $files = NULL;
         if (Arr::is_array($file_name)) {
@@ -78,7 +105,16 @@ class Media extends Singleton{
         if ( Kohana::$environment != Kohana::PRODUCTION) {
             $this->coffeescript($file_name, $files);
         }
-        $this->scripts[]= $this->resource('js', $file_name);
+        if ($check && ! $this->find_file($file_name, 'js'))
+            return;
+        $this->scripts[]= $this->resource($file_name, 'js');
+    }
+
+    public function append_inline_script($js)
+    {
+        if ( ! $js)
+            return;
+        $this->inline_script .= $js;
     }
 
     public function styles()
@@ -86,9 +122,23 @@ class Media extends Singleton{
         return $this->styles;
     }
 
+    public function inline_style()
+    {
+        if ( ! $this->inline_style)
+            return;
+        return "\n<style type=\"text/css\">\n$this->inline_style\n</style>\n";
+    }
+
     public function scripts()
     {
-        return $this->scripts;
+        return array_unique($this->scripts);
+    }
+
+    public function inline_script()
+    {
+        if ( ! $this->inline_script)
+            return;
+        return "\n<script type=\"text/javascript\">\n$this->inline_script\n</script>\n";
     }
 
     private function need_compile($source, $destination)
@@ -126,7 +176,7 @@ class Media extends Singleton{
             $compile = $this->need_compile($source, $destination);
            
         }
-        var_dump($compile );
+
         if( ! $compile)
             return;
         
