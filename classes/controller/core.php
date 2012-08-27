@@ -7,7 +7,7 @@ class Controller_Core extends  Controller_Template{
     public $template = 'layout/template';
     // for children it's recommended to change this prefixes
     // if needed IN CONSTRUCTOR (to not damage changes in parent class)
-    protected $resource_prefixes = array('default');
+    protected $resource_prefixes = array('');
     // check Acl access (true means do the check)
     protected $check_access = TRUE;
 
@@ -32,10 +32,7 @@ class Controller_Core extends  Controller_Template{
         $this->check_access();
 
         $this->view = new View();
-        $this->view->bind('controller', $this);
 
-        $this->template->styles = array();
-        $this->template->scripts = array();
         foreach(array('content', 'keywords', 'description', 'title') as $property)
         {
             $this->template->set($property, '');
@@ -120,67 +117,17 @@ class Controller_Core extends  Controller_Template{
     // registeres the needed resources from config file
     public function register_resources($identifier)
     {
-        $media = Kohana::$config->load('media.'.$identifier);
-        // reverse because we're not appending, but prepending
-        $files = array_reverse(
-            Arr::get($media, 'css', array())
-        );
-        foreach($files as $file => $media_type)
-        {
-            $this->register_css_file($file, $media_type, false, true);
-        }
-
-        // reverse because we're not appending, but prepending
-        $files = array_reverse(
-            Arr::get($media, 'js', array())
-        );
-
-        foreach ($files as $file)
-        {
-            $this->register_js_file($file, false, true);
-        }
+        Media::instance()->bundle($identifier);
     }
 
-    public function register_css_file($name, $media = '', $check_file = false, $insert_from_beginning = false)
+    public function register_css_file($name, $media = '')
     {
-        $file_name = 'media/css/'.$name.'.css';
-        if ($check_file && ! file_exists(DOCROOT.$file_name))
-            return;
-        if (array_key_exists($file_name, $this->template->styles))
-            return;
-        if ( ! $insert_from_beginning)
-        {
-            $this->template->styles[URL::base(TRUE, TRUE).$file_name] = $media;
-        }
-        else
-        {
-            Arr::unshift(
-                $this->template->styles,
-                URL::base(TRUE, FALSE).$file_name,
-                $media
-            );
-        }
+        Media::instance()->append_style($name, $media);
     }
 
-    public function register_js_file($name, $check_file = false, $insert_from_beginning = false)
+    public function register_js_file($name)
     {
-
-        CoffeeScript::build_if_needed($name);
-        $file_name = 'media/js/'.$name.'.js';
-
-        if ($check_file && ! file_exists(DOCROOT.$file_name))
-            return;
-        $resource_name = URL::base(TRUE, TRUE).$file_name;
-
-        if ($insert_from_beginning)
-        {
-            array_unshift($this->template->scripts, $resource_name);
-        }
-        else
-        {
-            $this->template->scripts []= $resource_name;
-        }
-        $this->template->scripts = array_unique($this->template->scripts);
+        Media::instance()->append_script($name);
     }
 
     // tries to add default files
@@ -195,13 +142,12 @@ class Controller_Core extends  Controller_Template{
             $directory = array_shift($structure) . '/';
         }
         $file_name = $directory .  implode('.', $structure);
-        $this->register_css_file($file_name, '', TRUE);
-        $this->register_js_file($file_name, TRUE);
+        Media::instance()->append(array('css','js'), $file_name, NULL, TRUE);
     }
 
     public function is_delete()
     {
-        return $this->request->method() == 'DELETE';
+        return $this->request->method() === 'DELETE';
     }
 
     public function is_ajax()
@@ -209,15 +155,13 @@ class Controller_Core extends  Controller_Template{
         return $this->request->is_ajax();
     }
 
-    public function render_partial($file = '', $locals=array())
+    public function render_partial($file = '', $view_data = array())
     {
         $this->check_auto_render();
-        $this->auto_render = false;
+        $this->auto_render = FALSE;
         $this->set_filename($file);
-        foreach ($locals as $key => $value)
-        {
-            $this->view->set($key, $value);
-        }
+        if ($view_data)
+            $this->view->bind($view_data);
         $this->set_view_filename();
         return $this->response->body($this->view->render());
     }
@@ -237,8 +181,8 @@ class Controller_Core extends  Controller_Template{
     public function render_json($data)
     {
         $this->check_auto_render();
-        $this->auto_render = false;
-        $json = json_encode($data);
+        $this->auto_render = FALSE;
+        $json = json_encode($data, JSON_HEX_TAG);
         $this->response->headers('Content-Type', 'application/json')
             ->send_headers()
             ->body($json);
@@ -274,19 +218,10 @@ class Controller_Core extends  Controller_Template{
             $this->set_favicon($favicon);
         }
 
-        // sets title, meta keywords/description
-//        $this->setup_meta_data();
-
         $this->register_resources_by_default();
         $this->template->content = $this->view->render();
         parent::after();
     }
-
-//    // sets title, meta keywords/description
-//    protected  function setup_meta_data()
-//    {
-//        Model_Page_Parameter::fill($this);
-//    }
 
     // finally set the view filename (not possible to change back)
     protected function set_view_filename()
