@@ -323,7 +323,7 @@ class Model extends Kohana_Model
         }
 
         $this->prepare_for_query();
-        if ( ! Validation_Db::check($this) || ! $this->validate())
+        if ( ! Db_Validation::check($this) || ! $this->validate())
             return FALSE;
         $this->before_save();
         $responce = $this->exec();
