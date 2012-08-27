@@ -117,7 +117,7 @@ class Controller_Core extends  Controller_Template{
     // registeres the needed resources from config file
     public function register_resources($identifier)
     {
-        Media::instance()->bundle($identifier);      
+        Media::instance()->bundle($identifier);
     }
 
     public function register_css_file($name, $media = '')
@@ -160,7 +160,8 @@ class Controller_Core extends  Controller_Template{
         $this->check_auto_render();
         $this->auto_render = FALSE;
         $this->set_filename($file);
-        $this->view->bind($view_data);
+        if ($view_data)
+            $this->view->bind($view_data);
         $this->set_view_filename();
         return $this->response->body($this->view->render());
     }
