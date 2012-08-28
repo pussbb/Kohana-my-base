@@ -117,7 +117,7 @@ class Controller_Core extends  Controller_Template{
     // registeres the needed resources from config file
     public function register_resources($identifier)
     {
-        Media::instance()->bundle($identifier);      
+        Media::instance()->bundle($identifier);
     }
 
     public function register_css_file($name, $media = '')

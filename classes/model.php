@@ -320,10 +320,13 @@ class Model extends Kohana_Model
             else
                 $this->update($this->table_fields());
         }
-        $this->prepare_for_query();
-        if ( ! Validation_Db::check($this) || ! $this->validate())
+
+        if ( ! Db_Validation::check($this) || ! $this->validate())
             return FALSE;
+
         $this->before_save();
+        $this->prepare_for_query();
+
         $responce = $this->exec();
         $this->after_save();
         return $responce;

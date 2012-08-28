@@ -48,12 +48,12 @@ echo $form->password(array(
     'info' => __('at_least_6_characters')
 ));
 
-echo $form->checkbox(array(
-    'name' => 'terms_of_use',
-    'label' => __('email_address'),
-    'attr' => array(),
-    'info' => __('valid_email_adrress')
-));
+//echo $form->checkbox(array(
+//    'name' => 'terms_of_use',
+//    'label' => __('terms_of_use'),
+//    'attr' => array(),
+//    'info' => __('terms_of_use')
+//));
 
 echo $form->form_action(array(
     'buttons' => array(

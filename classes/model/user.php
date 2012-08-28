@@ -67,9 +67,9 @@ class Model_User extends Model
                 'not_empty',
                 array('equals', array($this->pswd_confirmation, $this->password, 'password'))
             ),
-            'terms_of_use' => array(
-                'not_empty'
-            ),
+//            'terms_of_use' => array(
+//                'not_empty'
+//            ),
         );
     }
 
@@ -86,10 +86,9 @@ class Model_User extends Model
         $this->role_id = Model_Access_Rules::ROLE_USER;
         $this->meta_data = json_encode(array());
 
-        if ( ! $this->validate($this->registration_rules()+$this->rules()))
+        if ( ! $this->validate($this->registration_rules()))
             return FALSE;
         return $this->save();
-
     }
 
 }
