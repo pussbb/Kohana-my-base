@@ -73,12 +73,12 @@ class Model_User extends Model
         );
     }
 
-    public function bafore_save()
+    public function before_save()
     {
-        if (md5($this->password) !== $this->password)
+        if ($this->new_record())
             $this->password = md5($this->password);
     }
-    
+
     public function register()
     {
         $this->insert(array('login', 'email', 'password', 'api_key'));

@@ -160,7 +160,9 @@ class Controller_Core extends  Controller_Template{
         $this->check_auto_render();
         $this->auto_render = FALSE;
         $this->set_filename($file);
-        $this->view->bind($view_data);
+        if ($view_data)
+            $this->view->set($view_data);
+        $this->append_dynamic_properties($this->view);
         $this->set_view_filename();
         return $this->response->body($this->view->render());
     }
@@ -218,8 +220,25 @@ class Controller_Core extends  Controller_Template{
         }
 
         $this->register_resources_by_default();
+        $this->append_dynamic_properties($this->view);
         $this->template->content = $this->view->render();
         parent::after();
+    }
+
+    private function append_dynamic_properties($view)
+    {
+        $reflection_object = new ReflectionClass($this);
+        $properties = $reflection_object->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED | ReflectionProperty::IS_PRIVATE );
+        $system_variables = array('kohana_view_filename', 'kohana_view_data', 'filename');
+        foreach($properties as $property) {
+            $system_variables[] = $property->getName();
+        }
+
+        foreach (get_object_vars($this) as $key => $value) {
+            if (in_array($key, $system_variables))
+                continue;
+            $view->bind($key, $value);
+        }
     }
 
     // finally set the view filename (not possible to change back)
