@@ -130,6 +130,11 @@ class Controller_Core extends  Controller_Template{
         Media::instance()->append_script($name);
     }
 
+    public function register_media($file_name, $media = NULL, $check_file = FALSE)
+    {
+        Media::instance()->append(array('css','js'), $file_name, $media, $check_file);
+    }
+
     // tries to add default files
     // in format directory/controller.action.js
     // and directory/controller.action.css

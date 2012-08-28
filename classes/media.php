@@ -164,7 +164,7 @@ class Media extends Singleton{
         if (Arr::is_array($files)) {
             $join = ' -j '. $file_name.'.js';
             foreach($files as $file) {
-                $_source = $source_path.$file.'.coffee'; 
+                $_source = $source_path.$file.'.coffee';
                 $compile &= $this->need_compile($_source, $destination);
                 $source .= ' ' . $_source;
             }
@@ -174,12 +174,11 @@ class Media extends Singleton{
         else {
             $source = $source_path.$file_name.'.coffee';
             $compile = $this->need_compile($source, $destination);
-           
         }
 
         if( ! $compile)
             return;
-        
+
         $output_dir = pathinfo($destination, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR;
 
         if ( ! file_exists($output_dir) && ! is_dir($output_dir))
