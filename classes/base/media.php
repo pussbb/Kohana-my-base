@@ -193,7 +193,7 @@ class Base_Media extends Singleton{
         $output = shell_exec($cmd);
 
         if ( ! $output)
-            return;
+            return $this->minize_script($destination);
 
         throw new Kohana_Exception(
             __("coffescript_compiler_output_for :file : :output", array(
@@ -201,5 +201,18 @@ class Base_Media extends Singleton{
                 ':output' => $output,
             ))
         );
+    }
+
+    private function minize_script($file)
+    {
+        if (Kohana::$environment == Kohana::PRODUCTION)
+            return;
+        if ( ! $this->config('core.coffeescript.minify'))
+            return;
+        $jsmin = Kohana::find_file('vendor', 'jsmin-php/jsmin');
+        if ( ! $jsmin)
+            return;
+        include_once $jsmin;
+        file_put_contents($file, JSMin::minify(file_get_contents($file)));
     }
 }

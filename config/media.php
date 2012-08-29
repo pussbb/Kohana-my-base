@@ -7,7 +7,8 @@ return array(
         'path' => DOCROOT.'media'.DIRECTORY_SEPARATOR,
         'coffeescript' => array(
             'source_path' => DOCROOT.'coffee_scripts'.DIRECTORY_SEPARATOR,
-            'dest_path' => DOCROOT.'media'.DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR
+            'dest_path' => DOCROOT.'media'.DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR,
+            'minify' => TRUE, // uses php class JSMin
         ),
         'less' => array(
             'source' => DOCROOT.'coffee_scripts'.DIRECTORY_SEPARATOR,
