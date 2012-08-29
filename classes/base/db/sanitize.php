@@ -4,13 +4,16 @@ class Base_Db_Sanitize
 {
   public static function int($value)
   {
-    return intval($value);
+    if ( ! Arr::is_array($value))
+      return intval($value);
+    return array_map('intval', $value);
   }
 
   public static function string($value)
   {
-
-    return Base_Db_Sanitize::xss_clean($value);
+    if ( ! Arr::is_array($value))
+      return Base_Db_Sanitize::xss_clean($value);
+    return aray_map('Base_Db_Sanitize::xss_clean', $value);
   }
 
   public static function value($type, $value)

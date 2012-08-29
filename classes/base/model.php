@@ -169,7 +169,7 @@ class Base_Model extends Kohana_Model
                     $comparison_key = '';
                 
            }
-           $this->db_query->where($key, $comparison_key, $value);
+           $this->db_query->where($key, $comparison_key, $this->sanitize($key, $value));
         }
         $this->db_query->where_close();
         return $this;
@@ -249,14 +249,9 @@ class Base_Model extends Kohana_Model
                 if ( $columns && ! $values)
                 {
                     $data = array();
-                    $table_columns = $this->get_table_columns();
                     foreach($columns as $field)
                     {
-                        $type = Arr::path($table_columns, $field.'.type');
-                        $value = $this->$field;
-                        if ($type)
-                            $value = Base_Db_Sanitize::value($type, $value);
-                        $data[] = $value;
+                        $data[] = $this->sanitize($field, $value);
                     }
                     $this->db_query->values($data);
                 }
@@ -266,6 +261,16 @@ class Base_Model extends Kohana_Model
         }
     }
 
+    private function sanitize($key, $value)
+    {
+        if (is_object($value))
+             return $value;
+        $table_columns = $this->get_table_columns();
+        $type = Arr::path($table_columns, $key.'.type');
+        if ($type)
+            return Base_Db_Sanitize::value($type, $value);
+        return $value;     
+    }
     public function validate(array $rules = NULL,array $data = NULL)
     {
         $data = $data?$data:$this->data;
