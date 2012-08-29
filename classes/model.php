@@ -62,7 +62,7 @@ class Model extends Kohana_Model
 
     public function __isset($name)
     {
-        return isset($this->data[$name]);
+        return array_key_exists($name, $this->data);
     }
 
     public function __unset($name)
