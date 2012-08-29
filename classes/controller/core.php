@@ -117,22 +117,22 @@ class Controller_Core extends  Controller_Template{
     // registeres the needed resources from config file
     public function register_resources($identifier)
     {
-        Media::instance()->bundle($identifier);
+        Media::bundle($identifier);
     }
 
     public function register_css_file($name, $media = '')
     {
-        Media::instance()->append_style($name, $media);
+        Media::append_style($name, $media);
     }
 
     public function register_js_file($name)
     {
-        Media::instance()->append_script($name);
+        Media::append_script($name);
     }
 
     public function register_media($file_name, $media = NULL, $check_file = FALSE)
     {
-        Media::instance()->append(array('css','js'), $file_name, $media, $check_file);
+        Media::append(array('css','js'), $file_name, $media, $check_file);
     }
 
     // tries to add default files
@@ -147,7 +147,7 @@ class Controller_Core extends  Controller_Template{
             $directory = array_shift($structure) . '/';
         }
         $file_name = $directory .  implode('.', $structure);
-        Media::instance()->append(array('css','js'), $file_name, NULL, TRUE);
+        Media::append(array('css','js'), $file_name, NULL, TRUE);
     }
 
     public function is_delete()

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Db_Validation
+class Base_Db_Validation
 {
   private static $new_record = FALSE;
   
@@ -12,7 +12,7 @@ class Db_Validation
     $extra = Arr::get($rules, 'extra');
     if ($extra) { 
         if (preg_match('/auto_increment/i', $extra)
-            && Db_Validation::$new_record)
+            && Base_Db_Validation::$new_record)
             return NULL;
     }
 
@@ -53,13 +53,13 @@ class Db_Validation
 
   public static function check(&$model)
   {
-    Db_Validation::$new_record = $model->new_record();
+    Base_Db_Validation::$new_record = $model->new_record();
     $result = TRUE;
     foreach($model->get_table_columns() as $key => $rules) {
         $type = Arr::get($rules, 'type');
-        if (method_exists('Db_Validation', $type)){
+        if (method_exists('Base_Db_Validation', $type)){
             $value = isset($model->$key)?$model->$key:NULL;
-            $_result = Db_Validation::$type($key, $value, $rules);
+            $_result = Base_Db_Validation::$type($key, $value, $rules);
             if ($_result) {
                 $model->add_error($key, $_result);
                 $result = FALSE;

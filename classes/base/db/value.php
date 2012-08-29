@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Db_Value
+class Base_Db_Value
 {
   public static function int($value)
   {
