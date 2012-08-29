@@ -244,9 +244,14 @@ class Base_Model extends Kohana_Model
                 if ( $columns && ! $values)
                 {
                     $data = array();
+                    $table_columns = $this->get_table_columns();
                     foreach($columns as $field)
                     {
-                        $data[] = $this->$field;//Database::instance()->escape();
+                        $type = Arr::path($table_columns, $field.'.type');
+                        $value = $this->$field;
+                        if ($type)
+                            $value = Base_Db_Sanitize::value($type, $value);
+                        $data[] = $value;
                     }
                     $this->db_query->values($data);
                 }
