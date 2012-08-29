@@ -3,7 +3,7 @@
 class Model extends Kohana_Model
 {
 
-    public $records = NULL;
+    public $records = array();
     public $per_page = NULL;
     public $count = NULL;
 
@@ -103,8 +103,8 @@ class Model extends Kohana_Model
         $result = $kclass::find_all($filter, 1, NULL, $cache);
         if ( ! isset($result->{$kclass->primary_key}))
             throw new Exception('record_not_found', 10);
-        $result->records = NULL;
-        $result->count = NULL;
+        $result->records = array();
+        $result->count = 1;
         return $result;
     }
 
