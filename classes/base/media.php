@@ -143,13 +143,16 @@ class Base_Media extends Singleton{
 
     private function need_compile($source, $destination)
     {
+
         if( ! file_exists($source))
             return FALSE;
+
         if ( ! file_exists($destination))
             return TRUE;
-        if (file_exists($source) && filemtime($source) >= filemtime($destination))
-            return FALSE;
-        return TRUE;
+
+        if (filemtime($source) > filemtime($destination))
+            return TRUE;
+        return FALSE;
     }
 
     private function coffeescript($file_name, $files = NULL)
@@ -165,11 +168,10 @@ class Base_Media extends Singleton{
             $join = ' -j '. $file_name.'.js';
             foreach($files as $file) {
                 $_source = $source_path.$file.'.coffee';
-                $compile &= $this->need_compile($_source, $destination);
+                if ( ! $compile)
+                    $compile = $this->need_compile($_source, $destination);
                 $source .= ' ' . $_source;
             }
-            if ( ! file_exists($destination))
-                $compile = TRUE;
         }
         else {
             $source = $source_path.$file_name.'.coffee';
