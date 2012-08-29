@@ -155,14 +155,19 @@ class Base_Model extends Kohana_Model
             return $this;
 
         $this->db_query->where_open();
-        foreach($filter as $key => $value)
-        {
+        foreach($filter as $key => $value) {
            $comparison_key = '=';
-           if ( Arr::is_array($value))
-           {
+           if ( Arr::is_array($value)) {
                if (! $value)
                    continue;
                $comparison_key = 'IN';
+           }
+           if (is_object($value)) {
+                if(get_class($value) != 'Database_Expression')
+                    throw new Exception("Error Processing Request", 1);
+                if (preg_match('/REGEXP/', $value->value()))
+                    $comparison_key = '';
+                
            }
            $this->db_query->where($key, $comparison_key, $value);
         }

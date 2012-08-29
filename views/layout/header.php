@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
 <?php
-echo '<title>', $title, '</title>', PHP_EOL;
+echo "<title>$title</title>", PHP_EOL;
 
 if ($favicon) {
     echo '<link rel ="shortcut icon" href="' .URL::base(TRUE, FALSE) . $favicon. '" type="image/x-icon" />';
@@ -12,7 +12,7 @@ $media = Media::instance();
 foreach (array('keywords', 'description') as $property) {
     if (!$property)
         continue;
-    echo '<meta name="'. $property.'" content="' .$property.'"/>';
+    echo "<meta name=\"$property\" content=\"$property\"/>";
 }
 
 foreach ($media->styles() as $file => $type) {

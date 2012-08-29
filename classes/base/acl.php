@@ -15,9 +15,13 @@ class Base_ACL extends Singleton{
         return Model_Access_Rules::exists(array(
             'role_id' => $role_id,
             'directory' => Arr::get($current_request, 0),
-            'controller' => Arr::get($current_request, 1),
-            'action' => Arr::get($current_request, 2),
+            'controller' => self::dbexpr(Arr::get($current_request, 1)),
+            'action' => self::dbexpr(Arr::get($current_request, 2)),
         ), 1, 30000);
     }
 
+    private static function dbexpr($value)
+    {
+        return DB::expr('REGEXP "('.$value.'|\\\\*)"');
+    }
 }
