@@ -20,6 +20,6 @@ class Base_Auth extends Singleton{
 
     public function logged_in()
     {
-        return ! is_null(Session::instance()->get('auth'));
+        return ! is_null($this->current_user());
     }
 }
