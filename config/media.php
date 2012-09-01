@@ -16,6 +16,13 @@ return array(
         ),
     ),
     'default' => array(
+        'css' => array(),
+        'js' => array(),
+    ),
+);
+/*
+Example 
+'default' => array(
         'css' => array(
             'bootstrap/bootstrap.min' => '',
             'bootstrap/bootstrap-responsive.min' => '',
@@ -33,4 +40,5 @@ return array(
             ),
         ),
     ),
-);
+
+*/
