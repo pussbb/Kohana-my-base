@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Base_Model extends Singleton
+class Base_Model extends Kohana_Model
 {
 
     public $records = array();
@@ -101,6 +101,9 @@ class Base_Model extends Singleton
 
     public function __toString()
     {
+        $string = (string)$this->db_query;
+        if ($string)
+            return $string;
         return $this->last_query;
     }
 
