@@ -9,11 +9,11 @@ abstract class Singleton {
     final public static function instance()
     {
         $klass = get_called_class();
+
         if (! array_key_exists($klass, $klass::$instances))
         {
             $klass::$instances[$klass] = new $klass;
         }
         return $klass::$instances[$klass];
     }
-
 }

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Base_Model extends Kohana_Model
+class Base_Model extends Singleton
 {
 
     public $records = array();
@@ -34,6 +34,12 @@ class Base_Model extends Kohana_Model
 
     }
 
+    public function __destruct()
+    {
+        $this->clean();
+        $this->data = NULL;
+        $this->records = NULL;
+    }
 
     public static function module_name($glue = '')
     {
@@ -91,6 +97,16 @@ class Base_Model extends Kohana_Model
             default:
                 break;
         }
+    }
+
+    public function __toString()
+    {
+        return $this->last_query;
+    }
+
+    public function __toArray()
+    {
+        return $this->data;
     }
 
     public static function find($filter, $cache = NULL)

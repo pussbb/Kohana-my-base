@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Date extends Kohana_Date {
+class Base_Date extends Kohana_Date {
 
     // which day does the week start on (0 - 6)
     const WEEK_START = 2;
