@@ -26,7 +26,7 @@ class Base_Model extends Kohana_Model
         'total_count', // for select will added total_count to count all rows if limit set
     );
 
-    private $db_query_count = NULL;
+    private $count_total = FALSE;
 
     const BELONGS_TO = 1;
     const HAS_MANY = 2;
@@ -180,7 +180,7 @@ class Base_Model extends Kohana_Model
                 $this->db_query->offset((int)$value);
                 break;
             case 'total_count':
-                //$this->db_query->select(array(DB::expr('COUNT(*)'), 'total_count'));
+                $this->count_total = TRUE;
                 break;
             case 'with':
                 break;
@@ -480,7 +480,10 @@ class Base_Model extends Kohana_Model
                     $this->update_params($result->current());
                 }
                 $kclass = get_called_class();
-                $this->count = $result->count();
+                if ($this->count_total)
+                    $this->count = $this->auto_count_total();
+                else
+                    $this->count = $result->count();
                 foreach($result->as_array() as $record) {
                     if ( ! Arr::is_array($record) && ! Arr::is_assoc($record))
                         break;
@@ -497,6 +500,37 @@ class Base_Model extends Kohana_Model
                 break;
         }
         return $result;
+    }
+
+    private function auto_count_total()
+    {
+        $query = clone $this->db_query;
+        $properties = array();
+        $reflecionObject = new ReflectionObject($query);
+        $object_properties = $reflecionObject->getProperties(ReflectionProperty::IS_PROTECTED);
+        foreach ($object_properties as $property)
+        {
+            $property->setAccessible(true);
+            switch($property->getName()){
+                case '_select':
+                    $property->setValue($query,array(
+                           array(DB::expr('COUNT(*)'), 'total_count'),
+                    ));
+                    break;
+                case '_limit':
+                    $property->setValue($query, NULL);
+                    break;
+                case '_offset':
+                    $property->setValue($query, NULL);
+                    break;
+                case '_sql':
+                   $property->setValue($query, NULL); 
+                   break;
+                default:
+                    break;
+            }
+        }
+        return $query->execute()->get('total_count');
     }
 
     protected function after_save()
