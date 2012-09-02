@@ -19,8 +19,11 @@ class Base_Model extends Kohana_Model
     private $errors = array();
     private $last_query = NULL;
     private $data = array();
-
-
+    private $system_filters = array(
+        'limit', //limit of rows
+        'offset', //offset ...
+        'with', // query with join of known relation
+    );
 
     public function __construct($params = NULL)
     {
@@ -160,19 +163,51 @@ class Base_Model extends Kohana_Model
         return $columns;
     }
 
+    private function system_filters($key, $value)
+    {
+        switch ($key) {
+            case 'limit':
+                $this->db_query->limit((int)$value);
+                break;
+            case 'offset':
+                $this->db_query->offset((int)$value);
+                break;
+            case 'with':
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
+
     public function filter($filter)
     {
         if ( ! Arr::is_array($filter))
                 throw new Kohana_Exception('must be an array');
 
+        $table_columns = $this->table_columns();
         if ( ! Arr::is_assoc($filter))
         {
             $fields = array();
             foreach($filter as $field)
             {
+                if ( ! array_key_exists($filed, $table_columns))
+                    continue;
                 $fields[$field] = $this->$field;
             }
             $filter = $fields;
+        }
+        else
+        {
+            //skip fields that are not in table
+            //and if it's a system append them
+            foreach ($filter as $key => $value) {
+                if ( array_key_exists($key, $table_columns))
+                    continue;
+                if ( in_array($key, $this->system_filters))
+                    $this->system_filters($key, $filter[$key]);
+                unset($filter[$key]);
+            }
         }
 
         if ( ! array_filter($filter))
@@ -181,6 +216,11 @@ class Base_Model extends Kohana_Model
         $this->db_query->where_open();
         foreach($filter as $key => $value) {
            $comparison_key = '=';
+           if (in_array($key, $this->system_filters))
+           {
+                $this->system_filters($key, $value);
+                continue;
+           }
            if ( Arr::is_array($value)) {
                if (! $value)
                    continue;
@@ -189,9 +229,8 @@ class Base_Model extends Kohana_Model
            if (is_object($value)) {
                 if(get_class($value) != 'Database_Expression')
                     throw new Exception("Error Processing Request", 1);
-                if (preg_match('/REGEXP/', $value->value()))
-                    $comparison_key = '';
-                
+                ///if (preg_match('/REGEXP/', $value->value()))
+                $comparison_key = '';   
            }
            $this->db_query->where($key, $comparison_key, $this->sanitize($key, $value));
         }
