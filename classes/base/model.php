@@ -23,7 +23,14 @@ class Base_Model extends Kohana_Model
         'limit', //limit of rows
         'offset', //offset ...
         'with', // query with join of known relation
+        'total_count', // for select will added total_count to count all rows if limit set
     );
+
+    private $db_query_count = NULL;
+
+    const BELONGS_TO = 1;
+    const HAS_MANY = 2;
+    const HAS_ONE = 3;
 
     public function __construct($params = NULL)
     {
@@ -171,6 +178,9 @@ class Base_Model extends Kohana_Model
                 break;
             case 'offset':
                 $this->db_query->offset((int)$value);
+                break;
+            case 'total_count':
+                //$this->db_query->select(array(DB::expr('COUNT(*)'), 'total_count'));
                 break;
             case 'with':
                 break;
