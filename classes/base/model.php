@@ -14,6 +14,7 @@ class Base_Model extends Kohana_Model
     protected $validate = TRUE;
     protected $auto_clean = TRUE;
 
+    private $bare_table_name = NULL;
     private $errors = array();
     private $last_query = NULL;
     private $data = array();
@@ -31,7 +32,7 @@ class Base_Model extends Kohana_Model
             $this->data[$this->primary_key] = $params;
         }
         $this->db_table = self::db_table_name();
-
+        $this->bare_table_name = self::db_table_name('_', FALSE);
     }
 
     public function __destruct()
@@ -48,9 +49,12 @@ class Base_Model extends Kohana_Model
         return implode($glue, $kclass_pieces);
     }
 
-    public static  function db_table_name($glue = '_')
+    public static  function db_table_name($glue = '_', $plural = TRUE)
     {
-        return strtolower(self::module_name($glue));
+        $table_name = strtolower(self::module_name($glue));
+        if ( ! $plural)
+            return $table_name;
+        return Inflector::plural($table_name);
     }
 
     public function __set($name, $value)
@@ -196,8 +200,34 @@ class Base_Model extends Kohana_Model
 
     public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
     {
-        $select_args = !Arr::is_array($select_args) ? $select_args : extract($select_args);
-        $this->db_query = DB::select()->from($this->db_table);
+        if ( ! Arr::is_array($select_args))
+        {
+            $this->db_query = DB::select($this->bare_table_name.'.'.$select_args);
+        }
+        else
+        {
+            $fields = array();
+            if (Arr::is_array(Arr::get($select_args, 0))) {
+                foreach ($select_args as $item) {
+                    $fields[] = array(
+                        $this->bare_table_name.'.'.Arr::get($item, 0),
+                        Arr::get($item, 1)
+                    );
+                }
+                $this->db_query = call_user_func_array(array('DB', 'select'), $fields);
+            }
+            else {
+                $fields = array(
+                    $this->bare_table_name.'.'.Arr::get($select_args, 0),
+                    Arr::get($select_args, 1)
+                );
+                $this->db_query = DB::select($fields);
+            }
+        }
+        ///$select_args = !Arr::is_array($select_args) ? $select_args : debug( extract($select_args));
+
+        
+        $this->db_query->from(array($this->db_table, $this->bare_table_name));
         $this->db_query->limit($limit)->offset($offset);
         if ($cache)
             $this->db_query->cached($cache);

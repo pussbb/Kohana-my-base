@@ -6,13 +6,13 @@ class Base_ACL extends Singleton{
     {
         $user = Auth::instance()->current_user();
         if ( ! is_object($user))
-            $role_id = Model_Access_Rules::ROLE_GUEST;
+            $role_id = Model_Access_Rule::ROLE_GUEST;
         else
             $role_id = $user->role_id;
 
         $current_request = $core->current_request_structure();
 
-        return Model_Access_Rules::exists(array(
+        return Model_Access_Rule::exists(array(
             'role_id' => $role_id,
             'directory' => Arr::get($current_request, 0),
             'controller' => self::dbexpr(Arr::get($current_request, 1)),

@@ -83,7 +83,7 @@ class Model_User extends Model
     {
         $this->insert(array('login', 'email', 'password', 'api_key'));
         $this->api_key = uniqid();
-        $this->role_id = Model_Access_Rules::ROLE_USER;
+        $this->role_id = Model_Access_Rule::ROLE_USER;
         $this->meta_data = json_encode(array());
 
         if ( ! $this->validate($this->registration_rules()))
