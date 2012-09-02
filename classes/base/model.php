@@ -7,6 +7,7 @@ class Base_Model extends Kohana_Model
     public $per_page = NULL;
     public $count = NULL;
 
+    protected $order = array();
     protected $primary_key = 'id';
     protected $db_table = NULL;
     protected $db_query = NULL;
@@ -200,8 +201,7 @@ class Base_Model extends Kohana_Model
 
     public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
     {
-        if ( ! Arr::is_array($select_args))
-        {
+        if ( ! Arr::is_array($select_args)) {
             $this->db_query = DB::select($this->bare_table_name.'.'.$select_args);
         }
         else
@@ -224,9 +224,7 @@ class Base_Model extends Kohana_Model
                 $this->db_query = DB::select($fields);
             }
         }
-        ///$select_args = !Arr::is_array($select_args) ? $select_args : debug( extract($select_args));
 
-        
         $this->db_query->from(array($this->db_table, $this->bare_table_name));
         $this->db_query->limit($limit)->offset($offset);
         if ($cache)
@@ -410,6 +408,8 @@ class Base_Model extends Kohana_Model
     protected function exec()
     {
         $this->db_query->as_assoc();
+        if ($this->order)
+            call_user_func_array(array($this->db_query, 'order_by'), $this->order);
         $result = $this->db_query->execute();
         $this->last_query = (string) $this->db_query;
         $responce = $this->parse_responce($result);
@@ -482,6 +482,16 @@ class Base_Model extends Kohana_Model
     public function labels()
     {
       return array();
+    }
+
+    public function last_inserted_id()
+    {
+        return $this->last_inserted_id;
+    }
+
+    public function last_query()
+    {
+        return $this->last_query;
     }
 
     public function unique_validation($validation, $field)
