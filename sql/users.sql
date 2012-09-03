@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_id` int(11) NOT NULL DEFAULT '1' COMMENT 'role id',
   `email` text NOT NULL,

@@ -1,12 +1,3 @@
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
--- --------------------------------------------------------
---
--- Table structure `access_rules`
---
-
 CREATE TABLE IF NOT EXISTS `access_rules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_id` int(11) DEFAULT NULL,
@@ -26,7 +17,3 @@ INSERT INTO `access_rules` ( `role_id`, `directory`, `controller`, `action`) VAL
 (1, NULL, 'users', 'logout'),
 (1, NULL, 'users', 'account_info'),
 (1, NULL, 'users', 'settings');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

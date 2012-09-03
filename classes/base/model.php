@@ -14,7 +14,6 @@ class Base_Model extends Kohana_Model {
     protected $validate = TRUE;
     protected $auto_clean = TRUE;
 
-    private $bare_table_name = NULL;
     private $errors = array();
     private $last_query = NULL;
     private $data = array();
@@ -39,7 +38,6 @@ class Base_Model extends Kohana_Model {
             $this->data[$this->primary_key] = $params;
         }
         $this->db_table = self::db_table_name();
-        $this->bare_table_name = self::db_table_name('_', FALSE);
     }
 
     public function __destruct()
@@ -49,19 +47,16 @@ class Base_Model extends Kohana_Model {
         $this->records = NULL;
     }
 
-    public static function module_name($glue = '')
+    public static function module_name($glue = '_')
     {
         $kclass_pieces = explode('_', get_called_class());
         unset($kclass_pieces[0]);
         return implode($glue, $kclass_pieces);
     }
 
-    public static function db_table_name($glue = '_', $plural = TRUE)
+    public static function db_table_name($glue = '_')
     {
-        $table_name = strtolower(self::module_name($glue));
-        if (!$plural)
-            return $table_name;
-        return Inflector::plural($table_name);
+        return Inflector::plural(strtolower(self::module_name($glue)));
     }
 
     public function __set($name, $value)
@@ -244,14 +239,14 @@ class Base_Model extends Kohana_Model {
     public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
     {
         if (!Arr::is_array($select_args)) {
-            $this->db_query = DB::select($this->bare_table_name . '.' . $select_args);
+            $this->db_query = DB::select(self::module_name().'.'.$select_args);
         }
         else {
             $fields = array();
             if (Arr::is_array(Arr::get($select_args, 0))) {
                 foreach ($select_args as $item) {
                     $fields[] = array(
-                        $this->bare_table_name . '.' . Arr::get($item, 0),
+                        self::module_name() . '.' . Arr::get($item, 0),
                         Arr::get($item, 1)
                     );
                 }
@@ -259,14 +254,14 @@ class Base_Model extends Kohana_Model {
             }
             else {
                 $fields = array(
-                    $this->bare_table_name . '.' . Arr::get($select_args, 0),
+                    self::module_name() . '.' . Arr::get($select_args, 0),
                     Arr::get($select_args, 1)
                 );
                 $this->db_query = DB::select($fields);
             }
         }
 
-        $this->db_query->from(array($this->db_table, $this->bare_table_name));
+        $this->db_query->from(array($this->db_table, self::module_name()));
         $this->db_query->limit($limit)->offset($offset);
         if ($cache)
             $this->db_query->cached($cache);
@@ -523,6 +518,7 @@ class Base_Model extends Kohana_Model {
     private function clean()
     {
         $this->db_query = NULL;
+        $this->count_total = FALSE;
         $this->errors = array();
     }
 
