@@ -1,16 +1,15 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 class Base_Date extends Kohana_Date {
-
     // which day does the week start on (0 - 6)
+
     const WEEK_START = 2;
 
     public static function formated($date)
     {
         $format = Kohana::$config->load('common.date');
-        if ( ! $format)
-        {
-            $format =  "F j, Y, g:i a";
+        if (!$format) {
+            $format = "F j, Y, g:i a";
         }
         return date($format, strtotime($date));
     }
@@ -23,7 +22,7 @@ class Base_Date extends Kohana_Date {
     public static function start_of_month($date = null)
     {
         $time = Date::today_if_null($date);
-        return gmmktime(0, 0, 0, date('m', $time), 2 , date('Y', $time));
+        return gmmktime(0, 0, 0, date('m', $time), 2, date('Y', $time));
     }
 
     public static function month_days($date = null, $format = 'Y-m-d')
@@ -32,8 +31,7 @@ class Base_Date extends Kohana_Date {
         $end_of_month = Date::end_of_month($date);
         $result = array();
 
-        while( $day < $end_of_month ) 
-        {
+        while ($day < $end_of_month) {
             $result[] = date($format, $day);
             $day = $day + Date::DAY;
         }
@@ -49,8 +47,9 @@ class Base_Date extends Kohana_Date {
     public static function start_of_week($date = null)
     {
         $time = Date::today_if_null($date);
-        $start = gmmktime(0, 0, 0, date('m', $time), (date('d', $time)+Date::WEEK_START)-date('w', $time), date('Y', $time));
-        if($start > $time) $start -= Date::WEEK;
+        $start = gmmktime(0, 0, 0, date('m', $time), (date('d', $time) + Date::WEEK_START) - date('w', $time), date('Y', $time));
+        if ($start > $time)
+            $start -= Date::WEEK;
         return $start;
     }
 
@@ -70,7 +69,7 @@ class Base_Date extends Kohana_Date {
 
         $day = $startofweek;
 
-        while( $day < $endofweek ) {
+        while ($day < $endofweek) {
             array_push($output, date("D", $day));
             $day = $day + Date::DAY;
         }

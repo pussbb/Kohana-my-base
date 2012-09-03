@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Base_Auth extends Singleton{
+class Base_Auth extends Singleton {
 
     public function authorize(&$user)
     {
@@ -10,7 +10,7 @@ class Base_Auth extends Singleton{
     public function current_user()
     {
         $user = Arr::get(Session::instance()->get('auth'), 'current_user');
-        return is_object($user) ? clone $user: NULL;
+        return is_object($user) ? clone $user : NULL;
     }
 
     public function logout()
@@ -20,7 +20,7 @@ class Base_Auth extends Singleton{
 
     public function logged_in()
     {
-        return ! is_null($this->current_user());
+        return !is_null($this->current_user());
     }
 
     public function has_role($user_role)
@@ -32,4 +32,5 @@ class Base_Auth extends Singleton{
     {
         return $this->has_role(Model_Access_Role::ROLE_ADMIN);
     }
+
 }

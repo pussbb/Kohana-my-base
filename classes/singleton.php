@@ -10,10 +10,10 @@ abstract class Singleton {
     {
         $klass = get_called_class();
 
-        if (! array_key_exists($klass, $klass::$instances))
-        {
+        if (!array_key_exists($klass, $klass::$instances)) {
             $klass::$instances[$klass] = new $klass;
         }
         return $klass::$instances[$klass];
     }
+
 }

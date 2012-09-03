@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Core extends  Controller_Template{
+class Controller_Core extends Controller_Template {
 
     // base template file
     // but remember, in parent class it will become View object
@@ -10,7 +10,6 @@ class Controller_Core extends  Controller_Template{
     protected $resource_prefixes = array('');
     // check Acl access (true means do the check)
     protected $check_access = TRUE;
-
     public $view = null;
     // contains null or array with [directory/]controller/action parts
     // gathered in string in after() method
@@ -22,7 +21,7 @@ class Controller_Core extends  Controller_Template{
         // we have ru/en/de languages
         // but kohana expects ru-ru/en-en ...
         $language = "EN";
-        I18n::lang($language.'-'.$language);
+        I18n::lang($language . '-' . $language);
     }
 
     public function before()
@@ -33,39 +32,36 @@ class Controller_Core extends  Controller_Template{
 
         $this->view = new View();
 
-        foreach(array('content', 'keywords', 'description', 'title') as $property)
-        {
+        foreach (array('content', 'keywords', 'description', 'title') as $property) {
             $this->template->set($property, '');
         }
     }
 
     public function set_filename($filename)
     {
-        if( ! $filename)
+        if (!$filename)
             return;
         $this->filename = explode('/', $filename);
     }
 
     protected function check_access()
     {
-        if ( ! $this->request->is_initial() ||
-             ! $this->check_access ||
-             Acl::instance()->allowed($this))
+        if (!$this->request->is_initial() ||
+                !$this->check_access ||
+                Acl::instance()->allowed($this))
             return;
 
         // we are here because access is denied
         // redirect to not_logged_in if needed
-        if ( $this->request->is_ajax())
+        if ($this->request->is_ajax())
             throw new HTTP_Exception_403(__('access_deny'));
 
         // rememeber the url
         Cookie::set(
-            'return_url',
-            Url::base(TRUE, TRUE).$this->request->url()
+                'return_url', Url::base(TRUE, TRUE) . $this->request->url()
         );
 
-        if ( ! Auth::instance()->logged_in())
-        {
+        if (!Auth::instance()->logged_in()) {
             $this->redirect('users/login');
             return;
         }
@@ -75,7 +71,6 @@ class Controller_Core extends  Controller_Template{
         throw new HTTP_Exception_403(__('access_deny'));
         return;
     }
-
 
     public function set_keywords($keywords)
     {
@@ -94,13 +89,12 @@ class Controller_Core extends  Controller_Template{
 
     public function set_title($title)
     {
-        if ( $this->template->title && !$title)
+        if ($this->template->title && !$title)
             return;
         $default_title = Kohana::$config->load('site.title');
         $delimiter = $title ? ' | ' : '';
-        if ($default_title)
-        {
-            $title .= $delimiter.$default_title;
+        if ($default_title) {
+            $title .= $delimiter . $default_title;
         }
         $this->template->title = $title;
     }
@@ -108,10 +102,10 @@ class Controller_Core extends  Controller_Template{
     public function current_request_structure()
     {
         return array_filter(array(
-            $this->request->directory(),
-            $this->request->controller(),
-            $this->request->action(),
-        ));
+                    $this->request->directory(),
+                    $this->request->controller(),
+                    $this->request->action(),
+                ));
     }
 
     // registeres the needed resources from config file
@@ -132,7 +126,7 @@ class Controller_Core extends  Controller_Template{
 
     public function register_media($file_name, $media = NULL, $check_file = FALSE)
     {
-        Media::append(array('css','js'), $file_name, $media, $check_file);
+        Media::append(array('css', 'js'), $file_name, $media, $check_file);
     }
 
     // tries to add default files
@@ -142,12 +136,11 @@ class Controller_Core extends  Controller_Template{
     {
         $structure = $this->current_request_structure();
         $directory = NULL;
-        if ( Arr::get($structure, 0))
-        {
+        if (Arr::get($structure, 0)) {
             $directory = array_shift($structure) . '/';
         }
-        $file_name = $directory .  implode('.', $structure);
-        Media::append(array('css','js'), $file_name, NULL, TRUE);
+        $file_name = $directory . implode('.', $structure);
+        Media::append(array('css', 'js'), $file_name, NULL, TRUE);
     }
 
     public function is_delete()
@@ -190,37 +183,34 @@ class Controller_Core extends  Controller_Template{
         $this->auto_render = FALSE;
         $json = json_encode($data, JSON_HEX_TAG);
         $this->response->headers('Content-Type', 'application/json')
-            ->send_headers()
-            ->body($json);
+                ->send_headers()
+                ->body($json);
     }
 
     // checks if auto_render already false, it means
     // you tried to render several views in one action
     protected function check_auto_render()
     {
-        if ( ! $this->auto_render)
+        if (!$this->auto_render)
             throw new Kohana_Exception("You have to render something (or redirect) only once per action");
     }
 
     public function after()
     {
-        if ( ! $this->auto_render)
-        {
+        if (!$this->auto_render) {
             parent::after();
             return;
         }
 
         $this->set_view_filename();
 
-        foreach ($this->resource_prefixes as $prefix)
-        {
+        foreach ($this->resource_prefixes as $prefix) {
             $this->register_resources($prefix);
         }
 
         //set favicon (name from config: site.favicon)
         $favicon = Kohana::$config->load('site.favicon', '');
-        if ($favicon)
-        {
+        if ($favicon) {
             $this->set_favicon($favicon);
         }
 
@@ -233,9 +223,9 @@ class Controller_Core extends  Controller_Template{
     private function append_dynamic_properties($view)
     {
         $reflection_object = new ReflectionClass($this);
-        $properties = $reflection_object->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED | ReflectionProperty::IS_PRIVATE );
+        $properties = $reflection_object->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED | ReflectionProperty::IS_PRIVATE);
         $system_variables = array('kohana_view_filename', 'kohana_view_data', 'filename');
-        foreach($properties as $property) {
+        foreach ($properties as $property) {
             $system_variables[] = $property->getName();
         }
 
@@ -249,13 +239,12 @@ class Controller_Core extends  Controller_Template{
     // finally set the view filename (not possible to change back)
     protected function set_view_filename()
     {
-        if ( ! $this->filename)
-        {
+        if (!$this->filename) {
             // i know it's bad, but we have to change $this->filename
             // in unified way
 
             $this->set_filename(
-                implode('/', $this->current_request_structure())
+                    implode('/', $this->current_request_structure())
             );
         }
         $this->view->set_filename(implode('/', $this->filename));

@@ -8,7 +8,9 @@ class Media {
         if ($name == "instance")
             return $media;
 
-        if ( method_exists($media, $name)) 
-            return call_user_func_array(array($media, $name),  $arguments);
+        if (method_exists($media, $name))
+            return call_user_func_array(array($media, $name), $arguments);
     }
-} 
+
+}
+

@@ -1,7 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Base_Model extends Kohana_Model
-{
+class Base_Model extends Kohana_Model {
 
     public $records = array();
     public $per_page = NULL;
@@ -25,7 +24,6 @@ class Base_Model extends Kohana_Model
         'with', // query with join of known relation
         'total_count', // for select will added total_count to count all rows if limit set
     );
-
     private $count_total = FALSE;
 
     const BELONGS_TO = 1;
@@ -34,12 +32,10 @@ class Base_Model extends Kohana_Model
 
     public function __construct($params = NULL)
     {
-        if (Arr::is_array($params))
-        {
+        if (Arr::is_array($params)) {
             $this->data = $params;
         }
-        if (is_numeric($params))
-        {
+        if (is_numeric($params)) {
             $this->data[$this->primary_key] = $params;
         }
         $this->db_table = self::db_table_name();
@@ -60,10 +56,10 @@ class Base_Model extends Kohana_Model
         return implode($glue, $kclass_pieces);
     }
 
-    public static  function db_table_name($glue = '_', $plural = TRUE)
+    public static function db_table_name($glue = '_', $plural = TRUE)
     {
         $table_name = strtolower(self::module_name($glue));
-        if ( ! $plural)
+        if (!$plural)
             return $table_name;
         return Inflector::plural($table_name);
     }
@@ -91,16 +87,18 @@ class Base_Model extends Kohana_Model
         unset($this->data[$name]);
     }
 
-    public function __call($name, $arguments) {
-        if ( method_exists($this, $name))
+    public function __call($name, $arguments)
+    {
+        if (method_exists($this, $name))
             return;
-        if ( method_exists($this->db_query, $name))
-            return  call_user_func_array($this->db_query->$name,  $arguments);
+        if (method_exists($this->db_query, $name))
+            return call_user_func_array($this->db_query->$name, $arguments);
     }
 
-    public static function __callStatic($name, $arguments) {
+    public static function __callStatic($name, $arguments)
+    {
         $kclass_name = get_called_class();
-        switch($name) {
+        switch ($name) {
             case 'destroy':
                 $kclass = new $kclass_name;
                 return $kclass->destroy($arguments[0]);
@@ -116,7 +114,7 @@ class Base_Model extends Kohana_Model
 
     public function __toString()
     {
-        $string = (string)$this->db_query;
+        $string = (string) $this->db_query;
         if ($string)
             return $string;
         return $this->last_query;
@@ -135,7 +133,7 @@ class Base_Model extends Kohana_Model
             $filter = array($kclass->primary_key => $filter);
         }
         $result = $kclass::find_all($filter, 1, NULL, $cache);
-        if ( ! isset($result->{$kclass->primary_key}))
+        if (!isset($result->{$kclass->primary_key}))
             throw new Exception('record_not_found', 10);
         $result->records = array();
         $result->count = 1;
@@ -153,19 +151,18 @@ class Base_Model extends Kohana_Model
 
     public static function table_columns($table = NULL)
     {
-        if ( ! $table)
-        {
+        if (!$table) {
             $kclass_name = get_called_class();
             $table = $kclass_name::db_table_name();
         }
-        $columns = Kohana::cache($table.'_columns');
-        if ( ! $columns ) {
+        $columns = Kohana::cache($table . '_columns');
+        if (!$columns) {
             $columns = Database::instance()->list_columns($table);
-            foreach($columns as $key => $values) {
+            foreach ($columns as $key => $values) {
                 if (Arr::get($values, 'character_maximum_length'))
                     $columns[$key]['max'] = $values['character_maximum_length'];
             }
-            Kohana::cache($table.'_columns', $columns , 3600 * 24 * 30);
+            Kohana::cache($table . '_columns', $columns, 3600 * 24 * 30);
         }
         return $columns;
     }
@@ -174,10 +171,10 @@ class Base_Model extends Kohana_Model
     {
         switch ($key) {
             case 'limit':
-                $this->db_query->limit((int)$value);
+                $this->db_query->limit((int) $value);
                 break;
             case 'offset':
-                $this->db_query->offset((int)$value);
+                $this->db_query->offset((int) $value);
                 break;
             case 'total_count':
                 $this->count_total = TRUE;
@@ -192,57 +189,53 @@ class Base_Model extends Kohana_Model
 
     public function filter($filter)
     {
-        if ( ! Arr::is_array($filter))
-                throw new Kohana_Exception('must be an array');
+        if (!Arr::is_array($filter))
+            throw new Kohana_Exception('must be an array');
 
         $table_columns = $this->table_columns();
-        if ( ! Arr::is_assoc($filter))
-        {
+        if (!Arr::is_assoc($filter)) {
             $fields = array();
-            foreach($filter as $field)
-            {
-                if ( ! array_key_exists($filed, $table_columns))
+            foreach ($filter as $field) {
+                if (!array_key_exists($filed, $table_columns))
                     continue;
                 $fields[$field] = $this->$field;
             }
             $filter = $fields;
         }
-        else
-        {
+        else {
             //skip fields that are not in table
             //and if it's a system append them
             foreach ($filter as $key => $value) {
-                if ( array_key_exists($key, $table_columns))
+                if (array_key_exists($key, $table_columns))
                     continue;
-                if ( in_array($key, $this->system_filters))
+                if (in_array($key, $this->system_filters))
                     $this->system_filters($key, $filter[$key]);
                 unset($filter[$key]);
             }
         }
 
-        if ( ! array_filter($filter))
+        if (!array_filter($filter))
             return $this;
 
         $this->db_query->where_open();
-        foreach($filter as $key => $value) {
-           $comparison_key = '=';
-           if (in_array($key, $this->system_filters))
-           {
+        foreach ($filter as $key => $value) {
+            $comparison_key = '=';
+            if (in_array($key, $this->system_filters)) {
                 $this->system_filters($key, $value);
                 continue;
-           }
-           if ( Arr::is_array($value)) {
-               if (! $value)
-                   continue;
-               $comparison_key = 'IN';
-           }
-           if (is_object($value)) {
-                if(get_class($value) != 'Database_Expression')
+            }
+            if (Arr::is_array($value)) {
+                if (!$value)
+                    continue;
+                $comparison_key = 'IN';
+            }
+            if (is_object($value)) {
+                if (get_class($value) != 'Database_Expression')
                     throw new Exception("Error Processing Request", 1);
                 ///if (preg_match('/REGEXP/', $value->value()))
-                $comparison_key = '';   
-           }
-           $this->db_query->where($key, $comparison_key, $this->sanitize($key, $value));
+                $comparison_key = '';
+            }
+            $this->db_query->where($key, $comparison_key, $this->sanitize($key, $value));
         }
         $this->db_query->where_close();
         return $this;
@@ -250,16 +243,15 @@ class Base_Model extends Kohana_Model
 
     public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
     {
-        if ( ! Arr::is_array($select_args)) {
-            $this->db_query = DB::select($this->bare_table_name.'.'.$select_args);
+        if (!Arr::is_array($select_args)) {
+            $this->db_query = DB::select($this->bare_table_name . '.' . $select_args);
         }
-        else
-        {
+        else {
             $fields = array();
             if (Arr::is_array(Arr::get($select_args, 0))) {
                 foreach ($select_args as $item) {
                     $fields[] = array(
-                        $this->bare_table_name.'.'.Arr::get($item, 0),
+                        $this->bare_table_name . '.' . Arr::get($item, 0),
                         Arr::get($item, 1)
                     );
                 }
@@ -267,7 +259,7 @@ class Base_Model extends Kohana_Model
             }
             else {
                 $fields = array(
-                    $this->bare_table_name.'.'.Arr::get($select_args, 0),
+                    $this->bare_table_name . '.' . Arr::get($select_args, 0),
                     Arr::get($select_args, 1)
                 );
                 $this->db_query = DB::select($fields);
@@ -289,14 +281,14 @@ class Base_Model extends Kohana_Model
 
     public function update()
     {
-        $this->db_query = DB::update($this->db_table)->where($this->primary_key, '=',$this->{$this->primary_key});
+        $this->db_query = DB::update($this->db_table)->where($this->primary_key, '=', $this->{$this->primary_key});
         return $this;
     }
 
     protected function destroy($filter = NULL)
     {
         $this->db_query = DB::delete($this->db_table);
-        if ( ! $filter )
+        if (!$filter)
             $filter = array($this->primary_key);
         return $this->filter($filter)->save();
     }
@@ -314,7 +306,7 @@ class Base_Model extends Kohana_Model
     protected function exists($filter = NULL, $limit = 1, $cache = NULL)
     {
         $this->select('*', $limit, NULL, $cache);
-        if ( ! $filter )
+        if (!$filter)
             $filter = array($this->primary_key);
 
         return $this->filter($filter)->exec();
@@ -325,8 +317,7 @@ class Base_Model extends Kohana_Model
         $properties = array();
         $reflecionObject = new ReflectionObject($obj);
         $object_properties = $reflecionObject->getProperties(ReflectionProperty::IS_PRIVATE | ReflectionProperty::IS_PROTECTED);
-        foreach ($object_properties as $property)
-        {
+        foreach ($object_properties as $property) {
             $property->setAccessible(true);
             $properties[$property->getName()] = $property->getValue($obj);
         }
@@ -335,18 +326,15 @@ class Base_Model extends Kohana_Model
 
     private function prepare_for_query()
     {
-        switch ($this->query_type())
-        {
+        switch ($this->query_type()) {
             case 'insert':
             case 'update':
                 $properties = $this->get_private_properties($this->db_query);
                 $columns = Arr::get($properties, '_columns');
                 $values = Arr::get($properties, '_values');
-                if ( $columns && ! $values)
-                {
+                if ($columns && !$values) {
                     $data = array();
-                    foreach($columns as $field)
-                    {
+                    foreach ($columns as $field) {
                         $data[] = $this->sanitize($field, $value);
                     }
                     $this->db_query->values($data);
@@ -360,33 +348,30 @@ class Base_Model extends Kohana_Model
     private function sanitize($key, $value)
     {
         if (is_object($value))
-             return $value;
+            return $value;
         $table_columns = $this->get_table_columns();
-        $type = Arr::path($table_columns, $key.'.type');
+        $type = Arr::path($table_columns, $key . '.type');
         if ($type)
             return Base_Db_Sanitize::value($type, $value);
-        return $value;     
+        return $value;
     }
-    public function validate(array $rules = NULL,array $data = NULL)
+
+    public function validate(array $rules = NULL, array $data = NULL)
     {
-        $data = $data?$data:$this->data;
-        $rules = $rules?$rules:$this->rules();
+        $data = $data ? $data : $this->data;
+        $rules = $rules ? $rules : $this->rules();
         $validator = Validation::factory($data);
-        foreach ($rules as $key => $rules)
-        {
-            foreach ($rules as $rule)
-            {
+        foreach ($rules as $key => $rules) {
+            foreach ($rules as $rule) {
                 if ($rule === 'unique')
                     $rule = array(array($this, 'unique_validation'), array(':validation', ':field'));
 
-                if ( ! is_array($rule)) {
+                if (!is_array($rule)) {
                     $validator->rule($key, $rule);
                     continue;
                 }
                 $validator->rule(
-                    $key,
-                    Arr::get($rule, 0, NULL),
-                    Arr::get($rule, 1, NULL)
+                        $key, Arr::get($rule, 0, NULL), Arr::get($rule, 1, NULL)
                 );
             }
         }
@@ -396,7 +381,7 @@ class Base_Model extends Kohana_Model
 
         $errors = $validator->errors('', FALSE);
         if (Arr::is_assoc($errors))
-          $this->errors = Arr::merge($this->errors, $errors);
+            $this->errors = Arr::merge($this->errors, $errors);
 
         return FALSE;
     }
@@ -408,14 +393,15 @@ class Base_Model extends Kohana_Model
 
     public function new_record()
     {
-        return ! isset($this->{$this->primary_key});
+        return !isset($this->{$this->primary_key});
     }
 
     private function table_fields()
     {
+        $keys = array();
         $table_columns = $this->get_table_columns();
-        foreach($this->data as $key => $value) {
-            if ( ! array_key_exists($key, $table_columns))
+        foreach ($this->data as $key => $value) {
+            if (!array_key_exists($key, $table_columns))
                 continue;
             $keys[] = $key;
         }
@@ -424,15 +410,14 @@ class Base_Model extends Kohana_Model
 
     public function save()
     {
-        if ( ! $this->query_type())
-        {
-            if ( $this->new_record())
+        if (!$this->query_type()) {
+            if ($this->new_record())
                 $this->insert($this->table_fields());
             else
                 $this->update($this->table_fields());
         }
 
-        if ( ! Base_Db_Validation::check($this) || ! $this->validate())
+        if (!Base_Db_Validation::check($this) || !$this->validate())
             return FALSE;
 
         $this->before_save();
@@ -445,7 +430,7 @@ class Base_Model extends Kohana_Model
 
     public function get_table_columns()
     {
-        return $this->columns()?:self::table_columns();
+        return $this->columns()? : self::table_columns();
     }
 
     private function query_type()
@@ -462,15 +447,14 @@ class Base_Model extends Kohana_Model
         $result = $this->db_query->execute();
         $this->last_query = (string) $this->db_query;
         $responce = $this->parse_responce($result);
-        if ( $this->auto_clean)
+        if ($this->auto_clean)
             $this->clean();
         return $responce;
     }
 
     private function parse_responce($result)
     {
-        switch ($this->query_type())
-        {
+        switch ($this->query_type()) {
             case 'insert':
                 $this->last_inserted_id = $result[0];
                 $result = TRUE;
@@ -484,8 +468,8 @@ class Base_Model extends Kohana_Model
                     $this->count = $this->auto_count_total();
                 else
                     $this->count = $result->count();
-                foreach($result->as_array() as $record) {
-                    if ( ! Arr::is_array($record) && ! Arr::is_assoc($record))
+                foreach ($result->as_array() as $record) {
+                    if (!Arr::is_array($record) && !Arr::is_assoc($record))
                         break;
                     $this->records[] = new $kclass($record);
                 }
@@ -505,16 +489,14 @@ class Base_Model extends Kohana_Model
     private function auto_count_total()
     {
         $query = clone $this->db_query;
-        $properties = array();
         $reflecionObject = new ReflectionObject($query);
         $object_properties = $reflecionObject->getProperties(ReflectionProperty::IS_PROTECTED);
-        foreach ($object_properties as $property)
-        {
+        foreach ($object_properties as $property) {
             $property->setAccessible(true);
-            switch($property->getName()){
+            switch ($property->getName()) {
                 case '_select':
-                    $property->setValue($query,array(
-                           array(DB::expr('COUNT(*)'), 'total_count'),
+                    $property->setValue($query, array(
+                        array(DB::expr('COUNT(*)'), 'total_count'),
                     ));
                     break;
                 case '_limit':
@@ -524,8 +506,8 @@ class Base_Model extends Kohana_Model
                     $property->setValue($query, NULL);
                     break;
                 case '_sql':
-                   $property->setValue($query, NULL); 
-                   break;
+                    $property->setValue($query, NULL);
+                    break;
                 default:
                     break;
             }
@@ -546,8 +528,7 @@ class Base_Model extends Kohana_Model
 
     public function update_params($array)
     {
-        foreach($array as $key => $value)
-        {
+        foreach ($array as $key => $value) {
             $this->$key = $value;
         }
     }
@@ -564,7 +545,7 @@ class Base_Model extends Kohana_Model
 
     public function labels()
     {
-      return array();
+        return array();
     }
 
     public function last_inserted_id()
@@ -580,9 +561,10 @@ class Base_Model extends Kohana_Model
     public function unique_validation($validation, $field)
     {
         $kclass = clone $this;
-        if ($kclass->exists(array($field))){
-            $validation->error($field, ' '.__("already exists"));
+        if ($kclass->exists(array($field))) {
+            $validation->error($field, ' ' . __("already exists"));
             return;
         }
     }
+
 }
