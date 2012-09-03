@@ -1,7 +1,15 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ *
+ */
 class Base_Db_Sanitize {
 
+    /**
+     * @static
+     * @param $value
+     * @return array|int
+     */
     public static function int($value)
     {
         if (!Arr::is_array($value))
@@ -9,6 +17,11 @@ class Base_Db_Sanitize {
         return array_map('intval', $value);
     }
 
+    /**
+     * @static
+     * @param $value
+     * @return mixed|string
+     */
     public static function string($value)
     {
         if (!Arr::is_array($value))
@@ -16,6 +29,12 @@ class Base_Db_Sanitize {
         return aray_map('Base_Db_Sanitize::xss_clean', $value);
     }
 
+    /**
+     * @static
+     * @param $type
+     * @param $value
+     * @return mixed
+     */
     public static function value($type, $value)
     {
         if (!method_exists('Base_Db_Value', $type))
@@ -23,6 +42,11 @@ class Base_Db_Sanitize {
         return Base_Db_Sanitize::$type($key, $value);
     }
 
+    /**
+     * @static
+     * @param $data
+     * @return mixed|string
+     */
     public static function xss_clean($data)
     {
         // Fix &entity\n;

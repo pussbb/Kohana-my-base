@@ -1,34 +1,94 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ *
+ */
 class Base_Model extends Kohana_Model {
 
+    /**
+     * @var array
+     */
     public $records = array();
+    /**
+     * @var null
+     */
     public $per_page = NULL;
+    /**
+     * @var null
+     */
     public $count = NULL;
 
+    /**
+     * @var array
+     */
     protected $order = array();
+    /**
+     * @var string
+     */
     protected $primary_key = 'id';
+    /**
+     * @var null
+     */
     protected $db_table = NULL;
+    /**
+     * @var null
+     */
     protected $db_query = NULL;
+    /**
+     * @var null
+     */
     protected $last_inserted_id = NULL;
+    /**
+     * @var bool
+     */
     protected $validate = TRUE;
+    /**
+     * @var bool
+     */
     protected $auto_clean = TRUE;
 
+    /**
+     * @var array
+     */
     private $errors = array();
+    /**
+     * @var null
+     */
     private $last_query = NULL;
+    /**
+     * @var array|null
+     */
     private $data = array();
+    /**
+     * @var array
+     */
     private $system_filters = array(
         'limit', //limit of rows
         'offset', //offset ...
         'with', // query with join of known relation
         'total_count', // for select will added total_count to count all rows if limit set
     );
+    /**
+     * @var bool
+     */
     private $count_total = FALSE;
 
+    /**
+     *
+     */
     const BELONGS_TO = 1;
+    /**
+     *
+     */
     const HAS_MANY = 2;
+    /**
+     *
+     */
     const HAS_ONE = 3;
 
+    /**
+     * @param null $params
+     */
     public function __construct($params = NULL)
     {
         if (Arr::is_array($params)) {
@@ -40,6 +100,9 @@ class Base_Model extends Kohana_Model {
         $this->db_table = self::db_table_name();
     }
 
+    /**
+     *
+     */
     public function __destruct()
     {
         $this->clean();
@@ -47,6 +110,11 @@ class Base_Model extends Kohana_Model {
         $this->records = NULL;
     }
 
+    /**
+     * @static
+     * @param string $glue
+     * @return string
+     */
     public static function module_name($glue = '_')
     {
         $kclass_pieces = explode('_', get_called_class());
@@ -54,16 +122,30 @@ class Base_Model extends Kohana_Model {
         return implode($glue, $kclass_pieces);
     }
 
+    /**
+     * @static
+     * @param string $glue
+     * @return mixed
+     */
     public static function db_table_name($glue = '_')
     {
         return Inflector::plural(strtolower(self::module_name($glue)));
     }
 
+    /**
+     * @param $name
+     * @param $value
+     */
     public function __set($name, $value)
     {
         $this->data[$name] = $value;
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     * @throws Kohana_Exception
+     */
     public function __get($name)
     {
         if (isset($this->$name))
@@ -72,16 +154,28 @@ class Base_Model extends Kohana_Model {
             throw new Kohana_Exception('property_not_exists_' . $name);
     }
 
+    /**
+     * @param $name
+     * @return bool
+     */
     public function __isset($name)
     {
         return array_key_exists($name, $this->data);
     }
 
+    /**
+     * @param $name
+     */
     public function __unset($name)
     {
         unset($this->data[$name]);
     }
 
+    /**
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     */
     public function __call($name, $arguments)
     {
         if (method_exists($this, $name))
@@ -90,6 +184,12 @@ class Base_Model extends Kohana_Model {
             return call_user_func_array($this->db_query->$name, $arguments);
     }
 
+    /**
+     * @static
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     */
     public static function __callStatic($name, $arguments)
     {
         $kclass_name = get_called_class();
@@ -107,6 +207,9 @@ class Base_Model extends Kohana_Model {
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function __toString()
     {
         $string = (string) $this->db_query;
@@ -115,11 +218,21 @@ class Base_Model extends Kohana_Model {
         return $this->last_query;
     }
 
+    /**
+     * @return array|null
+     */
     public function __toArray()
     {
         return $this->data;
     }
 
+    /**
+     * @static
+     * @param $filter
+     * @param null $cache
+     * @return mixed
+     * @throws Exception
+     */
     public static function find($filter, $cache = NULL)
     {
         $kclass_name = get_called_class();
@@ -135,6 +248,14 @@ class Base_Model extends Kohana_Model {
         return $result;
     }
 
+    /**
+     * @static
+     * @param array $filter
+     * @param null $limit
+     * @param null $offset
+     * @param null $cache
+     * @return mixed
+     */
     public static function find_all($filter = array(), $limit = NULL, $offset = NULL, $cache = NULL)
     {
         $kclass_name = get_called_class();
@@ -144,6 +265,11 @@ class Base_Model extends Kohana_Model {
         return $kclass;
     }
 
+    /**
+     * @static
+     * @param null $table
+     * @return mixed
+     */
     public static function table_columns($table = NULL)
     {
         if (!$table) {
@@ -162,6 +288,10 @@ class Base_Model extends Kohana_Model {
         return $columns;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     private function system_filters($key, $value)
     {
         switch ($key) {
@@ -182,6 +312,12 @@ class Base_Model extends Kohana_Model {
         }
     }
 
+    /**
+     * @param $filter
+     * @return Base_Model
+     * @throws Kohana_Exception
+     * @throws Exception
+     */
     public function filter($filter)
     {
         if (!Arr::is_array($filter))
@@ -236,6 +372,13 @@ class Base_Model extends Kohana_Model {
         return $this;
     }
 
+    /**
+     * @param string $select_args
+     * @param null $limit
+     * @param null $offset
+     * @param null $cache
+     * @return Base_Model
+     */
     public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
     {
         if (!Arr::is_array($select_args)) {
@@ -268,18 +411,29 @@ class Base_Model extends Kohana_Model {
         return $this;
     }
 
+    /**
+     * @param null $fields
+     * @return Base_Model
+     */
     public function insert($fields = NULL)
     {
         $this->db_query = DB::insert($this->db_table, $fields);
         return $this;
     }
 
+    /**
+     * @return Base_Model
+     */
     public function update()
     {
         $this->db_query = DB::update($this->db_table)->where($this->primary_key, '=', $this->{$this->primary_key});
         return $this;
     }
 
+    /**
+     * @param null $filter
+     * @return bool
+     */
     protected function destroy($filter = NULL)
     {
         $this->db_query = DB::delete($this->db_table);
@@ -288,16 +442,29 @@ class Base_Model extends Kohana_Model {
         return $this->filter($filter)->save();
     }
 
+    /**
+     * @return array
+     */
     public function errors()
     {
         return $this->errors;
     }
 
+    /**
+     * @param $key
+     * @param $msg
+     */
     public function add_error($key, $msg)
     {
         $this->errors[$key] = $msg;
     }
 
+    /**
+     * @param null $filter
+     * @param int $limit
+     * @param null $cache
+     * @return bool
+     */
     protected function exists($filter = NULL, $limit = 1, $cache = NULL)
     {
         $this->select('*', $limit, NULL, $cache);
@@ -307,6 +474,10 @@ class Base_Model extends Kohana_Model {
         return $this->filter($filter)->exec();
     }
 
+    /**
+     * @param $obj
+     * @return array
+     */
     private function get_private_properties($obj)
     {
         $properties = array();
@@ -319,6 +490,9 @@ class Base_Model extends Kohana_Model {
         return $properties;
     }
 
+    /**
+     *
+     */
     private function prepare_for_query()
     {
         switch ($this->query_type()) {
@@ -340,6 +514,11 @@ class Base_Model extends Kohana_Model {
         }
     }
 
+    /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     */
     private function sanitize($key, $value)
     {
         if (is_object($value))
@@ -351,6 +530,11 @@ class Base_Model extends Kohana_Model {
         return $value;
     }
 
+    /**
+     * @param array $rules
+     * @param array $data
+     * @return bool
+     */
     public function validate(array $rules = NULL, array $data = NULL)
     {
         $data = $data ? $data : $this->data;
@@ -381,16 +565,25 @@ class Base_Model extends Kohana_Model {
         return FALSE;
     }
 
+    /**
+     *
+     */
     protected function before_save()
     {
         //user manipulations
     }
 
+    /**
+     * @return bool
+     */
     public function new_record()
     {
         return !isset($this->{$this->primary_key});
     }
 
+    /**
+     * @return array
+     */
     private function table_fields()
     {
         $keys = array();
@@ -403,6 +596,9 @@ class Base_Model extends Kohana_Model {
         return array_filter($keys);
     }
 
+    /**
+     * @return bool
+     */
     public function save()
     {
         if (!$this->query_type()) {
@@ -423,17 +619,26 @@ class Base_Model extends Kohana_Model {
         return $responce;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_table_columns()
     {
         return $this->columns()? : self::table_columns();
     }
 
+    /**
+     * @return string
+     */
     private function query_type()
     {
         $kclass_pieces = preg_split('/(?=[A-Z])/', get_class($this->db_query));
         return strtolower(end($kclass_pieces));
     }
 
+    /**
+     * @return bool
+     */
     protected function exec()
     {
         $this->db_query->as_assoc();
@@ -447,6 +652,10 @@ class Base_Model extends Kohana_Model {
         return $responce;
     }
 
+    /**
+     * @param $result
+     * @return bool
+     */
     private function parse_responce($result)
     {
         switch ($this->query_type()) {
@@ -481,6 +690,9 @@ class Base_Model extends Kohana_Model {
         return $result;
     }
 
+    /**
+     * @return mixed
+     */
     private function auto_count_total()
     {
         $query = clone $this->db_query;
@@ -510,11 +722,17 @@ class Base_Model extends Kohana_Model {
         return $query->execute()->get('total_count');
     }
 
+    /**
+     *
+     */
     protected function after_save()
     {
         //user manipulations
     }
 
+    /**
+     *
+     */
     private function clean()
     {
         $this->db_query = NULL;
@@ -522,6 +740,9 @@ class Base_Model extends Kohana_Model {
         $this->errors = array();
     }
 
+    /**
+     * @param $array
+     */
     public function update_params($array)
     {
         foreach ($array as $key => $value) {
@@ -529,31 +750,50 @@ class Base_Model extends Kohana_Model {
         }
     }
 
+    /**
+     * @return array
+     */
     public function columns()
     {
         return array();
     }
 
+    /**
+     * @return array
+     */
     public function rules()
     {
         return array();
     }
 
+    /**
+     * @return array
+     */
     public function labels()
     {
         return array();
     }
 
+    /**
+     * @return null
+     */
     public function last_inserted_id()
     {
         return $this->last_inserted_id;
     }
 
+    /**
+     * @return null
+     */
     public function last_query()
     {
         return $this->last_query;
     }
 
+    /**
+     * @param $validation
+     * @param $field
+     */
     public function unique_validation($validation, $field)
     {
         $kclass = clone $this;

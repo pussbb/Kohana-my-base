@@ -1,10 +1,21 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ *
+ */
 class Base_Date extends Kohana_Date {
     // which day does the week start on (0 - 6)
 
+    /**
+     *
+     */
     const WEEK_START = 2;
 
+    /**
+     * @static
+     * @param $date
+     * @return string
+     */
     public static function formated($date)
     {
         $format = Kohana::$config->load('common.date');
@@ -14,17 +25,33 @@ class Base_Date extends Kohana_Date {
         return date($format, strtotime($date));
     }
 
+    /**
+     * @static
+     * @param null $date
+     * @return int|null
+     */
     public static function today_if_null($date = null)
     {
         return is_string($date) ? strtotime($date) : (is_int($date) ? $date : time());
     }
 
+    /**
+     * @static
+     * @param null $date
+     * @return int
+     */
     public static function start_of_month($date = null)
     {
         $time = Date::today_if_null($date);
         return gmmktime(0, 0, 0, date('m', $time), 2, date('Y', $time));
     }
 
+    /**
+     * @static
+     * @param null $date
+     * @param string $format
+     * @return array
+     */
     public static function month_days($date = null, $format = 'Y-m-d')
     {
         $day = Date::start_of_month($date);
@@ -38,12 +65,22 @@ class Base_Date extends Kohana_Date {
         return $result;
     }
 
+    /**
+     * @static
+     * @param null $date
+     * @return int
+     */
     public static function end_of_month($date = null)
     {
         $time = Date::today_if_null($date);
         return gmmktime(25, 0, 0, date('m', $time), date('t', $time), date('Y', $time));
     }
 
+    /**
+     * @static
+     * @param null $date
+     * @return int
+     */
     public static function start_of_week($date = null)
     {
         $time = Date::today_if_null($date);
@@ -53,12 +90,22 @@ class Base_Date extends Kohana_Date {
         return $start;
     }
 
+    /**
+     * @static
+     * @param null $date
+     * @return int
+     */
     public static function end_of_week($date = null)
     {
         $time = Date::today_if_null($date);
         return Date::start_of_week($time) + Date::WEEK - 1;
     }
 
+    /**
+     * @static
+     * @param null $date
+     * @return array
+     */
     public static function week_days($date = null)
     {
         $time = Date::today_if_null($date);

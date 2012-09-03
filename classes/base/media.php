@@ -1,20 +1,48 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ *
+ */
 class Base_Media extends Singleton{
 
+    /**
+     * @var null
+     */
     private $config = NULL;
+    /**
+     * @var array
+     */
     private $styles = array();
+    /**
+     * @var string
+     */
     private $inline_style = '';
+    /**
+     * @var string
+     */
     private $inline_script = '';
+    /**
+     * @var array
+     */
     private $scripts = array();
+    /**
+     * @var null
+     */
     private $path = NULL;
 
+    /**
+     *
+     */
     public function __construct()
     {
         $this->config = Kohana::$config->load('media');
         $this->bundle('default');
     }
 
+    /**
+     * @param $key
+     * @return mixed
+     */
     private function config($key)
     {
          if (strpos($key, '.') !== FALSE)
@@ -22,6 +50,9 @@ class Base_Media extends Singleton{
         return Arr::get($this->config, $key);
     }
 
+    /**
+     * @param $name
+     */
     public function bundle($name)
     {
         $bundle = Arr::get($this->config, $name, array());
@@ -35,6 +66,12 @@ class Base_Media extends Singleton{
         }
     }
 
+    /**
+     * @param $key
+     * @param $name
+     * @param null $media
+     * @param bool $check
+     */
     public function append($key, $name, $media = NULL, $check = FALSE)
     {
         if (Arr::is_array($key))
@@ -57,6 +94,11 @@ class Base_Media extends Singleton{
         }
     }
 
+    /**
+     * @param $name
+     * @param $prefix
+     * @return string
+     */
     public function find_file($name, $prefix)
     {
         $path = $this->config('core.path');
@@ -66,11 +108,20 @@ class Base_Media extends Singleton{
         return Kohana::find_file('media',$name, $prefix);
     }
 
+    /**
+     * @param $uri
+     * @return mixed
+     */
     private function is_url($uri)
     {
         return Valid::url($uri);
     }
 
+    /**
+     * @param $file_name
+     * @param $prefix
+     * @return mixed|string
+     */
     private function resource($file_name, $prefix)
     {
         if ($this->is_url($file_name))
@@ -80,6 +131,11 @@ class Base_Media extends Singleton{
         return Url::base(TRUE,TRUE).$this->config('core.uri').$prefix.'/'.$file_name.'.'.$prefix;
     }
 
+    /**
+     * @param $file_name
+     * @param null $media
+     * @param bool $check
+     */
     public function append_style($file_name, $media = NULL, $check = FALSE)
     {
         if ($check && ! $this->find_file($file_name, 'css'))
@@ -87,6 +143,9 @@ class Base_Media extends Singleton{
         $this->styles[$this->resource($file_name, 'css')]= $media;
     }
 
+    /**
+     * @param $css
+     */
     public function append_inline_style($css)
     {
         if ( ! $css)
@@ -94,6 +153,10 @@ class Base_Media extends Singleton{
         $this->inline_style .= $css;
     }
 
+    /**
+     * @param $file_name
+     * @param bool $check
+     */
     public function append_script($file_name, $check = FALSE)
     {
         $files = NULL;
@@ -110,6 +173,9 @@ class Base_Media extends Singleton{
         $this->scripts[]= $this->resource($file_name, 'js');
     }
 
+    /**
+     * @param $js
+     */
     public function append_inline_script($js)
     {
         if ( ! $js)
@@ -117,11 +183,17 @@ class Base_Media extends Singleton{
         $this->inline_script .= $js;
     }
 
+    /**
+     * @return array
+     */
     public function styles()
     {
         return $this->styles;
     }
 
+    /**
+     * @return string
+     */
     public function inline_style()
     {
         if ( ! $this->inline_style)
@@ -129,11 +201,17 @@ class Base_Media extends Singleton{
         return "\n<style type=\"text/css\">\n$this->inline_style\n</style>\n";
     }
 
+    /**
+     * @return array
+     */
     public function scripts()
     {
         return array_unique($this->scripts);
     }
 
+    /**
+     * @return string
+     */
     public function inline_script()
     {
         if ( ! $this->inline_script)
@@ -141,6 +219,11 @@ class Base_Media extends Singleton{
         return "\n<script type=\"text/javascript\">\n$this->inline_script\n</script>\n";
     }
 
+    /**
+     * @param $source
+     * @param $destination
+     * @return bool
+     */
     private function need_compile($source, $destination)
     {
 
@@ -155,6 +238,11 @@ class Base_Media extends Singleton{
         return FALSE;
     }
 
+    /**
+     * @param $file_name
+     * @param null $files
+     * @throws Kohana_Exception
+     */
     private function coffeescript($file_name, $files = NULL)
     {
         $source_path = $this->config('core.coffeescript.source_path');
@@ -203,6 +291,9 @@ class Base_Media extends Singleton{
         );
     }
 
+    /**
+     * @param $file
+     */
     private function minize_script($file)
     {
         if (Kohana::$environment == Kohana::PRODUCTION)

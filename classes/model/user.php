@@ -3,6 +3,9 @@
 class Model_User extends Model
 {
 
+
+    protected $order = array('email', 'DESC');
+
     public function _columns ()
     {
         return array(
@@ -13,7 +16,6 @@ class Model_User extends Model
         );
     }
 
-    protected $order = array('email', 'DESC');
     public function rules()
     {
         return array(

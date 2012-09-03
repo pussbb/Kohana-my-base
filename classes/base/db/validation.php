@@ -1,9 +1,22 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ *
+ */
 class Base_Db_Validation {
 
+    /**
+     * @var bool
+     */
     private static $new_record = FALSE;
 
+    /**
+     * @static
+     * @param $key
+     * @param $value
+     * @param $rules
+     * @return null
+     */
     public static function int($key, $value, $rules)
     {
         $is_nullable = (bool) Arr::get($rules, 'is_nullable');
@@ -37,6 +50,13 @@ class Base_Db_Validation {
         return NULL;
     }
 
+    /**
+     * @static
+     * @param $key
+     * @param $value
+     * @param $rules
+     * @return null
+     */
     public static function string($key, $value, $rules)
     {
         $is_nullable = (bool) Arr::get($rules, 'is_nullable');
@@ -53,6 +73,11 @@ class Base_Db_Validation {
         return NULL;
     }
 
+    /**
+     * @static
+     * @param $model
+     * @return bool
+     */
     public static function check(&$model)
     {
         Base_Db_Validation::$new_record = $model->new_record();

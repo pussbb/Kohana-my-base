@@ -1,15 +1,42 @@
 <?php
 // from https://github.com/synapsestudios/kohana-errors
+/**
+ *
+ */
 class Error
 {
 
+    /**
+     * @var null
+     */
     public $type = NULL;
+    /**
+     * @var null
+     */
     public $code = NULL;
+    /**
+     * @var null
+     */
     public $message = NULL;
+    /**
+     * @var null
+     */
     public $file = NULL;
+    /**
+     * @var null
+     */
     public $line = NULL;
+    /**
+     * @var null
+     */
     public $text = NULL;
+    /**
+     * @var array
+     */
     public $trace = array();
+    /**
+     * @var null
+     */
     public $display = NULL;
 
     /**

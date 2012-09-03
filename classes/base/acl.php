@@ -1,7 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ *
+ */
 class Base_ACL extends Singleton{
 
+    /**
+     * @param $core
+     * @return bool
+     */
     public function allowed($core)
     {
         $user = Auth::instance()->current_user();
@@ -20,6 +27,11 @@ class Base_ACL extends Singleton{
         ), 1, 30000);
     }
 
+    /**
+     * @static
+     * @param $value
+     * @return mixed
+     */
     private static function dbexpr($value)
     {
         return DB::expr('REGEXP "('.$value.'|\\\\*)"');

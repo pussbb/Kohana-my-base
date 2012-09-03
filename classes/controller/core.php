@@ -1,20 +1,41 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ *
+ */
 class Controller_Core extends Controller_Template {
 
     // base template file
     // but remember, in parent class it will become View object
+    /**
+     * @var string
+     */
     public $template = 'layout/template';
     // for children it's recommended to change this prefixes
     // if needed IN CONSTRUCTOR (to not damage changes in parent class)
+    /**
+     * @var array
+     */
     protected $resource_prefixes = array('');
     // check Acl access (true means do the check)
+    /**
+     * @var bool
+     */
     protected $check_access = TRUE;
+    /**
+     * @var null
+     */
     public $view = null;
     // contains null or array with [directory/]controller/action parts
     // gathered in string in after() method
+    /**
+     * @var null
+     */
     private $filename = null;
 
+    /**
+     *
+     */
     protected function set_language()
     {
 //        $language = Language::get()->name;
@@ -24,6 +45,9 @@ class Controller_Core extends Controller_Template {
         I18n::lang($language . '-' . $language);
     }
 
+    /**
+     *
+     */
     public function before()
     {
         parent::before();
@@ -37,6 +61,9 @@ class Controller_Core extends Controller_Template {
         }
     }
 
+    /**
+     * @param $filename
+     */
     public function set_filename($filename)
     {
         if (!$filename)
@@ -44,6 +71,9 @@ class Controller_Core extends Controller_Template {
         $this->filename = explode('/', $filename);
     }
 
+    /**
+     * @throws HTTP_Exception_403
+     */
     protected function check_access()
     {
         if (!$this->request->is_initial() ||
@@ -72,21 +102,33 @@ class Controller_Core extends Controller_Template {
         return;
     }
 
+    /**
+     * @param $keywords
+     */
     public function set_keywords($keywords)
     {
         $this->template->keywords = $keywords;
     }
 
+    /**
+     * @param $description
+     */
     public function set_description($description)
     {
         $this->template->description = $description;
     }
 
+    /**
+     * @param $icon_name
+     */
     public function set_favicon($icon_name)
     {
         $this->template->favicon = $icon_name;
     }
 
+    /**
+     * @param $title
+     */
     public function set_title($title)
     {
         if ($this->template->title && !$title)
@@ -99,6 +141,9 @@ class Controller_Core extends Controller_Template {
         $this->template->title = $title;
     }
 
+    /**
+     * @return array
+     */
     public function current_request_structure()
     {
         return array_filter(array(
@@ -109,21 +154,36 @@ class Controller_Core extends Controller_Template {
     }
 
     // registeres the needed resources from config file
+    /**
+     * @param $identifier
+     */
     public function register_resources($identifier)
     {
         Media::bundle($identifier);
     }
 
+    /**
+     * @param $name
+     * @param string $media
+     */
     public function register_css_file($name, $media = '')
     {
         Media::append_style($name, $media);
     }
 
+    /**
+     * @param $name
+     */
     public function register_js_file($name)
     {
         Media::append_script($name);
     }
 
+    /**
+     * @param $file_name
+     * @param null $media
+     * @param bool $check_file
+     */
     public function register_media($file_name, $media = NULL, $check_file = FALSE)
     {
         Media::append(array('css', 'js'), $file_name, $media, $check_file);
@@ -132,6 +192,9 @@ class Controller_Core extends Controller_Template {
     // tries to add default files
     // in format directory/controller.action.js
     // and directory/controller.action.css
+    /**
+     * @param array $request_struct
+     */
     private function register_resources_by_default($request_struct = array())
     {
         $structure = $this->current_request_structure();
@@ -143,16 +206,27 @@ class Controller_Core extends Controller_Template {
         Media::append(array('css', 'js'), $file_name, NULL, TRUE);
     }
 
+    /**
+     * @return bool
+     */
     public function is_delete()
     {
         return $this->request->method() === 'DELETE';
     }
 
+    /**
+     * @return mixed
+     */
     public function is_ajax()
     {
         return $this->request->is_ajax();
     }
 
+    /**
+     * @param string $file
+     * @param array $view_data
+     * @return mixed
+     */
     public function render_partial($file = '', $view_data = array())
     {
         $this->check_auto_render();
@@ -165,11 +239,18 @@ class Controller_Core extends Controller_Template {
         return $this->response->body($this->view->render());
     }
 
+    /**
+     *
+     */
     public function render_nothing()
     {
         $this->render_partial('core/empty');
     }
 
+    /**
+     * @param $url
+     * @param int $code
+     */
     public function redirect($url, $code = 302)
     {
         $this->check_auto_render();
@@ -177,6 +258,9 @@ class Controller_Core extends Controller_Template {
         $this->request->redirect(URL::site($url), $code);
     }
 
+    /**
+     * @param $data
+     */
     public function render_json($data)
     {
         $this->check_auto_render();
@@ -189,12 +273,18 @@ class Controller_Core extends Controller_Template {
 
     // checks if auto_render already false, it means
     // you tried to render several views in one action
+    /**
+     * @throws Kohana_Exception
+     */
     protected function check_auto_render()
     {
         if (!$this->auto_render)
             throw new Kohana_Exception("You have to render something (or redirect) only once per action");
     }
 
+    /**
+     *
+     */
     public function after()
     {
         if (!$this->auto_render) {
@@ -220,6 +310,9 @@ class Controller_Core extends Controller_Template {
         parent::after();
     }
 
+    /**
+     * @param $view
+     */
     private function append_dynamic_properties($view)
     {
         $reflection_object = new ReflectionClass($this);
@@ -237,6 +330,9 @@ class Controller_Core extends Controller_Template {
     }
 
     // finally set the view filename (not possible to change back)
+    /**
+     *
+     */
     protected function set_view_filename()
     {
         if (!$this->filename) {
