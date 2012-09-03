@@ -1,66 +1,135 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
+ * Kohana-my-base
+ * Attemp to create module with classes for Kohana framework,
+ * with main goal make developing web applications more easily(as for me)
  *
+ * @package Kohana-my-base
+ * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
+ * @version 0.1.2 
+ * @link https://github.com/pussbb/Kohana-my-base
  */
+
 class Base_Model extends Kohana_Model {
 
     /**
+     * array of model objects if in select query more than one record
+     * was returned
      * @var array
+     * @access public
      */
     public $records = array();
-    /**
-     * @var null
-     */
-    public $per_page = NULL;
-    /**
-     * @var null
-     */
-    public $count = NULL;
 
     /**
+     * default value for limit rows 
+     * @var int
+     * @access public
+     */
+    public $per_page = 10;
+
+    /**
+     * number of total records 
+     * by default count($this->records), but if system filter 'count_total'
+     * was specified. This variable will be contain count of all records in DB
+     * even if limit was set. 
+     * @var int
+     * @access public
+     */
+    public $count = 0;
+
+    /**
+     * Sets defualt ordering for DB query
+     * <code>
+     *  <?php
+     *     class Model_User extends Model{
+     *          protected $order = array('email', 'DESC');
+     *     }
+     *  ?>
+     * </code>
      * @var array
+     * @access protected
      */
     protected $order = array();
+
     /**
+     * sets the primary key name
+     * <code>
+     *  <?php
+     *     class Model_User extends Model{
+     *          protected $primary_key = 'email';
+     *     }
+     *  ?>
+     * </code> 
      * @var string
+     * @access protected
      */
     protected $primary_key = 'id';
+
     /**
-     * @var null
+     * contains database table name
+     * Model_User ->(in database) table will be `users`
+     * @var string
+     * @access private
      */
-    protected $db_table = NULL;
+    private $db_table = NULL;
+
     /**
-     * @var null
+     * DB object for queries(uses Kohana's DB class)
+     * @var object
+     * @access protected
      */
     protected $db_query = NULL;
+
     /**
-     * @var null
+     * after insert some row to db, last inserted row id in db will be append 
+     * to that variable
+     * @var int
+     * @access protected
      */
     protected $last_inserted_id = NULL;
+
     /**
+     * controll if need to validate data when insiting or updating row
      * @var bool
+     * @access protected
      */
     protected $validate = TRUE;
+
     /**
+     * Enable or disenable cleaning not needed data after query
      * @var bool
+     * @access protected
      */
     protected $auto_clean = TRUE;
 
     /**
+     * assoc array of errors for this model
      * @var array
+     * @access private
      */
     private $errors = array();
+
     /**
-     * @var null
+     * Last normal SQL query executed as string 
+     * @var string
+     * @access private
      */
     private $last_query = NULL;
+
     /**
+     * array wich contain dynamicly append variables to the object
+     * or fields and value for the row
      * @var array|null
+     * @access private
      */
     private $data = array();
+
     /**
+     * defines system variables(commands) wich can parse in filter function
      * @var array
+     * @access private
      */
     private $system_filters = array(
         'limit', //limit of rows
@@ -69,7 +138,9 @@ class Base_Model extends Kohana_Model {
         'total_count', // for select will added total_count to count all rows if limit set
     );
     /**
+     * controll if need to make another one query to count all records ignoring limit and offset
      * @var bool
+     * @access private
      */
     private $count_total = FALSE;
 
@@ -87,7 +158,16 @@ class Base_Model extends Kohana_Model {
     const HAS_ONE = 3;
 
     /**
-     * @param null $params
+     * Constructs the object  
+     * <code>
+     *  <?php
+     *      $model = new Model_User(array(
+     *          'email' => 'domain@site.com',
+     *          .....
+     *      ));
+     *  ?>
+     * </code>
+     * @param array $params
      */
     public function __construct($params = NULL)
     {
@@ -112,8 +192,8 @@ class Base_Model extends Kohana_Model {
 
     /**
      * @static
-     * @param string $glue
-     * @return string
+     * @param string $glue 
+     * @return string name of current module
      */
     public static function module_name($glue = '_')
     {
