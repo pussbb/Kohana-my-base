@@ -1,0 +1,362 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \Error</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/JSMin.html"><i class="icon-folder-open"></i> JSMin</a></li>
+<li><a href="../packages/Kohana-my-base.html"><i class="icon-folder-open"></i> Kohana-my-base</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">140</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">1</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__call" title="__call :: CatchAll for actions."><span class="description">CatchAll for actions.</span><pre>__call()</pre></a></li>
+<li class="method public "><a href="#action" title="action :: Performs the action set in configuration"><span class="description">Performs the action set in configuration</span><pre>action()</pre></a></li>
+<li class="method public "><a href="#config" title="config :: Retrieves the config settings for the exception type, and cascades down
+to the _default settings if there is nothing relavant to the type."><span class="description">Retrieves the config settings for the exception type, and cascades down
+to the _default settings if there is nothing relavant to the type.</span><pre>config()</pre></a></li>
+<li class="method public "><a href="#demo_callback" title="demo_callback :: This is a demo callback that serves an example for how to use the
+callback action type."><span class="description">This is a demo callback that serves an example for how to use the
+callback action type.</span><pre>demo_callback()</pre></a></li>
+<li class="method public "><a href="#email" title="email :: Sends the email if enabled"><span class="description">Sends the email if enabled</span><pre>email()</pre></a></li>
+<li class="method public "><a href="#handler" title="handler :: Replaces Kohana's `Kohana::exception_handler()` method."><span class="description">Replaces Kohana's `Kohana::exception_handler()` method.</span><pre>handler()</pre></a></li>
+<li class="method public "><a href="#log" title="log :: Performs the logging is enabled"><span class="description">Performs the logging is enabled</span><pre>log()</pre></a></li>
+<li class="method public "><a href="#render" title="render :: Renders an error with a view file."><span class="description">Renders an error with a view file.</span><pre>render()</pre></a></li>
+<li class="method public "><a href="#shutdown_handler" title="shutdown_handler :: Replace Kohana's `Kohana::shutdown_handler()` method with one that will
+use our error handler."><span class="description">Replace Kohana's `Kohana::shutdown_handler()` method with one that will
+use our error handler.</span><pre>shutdown_handler()</pre></a></li>
+<li class="nav-header protected">» Protected</li>
+<li class="method protected "><a href="#_action_callback" title="_action_callback :: Performs a callback on the error before displaying"><span class="description">Performs a callback on the error before displaying</span><pre>_action_callback()</pre></a></li>
+<li class="method protected "><a href="#_action_display" title="_action_display :: Displays the error"><span class="description">Displays the error</span><pre>_action_display()</pre></a></li>
+<li class="method protected "><a href="#_action_redirect" title="_action_redirect :: Redirects the user upon error"><span class="description">Redirects the user upon error</span><pre>_action_redirect()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="property public "><a href="#%24code" title="$code :: "><span class="description">$code</span><pre>$code</pre></a></li>
+<li class="property public "><a href="#%24display" title="$display :: "><span class="description">$display</span><pre>$display</pre></a></li>
+<li class="property public "><a href="#%24file" title="$file :: "><span class="description">$file</span><pre>$file</pre></a></li>
+<li class="property public "><a href="#%24line" title="$line :: "><span class="description">$line</span><pre>$line</pre></a></li>
+<li class="property public "><a href="#%24message" title="$message :: "><span class="description">$message</span><pre>$message</pre></a></li>
+<li class="property public "><a href="#%24text" title="$text :: "><span class="description">$text</span><pre>$text</pre></a></li>
+<li class="property public "><a href="#%24trace" title="$trace :: "><span class="description">$trace</span><pre>$trace</pre></a></li>
+<li class="property public "><a href="#%24type" title="$type :: "><span class="description">$type</span><pre>$type</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CError" id="\Error"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Error.html">Error</a>
+</li>
+</ul>
+<div href="../classes/Error.html" class="element class">
+<p class="short_description">Kohana-my-base
+Attemp to create module with classes for Kohana framework,
+with main goal make developing web applications more easily(as for me)</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Kohana-my-base.extra.html">Kohana-my-base</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 pussbb@gmail.com(alexnevpryaga@gmail.com)</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.gnu.org/copyleft/gpl.html">GNU GENERAL PUBLIC LICENSE v3</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>0.1.2</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/pussbb/Kohana-my-base">https://github.com/pussbb/Kohana-my-base</a></td>
+</tr>
+<tr>
+<th>category</th>
+<td>extra</td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>extra</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__call" id="__call"></a><div class="element clickable method public __call" data-toggle="collapse" data-target=".__call .collapse">
+<h2>CatchAll for actions.</h2>
+<pre>__call(string $method, array $args) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Just displays the error.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$args</h4>
+<code>array</code>
+</div>
+</div></div>
+</div>
+<a name="action" id="action"></a><div class="element clickable method public action" data-toggle="collapse" data-target=".action .collapse">
+<h2>Performs the action set in configuration</h2>
+<pre>action() : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a name="config" id="config"></a><div class="element clickable method public config" data-toggle="collapse" data-target=".config .collapse">
+<h2>Retrieves the config settings for the exception type, and cascades down
+to the _default settings if there is nothing relavant to the type.</h2>
+<pre>config(string $key, mixed $default) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>The config key</p></div>
+<div class="subelement argument">
+<h4>$default</h4>
+<code>mixed</code><p>A default value to return</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a name="demo_callback" id="demo_callback"></a><div class="element clickable method public demo_callback" data-toggle="collapse" data-target=".demo_callback .collapse">
+<h2>This is a demo callback that serves an example for how to use the
+callback action type.</h2>
+<pre>demo_callback(object $error) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$error</h4>
+<code>object</code><p>The error object</p></div>
+</div></div>
+</div>
+<a name="email" id="email"></a><div class="element clickable method public email" data-toggle="collapse" data-target=".email .collapse">
+<h2>Sends the email if enabled</h2>
+<pre>email() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="handler" id="handler"></a><div class="element clickable method public handler" data-toggle="collapse" data-target=".handler .collapse">
+<h2>Replaces Kohana's `Kohana::exception_handler()` method.</h2>
+<pre>handler(\Exception $e) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>This does the
+same thing, but also adds email functionality and the ability to perform
+an action in response to the exception. These actions and emails are
+customizable per type in the config file for this module.</p></p>
+<table class="table table-bordered"><tr>
+<th>uses</th>
+<td>\global\Kohana::exception_text</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$e</h4>
+<code>object</code><p>exception object</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a name="log" id="log"></a><div class="element clickable method public log" data-toggle="collapse" data-target=".log .collapse">
+<h2>Performs the logging is enabled</h2>
+<pre>log() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="render" id="render"></a><div class="element clickable method public render" data-toggle="collapse" data-target=".render .collapse">
+<h2>Renders an error with a view file.</h2>
+<pre>render(string $view) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>The view library is not used because
+there is a chance that it will fail within this context.
+Include the exception HTML cascading system /views/errors/
+            1. $view
+            2. error type - folder and error code - php file
+            3. error type - php file
+            4. error code - php file</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$view</h4>
+<code>string</code><p>The view file</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="shutdown_handler" id="shutdown_handler"></a><div class="element clickable method public shutdown_handler" data-toggle="collapse" data-target=".shutdown_handler .collapse">
+<h2>Replace Kohana's `Kohana::shutdown_handler()` method with one that will
+use our error handler.</h2>
+<pre>shutdown_handler() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>This is to catch errors that are not normally
+caught by the error handler, such as E_PARSE.</p></p>
+<table class="table table-bordered"><tr>
+<th>uses</th>
+<td>\global\Error::handler</td>
+</tr></table>
+</div></div>
+</div>
+<a name="_action_callback" id="_action_callback"></a><div class="element clickable method protected _action_callback" data-toggle="collapse" data-target="._action_callback .collapse">
+<h2>Performs a callback on the error before displaying</h2>
+<pre>_action_callback(array $options) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>Options from config</p></div>
+</div></div>
+</div>
+<a name="_action_display" id="_action_display"></a><div class="element clickable method protected _action_display" data-toggle="collapse" data-target="._action_display .collapse">
+<h2>Displays the error</h2>
+<pre>_action_display(array $options) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>Options from config</p></div>
+</div></div>
+</div>
+<a name="_action_redirect" id="_action_redirect"></a><div class="element clickable method protected _action_redirect" data-toggle="collapse" data-target="._action_redirect .collapse">
+<h2>Redirects the user upon error</h2>
+<pre>_action_redirect(array $options) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>Options from config</p></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24code" id="$code"> </a><div class="element clickable property public $code" data-toggle="collapse" data-target=".$code .collapse">
+<h2>$code</h2>
+<pre>$code : null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24display" id="$display"> </a><div class="element clickable property public $display" data-toggle="collapse" data-target=".$display .collapse">
+<h2>$display</h2>
+<pre>$display : null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24file" id="$file"> </a><div class="element clickable property public $file" data-toggle="collapse" data-target=".$file .collapse">
+<h2>$file</h2>
+<pre>$file : null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24line" id="$line"> </a><div class="element clickable property public $line" data-toggle="collapse" data-target=".$line .collapse">
+<h2>$line</h2>
+<pre>$line : null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24message" id="$message"> </a><div class="element clickable property public $message" data-toggle="collapse" data-target=".$message .collapse">
+<h2>$message</h2>
+<pre>$message : null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24text" id="$text"> </a><div class="element clickable property public $text" data-toggle="collapse" data-target=".$text .collapse">
+<h2>$text</h2>
+<pre>$text : null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24trace" id="$trace"> </a><div class="element clickable property public $trace" data-toggle="collapse" data-target=".$trace .collapse">
+<h2>$trace</h2>
+<pre>$trace : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24type" id="$type"> </a><div class="element clickable property public $type" data-toggle="collapse" data-target=".$type .collapse">
+<h2>$type</h2>
+<pre>$type : null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-09-04T17:08:55+03:00.<br></footer></div>
+</div>
+</body>
+</html>
