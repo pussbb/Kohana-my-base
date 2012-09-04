@@ -1,21 +1,28 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Kohana-my-base
- * Attemp to create module with classes for Kohana framework,
- * with main goal make developing web applications more easily(as for me)
+ * Class to work with db queries easily
  *
+ *<code>
+ * $m = new Model_User::find_all(array(
+ *    'login' => 'bla'
+ * ))
+ *</code>
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2 
  * @link https://github.com/pussbb/Kohana-my-base
+ * @category database
+ * @subpackage database
  */
 
 class Base_Model extends Kohana_Model {
 
     /**
-     * array of model objects if in select query more than one record
+     * array of model objects
+     *
+     * if in select query more than one record
      * was returned
      * @var array
      * @access public
@@ -30,7 +37,8 @@ class Base_Model extends Kohana_Model {
     public $per_page = 10;
 
     /**
-     * number of total records 
+     * number of total records
+     *
      * by default count($this->records), but if system filter 'count_total'
      * was specified. This variable will be contain count of all records in DB
      * even if limit was set. 
@@ -41,6 +49,7 @@ class Base_Model extends Kohana_Model {
 
     /**
      * Sets defualt ordering for DB query
+     *
      * <code>
      *  <?php
      *     class Model_User extends Model{
@@ -69,6 +78,7 @@ class Base_Model extends Kohana_Model {
 
     /**
      * contains database table name
+     *
      * Model_User ->(in database) table will be `users`
      * @var string
      * @access private
@@ -83,6 +93,8 @@ class Base_Model extends Kohana_Model {
     protected $db_query = NULL;
 
     /**
+     * last inserted row in db for table
+     *
      * after insert some row to db, last inserted row id in db will be append 
      * to that variable
      * @var int
@@ -91,14 +103,16 @@ class Base_Model extends Kohana_Model {
     protected $last_inserted_id = NULL;
 
     /**
-     * controll if need to validate data when insiting or updating row
+     * controls if need to validate data
+     *
+     * when inserting or updating row
      * @var bool
      * @access protected
      */
     protected $validate = TRUE;
 
     /**
-     * Enable or disenable cleaning not needed data after query
+     * Enable or disable cleaning garbage
      * @var bool
      * @access protected
      */
@@ -119,7 +133,8 @@ class Base_Model extends Kohana_Model {
     private $last_query = NULL;
 
     /**
-     * array wich contain dynamicly append variables to the object
+     * contain dynamically append variables
+     *
      * or fields and value for the row
      * @var array|null
      * @access private
@@ -127,7 +142,9 @@ class Base_Model extends Kohana_Model {
     private $data = array();
 
     /**
-     * defines system variables(commands) wich can parse in filter function
+     * defines system variables(commands)
+     *
+     * wich can parse in filter function
      * @var array
      * @access private
      */
@@ -138,7 +155,9 @@ class Base_Model extends Kohana_Model {
         'total_count', // for select will added total_count to count all rows if limit set
     );
     /**
-     * controll if need to make another one query to count all records ignoring limit and offset
+     * Count all rows with the same conditions or not
+     *
+     * if need to make another one query to count all records ignoring limit and offset
      * @var bool
      * @access private
      */
@@ -158,16 +177,19 @@ class Base_Model extends Kohana_Model {
     const HAS_ONE = 3;
 
     /**
-     * Constructs the object  
+     * Constructs the object
+     *
      * <code>
-     *  <?php
+     *
      *      $model = new Model_User(array(
      *          'email' => 'domain@site.com',
      *          .....
      *      ));
-     *  ?>
+     *
      * </code>
      * @param array $params
+     * @access public
+     * @return void
      */
     public function __construct($params = NULL)
     {
@@ -181,7 +203,8 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     *
+     * @ignore
+     * @return void
      */
     public function __destruct()
     {
@@ -191,9 +214,13 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * Returns model name
+     *
+     * e.g. Model_User::module_name() will return 'User'
      * @static
      * @param string $glue 
      * @return string name of current module
+     * @access public
      */
     public static function module_name($glue = '_')
     {
@@ -203,16 +230,21 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * return a table name in plural form
+     *
+     * Model_User::db_table_name() = `users`
      * @static
      * @param string $glue
      * @return mixed
+     * @access private
      */
-    public static function db_table_name($glue = '_')
+    private static function db_table_name($glue = '_')
     {
         return Inflector::plural(strtolower(self::module_name($glue)));
     }
 
     /**
+     * @ignore
      * @param $name
      * @param $value
      */
@@ -222,6 +254,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * @ignore
      * @param $name
      * @return mixed
      * @throws Kohana_Exception
@@ -235,6 +268,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * @ignore
      * @param $name
      * @return bool
      */
@@ -244,6 +278,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * @ignore
      * @param $name
      */
     public function __unset($name)
@@ -252,6 +287,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * @ignore
      * @param $name
      * @param $arguments
      * @return mixed
@@ -265,6 +301,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * @ignore
      * @static
      * @param $name
      * @param $arguments
@@ -288,6 +325,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * 
      * @return null|string
      */
     public function __toString()

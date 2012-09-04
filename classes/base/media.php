@@ -1,46 +1,73 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Kohana-my-base
- * Attemp to create module with classes for Kohana framework,
- * with main goal make developing web applications more easily(as for me)
+ * Class to add javascripts and CSS to the main template
  *
  * @package Kohana-my-base
- * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
+ * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2 
  * @link https://github.com/pussbb/Kohana-my-base
+ * @category template
+ * @subpackage template
  */
 
 class Base_Media extends Singleton{
 
     /**
-     * @var null
+     * configuration settings
+     * @var array|null
+     * @access private
      */
     private $config = NULL;
-    /**
-     * @var array
-     */
-    private $styles = array();
-    /**
-     * @var string
-     */
-    private $inline_style = '';
-    /**
-     * @var string
-     */
-    private $inline_script = '';
-    /**
-     * @var array
-     */
-    private $scripts = array();
-    /**
-     * @var null
-     */
-    private $path = NULL;
 
     /**
-     *
+     * containce all css files
+     * wich need to add to the template
+     * @var array
+     * @access private
+     */
+    private $styles = array();
+
+    /**
+     * Variable with inline css
+     * in template will added like this
+     * <code>
+     * <style type="type/css">
+     *      body {css_rule: value};
+     * </style>
+     * </code>
+     * before tag </head>
+     * @var string
+     * @access private
+     */
+    private $inline_style = '';
+
+    /**
+     * Variable with inline javascript
+     * in template will added like this
+     * <code>
+     * <script type="text/javascript">
+     *      var some_var = value;
+     * </script>
+     * </code>
+     * before tag </head>
+     * @var string
+     * @access private
+     */
+    private $inline_script = '';
+
+    /**
+     * contain all javascript files which,
+     * will be included to the template
+     * @var array
+     * @access private
+     */
+    private $scripts = array();
+
+    /**
+     * Initialize configuration settings
+     * and auto load default bundle
      */
     public function __construct()
     {
@@ -49,8 +76,10 @@ class Base_Media extends Singleton{
     }
 
     /**
+     * get value from config
      * @param $key
      * @return mixed
+     * @access private
      */
     private function config($key)
     {
@@ -60,7 +89,9 @@ class Base_Media extends Singleton{
     }
 
     /**
+     * Append colection of css and js files
      * @param $name
+     * @return void
      */
     public function bundle($name)
     {
@@ -76,10 +107,12 @@ class Base_Media extends Singleton{
     }
 
     /**
-     * @param $key
-     * @param $name
-     * @param null $media
+     * append media type to the list
+     * @param $key type css or js
+     * @param $name file name without file extension .css or .js
+     * @param string|null $media for css files only e.g. 'screen'
      * @param bool $check
+     * @access public
      */
     public function append($key, $name, $media = NULL, $check = FALSE)
     {
@@ -104,9 +137,21 @@ class Base_Media extends Singleton{
     }
 
     /**
-     * @param $name
-     * @param $prefix
-     * @return string
+     * function to find media file
+     *
+     * example
+     * <code>
+     * <?php
+     *  $file = Media::find_file('jquery', 'js);
+     *  // or
+     *  $file = Media_Base::instance()->find_file('jquery', 'js);
+     * ?>
+     * </code>
+     * will search file DOCROOT.'media/js/jquery.js'
+     * @param $name file name without file extension .css or .js
+     * @param $prefix css or js
+     * @return string|null full path to the file or null if not found
+     * @access public
      */
     public function find_file($name, $prefix)
     {
@@ -118,8 +163,10 @@ class Base_Media extends Singleton{
     }
 
     /**
+     * checks if valid url
      * @param $uri
-     * @return mixed
+     * @return bool TRUE if url is valid
+     * @access private
      */
     private function is_url($uri)
     {
@@ -127,9 +174,17 @@ class Base_Media extends Singleton{
     }
 
     /**
+     * return full url for media file
+     *
+     * if appended media already has a valid url (http://....)
+     * this functions keep that media
+     * if stattic:// was specified at the begining of string
+     * function return a url with static url wich must specified in config
+     * e.g. 'static://juery' -> 'http://static.local/js/jquery.js/'
      * @param $file_name
      * @param $prefix
-     * @return mixed|string
+     * @return string
+     * @access private
      */
     private function resource($file_name, $prefix)
     {
@@ -141,9 +196,11 @@ class Base_Media extends Singleton{
     }
 
     /**
-     * @param $file_name
-     * @param null $media
-     * @param bool $check
+     * add css file to the list
+     * @param $file_name file name without file extension .css or .js
+     * @param string|null $media type for css  e.g. 'screen'
+     * @param bool $check if TRUE first check file if its a remote it always will be FALSE
+     * @access public
      */
     public function append_style($file_name, $media = NULL, $check = FALSE)
     {
@@ -153,7 +210,9 @@ class Base_Media extends Singleton{
     }
 
     /**
-     * @param $css
+     * adds inline css
+     * @param string $css
+     * @access public
      */
     public function append_inline_style($css)
     {
@@ -163,8 +222,13 @@ class Base_Media extends Singleton{
     }
 
     /**
-     * @param $file_name
-     * @param bool $check
+     * add javasript file to the list
+     *
+     * also tries to find coffee script file and compile them to js file
+     * if needed
+     * @param $file_name file name without file extension .css or .js
+     * @param bool $check if TRUE first check file if its a remote it always will be FALSE
+     * @access public
      */
     public function append_script($file_name, $check = FALSE)
     {
@@ -183,7 +247,9 @@ class Base_Media extends Singleton{
     }
 
     /**
-     * @param $js
+     * add inline javascript
+     * @param string $js
+     * @access public
      */
     public function append_inline_script($js)
     {
@@ -193,7 +259,9 @@ class Base_Media extends Singleton{
     }
 
     /**
+     * get all appended css files
      * @return array
+     * @access public
      */
     public function styles()
     {
@@ -201,7 +269,11 @@ class Base_Media extends Singleton{
     }
 
     /**
+     * return formatted string for inline style
+     *
+     * all included inline styles already wrapped in tag <style>
      * @return string
+     * @access public
      */
     public function inline_style()
     {
@@ -211,6 +283,7 @@ class Base_Media extends Singleton{
     }
 
     /**
+     * return a list with included javascript files
      * @return array
      */
     public function scripts()
@@ -219,7 +292,11 @@ class Base_Media extends Singleton{
     }
 
     /**
+     * return formatted string for inline javascript
+     *
+     * all included inline script already wrapped in tag <script>
      * @return string
+     * @access public
      */
     public function inline_script()
     {
@@ -229,9 +306,15 @@ class Base_Media extends Singleton{
     }
 
     /**
-     * @param $source
-     * @param $destination
+     * checks if coffee script exists
+     *
+     * Returns TRUE if coffee script exists and he is newer than javascript script
+     * or if javascript file does not exists
+     *
+     * @param $source full path to cofee script file
+     * @param $destination full path to javascript file
      * @return bool
+     * @access private
      */
     private function need_compile($source, $destination)
     {
@@ -248,9 +331,11 @@ class Base_Media extends Singleton{
     }
 
     /**
+     * compiles coffee script if needed
      * @param $file_name
      * @param null $files
      * @throws Kohana_Exception
+     * @access private
      */
     private function coffeescript($file_name, $files = NULL)
     {
@@ -301,7 +386,10 @@ class Base_Media extends Singleton{
     }
 
     /**
+     * minize javascript script using JSMin
+     * @see  JSMin
      * @param $file
+     * @access private
      */
     private function minize_script($file)
     {

@@ -33,7 +33,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">224</span></a></li>
+                <span class="label label-info">175</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -57,25 +57,17 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#end_of_month" title="end_of_month :: "><span class="description">end_of_month()
-        </span><pre>end_of_month()</pre></a></li>
-<li class="method public "><a href="#end_of_week" title="end_of_week :: "><span class="description">end_of_week()
-        </span><pre>end_of_week()</pre></a></li>
-<li class="method public "><a href="#formated" title="formated :: "><span class="description">formated()
-        </span><pre>formated()</pre></a></li>
-<li class="method public "><a href="#month_days" title="month_days :: "><span class="description">month_days()
-        </span><pre>month_days()</pre></a></li>
-<li class="method public "><a href="#start_of_month" title="start_of_month :: "><span class="description">start_of_month()
-        </span><pre>start_of_month()</pre></a></li>
-<li class="method public "><a href="#start_of_week" title="start_of_week :: "><span class="description">start_of_week()
-        </span><pre>start_of_week()</pre></a></li>
-<li class="method public "><a href="#today_if_null" title="today_if_null :: "><span class="description">today_if_null()
-        </span><pre>today_if_null()</pre></a></li>
-<li class="method public "><a href="#week_days" title="week_days :: "><span class="description">week_days()
-        </span><pre>week_days()</pre></a></li>
+<li class="method public "><a href="#end_of_month" title="end_of_month :: Get the timestamp for last day of month"><span class="description">Get the timestamp for last day of month</span><pre>end_of_month()</pre></a></li>
+<li class="method public "><a href="#end_of_week" title="end_of_week :: Get the timestamp for the last day of week"><span class="description">Get the timestamp for the last day of week</span><pre>end_of_week()</pre></a></li>
+<li class="method public "><a href="#formated" title="formated :: print date in specific format(from config common)"><span class="description">print date in specific format(from config common)</span><pre>formated()</pre></a></li>
+<li class="method public "><a href="#month_days" title="month_days :: Get all days for month"><span class="description">Get all days for month</span><pre>month_days()</pre></a></li>
+<li class="method public "><a href="#start_of_month" title="start_of_month :: Get the timestamp for first day of the month"><span class="description">Get the timestamp for first day of the month</span><pre>start_of_month()</pre></a></li>
+<li class="method public "><a href="#start_of_week" title="start_of_week :: Get the timestamp for first day of week"><span class="description">Get the timestamp for first day of week</span><pre>start_of_week()</pre></a></li>
+<li class="method public "><a href="#today_if_null" title="today_if_null :: convert date to a timestamp"><span class="description">convert date to a timestamp</span><pre>today_if_null()</pre></a></li>
+<li class="method public "><a href="#week_days" title="week_days :: get days of week"><span class="description">get days of week</span><pre>week_days()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-constant"></i> Constants</li>
-<li class="constant  "><a href="#WEEK_START" title="WEEK_START :: "><span class="description">WEEK_START</span><pre>WEEK_START</pre></a></li>
+<li class="constant  "><a href="#WEEK_START" title="WEEK_START :: which day does the week start on (0 - 6)"><span class="description">which day does the week start on (0 - 6)</span><pre>WEEK_START</pre></a></li>
 </ul>
 </div>
 <div class="span8">
@@ -89,19 +81,17 @@
 </li>
 </ul>
 <div href="../classes/Base_Date.html" class="element class">
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
+<p class="short_description">Class wich adds some extra functions to Date class in Kohana</p>
 <div class="details">
 <p class="long_description"></p>
 <table class="table table-bordered">
 <tr>
 <th>package</th>
-<td><a href="../packages/Kohana-my-base.html">Kohana-my-base</a></td>
+<td><a href="../packages/Kohana-my-base.extra.html">Kohana-my-base</a></td>
 </tr>
 <tr>
 <th>copyright</th>
-<td>2012 pussbb@gmail.com(alexnevpryaga@gmail.com)</td>
+<td>2012 pussbb@gmail.com</td>
 </tr>
 <tr>
 <th>license</th>
@@ -115,12 +105,19 @@ with main goal make developing web applications more easily(as for me)</p>
 <th>link</th>
 <td><a href="https://github.com/pussbb/Kohana-my-base">https://github.com/pussbb/Kohana-my-base</a></td>
 </tr>
+<tr>
+<th>category</th>
+<td>extra</td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>extra</td>
+</tr>
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
 <a name="end_of_month" id="end_of_month"></a><div class="element clickable method public end_of_month" data-toggle="collapse" data-target=".end_of_month .collapse">
-<h2>end_of_month()
-        </h2>
+<h2>Get the timestamp for last day of month</h2>
 <pre>end_of_month(null $date) : int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -139,8 +136,7 @@ with main goal make developing web applications more easily(as for me)</p>
 </div></div>
 </div>
 <a name="end_of_week" id="end_of_week"></a><div class="element clickable method public end_of_week" data-toggle="collapse" data-target=".end_of_week .collapse">
-<h2>end_of_week()
-        </h2>
+<h2>Get the timestamp for the last day of week</h2>
 <pre>end_of_week(null $date) : int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -159,8 +155,7 @@ with main goal make developing web applications more easily(as for me)</p>
 </div></div>
 </div>
 <a name="formated" id="formated"></a><div class="element clickable method public formated" data-toggle="collapse" data-target=".formated .collapse">
-<h2>formated()
-        </h2>
+<h2>print date in specific format(from config common)</h2>
 <pre>formated($date) : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -172,12 +167,12 @@ with main goal make developing web applications more easily(as for me)</p>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$date</h4></div>
 <h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
+<div class="subelement response">
+<code>string</code>foremated date</div>
 </div></div>
 </div>
 <a name="month_days" id="month_days"></a><div class="element clickable method public month_days" data-toggle="collapse" data-target=".month_days .collapse">
-<h2>month_days()
-        </h2>
+<h2>Get all days for month</h2>
 <pre>month_days(null $date, string $format) : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -200,8 +195,7 @@ with main goal make developing web applications more easily(as for me)</p>
 </div></div>
 </div>
 <a name="start_of_month" id="start_of_month"></a><div class="element clickable method public start_of_month" data-toggle="collapse" data-target=".start_of_month .collapse">
-<h2>start_of_month()
-        </h2>
+<h2>Get the timestamp for first day of the month</h2>
 <pre>start_of_month(null $date) : int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -220,8 +214,7 @@ with main goal make developing web applications more easily(as for me)</p>
 </div></div>
 </div>
 <a name="start_of_week" id="start_of_week"></a><div class="element clickable method public start_of_week" data-toggle="collapse" data-target=".start_of_week .collapse">
-<h2>start_of_week()
-        </h2>
+<h2>Get the timestamp for first day of week</h2>
 <pre>start_of_week(null $date) : int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -240,12 +233,11 @@ with main goal make developing web applications more easily(as for me)</p>
 </div></div>
 </div>
 <a name="today_if_null" id="today_if_null"></a><div class="element clickable method public today_if_null" data-toggle="collapse" data-target=".today_if_null .collapse">
-<h2>today_if_null()
-        </h2>
-<pre>today_if_null(null $date) : int | null</pre>
+<h2>convert date to a timestamp</h2>
+<pre>today_if_null(null $date) : int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<p class="long_description"><p>if valid otherwise current timestamp</p></p>
 <table class="table table-bordered"><tr>
 <th>static</th>
 <td></td>
@@ -256,14 +248,11 @@ with main goal make developing web applications more easily(as for me)</p>
 <code>null</code>
 </div>
 <h3>Returns</h3>
-<div class="subelement response">
-<code>int</code><code>null</code>
-</div>
+<div class="subelement response"><code>int</code></div>
 </div></div>
 </div>
 <a name="week_days" id="week_days"></a><div class="element clickable method public week_days" data-toggle="collapse" data-target=".week_days .collapse">
-<h2>week_days()
-        </h2>
+<h2>get days of week</h2>
 <pre>week_days(null $date) : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -284,7 +273,7 @@ with main goal make developing web applications more easily(as for me)</p>
 <h3>
 <i class="icon-custom icon-constant"></i> Constants</h3>
 <a name="WEEK_START" id="WEEK_START"> </a><div class="element clickable constant  WEEK_START" data-toggle="collapse" data-target=".WEEK_START .collapse">
-<h2>WEEK_START</h2>
+<h2>which day does the week start on (0 - 6)</h2>
 <pre>WEEK_START </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
@@ -296,7 +285,7 @@ with main goal make developing web applications more easily(as for me)</p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-09-03T21:39:40+03:00.<br></footer></div>
+            generated on 2012-09-04T13:52:27+03:00.<br></footer></div>
 </div>
 </body>
 </html>

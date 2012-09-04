@@ -1,29 +1,29 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Kohana-my-base
- * Attemp to create module with classes for Kohana framework,
- * with main goal make developing web applications more easily(as for me)
+ * Class wich adds some extra functions to Date class in Kohana
  *
  * @package Kohana-my-base
- * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
+ * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2 
  * @link https://github.com/pussbb/Kohana-my-base
+ * @category extra
+ * @subpackage extra
  */
 
 class Base_Date extends Kohana_Date {
-    // which day does the week start on (0 - 6)
 
     /**
-     *
+     *which day does the week start on (0 - 6)
      */
     const WEEK_START = 2;
 
     /**
+     * print date in specific format(from config common)
      * @static
      * @param $date
-     * @return string
+     * @return string foremated date
      */
     public static function formated($date)
     {
@@ -35,9 +35,12 @@ class Base_Date extends Kohana_Date {
     }
 
     /**
+     * convert date to a timestamp
+     *
+     * if valid otherwise current timestamp
      * @static
      * @param null $date
-     * @return int|null
+     * @return int
      */
     public static function today_if_null($date = null)
     {
@@ -45,6 +48,7 @@ class Base_Date extends Kohana_Date {
     }
 
     /**
+     * Get the timestamp for first day of the month
      * @static
      * @param null $date
      * @return int
@@ -56,6 +60,7 @@ class Base_Date extends Kohana_Date {
     }
 
     /**
+     * Get all days for month
      * @static
      * @param null $date
      * @param string $format
@@ -75,6 +80,7 @@ class Base_Date extends Kohana_Date {
     }
 
     /**
+     * Get the timestamp for last day of month
      * @static
      * @param null $date
      * @return int
@@ -86,6 +92,7 @@ class Base_Date extends Kohana_Date {
     }
 
     /**
+     * Get the timestamp for first day of week
      * @static
      * @param null $date
      * @return int
@@ -100,6 +107,7 @@ class Base_Date extends Kohana_Date {
     }
 
     /**
+     * Get the timestamp for the last day of week
      * @static
      * @param null $date
      * @return int
@@ -111,6 +119,7 @@ class Base_Date extends Kohana_Date {
     }
 
     /**
+     * get days of week
      * @static
      * @param null $date
      * @return array

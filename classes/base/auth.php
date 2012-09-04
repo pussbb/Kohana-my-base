@@ -1,21 +1,20 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Kohana-my-base
- * Attemp to create module with classes for Kohana framework,
- * with main goal make developing web applications more easily(as for me)
- *
+ * Base class to manage roles for user
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2 
  * @link https://github.com/pussbb/Kohana-my-base
+ * @category access
  */
 
 class Base_Auth extends Singleton {
 
     /**
-     * @param $user
+     * remember just logged in user
+     * @param $user (object)
      */
     public function authorize(&$user)
     {
@@ -23,7 +22,8 @@ class Base_Auth extends Singleton {
     }
 
     /**
-     * @return null
+     * get current logged in user
+     * @return object|null if in session not valid object returns NULL otherwise object
      */
     public function current_user()
     {
@@ -32,7 +32,8 @@ class Base_Auth extends Singleton {
     }
 
     /**
-     *
+     * destroy session for current logged in user
+     * @return void
      */
     public function logout()
     {
@@ -40,7 +41,8 @@ class Base_Auth extends Singleton {
     }
 
     /**
-     * @return bool
+     * checks if user logged in or just a visitor
+     * @return bool if user loggged in  return TRUE otherwise FALSE
      */
     public function logged_in()
     {
@@ -48,8 +50,16 @@ class Base_Auth extends Singleton {
     }
 
     /**
-     * @param $user_role
-     * @return mixed
+     * checks if user has role
+     * <code>
+     * <?php
+     *      Auth::has_role(Model_Access_Role::ROLE_ADMIN);
+     *      //or
+     *      Auth::instance()->has_role(Model_Access_Role::ROLE_ADMIN);
+     * ?>
+     * </code>
+     * @param $user_role @see Model_Access_Role constants
+     * @return bool
      */
     public function has_role($user_role)
     {
@@ -57,7 +67,8 @@ class Base_Auth extends Singleton {
     }
 
     /**
-     * @return mixed
+     * checks if user is admin
+     * @return bool
      */
     public function is_admin()
     {

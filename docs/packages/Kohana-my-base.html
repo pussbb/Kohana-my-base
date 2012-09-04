@@ -33,7 +33,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">224</span></a></li>
+                <span class="label label-info">175</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -58,61 +58,48 @@
 <li class="nav-header">
 <i class="icon-map-marker"></i> Packages</li>
 <li>
-<a href="../packages/Kohana-my-base.html" title="Kohana-my-base"><i class="icon-folder-open"></i>Kohana-my-base</a><ul class="nav nav-list nav-packages"></ul>
+<a href="../packages/Kohana-my-base.html" title="Kohana-my-base"><i class="icon-folder-open"></i>Kohana-my-base</a><ul class="nav nav-list nav-packages">
+<li>
+<a href="../packages/Kohana-my-base.database.html" title="database"><i class="icon-folder-open"></i>database</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li>
+<a href="../packages/Kohana-my-base.extra.html" title="extra"><i class="icon-folder-open"></i>extra</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li>
+<a href="../packages/Kohana-my-base.template.html" title="template"><i class="icon-folder-open"></i>template</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+</ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-class"></i> Classes</li>
-<li><a href="#ACL" title="Kohana-my-base
+<li><a href="#Singleton" title="Kohana-my-base
 Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">ACL</a></li>
-<li><a href="#Pretty_Form" title="Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Pretty_Form</a></li>
-<li><a href="#Model" title="Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Model</a></li>
-<li><a href="#Base_Db_Sanitize" title="Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Base_Db_Sanitize</a></li>
-<li><a href="#Base_Db_Validation" title="Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Base_Db_Validation</a></li>
-<li><a href="#Base_ACL" title="Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Base_ACL</a></li>
-<li><a href="#Base_Model" title="Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Base_Model</a></li>
-<li><a href="#Base_Media" title="Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Base_Media</a></li>
-<li><a href="#Base_Auth" title="Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Base_Auth</a></li>
-<li><a href="#Base_Date" title="Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Base_Date</a></li>
+with main goal make developing web applications more easily(as for me)">Singleton</a></li>
+<li><a href="#Auth" title="Class to check user(registered user, or just visitor .">Auth</a></li>
 <li><a href="#Controller_Users" title="Kohana-my-base
 Attemp to create module with classes for Kohana framework,
 with main goal make developing web applications more easily(as for me)">Controller_Users</a></li>
 <li><a href="#Controller_Core" title="Kohana-my-base
 Attemp to create module with classes for Kohana framework,
 with main goal make developing web applications more easily(as for me)">Controller_Core</a></li>
-<li><a href="#Singleton" title="Kohana-my-base
+<li><a href="#Base_Auth" title="Base class to manage roles for user">Base_Auth</a></li>
+<li><a href="#Base_Db_Validation" title="Kohana-my-base
 Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Singleton</a></li>
-<li><a href="#Media" title="Kohana-my-base
+with main goal make developing web applications more easily(as for me)">Base_Db_Validation</a></li>
+<li><a href="#Base_Db_Sanitize" title="Kohana-my-base
 Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Media</a></li>
-<li><a href="#Auth" title="Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Auth</a></li>
+with main goal make developing web applications more easily(as for me)">Base_Db_Sanitize</a></li>
+<li><a href="#Base_ACL" title="Base class to check user permision for some request">Base_ACL</a></li>
 <li><a href="#Error" title="Kohana-my-base
 Attemp to create module with classes for Kohana framework,
 with main goal make developing web applications more easily(as for me)">Error</a></li>
-<li><a href="#Date" title="Kohana-my-base
+<li><a href="#Pretty_Form" title="Kohana-my-base
 Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)">Date</a></li>
+with main goal make developing web applications more easily(as for me)">Pretty_Form</a></li>
+<li><a href="#ACL" title="Class to check user permissions for some actions
+&lt;code&gt;
+ ACL::instance()-&gt;allowed($obj);
+&lt;/code&gt;">ACL</a></li>
 </ul>
 </div>
 <div class="span8 package-contents">
@@ -128,47 +115,33 @@ with main goal make developing web applications more easily(as for me)">Date</a>
 <a name="ACL" id="ACL"></a><div class="element ajax clickable class" href="../classes/ACL.html">
 <h1>ACL<a href="../classes/ACL.html">¶</a>
 </h1>
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
+<p class="short_description">Class to check user permissions for some actions
+<code>
+ ACL::instance()->allowed($obj);
+</code></p>
 <div class="details collapse"></div>
 <a href="../classes/ACL.html" class="more">« More »</a>
 </div>
 <a name="Auth" id="Auth"></a><div class="element ajax clickable class" href="../classes/Auth.html">
 <h1>Auth<a href="../classes/Auth.html">¶</a>
 </h1>
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
+<p class="short_description">Class to check user(registered user, or just visitor .</p>
 <div class="details collapse"></div>
 <a href="../classes/Auth.html" class="more">« More »</a>
 </div>
 <a name="Base_ACL" id="Base_ACL"></a><div class="element ajax clickable class" href="../classes/Base_ACL.html">
 <h1>Base_ACL<a href="../classes/Base_ACL.html">¶</a>
 </h1>
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
+<p class="short_description">Base class to check user permision for some request</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_ACL.html" class="more">« More »</a>
 </div>
 <a name="Base_Auth" id="Base_Auth"></a><div class="element ajax clickable class" href="../classes/Base_Auth.html">
 <h1>Base_Auth<a href="../classes/Base_Auth.html">¶</a>
 </h1>
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
+<p class="short_description">Base class to manage roles for user</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_Auth.html" class="more">« More »</a>
-</div>
-<a name="Base_Date" id="Base_Date"></a><div class="element ajax clickable class" href="../classes/Base_Date.html">
-<h1>Base_Date<a href="../classes/Base_Date.html">¶</a>
-</h1>
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
-<div class="details collapse"></div>
-<a href="../classes/Base_Date.html" class="more">« More »</a>
 </div>
 <a name="Base_Db_Sanitize" id="Base_Db_Sanitize"></a><div class="element ajax clickable class" href="../classes/Base_Db_Sanitize.html">
 <h1>Base_Db_Sanitize<a href="../classes/Base_Db_Sanitize.html">¶</a>
@@ -188,24 +161,6 @@ with main goal make developing web applications more easily(as for me)</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_Db_Validation.html" class="more">« More »</a>
 </div>
-<a name="Base_Media" id="Base_Media"></a><div class="element ajax clickable class" href="../classes/Base_Media.html">
-<h1>Base_Media<a href="../classes/Base_Media.html">¶</a>
-</h1>
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
-<div class="details collapse"></div>
-<a href="../classes/Base_Media.html" class="more">« More »</a>
-</div>
-<a name="Base_Model" id="Base_Model"></a><div class="element ajax clickable class" href="../classes/Base_Model.html">
-<h1>Base_Model<a href="../classes/Base_Model.html">¶</a>
-</h1>
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
-<div class="details collapse"></div>
-<a href="../classes/Base_Model.html" class="more">« More »</a>
-</div>
 <a name="Controller_Core" id="Controller_Core"></a><div class="element ajax clickable class" href="../classes/Controller_Core.html">
 <h1>Controller_Core<a href="../classes/Controller_Core.html">¶</a>
 </h1>
@@ -224,15 +179,6 @@ with main goal make developing web applications more easily(as for me)</p>
 <div class="details collapse"></div>
 <a href="../classes/Controller_Users.html" class="more">« More »</a>
 </div>
-<a name="Date" id="Date"></a><div class="element ajax clickable class" href="../classes/Date.html">
-<h1>Date<a href="../classes/Date.html">¶</a>
-</h1>
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
-<div class="details collapse"></div>
-<a href="../classes/Date.html" class="more">« More »</a>
-</div>
 <a name="Error" id="Error"></a><div class="element ajax clickable class" href="../classes/Error.html">
 <h1>Error<a href="../classes/Error.html">¶</a>
 </h1>
@@ -241,24 +187,6 @@ Attemp to create module with classes for Kohana framework,
 with main goal make developing web applications more easily(as for me)</p>
 <div class="details collapse"></div>
 <a href="../classes/Error.html" class="more">« More »</a>
-</div>
-<a name="Media" id="Media"></a><div class="element ajax clickable class" href="../classes/Media.html">
-<h1>Media<a href="../classes/Media.html">¶</a>
-</h1>
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
-<div class="details collapse"></div>
-<a href="../classes/Media.html" class="more">« More »</a>
-</div>
-<a name="Model" id="Model"></a><div class="element ajax clickable class" href="../classes/Model.html">
-<h1>Model<a href="../classes/Model.html">¶</a>
-</h1>
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
-<div class="details collapse"></div>
-<a href="../classes/Model.html" class="more">« More »</a>
 </div>
 <a name="Pretty_Form" id="Pretty_Form"></a><div class="element ajax clickable class" href="../classes/Pretty_Form.html">
 <h1>Pretty_Form<a href="../classes/Pretty_Form.html">¶</a>
@@ -278,13 +206,88 @@ with main goal make developing web applications more easily(as for me)</p>
 <div class="details collapse"></div>
 <a href="../classes/Singleton.html" class="more">« More »</a>
 </div>
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/Kohana-my-base.html">Kohana-my-base</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/Kohana-my-base.database.html">database</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="Base_Model" id="Base_Model"></a><div class="element ajax clickable class" href="../classes/Base_Model.html">
+<h1>Base_Model<a href="../classes/Base_Model.html">¶</a>
+</h1>
+<p class="short_description">Class to work with db queries easily</p>
+<div class="details collapse"></div>
+<a href="../classes/Base_Model.html" class="more">« More »</a>
+</div>
+<a name="Model" id="Model"></a><div class="element ajax clickable class" href="../classes/Model.html">
+<h1>Model<a href="../classes/Model.html">¶</a>
+</h1>
+<p class="short_description">Helper class to work with Base_Model</p>
+<div class="details collapse"></div>
+<a href="../classes/Model.html" class="more">« More »</a>
+</div>
+</div>
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/Kohana-my-base.html">Kohana-my-base</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/Kohana-my-base.extra.html">extra</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="Base_Date" id="Base_Date"></a><div class="element ajax clickable class" href="../classes/Base_Date.html">
+<h1>Base_Date<a href="../classes/Base_Date.html">¶</a>
+</h1>
+<p class="short_description">Class wich adds some extra functions to Date class in Kohana</p>
+<div class="details collapse"></div>
+<a href="../classes/Base_Date.html" class="more">« More »</a>
+</div>
+<a name="Date" id="Date"></a><div class="element ajax clickable class" href="../classes/Date.html">
+<h1>Date<a href="../classes/Date.html">¶</a>
+</h1>
+<p class="short_description">Date class just to make easy call of Base_Date functions</p>
+<div class="details collapse"></div>
+<a href="../classes/Date.html" class="more">« More »</a>
+</div>
+</div>
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/Kohana-my-base.html">Kohana-my-base</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/Kohana-my-base.template.html">template</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="Base_Media" id="Base_Media"></a><div class="element ajax clickable class" href="../classes/Base_Media.html">
+<h1>Base_Media<a href="../classes/Base_Media.html">¶</a>
+</h1>
+<p class="short_description">Class to add javascripts and CSS to the main template</p>
+<div class="details collapse"></div>
+<a href="../classes/Base_Media.html" class="more">« More »</a>
+</div>
+<a name="Media" id="Media"></a><div class="element ajax clickable class" href="../classes/Media.html">
+<h1>Media<a href="../classes/Media.html">¶</a>
+</h1>
+<p class="short_description">Class just to make easy call Base_Media functions</p>
+<div class="details collapse"></div>
+<a href="../classes/Media.html" class="more">« More »</a>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-09-03T21:39:40+03:00.<br></footer></div>
+            generated on 2012-09-04T13:52:27+03:00.<br></footer></div>
 </div>
 </body>
 </html>
