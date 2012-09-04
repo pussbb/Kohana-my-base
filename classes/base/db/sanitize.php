@@ -1,16 +1,16 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Kohana-my-base
- * Attemp to create module with classes for Kohana framework,
- * with main goal make developing web applications more easily(as for me)
+ * Class to clean values in query
+ * and convert them to type of the database table column type
  *
  * @package Kohana-my-base
- * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
+ * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
- * @version 0.1.2 
+ * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
+ * @category database
+ * @subpackage database
  */
-
 class Base_Db_Sanitize {
 
     /**

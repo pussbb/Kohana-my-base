@@ -8,6 +8,7 @@
  * @version 0.1.2 
  * @link https://github.com/pussbb/Kohana-my-base
  * @category access
+ * @subpackage access
  */
 
 class Base_ACL extends Singleton{

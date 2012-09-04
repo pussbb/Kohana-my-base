@@ -8,6 +8,7 @@
  * @version 0.1.2 
  * @link https://github.com/pussbb/Kohana-my-base
  * @category access
+ * @subpackage access
  */
 
 class Base_Auth extends Singleton {
@@ -51,14 +52,16 @@ class Base_Auth extends Singleton {
 
     /**
      * checks if user has role
+     *
      * <code>
-     * <?php
+     *
      *      Auth::has_role(Model_Access_Role::ROLE_ADMIN);
      *      //or
      *      Auth::instance()->has_role(Model_Access_Role::ROLE_ADMIN);
-     * ?>
+     *
      * </code>
-     * @param $user_role @see Model_Access_Role constants
+     * @param $user_role
+     * @see Model_Access_Role constants
      * @return bool
      */
     public function has_role($user_role)

@@ -244,9 +244,15 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @ignore
+     * dynamically append variable to object
+     *
+     * <code>
+     * $model = new Model();
+     * $model->login = 'user';
+     * </code>
      * @param $name
      * @param $value
+     * @access public
      */
     public function __set($name, $value)
     {
@@ -254,10 +260,17 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @ignore
+     * get value of dynamically appended variable
+     *
+     * <code>
+     * $model = new Model();
+     * $model->login = 'user';
+     * echo $model->login; // will output user
+     * </code>
      * @param $name
      * @return mixed
      * @throws Kohana_Exception
+     * @access public
      */
     public function __get($name)
     {
@@ -268,9 +281,11 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @ignore
+     * checks if dynamically appended variable exists
+     *
      * @param $name
      * @return bool
+     * @access public
      */
     public function __isset($name)
     {
@@ -278,8 +293,15 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @ignore
+     * removes dynamically appended variable
+     *
+     * <code>
+     * $model = new Model();
+     * $model->login = 'user';
+     * unset($model->login); //here
+     * </code>
      * @param $name
+     * @access public
      */
     public function __unset($name)
     {
@@ -287,7 +309,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @ignore
+     * calls functions for Base_Model or DB clases in Kohana
      * @param $name
      * @param $arguments
      * @return mixed
@@ -301,11 +323,18 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * adds availability to call some functions as static
+     *
+     * <code>
+     *  Model::destroy($id);
+     *  Model::exists($params);
+     * </code>
      * @ignore
      * @static
      * @param $name
      * @param $arguments
      * @return mixed
+     * @access public
      */
     public static function __callStatic($name, $arguments)
     {
@@ -325,8 +354,14 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * 
+     * returns last query string
+     *
+     * <code>
+     *  $model = Model_User::find($id);
+     *  echo (string) $model; // returns SELECT * FROM ...
+     * </code>
      * @return null|string
+     * @access public
      */
     public function __toString()
     {
@@ -337,6 +372,18 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * returns assoc array of dynamically append variable
+     *
+     * <code>
+     *  $model = Model_User::find($id);
+     *  var_dump((array)$model);
+     *  //print
+     * array(
+     *   'login' => 'bla',
+     *   'email' => 'email@site.com',
+     *   ....
+     * )
+     * </code>
      * @return array|null
      */
     public function __toArray()
@@ -345,6 +392,21 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * find record in database table by condition
+     *
+     * <code>
+     *  //if we need to find by primary key
+     *  $model = Model_User::find($some_value);
+     *  // complex condition
+     *  $model = Model_User::find(array(
+     *    'login' => 'bla',
+     *    ....
+     *  ));
+     *  //get values
+     *  echo $model->login;// output 'bla'
+     * </code>
+     *
+     * if row was not found Exception will be called
      * @static
      * @param $filter
      * @param null $cache
@@ -367,6 +429,29 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * find a collections of rows in database table
+     *
+     * <code>
+     *  // complex condition only
+     *  $model = Model_User::find_all(array(
+     *    'login' => 'bla',
+     *    ....
+     * ));
+     * </code>
+     *
+     * to get records
+     * <code>
+     *  $records = $model->records;
+     * </code>
+     * each item in array it's a object of certain module
+     * so you can do everything.
+     * e.g. delete
+     *<code>
+     * foreach($model->records as $_model)
+     * {
+     *  $_model->destroy();//can be everything from Base_Model
+     * }
+     *</code>
      * @static
      * @param array $filter
      * @param null $limit
@@ -384,9 +469,10 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * returns array with table columns SQL query
      * @static
      * @param null $table
-     * @return mixed
+     * @return array
      */
     public static function table_columns($table = NULL)
     {
@@ -407,8 +493,24 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * execute commands wich get as array
+     * e.g.
+     * <code>
+     * $m = Model_User::find_all(array(
+     *    'limit' => 2, //will set limit
+     * ));
+     * </code>
+     * <ul>
+     *  <li>limit - sets limit for query</li>
+     *  <li>offset - sets offset for query</li>
+     *  <li> total_count - sets to execute another one query to count all records
+     *    in table with the same conditions from previous query ignoring limit
+     *    and offset. Result of this query will be set to $count variable of this class
+     *  </li>
+     * </ul>
      * @param $key
      * @param $value
+     * @access private
      */
     private function system_filters($key, $value)
     {
@@ -431,7 +533,39 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @param $filter
+     * Helper function to create WHERE clause
+     *
+     * what for to rewrite?
+     * <ul>
+     *   <li>this function build more safe where condition for queries</li>
+     *   <li>any field that are not describe in table ( see table_columns()) will be ignored</li>
+     *   <li>each type for field will be cleaned and convert to their type in database </li>
+     *   <li>do not required setting values for fileds if you already have them in object. Just tell what field you need</li>
+     * </ul>
+     * can be changed in future, because supports only
+     * <ul>
+     *   <li> = comparison key ( WHERE `field` = `value`)</li>
+     *   <li> IN ( WHERE `field` IN (...))</li>
+     *   <li> DB expression ->e.g. WHERE `field` REGEXPR "..."</li>
+     * </ul>
+     * @todo add comperision key != for example
+     * filter options sets throw array assoc or not
+     * e.g. of not assoc array
+     * <code>
+     *   array('login', 'email');
+     * </code>
+     * in that case values will be get from current model object if they exists
+     * e.g. of assoc array
+     * <code>
+     *   array(
+     *       'login' => 'bla',
+     *       'email' => 'email@site.com',
+     *  );
+     * </code>
+     * Also values of fields can be array . In this case comparison key will be IN
+     * Also supports DB::expr as value
+     * @uses Database_Query_Builder_Where functions
+     * @param $filter array
      * @return Base_Model
      * @throws Kohana_Exception
      * @throws Exception
@@ -491,7 +625,14 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @param string $select_args
+     * set parameters for SELECT query
+     *
+     *
+     * @param string|array $select_args can be <ul>
+     *   <li>string - e.g. '*'</li>
+     *   <li> single array - e.g. array('id','user_id') first field name, second his alias name in sql -> `id` AS `user_id`</li>
+     *   <li> multidementional array - e.g. array( array('id','user_id'), array('login','user_login')...)</li>
+     * </ul>
      * @param null $limit
      * @param null $offset
      * @param null $cache
@@ -530,7 +671,17 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @param null $fields
+     * sets parameters for INSERT query
+     *
+     * $fields can be sets as array
+     * e.g. of not assoc array
+     * <code>
+     *   array('login', 'email');
+     * </code>
+     *
+     * if you call function save() all values for fields will be automatical get from object
+     * if they exists
+     * @param array|null $fields
      * @return Base_Model
      */
     public function insert($fields = NULL)
@@ -540,7 +691,9 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * sets parameters for UPDATE query
      * @return Base_Model
+     * @access public
      */
     public function update()
     {
@@ -549,8 +702,20 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * creates DELETE query object
+     *
+     * if $filter not specified will search by primary key
+     * usage example
+     * <code>
+     * $model->destroy() // if we already have object
+     * //or
+     * Model_User::destroy($id);
+     * //or
+     * Model_User::destroy(array('login' => 'bla', ....));
+     *</code>
      * @param null $filter
      * @return bool
+     * @access protected
      */
     protected function destroy($filter = NULL)
     {
@@ -561,7 +726,9 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * returns assoc array with all errors
      * @return array
+     * @access public
      */
     public function errors()
     {
@@ -569,8 +736,10 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @param $key
-     * @param $msg
+     * add error message to errors list
+     * @param $key string name of the field
+     * @param $msg string message
+     * @access public
      */
     public function add_error($key, $msg)
     {
@@ -578,12 +747,14 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @param null $filter
+     * checks if value exists by some condition
+     * @param array  $filter Base_Model filter method first parameter
      * @param int $limit
      * @param null $cache
      * @return bool
+     * @access protected
      */
-    protected function exists($filter = NULL, $limit = 1, $cache = NULL)
+    protected function exists($filter, $limit = 1, $cache = NULL)
     {
         $this->select('*', $limit, NULL, $cache);
         if (!$filter)
@@ -593,8 +764,10 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * gets properties and their values from some object
      * @param $obj
      * @return array
+     * @access private
      */
     private function get_private_properties($obj)
     {
@@ -610,6 +783,8 @@ class Base_Model extends Kohana_Model {
 
     /**
      *
+     * @access private
+     * @return void
      */
     private function prepare_for_query()
     {
@@ -633,6 +808,9 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * checks values of fields and convert to type of field
+     *
+     *
      * @param $key
      * @param $value
      * @return mixed
@@ -649,6 +827,21 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * simple function to validate data before save
+     *
+     * <code>
+     * $additional_rules = array(
+     *      'pswd_confirmation' => array(
+     *        'not_empty',
+     *        array('equals', array($this->pswd_confirmation, $this->password, 'password'))
+     *     ),
+     *   );
+     *   $this->validate($additional_rules);//check according rules
+     * </code>
+     *
+     * Creating rules simmilar to Kohana's Validation
+     * Also if some model has function rules() before saving data it will get from that function and validate data
+     *
      * @param array $rules
      * @param array $data
      * @return bool
@@ -684,7 +877,9 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * user function to make some operations before saving
      *
+     * @access protected
      */
     protected function before_save()
     {
@@ -692,6 +887,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * check if model has primary key
      * @return bool
      */
     public function new_record()
@@ -700,7 +896,9 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * returns all table fields without field type and if value preset in model
      * @return array
+     * @access private
      */
     private function table_fields()
     {
@@ -715,7 +913,10 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * function that execute query with user callback functions
+     *
      * @return bool
+     * @access public
      */
     public function save()
     {
@@ -738,6 +939,10 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * gets table columns
+     *
+     * if model has method columns
+     * sql query will not execute to get column name and it type
      * @return mixed
      */
     public function get_table_columns()
@@ -746,6 +951,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * returns type of query 'select', 'update' ...
      * @return string
      */
     private function query_type()
@@ -755,6 +961,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * low level function to execute query
      * @return bool
      */
     protected function exec()
@@ -771,8 +978,10 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * append data to object according type of query
      * @param $result
      * @return bool
+     * @access private
      */
     private function parse_responce($result)
     {
@@ -809,7 +1018,9 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * function to calculate total rows in database column
      * @return mixed
+     * @access private
      */
     private function auto_count_total()
     {
@@ -841,7 +1052,9 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     *
+     * user callback function wich calls after success executing query
+     * @access protected
+     * @return void
      */
     protected function after_save()
     {
@@ -849,7 +1062,9 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     *
+     * helper function to delete garbage after success query
+     * @access private
+     * @return void
      */
     private function clean()
     {
@@ -859,7 +1074,18 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * helper function to append data to the object
+     *
+     * <code>
+     * $params = array(
+     *    'login' => 'blabla'
+     *    ....
+     * )
+     * $model->update_params($params);
+     * echo $model->login;// output 'blabla'
+     * </code>
      * @param $array
+     * @access public
      */
     public function update_params($array)
     {
@@ -869,7 +1095,9 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * user function to define database table columns
      * @return array
+     * @access public
      */
     public function columns()
     {
@@ -877,6 +1105,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * user function to define validation rules
      * @return array
      */
     public function rules()
@@ -885,6 +1114,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * user function to define representative labels for table fields
      * @return array
      */
     public function labels()
@@ -893,6 +1123,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * returns last inserted id
      * @return null
      */
     public function last_inserted_id()
@@ -901,6 +1132,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * returns last executed query
      * @return null
      */
     public function last_query()
@@ -909,6 +1141,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * validate unique value required Validation object
      * @param $validation
      * @param $field
      */

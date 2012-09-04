@@ -13,6 +13,7 @@
  * @link https://github.com/pussbb/Kohana-my-base
  * @category access
  * @see Base_Auth
+ * @subpackage access
  */
 
 class Auth extends Base_Auth {
