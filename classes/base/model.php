@@ -579,7 +579,7 @@ class Base_Model extends Kohana_Model {
         if (!Arr::is_assoc($filter)) {
             $fields = array();
             foreach ($filter as $field) {
-                if (!array_key_exists($filed, $table_columns))
+                if (!array_key_exists($field, $table_columns))
                     continue;
                 $fields[$field] = $this->$field;
             }
