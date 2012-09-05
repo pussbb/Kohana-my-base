@@ -14,11 +14,13 @@
 class Base_Db_Validation {
 
     /**
+     * indicates if record is new
      * @var bool
      */
     private static $new_record = FALSE;
 
     /**
+     * checks if value is integer and if it suites to db type of column
      * @static
      * @param $key
      * @param $value
@@ -59,6 +61,7 @@ class Base_Db_Validation {
     }
 
     /**
+     * checks string and his max length
      * @static
      * @param $key
      * @param $value
@@ -82,6 +85,7 @@ class Base_Db_Validation {
     }
 
     /**
+     * general function to check all fields
      * @static
      * @param $model
      * @return bool

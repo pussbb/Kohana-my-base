@@ -1591,26 +1591,26 @@ and convert them to type of the database table column type]]></description>
       <error line="0" code="50007">No page-level DocBlock was found in file classes/base/acl.php</error>
     </parse_markers>
   </file>
-  <file path="classes/base/model.php" hash="8195b44e8728e8c86631f1bbbfe34b3b" package="Default">
-    <class final="false" abstract="false" namespace="global" line="20" package="Kohana-my-base\database">
-      <extends>\Kohana_Model</extends>
-      <name>Base_Model</name>
-      <full_name>\Base_Model</full_name>
-      <docblock line="3">
-        <description><![CDATA[Class to work with db queries easily]]></description>
-        <long-description><![CDATA[<pre><code>$m = new Model_User::find_all(array(
+  <file path="classes/base/model.php" hash="7219f71076f709f89e9d15c31c49d681" package="Kohana-my-base\database">
+    <docblock line="2">
+      <description><![CDATA[Class to work with db queries easily]]></description>
+      <long-description><![CDATA[<pre><code>$m = new Model_User::find_all(array(
    'login' => 'bla'
 ))
 </code></pre>]]></long-description>
-        <tag line="3" name="package" description="Kohana-my-base"/>
-        <tag line="3" name="copyright" description="2012 pussbb@gmail.com(alexnevpryaga@gmail.com)"/>
-        <tag line="3" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
-        <tag line="3" name="version" description="0.1.2"/>
-        <tag line="3" name="link" description="https://github.com/pussbb/Kohana-my-base" link="https://github.com/pussbb/Kohana-my-base"/>
-        <tag line="3" name="category" description="database"/>
-        <tag line="3" name="subpackage" description="database"/>
-      </docblock>
-      <constant namespace="global" line="169" package="Kohana-my-base\database">
+      <tag line="2" name="package" description="Kohana-my-base"/>
+      <tag line="2" name="copyright" description="2012 pussbb@gmail.com(alexnevpryaga@gmail.com)"/>
+      <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
+      <tag line="2" name="version" description="0.1.2"/>
+      <tag line="2" name="link" description="https://github.com/pussbb/Kohana-my-base" link="https://github.com/pussbb/Kohana-my-base"/>
+      <tag line="2" name="category" description="database"/>
+      <tag line="2" name="subpackage" description="database"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="global" line="20" package="Default">
+      <extends>\Kohana_Model</extends>
+      <name>Base_Model</name>
+      <full_name>\Base_Model</full_name>
+      <constant namespace="global" line="169" package="Default">
         <name>BELONGS_TO</name>
         <full_name>BELONGS_TO</full_name>
         <value><![CDATA[1]]></value>
@@ -1619,7 +1619,7 @@ and convert them to type of the database table column type]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </constant>
-      <constant namespace="global" line="173" package="Kohana-my-base\database">
+      <constant namespace="global" line="173" package="Default">
         <name>HAS_MANY</name>
         <full_name>HAS_MANY</full_name>
         <value><![CDATA[2]]></value>
@@ -1628,7 +1628,7 @@ and convert them to type of the database table column type]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </constant>
-      <constant namespace="global" line="177" package="Kohana-my-base\database">
+      <constant namespace="global" line="177" package="Default">
         <name>HAS_ONE</name>
         <full_name>HAS_ONE</full_name>
         <value><![CDATA[3]]></value>
@@ -1834,7 +1834,7 @@ to that variable</p>]]></long-description>
           <tag line="157" name="access" description="private"/>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="194" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="194" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
         <docblock line="179">
@@ -1860,7 +1860,7 @@ to that variable</p>]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="209" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="209" package="Default">
         <name>__destruct</name>
         <full_name>__destruct</full_name>
         <docblock line="205">
@@ -1872,7 +1872,7 @@ to that variable</p>]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="225" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="225" package="Default">
         <name>module_name</name>
         <full_name>module_name</full_name>
         <docblock line="216">
@@ -1893,7 +1893,7 @@ to that variable</p>]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="private" namespace="global" line="241" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="private" namespace="global" line="241" package="Default">
         <name>db_table_name</name>
         <full_name>db_table_name</full_name>
         <docblock line="232">
@@ -1914,7 +1914,7 @@ to that variable</p>]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="257" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="257" package="Default">
         <name>__set</name>
         <full_name>__set</full_name>
         <docblock line="246">
@@ -1937,7 +1937,7 @@ $model->login = 'user';
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="275" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="275" package="Default">
         <name>__get</name>
         <full_name>__get</full_name>
         <docblock line="262">
@@ -1961,7 +1961,7 @@ echo $model->login; // will output user
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="290" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="290" package="Default">
         <name>__isset</name>
         <full_name>__isset</full_name>
         <docblock line="283">
@@ -1979,7 +1979,7 @@ echo $model->login; // will output user
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="306" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="306" package="Default">
         <name>__unset</name>
         <full_name>__unset</full_name>
         <docblock line="295">
@@ -1997,7 +1997,7 @@ unset($model->login); //here
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="317" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="317" package="Default">
         <name>__call</name>
         <full_name>__call</full_name>
         <docblock line="311">
@@ -2020,7 +2020,7 @@ unset($model->login); //here
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="339" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="339" package="Default">
         <name>__callStatic</name>
         <full_name>__callStatic</full_name>
         <docblock line="325">
@@ -2048,7 +2048,7 @@ unset($model->login); //here
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="366" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="366" package="Default">
         <name>__toString</name>
         <full_name>__toString</full_name>
         <docblock line="356">
@@ -2063,7 +2063,7 @@ unset($model->login); //here
           <tag line="356" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="389" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="389" package="Default">
         <name>__toArray</name>
         <full_name>__toArray</full_name>
         <docblock line="374">
@@ -2083,7 +2083,7 @@ array(
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="416" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="416" package="Default">
         <name>find</name>
         <full_name>find</full_name>
         <docblock line="394">
@@ -2123,7 +2123,7 @@ array(
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="462" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="462" package="Default">
         <name>find_all</name>
         <full_name>find_all</full_name>
         <docblock line="431">
@@ -2187,7 +2187,7 @@ e.g. delete</p>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="477" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="477" package="Default">
         <name>table_columns</name>
         <full_name>table_columns</full_name>
         <docblock line="471">
@@ -2207,7 +2207,7 @@ e.g. delete</p>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="515" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="515" package="Default">
         <name>system_filters</name>
         <full_name>system_filters</full_name>
         <docblock line="495">
@@ -2241,7 +2241,7 @@ e.g.]]></description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="573" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="573" package="Default">
         <name>filter</name>
         <full_name>filter</full_name>
         <docblock line="535">
@@ -2283,7 +2283,7 @@ e.g.]]></description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="641" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="641" package="Default">
         <name>select</name>
         <full_name>select</full_name>
         <docblock line="627">
@@ -2327,7 +2327,7 @@ e.g.]]></description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="687" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="687" package="Default">
         <name>insert</name>
         <full_name>insert</full_name>
         <docblock line="673">
@@ -2354,7 +2354,7 @@ if they exists</p>]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="698" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="698" package="Default">
         <name>update</name>
         <full_name>update</full_name>
         <docblock line="693">
@@ -2366,7 +2366,7 @@ if they exists</p>]]></long-description>
           <tag line="693" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="720" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="720" package="Default">
         <name>destroy</name>
         <full_name>destroy</full_name>
         <docblock line="704">
@@ -2394,7 +2394,7 @@ Model_User::destroy(array('login' => 'bla', ....));
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="733" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="733" package="Default">
         <name>errors</name>
         <full_name>errors</full_name>
         <docblock line="728">
@@ -2406,7 +2406,7 @@ Model_User::destroy(array('login' => 'bla', ....));
           <tag line="728" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="744" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="744" package="Default">
         <name>add_error</name>
         <full_name>add_error</full_name>
         <docblock line="738">
@@ -2431,7 +2431,7 @@ Model_User::destroy(array('login' => 'bla', ....));
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="757" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="757" package="Default">
         <name>exists</name>
         <full_name>exists</full_name>
         <docblock line="749">
@@ -2467,7 +2467,7 @@ Model_User::destroy(array('login' => 'bla', ....));
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="772" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="772" package="Default">
         <name>get_private_properties</name>
         <full_name>get_private_properties</full_name>
         <docblock line="766">
@@ -2485,7 +2485,7 @@ Model_User::destroy(array('login' => 'bla', ....));
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="789" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="789" package="Default">
         <name>prepare_for_query</name>
         <full_name>prepare_for_query</full_name>
         <docblock line="784">
@@ -2497,7 +2497,7 @@ Model_User::destroy(array('login' => 'bla', ....));
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="818" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="818" package="Default">
         <name>sanitize</name>
         <full_name>sanitize</full_name>
         <docblock line="810">
@@ -2520,7 +2520,7 @@ Model_User::destroy(array('login' => 'bla', ....));
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="849" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="849" package="Default">
         <name>validate</name>
         <full_name>validate</full_name>
         <docblock line="829">
@@ -2557,7 +2557,7 @@ Also if some model has function rules() before saving data it will get from that
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="884" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="884" package="Default">
         <name>before_save</name>
         <full_name>before_save</full_name>
         <docblock line="879">
@@ -2566,7 +2566,7 @@ Also if some model has function rules() before saving data it will get from that
           <tag line="879" name="access" description="protected"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="893" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="893" package="Default">
         <name>new_record</name>
         <full_name>new_record</full_name>
         <docblock line="889">
@@ -2577,7 +2577,7 @@ Also if some model has function rules() before saving data it will get from that
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="903" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="903" package="Default">
         <name>table_fields</name>
         <full_name>table_fields</full_name>
         <docblock line="898">
@@ -2589,7 +2589,7 @@ Also if some model has function rules() before saving data it will get from that
           <tag line="898" name="access" description="private"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="921" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="921" package="Default">
         <name>save</name>
         <full_name>save</full_name>
         <docblock line="915">
@@ -2601,7 +2601,7 @@ Also if some model has function rules() before saving data it will get from that
           <tag line="915" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="948" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="948" package="Default">
         <name>get_table_columns</name>
         <full_name>get_table_columns</full_name>
         <docblock line="941">
@@ -2613,7 +2613,7 @@ sql query will not execute to get column name and it type</p>]]></long-descripti
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="957" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="957" package="Default">
         <name>query_type</name>
         <full_name>query_type</full_name>
         <docblock line="953">
@@ -2624,7 +2624,7 @@ sql query will not execute to get column name and it type</p>]]></long-descripti
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="967" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="967" package="Default">
         <name>exec</name>
         <full_name>exec</full_name>
         <docblock line="963">
@@ -2635,7 +2635,7 @@ sql query will not execute to get column name and it type</p>]]></long-descripti
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="986" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="986" package="Default">
         <name>parse_responce</name>
         <full_name>parse_responce</full_name>
         <docblock line="980">
@@ -2653,7 +2653,7 @@ sql query will not execute to get column name and it type</p>]]></long-descripti
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1025" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1025" package="Default">
         <name>auto_count_total</name>
         <full_name>auto_count_total</full_name>
         <docblock line="1020">
@@ -2665,7 +2665,7 @@ sql query will not execute to get column name and it type</p>]]></long-descripti
           <tag line="1020" name="access" description="private"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1059" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1059" package="Default">
         <name>after_save</name>
         <full_name>after_save</full_name>
         <docblock line="1054">
@@ -2677,7 +2677,7 @@ sql query will not execute to get column name and it type</p>]]></long-descripti
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1069" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1069" package="Default">
         <name>clean</name>
         <full_name>clean</full_name>
         <docblock line="1064">
@@ -2689,7 +2689,7 @@ sql query will not execute to get column name and it type</p>]]></long-descripti
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1090" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1090" package="Default">
         <name>update_params</name>
         <full_name>update_params</full_name>
         <docblock line="1076">
@@ -2710,7 +2710,7 @@ echo $model->login;// output 'blabla'
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1102" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1102" package="Default">
         <name>columns</name>
         <full_name>columns</full_name>
         <docblock line="1097">
@@ -2722,7 +2722,7 @@ echo $model->login;// output 'blabla'
           <tag line="1097" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1111" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1111" package="Default">
         <name>rules</name>
         <full_name>rules</full_name>
         <docblock line="1107">
@@ -2733,7 +2733,7 @@ echo $model->login;// output 'blabla'
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1120" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1120" package="Default">
         <name>labels</name>
         <full_name>labels</full_name>
         <docblock line="1116">
@@ -2744,7 +2744,7 @@ echo $model->login;// output 'blabla'
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1129" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1129" package="Default">
         <name>last_inserted_id</name>
         <full_name>last_inserted_id</full_name>
         <docblock line="1125">
@@ -2755,7 +2755,7 @@ echo $model->login;// output 'blabla'
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1138" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1138" package="Default">
         <name>last_query</name>
         <full_name>last_query</full_name>
         <docblock line="1134">
@@ -2766,7 +2766,7 @@ echo $model->login;// output 'blabla'
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1148" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1148" package="Default">
         <name>unique_validation</name>
         <full_name>unique_validation</full_name>
         <docblock line="1143">
@@ -2788,7 +2788,7 @@ echo $model->login;// output 'blabla'
       </method>
     </class>
     <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file classes/base/model.php</error>
+      <error line="20" code="50000">No DocBlock was found for \Base_Model</error>
       <error line="784" code="50012">No short description for method prepare_for_query()</error>
     </parse_markers>
   </file>

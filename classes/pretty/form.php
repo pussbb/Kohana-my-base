@@ -1,39 +1,47 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Kohana-my-base
- * Attemp to create module with classes for Kohana framework,
- * with main goal make developing web applications more easily(as for me)
+ * Helper class to render forms
+ *
+ * extends Kohana_Form but
+ * adds availability to create much more complicated forms
+ * using template system
  *
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2 
  * @link https://github.com/pussbb/Kohana-my-base
+ * @category html
+ * @subpackage html
  */
 
 class Pretty_Form extends Singleton
 {
 
     /**
+     * array with errors
      * @var null
      */
     private $errors = NULL;
     /**
+     * array with values
      * @var array|null
      */
     private $data = NULL;
     /**
+     * defines where need to find views
      * @var null|string
      */
     public $view_path = NULL;
     /**
+     * sets template name
      * @var null
      */
     private $template = NULL;
 
     /**
-     *
+     * init settings
      */
     public function __construct()
     {
@@ -59,6 +67,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * gives availability to call methods from this jbject and Kohana_Form
      * @param $name
      * @param $arguments
      * @return mixed
@@ -73,6 +82,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * sets the tempalte name
      * @param $name
      */
     public function set_template($name)
@@ -81,6 +91,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * opens html form
      * @param $action
      * @param null $attr
      * @return string
@@ -91,6 +102,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * form legend
      * @param $text
      * @return string
      */
@@ -100,6 +112,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * close form
      * @return string
      */
     public function close()
@@ -108,6 +121,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * html input
      * @param $params
      * @return string
      */
@@ -134,6 +148,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * inserts id to form element if label was defined
      * @param $name
      * @param $attr
      * @return array
@@ -145,10 +160,11 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * returns action buttons (Submit, Reset ...)
      * @param $params
      * @return string
      */
-    public function form_action($params)
+    public function form_actions($params)
     {
         if ($this->template) {
             $template = Arr::get($params, 'template', 'form_actions');
@@ -166,6 +182,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * html select
      * @param $params
      * @return string
      */
@@ -190,6 +207,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * html input type password
      * @param $params
      * @return string
      */
@@ -202,6 +220,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * html form checkbox
      * @param $params
      * @return string
      */
@@ -226,6 +245,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * get value for form element if exists
      * @param $params
      * @return mixed
      */
@@ -238,6 +258,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * returns error if exists
      * @param $params
      * @return mixed
      */
@@ -252,6 +273,7 @@ class Pretty_Form extends Singleton
     }
 
     /**
+     * renders template
      * @param $name
      * @param $params
      * @return mixed

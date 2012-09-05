@@ -11,7 +11,7 @@
  * @link https://github.com/pussbb/Kohana-my-base
  * @category access
  * @subpackage access
- * @see  Base_Acl
+ * @see  Base_ACL
  */
 
-class ACL extends Base_Acl{}
+class ACL extends Base_ACL{}

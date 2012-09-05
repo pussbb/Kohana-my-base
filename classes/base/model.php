@@ -548,7 +548,6 @@ class Base_Model extends Kohana_Model {
      *   <li> IN ( WHERE `field` IN (...))</li>
      *   <li> DB expression ->e.g. WHERE `field` REGEXPR "..."</li>
      * </ul>
-     * @todo add comperision key != for example
      * filter options sets throw array assoc or not
      * e.g. of not assoc array
      * <code>
@@ -564,6 +563,8 @@ class Base_Model extends Kohana_Model {
      * </code>
      * Also values of fields can be array . In this case comparison key will be IN
      * Also supports DB::expr as value
+     *
+     * @todo add comperision key != for example
      * @uses Database_Query_Builder_Where functions
      * @param $filter array
      * @return Base_Model

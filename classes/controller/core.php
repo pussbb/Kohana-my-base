@@ -15,36 +15,41 @@
 
 class Controller_Core extends Controller_Template {
 
-    // base template file
-    // but remember, in parent class it will become View object
-    /**
+     /**
+     * base template file
+     *
+     * but remember, in parent class it will become View object
      * @var string
      */
     public $template = 'layout/template';
-    // for children it's recommended to change this prefixes
-    // if needed IN CONSTRUCTOR (to not damage changes in parent class)
+
     /**
+     * for children it's recommended to change this prefixes
+     * if needed IN CONSTRUCTOR (to not damage changes in parent class)
      * @var array
      */
     protected $resource_prefixes = array('');
-    // check Acl access (true means do the check)
+
     /**
+     *  check Acl access (true means do the check)
      * @var bool
      */
     protected $check_access = TRUE;
     /**
+     * Kohana View object
      * @var null
      */
     public $view = null;
-    // contains null or array with [directory/]controller/action parts
-    // gathered in string in after() method
+
     /**
      * @var null
      */
     private $filename = null;
 
     /**
-     *
+     * sets language by default
+     * @return void
+     * @access protected
      */
     protected function set_language()
     {
@@ -56,7 +61,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
-     *
+     * init base template and this
      */
     public function before()
     {
@@ -72,6 +77,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * sets current file name wich will be render
      * @param $filename
      */
     public function set_filename($filename)
@@ -82,6 +88,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * check access for current request
      * @throws HTTP_Exception_403
      */
     protected function check_access()
@@ -113,6 +120,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * set keywords for page
      * @param $keywords
      */
     public function set_keywords($keywords)
@@ -121,6 +129,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * sets description for current page
      * @param $description
      */
     public function set_description($description)
@@ -129,6 +138,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * sets favicon
      * @param $icon_name
      */
     public function set_favicon($icon_name)
@@ -137,6 +147,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * sets title for current page
      * @param $title
      */
     public function set_title($title)
@@ -152,6 +163,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * returns request in array(dir, controller, action)
      * @return array
      */
     public function current_request_structure()
@@ -163,8 +175,8 @@ class Controller_Core extends Controller_Template {
                 ));
     }
 
-    // registeres the needed resources from config file
     /**
+     * registeres the needed resources from config file
      * @param $identifier
      */
     public function register_resources($identifier)
@@ -173,6 +185,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * append css file
      * @param $name
      * @param string $media
      */
@@ -182,6 +195,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * append javascript file
      * @param $name
      */
     public function register_js_file($name)
@@ -190,6 +204,14 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * try to append css and js for file
+     *
+     * <code>
+     *  $this->register_media('welcome.index');
+     * </code>
+     * will append
+     * ./css/welcome.index.css
+     * ./js/welcome.index.js
      * @param $file_name
      * @param null $media
      * @param bool $check_file
@@ -199,10 +221,12 @@ class Controller_Core extends Controller_Template {
         Media::append(array('css', 'js'), $file_name, $media, $check_file);
     }
 
-    // tries to add default files
-    // in format directory/controller.action.js
-    // and directory/controller.action.css
     /**
+     * register css and js for current request structure
+     *
+     * tries to add default files
+     * in format directory/controller.action.js
+     * and directory/controller.action.css
      * @param array $request_struct
      */
     private function register_resources_by_default($request_struct = array())
@@ -213,10 +237,11 @@ class Controller_Core extends Controller_Template {
             $directory = array_shift($structure) . '/';
         }
         $file_name = $directory . implode('.', $structure);
-        Media::append(array('css', 'js'), $file_name, NULL, TRUE);
+        $this->register_media($file_name, NULL, TRUE);
     }
 
     /**
+     * checks if request method is DELETE
      * @return bool
      */
     public function is_delete()
@@ -225,6 +250,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * checks if request is ajax
      * @return mixed
      */
     public function is_ajax()
@@ -233,6 +259,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * renders only view file name without template
      * @param string $file
      * @param array $view_data
      * @return mixed
@@ -250,7 +277,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
-     *
+     * renders nothing
      */
     public function render_nothing()
     {
@@ -258,6 +285,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * redirects to url without rendering anything
      * @param $url
      * @param int $code
      */
@@ -269,6 +297,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * send response as json response
      * @param $data
      */
     public function render_json($data)
@@ -281,9 +310,10 @@ class Controller_Core extends Controller_Template {
                 ->body($json);
     }
 
-    // checks if auto_render already false, it means
-    // you tried to render several views in one action
     /**
+     * checks if auto_render already false,
+     *
+     * it means you tried to render several views in one action
      * @throws Kohana_Exception
      */
     protected function check_auto_render()
@@ -293,7 +323,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
-     *
+     * after
      */
     public function after()
     {
@@ -321,6 +351,7 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
+     * append to view and tempalate dynamically append variable from $this
      * @param $view
      */
     private function append_dynamic_properties($view)
@@ -339,9 +370,8 @@ class Controller_Core extends Controller_Template {
         }
     }
 
-    // finally set the view filename (not possible to change back)
     /**
-     *
+     * finally set the view filename (not possible to change back)
      */
     protected function set_view_filename()
     {

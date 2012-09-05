@@ -14,6 +14,7 @@
 class Base_Db_Sanitize {
 
     /**
+     * convert value to int
      * @static
      * @param $value
      * @return array|int
@@ -26,6 +27,7 @@ class Base_Db_Sanitize {
     }
 
     /**
+     * convert to string and clean from xss injections
      * @static
      * @param $value
      * @return mixed|string
@@ -33,11 +35,12 @@ class Base_Db_Sanitize {
     public static function string($value)
     {
         if (!Arr::is_array($value))
-            return Base_Db_Sanitize::xss_clean($value);
+            return (string)Base_Db_Sanitize::xss_clean($value);
         return aray_map('Base_Db_Sanitize::xss_clean', $value);
     }
 
     /**
+     * checks if class has function for field type
      * @static
      * @param $type
      * @param $value
@@ -51,6 +54,7 @@ class Base_Db_Sanitize {
     }
 
     /**
+     * general function cleans from xss injections
      * @static
      * @param $data
      * @return mixed|string
