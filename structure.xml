@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project version="2.0.0a10" title="">
+<project version="2.0.0a10" title="&lt;b&gt;Kohana&lt;/b&gt;&lt;i&gt;My&lt;/i&gt; Base">
   <file path="classes/singleton.php" hash="183a22e4d2c5284b396472681f3ffb95" package="Default">
     <class final="false" abstract="false" namespace="global" line="14" package="Kohana-my-base">
       <extends/>
@@ -276,7 +276,7 @@ with main goal make developing web applications more easily(as for me)]]></descr
       <error line="79" code="50010">No DocBlock was found for method action_settings()</error>
     </parse_markers>
   </file>
-  <file path="classes/controller/core.php" hash="cc79f0d1e1029f445a7b0523adda3e49" package="Default">
+  <file path="classes/controller/core.php" hash="fcc773cf55bc5943cc727711b09d83f8" package="Default">
     <class final="false" abstract="false" namespace="global" line="16" package="Kohana-my-base\template">
       <extends>\Controller_Template</extends>
       <name>Controller_Core</name>
@@ -292,431 +292,415 @@ with main goal make developing web applications more easily(as for me)]]></descr
         <tag line="3" name="category" description="template"/>
         <tag line="3" name="subpackage" description="template"/>
       </docblock>
-      <property final="false" static="false" visibility="public" line="23" namespace="global" package="Default">
+      <property final="false" static="false" visibility="public" line="24" namespace="global" package="Default">
         <name>$template</name>
         <default><![CDATA['layout/template']]></default>
-        <docblock line="20">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="20" name="var" description="" type="string">
+        <docblock line="18">
+          <description><![CDATA[base template file]]></description>
+          <long-description><![CDATA[<p>but remember, in parent class it will become View object</p>]]></long-description>
+          <tag line="18" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="29" namespace="global" package="Default">
+      <property final="false" static="false" visibility="protected" line="31" namespace="global" package="Default">
         <name>$resource_prefixes</name>
         <default><![CDATA[array('')]]></default>
         <docblock line="26">
-          <description><![CDATA[]]></description>
+          <description><![CDATA[for children it's recommended to change this prefixes
+if needed IN CONSTRUCTOR (to not damage changes in parent class)]]></description>
           <long-description><![CDATA[]]></long-description>
           <tag line="26" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="34" namespace="global" package="Default">
+      <property final="false" static="false" visibility="protected" line="37" namespace="global" package="Default">
         <name>$check_access</name>
         <default><![CDATA[TRUE]]></default>
-        <docblock line="31">
-          <description><![CDATA[]]></description>
+        <docblock line="33">
+          <description><![CDATA[check Acl access (true means do the check)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="31" name="var" description="" type="bool">
+          <tag line="33" name="var" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="38" namespace="global" package="Default">
+      <property final="false" static="false" visibility="public" line="42" namespace="global" package="Default">
         <name>$view</name>
         <default><![CDATA[null]]></default>
-        <docblock line="35">
-          <description><![CDATA[]]></description>
+        <docblock line="38">
+          <description><![CDATA[Kohana View object]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="35" name="var" description="" type="null">
+          <tag line="38" name="var" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="private" line="44" namespace="global" package="Default">
+      <property final="false" static="false" visibility="private" line="47" namespace="global" package="Default">
         <name>$filename</name>
         <default><![CDATA[null]]></default>
-        <docblock line="41">
+        <docblock line="44">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="41" name="var" description="" type="null">
+          <tag line="44" name="var" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="49" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="54" package="Kohana-my-base\template">
         <name>set_language</name>
         <full_name>set_language</full_name>
-        <docblock line="46">
-          <description><![CDATA[]]></description>
+        <docblock line="49">
+          <description><![CDATA[sets language by default]]></description>
           <long-description><![CDATA[]]></long-description>
+          <tag line="49" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+          <tag line="49" name="access" description="protected"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="61" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="66" package="Kohana-my-base\template">
         <name>before</name>
         <full_name>before</full_name>
-        <docblock line="58">
-          <description><![CDATA[]]></description>
+        <docblock line="63">
+          <description><![CDATA[init base template and this]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="77" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="83" package="Kohana-my-base\template">
         <name>set_filename</name>
         <full_name>set_filename</full_name>
-        <docblock line="74">
-          <description><![CDATA[]]></description>
+        <docblock line="79">
+          <description><![CDATA[sets current file name wich will be render]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="74" name="param" description="" type="" variable="$filename"/>
+          <tag line="79" name="param" description="" type="" variable="$filename"/>
         </docblock>
-        <argument line="77">
+        <argument line="83">
           <name>$filename</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="87" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="94" package="Kohana-my-base\template">
         <name>check_access</name>
         <full_name>check_access</full_name>
-        <docblock line="84">
-          <description><![CDATA[]]></description>
+        <docblock line="90">
+          <description><![CDATA[check access for current request]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="84" name="throws" description="" type="\HTTP_Exception_403">
+          <tag line="90" name="throws" description="" type="\HTTP_Exception_403">
             <type by_reference="false">\HTTP_Exception_403</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="118" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="126" package="Kohana-my-base\template">
         <name>set_keywords</name>
         <full_name>set_keywords</full_name>
-        <docblock line="115">
-          <description><![CDATA[]]></description>
+        <docblock line="122">
+          <description><![CDATA[set keywords for page]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="115" name="param" description="" type="" variable="$keywords"/>
+          <tag line="122" name="param" description="" type="" variable="$keywords"/>
         </docblock>
-        <argument line="118">
+        <argument line="126">
           <name>$keywords</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="126" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="135" package="Kohana-my-base\template">
         <name>set_description</name>
         <full_name>set_description</full_name>
-        <docblock line="123">
-          <description><![CDATA[]]></description>
+        <docblock line="131">
+          <description><![CDATA[sets description for current page]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="123" name="param" description="" type="" variable="$description"/>
+          <tag line="131" name="param" description="" type="" variable="$description"/>
         </docblock>
-        <argument line="126">
+        <argument line="135">
           <name>$description</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="134" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="144" package="Kohana-my-base\template">
         <name>set_favicon</name>
         <full_name>set_favicon</full_name>
-        <docblock line="131">
-          <description><![CDATA[]]></description>
+        <docblock line="140">
+          <description><![CDATA[sets favicon]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="131" name="param" description="" type="" variable="$icon_name"/>
+          <tag line="140" name="param" description="" type="" variable="$icon_name"/>
         </docblock>
-        <argument line="134">
+        <argument line="144">
           <name>$icon_name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="142" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="153" package="Kohana-my-base\template">
         <name>set_title</name>
         <full_name>set_title</full_name>
-        <docblock line="139">
-          <description><![CDATA[]]></description>
+        <docblock line="149">
+          <description><![CDATA[sets title for current page]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="139" name="param" description="" type="" variable="$title"/>
+          <tag line="149" name="param" description="" type="" variable="$title"/>
         </docblock>
-        <argument line="142">
+        <argument line="153">
           <name>$title</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="157" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="169" package="Kohana-my-base\template">
         <name>current_request_structure</name>
         <full_name>current_request_structure</full_name>
-        <docblock line="154">
-          <description><![CDATA[]]></description>
+        <docblock line="165">
+          <description><![CDATA[returns request in array(dir, controller, action)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="154" name="return" description="" type="array">
+          <tag line="165" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="170" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="182" package="Kohana-my-base\template">
         <name>register_resources</name>
         <full_name>register_resources</full_name>
-        <docblock line="167">
-          <description><![CDATA[]]></description>
+        <docblock line="178">
+          <description><![CDATA[registeres the needed resources from config file]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="167" name="param" description="" type="" variable="$identifier"/>
+          <tag line="178" name="param" description="" type="" variable="$identifier"/>
         </docblock>
-        <argument line="170">
+        <argument line="182">
           <name>$identifier</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="179" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="192" package="Kohana-my-base\template">
         <name>register_css_file</name>
         <full_name>register_css_file</full_name>
-        <docblock line="175">
-          <description><![CDATA[]]></description>
+        <docblock line="187">
+          <description><![CDATA[append css file]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="175" name="param" description="" type="" variable="$name"/>
-          <tag line="175" name="param" description="" type="string" variable="$media">
+          <tag line="187" name="param" description="" type="" variable="$name"/>
+          <tag line="187" name="param" description="" type="string" variable="$media">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="179">
+        <argument line="192">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="179">
+        <argument line="192">
           <name>$media</name>
           <default><![CDATA['']]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="187" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="201" package="Kohana-my-base\template">
         <name>register_js_file</name>
         <full_name>register_js_file</full_name>
-        <docblock line="184">
-          <description><![CDATA[]]></description>
+        <docblock line="197">
+          <description><![CDATA[append javascript file]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="184" name="param" description="" type="" variable="$name"/>
+          <tag line="197" name="param" description="" type="" variable="$name"/>
         </docblock>
-        <argument line="187">
+        <argument line="201">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="197" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="219" package="Kohana-my-base\template">
         <name>register_media</name>
         <full_name>register_media</full_name>
-        <docblock line="192">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="192" name="param" description="" type="" variable="$file_name"/>
-          <tag line="192" name="param" description="" type="null" variable="$media">
+        <docblock line="206">
+          <description><![CDATA[try to append css and js for file]]></description>
+          <long-description><![CDATA[<pre><code> $this->register_media('welcome.index');
+</code></pre>
+
+<p>will append
+./css/welcome.index.css
+./js/welcome.index.js</p>]]></long-description>
+          <tag line="206" name="param" description="" type="" variable="$file_name"/>
+          <tag line="206" name="param" description="" type="null" variable="$media">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="192" name="param" description="" type="bool" variable="$check_file">
+          <tag line="206" name="param" description="" type="bool" variable="$check_file">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="197">
+        <argument line="219">
           <name>$file_name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="197">
+        <argument line="219">
           <name>$media</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
-        <argument line="197">
+        <argument line="219">
           <name>$check_file</name>
           <default><![CDATA[FALSE]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="208" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="232" package="Kohana-my-base\template">
         <name>register_resources_by_default</name>
         <full_name>register_resources_by_default</full_name>
-        <docblock line="205">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="205" name="param" description="" type="array" variable="$request_struct">
+        <docblock line="224">
+          <description><![CDATA[register css and js for current request structure]]></description>
+          <long-description><![CDATA[<p>tries to add default files
+in format directory/controller.action.js
+and directory/controller.action.css</p>]]></long-description>
+          <tag line="224" name="param" description="" type="array" variable="$request_struct">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="208">
+        <argument line="232">
           <name>$request_struct</name>
           <default><![CDATA[array()]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="222" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="247" package="Kohana-my-base\template">
         <name>is_delete</name>
         <full_name>is_delete</full_name>
-        <docblock line="219">
-          <description><![CDATA[]]></description>
+        <docblock line="243">
+          <description><![CDATA[checks if request method is DELETE]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="219" name="return" description="" type="bool">
+          <tag line="243" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="230" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="256" package="Kohana-my-base\template">
         <name>is_ajax</name>
         <full_name>is_ajax</full_name>
-        <docblock line="227">
-          <description><![CDATA[]]></description>
+        <docblock line="252">
+          <description><![CDATA[checks if request is ajax]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="227" name="return" description="" type="mixed">
+          <tag line="252" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="240" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="267" package="Kohana-my-base\template">
         <name>render_partial</name>
         <full_name>render_partial</full_name>
-        <docblock line="235">
-          <description><![CDATA[]]></description>
+        <docblock line="261">
+          <description><![CDATA[renders only view file name without template]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="235" name="param" description="" type="string" variable="$file">
+          <tag line="261" name="param" description="" type="string" variable="$file">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="235" name="param" description="" type="array" variable="$view_data">
+          <tag line="261" name="param" description="" type="array" variable="$view_data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="235" name="return" description="" type="mixed">
+          <tag line="261" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="240">
+        <argument line="267">
           <name>$file</name>
           <default><![CDATA['']]></default>
           <type/>
         </argument>
-        <argument line="240">
+        <argument line="267">
           <name>$view_data</name>
           <default><![CDATA[array()]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="255" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="282" package="Kohana-my-base\template">
         <name>render_nothing</name>
         <full_name>render_nothing</full_name>
-        <docblock line="252">
-          <description><![CDATA[]]></description>
+        <docblock line="279">
+          <description><![CDATA[renders nothing]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="264" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="292" package="Kohana-my-base\template">
         <name>redirect</name>
         <full_name>redirect</full_name>
-        <docblock line="260">
-          <description><![CDATA[]]></description>
+        <docblock line="287">
+          <description><![CDATA[redirects to url without rendering anything]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="260" name="param" description="" type="" variable="$url"/>
-          <tag line="260" name="param" description="" type="int" variable="$code">
+          <tag line="287" name="param" description="" type="" variable="$url"/>
+          <tag line="287" name="param" description="" type="int" variable="$code">
             <type by_reference="false">int</type>
           </tag>
         </docblock>
-        <argument line="264">
+        <argument line="292">
           <name>$url</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="264">
+        <argument line="292">
           <name>$code</name>
           <default><![CDATA[302]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="274" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="303" package="Kohana-my-base\template">
         <name>render_json</name>
         <full_name>render_json</full_name>
-        <docblock line="271">
-          <description><![CDATA[]]></description>
+        <docblock line="299">
+          <description><![CDATA[send response as json response]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="271" name="param" description="" type="" variable="$data"/>
+          <tag line="299" name="param" description="" type="" variable="$data"/>
         </docblock>
-        <argument line="274">
+        <argument line="303">
           <name>$data</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="289" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="319" package="Kohana-my-base\template">
         <name>check_auto_render</name>
         <full_name>check_auto_render</full_name>
-        <docblock line="286">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="286" name="throws" description="" type="\Kohana_Exception">
+        <docblock line="313">
+          <description><![CDATA[checks if auto_render already false,]]></description>
+          <long-description><![CDATA[<p>it means you tried to render several views in one action</p>]]></long-description>
+          <tag line="313" name="throws" description="" type="\Kohana_Exception">
             <type by_reference="false">\Kohana_Exception</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="298" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="328" package="Kohana-my-base\template">
         <name>after</name>
         <full_name>after</full_name>
-        <docblock line="295">
-          <description><![CDATA[]]></description>
+        <docblock line="325">
+          <description><![CDATA[after]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="326" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="357" package="Kohana-my-base\template">
         <name>append_dynamic_properties</name>
         <full_name>append_dynamic_properties</full_name>
-        <docblock line="323">
-          <description><![CDATA[]]></description>
+        <docblock line="353">
+          <description><![CDATA[append to view and tempalate dynamically append variable from $this]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="323" name="param" description="" type="" variable="$view"/>
+          <tag line="353" name="param" description="" type="" variable="$view"/>
         </docblock>
-        <argument line="326">
+        <argument line="357">
           <name>$view</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="346" package="Kohana-my-base\template">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="376" package="Kohana-my-base\template">
         <name>set_view_filename</name>
         <full_name>set_view_filename</full_name>
-        <docblock line="343">
-          <description><![CDATA[]]></description>
+        <docblock line="373">
+          <description><![CDATA[finally set the view filename (not possible to change back)]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </method>
     </class>
     <parse_markers>
       <error line="0" code="50007">No page-level DocBlock was found in file classes/controller/core.php</error>
-      <critical line="20" code="50019">No short description for property $template</critical>
-      <critical line="26" code="50019">No short description for property $resource_prefixes</critical>
-      <critical line="31" code="50019">No short description for property $check_access</critical>
-      <critical line="35" code="50019">No short description for property $view</critical>
-      <critical line="41" code="50019">No short description for property $filename</critical>
-      <error line="46" code="50012">No short description for method set_language()</error>
-      <error line="58" code="50012">No short description for method before()</error>
-      <error line="74" code="50012">No short description for method set_filename()</error>
-      <error line="84" code="50012">No short description for method check_access()</error>
-      <error line="115" code="50012">No short description for method set_keywords()</error>
-      <error line="123" code="50012">No short description for method set_description()</error>
-      <error line="131" code="50012">No short description for method set_favicon()</error>
-      <error line="139" code="50012">No short description for method set_title()</error>
-      <error line="154" code="50012">No short description for method current_request_structure()</error>
-      <error line="167" code="50012">No short description for method register_resources()</error>
-      <error line="175" code="50012">No short description for method register_css_file()</error>
-      <error line="184" code="50012">No short description for method register_js_file()</error>
-      <error line="192" code="50012">No short description for method register_media()</error>
-      <error line="205" code="50012">No short description for method register_resources_by_default()</error>
-      <error line="219" code="50012">No short description for method is_delete()</error>
-      <error line="227" code="50012">No short description for method is_ajax()</error>
-      <error line="235" code="50012">No short description for method render_partial()</error>
-      <error line="252" code="50012">No short description for method render_nothing()</error>
-      <error line="260" code="50012">No short description for method redirect()</error>
-      <error line="271" code="50012">No short description for method render_json()</error>
-      <error line="286" code="50012">No short description for method check_auto_render()</error>
-      <error line="295" code="50012">No short description for method after()</error>
-      <error line="323" code="50012">No short description for method append_dynamic_properties()</error>
-      <error line="343" code="50012">No short description for method set_view_filename()</error>
+      <critical line="44" code="50019">No short description for property $filename</critical>
     </parse_markers>
   </file>
   <file path="classes/base/media.php" hash="c228e57db89e829beb4c23e3364a11eb" package="Default">
@@ -1311,7 +1295,7 @@ or if javascript file does not exists</p>]]></long-description>
       <error line="0" code="50007">No page-level DocBlock was found in file classes/base/auth.php</error>
     </parse_markers>
   </file>
-  <file path="classes/base/db/validation.php" hash="7317e5193c9fd58a7f9b9b24fa0a1c4e" package="Default">
+  <file path="classes/base/db/validation.php" hash="f1e1da5ce8c567dc2d2a63c90e955ae2" package="Default">
     <class final="false" abstract="false" namespace="global" line="14" package="Kohana-my-base\database">
       <extends/>
       <name>Base_Db_Validation</name>
@@ -1327,90 +1311,90 @@ or if javascript file does not exists</p>]]></long-description>
         <tag line="3" name="category" description="database"/>
         <tag line="3" name="subpackage" description="database"/>
       </docblock>
-      <property final="false" static="true" visibility="private" line="19" namespace="global" package="Default">
+      <property final="false" static="true" visibility="private" line="20" namespace="global" package="Default">
         <name>$new_record</name>
         <default><![CDATA[FALSE]]></default>
         <docblock line="16">
-          <description><![CDATA[]]></description>
+          <description><![CDATA[indicates if record is new]]></description>
           <long-description><![CDATA[]]></long-description>
           <tag line="16" name="var" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="28" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="30" package="Kohana-my-base\database">
         <name>int</name>
         <full_name>int</full_name>
-        <docblock line="21">
-          <description><![CDATA[]]></description>
+        <docblock line="22">
+          <description><![CDATA[checks if value is integer and if it suites to db type of column]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="21" name="static" description=""/>
-          <tag line="21" name="param" description="" type="" variable="$key"/>
-          <tag line="21" name="param" description="" type="" variable="$value"/>
-          <tag line="21" name="param" description="" type="" variable="$rules"/>
-          <tag line="21" name="return" description="" type="null">
+          <tag line="22" name="static" description=""/>
+          <tag line="22" name="param" description="" type="" variable="$key"/>
+          <tag line="22" name="param" description="" type="" variable="$value"/>
+          <tag line="22" name="param" description="" type="" variable="$rules"/>
+          <tag line="22" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="28">
+        <argument line="30">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="28">
+        <argument line="30">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="28">
+        <argument line="30">
           <name>$rules</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="68" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="71" package="Kohana-my-base\database">
         <name>string</name>
         <full_name>string</full_name>
-        <docblock line="61">
-          <description><![CDATA[]]></description>
+        <docblock line="63">
+          <description><![CDATA[checks string and his max length]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="61" name="static" description=""/>
-          <tag line="61" name="param" description="" type="" variable="$key"/>
-          <tag line="61" name="param" description="" type="" variable="$value"/>
-          <tag line="61" name="param" description="" type="" variable="$rules"/>
-          <tag line="61" name="return" description="" type="null">
+          <tag line="63" name="static" description=""/>
+          <tag line="63" name="param" description="" type="" variable="$key"/>
+          <tag line="63" name="param" description="" type="" variable="$value"/>
+          <tag line="63" name="param" description="" type="" variable="$rules"/>
+          <tag line="63" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="68">
+        <argument line="71">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="68">
+        <argument line="71">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="68">
+        <argument line="71">
           <name>$rules</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="89" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="93" package="Kohana-my-base\database">
         <name>check</name>
         <full_name>check</full_name>
-        <docblock line="84">
-          <description><![CDATA[]]></description>
+        <docblock line="87">
+          <description><![CDATA[general function to check all fields]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="84" name="static" description=""/>
-          <tag line="84" name="param" description="" type="" variable="$model"/>
-          <tag line="84" name="return" description="" type="bool">
+          <tag line="87" name="static" description=""/>
+          <tag line="87" name="param" description="" type="" variable="$model"/>
+          <tag line="87" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="89">
+        <argument line="93">
           <name>$model</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -1419,13 +1403,9 @@ or if javascript file does not exists</p>]]></long-description>
     </class>
     <parse_markers>
       <error line="0" code="50007">No page-level DocBlock was found in file classes/base/db/validation.php</error>
-      <critical line="16" code="50019">No short description for property $new_record</critical>
-      <error line="21" code="50012">No short description for method int()</error>
-      <error line="61" code="50012">No short description for method string()</error>
-      <error line="84" code="50012">No short description for method check()</error>
     </parse_markers>
   </file>
-  <file path="classes/base/db/sanitize.php" hash="37dc85b8fbb272a10f0ebdf7b53f9857" package="Default">
+  <file path="classes/base/db/sanitize.php" hash="646ec8d398761b885d11eb002b0f870c" package="Default">
     <class final="false" abstract="false" namespace="global" line="14" package="Kohana-my-base\database">
       <extends/>
       <name>Base_Db_Sanitize</name>
@@ -1442,11 +1422,11 @@ and convert them to type of the database table column type]]></description>
         <tag line="2" name="category" description="database"/>
         <tag line="2" name="subpackage" description="database"/>
       </docblock>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="21" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="22" package="Kohana-my-base\database">
         <name>int</name>
         <full_name>int</full_name>
         <docblock line="16">
-          <description><![CDATA[]]></description>
+          <description><![CDATA[convert value to int]]></description>
           <long-description><![CDATA[]]></long-description>
           <tag line="16" name="static" description=""/>
           <tag line="16" name="param" description="" type="" variable="$value"/>
@@ -1455,69 +1435,69 @@ and convert them to type of the database table column type]]></description>
             <type by_reference="false">int</type>
           </tag>
         </docblock>
-        <argument line="21">
+        <argument line="22">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="33" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="35" package="Kohana-my-base\database">
         <name>string</name>
         <full_name>string</full_name>
-        <docblock line="28">
-          <description><![CDATA[]]></description>
+        <docblock line="29">
+          <description><![CDATA[convert to string and clean from xss injections]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="28" name="static" description=""/>
-          <tag line="28" name="param" description="" type="" variable="$value"/>
-          <tag line="28" name="return" description="" type="mixed|string">
+          <tag line="29" name="static" description=""/>
+          <tag line="29" name="param" description="" type="" variable="$value"/>
+          <tag line="29" name="return" description="" type="mixed|string">
             <type by_reference="false">mixed</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="33">
+        <argument line="35">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="46" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="49" package="Kohana-my-base\database">
         <name>value</name>
         <full_name>value</full_name>
-        <docblock line="40">
-          <description><![CDATA[]]></description>
+        <docblock line="42">
+          <description><![CDATA[checks if class has function for field type]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="40" name="static" description=""/>
-          <tag line="40" name="param" description="" type="" variable="$type"/>
-          <tag line="40" name="param" description="" type="" variable="$value"/>
-          <tag line="40" name="return" description="" type="mixed">
+          <tag line="42" name="static" description=""/>
+          <tag line="42" name="param" description="" type="" variable="$type"/>
+          <tag line="42" name="param" description="" type="" variable="$value"/>
+          <tag line="42" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="46">
+        <argument line="49">
           <name>$type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="46">
+        <argument line="49">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="58" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="62" package="Kohana-my-base\database">
         <name>xss_clean</name>
         <full_name>xss_clean</full_name>
-        <docblock line="53">
-          <description><![CDATA[]]></description>
+        <docblock line="56">
+          <description><![CDATA[general function cleans from xss injections]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="53" name="static" description=""/>
-          <tag line="53" name="param" description="" type="" variable="$data"/>
-          <tag line="53" name="return" description="" type="mixed|string">
+          <tag line="56" name="static" description=""/>
+          <tag line="56" name="param" description="" type="" variable="$data"/>
+          <tag line="56" name="return" description="" type="mixed|string">
             <type by_reference="false">mixed</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="58">
+        <argument line="62">
           <name>$data</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -1526,10 +1506,6 @@ and convert them to type of the database table column type]]></description>
     </class>
     <parse_markers>
       <error line="0" code="50007">No page-level DocBlock was found in file classes/base/db/sanitize.php</error>
-      <error line="16" code="50012">No short description for method int()</error>
-      <error line="28" code="50012">No short description for method string()</error>
-      <error line="40" code="50012">No short description for method value()</error>
-      <error line="53" code="50012">No short description for method xss_clean()</error>
     </parse_markers>
   </file>
   <file path="classes/base/acl.php" hash="503083e019a9cc71dd486b9d2551eb3a" package="Default">
@@ -1591,26 +1567,26 @@ and convert them to type of the database table column type]]></description>
       <error line="0" code="50007">No page-level DocBlock was found in file classes/base/acl.php</error>
     </parse_markers>
   </file>
-  <file path="classes/base/model.php" hash="7219f71076f709f89e9d15c31c49d681" package="Kohana-my-base\database">
-    <docblock line="2">
-      <description><![CDATA[Class to work with db queries easily]]></description>
-      <long-description><![CDATA[<pre><code>$m = new Model_User::find_all(array(
-   'login' => 'bla'
-))
-</code></pre>]]></long-description>
-      <tag line="2" name="package" description="Kohana-my-base"/>
-      <tag line="2" name="copyright" description="2012 pussbb@gmail.com(alexnevpryaga@gmail.com)"/>
-      <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
-      <tag line="2" name="version" description="0.1.2"/>
-      <tag line="2" name="link" description="https://github.com/pussbb/Kohana-my-base" link="https://github.com/pussbb/Kohana-my-base"/>
-      <tag line="2" name="category" description="database"/>
-      <tag line="2" name="subpackage" description="database"/>
-    </docblock>
-    <class final="false" abstract="false" namespace="global" line="20" package="Default">
+  <file path="classes/base/model.php" hash="dfb93c12b924a5cf193696e779128708" package="Default">
+    <class final="false" abstract="false" namespace="global" line="20" package="Kohana-my-base\database">
       <extends>\Kohana_Model</extends>
       <name>Base_Model</name>
       <full_name>\Base_Model</full_name>
-      <constant namespace="global" line="169" package="Default">
+      <docblock line="3">
+        <description><![CDATA[Class to work with db queries easily]]></description>
+        <long-description><![CDATA[<pre><code>$m = new Model_User::find_all(array(
+   'login' => 'bla'
+))
+</code></pre>]]></long-description>
+        <tag line="3" name="package" description="Kohana-my-base"/>
+        <tag line="3" name="copyright" description="2012 pussbb@gmail.com(alexnevpryaga@gmail.com)"/>
+        <tag line="3" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
+        <tag line="3" name="version" description="0.1.2"/>
+        <tag line="3" name="link" description="https://github.com/pussbb/Kohana-my-base" link="https://github.com/pussbb/Kohana-my-base"/>
+        <tag line="3" name="category" description="database"/>
+        <tag line="3" name="subpackage" description="database"/>
+      </docblock>
+      <constant namespace="global" line="169" package="Kohana-my-base\database">
         <name>BELONGS_TO</name>
         <full_name>BELONGS_TO</full_name>
         <value><![CDATA[1]]></value>
@@ -1619,7 +1595,7 @@ and convert them to type of the database table column type]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </constant>
-      <constant namespace="global" line="173" package="Default">
+      <constant namespace="global" line="173" package="Kohana-my-base\database">
         <name>HAS_MANY</name>
         <full_name>HAS_MANY</full_name>
         <value><![CDATA[2]]></value>
@@ -1628,7 +1604,7 @@ and convert them to type of the database table column type]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </constant>
-      <constant namespace="global" line="177" package="Default">
+      <constant namespace="global" line="177" package="Kohana-my-base\database">
         <name>HAS_ONE</name>
         <full_name>HAS_ONE</full_name>
         <value><![CDATA[3]]></value>
@@ -1834,7 +1810,7 @@ to that variable</p>]]></long-description>
           <tag line="157" name="access" description="private"/>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="194" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="194" package="Kohana-my-base\database">
         <name>__construct</name>
         <full_name>__construct</full_name>
         <docblock line="179">
@@ -1860,7 +1836,7 @@ to that variable</p>]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="209" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="209" package="Kohana-my-base\database">
         <name>__destruct</name>
         <full_name>__destruct</full_name>
         <docblock line="205">
@@ -1872,7 +1848,7 @@ to that variable</p>]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="225" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="225" package="Kohana-my-base\database">
         <name>module_name</name>
         <full_name>module_name</full_name>
         <docblock line="216">
@@ -1893,7 +1869,7 @@ to that variable</p>]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="private" namespace="global" line="241" package="Default">
+      <method final="false" abstract="false" static="true" visibility="private" namespace="global" line="241" package="Kohana-my-base\database">
         <name>db_table_name</name>
         <full_name>db_table_name</full_name>
         <docblock line="232">
@@ -1914,7 +1890,7 @@ to that variable</p>]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="257" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="257" package="Kohana-my-base\database">
         <name>__set</name>
         <full_name>__set</full_name>
         <docblock line="246">
@@ -1937,7 +1913,7 @@ $model->login = 'user';
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="275" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="275" package="Kohana-my-base\database">
         <name>__get</name>
         <full_name>__get</full_name>
         <docblock line="262">
@@ -1961,7 +1937,7 @@ echo $model->login; // will output user
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="290" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="290" package="Kohana-my-base\database">
         <name>__isset</name>
         <full_name>__isset</full_name>
         <docblock line="283">
@@ -1979,7 +1955,7 @@ echo $model->login; // will output user
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="306" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="306" package="Kohana-my-base\database">
         <name>__unset</name>
         <full_name>__unset</full_name>
         <docblock line="295">
@@ -1997,7 +1973,7 @@ unset($model->login); //here
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="317" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="317" package="Kohana-my-base\database">
         <name>__call</name>
         <full_name>__call</full_name>
         <docblock line="311">
@@ -2020,7 +1996,7 @@ unset($model->login); //here
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="339" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="339" package="Kohana-my-base\database">
         <name>__callStatic</name>
         <full_name>__callStatic</full_name>
         <docblock line="325">
@@ -2048,7 +2024,7 @@ unset($model->login); //here
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="366" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="366" package="Kohana-my-base\database">
         <name>__toString</name>
         <full_name>__toString</full_name>
         <docblock line="356">
@@ -2063,7 +2039,7 @@ unset($model->login); //here
           <tag line="356" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="389" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="389" package="Kohana-my-base\database">
         <name>__toArray</name>
         <full_name>__toArray</full_name>
         <docblock line="374">
@@ -2083,7 +2059,7 @@ array(
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="416" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="416" package="Kohana-my-base\database">
         <name>find</name>
         <full_name>find</full_name>
         <docblock line="394">
@@ -2123,7 +2099,7 @@ array(
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="462" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="462" package="Kohana-my-base\database">
         <name>find_all</name>
         <full_name>find_all</full_name>
         <docblock line="431">
@@ -2187,7 +2163,7 @@ e.g. delete</p>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="477" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="477" package="Kohana-my-base\database">
         <name>table_columns</name>
         <full_name>table_columns</full_name>
         <docblock line="471">
@@ -2207,7 +2183,7 @@ e.g. delete</p>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="515" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="515" package="Kohana-my-base\database">
         <name>system_filters</name>
         <full_name>system_filters</full_name>
         <docblock line="495">
@@ -2241,7 +2217,7 @@ e.g.]]></description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="573" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="574" package="Kohana-my-base\database">
         <name>filter</name>
         <full_name>filter</full_name>
         <docblock line="535">
@@ -2261,8 +2237,26 @@ e.g.]]></description>
   <li> = comparison key ( WHERE `field` = `value`)</li>
   <li> IN ( WHERE `field` IN (...))</li>
   <li> DB expression ->e.g. WHERE `field` REGEXPR "..."</li>
-</ul>]]></long-description>
-          <tag line="535" name="todo" description="add comperision key != for example&#10;filter options sets throw array assoc or not&#10;e.g. of not assoc array&#10;&lt;code&gt;&#10;array('login', 'email');&#10;&lt;/code&gt;&#10;in that case values will be get from current model object if they exists&#10;e.g. of assoc array&#10;&lt;code&gt;&#10;array(&#10;'login' =&gt; 'bla',&#10;'email' =&gt; 'email@site.com',&#10;);&#10;&lt;/code&gt;&#10;Also values of fields can be array . In this case comparison key will be IN&#10;Also supports DB::expr as value"/>
+</ul>
+
+<p>filter options sets throw array assoc or not
+e.g. of not assoc array</p>
+
+<pre><code>  array('login', 'email');
+</code></pre>
+
+<p>in that case values will be get from current model object if they exists
+e.g. of assoc array</p>
+
+<pre><code>  array(
+      'login' => 'bla',
+      'email' => 'email@site.com',
+ );
+</code></pre>
+
+<p>Also values of fields can be array . In this case comparison key will be IN
+Also supports DB::expr as value</p>]]></long-description>
+          <tag line="535" name="todo" description="add comperision key != for example"/>
           <tag line="535" name="uses" description="\global\Database_Query_Builder_Where" refers="\global\Database_Query_Builder_Where"/>
           <tag line="535" name="param" description="array" type="\$filter" variable="$filter">
             <type by_reference="false">\$filter</type>
@@ -2277,60 +2271,60 @@ e.g.]]></description>
             <type by_reference="false">\Exception</type>
           </tag>
         </docblock>
-        <argument line="573">
+        <argument line="574">
           <name>$filter</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="641" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="642" package="Kohana-my-base\database">
         <name>select</name>
         <full_name>select</full_name>
-        <docblock line="627">
+        <docblock line="628">
           <description><![CDATA[set parameters for SELECT query]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="627" name="param" description="can be &lt;ul&gt; &lt;li&gt;string - e.g. '*'&lt;/li&gt; &lt;li&gt; single array - e.g. array('id','user_id') first field name, second his alias name in sql -&gt; `id` AS `user_id`&lt;/li&gt; &lt;li&gt; multidementional array - e.g. array( array('id','user_id'), array('login','user_login')...)&lt;/li&gt; &lt;/ul&gt;" type="string|array" variable="$select_args">
+          <tag line="628" name="param" description="can be &lt;ul&gt; &lt;li&gt;string - e.g. '*'&lt;/li&gt; &lt;li&gt; single array - e.g. array('id','user_id') first field name, second his alias name in sql -&gt; `id` AS `user_id`&lt;/li&gt; &lt;li&gt; multidementional array - e.g. array( array('id','user_id'), array('login','user_login')...)&lt;/li&gt; &lt;/ul&gt;" type="string|array" variable="$select_args">
             <type by_reference="false">string</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="627" name="param" description="" type="null" variable="$limit">
+          <tag line="628" name="param" description="" type="null" variable="$limit">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="627" name="param" description="" type="null" variable="$offset">
+          <tag line="628" name="param" description="" type="null" variable="$offset">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="627" name="param" description="" type="null" variable="$cache">
+          <tag line="628" name="param" description="" type="null" variable="$cache">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="627" name="return" description="" type="\Base_Model">
+          <tag line="628" name="return" description="" type="\Base_Model">
             <type by_reference="false">\Base_Model</type>
           </tag>
         </docblock>
-        <argument line="641">
+        <argument line="642">
           <name>$select_args</name>
           <default><![CDATA['*']]></default>
           <type/>
         </argument>
-        <argument line="641">
+        <argument line="642">
           <name>$limit</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
-        <argument line="641">
+        <argument line="642">
           <name>$offset</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
-        <argument line="641">
+        <argument line="642">
           <name>$cache</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="687" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="688" package="Kohana-my-base\database">
         <name>insert</name>
         <full_name>insert</full_name>
-        <docblock line="673">
+        <docblock line="674">
           <description><![CDATA[sets parameters for INSERT query]]></description>
           <long-description><![CDATA[<p>$fields can be sets as array
 e.g. of not assoc array</p>
@@ -2340,36 +2334,36 @@ e.g. of not assoc array</p>
 
 <p>if you call function save() all values for fields will be automatical get from object
 if they exists</p>]]></long-description>
-          <tag line="673" name="param" description="" type="array|null" variable="$fields">
+          <tag line="674" name="param" description="" type="array|null" variable="$fields">
             <type by_reference="false">array</type>
             <type by_reference="false">null</type>
           </tag>
-          <tag line="673" name="return" description="" type="\Base_Model">
+          <tag line="674" name="return" description="" type="\Base_Model">
             <type by_reference="false">\Base_Model</type>
           </tag>
         </docblock>
-        <argument line="687">
+        <argument line="688">
           <name>$fields</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="698" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="699" package="Kohana-my-base\database">
         <name>update</name>
         <full_name>update</full_name>
-        <docblock line="693">
+        <docblock line="694">
           <description><![CDATA[sets parameters for UPDATE query]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="693" name="return" description="" type="\Base_Model">
+          <tag line="694" name="return" description="" type="\Base_Model">
             <type by_reference="false">\Base_Model</type>
           </tag>
-          <tag line="693" name="access" description="public"/>
+          <tag line="694" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="720" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="721" package="Kohana-my-base\database">
         <name>destroy</name>
         <full_name>destroy</full_name>
-        <docblock line="704">
+        <docblock line="705">
           <description><![CDATA[creates DELETE query object]]></description>
           <long-description><![CDATA[<p>if $filter not specified will search by primary key
 usage example</p>
@@ -2380,150 +2374,150 @@ Model_User::destroy($id);
 //or
 Model_User::destroy(array('login' => 'bla', ....));
 </code></pre>]]></long-description>
-          <tag line="704" name="param" description="" type="null" variable="$filter">
+          <tag line="705" name="param" description="" type="null" variable="$filter">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="704" name="return" description="" type="bool">
+          <tag line="705" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="704" name="access" description="protected"/>
+          <tag line="705" name="access" description="protected"/>
         </docblock>
-        <argument line="720">
+        <argument line="721">
           <name>$filter</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="733" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="734" package="Kohana-my-base\database">
         <name>errors</name>
         <full_name>errors</full_name>
-        <docblock line="728">
+        <docblock line="729">
           <description><![CDATA[returns assoc array with all errors]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="728" name="return" description="" type="array">
+          <tag line="729" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="728" name="access" description="public"/>
+          <tag line="729" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="744" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="745" package="Kohana-my-base\database">
         <name>add_error</name>
         <full_name>add_error</full_name>
-        <docblock line="738">
+        <docblock line="739">
           <description><![CDATA[add error message to errors list]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="738" name="param" description="string name of the field" type="\$key" variable="$key">
+          <tag line="739" name="param" description="string name of the field" type="\$key" variable="$key">
             <type by_reference="false">\$key</type>
           </tag>
-          <tag line="738" name="param" description="string message" type="\$msg" variable="$msg">
+          <tag line="739" name="param" description="string message" type="\$msg" variable="$msg">
             <type by_reference="false">\$msg</type>
           </tag>
-          <tag line="738" name="access" description="public"/>
+          <tag line="739" name="access" description="public"/>
         </docblock>
-        <argument line="744">
+        <argument line="745">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="744">
+        <argument line="745">
           <name>$msg</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="757" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="758" package="Kohana-my-base\database">
         <name>exists</name>
         <full_name>exists</full_name>
-        <docblock line="749">
+        <docblock line="750">
           <description><![CDATA[checks if value exists by some condition]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="749" name="param" description="Base_Model filter method first parameter" type="array" variable="$filter">
+          <tag line="750" name="param" description="Base_Model filter method first parameter" type="array" variable="$filter">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="749" name="param" description="" type="int" variable="$limit">
+          <tag line="750" name="param" description="" type="int" variable="$limit">
             <type by_reference="false">int</type>
           </tag>
-          <tag line="749" name="param" description="" type="null" variable="$cache">
+          <tag line="750" name="param" description="" type="null" variable="$cache">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="749" name="return" description="" type="bool">
+          <tag line="750" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="749" name="access" description="protected"/>
+          <tag line="750" name="access" description="protected"/>
         </docblock>
-        <argument line="757">
+        <argument line="758">
           <name>$filter</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="757">
+        <argument line="758">
           <name>$limit</name>
           <default><![CDATA[1]]></default>
           <type/>
         </argument>
-        <argument line="757">
+        <argument line="758">
           <name>$cache</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="772" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="773" package="Kohana-my-base\database">
         <name>get_private_properties</name>
         <full_name>get_private_properties</full_name>
-        <docblock line="766">
+        <docblock line="767">
           <description><![CDATA[gets properties and their values from some object]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="766" name="param" description="" type="" variable="$obj"/>
-          <tag line="766" name="return" description="" type="array">
+          <tag line="767" name="param" description="" type="" variable="$obj"/>
+          <tag line="767" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="766" name="access" description="private"/>
+          <tag line="767" name="access" description="private"/>
         </docblock>
-        <argument line="772">
+        <argument line="773">
           <name>$obj</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="789" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="790" package="Kohana-my-base\database">
         <name>prepare_for_query</name>
         <full_name>prepare_for_query</full_name>
-        <docblock line="784">
+        <docblock line="785">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="784" name="access" description="private"/>
-          <tag line="784" name="return" description="" type="void">
+          <tag line="785" name="access" description="private"/>
+          <tag line="785" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="818" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="819" package="Kohana-my-base\database">
         <name>sanitize</name>
         <full_name>sanitize</full_name>
-        <docblock line="810">
+        <docblock line="811">
           <description><![CDATA[checks values of fields and convert to type of field]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="810" name="param" description="" type="" variable="$key"/>
-          <tag line="810" name="param" description="" type="" variable="$value"/>
-          <tag line="810" name="return" description="" type="mixed">
+          <tag line="811" name="param" description="" type="" variable="$key"/>
+          <tag line="811" name="param" description="" type="" variable="$value"/>
+          <tag line="811" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="818">
+        <argument line="819">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="818">
+        <argument line="819">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="849" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="850" package="Kohana-my-base\database">
         <name>validate</name>
         <full_name>validate</full_name>
-        <docblock line="829">
+        <docblock line="830">
           <description><![CDATA[simple function to validate data before save]]></description>
           <long-description><![CDATA[<pre><code>$additional_rules = array(
      'pswd_confirmation' => array(
@@ -2536,163 +2530,163 @@ Model_User::destroy(array('login' => 'bla', ....));
 
 <p>Creating rules simmilar to Kohana's Validation
 Also if some model has function rules() before saving data it will get from that function and validate data</p>]]></long-description>
-          <tag line="829" name="param" description="" type="array" variable="$rules">
+          <tag line="830" name="param" description="" type="array" variable="$rules">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="829" name="param" description="" type="array" variable="$data">
+          <tag line="830" name="param" description="" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="829" name="return" description="" type="bool">
+          <tag line="830" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="849">
+        <argument line="850">
           <name>$rules</name>
           <default><![CDATA[NULL]]></default>
           <type>array</type>
         </argument>
-        <argument line="849">
+        <argument line="850">
           <name>$data</name>
           <default><![CDATA[NULL]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="884" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="885" package="Kohana-my-base\database">
         <name>before_save</name>
         <full_name>before_save</full_name>
-        <docblock line="879">
+        <docblock line="880">
           <description><![CDATA[user function to make some operations before saving]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="879" name="access" description="protected"/>
+          <tag line="880" name="access" description="protected"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="893" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="894" package="Kohana-my-base\database">
         <name>new_record</name>
         <full_name>new_record</full_name>
-        <docblock line="889">
+        <docblock line="890">
           <description><![CDATA[check if model has primary key]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="889" name="return" description="" type="bool">
+          <tag line="890" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="903" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="904" package="Kohana-my-base\database">
         <name>table_fields</name>
         <full_name>table_fields</full_name>
-        <docblock line="898">
+        <docblock line="899">
           <description><![CDATA[returns all table fields without field type and if value preset in model]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="898" name="return" description="" type="array">
+          <tag line="899" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="898" name="access" description="private"/>
+          <tag line="899" name="access" description="private"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="921" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="922" package="Kohana-my-base\database">
         <name>save</name>
         <full_name>save</full_name>
-        <docblock line="915">
+        <docblock line="916">
           <description><![CDATA[function that execute query with user callback functions]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="915" name="return" description="" type="bool">
+          <tag line="916" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="915" name="access" description="public"/>
+          <tag line="916" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="948" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="949" package="Kohana-my-base\database">
         <name>get_table_columns</name>
         <full_name>get_table_columns</full_name>
-        <docblock line="941">
+        <docblock line="942">
           <description><![CDATA[gets table columns]]></description>
           <long-description><![CDATA[<p>if model has method columns
 sql query will not execute to get column name and it type</p>]]></long-description>
-          <tag line="941" name="return" description="" type="mixed">
+          <tag line="942" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="957" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="958" package="Kohana-my-base\database">
         <name>query_type</name>
         <full_name>query_type</full_name>
-        <docblock line="953">
+        <docblock line="954">
           <description><![CDATA[returns type of query 'select', 'update' .]]></description>
           <long-description><![CDATA[<p>..</p>]]></long-description>
-          <tag line="953" name="return" description="" type="string">
+          <tag line="954" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="967" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="968" package="Kohana-my-base\database">
         <name>exec</name>
         <full_name>exec</full_name>
-        <docblock line="963">
+        <docblock line="964">
           <description><![CDATA[low level function to execute query]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="963" name="return" description="" type="bool">
+          <tag line="964" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="986" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="987" package="Kohana-my-base\database">
         <name>parse_responce</name>
         <full_name>parse_responce</full_name>
-        <docblock line="980">
+        <docblock line="981">
           <description><![CDATA[append data to object according type of query]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="980" name="param" description="" type="" variable="$result"/>
-          <tag line="980" name="return" description="" type="bool">
+          <tag line="981" name="param" description="" type="" variable="$result"/>
+          <tag line="981" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="980" name="access" description="private"/>
+          <tag line="981" name="access" description="private"/>
         </docblock>
-        <argument line="986">
+        <argument line="987">
           <name>$result</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1025" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1026" package="Kohana-my-base\database">
         <name>auto_count_total</name>
         <full_name>auto_count_total</full_name>
-        <docblock line="1020">
+        <docblock line="1021">
           <description><![CDATA[function to calculate total rows in database column]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1020" name="return" description="" type="mixed">
+          <tag line="1021" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="1020" name="access" description="private"/>
+          <tag line="1021" name="access" description="private"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1059" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1060" package="Kohana-my-base\database">
         <name>after_save</name>
         <full_name>after_save</full_name>
-        <docblock line="1054">
+        <docblock line="1055">
           <description><![CDATA[user callback function wich calls after success executing query]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1054" name="access" description="protected"/>
-          <tag line="1054" name="return" description="" type="void">
+          <tag line="1055" name="access" description="protected"/>
+          <tag line="1055" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1069" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1070" package="Kohana-my-base\database">
         <name>clean</name>
         <full_name>clean</full_name>
-        <docblock line="1064">
+        <docblock line="1065">
           <description><![CDATA[helper function to delete garbage after success query]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1064" name="access" description="private"/>
-          <tag line="1064" name="return" description="" type="void">
+          <tag line="1065" name="access" description="private"/>
+          <tag line="1065" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1090" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1091" package="Kohana-my-base\database">
         <name>update_params</name>
         <full_name>update_params</full_name>
-        <docblock line="1076">
+        <docblock line="1077">
           <description><![CDATA[helper function to append data to the object]]></description>
           <long-description><![CDATA[<pre><code>$params = array(
    'login' => 'blabla'
@@ -2701,86 +2695,86 @@ sql query will not execute to get column name and it type</p>]]></long-descripti
 $model->update_params($params);
 echo $model->login;// output 'blabla'
 </code></pre>]]></long-description>
-          <tag line="1076" name="param" description="" type="" variable="$array"/>
-          <tag line="1076" name="access" description="public"/>
+          <tag line="1077" name="param" description="" type="" variable="$array"/>
+          <tag line="1077" name="access" description="public"/>
         </docblock>
-        <argument line="1090">
+        <argument line="1091">
           <name>$array</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1102" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1103" package="Kohana-my-base\database">
         <name>columns</name>
         <full_name>columns</full_name>
-        <docblock line="1097">
+        <docblock line="1098">
           <description><![CDATA[user function to define database table columns]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1097" name="return" description="" type="array">
+          <tag line="1098" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="1097" name="access" description="public"/>
+          <tag line="1098" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1111" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1112" package="Kohana-my-base\database">
         <name>rules</name>
         <full_name>rules</full_name>
-        <docblock line="1107">
+        <docblock line="1108">
           <description><![CDATA[user function to define validation rules]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1107" name="return" description="" type="array">
+          <tag line="1108" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1120" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1121" package="Kohana-my-base\database">
         <name>labels</name>
         <full_name>labels</full_name>
-        <docblock line="1116">
+        <docblock line="1117">
           <description><![CDATA[user function to define representative labels for table fields]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1116" name="return" description="" type="array">
+          <tag line="1117" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1129" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1130" package="Kohana-my-base\database">
         <name>last_inserted_id</name>
         <full_name>last_inserted_id</full_name>
-        <docblock line="1125">
+        <docblock line="1126">
           <description><![CDATA[returns last inserted id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1125" name="return" description="" type="null">
+          <tag line="1126" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1138" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1139" package="Kohana-my-base\database">
         <name>last_query</name>
         <full_name>last_query</full_name>
-        <docblock line="1134">
+        <docblock line="1135">
           <description><![CDATA[returns last executed query]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1134" name="return" description="" type="null">
+          <tag line="1135" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1148" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1149" package="Kohana-my-base\database">
         <name>unique_validation</name>
         <full_name>unique_validation</full_name>
-        <docblock line="1143">
+        <docblock line="1144">
           <description><![CDATA[validate unique value required Validation object]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1143" name="param" description="" type="" variable="$validation"/>
-          <tag line="1143" name="param" description="" type="" variable="$field"/>
+          <tag line="1144" name="param" description="" type="" variable="$validation"/>
+          <tag line="1144" name="param" description="" type="" variable="$field"/>
         </docblock>
-        <argument line="1148">
+        <argument line="1149">
           <name>$validation</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="1148">
+        <argument line="1149">
           <name>$field</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -2788,8 +2782,8 @@ echo $model->login;// output 'blabla'
       </method>
     </class>
     <parse_markers>
-      <error line="20" code="50000">No DocBlock was found for \Base_Model</error>
-      <error line="784" code="50012">No short description for method prepare_for_query()</error>
+      <error line="0" code="50007">No page-level DocBlock was found in file classes/base/model.php</error>
+      <error line="785" code="50012">No short description for method prepare_for_query()</error>
     </parse_markers>
   </file>
   <file path="classes/base/date.php" hash="f20dbbe83ae06200fd28b4b35d02bb66" package="Default">
@@ -3332,326 +3326,328 @@ callback action type.]]></description>
       <error line="53" code="50016">The type hint of the argument is incorrect for the type definition of the @param tag with argument $e in handler()</error>
     </parse_markers>
   </file>
-  <file path="classes/pretty/form.php" hash="ce8c110e5ef2c0cf5033b88237940efb" package="Default">
-    <class final="false" abstract="false" namespace="global" line="15" package="Kohana-my-base">
+  <file path="classes/pretty/form.php" hash="9a9cad174753fea6027a8d5dd86a2853" package="Default">
+    <class final="false" abstract="false" namespace="global" line="19" package="Kohana-my-base\html">
       <extends>\Singleton</extends>
       <name>Pretty_Form</name>
       <full_name>\Pretty_Form</full_name>
       <docblock line="3">
-        <description><![CDATA[Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)]]></description>
-        <long-description><![CDATA[]]></long-description>
+        <description><![CDATA[Helper class to render forms]]></description>
+        <long-description><![CDATA[<p>extends Kohana_Form but
+adds availability to create much more complicated forms
+using template system</p>]]></long-description>
         <tag line="3" name="package" description="Kohana-my-base"/>
         <tag line="3" name="copyright" description="2012 pussbb@gmail.com(alexnevpryaga@gmail.com)"/>
         <tag line="3" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
         <tag line="3" name="version" description="0.1.2"/>
         <tag line="3" name="link" description="https://github.com/pussbb/Kohana-my-base" link="https://github.com/pussbb/Kohana-my-base"/>
+        <tag line="3" name="category" description="html"/>
+        <tag line="3" name="subpackage" description="html"/>
       </docblock>
-      <property final="false" static="false" visibility="private" line="21" namespace="global" package="Default">
+      <property final="false" static="false" visibility="private" line="26" namespace="global" package="Default">
         <name>$errors</name>
         <default><![CDATA[NULL]]></default>
-        <docblock line="18">
-          <description><![CDATA[]]></description>
+        <docblock line="22">
+          <description><![CDATA[array with errors]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="18" name="var" description="" type="null">
+          <tag line="22" name="var" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="private" line="25" namespace="global" package="Default">
+      <property final="false" static="false" visibility="private" line="31" namespace="global" package="Default">
         <name>$data</name>
         <default><![CDATA[NULL]]></default>
-        <docblock line="22">
-          <description><![CDATA[]]></description>
+        <docblock line="27">
+          <description><![CDATA[array with values]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="22" name="var" description="" type="array|null">
+          <tag line="27" name="var" description="" type="array|null">
             <type by_reference="false">array</type>
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="29" namespace="global" package="Default">
+      <property final="false" static="false" visibility="public" line="36" namespace="global" package="Default">
         <name>$view_path</name>
         <default><![CDATA[NULL]]></default>
-        <docblock line="26">
-          <description><![CDATA[]]></description>
+        <docblock line="32">
+          <description><![CDATA[defines where need to find views]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="26" name="var" description="" type="null|string">
+          <tag line="32" name="var" description="" type="null|string">
             <type by_reference="false">null</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="private" line="33" namespace="global" package="Default">
+      <property final="false" static="false" visibility="private" line="41" namespace="global" package="Default">
         <name>$template</name>
         <default><![CDATA[NULL]]></default>
-        <docblock line="30">
-          <description><![CDATA[]]></description>
+        <docblock line="37">
+          <description><![CDATA[sets template name]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="30" name="var" description="" type="null">
+          <tag line="37" name="var" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="38" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="46" package="Kohana-my-base\html">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <docblock line="35">
-          <description><![CDATA[]]></description>
+        <docblock line="43">
+          <description><![CDATA[init settings]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="66" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="75" package="Kohana-my-base\html">
         <name>__call</name>
         <full_name>__call</full_name>
-        <docblock line="61">
-          <description><![CDATA[]]></description>
+        <docblock line="69">
+          <description><![CDATA[gives availability to call methods from this jbject and Kohana_Form]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="61" name="param" description="" type="" variable="$name"/>
-          <tag line="61" name="param" description="" type="" variable="$arguments"/>
-          <tag line="61" name="return" description="" type="mixed">
+          <tag line="69" name="param" description="" type="" variable="$name"/>
+          <tag line="69" name="param" description="" type="" variable="$arguments"/>
+          <tag line="69" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="66">
+        <argument line="75">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="66">
+        <argument line="75">
           <name>$arguments</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="78" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="88" package="Kohana-my-base\html">
         <name>set_template</name>
         <full_name>set_template</full_name>
-        <docblock line="75">
-          <description><![CDATA[]]></description>
+        <docblock line="84">
+          <description><![CDATA[sets the tempalte name]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="75" name="param" description="" type="" variable="$name"/>
+          <tag line="84" name="param" description="" type="" variable="$name"/>
         </docblock>
-        <argument line="78">
+        <argument line="88">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="88" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="99" package="Kohana-my-base\html">
         <name>open</name>
         <full_name>open</full_name>
-        <docblock line="83">
-          <description><![CDATA[]]></description>
+        <docblock line="93">
+          <description><![CDATA[opens html form]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="83" name="param" description="" type="" variable="$action"/>
-          <tag line="83" name="param" description="" type="null" variable="$attr">
+          <tag line="93" name="param" description="" type="" variable="$action"/>
+          <tag line="93" name="param" description="" type="null" variable="$attr">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="83" name="return" description="" type="string">
+          <tag line="93" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="88">
+        <argument line="99">
           <name>$action</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="88">
+        <argument line="99">
           <name>$attr</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="97" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="109" package="Kohana-my-base\html">
         <name>legend</name>
         <full_name>legend</full_name>
-        <docblock line="93">
-          <description><![CDATA[]]></description>
+        <docblock line="104">
+          <description><![CDATA[form legend]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="93" name="param" description="" type="" variable="$text"/>
-          <tag line="93" name="return" description="" type="string">
+          <tag line="104" name="param" description="" type="" variable="$text"/>
+          <tag line="104" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="97">
+        <argument line="109">
           <name>$text</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="105" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="118" package="Kohana-my-base\html">
         <name>close</name>
         <full_name>close</full_name>
-        <docblock line="102">
-          <description><![CDATA[]]></description>
+        <docblock line="114">
+          <description><![CDATA[close form]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="102" name="return" description="" type="string">
+          <tag line="114" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="114" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="128" package="Kohana-my-base\html">
         <name>input</name>
         <full_name>input</full_name>
-        <docblock line="110">
-          <description><![CDATA[]]></description>
+        <docblock line="123">
+          <description><![CDATA[html input]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="110" name="param" description="" type="" variable="$params"/>
-          <tag line="110" name="return" description="" type="string">
+          <tag line="123" name="param" description="" type="" variable="$params"/>
+          <tag line="123" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="114">
+        <argument line="128">
           <name>$params</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="141" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="156" package="Kohana-my-base\html">
         <name>for_label</name>
         <full_name>for_label</full_name>
-        <docblock line="136">
-          <description><![CDATA[]]></description>
+        <docblock line="150">
+          <description><![CDATA[inserts id to form element if label was defined]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="136" name="param" description="" type="" variable="$name"/>
-          <tag line="136" name="param" description="" type="" variable="$attr"/>
-          <tag line="136" name="return" description="" type="array">
+          <tag line="150" name="param" description="" type="" variable="$name"/>
+          <tag line="150" name="param" description="" type="" variable="$attr"/>
+          <tag line="150" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="141">
+        <argument line="156">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="141">
+        <argument line="156">
           <name>$attr</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="151" package="Kohana-my-base">
-        <name>form_action</name>
-        <full_name>form_action</full_name>
-        <docblock line="147">
-          <description><![CDATA[]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="147" name="param" description="" type="" variable="$params"/>
-          <tag line="147" name="return" description="" type="string">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="167" package="Kohana-my-base\html">
+        <name>form_actions</name>
+        <full_name>form_actions</full_name>
+        <docblock line="162">
+          <description><![CDATA[returns action buttons (Submit, Reset .]]></description>
+          <long-description><![CDATA[<p>..)</p>]]></long-description>
+          <tag line="162" name="param" description="" type="" variable="$params"/>
+          <tag line="162" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="151">
+        <argument line="167">
           <name>$params</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="172" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="189" package="Kohana-my-base\html">
         <name>select</name>
         <full_name>select</full_name>
-        <docblock line="168">
-          <description><![CDATA[]]></description>
+        <docblock line="184">
+          <description><![CDATA[html select]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="168" name="param" description="" type="" variable="$params"/>
-          <tag line="168" name="return" description="" type="string">
+          <tag line="184" name="param" description="" type="" variable="$params"/>
+          <tag line="184" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="172">
+        <argument line="189">
           <name>$params</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="196" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="214" package="Kohana-my-base\html">
         <name>password</name>
         <full_name>password</full_name>
-        <docblock line="192">
-          <description><![CDATA[]]></description>
+        <docblock line="209">
+          <description><![CDATA[html input type password]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="192" name="param" description="" type="" variable="$params"/>
-          <tag line="192" name="return" description="" type="string">
+          <tag line="209" name="param" description="" type="" variable="$params"/>
+          <tag line="209" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="196">
+        <argument line="214">
           <name>$params</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="208" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="227" package="Kohana-my-base\html">
         <name>checkbox</name>
         <full_name>checkbox</full_name>
-        <docblock line="204">
-          <description><![CDATA[]]></description>
+        <docblock line="222">
+          <description><![CDATA[html form checkbox]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="204" name="param" description="" type="" variable="$params"/>
-          <tag line="204" name="return" description="" type="string">
+          <tag line="222" name="param" description="" type="" variable="$params"/>
+          <tag line="222" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="208">
+        <argument line="227">
           <name>$params</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="232" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="252" package="Kohana-my-base\html">
         <name>value</name>
         <full_name>value</full_name>
-        <docblock line="228">
-          <description><![CDATA[]]></description>
+        <docblock line="247">
+          <description><![CDATA[get value for form element if exists]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="228" name="param" description="" type="" variable="$params"/>
-          <tag line="228" name="return" description="" type="mixed">
+          <tag line="247" name="param" description="" type="" variable="$params"/>
+          <tag line="247" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="232">
+        <argument line="252">
           <name>$params</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="244" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="265" package="Kohana-my-base\html">
         <name>error</name>
         <full_name>error</full_name>
-        <docblock line="240">
-          <description><![CDATA[]]></description>
+        <docblock line="260">
+          <description><![CDATA[returns error if exists]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="240" name="param" description="" type="" variable="$params"/>
-          <tag line="240" name="return" description="" type="mixed">
+          <tag line="260" name="param" description="" type="" variable="$params"/>
+          <tag line="260" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="244">
+        <argument line="265">
           <name>$params</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="259" package="Kohana-my-base">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="281" package="Kohana-my-base\html">
         <name>render_template</name>
         <full_name>render_template</full_name>
-        <docblock line="254">
-          <description><![CDATA[]]></description>
+        <docblock line="275">
+          <description><![CDATA[renders template]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="254" name="param" description="" type="" variable="$name"/>
-          <tag line="254" name="param" description="" type="" variable="$params"/>
-          <tag line="254" name="return" description="" type="mixed">
+          <tag line="275" name="param" description="" type="" variable="$name"/>
+          <tag line="275" name="param" description="" type="" variable="$params"/>
+          <tag line="275" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="259">
+        <argument line="281">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="259">
+        <argument line="281">
           <name>$params</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -3660,30 +3656,11 @@ with main goal make developing web applications more easily(as for me)]]></descr
     </class>
     <parse_markers>
       <error line="0" code="50007">No page-level DocBlock was found in file classes/pretty/form.php</error>
-      <critical line="18" code="50019">No short description for property $errors</critical>
-      <critical line="22" code="50019">No short description for property $data</critical>
-      <critical line="26" code="50019">No short description for property $view_path</critical>
-      <critical line="30" code="50019">No short description for property $template</critical>
-      <error line="35" code="50012">No short description for method __construct()</error>
-      <error line="61" code="50012">No short description for method __call()</error>
-      <error line="75" code="50012">No short description for method set_template()</error>
-      <error line="83" code="50012">No short description for method open()</error>
-      <error line="93" code="50012">No short description for method legend()</error>
-      <error line="102" code="50012">No short description for method close()</error>
-      <error line="110" code="50012">No short description for method input()</error>
-      <error line="136" code="50012">No short description for method for_label()</error>
-      <error line="147" code="50012">No short description for method form_action()</error>
-      <error line="168" code="50012">No short description for method select()</error>
-      <error line="192" code="50012">No short description for method password()</error>
-      <error line="204" code="50012">No short description for method checkbox()</error>
-      <error line="228" code="50012">No short description for method value()</error>
-      <error line="240" code="50012">No short description for method error()</error>
-      <error line="254" code="50012">No short description for method render_template()</error>
     </parse_markers>
   </file>
-  <file path="classes/acl.php" hash="5785c14fa66ea54c25b6a8b9a8edda0a" package="Default">
+  <file path="classes/acl.php" hash="ae50424cc08be08617462c880b9f9b1e" package="Default">
     <class final="false" abstract="false" namespace="global" line="17" package="Kohana-my-base\access">
-      <extends>\Base_Acl</extends>
+      <extends>\Base_ACL</extends>
       <name>ACL</name>
       <full_name>\ACL</full_name>
       <docblock line="2">
@@ -3699,7 +3676,7 @@ with main goal make developing web applications more easily(as for me)]]></descr
         <tag line="2" name="link" description="https://github.com/pussbb/Kohana-my-base" link="https://github.com/pussbb/Kohana-my-base"/>
         <tag line="2" name="category" description="access"/>
         <tag line="2" name="subpackage" description="access"/>
-        <tag line="2" name="see" description="\global\Base_Acl" refers="\global\Base_Acl"/>
+        <tag line="2" name="see" description="\global\Base_ACL" refers="\global\Base_ACL"/>
       </docblock>
     </class>
     <parse_markers>
@@ -4037,110 +4014,13 @@ action recognizes a regular expression if it is preceded by ( or , or =.</p>]]><
       <error line="385" code="50000">No DocBlock was found for \JSMinException</error>
     </parse_markers>
   </file>
-  <file path="views/pretty_form/twitter_bootstrap/input_for_mail.php" hash="435f9f0fe6933554f7146193b69c3f7e" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/pretty_form/twitter_bootstrap/input_for_mail.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/pretty_form/twitter_bootstrap/checkbox.php" hash="b3c0dc00f2b3e14fdbfd5fee347ba35b" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/pretty_form/twitter_bootstrap/checkbox.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/pretty_form/twitter_bootstrap/select.php" hash="6d9eefddd67719004abe009190ed53ad" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/pretty_form/twitter_bootstrap/select.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/pretty_form/twitter_bootstrap/input.php" hash="aec4d48c4dfa3861cc4f7f39c1a2b486" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/pretty_form/twitter_bootstrap/input.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/pretty_form/twitter_bootstrap/buttons_only.php" hash="63c4fb79b2023e4514049e292c048ca5" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/pretty_form/twitter_bootstrap/buttons_only.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/pretty_form/twitter_bootstrap/form_actions.php" hash="62d85d86ec5c02d3101fd33db148827c" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/pretty_form/twitter_bootstrap/form_actions.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/errors/404.php" hash="e72a9b04b2dde0e25af50af61e98bb43" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/errors/404.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/errors/500.php" hash="48b193e673e975c4044844e93a80d0b3" package="Default">
-    <include line="13" type="Include" package="Default">
-      <name/>
-    </include>
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/errors/500.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/errors/default.php" hash="2bedd0fa6856cf9e0e69c5c7272c9d77" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/errors/default.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/users/account_info.php" hash="fd1838af5cf63c7a9d2ea222efbc9d31" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/users/account_info.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/users/register.php" hash="2d3e77e9c6fbdffbe0cb6c9ee845f57d" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/users/register.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/users/login.php" hash="4247e9b17a82a60eade69c7be5d50cfa" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/users/login.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/layout/header.php" hash="21da93e14c774b987e393b9ce8690a1f" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/layout/header.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/layout/footer.php" hash="5b4e9fe5de6704ae72e1a4405b644216" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/layout/footer.php</error>
-    </parse_markers>
-  </file>
-  <file path="views/layout/template.php" hash="d0bf8d845015c351d16322eb3f389df2" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file views/layout/template.php</error>
-    </parse_markers>
-  </file>
-  <file path="config/site.php" hash="71a29363f2cd8f58edcc442cdc4d59f9" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file config/site.php</error>
-    </parse_markers>
-  </file>
-  <file path="config/media.php" hash="a4d1b7352cd1335108652d6972d963d9" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file config/media.php</error>
-    </parse_markers>
-  </file>
-  <file path="config/error.php" hash="a00e39686ced5c3b38f2d8ec76c3b7de" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file config/error.php</error>
-    </parse_markers>
-  </file>
-  <file path="config/user.php" hash="ef93a9403537e18faee92a1d40f4bf68" package="Default">
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file config/user.php</error>
-    </parse_markers>
-  </file>
   <package name="Default" full_name="Default"/>
   <package name="JSMin" full_name="JSMin"/>
   <package name="Kohana-my-base" full_name="Kohana-my-base">
     <package name="access" full_name="Kohana-my-base\access"/>
     <package name="database" full_name="Kohana-my-base\database"/>
     <package name="extra" full_name="Kohana-my-base\extra"/>
+    <package name="html" full_name="Kohana-my-base\html"/>
     <package name="template" full_name="Kohana-my-base\template"/>
   </package>
   <namespace name="global" full_name="global"/>
