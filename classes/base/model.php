@@ -307,17 +307,17 @@ class Base_Model extends Kohana_Model {
         switch ($type) {
             case Model::BELONGS_TO:
             case Model::HAS_ONE:
-                $model = $kclass::find($filter);
+                $result = $kclass::find($filter);
                 break;
             case Model::HAS_MANY:
-                $model = $kclass::find_all($filter)->records;
+                $result = $kclass::find_all($filter)->records;
                 break;
             default:
                 throw new Exception("Unknown relation type");
                 break;
         }
-        $this->data[$name] = $model;
-        return $model;
+        $this->data[$name] = $result;
+        return $result;
     }
 
     /**
