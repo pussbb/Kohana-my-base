@@ -20,211 +20,211 @@
 <path fill="none" stroke="gray" d="M305,-110C305,-104 311,-98 317,-98"/>
 <text text-anchor="middle" x="594.5" y="-752.1" font-family="Times Roman,serif" font-size="11.00" fill="gray">global</text>
 </g>
-<!-- \\Singleton -->
-<g id="node2" class="node"><title>\\Singleton</title>
-<a xlink:href="classes.singleton.html" xlink:title="Singleton" target="_parent">
-<polygon fill="none" stroke="black" points="393,-574 317,-574 317,-538 393,-538 393,-574"/>
-<text text-anchor="middle" x="355" y="-553.1" font-family="Courier,monospace" font-size="11.00">Singleton</text>
-</a>
-</g>
-<!-- \\Media -->
-<g id="node3" class="node"><title>\\Media</title>
-<a xlink:href="classes.media.html" xlink:title="Media" target="_parent">
+<!-- \\JSMin -->
+<g id="node2" class="node"><title>\\JSMin</title>
+<a xlink:href="vendor.jsmin-php.jsmin.html" xlink:title="JSMin" target="_parent">
 <polygon fill="none" stroke="black" points="834,-736 780,-736 780,-700 834,-700 834,-736"/>
-<text text-anchor="middle" x="807" y="-715.1" font-family="Courier,monospace" font-size="11.00">Media</text>
+<text text-anchor="middle" x="807" y="-715.1" font-family="Courier,monospace" font-size="11.00">JSMin</text>
 </a>
 </g>
-<!-- \\Model_Access_Rule -->
-<g id="node4" class="node"><title>\\Model_Access_Rule</title>
-<a xlink:href="classes.model.access.rule.html" xlink:title="Model_Access_Rule" target="_parent">
-<polygon fill="none" stroke="black" points="872,-682 742,-682 742,-646 872,-646 872,-682"/>
-<text text-anchor="middle" x="807" y="-661.1" font-family="Courier,monospace" font-size="11.00">Model_Access_Rule</text>
+<!-- \\JSMinException -->
+<g id="node3" class="node"><title>\\JSMinException</title>
+<a xlink:href="vendor.jsmin-php.jsmin.html" xlink:title="JSMinException" target="_parent">
+<polygon fill="none" stroke="black" points="862,-142 752,-142 752,-106 862,-106 862,-142"/>
+<text text-anchor="middle" x="807" y="-121.1" font-family="Courier,monospace" font-size="11.00">JSMinException</text>
 </a>
 </g>
-<!-- \\Model -->
-<g id="node19" class="node"><title>\\Model</title>
-<a xlink:href="classes.model.html" xlink:title="Model" target="_parent">
-<polygon fill="none" stroke="black" points="630,-709 576,-709 576,-673 630,-673 630,-709"/>
-<text text-anchor="middle" x="603" y="-688.1" font-family="Courier,monospace" font-size="11.00">Model</text>
-</a>
+<!-- \\Exception -->
+<g id="node24" class="node"><title>\\Exception</title>
+<ellipse fill="none" stroke="black" cx="603" cy="-72" rx="62.9325" ry="18.3848"/>
+<text text-anchor="middle" x="603" y="-68.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Exception</text>
 </g>
-<!-- \\Model_Access_Rule&#45;&gt;\\Model -->
-<g id="edge3" class="edge"><title>\\Model_Access_Rule&#45;&gt;\\Model</title>
-<path fill="none" stroke="black" d="M741.33,-672.692C707.97,-677.107 668.646,-682.311 640.47,-686.041"/>
-<polygon fill="none" stroke="black" points="639.707,-682.611 630.253,-687.393 640.626,-689.551 639.707,-682.611"/>
+<!-- \\JSMinException&#45;&gt;\\Exception -->
+<g id="edge3" class="edge"><title>\\JSMinException&#45;&gt;\\Exception</title>
+<path fill="none" stroke="black" d="M751.256,-109.791C722.869,-102.555 688.418,-93.7732 659.873,-86.497"/>
+<polygon fill="none" stroke="black" points="660.597,-83.0696 650.042,-83.9911 658.867,-89.8527 660.597,-83.0696"/>
 </g>
-<!-- \\Model_User -->
-<g id="node5" class="node"><title>\\Model_User</title>
-<a xlink:href="classes.model.user.html" xlink:title="Model_User" target="_parent">
-<polygon fill="none" stroke="black" points="849,-628 765,-628 765,-592 849,-592 849,-628"/>
-<text text-anchor="middle" x="807" y="-607.1" font-family="Courier,monospace" font-size="11.00">Model_User</text>
-</a>
-</g>
-<!-- \\Model_User&#45;&gt;\\Model -->
-<g id="edge5" class="edge"><title>\\Model_User&#45;&gt;\\Model</title>
-<path fill="none" stroke="black" d="M764.651,-626.513C755.838,-629.966 746.612,-633.593 738,-637 704.656,-650.192 666.749,-665.371 639.61,-676.27"/>
-<polygon fill="none" stroke="black" points="638.101,-673.104 630.127,-680.08 640.711,-679.599 638.101,-673.104"/>
-</g>
-<!-- \\Auth -->
-<g id="node6" class="node"><title>\\Auth</title>
-<a xlink:href="classes.auth.html" xlink:title="Auth" target="_parent">
-<polygon fill="none" stroke="black" points="834,-520 780,-520 780,-484 834,-484 834,-520"/>
-<text text-anchor="middle" x="807" y="-499.1" font-family="Courier,monospace" font-size="11.00">Auth</text>
-</a>
-</g>
-<!-- \\Base_Auth -->
-<g id="node10" class="node"><title>\\Base_Auth</title>
-<a xlink:href="classes.base.auth.html" xlink:title="Base_Auth" target="_parent">
-<polygon fill="none" stroke="black" points="641,-493 565,-493 565,-457 641,-457 641,-493"/>
-<text text-anchor="middle" x="603" y="-472.1" font-family="Courier,monospace" font-size="11.00">Base_Auth</text>
-</a>
-</g>
-<!-- \\Auth&#45;&gt;\\Base_Auth -->
-<g id="edge7" class="edge"><title>\\Auth&#45;&gt;\\Base_Auth</title>
-<path fill="none" stroke="black" d="M779.91,-498.415C747.307,-494.099 691.947,-486.772 651.825,-481.462"/>
-<polygon fill="none" stroke="black" points="652.091,-477.967 641.719,-480.125 651.173,-484.906 652.091,-477.967"/>
-</g>
-<!-- \\Controller_Users -->
-<g id="node7" class="node"><title>\\Controller_Users</title>
-<a xlink:href="classes.controller.users.html" xlink:title="Controller_Users" target="_parent">
-<polygon fill="none" stroke="black" points="869,-304 745,-304 745,-268 869,-268 869,-304"/>
-<text text-anchor="middle" x="807" y="-283.1" font-family="Courier,monospace" font-size="11.00">Controller_Users</text>
-</a>
-</g>
-<!-- \\Controller_Core -->
-<g id="node8" class="node"><title>\\Controller_Core</title>
-<a xlink:href="classes.controller.core.html" xlink:title="Controller_Core" target="_parent">
-<polygon fill="none" stroke="black" points="662,-251 544,-251 544,-215 662,-215 662,-251"/>
-<text text-anchor="middle" x="603" y="-230.1" font-family="Courier,monospace" font-size="11.00">Controller_Core</text>
-</a>
-</g>
-<!-- \\Controller_Users&#45;&gt;\\Controller_Core -->
-<g id="edge9" class="edge"><title>\\Controller_Users&#45;&gt;\\Controller_Core</title>
-<path fill="none" stroke="black" d="M744.407,-269.738C721.553,-263.801 695.581,-257.053 672.186,-250.975"/>
-<polygon fill="none" stroke="black" points="672.893,-247.542 662.334,-248.415 671.133,-254.317 672.893,-247.542"/>
-</g>
-<!-- \\Controller_Template -->
-<g id="node28" class="node"><title>\\Controller_Template</title>
-<ellipse fill="none" stroke="black" cx="355" cy="-72" rx="113.137" ry="18.3848"/>
-<text text-anchor="middle" x="355" y="-68.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Controller_Template</text>
-</g>
-<!-- \\Controller_Core&#45;&gt;\\Controller_Template -->
-<g id="edge11" class="edge"><title>\\Controller_Core&#45;&gt;\\Controller_Template</title>
-<path fill="none" stroke="black" d="M580.069,-214.839C567.769,-204.733 552.594,-191.668 540,-179 505.094,-143.89 510.713,-119.035 468,-94 463.312,-91.2523 458.345,-88.8401 453.212,-86.7232"/>
-<polygon fill="none" stroke="black" points="454.409,-83.4341 443.816,-83.2228 451.965,-89.9937 454.409,-83.4341"/>
-</g>
-<!-- \\Base_Media -->
-<g id="node9" class="node"><title>\\Base_Media</title>
-<a xlink:href="classes.base.media.html" xlink:title="Base_Media" target="_parent">
-<polygon fill="none" stroke="black" points="645,-655 561,-655 561,-619 645,-619 645,-655"/>
-<text text-anchor="middle" x="603" y="-634.1" font-family="Courier,monospace" font-size="11.00">Base_Media</text>
-</a>
-</g>
-<!-- \\Base_Media&#45;&gt;\\Singleton -->
-<g id="edge13" class="edge"><title>\\Base_Media&#45;&gt;\\Singleton</title>
-<path fill="none" stroke="black" d="M560.93,-623.259C517.285,-609.004 449.128,-586.743 403.306,-571.777"/>
-<polygon fill="none" stroke="black" points="404.191,-568.385 393.599,-568.607 402.018,-575.039 404.191,-568.385"/>
-</g>
-<!-- \\Base_Auth&#45;&gt;\\Singleton -->
-<g id="edge15" class="edge"><title>\\Base_Auth&#45;&gt;\\Singleton</title>
-<path fill="none" stroke="black" d="M564.317,-491.482C556.271,-494.937 547.852,-498.573 540,-502 507.906,-516.009 501.399,-523.476 468,-534 447.29,-540.526 423.806,-545.475 403.632,-549.011"/>
-<polygon fill="none" stroke="black" points="402.999,-545.568 393.72,-550.682 404.163,-552.47 402.999,-545.568"/>
-</g>
-<!-- \\Base_Db_Validation -->
-<g id="node11" class="node"><title>\\Base_Db_Validation</title>
-<a xlink:href="classes.base.db.validation.html" xlink:title="Base_Db_Validation" target="_parent">
-<polygon fill="none" stroke="black" points="876,-466 738,-466 738,-430 876,-430 876,-466"/>
-<text text-anchor="middle" x="807" y="-445.1" font-family="Courier,monospace" font-size="11.00">Base_Db_Validation</text>
-</a>
-</g>
-<!-- \\Base_Db_Sanitize -->
-<g id="node12" class="node"><title>\\Base_Db_Sanitize</title>
-<a xlink:href="classes.base.db.sanitize.html" xlink:title="Base_Db_Sanitize" target="_parent">
-<polygon fill="none" stroke="black" points="869,-412 745,-412 745,-376 869,-376 869,-412"/>
-<text text-anchor="middle" x="807" y="-391.1" font-family="Courier,monospace" font-size="11.00">Base_Db_Sanitize</text>
+<!-- \\ACL -->
+<g id="node4" class="node"><title>\\ACL</title>
+<a xlink:href="classes.acl.html" xlink:title="ACL" target="_parent">
+<polygon fill="none" stroke="black" points="834,-628 780,-628 780,-592 834,-592 834,-628"/>
+<text text-anchor="middle" x="807" y="-607.1" font-family="Courier,monospace" font-size="11.00">ACL</text>
 </a>
 </g>
 <!-- \\Base_ACL -->
-<g id="node13" class="node"><title>\\Base_ACL</title>
+<g id="node9" class="node"><title>\\Base_ACL</title>
 <a xlink:href="classes.base.acl.html" xlink:title="Base_ACL" target="_parent">
-<polygon fill="none" stroke="black" points="638,-547 568,-547 568,-511 638,-511 638,-547"/>
-<text text-anchor="middle" x="603" y="-526.1" font-family="Courier,monospace" font-size="11.00">Base_ACL</text>
-</a>
-</g>
-<!-- \\Base_ACL&#45;&gt;\\Singleton -->
-<g id="edge17" class="edge"><title>\\Base_ACL&#45;&gt;\\Singleton</title>
-<path fill="none" stroke="black" d="M567.468,-532.868C524.544,-537.542 452.109,-545.428 403.926,-550.673"/>
-<polygon fill="none" stroke="black" points="403.295,-547.221 393.733,-551.783 404.053,-554.18 403.295,-547.221"/>
-</g>
-<!-- \\Base_Model -->
-<g id="node14" class="node"><title>\\Base_Model</title>
-<a xlink:href="classes.base.model.html" xlink:title="Base_Model" target="_parent">
-<polygon fill="none" stroke="black" points="397,-709 313,-709 313,-673 397,-673 397,-709"/>
-<text text-anchor="middle" x="355" y="-688.1" font-family="Courier,monospace" font-size="11.00">Base_Model</text>
-</a>
-</g>
-<!-- \\Kohana_Model -->
-<g id="node33" class="node"><title>\\Kohana_Model</title>
-<ellipse fill="none" stroke="black" cx="85" cy="-691" rx="84.8528" ry="18.3848"/>
-<text text-anchor="middle" x="85" y="-687.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Kohana_Model</text>
-</g>
-<!-- \\Base_Model&#45;&gt;\\Kohana_Model -->
-<g id="edge19" class="edge"><title>\\Base_Model&#45;&gt;\\Kohana_Model</title>
-<path fill="none" stroke="black" d="M312.812,-691C277.444,-691 225.604,-691 180.307,-691"/>
-<polygon fill="none" stroke="black" points="180.152,-687.5 170.152,-691 180.152,-694.5 180.152,-687.5"/>
-</g>
-<!-- \\Base_Date -->
-<g id="node15" class="node"><title>\\Base_Date</title>
-<a xlink:href="classes.base.date.html" xlink:title="Base_Date" target="_parent">
-<polygon fill="none" stroke="black" points="641,-170 565,-170 565,-134 641,-134 641,-170"/>
-<text text-anchor="middle" x="603" y="-149.1" font-family="Courier,monospace" font-size="11.00">Base_Date</text>
-</a>
-</g>
-<!-- \\Kohana_Date -->
-<g id="node35" class="node"><title>\\Kohana_Date</title>
-<ellipse fill="none" stroke="black" cx="355" cy="-18" rx="79.9031" ry="18.3848"/>
-<text text-anchor="middle" x="355" y="-14.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Kohana_Date</text>
-</g>
-<!-- \\Base_Date&#45;&gt;\\Kohana_Date -->
-<g id="edge21" class="edge"><title>\\Base_Date&#45;&gt;\\Kohana_Date</title>
-<path fill="none" stroke="black" d="M564.454,-142.183C555.982,-139.055 547.352,-135.052 540,-130 499.194,-101.964 510.175,-70.9317 468,-45 457.56,-38.5811 445.711,-33.6882 433.709,-29.9586"/>
-<polygon fill="none" stroke="black" points="434.652,-26.5879 424.076,-27.2099 432.732,-33.3193 434.652,-26.5879"/>
-</g>
-<!-- \\Error -->
-<g id="node16" class="node"><title>\\Error</title>
-<a xlink:href="classes.error.html" xlink:title="Error" target="_parent">
-<polygon fill="none" stroke="black" points="834,-358 780,-358 780,-322 834,-322 834,-358"/>
-<text text-anchor="middle" x="807" y="-337.1" font-family="Courier,monospace" font-size="11.00">Error</text>
-</a>
-</g>
-<!-- \\Pretty_Form -->
-<g id="node17" class="node"><title>\\Pretty_Form</title>
-<a xlink:href="classes.pretty.form.html" xlink:title="Pretty_Form" target="_parent">
-<polygon fill="none" stroke="black" points="648,-601 558,-601 558,-565 648,-565 648,-601"/>
-<text text-anchor="middle" x="603" y="-580.1" font-family="Courier,monospace" font-size="11.00">Pretty_Form</text>
-</a>
-</g>
-<!-- \\Pretty_Form&#45;&gt;\\Singleton -->
-<g id="edge23" class="edge"><title>\\Pretty_Form&#45;&gt;\\Singleton</title>
-<path fill="none" stroke="black" d="M557.224,-578.016C513.597,-573.267 448.134,-566.14 403.595,-561.291"/>
-<polygon fill="none" stroke="black" points="403.908,-557.804 393.588,-560.201 403.151,-564.763 403.908,-557.804"/>
-</g>
-<!-- \\ACL -->
-<g id="node18" class="node"><title>\\ACL</title>
-<a xlink:href="classes.acl.html" xlink:title="ACL" target="_parent">
-<polygon fill="none" stroke="black" points="834,-574 780,-574 780,-538 834,-538 834,-574"/>
-<text text-anchor="middle" x="807" y="-553.1" font-family="Courier,monospace" font-size="11.00">ACL</text>
+<polygon fill="none" stroke="black" points="638,-574 568,-574 568,-538 638,-538 638,-574"/>
+<text text-anchor="middle" x="603" y="-553.1" font-family="Courier,monospace" font-size="11.00">Base_ACL</text>
 </a>
 </g>
 <!-- \\ACL&#45;&gt;\\Base_ACL -->
-<g id="edge25" class="edge"><title>\\ACL&#45;&gt;\\Base_ACL</title>
-<path fill="none" stroke="black" d="M779.91,-552.415C746.51,-547.994 689.225,-540.412 648.908,-535.076"/>
-<polygon fill="none" stroke="black" points="649.165,-531.58 638.792,-533.737 648.246,-538.519 649.165,-531.58"/>
+<g id="edge5" class="edge"><title>\\ACL&#45;&gt;\\Base_ACL</title>
+<path fill="none" stroke="black" d="M779.91,-602.829C746.439,-593.969 688.981,-578.76 648.651,-568.084"/>
+<polygon fill="none" stroke="black" points="649.355,-564.65 638.792,-565.474 647.564,-571.417 649.355,-564.65"/>
+</g>
+<!-- \\Pretty_Form -->
+<g id="node5" class="node"><title>\\Pretty_Form</title>
+<a xlink:href="classes.pretty.form.html" xlink:title="Pretty_Form" target="_parent">
+<polygon fill="none" stroke="black" points="648,-736 558,-736 558,-700 648,-700 648,-736"/>
+<text text-anchor="middle" x="603" y="-715.1" font-family="Courier,monospace" font-size="11.00">Pretty_Form</text>
+</a>
+</g>
+<!-- \\Singleton -->
+<g id="node16" class="node"><title>\\Singleton</title>
+<a xlink:href="classes.singleton.html" xlink:title="Singleton" target="_parent">
+<polygon fill="none" stroke="black" points="393,-655 317,-655 317,-619 393,-619 393,-655"/>
+<text text-anchor="middle" x="355" y="-634.1" font-family="Courier,monospace" font-size="11.00">Singleton</text>
+</a>
+</g>
+<!-- \\Pretty_Form&#45;&gt;\\Singleton -->
+<g id="edge7" class="edge"><title>\\Pretty_Form&#45;&gt;\\Singleton</title>
+<path fill="none" stroke="black" d="M557.224,-703.049C513.505,-688.77 447.858,-667.329 403.314,-652.78"/>
+<polygon fill="none" stroke="black" points="404.181,-649.381 393.588,-649.603 402.008,-656.035 404.181,-649.381"/>
+</g>
+<!-- \\Model -->
+<g id="node6" class="node"><title>\\Model</title>
+<a xlink:href="classes.model.html" xlink:title="Model" target="_parent">
+<polygon fill="none" stroke="black" points="630,-412 576,-412 576,-376 630,-376 630,-412"/>
+<text text-anchor="middle" x="603" y="-391.1" font-family="Courier,monospace" font-size="11.00">Model</text>
+</a>
+</g>
+<!-- \\Base_Model -->
+<g id="node10" class="node"><title>\\Base_Model</title>
+<a xlink:href="classes.base.model.html" xlink:title="Base_Model" target="_parent">
+<polygon fill="none" stroke="black" points="397,-412 313,-412 313,-376 397,-376 397,-412"/>
+<text text-anchor="middle" x="355" y="-391.1" font-family="Courier,monospace" font-size="11.00">Base_Model</text>
+</a>
 </g>
 <!-- \\Model&#45;&gt;\\Base_Model -->
-<g id="edge27" class="edge"><title>\\Model&#45;&gt;\\Base_Model</title>
-<path fill="none" stroke="black" d="M575.988,-691C535.703,-691 459.109,-691 407.543,-691"/>
-<polygon fill="none" stroke="black" points="407.262,-687.5 397.262,-691 407.262,-694.5 407.262,-687.5"/>
+<g id="edge9" class="edge"><title>\\Model&#45;&gt;\\Base_Model</title>
+<path fill="none" stroke="black" d="M575.988,-394C535.703,-394 459.109,-394 407.543,-394"/>
+<polygon fill="none" stroke="black" points="407.262,-390.5 397.262,-394 407.262,-397.5 407.262,-390.5"/>
+</g>
+<!-- \\Base_Db_Sanitize -->
+<g id="node7" class="node"><title>\\Base_Db_Sanitize</title>
+<a xlink:href="classes.base.db.sanitize.html" xlink:title="Base_Db_Sanitize" target="_parent">
+<polygon fill="none" stroke="black" points="869,-574 745,-574 745,-538 869,-538 869,-574"/>
+<text text-anchor="middle" x="807" y="-553.1" font-family="Courier,monospace" font-size="11.00">Base_Db_Sanitize</text>
+</a>
+</g>
+<!-- \\Base_Db_Validation -->
+<g id="node8" class="node"><title>\\Base_Db_Validation</title>
+<a xlink:href="classes.base.db.validation.html" xlink:title="Base_Db_Validation" target="_parent">
+<polygon fill="none" stroke="black" points="876,-520 738,-520 738,-484 876,-484 876,-520"/>
+<text text-anchor="middle" x="807" y="-499.1" font-family="Courier,monospace" font-size="11.00">Base_Db_Validation</text>
+</a>
+</g>
+<!-- \\Base_ACL&#45;&gt;\\Singleton -->
+<g id="edge11" class="edge"><title>\\Base_ACL&#45;&gt;\\Singleton</title>
+<path fill="none" stroke="black" d="M567.468,-567.605C524.364,-581.684 451.501,-605.481 403.322,-621.218"/>
+<polygon fill="none" stroke="black" points="402.152,-617.917 393.733,-624.349 404.325,-624.572 402.152,-617.917"/>
+</g>
+<!-- \\Kohana_Model -->
+<g id="node30" class="node"><title>\\Kohana_Model</title>
+<ellipse fill="none" stroke="black" cx="85" cy="-394" rx="84.8528" ry="18.3848"/>
+<text text-anchor="middle" x="85" y="-390.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Kohana_Model</text>
+</g>
+<!-- \\Base_Model&#45;&gt;\\Kohana_Model -->
+<g id="edge13" class="edge"><title>\\Base_Model&#45;&gt;\\Kohana_Model</title>
+<path fill="none" stroke="black" d="M312.812,-394C277.444,-394 225.604,-394 180.307,-394"/>
+<polygon fill="none" stroke="black" points="180.152,-390.5 170.152,-394 180.152,-397.5 180.152,-390.5"/>
+</g>
+<!-- \\Base_Media -->
+<g id="node11" class="node"><title>\\Base_Media</title>
+<a xlink:href="classes.base.media.html" xlink:title="Base_Media" target="_parent">
+<polygon fill="none" stroke="black" points="645,-682 561,-682 561,-646 645,-646 645,-682"/>
+<text text-anchor="middle" x="603" y="-661.1" font-family="Courier,monospace" font-size="11.00">Base_Media</text>
+</a>
+</g>
+<!-- \\Base_Media&#45;&gt;\\Singleton -->
+<g id="edge15" class="edge"><title>\\Base_Media&#45;&gt;\\Singleton</title>
+<path fill="none" stroke="black" d="M560.93,-659.42C517.376,-654.678 449.413,-647.279 403.595,-642.291"/>
+<polygon fill="none" stroke="black" points="403.919,-638.805 393.599,-641.202 403.161,-645.764 403.919,-638.805"/>
+</g>
+<!-- \\Base_Auth -->
+<g id="node12" class="node"><title>\\Base_Auth</title>
+<a xlink:href="classes.base.auth.html" xlink:title="Base_Auth" target="_parent">
+<polygon fill="none" stroke="black" points="641,-628 565,-628 565,-592 641,-592 641,-628"/>
+<text text-anchor="middle" x="603" y="-607.1" font-family="Courier,monospace" font-size="11.00">Base_Auth</text>
+</a>
+</g>
+<!-- \\Base_Auth&#45;&gt;\\Singleton -->
+<g id="edge17" class="edge"><title>\\Base_Auth&#45;&gt;\\Singleton</title>
+<path fill="none" stroke="black" d="M564.25,-614.219C520.971,-618.931 450.838,-626.566 403.839,-631.683"/>
+<polygon fill="none" stroke="black" points="403.449,-628.205 393.886,-632.766 404.206,-635.163 403.449,-628.205"/>
+</g>
+<!-- \\Base_Date -->
+<g id="node13" class="node"><title>\\Base_Date</title>
+<a xlink:href="classes.base.date.html" xlink:title="Base_Date" target="_parent">
+<polygon fill="none" stroke="black" points="641,-224 565,-224 565,-188 641,-188 641,-224"/>
+<text text-anchor="middle" x="603" y="-203.1" font-family="Courier,monospace" font-size="11.00">Base_Date</text>
+</a>
+</g>
+<!-- \\Kohana_Date -->
+<g id="node34" class="node"><title>\\Kohana_Date</title>
+<ellipse fill="none" stroke="black" cx="355" cy="-72" rx="79.9031" ry="18.3848"/>
+<text text-anchor="middle" x="355" y="-68.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Kohana_Date</text>
+</g>
+<!-- \\Base_Date&#45;&gt;\\Kohana_Date -->
+<g id="edge19" class="edge"><title>\\Base_Date&#45;&gt;\\Kohana_Date</title>
+<path fill="none" stroke="black" d="M571.63,-187.971C561.227,-181.505 549.807,-173.859 540,-166 504.685,-137.701 507.954,-115.252 468,-94 458.543,-88.9699 448.093,-85.0816 437.481,-82.0777"/>
+<polygon fill="none" stroke="black" points="438.27,-78.6667 427.713,-79.5601 436.523,-85.4452 438.27,-78.6667"/>
+</g>
+<!-- \\Controller_Users -->
+<g id="node14" class="node"><title>\\Controller_Users</title>
+<a xlink:href="classes.controller.users.html" xlink:title="Controller_Users" target="_parent">
+<polygon fill="none" stroke="black" points="869,-196 745,-196 745,-160 869,-160 869,-196"/>
+<text text-anchor="middle" x="807" y="-175.1" font-family="Courier,monospace" font-size="11.00">Controller_Users</text>
+</a>
+</g>
+<!-- \\Controller_Core -->
+<g id="node15" class="node"><title>\\Controller_Core</title>
+<a xlink:href="classes.controller.core.html" xlink:title="Controller_Core" target="_parent">
+<polygon fill="none" stroke="black" points="662,-157 544,-157 544,-121 662,-121 662,-157"/>
+<text text-anchor="middle" x="603" y="-136.1" font-family="Courier,monospace" font-size="11.00">Controller_Core</text>
+</a>
+</g>
+<!-- \\Controller_Users&#45;&gt;\\Controller_Core -->
+<g id="edge21" class="edge"><title>\\Controller_Users&#45;&gt;\\Controller_Core</title>
+<path fill="none" stroke="black" d="M744.407,-166.034C721.553,-161.665 695.581,-156.699 672.186,-152.227"/>
+<polygon fill="none" stroke="black" points="672.814,-148.783 662.334,-150.343 671.499,-155.659 672.814,-148.783"/>
+</g>
+<!-- \\Controller_Template -->
+<g id="node37" class="node"><title>\\Controller_Template</title>
+<ellipse fill="none" stroke="black" cx="355" cy="-18" rx="113.137" ry="18.3848"/>
+<text text-anchor="middle" x="355" y="-14.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Controller_Template</text>
+</g>
+<!-- \\Controller_Core&#45;&gt;\\Controller_Template -->
+<g id="edge23" class="edge"><title>\\Controller_Core&#45;&gt;\\Controller_Template</title>
+<path fill="none" stroke="black" d="M546.726,-120.857C544.411,-119.64 542.159,-118.355 540,-117 501.674,-92.9351 507.497,-67.0912 468,-45 460.39,-40.7435 452.127,-37.1546 443.65,-34.1292"/>
+<polygon fill="none" stroke="black" points="444.604,-30.7585 434.011,-30.9474 442.41,-37.4057 444.604,-30.7585"/>
+</g>
+<!-- \\Media -->
+<g id="node17" class="node"><title>\\Media</title>
+<a xlink:href="classes.media.html" xlink:title="Media" target="_parent">
+<polygon fill="none" stroke="black" points="834,-412 780,-412 780,-376 834,-376 834,-412"/>
+<text text-anchor="middle" x="807" y="-391.1" font-family="Courier,monospace" font-size="11.00">Media</text>
+</a>
+</g>
+<!-- \\Auth -->
+<g id="node18" class="node"><title>\\Auth</title>
+<a xlink:href="classes.auth.html" xlink:title="Auth" target="_parent">
+<polygon fill="none" stroke="black" points="834,-682 780,-682 780,-646 834,-646 834,-682"/>
+<text text-anchor="middle" x="807" y="-661.1" font-family="Courier,monospace" font-size="11.00">Auth</text>
+</a>
+</g>
+<!-- \\Auth&#45;&gt;\\Base_Auth -->
+<g id="edge25" class="edge"><title>\\Auth&#45;&gt;\\Base_Auth</title>
+<path fill="none" stroke="black" d="M779.91,-656.829C747.238,-648.181 691.712,-633.483 651.57,-622.857"/>
+<polygon fill="none" stroke="black" points="652.281,-619.425 641.719,-620.249 650.49,-626.192 652.281,-619.425"/>
+</g>
+<!-- \\Error -->
+<g id="node19" class="node"><title>\\Error</title>
+<a xlink:href="classes.error.html" xlink:title="Error" target="_parent">
+<polygon fill="none" stroke="black" points="834,-304 780,-304 780,-268 834,-268 834,-304"/>
+<text text-anchor="middle" x="807" y="-283.1" font-family="Courier,monospace" font-size="11.00">Error</text>
+</a>
 </g>
 <!-- \\Date -->
 <g id="node20" class="node"><title>\\Date</title>
@@ -234,33 +234,33 @@
 </a>
 </g>
 <!-- \\Date&#45;&gt;\\Base_Date -->
-<g id="edge29" class="edge"><title>\\Date&#45;&gt;\\Base_Date</title>
-<path fill="none" stroke="black" d="M779.797,-221.363C767.096,-216.395 751.773,-210.398 738,-205 709.21,-193.716 676.974,-181.061 651.224,-170.947"/>
-<polygon fill="none" stroke="black" points="652.281,-167.602 641.693,-167.204 649.721,-174.118 652.281,-167.602"/>
+<g id="edge27" class="edge"><title>\\Date&#45;&gt;\\Base_Date</title>
+<path fill="none" stroke="black" d="M779.91,-228.547C747.307,-224.392 691.947,-217.336 651.825,-212.223"/>
+<polygon fill="none" stroke="black" points="652.081,-208.727 641.719,-210.935 651.196,-215.671 652.081,-208.727"/>
 </g>
-<!-- \\JSMin -->
-<g id="node21" class="node"><title>\\JSMin</title>
-<a xlink:href="vendor.jsmin-php.jsmin.html" xlink:title="JSMin" target="_parent">
-<polygon fill="none" stroke="black" points="834,-196 780,-196 780,-160 834,-160 834,-196"/>
-<text text-anchor="middle" x="807" y="-175.1" font-family="Courier,monospace" font-size="11.00">JSMin</text>
+<!-- \\Model_User -->
+<g id="node21" class="node"><title>\\Model_User</title>
+<a xlink:href="classes.model.user.html" xlink:title="Model_User" target="_parent">
+<polygon fill="none" stroke="black" points="849,-466 765,-466 765,-430 849,-430 849,-466"/>
+<text text-anchor="middle" x="807" y="-445.1" font-family="Courier,monospace" font-size="11.00">Model_User</text>
 </a>
 </g>
-<!-- \\JSMinException -->
-<g id="node22" class="node"><title>\\JSMinException</title>
-<a xlink:href="vendor.jsmin-php.jsmin.html" xlink:title="JSMinException" target="_parent">
-<polygon fill="none" stroke="black" points="862,-142 752,-142 752,-106 862,-106 862,-142"/>
-<text text-anchor="middle" x="807" y="-121.1" font-family="Courier,monospace" font-size="11.00">JSMinException</text>
+<!-- \\Model_User&#45;&gt;\\Model -->
+<g id="edge29" class="edge"><title>\\Model_User&#45;&gt;\\Model</title>
+<path fill="none" stroke="black" d="M764.731,-436.811C727.979,-427.083 675.253,-413.126 640.107,-403.822"/>
+<polygon fill="none" stroke="black" points="640.807,-400.387 630.245,-401.212 639.016,-407.154 640.807,-400.387"/>
+</g>
+<!-- \\Model_Access_Rule -->
+<g id="node22" class="node"><title>\\Model_Access_Rule</title>
+<a xlink:href="classes.model.access.rule.html" xlink:title="Model_Access_Rule" target="_parent">
+<polygon fill="none" stroke="black" points="872,-358 742,-358 742,-322 872,-322 872,-358"/>
+<text text-anchor="middle" x="807" y="-337.1" font-family="Courier,monospace" font-size="11.00">Model_Access_Rule</text>
 </a>
 </g>
-<!-- \\Exception -->
-<g id="node41" class="node"><title>\\Exception</title>
-<ellipse fill="none" stroke="black" cx="603" cy="-72" rx="62.9325" ry="18.3848"/>
-<text text-anchor="middle" x="603" y="-68.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Exception</text>
-</g>
-<!-- \\JSMinException&#45;&gt;\\Exception -->
-<g id="edge31" class="edge"><title>\\JSMinException&#45;&gt;\\Exception</title>
-<path fill="none" stroke="black" d="M751.256,-109.791C722.869,-102.555 688.418,-93.7732 659.873,-86.497"/>
-<polygon fill="none" stroke="black" points="660.597,-83.0696 650.042,-83.9911 658.867,-89.8527 660.597,-83.0696"/>
+<!-- \\Model_Access_Rule&#45;&gt;\\Model -->
+<g id="edge31" class="edge"><title>\\Model_Access_Rule&#45;&gt;\\Model</title>
+<path fill="none" stroke="black" d="M741.33,-357.383C707.823,-366.253 668.3,-376.715 640.098,-384.18"/>
+<polygon fill="none" stroke="black" points="639.024,-380.844 630.253,-386.786 640.816,-387.61 639.024,-380.844"/>
 </g>
 </g>
 </svg>

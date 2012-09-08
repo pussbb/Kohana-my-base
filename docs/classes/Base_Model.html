@@ -59,14 +59,6 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#__call" title="__call :: calls functions for Base_Model or DB clases in Kohana"><span class="description">calls functions for Base_Model or DB clases in Kohana</span><pre>__call()</pre></a></li>
-<li class="method public "><a href="#__construct" title="__construct :: Constructs the object"><span class="description">Constructs the object</span><pre>__construct()</pre></a></li>
-<li class="method public "><a href="#__get" title="__get :: get value of dynamically appended variable"><span class="description">get value of dynamically appended variable</span><pre>__get()</pre></a></li>
-<li class="method public "><a href="#__isset" title="__isset :: checks if dynamically appended variable exists"><span class="description">checks if dynamically appended variable exists</span><pre>__isset()</pre></a></li>
-<li class="method public "><a href="#__set" title="__set :: dynamically append variable to object"><span class="description">dynamically append variable to object</span><pre>__set()</pre></a></li>
-<li class="method public "><a href="#__toArray" title="__toArray :: returns assoc array of dynamically append variable"><span class="description">returns assoc array of dynamically append variable</span><pre>__toArray()</pre></a></li>
-<li class="method public "><a href="#__toString" title="__toString :: returns last query string"><span class="description">returns last query string</span><pre>__toString()</pre></a></li>
-<li class="method public "><a href="#__unset" title="__unset :: removes dynamically appended variable"><span class="description">removes dynamically appended variable</span><pre>__unset()</pre></a></li>
 <li class="method public "><a href="#add_error" title="add_error :: add error message to errors list"><span class="description">add error message to errors list</span><pre>add_error()</pre></a></li>
 <li class="method public "><a href="#columns" title="columns :: user function to define database table columns"><span class="description">user function to define database table columns</span><pre>columns()</pre></a></li>
 <li class="method public "><a href="#errors" title="errors :: returns assoc array with all errors"><span class="description">returns assoc array with all errors</span><pre>errors()</pre></a></li>
@@ -197,154 +189,6 @@ e.g.</span><pre>system_filters()</pre></a></li>
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="__call" id="__call"></a><div class="element clickable method public __call" data-toggle="collapse" data-target=".__call .collapse">
-<h2>calls functions for Base_Model or DB clases in Kohana</h2>
-<pre>__call($name, $arguments) : mixed</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$name</h4></div>
-<div class="subelement argument"><h4>$arguments</h4></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>mixed</code></div>
-</div></div>
-</div>
-<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
-<h2>Constructs the object</h2>
-<pre>__construct(array $params) : void</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code>
-     $model = new Model_User(array(
-         'email' => 'domain@site.com',
-         .....
-     ));
-
-</code></pre></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$params</h4>
-<code>array</code>
-</div>
-</div></div>
-</div>
-<a name="__get" id="__get"></a><div class="element clickable method public __get" data-toggle="collapse" data-target=".__get .collapse">
-<h2>get value of dynamically appended variable</h2>
-<pre>__get($name) : mixed</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code>$model = new Model();
-$model->login = 'user';
-echo $model->login; // will output user
-</code></pre></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$name</h4></div>
-<h3>Exceptions</h3>
-<table class="table table-bordered"><tr>
-<th><code>\Kohana_Exception</code></th>
-<td></td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response"><code>mixed</code></div>
-</div></div>
-</div>
-<a name="__isset" id="__isset"></a><div class="element clickable method public __isset" data-toggle="collapse" data-target=".__isset .collapse">
-<h2>checks if dynamically appended variable exists</h2>
-<pre>__isset($name) : bool</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$name</h4></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>bool</code></div>
-</div></div>
-</div>
-<a name="__set" id="__set"></a><div class="element clickable method public __set" data-toggle="collapse" data-target=".__set .collapse">
-<h2>dynamically append variable to object</h2>
-<pre>__set($name, $value) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code>$model = new Model();
-$model->login = 'user';
-</code></pre></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$name</h4></div>
-<div class="subelement argument"><h4>$value</h4></div>
-</div></div>
-</div>
-<a name="__toArray" id="__toArray"></a><div class="element clickable method public __toArray" data-toggle="collapse" data-target=".__toArray .collapse">
-<h2>returns assoc array of dynamically append variable</h2>
-<pre>__toArray() : array | null</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code> $model = Model_User::find($id);
- var_dump((array)$model);
- //print
-array(
-  'login' => 'bla',
-  'email' => 'email@site.com',
-  ....
-)
-</code></pre></p>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>array</code><code>null</code>
-</div>
-</div></div>
-</div>
-<a name="__toString" id="__toString"></a><div class="element clickable method public __toString" data-toggle="collapse" data-target=".__toString .collapse">
-<h2>returns last query string</h2>
-<pre>__toString() : null | string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code> $model = Model_User::find($id);
- echo (string) $model; // returns SELECT * FROM ...
-</code></pre></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>null</code><code>string</code>
-</div>
-</div></div>
-</div>
-<a name="__unset" id="__unset"></a><div class="element clickable method public __unset" data-toggle="collapse" data-target=".__unset .collapse">
-<h2>removes dynamically appended variable</h2>
-<pre>__unset($name) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code>$model = new Model();
-$model->login = 'user';
-unset($model->login); //here
-</code></pre></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$name</h4></div>
-</div></div>
-</div>
 <a name="add_error" id="add_error"></a><div class="element clickable method public add_error" data-toggle="collapse" data-target=".add_error .collapse">
 <h2>add error message to errors list</h2>
 <pre>add_error(\$key $key, \$msg $msg) </pre>
@@ -1265,7 +1109,7 @@ to that variable</p></p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-09-05T10:48:47+03:00.<br></footer></div>
+            generated on 2012-09-08T21:14:12+03:00.<br></footer></div>
 </div>
 </body>
 </html>

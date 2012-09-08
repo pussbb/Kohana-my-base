@@ -21,7 +21,7 @@
 class Media {
 
     /*
-     * @ignore
+     * @internal
      */
     public static function __callStatic($name, $arguments)
     {

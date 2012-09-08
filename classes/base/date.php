@@ -20,14 +20,14 @@ class Base_Date extends Kohana_Date {
     const WEEK_START = 2;
 
     /**
-     * print date in specific format(from config common)
+     * print date in specific format(from config site)
      * @static
      * @param $date
      * @return string foremated date
      */
-    public static function formated($date)
+    public static function format($date)
     {
-        $format = Kohana::$config->load('common.date');
+        $format = Kohana::$config->load('site.date_formart');
         if (!$format) {
             $format = "F j, Y, g:i a";
         }

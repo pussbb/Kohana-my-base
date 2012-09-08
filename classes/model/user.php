@@ -16,6 +16,18 @@ class Model_User extends Model
         );
     }
 
+    public function relations()
+    {
+        return array(
+            'access_rules' => array(
+                Model::HAS_MANY,
+                'Model_Access_Rule',
+                'role_id',
+                'role_id'
+            ),
+        );
+    }
+
     public function rules()
     {
         return array(

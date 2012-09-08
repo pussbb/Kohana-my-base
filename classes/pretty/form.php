@@ -79,6 +79,7 @@ class Pretty_Form extends Singleton
         //call_user_func_array($this, $name, $arguments);
         if (method_exists('Form', $name))
             return call_user_func_array('Form::' . $name, $arguments);
+        throw new Exception("Unknown method $name");
     }
 
     /**

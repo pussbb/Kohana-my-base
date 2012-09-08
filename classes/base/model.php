@@ -190,6 +190,7 @@ class Base_Model extends Kohana_Model {
      * @param array $params
      * @access public
      * @return void
+     * @internal
      */
     public function __construct($params = NULL)
     {
@@ -204,6 +205,7 @@ class Base_Model extends Kohana_Model {
 
     /**
      * @ignore
+     * @internal
      * @return void
      */
     public function __destruct()
@@ -253,6 +255,7 @@ class Base_Model extends Kohana_Model {
      * @param $name
      * @param $value
      * @access public
+     * @internal
      */
     public function __set($name, $value)
     {
@@ -271,13 +274,50 @@ class Base_Model extends Kohana_Model {
      * @return mixed
      * @throws Kohana_Exception
      * @access public
+     * @internal
      */
     public function __get($name)
     {
         if (isset($this->$name))
             return $this->data[$name];
-        else
+
+        $relation = $this->get_relation($name);
+        if ( ! $relation)
             throw new Kohana_Exception('property_not_exists_' . $name);
+        return $this->_relation($name, $relation);
+    }
+
+    /*
+     * @internal
+     */
+    private function get_relation($name)
+    {
+        return Arr::get($this->relations(), $name);
+    }
+    /*
+     * @internal
+     */
+    private function _relation($name, $relation, $filter = array() )
+    {
+        $type = Arr::get($relation, 0);
+        $kclass = Arr::get($relation, 1);
+        $foreign_key = Arr::get($relation, 2);
+        $model_key = Arr::get($relation, 3, $this->primary_key);
+        $fiter[$foreign_key] = $this->$model_key;
+        switch ($type) {
+            case Model::BELONGS_TO:
+            case Model::HAS_ONE:
+                $model = $kclass::find($filter);
+                break;
+            case Model::HAS_MANY:
+                $model = $kclass::find_all($filter)->records;
+                break;
+            default:
+                throw new Exception("Unknown relation type");
+                break;
+        }
+        $this->data[$name] = $model;
+        return $model;
     }
 
     /**
@@ -286,6 +326,7 @@ class Base_Model extends Kohana_Model {
      * @param $name
      * @return bool
      * @access public
+     * @internal
      */
     public function __isset($name)
     {
@@ -302,6 +343,7 @@ class Base_Model extends Kohana_Model {
      * </code>
      * @param $name
      * @access public
+     * @internal
      */
     public function __unset($name)
     {
@@ -313,6 +355,7 @@ class Base_Model extends Kohana_Model {
      * @param $name
      * @param $arguments
      * @return mixed
+     * @internal
      */
     public function __call($name, $arguments)
     {
@@ -320,6 +363,12 @@ class Base_Model extends Kohana_Model {
             return;
         if (method_exists($this->db_query, $name))
             return call_user_func_array($this->db_query->$name, $arguments);
+
+        $relation = $this->get_relation($name);
+        if ( ! $relation)
+            throw new Exception("Unknown method $name");
+
+        return $this->_relation($name, $relation, Arr::get($arguments, 0, array()));    
     }
 
     /**
@@ -335,6 +384,7 @@ class Base_Model extends Kohana_Model {
      * @param $arguments
      * @return mixed
      * @access public
+     * @internal
      */
     public static function __callStatic($name, $arguments)
     {
@@ -362,6 +412,7 @@ class Base_Model extends Kohana_Model {
      * </code>
      * @return null|string
      * @access public
+     * @internal
      */
     public function __toString()
     {
@@ -385,6 +436,7 @@ class Base_Model extends Kohana_Model {
      * )
      * </code>
      * @return array|null
+     * @internal
      */
     public function __toArray()
     {
@@ -1123,6 +1175,14 @@ class Base_Model extends Kohana_Model {
         return array();
     }
 
+    /**
+     * sets relations for external models to this model
+     * @return array
+     */
+    protected function relations()
+    {
+        return array();
+    }
     /**
      * returns last inserted id
      * @return null

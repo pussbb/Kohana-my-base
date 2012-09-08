@@ -18,6 +18,9 @@
 
 class Auth extends Base_Auth {
 
+	/*
+	* @internal
+	*/
     public static function __callStatic($name, $arguments)
     {
         $auth = Base_Auth::instance();
