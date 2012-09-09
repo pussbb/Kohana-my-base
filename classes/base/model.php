@@ -654,6 +654,7 @@ class Base_Model extends Kohana_Model {
             return $this;
 
         $this->db_query->where_open();
+        $module_name = strtolower(self::module_name());
         foreach ($filter as $key => $value) {
             $comparison_key = '=';
             if (in_array($key, $this->system_filters)) {
@@ -671,7 +672,7 @@ class Base_Model extends Kohana_Model {
                 ///if (preg_match('/REGEXP/', $value->value()))
                 $comparison_key = '';
             }
-            $this->db_query->where($key, $comparison_key, $this->sanitize($key, $value));
+            $this->db_query->where($module_name.'.'.$key, $comparison_key, $this->sanitize($key, $value));
         }
         $this->db_query->where_close();
         return $this;
@@ -693,15 +694,16 @@ class Base_Model extends Kohana_Model {
      */
     public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
     {
+        $module_name = strtolower(self::module_name());
         if (!Arr::is_array($select_args)) {
-            $this->db_query = DB::select(self::module_name().'.'.$select_args);
+            $this->db_query = DB::select($module_name.'.'.$select_args);
         }
         else {
             $fields = array();
             if (Arr::is_array(Arr::get($select_args, 0))) {
                 foreach ($select_args as $item) {
                     $fields[] = array(
-                        self::module_name() . '.' . Arr::get($item, 0),
+                        $module_name . '.' . Arr::get($item, 0),
                         Arr::get($item, 1)
                     );
                 }
@@ -709,14 +711,14 @@ class Base_Model extends Kohana_Model {
             }
             else {
                 $fields = array(
-                    self::module_name() . '.' . Arr::get($select_args, 0),
+                    $module_name . '.' . Arr::get($select_args, 0),
                     Arr::get($select_args, 1)
                 );
                 $this->db_query = DB::select($fields);
             }
         }
 
-        $this->db_query->from(array($this->db_table, self::module_name()));
+        $this->db_query->from(array($this->db_table, $module_name));
         $this->db_query->limit($limit)->offset($offset);
         if ($cache)
             $this->db_query->cached($cache);
