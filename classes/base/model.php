@@ -737,7 +737,7 @@ class Base_Model extends Kohana_Model {
     {
         $module_name = strtolower(self::module_name());
         if ( ! Arr::is_array($select_args)) {
-            $this->db_query = DB::select($module_name.'.'.$select_args);
+            $this->db_query = DB::select($this->query_field($select_args));
         }
         else {
             $fields = array();
@@ -756,7 +756,7 @@ class Base_Model extends Kohana_Model {
             }
         }
 
-        $this->db_query->from(array($this->db_table, $module_name));
+        $this->db_query->from(array($this->db_table, $this->module_name));
         $this->db_query->limit($limit)->offset($offset);
         if ($cache)
             $this->db_query->cached($cache);
@@ -779,7 +779,7 @@ class Base_Model extends Kohana_Model {
      */
     public function insert($fields = NULL)
     {
-        $this->db_query = DB::insert($this->db_table, $fields);
+        $this->db_query = DB::insert(array($this->db_table, $this->module_name), $fields);
         return $this;
     }
 
@@ -790,7 +790,7 @@ class Base_Model extends Kohana_Model {
      */
     public function update()
     {
-        $this->db_query = DB::update($this->db_table)->where($this->query_field($this->primary_key), '=', $this->{$this->primary_key});
+        $this->db_query = DB::update(array($this->db_table, $this->module_name))->where($this->query_field($this->primary_key), '=', $this->{$this->primary_key});
         return $this;
     }
 
@@ -883,12 +883,10 @@ class Base_Model extends Kohana_Model {
     {
         switch ($this->query_type()) {
             case 'insert':
-            case 'update':
                 $properties = $this->get_private_properties($this->db_query);
-                $columns = Arr::get($properties, '_columns');
+                $columns = Arr::get($properties, '_columns', $this->table_columns());
                 $values = Arr::get($properties, '_values');
-               /// debug($this,1);
-                if ($columns && !$values) {
+                if ($columns && ! $values) {
                     $data = array();
                     foreach ($columns as $field) {
                         $data[] = $this->sanitize($field, $value);
@@ -896,6 +894,13 @@ class Base_Model extends Kohana_Model {
                     $this->db_query->values($data);
                 }
                 break;
+
+            case 'update':
+              foreach ($this->table_columns() as $field => $value) {
+                    if ($this->primary_key !== $field)
+                        $this->value($field, $this->sanitize($field, $this->{$field}));
+              }
+              break;
             default:
                 break;
         }
