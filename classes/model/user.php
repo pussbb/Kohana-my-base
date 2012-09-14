@@ -25,6 +25,12 @@ class Model_User extends Model
                 'role_id',
                 'role_id'
             ),
+            'total_rules' => array(
+                Model::STAT,
+                'Model_Access_Rule',
+                'role_id',
+                'role_id'
+            ),
         );
     }
 

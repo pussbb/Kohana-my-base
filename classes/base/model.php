@@ -177,6 +177,11 @@ class Base_Model extends Kohana_Model {
     const HAS_ONE = 3;
 
     /**
+     *
+     */
+    const STAT = 4;
+
+    /**
      * Constructs the object
      *
      * <code>
@@ -312,6 +317,13 @@ class Base_Model extends Kohana_Model {
             case Model::HAS_MANY:
                 $result = $klass::find_all($filter)->records;
                 break;
+            case Model::STAT:
+                $obj = new $klass();
+                $result = $obj->select(array(DB::expr('COUNT(*)'), 'total_count'))
+                                ->filter($filter)
+                                    ->execute()
+                                        ->get('total_count'); 
+                break;
             default:
                 throw new Exception("Unknown relation type");
                 break;
@@ -359,10 +371,12 @@ class Base_Model extends Kohana_Model {
      */
     public function __call($name, $arguments)
     {
+
         if (method_exists($this, $name))
             return;
         if (method_exists($this->db_query, $name))
-            return call_user_func_array($this->db_query->$name, $arguments);
+                return call_user_func_array(array($this->db_query, $name), $arguments);
+            
 
         $relation = $this->get_relation($name);
         if ( ! $relation)
@@ -629,10 +643,10 @@ class Base_Model extends Kohana_Model {
             throw new Kohana_Exception('must be an array');
 
         $table_columns = $this->table_columns();
-        if (!Arr::is_assoc($filter)) {
+        if ( ! Arr::is_assoc($filter)) {
             $fields = array();
             foreach ($filter as $field) {
-                if (!array_key_exists($field, $table_columns))
+                if ( ! array_key_exists($field, $table_columns))
                     continue;
                 $fields[$field] = $this->$field;
             }
@@ -650,7 +664,7 @@ class Base_Model extends Kohana_Model {
             }
         }
 
-        if (!array_filter($filter))
+        if ( ! array_filter($filter))
             return $this;
 
         $this->db_query->where_open();
@@ -662,7 +676,7 @@ class Base_Model extends Kohana_Model {
                 continue;
             }
             if (Arr::is_array($value)) {
-                if (!$value)
+                if ( ! $value)
                     continue;
                 $comparison_key = 'IN';
             }
@@ -691,27 +705,32 @@ class Base_Model extends Kohana_Model {
      * @param null $offset
      * @param null $cache
      * @return Base_Model
+     * @todo rewrite
      */
     public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
     {
         $module_name = strtolower(self::module_name());
-        if (!Arr::is_array($select_args)) {
+        if ( ! Arr::is_array($select_args)) {
             $this->db_query = DB::select($module_name.'.'.$select_args);
         }
         else {
             $fields = array();
             if (Arr::is_array(Arr::get($select_args, 0))) {
-                foreach ($select_args as $item) {
-                    $fields[] = array(
-                        $module_name . '.' . Arr::get($item, 0),
-                        Arr::get($item, 1)
-                    );
+                foreach ($select_args as $field => $alias) {
+                    if ( ! is_object($field)) {
+                        $field = $module_name . '.' . $field;
+                    }
+                    $fields[] = array($field, $alias);
                 }
                 $this->db_query = call_user_func_array(array('DB', 'select'), $fields);
             }
             else {
+                $field = Arr::get($select_args, 0); 
+                if ( ! is_object($field)) {
+                        $field = $module_name . '.' . $field;
+                }
                 $fields = array(
-                    $module_name . '.' . Arr::get($select_args, 0),
+                    $field,
                     Arr::get($select_args, 1)
                 );
                 $this->db_query = DB::select($fields);
