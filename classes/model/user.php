@@ -6,7 +6,7 @@ class Model_User extends Model
 
     protected $order = array('email', 'DESC');
 
-    public function _columns ()
+    protected static function _columns ()
     {
         return array(
             'email' => array(

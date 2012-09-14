@@ -85,6 +85,15 @@ class Base_Model extends Kohana_Model {
      */
     private $db_table = NULL;
 
+     /**
+     * contains module name
+     *
+     * @var string
+     * @access private
+     * @internal
+     */
+    private $module_name = NULL;
+
     /**
      * DB object for queries(uses Kohana's DB class)
      * @var object
@@ -206,6 +215,7 @@ class Base_Model extends Kohana_Model {
             $this->data[$this->primary_key] = $params;
         }
         $this->db_table = self::db_table_name();
+        $this->module_name = strtolower(self::module_name());
     }
 
     /**
@@ -599,6 +609,24 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+    * return filed name for query
+    * @internal
+    * @access private
+    */
+    private function query_field($name)
+    {
+        if ( ! $name)
+            throw new Exception("Database table column must not be empty");
+           
+        if ( ! is_object($name))
+            return $this->module_name.'.'.$name;
+
+        if (get_class($name) != 'Database_Expression')
+           throw new Exception("Error Processing Request", 1);
+        return $name;
+    }
+
+    /**
      * Helper function to create WHERE clause
      *
      * what for to rewrite?
@@ -668,7 +696,6 @@ class Base_Model extends Kohana_Model {
             return $this;
 
         $this->db_query->where_open();
-        $module_name = strtolower(self::module_name());
         foreach ($filter as $key => $value) {
             $comparison_key = '=';
             if (in_array($key, $this->system_filters)) {
@@ -683,10 +710,9 @@ class Base_Model extends Kohana_Model {
             if (is_object($value)) {
                 if (get_class($value) != 'Database_Expression')
                     throw new Exception("Error Processing Request", 1);
-                ///if (preg_match('/REGEXP/', $value->value()))
                 $comparison_key = '';
             }
-            $this->db_query->where($module_name.'.'.$key, $comparison_key, $this->sanitize($key, $value));
+            $this->db_query->where($this->query_field($key), $comparison_key, $this->sanitize($key, $value));
         }
         $this->db_query->where_close();
         return $this;
@@ -717,20 +743,13 @@ class Base_Model extends Kohana_Model {
             $fields = array();
             if (Arr::is_array(Arr::get($select_args, 0))) {
                 foreach ($select_args as $field => $alias) {
-                    if ( ! is_object($field)) {
-                        $field = $module_name . '.' . $field;
-                    }
-                    $fields[] = array($field, $alias);
+                    $fields[] = array($this->query_field($field), $alias);
                 }
                 $this->db_query = call_user_func_array(array('DB', 'select'), $fields);
             }
             else {
-                $field = Arr::get($select_args, 0); 
-                if ( ! is_object($field)) {
-                        $field = $module_name . '.' . $field;
-                }
                 $fields = array(
-                    $field,
+                    $this->query_field(Arr::get($select_args, 0)),
                     Arr::get($select_args, 1)
                 );
                 $this->db_query = DB::select($fields);
@@ -771,7 +790,7 @@ class Base_Model extends Kohana_Model {
      */
     public function update()
     {
-        $this->db_query = DB::update($this->db_table)->where($this->primary_key, '=', $this->{$this->primary_key});
+        $this->db_query = DB::update($this->db_table)->where($this->query_field($this->primary_key), '=', $this->{$this->primary_key});
         return $this;
     }
 
@@ -1021,7 +1040,7 @@ class Base_Model extends Kohana_Model {
      */
     public function get_table_columns()
     {
-        return $this->columns()? : self::table_columns();
+        return self::columns()? : self::table_columns();
     }
 
     /**
@@ -1170,10 +1189,11 @@ class Base_Model extends Kohana_Model {
 
     /**
      * user function to define database table columns
+     * @static
      * @return array
-     * @access public
+     * @access protected
      */
-    public function columns()
+    protected static function columns()
     {
         return array();
     }
