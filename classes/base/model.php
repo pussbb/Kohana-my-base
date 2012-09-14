@@ -887,6 +887,7 @@ class Base_Model extends Kohana_Model {
                 $properties = $this->get_private_properties($this->db_query);
                 $columns = Arr::get($properties, '_columns');
                 $values = Arr::get($properties, '_values');
+               /// debug($this,1);
                 if ($columns && !$values) {
                     $data = array();
                     foreach ($columns as $field) {
@@ -949,7 +950,7 @@ class Base_Model extends Kohana_Model {
                 if ($rule === 'unique')
                     $rule = array(array($this, 'unique_validation'), array(':validation', ':field'));
 
-                if (!is_array($rule)) {
+                if ( ! is_array($rule)) {
                     $validator->rule($key, $rule);
                     continue;
                 }
@@ -1049,6 +1050,8 @@ class Base_Model extends Kohana_Model {
      */
     private function query_type()
     {
+        if ( ! $this->db_query)
+            return NULL;
         $klass_pieces = preg_split('/(?=[A-Z])/', get_class($this->db_query));
         return strtolower(end($klass_pieces));
     }
@@ -1060,7 +1063,7 @@ class Base_Model extends Kohana_Model {
     protected function exec()
     {
         $this->db_query->as_assoc();
-        if ($this->order)
+        if ($this->order && $this->query_type() === 'select')
             call_user_func_array(array($this->db_query, 'order_by'), $this->order);
         $result = $this->db_query->execute();
         $this->last_query = (string) $this->db_query;
@@ -1249,8 +1252,9 @@ class Base_Model extends Kohana_Model {
      */
     public function unique_validation($validation, $field)
     {
-        $klass = clone $this;
-        if ($klass->exists(array($field))) {
+        $obj = clone $this;
+        $result = $obj->exists(array($field));
+        if (($this->new_record() && $result) && ($result && $this->id !== $obj->id)) {
             $validation->error($field, ' ' . __("already exists"));
             return;
         }
