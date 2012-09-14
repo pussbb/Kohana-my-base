@@ -226,9 +226,9 @@ class Base_Model extends Kohana_Model {
      */
     public static function module_name($glue = '_')
     {
-        $kclass_pieces = explode('_', get_called_class());
-        unset($kclass_pieces[0]);
-        return implode($glue, $kclass_pieces);
+        $klass_pieces = explode('_', get_called_class());
+        unset($klass_pieces[0]);
+        return implode($glue, $klass_pieces);
     }
 
     /**
@@ -300,17 +300,17 @@ class Base_Model extends Kohana_Model {
     private function _relation($name, $relation, $filter = array() )
     {
         $type = Arr::get($relation, 0);
-        $kclass = Arr::get($relation, 1);
+        $klass = Arr::get($relation, 1);
         $foreign_key = Arr::get($relation, 2);
         $model_key = Arr::get($relation, 3, $this->primary_key);
         $fiter[$foreign_key] = $this->$model_key;
         switch ($type) {
             case Model::BELONGS_TO:
             case Model::HAS_ONE:
-                $result = $kclass::find($filter);
+                $result = $klass::find($filter);
                 break;
             case Model::HAS_MANY:
-                $result = $kclass::find_all($filter)->records;
+                $result = $klass::find_all($filter)->records;
                 break;
             default:
                 throw new Exception("Unknown relation type");
@@ -388,15 +388,15 @@ class Base_Model extends Kohana_Model {
      */
     public static function __callStatic($name, $arguments)
     {
-        $kclass_name = get_called_class();
+        $klass_name = get_called_class();
         switch ($name) {
             case 'destroy':
-                $kclass = new $kclass_name;
-                return $kclass->destroy($arguments[0]);
+                $klass = new $klass_name;
+                return $klass->destroy($arguments[0]);
                 break;
             case 'exists':
-                $kclass = new $kclass_name;
-                return $kclass->exists(Arr::get($arguments, 0), Arr::get($arguments, 1), Arr::get($arguments, 2));
+                $klass = new $klass_name;
+                return $klass->exists(Arr::get($arguments, 0), Arr::get($arguments, 1), Arr::get($arguments, 2));
                 break;
             default:
                 break;
@@ -467,13 +467,13 @@ class Base_Model extends Kohana_Model {
      */
     public static function find($filter, $cache = NULL)
     {
-        $kclass_name = get_called_class();
-        $kclass = new $kclass_name;
+        $klass_name = get_called_class();
+        $klass = new $klass_name;
         if (is_numeric($filter)) {
-            $filter = array($kclass->primary_key => $filter);
+            $filter = array($klass->primary_key => $filter);
         }
-        $result = $kclass::find_all($filter, 1, NULL, $cache);
-        if (!isset($result->{$kclass->primary_key}))
+        $result = $klass::find_all($filter, 1, NULL, $cache);
+        if (!isset($result->{$klass->primary_key}))
             throw new Exception('record_not_found', 10);
         $result->records = array();
         $result->count = 1;
@@ -513,11 +513,11 @@ class Base_Model extends Kohana_Model {
      */
     public static function find_all($filter = array(), $limit = NULL, $offset = NULL, $cache = NULL)
     {
-        $kclass_name = get_called_class();
-        $kclass = new $kclass_name();
-        $kclass->select('*', $limit, $offset, $cache);
-        $kclass->filter($filter)->exec();
-        return $kclass;
+        $klass_name = get_called_class();
+        $klass = new $klass_name();
+        $klass->select('*', $limit, $offset, $cache);
+        $klass->filter($filter)->exec();
+        return $klass;
     }
 
     /**
@@ -529,8 +529,8 @@ class Base_Model extends Kohana_Model {
     public static function table_columns($table = NULL)
     {
         if (!$table) {
-            $kclass_name = get_called_class();
-            $table = $kclass_name::db_table_name();
+            $klass_name = get_called_class();
+            $table = $klass_name::db_table_name();
         }
         $columns = Kohana::cache($table . '_columns');
         if (!$columns) {
@@ -1011,8 +1011,8 @@ class Base_Model extends Kohana_Model {
      */
     private function query_type()
     {
-        $kclass_pieces = preg_split('/(?=[A-Z])/', get_class($this->db_query));
-        return strtolower(end($kclass_pieces));
+        $klass_pieces = preg_split('/(?=[A-Z])/', get_class($this->db_query));
+        return strtolower(end($klass_pieces));
     }
 
     /**
@@ -1049,7 +1049,7 @@ class Base_Model extends Kohana_Model {
                 if ($result->count() == 1) {
                     $this->update_params($result->current());
                 }
-                $kclass = get_called_class();
+                $klass = get_called_class();
                 if ($this->count_total)
                     $this->count = $this->auto_count_total();
                 else
@@ -1057,7 +1057,7 @@ class Base_Model extends Kohana_Model {
                 foreach ($result->as_array() as $record) {
                     if (!Arr::is_array($record) && !Arr::is_assoc($record))
                         break;
-                    $this->records[] = new $kclass($record);
+                    $this->records[] = new $klass($record);
                 }
                 $result = $result->count() > 0;
                 break;
@@ -1210,8 +1210,8 @@ class Base_Model extends Kohana_Model {
      */
     public function unique_validation($validation, $field)
     {
-        $kclass = clone $this;
-        if ($kclass->exists(array($field))) {
+        $klass = clone $this;
+        if ($klass->exists(array($field))) {
             $validation->error($field, ' ' . __("already exists"));
             return;
         }
