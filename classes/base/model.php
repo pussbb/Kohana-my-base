@@ -1239,8 +1239,10 @@ class Base_Model extends Kohana_Model {
         }
         foreach ($_result as $key => $data) {
             foreach ($this->with as $_key => $values) {
+                $relation_type = Arr::path($this->relations(), $_key.'.0');
                 if (isset($_result[$key][$_key])
-                        && count($_result[$key][$_key]) == 1)
+                        && count($_result[$key][$_key]) == 1
+                        || ($relation_type == Model::BELONGS_TO || $relation_type == Model::HAS_ONE))
                     $_result[$key][$_key] = $_result[$key][$_key][0];
             }
         }
