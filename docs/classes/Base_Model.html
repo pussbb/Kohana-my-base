@@ -33,10 +33,10 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">66</span></a></li>
+                <span class="label label-info">74</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
-                <span class="label label-info">1</span>
+                <span class="label label-info">2</span>
 </li></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
                 <span class="label label-info">0</span></a></li>
@@ -60,7 +60,6 @@
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
 <li class="method public "><a href="#add_error" title="add_error :: add error message to errors list"><span class="description">add error message to errors list</span><pre>add_error()</pre></a></li>
-<li class="method public "><a href="#columns" title="columns :: user function to define database table columns"><span class="description">user function to define database table columns</span><pre>columns()</pre></a></li>
 <li class="method public "><a href="#errors" title="errors :: returns assoc array with all errors"><span class="description">returns assoc array with all errors</span><pre>errors()</pre></a></li>
 <li class="method public "><a href="#filter" title="filter :: Helper function to create WHERE clause"><span class="description">Helper function to create WHERE clause</span><pre>filter()</pre></a></li>
 <li class="method public "><a href="#find" title="find :: find record in database table by condition"><span class="description">find record in database table by condition</span><pre>find()</pre></a></li>
@@ -80,12 +79,15 @@
 <li class="method public "><a href="#update" title="update :: sets parameters for UPDATE query"><span class="description">sets parameters for UPDATE query</span><pre>update()</pre></a></li>
 <li class="method public "><a href="#update_params" title="update_params :: helper function to append data to the object"><span class="description">helper function to append data to the object</span><pre>update_params()</pre></a></li>
 <li class="method public "><a href="#validate" title="validate :: simple function to validate data before save"><span class="description">simple function to validate data before save</span><pre>validate()</pre></a></li>
+<li class="method public "><a href="#with" title="with :: JOIN function alternative"><span class="description">JOIN function alternative</span><pre>with()</pre></a></li>
 <li class="nav-header protected">» Protected</li>
 <li class="method protected "><a href="#after_save" title="after_save :: user callback function wich calls after success executing query"><span class="description">user callback function wich calls after success executing query</span><pre>after_save()</pre></a></li>
 <li class="method protected "><a href="#before_save" title="before_save :: user function to make some operations before saving"><span class="description">user function to make some operations before saving</span><pre>before_save()</pre></a></li>
+<li class="method protected "><a href="#columns" title="columns :: user function to define database table columns"><span class="description">user function to define database table columns</span><pre>columns()</pre></a></li>
 <li class="method protected "><a href="#destroy" title="destroy :: creates DELETE query object"><span class="description">creates DELETE query object</span><pre>destroy()</pre></a></li>
 <li class="method protected "><a href="#exec" title="exec :: low level function to execute query"><span class="description">low level function to execute query</span><pre>exec()</pre></a></li>
 <li class="method protected "><a href="#exists" title="exists :: checks if value exists by some condition"><span class="description">checks if value exists by some condition</span><pre>exists()</pre></a></li>
+<li class="method protected "><a href="#relations" title="relations :: sets relations for external models to this model"><span class="description">sets relations for external models to this model</span><pre>relations()</pre></a></li>
 <li class="nav-header private">» Private</li>
 <li class="method private "><a href="#auto_count_total" title="auto_count_total :: function to calculate total rows in database column"><span class="description">function to calculate total rows in database column</span><pre>auto_count_total()</pre></a></li>
 <li class="method private "><a href="#clean" title="clean :: helper function to delete garbage after success query"><span class="description">helper function to delete garbage after success query</span><pre>clean()</pre></a></li>
@@ -138,6 +140,7 @@ e.g.</span><pre>system_filters()</pre></a></li>
 <li class="constant  "><a href="#BELONGS_TO" title="BELONGS_TO :: "><span class="description">BELONGS_TO</span><pre>BELONGS_TO</pre></a></li>
 <li class="constant  "><a href="#HAS_MANY" title="HAS_MANY :: "><span class="description">HAS_MANY</span><pre>HAS_MANY</pre></a></li>
 <li class="constant  "><a href="#HAS_ONE" title="HAS_ONE :: "><span class="description">HAS_ONE</span><pre>HAS_ONE</pre></a></li>
+<li class="constant  "><a href="#STAT" title="STAT :: "><span class="description">STAT</span><pre>STAT</pre></a></li>
 </ul>
 </div>
 <div class="span8">
@@ -206,20 +209,6 @@ e.g.</span><pre>system_filters()</pre></a></li>
 <div class="subelement argument">
 <h4>$msg</h4>
 <code>\$msg</code><p>string message</p></div>
-</div></div>
-</div>
-<a name="columns" id="columns"></a><div class="element clickable method public columns" data-toggle="collapse" data-target=".columns .collapse">
-<h2>user function to define database table columns</h2>
-<pre>columns() : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a name="errors" id="errors"></a><div class="element clickable method public errors" data-toggle="collapse" data-target=".errors .collapse">
@@ -520,6 +509,10 @@ if they exists</p></p>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>rewrite</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$select_args</h4>
@@ -636,6 +629,31 @@ Also if some model has function rules() before saving data it will get from that
 <div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
+<a name="with" id="with"></a><div class="element clickable method public with" data-toggle="collapse" data-target=".with .collapse">
+<h2>JOIN function alternative</h2>
+<pre>with(\$name $name, \$foreign_key $foreign_key, \$field $field, \$comparison_key $comparison_key) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>\$name</code><p>string|object string can be name of some model or relation name,</p></div>
+<div class="subelement argument">
+<h4>$foreign_key</h4>
+<code>\$foreign_key</code><p>string</p></div>
+<div class="subelement argument">
+<h4>$field</h4>
+<code>\$field</code><p>string</p></div>
+<div class="subelement argument">
+<h4>$comparison_key</h4>
+<code>\$comparison_key</code><p>string</p></div>
+</div></div>
+</div>
 <a name="after_save" id="after_save"></a><div class="element clickable method protected after_save" data-toggle="collapse" data-target=".after_save .collapse">
 <h2>user callback function wich calls after success executing query</h2>
 <pre>after_save() : void</pre>
@@ -658,6 +676,26 @@ Also if some model has function rules() before saving data it will get from that
 <th>access</th>
 <td>protected</td>
 </tr></table>
+</div></div>
+</div>
+<a name="columns" id="columns"></a><div class="element clickable method protected columns" data-toggle="collapse" data-target=".columns .collapse">
+<h2>user function to define database table columns</h2>
+<pre>columns() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+<tr>
+<th>access</th>
+<td>protected</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a name="destroy" id="destroy"></a><div class="element clickable method protected destroy" data-toggle="collapse" data-target=".destroy .collapse">
@@ -721,6 +759,16 @@ Model_User::destroy(array('login' => 'bla', ....));
 </div>
 <h3>Returns</h3>
 <div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a name="relations" id="relations"></a><div class="element clickable method protected relations" data-toggle="collapse" data-target=".relations .collapse">
+<h2>sets relations for external models to this model</h2>
+<pre>relations() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a name="auto_count_total" id="auto_count_total"></a><div class="element clickable method private auto_count_total" data-toggle="collapse" data-target=".auto_count_total .collapse">
@@ -1102,6 +1150,12 @@ to that variable</p></p>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
+<a name="STAT" id="STAT"> </a><div class="element clickable constant  STAT" data-toggle="collapse" data-target=".STAT .collapse">
+<h2>STAT</h2>
+<pre>STAT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
 </div>
 </div>
 </div>
@@ -1109,7 +1163,7 @@ to that variable</p></p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-09-08T21:14:12+03:00.<br></footer></div>
+            generated on 2012-09-15T22:20:35+03:00.<br></footer></div>
 </div>
 </body>
 </html>
