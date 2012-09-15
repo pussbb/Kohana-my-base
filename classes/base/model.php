@@ -163,6 +163,7 @@ class Base_Model extends Kohana_Model {
         'with', // query with join of known relation
         'total_count', // for select will added total_count to count all rows if limit set
     );
+
     /**
      * Count all rows with the same conditions or not
      *
@@ -228,6 +229,18 @@ class Base_Model extends Kohana_Model {
         $this->clean();
         $this->data = NULL;
         $this->records = NULL;
+    }
+
+    /**
+     * @ignore
+     * @internal
+     * @return void
+     */
+    public function __clone()
+    {
+        $obj = $this;
+        unset($obj->{$this->primary_key});
+        return $obj;
     }
 
     /**
@@ -309,6 +322,7 @@ class Base_Model extends Kohana_Model {
     {
         return Arr::get($this->relations(), $name);
     }
+
     /*
      * @internal
      */
@@ -497,7 +511,7 @@ class Base_Model extends Kohana_Model {
             $filter = array($klass->primary_key => $filter);
         }
         $result = $klass::find_all($filter, 1, NULL, $cache);
-        if (!isset($result->{$klass->primary_key}))
+        if ( ! isset($result->{$klass->primary_key}))
             throw new Exception('record_not_found', 10);
         $result->records = array();
         $result->count = 1;
@@ -552,12 +566,12 @@ class Base_Model extends Kohana_Model {
      */
     public static function table_columns($table = NULL)
     {
-        if (!$table) {
+        if ( ! $table) {
             $klass_name = get_called_class();
             $table = $klass_name::db_table_name();
         }
         $columns = Kohana::cache($table . '_columns');
-        if (!$columns) {
+        if ( ! $columns) {
             $columns = Database::instance()->list_columns($table);
             foreach ($columns as $key => $values) {
                 if (Arr::get($values, 'character_maximum_length'))
@@ -601,6 +615,7 @@ class Base_Model extends Kohana_Model {
                 $this->count_total = TRUE;
                 break;
             case 'with':
+                $this->with($value);
                 break;
             default:
                 # code...
@@ -608,6 +623,13 @@ class Base_Model extends Kohana_Model {
         }
     }
 
+    /**
+     * @internal
+     */
+    public function with($name)
+    {
+        $relation = Arr::get($this->relations(), $name);
+    }
     /**
     * return filed name for query
     * @internal
@@ -991,7 +1013,7 @@ class Base_Model extends Kohana_Model {
      */
     public function new_record()
     {
-        return !isset($this->{$this->primary_key});
+        return ! isset($this->{$this->primary_key});
     }
 
     /**
@@ -1004,7 +1026,7 @@ class Base_Model extends Kohana_Model {
         $keys = array();
         $table_columns = $this->get_table_columns();
         foreach ($this->data as $key => $value) {
-            if (!array_key_exists($key, $table_columns))
+            if ( ! array_key_exists($key, $table_columns))
                 continue;
             $keys[] = $key;
         }
@@ -1019,14 +1041,14 @@ class Base_Model extends Kohana_Model {
      */
     public function save()
     {
-        if (!$this->query_type()) {
+        if ( ! $this->query_type()) {
             if ($this->new_record())
                 $this->insert($this->table_fields());
             else
                 $this->update($this->table_fields());
         }
 
-        if (!Base_Db_Validation::check($this) || !$this->validate())
+        if ( ! Base_Db_Validation::check($this) || ! $this->validate())
             return FALSE;
 
         $this->before_save();
