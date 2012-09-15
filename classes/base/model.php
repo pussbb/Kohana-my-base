@@ -960,7 +960,7 @@ class Base_Model extends Kohana_Model {
         switch ($this->query_type()) {
             case 'insert':
                 $properties = $this->get_private_properties($this->db_query);
-                $columns = Arr::get($properties, '_columns', $this->table_columns());
+                $columns = Arr::get($properties, '_columns', array_keys($this->table_columns()));
                 $values = Arr::get($properties, '_values');
                 if ($columns && ! $values) {
                     $data = array();
