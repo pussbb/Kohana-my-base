@@ -238,19 +238,6 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * returns copy of object without primary key if function `clone $some_model` was called
-     * @ignore
-     * @internal
-     * @return void
-     */
-    public function __clone()
-    {
-        $obj = $this;
-        unset($obj->{$this->primary_key});
-        return $obj;
-    }
-
-    /**
      * Returns model name
      *
      * e.g. Model_User::module_name() will return 'User'
