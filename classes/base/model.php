@@ -174,6 +174,7 @@ class Base_Model extends Kohana_Model {
     private $count_total = FALSE;
 
     /**
+     * contains all necessary data to create appropriate model from join query
      * @internal
      */
     private $with = array();
@@ -237,6 +238,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * returns copy of object without primary key if function `clone $some_model` was called
      * @ignore
      * @internal
      * @return void
@@ -320,15 +322,18 @@ class Base_Model extends Kohana_Model {
         return $this->_relation($name, $relation);
     }
 
-    /*
+    /**
+     * returns relation data or null
      * @internal
+     * @return array|null
      */
     private function get_relation($name)
     {
         return Arr::get($this->relations(), $name);
     }
 
-    /*
+    /**
+     * get data for relation depends on relation option
      * @internal
      */
     private function _relation($name, $relation, $filter = array() )
@@ -636,6 +641,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * returns array with names all columns from db table for request with join
      * @internal
      */   
     public function query_columns_for_join()
@@ -648,7 +654,12 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @internal
+     * JOIN function alternative
+     * @param $name string|object string can be name of some model or relation name,
+     * @param $foreign_key string 
+     * @param $field string 
+     * @param $comparison_key string 
+     * @access public
      */
     public function with($name, $foreign_key = NULL, $field = NULL, $comparison_key = '=')
     {
@@ -673,6 +684,12 @@ class Base_Model extends Kohana_Model {
         else{
             throw new Exception("Unknown model");
         }
+
+        if ( ! $foreign_key)
+            $foreign_key = $model->primary_key;
+        if ( ! $field)
+            $field = $this->primary_key;
+
         $model_fields = $model->query_columns_for_join();
         $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
         $this->db_query->join(array($model->db_table, $model->module_name))
@@ -1198,6 +1215,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     * function returns proper array with values
      * @internal
      */
     private function parse_result($result)
