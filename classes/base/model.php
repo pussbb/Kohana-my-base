@@ -174,6 +174,11 @@ class Base_Model extends Kohana_Model {
     private $count_total = FALSE;
 
     /**
+     * @internal
+     */
+    private $with = array();
+
+    /**
      *
      */
     const BELONGS_TO = 1;
@@ -615,7 +620,14 @@ class Base_Model extends Kohana_Model {
                 $this->count_total = TRUE;
                 break;
             case 'with':
-                $this->with($value);
+                if (is_array($value)){
+                    foreach ($value as $item) {
+                        $this->with($value);
+                    }
+                }
+                else {
+                    $this->with($value);
+                }
                 break;
             default:
                 # code...
@@ -630,7 +642,6 @@ class Base_Model extends Kohana_Model {
     {
         foreach (array_keys($this->table_columns()) as $column)
         {
-            // Add the prefix so that load_result can determine the relationship
             $result[] = array($this->query_field($column), $this->query_field($column, ':'));
         }
         return $result;
@@ -641,14 +652,18 @@ class Base_Model extends Kohana_Model {
      */
     public function with($name, $foreign_key = NULL, $field = NULL, $comparison_key = '=')
     {
+        $with_name = '';
         if (is_object($name)) {
             $model = $name;
+            $with_name = strtolower($model->module_name());
         }
         elseif (Kohana::find_file('',strtolower(str_replace('_', DIRECTORY_SEPARATOR, $name)))) {
             $model = new $name();
+            $with_name = strtolower($model->module_name());
         }
         elseif (Arr::get($this->relations(), $name)) {
             $klass = Arr::path($this->relations(), "$name.1");
+            $with_name = $name;
             $model = new $klass();
             if ( ! $foreign_key)
                 $foreign_key = Arr::path($this->relations(), "$name.2");
@@ -658,9 +673,15 @@ class Base_Model extends Kohana_Model {
         else{
             throw new Exception("Unknown model");
         }
-        $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model->query_columns_for_join());
+        $model_fields = $model->query_columns_for_join();
+        $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
         $this->db_query->join(array($model->db_table, $model->module_name))
                         ->on($model->query_field($foreign_key), $comparison_key, $this->query_field($field));
+        $this->with[$with_name] = array(
+                get_class($model),
+                Arr::path($model_fields, '*.1'),
+                array_keys($model->table_columns())
+            );
     }
 
     /**
@@ -1147,16 +1168,19 @@ class Base_Model extends Kohana_Model {
                 $result = TRUE;
                 break;
             case 'select':
-                if ($result->count() == 1) {
-                    $this->update_params($result->current());
+                $_result = $this->parse_result($result);
+                if ($result->count() == 1 || count($_result) == 1) {
+                    $this->update_params($_result);
+                    $result = TRUE;
+                    break;
                 }
                 $klass = get_called_class();
                 if ($this->count_total)
                     $this->count = $this->auto_count_total();
                 else
-                    $this->count = $result->count();
-                foreach ($result->as_array() as $record) {
-                    if (!Arr::is_array($record) && !Arr::is_assoc($record))
+                    $this->count = count($_result);
+                foreach ($_result as $record) {//debug($_result,1);
+                    if ( ! Arr::is_array($record) && ! Arr::is_assoc($record))
                         break;
                     $this->records[] = new $klass($record);
                 }
@@ -1171,6 +1195,38 @@ class Base_Model extends Kohana_Model {
                 break;
         }
         return $result;
+    }
+
+    /**
+     * @internal
+     */
+    private function parse_result($result)
+    {
+        if ( ! $this->with )
+            return $result->count() == 1?$result->current():$result->as_array();
+            
+        $_result = array();
+        $main_keys = array_keys($this->table_columns());
+        foreach ($result->as_array() as $row) {
+            $_key = $row[$this->primary_key];
+            if ( ! isset($_result[$_key]))
+                $_result[$_key] = array_combine($main_keys, Arr::extract($row, $main_keys));
+            
+            foreach ($this->with as $key => $value) {
+                $klass = Arr::get($value, 0);
+                $_result[$_key][$key][] = new $klass(
+                    array_combine(Arr::get($value, 2), Arr::extract($row, Arr::get($value, 1)))
+                    );
+            }
+        }
+        foreach ($_result as $key => $data) {
+            foreach ($this->with as $_key => $values) {
+                if (isset($_result[$key][$_key])
+                        && count($_result[$key][$_key]) == 1)
+                    $_result[$key][$_key] = $_result[$key][$_key][0];
+            }
+        }
+        return $_result;
     }
 
     /**
@@ -1226,6 +1282,7 @@ class Base_Model extends Kohana_Model {
     {
         $this->db_query = NULL;
         $this->count_total = FALSE;
+        $this->with = array();
         $this->errors = array();
     }
 
