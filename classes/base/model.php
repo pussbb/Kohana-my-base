@@ -625,23 +625,56 @@ class Base_Model extends Kohana_Model {
 
     /**
      * @internal
-     */
-    public function with($name)
+     */   
+    public function query_columns_for_join()
     {
-        $relation = Arr::get($this->relations(), $name);
+        foreach (array_keys($this->table_columns()) as $column)
+        {
+            // Add the prefix so that load_result can determine the relationship
+            $result[] = array($this->query_field($column), $this->query_field($column, ':'));
+        }
+        return $result;
     }
+
+    /**
+     * @internal
+     */
+    public function with($name, $foreign_key = NULL, $field = NULL, $comparison_key = '=')
+    {
+        if (is_object($name)) {
+            $model = $name;
+        }
+        elseif (Kohana::find_file('',strtolower(str_replace('_', DIRECTORY_SEPARATOR, $name)))) {
+            $model = new $name();
+        }
+        elseif (Arr::get($this->relations(), $name)) {
+            $klass = Arr::path($this->relations(), "$name.1");
+            $model = new $klass();
+            if ( ! $foreign_key)
+                $foreign_key = Arr::path($this->relations(), "$name.2");
+            if ( ! $field)
+                $field = Arr::path($this->relations(), "$name.3", $this->primary_key);
+        }
+        else{
+            throw new Exception("Unknown model");
+        }
+        $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model->query_columns_for_join());
+        $this->db_query->join(array($model->db_table, $model->module_name))
+                        ->on($model->query_field($foreign_key), $comparison_key, $this->query_field($field));
+    }
+
     /**
     * return filed name for query
     * @internal
     * @access private
     */
-    private function query_field($name)
+    private function query_field($name, $delimiter = '.')
     {
         if ( ! $name)
             throw new Exception("Database table column must not be empty");
            
         if ( ! is_object($name))
-            return $this->module_name.'.'.$name;
+            return $this->module_name.$delimiter.$name;
 
         if (get_class($name) != 'Database_Expression')
            throw new Exception("Error Processing Request", 1);
@@ -1068,7 +1101,7 @@ class Base_Model extends Kohana_Model {
      */
     public function get_table_columns()
     {
-        return self::columns()? : self::table_columns();
+        return $this->columns()? : self::table_columns();
     }
 
     /**
@@ -1223,7 +1256,7 @@ class Base_Model extends Kohana_Model {
      * @return array
      * @access protected
      */
-    protected static function columns()
+    protected function columns()
     {
         return array();
     }
