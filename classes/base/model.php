@@ -1384,4 +1384,39 @@ class Base_Model extends Kohana_Model {
         }
     }
 
+    private $meta_data_cache = NULL;
+
+    public function meta_item($key, $default = NULL)
+    {
+        $meta_data = $this->meta_data();
+         if (strpos($key, '.') !== FALSE)
+            return Arr::path($this->meta_data(), $key, $default);
+        return Arr::get($this->meta_data(), $key, $default);
+    }
+
+    public function meta_data()
+    {
+        if ( ! isset($this->meta_data))
+            throw new Exception("Table does not have field meta_data", 1);
+
+        if ($this->meta_data_cache)
+            return $this->meta_data_cache;
+
+        $data  = json_decode($this->meta_data, TRUE);
+        if (json_last_error() != JSON_ERROR_NONE)
+            throw new Exception_Json(NULL, json_last_error());
+            
+        if ( ! $data)
+            return array();
+        return $data;
+    }
+
+    public function set_meta_item($key, $value)
+    {
+        $meta_data = $this->meta_data();
+        $meta_data[$key] = $value;
+        $this->meta_data_cache[$key] = $value;
+        $this->meta_data = json_encode($meta_data);
+    }
+
 }
