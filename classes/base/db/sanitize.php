@@ -38,7 +38,21 @@ class Base_Db_Sanitize {
             return (string)Text::xss_clean($value);
         return aray_map('Text::xss_clean', $value);
     }
+    
+    public static function date($value)
+    {
+        return Date::format($value, 'YYYY-MM-DD');
+    }
 
+    public static function datetime($value)
+    {
+        return Date::format($value, 'YYYY-MM-DD HH:MM:SS');
+    }
+
+    public static function time($value)
+    {
+        return Date::format($value, 'HH:MM:SS');
+    }
     /**
      * checks if class has function for field type
      * @static
@@ -48,7 +62,7 @@ class Base_Db_Sanitize {
      */
     public static function value($type, $value)
     {
-        if (!method_exists('Base_Db_Value', $type))
+        if ( ! method_exists('Base_Db_Value', $type))
             return $value;
         return Base_Db_Sanitize::$type($key, $value);
     }

@@ -1001,6 +1001,8 @@ class Base_Model extends Kohana_Model {
             return $value;
         $table_columns = $this->get_table_columns();
         $type = Arr::path($table_columns, $key . '.type');
+        if (in_array(Arr::path($table_columns, $key . '.data_type'), array('date', 'datetime', 'time')))
+            $type = Arr::path($table_columns, $key . '.data_type');
         if ($type)
             return Base_Db_Sanitize::value($type, $value);
         return $value;
