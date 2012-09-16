@@ -25,11 +25,10 @@ class Base_Date extends Kohana_Date {
      * @param $date
      * @return string foremated date
      */
-    public static function format($date)
+    public static function format($date, $format = NULL)
     {
-        $format = Kohana::$config->load('site.date_formart');
         if (!$format) {
-            $format = "F j, Y, g:i a";
+            $format = Kohana::$config->load('site')->get('date_formart', 'F j, Y, g:i a');
         }
         return date($format, strtotime($date));
     }
