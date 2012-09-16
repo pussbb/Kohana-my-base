@@ -549,10 +549,11 @@ class Base_Model extends Kohana_Model {
     public static function find_all($filter = array(), $limit = NULL, $offset = NULL, $cache = NULL)
     {
         $klass_name = get_called_class();
-        $klass = new $klass_name();
-        $klass->select('*', $limit, $offset, $cache);
-        $klass->filter($filter)->exec();
-        return $klass;
+        $obj = new $klass_name();
+        $obj->select('*', $limit, $offset, $cache);
+        $obj->filter($filter)->exec();
+        $obj->data = array();
+        return $obj;
     }
 
     /**
@@ -1174,9 +1175,7 @@ class Base_Model extends Kohana_Model {
             case 'select':
                 $_result = $this->parse_result($result);
                 if ($this->count == 1) {
-                    $this->update_params($_result);
-                    $result = TRUE;
-                    break;
+                    $this->update_params($_result[0]);
                 }
                 $klass = get_called_class();
                 if ($this->count_total)
@@ -1208,7 +1207,7 @@ class Base_Model extends Kohana_Model {
     {
         $this->count = $result->count();
         if ( ! $this->with )
-            return $this->count == 1?$result->current():$result->as_array();
+            return $this->count == 1?array($result->current()):$result->as_array();
             
         $_result = array();
         $main_keys = array_keys($this->table_columns());
@@ -1228,17 +1227,13 @@ class Base_Model extends Kohana_Model {
             foreach ($this->with as $_key => $values) {
                 $relation_type = Arr::path($this->relations(), $_key.'.0');
                 if (isset($_result[$key][$_key])
-                        && count($_result[$key][$_key]) == 1
-                        || ($relation_type == Model::BELONGS_TO || $relation_type == Model::HAS_ONE))
+                        && ($relation_type == Model::BELONGS_TO || $relation_type == Model::HAS_ONE))
                     $_result[$key][$_key] = $_result[$key][$_key][0];
             }
         }
         $this->count = count($_result);
-        $_result = array_values($_result);
-        
-        if ($this->count == 1)
-            return $_result[0];
-        return $_result;
+        return array_values($_result);
+
     }
 
     /**
