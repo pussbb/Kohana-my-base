@@ -55,7 +55,7 @@ echo $form->password(array(
 //    'info' => __('terms_of_use')
 //));
 
-echo $form->form_action(array(
+echo $form->form_actions(array(
     'buttons' => array(
         array('submit', __('register'), array( 'class' => 'btn btn-primary', 'type' => 'submit'))
     )

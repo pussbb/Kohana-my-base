@@ -860,7 +860,7 @@ class Base_Model extends Kohana_Model {
      */
     public function insert($fields = NULL)
     {
-        $this->db_query = DB::insert(array($this->db_table, $this->module_name), $fields);
+        $this->db_query = DB::insert($this->db_table, $fields);
         return $this;
     }
 
@@ -970,7 +970,7 @@ class Base_Model extends Kohana_Model {
                 if ($columns && ! $values) {
                     $data = array();
                     foreach ($columns as $field) {
-                        $data[] = $this->sanitize($field, $value);
+                        $data[] = $this->sanitize($field, $this->$field);
                     }
                     $this->db_query->values($data);
                 }

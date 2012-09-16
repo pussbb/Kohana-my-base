@@ -31,7 +31,7 @@ echo $form->password(array(
 ));
 
 
-echo $form->form_action(array(
+echo $form->form_actions(array(
     'buttons' => array(
         array('submit', __('login'), array( 'class' => 'btn btn-primary', 'type' => 'submit'))
     )
