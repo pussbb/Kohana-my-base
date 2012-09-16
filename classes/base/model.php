@@ -1173,7 +1173,7 @@ class Base_Model extends Kohana_Model {
                 break;
             case 'select':
                 $_result = $this->parse_result($result);
-                if ($result->count() == 1 || count($_result) == 1) {
+                if ($this->count == 1) {
                     $this->update_params($_result);
                     $result = TRUE;
                     break;
@@ -1181,9 +1181,8 @@ class Base_Model extends Kohana_Model {
                 $klass = get_called_class();
                 if ($this->count_total)
                     $this->count = $this->auto_count_total();
-                else
-                    $this->count = count($_result);
-                foreach ($_result as $record) {//debug($_result,1);
+
+                foreach ($_result as $record) {
                     if ( ! Arr::is_array($record) && ! Arr::is_assoc($record))
                         break;
                     $this->records[] = new $klass($record);
@@ -1207,8 +1206,9 @@ class Base_Model extends Kohana_Model {
      */
     private function parse_result($result)
     {
+        $this->count = $result->count();
         if ( ! $this->with )
-            return $result->count() == 1?$result->current():$result->as_array();
+            return $this->count == 1?$result->current():$result->as_array();
             
         $_result = array();
         $main_keys = array_keys($this->table_columns());
@@ -1233,6 +1233,11 @@ class Base_Model extends Kohana_Model {
                     $_result[$key][$_key] = $_result[$key][$_key][0];
             }
         }
+        $this->count = count($_result);
+        $_result = array_values($_result);
+        
+        if ($this->count == 1)
+            return $_result[0];
         return $_result;
     }
 
