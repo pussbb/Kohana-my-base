@@ -59,10 +59,10 @@ class Text extends Kohana_Text {
      * @param $data
      * @return string
      */
-    public function strip_tags($text)
+    public function strip_tags($text, $allowed_tags = '<b><p><strong><br>')
     {
-    	        // remove all html tags except <b><p><strong><br>
-        $text = strip_tags($text, '<b><p><strong><br>');
+        // remove all html tags except <b><p><strong><br>
+        $text = strip_tags($text, $allowed_tags);
         // remove all html tags attributes for allowed tags
         // (prevent js code injection by inserting onclick attribute)
         $text = preg_replace(
