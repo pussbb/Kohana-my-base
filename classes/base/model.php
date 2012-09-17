@@ -11,7 +11,7 @@
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
- * @version 0.1.2 
+ * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
  * @category database
  * @subpackage database
@@ -30,7 +30,7 @@ class Base_Model extends Kohana_Model {
     public $records = array();
 
     /**
-     * default value for limit rows 
+     * default value for limit rows
      * @var int
      * @access public
      */
@@ -41,7 +41,7 @@ class Base_Model extends Kohana_Model {
      *
      * by default count($this->records), but if system filter 'count_total'
      * was specified. This variable will be contain count of all records in DB
-     * even if limit was set. 
+     * even if limit was set.
      * @var int
      * @access public
      */
@@ -70,7 +70,7 @@ class Base_Model extends Kohana_Model {
      *          protected $primary_key = 'email';
      *     }
      *  ?>
-     * </code> 
+     * </code>
      * @var string
      * @access protected
      */
@@ -104,7 +104,7 @@ class Base_Model extends Kohana_Model {
     /**
      * last inserted row in db for table
      *
-     * after insert some row to db, last inserted row id in db will be append 
+     * after insert some row to db, last inserted row id in db will be append
      * to that variable
      * @var int
      * @access protected
@@ -135,7 +135,7 @@ class Base_Model extends Kohana_Model {
     private $errors = array();
 
     /**
-     * Last normal SQL query executed as string 
+     * Last normal SQL query executed as string
      * @var string
      * @access private
      */
@@ -178,6 +178,13 @@ class Base_Model extends Kohana_Model {
      * @internal
      */
     private $with = array();
+
+
+    /**
+     * array from field meta_data(json string) - prevent multiplier usage of json_decode
+     * @internal
+     */
+    private $meta_data_cache = NULL;
 
     /**
      *
@@ -238,36 +245,6 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * Returns model name
-     *
-     * e.g. Model_User::module_name() will return 'User'
-     * @static
-     * @param string $glue 
-     * @return string name of current module
-     * @access public
-     */
-    public static function module_name($glue = '_')
-    {
-        $klass_pieces = explode('_', get_called_class());
-        unset($klass_pieces[0]);
-        return implode($glue, $klass_pieces);
-    }
-
-    /**
-     * return a table name in plural form
-     *
-     * Model_User::db_table_name() = `users`
-     * @static
-     * @param string $glue
-     * @return mixed
-     * @access private
-     */
-    private static function db_table_name($glue = '_')
-    {
-        return Inflector::plural(strtolower(self::module_name($glue)));
-    }
-
-    /**
      * dynamically append variable to object
      *
      * <code>
@@ -307,50 +284,6 @@ class Base_Model extends Kohana_Model {
         if ( ! $relation)
             throw new Kohana_Exception('property_not_exists_' . $name);
         return $this->_relation($name, $relation);
-    }
-
-    /**
-     * returns relation data or null
-     * @internal
-     * @return array|null
-     */
-    private function get_relation($name)
-    {
-        return Arr::get($this->relations(), $name);
-    }
-
-    /**
-     * get data for relation depends on relation option
-     * @internal
-     */
-    private function _relation($name, $relation, $filter = array() )
-    {
-        $type = Arr::get($relation, 0);
-        $klass = Arr::get($relation, 1);
-        $foreign_key = Arr::get($relation, 2);
-        $model_key = Arr::get($relation, 3, $this->primary_key);
-        $fiter[$foreign_key] = $this->$model_key;
-        switch ($type) {
-            case Model::BELONGS_TO:
-            case Model::HAS_ONE:
-                $result = $klass::find($filter);
-                break;
-            case Model::HAS_MANY:
-                $result = $klass::find_all($filter)->records;
-                break;
-            case Model::STAT:
-                $obj = new $klass();
-                $result = $obj->select(array(DB::expr('COUNT(*)'), 'total_count'))
-                                ->filter($filter)
-                                    ->execute()
-                                        ->get('total_count'); 
-                break;
-            default:
-                throw new Exception("Unknown relation type");
-                break;
-        }
-        $this->data[$name] = $result;
-        return $result;
     }
 
     /**
@@ -397,13 +330,13 @@ class Base_Model extends Kohana_Model {
             return;
         if (method_exists($this->db_query, $name))
                 return call_user_func_array(array($this->db_query, $name), $arguments);
-            
+
 
         $relation = $this->get_relation($name);
         if ( ! $relation)
             throw new Exception("Unknown method $name");
 
-        return $this->_relation($name, $relation, Arr::get($arguments, 0, array()));    
+        return $this->_relation($name, $relation, Arr::get($arguments, 0, array()));
     }
 
     /**
@@ -455,6 +388,80 @@ class Base_Model extends Kohana_Model {
         if ($string)
             return $string;
         return $this->last_query;
+    }
+
+   /**
+     * Returns model name
+     *
+     * e.g. Model_User::module_name() will return 'User'
+     * @static
+     * @param string $glue
+     * @return string name of current module
+     * @access public
+     */
+    public static function module_name($glue = '_')
+    {
+        $klass_pieces = explode('_', get_called_class());
+        unset($klass_pieces[0]);
+        return implode($glue, $klass_pieces);
+    }
+
+    /**
+     * return a table name in plural form
+     *
+     * Model_User::db_table_name() = `users`
+     * @static
+     * @param string $glue
+     * @return mixed
+     * @access private
+     */
+    private static function db_table_name($glue = '_')
+    {
+        return Inflector::plural(strtolower(self::module_name($glue)));
+    }
+
+    /**
+     * returns relation data or null
+     * @internal
+     * @return array|null
+     */
+    private function get_relation($name)
+    {
+        return Arr::get($this->relations(), $name);
+    }
+
+    /**
+     * get data for relation depends on relation option
+     * @internal
+     */
+    private function _relation($name, $relation, $filter = array() )
+    {
+        $type = Arr::get($relation, 0);
+        $klass = Arr::get($relation, 1);
+        $foreign_key = Arr::get($relation, 2);
+        $model_key = Arr::get($relation, 3, $this->primary_key);
+        $fiter[$foreign_key] = $this->$model_key;
+        switch ($type) {
+            case Model::BELONGS_TO:
+            case Model::HAS_ONE:
+                $result = $klass::find($filter);
+                break;
+            case Model::HAS_MANY:
+                $result = $klass::find_all($filter)->records;
+                break;
+            case Model::STAT:
+                $obj = new $klass();
+                $result = $obj->select(array(DB::expr('COUNT(*)'), 'total_count'))
+                                ->filter($filter)
+                                    ->execute()
+                                        ->get('total_count');
+                break;
+            default:
+                throw new Exception("Unknown relation type");
+                break;
+        }
+        $this->data[$name] = $result;
+        return $result;
     }
 
     /**
@@ -631,7 +638,7 @@ class Base_Model extends Kohana_Model {
     /**
      * returns array with names all columns from db table for request with join
      * @internal
-     */   
+     */
     public function query_columns_for_join()
     {
         foreach (array_keys($this->table_columns()) as $column)
@@ -644,9 +651,9 @@ class Base_Model extends Kohana_Model {
     /**
      * JOIN function alternative
      * @param $name string|object string can be name of some model or relation name,
-     * @param $foreign_key string 
-     * @param $field string 
-     * @param $comparison_key string 
+     * @param $foreign_key string
+     * @param $field string
+     * @param $comparison_key string
      * @access public
      */
     public function with($name, $foreign_key = NULL, $field = NULL, $comparison_key = '=')
@@ -698,7 +705,7 @@ class Base_Model extends Kohana_Model {
     {
         if ( ! $name)
             throw new Exception("Database table column must not be empty");
-           
+
         if ( ! is_object($name))
             return $this->module_name.$delimiter.$name;
 
@@ -1210,14 +1217,14 @@ class Base_Model extends Kohana_Model {
         $this->count = $result->count();
         if ( ! $this->with )
             return $this->count == 1?array($result->current()):$result->as_array();
-            
+
         $_result = array();
         $main_keys = array_keys($this->table_columns());
         foreach ($result->as_array() as $row) {
             $_key = $row[$this->primary_key];
             if ( ! isset($_result[$_key]))
                 $_result[$_key] = array_combine($main_keys, Arr::extract($row, $main_keys));
-            
+
             foreach ($this->with as $key => $value) {
                 $klass = Arr::get($value, 0);
                 $_result[$_key][$key][] = new $klass(
@@ -1386,8 +1393,13 @@ class Base_Model extends Kohana_Model {
         }
     }
 
-    private $meta_data_cache = NULL;
-
+    /**
+     * returns value of some item in meta_data field
+     * @param $key (string)
+     * @param $default mixed
+     * @access public
+     * @return mixed|null
+     */
     public function meta_item($key, $default = NULL)
     {
         $meta_data = $this->meta_data();
@@ -1396,6 +1408,11 @@ class Base_Model extends Kohana_Model {
         return Arr::get($this->meta_data(), $key, $default);
     }
 
+    /**
+     * returns encoded data from  table column meta_data(json encoded string)
+     * @access public
+     * @return void
+     */
     public function meta_data()
     {
         if ( ! isset($this->meta_data))
@@ -1407,12 +1424,19 @@ class Base_Model extends Kohana_Model {
         $data  = json_decode($this->meta_data, TRUE);
         if (json_last_error() != JSON_ERROR_NONE)
             throw new Exception_Json(NULL, json_last_error());
-            
+
         if ( ! $data)
             return array();
         return $data;
     }
 
+    /**
+     * add some item to the meta_data field
+     * @param $key - string
+     * @param $value - mixed
+     * @access public
+     * @return void
+     */
     public function set_meta_item($key, $value)
     {
         $meta_data = $this->meta_data();

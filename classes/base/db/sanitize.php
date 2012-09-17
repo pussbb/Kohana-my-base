@@ -21,9 +21,7 @@ class Base_Db_Sanitize {
      */
     public static function int($value)
     {
-        if (!Arr::is_array($value))
-            return intval($value);
-        return array_map('intval', $value);
+        return intval($value);
     }
 
     /**
@@ -34,25 +32,42 @@ class Base_Db_Sanitize {
      */
     public static function string($value)
     {
-        if (!Arr::is_array($value))
-            return (string)Text::xss_clean($value);
-        return aray_map('Text::xss_clean', $value);
+        return (string)Text::xss_clean((string)$value);
     }
-    
+
+    /**
+     * convert to string date to Mysql date format string
+     * @static
+     * @param $value
+     * @return mixed|string
+     */
     public static function date($value)
     {
         return Date::format($value, 'YYYY-MM-DD');
     }
 
+     /**
+     * convert to string datetime to Mysql datetime format string
+     * @static
+     * @param $value
+     * @return mixed|string
+     */
     public static function datetime($value)
     {
         return Date::format($value, 'YYYY-MM-DD HH:MM:SS');
     }
 
+    /**
+     * convert to string time to Mysql time format string
+     * @static
+     * @param $value
+     * @return mixed|string
+     */
     public static function time($value)
     {
         return Date::format($value, 'HH:MM:SS');
     }
+
     /**
      * checks if class has function for field type
      * @static
