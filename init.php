@@ -10,6 +10,16 @@ if (Kohana::$environment == Kohana::PRODUCTION)
     Kohana_Kohana_Exception::$error_view = "errors/500";
 }
 
+if ( ! function_exists('tr'))
+{
+	function tr($string, array $values = NULL)
+	{
+	    if ( ! $values)
+	    	return gettext($string);
+		return vprintf(gettext($string), $values);
+	}
+}
+
 if ( ! function_exists('debug'))
 {
     function debug($var, $exit = FALSE)

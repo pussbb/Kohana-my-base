@@ -515,11 +515,10 @@ class Base_Model extends Kohana_Model {
             $filter = array($klass->primary_key => $filter);
         }
         $result = $klass::find_all($filter, 1, NULL, $cache);
-        if ( ! isset($result->{$klass->primary_key}))
+        if ( ! Arr::get($result->records, 0))
             throw new Exception('record_not_found', 10);
-        $result->records = array();
-        $result->count = 1;
-        return $result;
+
+        return $result->records[0];
     }
 
     /**

@@ -53,11 +53,8 @@ class Controller_Core extends Controller_Template {
      */
     protected function set_language()
     {
-//        $language = Language::get()->name;
-        // we have ru/en/de languages
-        // but kohana expects ru-ru/en-en ...
-        $language = "EN";
-        I18n::lang($language . '-' . $language);
+        $language = Language::get()->locale;
+        I18n::lang($language);
     }
 
     /**
