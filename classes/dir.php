@@ -13,7 +13,7 @@
 
 class Dir {
 
-    public static function create($directory)
+    public static function create_if_need($directory)
     {
         if ( ! file_exists($directory))
         {
