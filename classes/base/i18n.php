@@ -43,4 +43,14 @@ class Base_I18n extends Kohana_I18n {
 	{
 		return DOCROOT.'locale'.DIRECTORY_SEPARATOR;
 	}
+
+	public static function absolute_file_path($lang = 'en-EN', $ext = 'po')
+	{
+		return self::tr_path($lang).self::$domain.'.'.$ext;
+	}
+
+	public static function gettext_enabled()
+	{
+		return function_exists('gettext');
+	}
 }
