@@ -226,7 +226,7 @@ class Error
 
         if ( Kohana::$environment == Kohana::DEVELOPMENT)
         {
-            include Kohana::find_file('views', 'kohana/error');
+            include Kohana::find_file('views', Kohana_Kohana_Exception::$error_view);
             return ob_get_clean();
         }
 

@@ -9,7 +9,7 @@ class Base_Language {
     public static function get()
     {
         $language = Session::instance()->get('language');
-        return $language ?: self::get_default();
+        return is_object($language) ? $language : self::get_default();
     }
 
     public static function get_default()

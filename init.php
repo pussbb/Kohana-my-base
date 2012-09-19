@@ -24,11 +24,14 @@ if ( ! function_exists('tr'))
 
 if ( ! function_exists('debug'))
 {
-    function debug($var, $exit = FALSE)
+    function debug()
     {
-        echo '<pre>';
-            print_r($var); // or var_dump($var);
-        echo '</pre>';
-        ! $exit ?: exit;
+        $exit = FALSE;
+        $args = func_get_args();
+        if (is_bool(end($args)) && count($args) > 1)
+            $exit = array_pop($args);
+        echo call_user_func_array('Debug::vars', $args);
+        if ($exit)
+            exit();
     }
 }

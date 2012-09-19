@@ -239,7 +239,7 @@ class Base_Media extends Singleton{
         }
 
         if ( Kohana::$environment != Kohana::PRODUCTION) {
-            $this->coffeescript($file_name, $files);
+            Tools_CoffeeScript::build_if_needed($file_name, $files);
         }
         if ($check && ! $this->find_file($file_name, 'js'))
             return;
@@ -305,85 +305,6 @@ class Base_Media extends Singleton{
         return "\n<script type=\"text/javascript\">\n$this->inline_script\n</script>\n";
     }
 
-    /**
-     * checks if coffee script exists
-     *
-     * Returns TRUE if coffee script exists and he is newer than javascript script
-     * or if javascript file does not exists
-     *
-     * @param $source full path to cofee script file
-     * @param $destination full path to javascript file
-     * @return bool
-     * @access private
-     */
-    private function need_compile($source, $destination)
-    {
-
-        if( ! file_exists($source))
-            return FALSE;
-
-        if ( ! file_exists($destination))
-            return TRUE;
-
-        if (filemtime($source) > filemtime($destination))
-            return TRUE;
-        return FALSE;
-    }
-
-    /**
-     * compiles coffee script if needed
-     * @param $file_name
-     * @param null $files
-     * @throws Kohana_Exception
-     * @access private
-     */
-    private function coffeescript($file_name, $files = NULL)
-    {
-        $source_path = $this->config('core.coffeescript.source_path');
-        $dest_path = $this->config('core.coffeescript.dest_path');
-        $destination = $dest_path.$file_name.'.js';
-        $join = '';
-        $source = '';
-        $compile = FALSE;
-
-        if (Arr::is_array($files)) {
-            $join = ' -j '. $file_name.'.js';
-            foreach($files as $file) {
-                $_source = $source_path.$file.'.coffee';
-                if ( ! $compile)
-                    $compile = $this->need_compile($_source, $destination);
-                $source .= ' ' . $_source;
-            }
-        }
-        else {
-            $source = $source_path.$file_name.'.coffee';
-            $compile = $this->need_compile($source, $destination);
-        }
-
-        if( ! $compile)
-            return;
-
-        $output_dir = pathinfo($destination, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR;
-
-        if ( ! file_exists($output_dir) && ! is_dir($output_dir))
-        {
-            mkdir($output_dir);
-            chmod($output_dir, 0777);
-        }
-        $cmd = 'coffee -l -o '. $output_dir .' '.$join.' -c '.$source.'  2>&1';
-
-        $output = shell_exec($cmd);
-
-        if ( ! $output)
-            return $this->minize_script($destination);
-
-        throw new Kohana_Exception(
-            __("coffescript_compiler_output_for :file : :output", array(
-                ':file' => $destination,
-                ':output' => $output,
-            ))
-        );
-    }
 
     /**
      * minize javascript script using JSMin

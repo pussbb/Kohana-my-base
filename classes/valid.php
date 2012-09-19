@@ -201,7 +201,7 @@ class Valid extends Kohana_Valid {
      */
     public static function regexpr($val)
     {
-      return (bool)preg_match('/^[\/|\%][\pL\pN]++[\/|\%][isxeADSUXJu]{0,}$/', $val);
+      return (bool)preg_match('/^[\/|\%].+[\/|\%][isxeADSUXJu]{0,}$/', $val);
     }
 
 }

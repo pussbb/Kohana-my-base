@@ -240,8 +240,8 @@ class Base_Model extends Kohana_Model {
     public function __destruct()
     {
         $this->clean();
-        $this->data = NULL;
-        $this->records = NULL;
+        $this->data = array();
+        $this->records = array();
     }
 
     /**

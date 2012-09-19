@@ -12,13 +12,29 @@
 
 class Tools {
 
-    /*
-     * @internal
+    /**
+     * checks if coffee script exists
+     *
+     * Returns TRUE if coffee script exists and he is newer than javascript script
+     * or if javascript file does not exists
+     *
+     * @param $source full path to cofee script file
+     * @param $destination full path to javascript file
+     * @return bool
+     * @access private
      */
-    public static function __callStatic($name, $arguments)
+    protected static function need_compile($source, $destination)
     {
-    	if ( ! function_exists('exec'))
-    		throw new Exception("Your configuration does not allow to execute console applications", 1);
-    		
+
+        if( ! file_exists($source))
+            return FALSE;
+
+        if ( ! file_exists($destination))
+            return TRUE;
+
+        if (filemtime($source) > filemtime($destination))
+            return TRUE;
+        return FALSE;
     }
+
 }
