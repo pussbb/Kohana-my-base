@@ -1,5 +1,15 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
+/**
+ * Class adds extra functionality to Kohana_I18n to support tr from gettext
+ *
+ * @package Kohana-my-base
+ * @copyright 2012 pussbb@gmail.com
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
+ * @version 0.1.2 
+ * @link https://github.com/pussbb/Kohana-my-base
+ * @category template
+ * @subpackage template
+ */
 class Base_I18n extends Kohana_I18n {
 
 	/**
@@ -18,7 +28,7 @@ class Base_I18n extends Kohana_I18n {
 	public static $encoding = 'UTF-8';
 
 	/**
-	 * 
+	 * set language
 	 */
 	public static function lang($lang = 'en-EN')
 	{
@@ -27,6 +37,7 @@ class Base_I18n extends Kohana_I18n {
 		bindtextdomain (I18n::$domain, self::base_dir());
 		textdomain (I18n::$domain);
 	    bind_textdomain_codeset(I18n::$domain, I18n::$encoding);
+	    return $lang;
 	}
 
 	public static function tr_path($lang = 'en-EN')

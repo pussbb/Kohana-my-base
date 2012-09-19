@@ -1,10 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- *
  * additional checks from http://www.maheshchari.com/60-validation-functions-with-php-2-part/
+ * 
  * @package Kohana-my-base
- * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
+ * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
@@ -26,7 +26,7 @@ class Valid extends Kohana_Valid {
       * @return  boolean
       */
 
-      function ascii($val)
+      public static function ascii($val)
       {
           return !preg_match('/[^x00-x7F]/i', $val);
       }
@@ -36,7 +36,7 @@ class Valid extends Kohana_Valid {
       * @param   string
       * @return  boolean
       */
-      function base64($val)
+      public static function base64($val)
       {
           return (bool)!preg_match('/[^a-zA-Z0-9/+=]/', $val);
       }
@@ -48,7 +48,7 @@ class Valid extends Kohana_Valid {
       * @param   string
       * @return  boolean
       */
-      function jssafe($val)
+      public static function jssafe($val)
       {
           return (bool)(!preg_match("/<script[^>]*>[srn]*(<!--)?|(-->)?[srn]*</script>/", $val));
       }
@@ -58,7 +58,7 @@ class Valid extends Kohana_Valid {
       * @param   string   value
       * @return  boolean
       */
-      function macaddress($val)
+      public static function macaddress($val)
       {
           return (bool)preg_match('/^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$/', $val);
       }
@@ -68,7 +68,7 @@ class Valid extends Kohana_Valid {
       * @param   string
       * @return  boolean
       */
-      function md5($val)
+      public static function md5($val)
       {
           return (bool)preg_match("/[0-9a-f]{32}/i", $val);
       }
@@ -78,7 +78,7 @@ class Valid extends Kohana_Valid {
       * @param   string
       * @return  boolean
       */
-      function is_multiline($val)
+      public static function multiline($val)
       {
           return (bool)preg_match("/[nrt]+/", $val);
       }
@@ -100,7 +100,7 @@ class Valid extends Kohana_Valid {
       * @param String
       * @return  boolean
       */
-      function pincode($val, $country = 'us')
+      public static function pincode($val, $country = 'us')
       {
           $patterns = array(
             'at' => '^[0-9]{4,4}$',
@@ -125,7 +125,7 @@ class Valid extends Kohana_Valid {
       * @param   string
       * @return  boolean
       */
-      function rgb($val)
+      public static function rgb($val)
       {
           return (bool)preg_match("/^(rgb(s*b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])bs*,s*b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])bs*,s*b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])bs*))|(rgb(s*(d?d%|100%)+s*,s*(d?d%|100%)+s*,s*(d?d%|100%)+s*))$/",     $val);
       }
@@ -136,7 +136,7 @@ class Valid extends Kohana_Valid {
      * @param   string
      * @return  boolean
      */
-    function time12($val)
+    public static function time12($val)
     {
         return (bool)preg_match("/^([1-9]|1[0-2]|0[1-9]){1}(:[0-5][0-9][aApP][mM]){1}$/", $val);
     }
@@ -148,7 +148,7 @@ class Valid extends Kohana_Valid {
      * @return  boolean
      */
 
-    function time24($val)
+    public static function time24($val)
     {
         return (bool)preg_match("/^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$/",
             $val);
@@ -160,7 +160,7 @@ class Valid extends Kohana_Valid {
      * @param   string
      * @return  boolean
      */
-    function timezone($val)
+    public static function timezone($val)
     {
         return (bool)preg_match("/^[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00)$/", $val);
     }
@@ -170,7 +170,7 @@ class Valid extends Kohana_Valid {
      * @param   string
      * @return  boolean
      */
-    function token($val)
+    public static function token($val)
     {
         return (bool)!preg_match('/s/', $val);
     }
@@ -180,7 +180,7 @@ class Valid extends Kohana_Valid {
      * @param   string
      * @return  boolean
      */
-    function usssn($val)
+    public static function usssn($val)
     {
         return (bool)preg_match("/^d{3}-d{2}-d{4}$/", $val);
     }
@@ -190,9 +190,19 @@ class Valid extends Kohana_Valid {
      * @param   string
      * @return  boolean
      */
-    function is_utf8($val)
+    public static function is_utf8($val)
     {
-        return preg_match('%(?:[xC2-xDF][x80-xBF]|xE0[xA0-xBF][x80-xBF]|[xE1-xECxEExEF][x80-xBF]{2}|xED[x80-x9F][x80-xBF]|xF0[x90-xBF][x80-xBF]{2}        |[xF1-xF3][x80-xBF]{3}|xF4[x80-x8F][x80-xBF]{2})+%xs', $val);
+        return preg_match('%(?:[xC2-xDF][x80-xBF]|xE0[xA0-xBF][x80-xBF]|[xE1-xECxEExEF][x80-xBF]{2}|xED[x80-x9F][x80-xBF]|xF0[x90-xBF][x80-xBF]{2}|[xF1-xF3][x80-xBF]{3}|xF4[x80-x8F][x80-xBF]{2})+%xs', $val);
     }
+    /**
+     * check given sting is regexpr string
+     * @param   string
+     * @return  boolean
+     */
+    public static function regexpr($val)
+    {
+      return (bool)preg_match('/^[\/|\%][\pL\pN]++[\/|\%][isxeADSUXJu]{0,}$/', $val);
+    }
+
 }
 
