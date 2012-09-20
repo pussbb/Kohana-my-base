@@ -4,13 +4,30 @@
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
- * @version 0.1.2 
+ * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
  * @category tools
  * @subpackage tools
  */
 
 class Tools {
+
+    public static function can_call($func_name = 'exec')
+    {
+        return function_exists($func_name);
+    }
+
+    public static function config($key)
+    {
+        return Kohana::$config->load("tools.$key");
+    }
+
+    public static function app_exists($cmd, $pattern)
+    {
+        exec($cmd, $result);
+        return (bool)preg_match($pattern, implode('', $result));
+    }
+
 
     /**
      * checks if coffee script exists

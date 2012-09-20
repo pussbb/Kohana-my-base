@@ -9,14 +9,15 @@
 
 class Controller_Languages extends Controller_Core {
 
-	protected $check_access = FALSE;
+    protected $check_access = FALSE;
 
-	public function action_update()
-	{
-		if (Kohana::$environment !== Kohana::DEVELOPMENT)
-			throw new Kohana_HTTP_Exception_403();
+    public function action_update()
+    {
+        if (Kohana::$environment !== Kohana::DEVELOPMENT)
+            throw new Kohana_HTTP_Exception_403();
 
-		Language::parse_source();
-		$this->render_nothing();
-	}
+        Tools_Language::parse_source();
+        exit;
+        $this->render_nothing();
+    }
 }
