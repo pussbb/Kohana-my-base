@@ -6,7 +6,7 @@ return array(
         'dest_path' => DOCROOT.'media'.DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR,
     ),
     'less' => array(
-        'source' => DOCROOT.'coffee_scripts'.DIRECTORY_SEPARATOR,
-        'dest' => DOCROOT.'media'.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR
+        'source_path' => DOCROOT.'less'.DIRECTORY_SEPARATOR,
+        'dest_path' => DOCROOT.'media'.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR
     ),
 );

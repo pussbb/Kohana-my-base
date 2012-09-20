@@ -7,7 +7,7 @@ return array(
         'path' => DOCROOT.'media'.DIRECTORY_SEPARATOR,
     ),
     'default' => array(
-        'css' => array(),
+        'css' => array('1' => ''),
         'js' => array(),
     ),
 );

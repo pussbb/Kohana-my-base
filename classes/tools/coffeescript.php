@@ -51,7 +51,7 @@ class Tools_CoffeeScript extends Tools {
 
         $cmd = 'coffee -l -o '. $output_dir .' '.$join.' -c '.$source.'  2>&1';
 
-        $output = shell_exec($cmd);
+        $output = exec($cmd);
 
         if ( ! $output)
             return;
@@ -60,7 +60,7 @@ class Tools_CoffeeScript extends Tools {
     }
 
     public static function check()
-    {
+    {return;
         if ( ! self::can_call());
             throw new Exception_Tools('Your system does not support to call exec');
         if ( ! self::app_exists('coffee -v', '/CoffeeScript version \d\.\d\.\d/'))

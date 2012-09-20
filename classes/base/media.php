@@ -217,6 +217,9 @@ class Base_Media extends Singleton{
      */
     public function append_style($file_name, $media = NULL, $check = FALSE)
     {
+        if ( Kohana::$environment != Kohana::PRODUCTION) {
+            Tools_Less::build_if_needed($file_name);
+        }
         if ($check && ! $this->find_file($file_name, 'css'))
             return;
         $this->styles[$this->resource($file_name, 'css')]= $media;

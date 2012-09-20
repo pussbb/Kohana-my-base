@@ -6,7 +6,7 @@ if ( ! is_array($error))
         'message' => UTF8::ucfirst(__('houston_we_have_a_problem')),
     );
 }
-else 
+else
 {
     $error['message'] = UTF8::ucfirst(__('houston_we_have_a_problem'));
 }
