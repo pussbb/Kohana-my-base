@@ -9,7 +9,7 @@
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
- * @version 0.1.2 
+ * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
  * @category access
  * @see Base_Auth
@@ -18,9 +18,9 @@
 
 class Auth extends Base_Auth {
 
-	/*
-	* @internal
-	*/
+    /*
+    * @internal
+    */
     public static function __callStatic($name, $arguments)
     {
         $auth = Base_Auth::instance();

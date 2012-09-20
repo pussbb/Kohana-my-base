@@ -6,7 +6,7 @@
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
- * @version 0.1.2 
+ * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
  * @category template
  * @subpackage template
@@ -156,7 +156,7 @@ class Base_Media extends Singleton{
     public function find_file($name, $prefix)
     {
         $path = $this->config('core.path');
-        $file = $path.$prefix.DIRECTORY_SEPARATOR.$name.'.'.$prefix;
+        $file = Text::reduce_slashes($path.$prefix.DIRECTORY_SEPARATOR.$name.'.'.$prefix);
         if (file_exists($file))
             return $file;
         return Kohana::find_file('media',$name, $prefix);
@@ -190,9 +190,22 @@ class Base_Media extends Singleton{
     {
         if ($this->is_url($file_name))
             return $file_name;
+        $file = $prefix.'/'.$file_name.'.'.$prefix;
         if ( strpos('static://', $file_name) === TRUE)
-            return str_replace('static://', $this->config('core.static_uri').$prefix.'/', $file_name.'.'.$prefix);
-        return Url::base(TRUE,TRUE).$this->config('core.uri').$prefix.'/'.$file_name.'.'.$prefix;
+            return str_replace('static://', $this->path_clean($this->config('core.static_uri').$file));
+        return Url::base(TRUE,TRUE).$this->path_clean($this->config('core.uri').$file);
+    }
+
+    /**
+     * return full url for media file without // in path
+     *
+     * @param $file
+     * @return string
+     * @access private
+     */
+    public function path_clean($file)
+    {
+        return Text::reduce_slashes($file);
     }
 
     /**
@@ -305,23 +318,4 @@ class Base_Media extends Singleton{
         return "\n<script type=\"text/javascript\">\n$this->inline_script\n</script>\n";
     }
 
-
-    /**
-     * minize javascript script using JSMin
-     * @see  JSMin
-     * @param $file
-     * @access private
-     */
-    private function minize_script($file)
-    {
-        if (Kohana::$environment == Kohana::PRODUCTION)
-            return;
-        if ( ! $this->config('core.coffeescript.minify'))
-            return;
-        $jsmin = Kohana::find_file('vendor', 'jsmin-php/jsmin');
-        if ( ! $jsmin)
-            return;
-        include_once $jsmin;
-        file_put_contents($file, JSMin::minify(file_get_contents($file)));
-    }
 }

@@ -8,7 +8,7 @@
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
- * @version 0.1.2 
+ * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
  * @category extra
  * @subpackage extra
@@ -64,6 +64,7 @@ class Error
     {
         try
         {
+
             $error = new Error();
             // Get the exception information
             $error->type = get_class($e);

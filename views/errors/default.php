@@ -48,7 +48,7 @@
             font-size: 14px;
             padding: 10px;
             text-indent: 30px;
-            
+
         }
         .error-container div.links {
             display: inline-block;
@@ -63,9 +63,9 @@
   <body>
     <div class="content">
         <div class="error-container">
-            <?php 
+            <?php
             echo '<h1>'. UTF8::ucfirst(__('oops,_an_error_occurred')) . '.</h1>';
-            
+
             echo '<hr/>';
             echo '<div class="text">';
                 echo  Arr::get( $error, 'message');
