@@ -4,7 +4,7 @@
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
- * @version 0.1.2 
+ * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
  * @category tools
  * @subpackage tools
@@ -46,12 +46,8 @@ class Tools_CoffeeScript extends Tools {
             return;
 
         $output_dir = pathinfo($destination, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR;
+        Dir::create_if_need($output_dir);
 
-        if ( ! file_exists($output_dir) && ! is_dir($output_dir))
-        {
-            mkdir($output_dir);
-            chmod($output_dir, 0777);
-        }
         $cmd = 'coffee -l -o '. $output_dir .' '.$join.' -c '.$source.'  2>&1';
 
         $output = shell_exec($cmd);
@@ -59,7 +55,7 @@ class Tools_CoffeeScript extends Tools {
         if ( ! $output)
             return;
 
-        throw new Exception_CoffeeScript("coffescript compiler output for $destination \n $output");
+        throw new Exception_Tools("coffescript compiler output for $destination \n $output");
     }
 
 }

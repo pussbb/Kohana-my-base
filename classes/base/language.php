@@ -9,7 +9,7 @@ class Base_Language {
     public static function get()
     {
         $language = Session::instance()->get('language');
-        return is_object($language) ? $language : self::get_default();
+        return is_object($language) ? clone $language : self::get_default();
     }
 
     public static function get_default()
@@ -32,7 +32,7 @@ class Base_Language {
         $k = exec('(find "'.DOCROOT.'" -type f  -iname "*.php" | xargs xgettext -D '.DOCROOT.' -o '.$template.' -L PHP -d="'.I18n::$domain.'" -p '.$base_dir.' --force-po --no-wrap --keyword="tr" --keyword="__" --keyword="_" --from-code="UTF-8") 2>&1');
         File::sed($template, '/Content-Type: text\/plain; charset=CHARSET/', 'Content-Type: text/plain; charset=UTF-8');
         foreach (Model_Language::find_all()->records as $language) {
-            $tr_file = I18n::absolute_file_path($language->locale); 
+            $tr_file = I18n::absolute_file_path($language->locale);
             if ( ! file_exists($tr_file)) {
                 $dir = I18n::tr_path($language->locale);
                 Dir::create_if_need($dir);

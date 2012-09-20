@@ -21,7 +21,7 @@ return array(
     ),
 );
 /*
-Example 
+Example
 'default' => array(
         'css' => array(
             'bootstrap/bootstrap.min' => '',

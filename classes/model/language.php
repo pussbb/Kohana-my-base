@@ -2,5 +2,5 @@
 
 class Model_Language extends Model
 {
-    
+
 }
