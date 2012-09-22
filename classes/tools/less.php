@@ -26,8 +26,8 @@ class Tools_Less extends Tools {
         $destination = $dest_path.$file_name.'.css';
         $source = $source_path.$file_name.'.less';
 
-        //if ( ! self::need_compile($source, $destination))
-        //    return;
+        if ( ! self::need_compile($source, $destination))
+            return;
         $output_dir = pathinfo($destination, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR;
         Dir::create_if_need($output_dir);
 
@@ -35,6 +35,8 @@ class Tools_Less extends Tools {
 
         if ( $this->exec($cmd))
         {
+            if( ! is_writable(dirname($destination)))
+                throw new Exception_Tools("You don't have permission to write in  $destination");
             file_put_contents($destination, $this->stdout);
             return;
         }
