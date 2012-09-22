@@ -73,4 +73,12 @@ class Text extends Kohana_Text {
         return $text;
     }
 
+    /**
+     * strip ANSI escape color codes.
+     *
+     */
+    public static function strip_ansi_color($string)
+    {
+      return preg_replace('/\e\[[;?0-9]*[0-9A-Za-z]/', ' ', $string);
+    }
 }

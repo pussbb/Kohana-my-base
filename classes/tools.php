@@ -10,16 +10,32 @@
  * @subpackage tools
  */
 
-class Tools {
+class Tools extends Singleton {
+
+    private static $config = NULL;
+    protected $stdout = NULL;
+    protected  $stderr = NULL;
+
+    public static function __callStatic($name, $args)
+    {
+      if (Kohana::$is_windows)
+            throw new Exception_Tools('Sorry but your platform currently not supported');
+      if ( ! self::can_call('proc_open'))
+           throw new Exception_Tools('Your system does not support to call proc_open');
+      $klass = get_called_class();
+      $klass::check();
+      return call_user_func_array(array($klass::instance(), $name), $args);
+    }
 
     public static function can_call($func_name = 'exec')
     {
         return function_exists($func_name);
     }
 
-    public static function config($key)
+    public static function config($key, $default = NULL)
     {
-        return Kohana::$config->load("tools.$key");
+        self::$config = self::$config ?:Kohana::$config->load("tools");
+        return Arr::path(self::$config->as_array(), $key, $default);
     }
 
     public static function app_exists($cmd, $pattern)
@@ -28,7 +44,26 @@ class Tools {
         return (bool)preg_match($pattern, implode('', $result));
     }
 
+    public function exec($cmd)
+    {
+        $proc = proc_open(
+            $cmd,
+            array(
+                array('pipe','r'),
+                array('pipe','w'),
+                array('pipe','w')
+            ),
+            $pipes,
+            NULL
+        );
+        $this->stdout = stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+        $this->stderr = stream_get_contents($pipes[2]);
+        fclose($pipes[2]);
+        return proc_close($proc) == 0;
+    }
 
+    
     /**
      * checks if coffee script exists
      *

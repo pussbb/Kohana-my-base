@@ -19,9 +19,8 @@ class Tools_CoffeeScript extends Tools {
      * @throws Kohana_Exception
      * @access private
      */
-    public static  function build_if_needed($file_name, $files = NULL)
+    protected function build_if_needed($file_name, $files = NULL)
     {
-        self::check();
         $source_path = self::config('coffeescript.source_path');
         $dest_path = self::config('coffeescript.dest_path');
         $destination = $dest_path.$file_name.'.js';
@@ -51,18 +50,13 @@ class Tools_CoffeeScript extends Tools {
 
         $cmd = 'coffee -l -o '. $output_dir .' '.$join.' -c '.$source.'  2>&1';
 
-        $output = exec($cmd);
-
-        if ( ! $output)
+        if ($this->exec($cmd))
             return;
-
-        throw new Exception_Tools("coffescript compiler output for $destination \n $output");
+        throw new Exception_Tools("coffescript compiler output for $destination \n $this->stdout");
     }
 
     public static function check()
-    {return;
-        if ( ! self::can_call());
-            throw new Exception_Tools('Your system does not support to call exec');
+    {
         if ( ! self::app_exists('coffee -v', '/CoffeeScript version \d\.\d\.\d/'))
             throw new Exception_Tools('Coffee script compiler not installed. Please visit http://coffeescript.org');
     }
