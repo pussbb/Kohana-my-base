@@ -68,9 +68,7 @@ class Controller_Core extends Controller_Template {
 
         $this->view = new View();
 
-        foreach (array('content', 'keywords', 'description', 'title') as $property) {
-            $this->template->set($property, '');
-        }
+        $this->template->set(array('content' => NULL, 'keywords'=> NULL, 'description'=> NULL, 'title'=> NULL));
     }
 
     /**
@@ -95,25 +93,16 @@ class Controller_Core extends Controller_Template {
                 Acl::instance()->allowed($this))
             return;
 
-        // we are here because access is denied
-        // redirect to not_logged_in if needed
         if ($this->request->is_ajax())
             throw new HTTP_Exception_403(__('access_deny'));
-
-        // rememeber the url
-        Cookie::set(
-                'return_url', Url::base(TRUE, TRUE) . $this->request->url()
-        );
 
         if (!Auth::instance()->logged_in()) {
             $this->redirect('users/login');
             return;
         }
-
-        // ok, logged, in
-        // then rejected
-        throw new HTTP_Exception_403(__('access_deny'));
-        return;
+        else {
+            throw new HTTP_Exception_403(__('access_deny'));
+        }
     }
 
     /**
