@@ -28,7 +28,7 @@ class Controller_Core extends Controller_Template {
      * if needed IN CONSTRUCTOR (to not damage changes in parent class)
      * @var array
      */
-    protected $resource_prefixes = array('');
+    protected $bundles = array('');
 
     /**
      *  check Acl access (true means do the check)
@@ -173,20 +173,11 @@ class Controller_Core extends Controller_Template {
     }
 
     /**
-     * registeres the needed resources from config file
-     * @param $identifier
-     */
-    public function register_resources($identifier)
-    {
-        Media::bundle($identifier);
-    }
-
-    /**
      * append css file
      * @param $name
      * @param string $media
      */
-    public function add_css($name, $media = '')
+    public function append_css($name, $media = '')
     {
         Media::append_style($name, $media);
     }
@@ -195,7 +186,7 @@ class Controller_Core extends Controller_Template {
      * append javascript file
      * @param $name
      */
-    public function add_js($name)
+    public function append_js($name)
     {
         Media::append_script($name);
     }
@@ -204,7 +195,7 @@ class Controller_Core extends Controller_Template {
      * try to append css and js for file
      *
      * <code>
-     *  $this->register_media('welcome.index');
+     *  $this->add_media('welcome.index');
      * </code>
      * will append
      * ./css/welcome.index.css
@@ -213,7 +204,7 @@ class Controller_Core extends Controller_Template {
      * @param null $media
      * @param bool $check_file
      */
-    public function register_media($file_name, $media = NULL, $check_file = FALSE)
+    public function append_media($file_name, $media = NULL, $check_file = FALSE)
     {
         Media::append(array('css', 'js'), $file_name, $media, $check_file);
     }
@@ -226,7 +217,7 @@ class Controller_Core extends Controller_Template {
      * and directory/controller.action.css
      * @param array $request_struct
      */
-    private function register_resources_by_default($request_struct = array())
+    private function media_by_default($request_struct = array())
     {
         $structure = $this->current_request_structure();
         $directory = NULL;
@@ -234,7 +225,7 @@ class Controller_Core extends Controller_Template {
             $directory = array_shift($structure) . '/';
         }
         $file_name = $directory . implode('.', $structure);
-        $this->register_media($file_name, NULL, TRUE);
+        $this->append_media($file_name, NULL, TRUE);
     }
 
     /**
@@ -331,8 +322,8 @@ class Controller_Core extends Controller_Template {
 
         $this->set_view_filename();
 
-        foreach ($this->resource_prefixes as $prefix) {
-            $this->register_resources($prefix);
+        foreach ($this->bundles as $bundle) {
+            Media::bundle($bundle);
         }
 
         //set favicon (name from config: site.favicon)
@@ -341,7 +332,7 @@ class Controller_Core extends Controller_Template {
             $this->set_favicon($favicon);
         }
 
-        $this->register_resources_by_default();
+        $this->media_by_default();
         $this->append_dynamic_properties($this->view);
         $this->template->content = $this->view->render();
         parent::after();
