@@ -10,6 +10,9 @@ return array(
         'dest_path' => DOCROOT.'media'.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR
     ),
     'eightpack' => array(
-        'jsmin' => '/opt/eightpack_bin/jsmin  --aggressive '
+        'jsmin' => '/opt/eightpack_bin/jsmin  --aggressive ',
+        'cssmin' => '/opt/eightpack_bin/cssmin ',
+        'cssbeautify' => '/opt/eightpack_bin/cssbeautify ',
+        'jsbeautify' => '/opt/eightpack_bin/jsbeautify '
     )
 );
