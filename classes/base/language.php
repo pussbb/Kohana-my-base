@@ -1,17 +1,41 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
+/**
+ * Class to manipulate with user Lang
+ *
+ * @package Kohana-my-base
+ * @copyright 2012 pussbb@gmail.com
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
+ * @version 0.1.2
+ * @link https://github.com/pussbb/Kohana-my-base
+ * @category extra
+ * @subpackage extra
+ */
 class Base_Language {
+
+    /**
+     * set current lang
+     * @param $language (model object)
+     * @static
+     */
     public static function set($language)
     {
         Session::instance()->set('language', $language);
     }
-
+    /**
+     * set current lang
+     * @return language (model object)
+     * @static
+     */
     public static function get()
     {
         $language = Session::instance()->get('language');
         return is_object($language) ? clone $language : self::get_default();
     }
-
+    /**
+     * get default lang
+     * @return default language (model object)
+     * @static
+     */
     public static function get_default()
     {
     	$code = Kohana::$config->load('site.default_language');

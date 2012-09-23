@@ -22,7 +22,8 @@ class Base_Date extends Kohana_Date {
     /**
      * print date in specific format(from config site)
      * @static
-     * @param $date
+     * @param $date string
+     * @param $format string
      * @return string foremated date
      */
     public static function format($date, $format = NULL)

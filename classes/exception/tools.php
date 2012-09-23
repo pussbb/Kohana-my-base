@@ -1,6 +1,6 @@
 <?php defined('DOCROOT') or die('No direct script access.');
 /**
- * sets human readable message for json_last_error
+ * sets human readable message for external console applications
  *
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
@@ -12,8 +12,8 @@
  */
 class Exception_Tools extends Exception {
     /**
-     * sets human readable message for json_last_error
-     * @internal
+     * sets human readable message for external console applications
+     * @ignore
      * @constructor
      * @access public
      * @return void

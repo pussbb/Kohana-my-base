@@ -410,7 +410,7 @@ class Base_Model extends Kohana_Model {
 
     /**
      * returns relation data or null
-     * @internal
+     * @param $name string
      * @return array|null
      */
     private function get_relation($name)
@@ -420,7 +420,9 @@ class Base_Model extends Kohana_Model {
 
     /**
      * get data for relation depends on relation option
-     * @internal
+     * @param $name string
+     * @param $relation array
+     * @param $filter array
      */
     private function _relation($name, $relation, $filter = array() )
     {
@@ -687,6 +689,8 @@ class Base_Model extends Kohana_Model {
     * return filed name for query
     * @internal
     * @access private
+    * @param $name string
+    * @param $delimiter string
     */
     private function query_field($name, $delimiter = '.')
     {

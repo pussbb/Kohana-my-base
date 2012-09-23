@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
+ * main class to execute some external console app
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
@@ -12,10 +13,22 @@
 
 class Tools extends Singleton {
 
+    /**
+     * config
+     */
     private static $config = NULL;
+     /**
+     * stdout stream
+     */
     protected $stdout = NULL;
+     /**
+     * stderr stream
+     */
     protected  $stderr = NULL;
 
+    /**
+     * @ignore
+     */
     public static function __callStatic($name, $args)
     {
       if (Kohana::$is_windows)
@@ -27,23 +40,40 @@ class Tools extends Singleton {
       return call_user_func_array(array($klass::instance(), $name), $args);
     }
 
+    /**
+     * checks if function exists
+     * @param $func_name string
+     */
     public static function can_call($func_name = 'exec')
     {
         return function_exists($func_name);
     }
-
+    /**
+     * get config item
+     * @param $key string
+     * @param $default string
+     * @static
+     */
     public static function config($key, $default = NULL)
     {
         self::$config = self::$config ?:Kohana::$config->load("tools");
         return Arr::path(self::$config->as_array(), $key, $default);
     }
-
+    /**
+     * check if external app installed
+     * @param $cmd string
+     * @param $pattern string reg expresion
+     * @static
+     */
     public static function app_exists($cmd, $pattern)
     {
         exec($cmd, $result);
         return (bool)preg_match($pattern, implode('', $result));
     }
-
+    /**
+     * run external app 
+     * @param $cmd string
+     */
     public function exec($cmd)
     {
         $proc = proc_open(
@@ -88,13 +118,17 @@ class Tools extends Singleton {
             return TRUE;
         return FALSE;
     }
-
+    /**
+     * @ignore
+     */
     public static function writable($dir)
     {
         if( ! is_writable($dir))
             throw new Exception_Tools("You don't have permission to write in  $destination");
     }
-
+    /**
+     * returns error wich retrun external app
+     */
     public function error()
     {
       return $this->stderr?:$this->stdout;

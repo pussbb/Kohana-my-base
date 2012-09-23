@@ -21,7 +21,6 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
-<li><a href="../packages/JSMin.html"><i class="icon-folder-open"></i> JSMin</a></li>
 <li><a href="../packages/Kohana-my-base.html"><i class="icon-folder-open"></i> Kohana-my-base</a></li>
 </ul>
 </li>
@@ -33,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">74</span></a></li>
+                <span class="label label-info">82</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -69,6 +68,8 @@
 <li class="method public inherited"><a href="#labels" title="labels :: user function to define representative labels for table fields"><span class="description">user function to define representative labels for table fields</span><pre>labels()</pre></a></li>
 <li class="method public inherited"><a href="#last_inserted_id" title="last_inserted_id :: returns last inserted id"><span class="description">returns last inserted id</span><pre>last_inserted_id()</pre></a></li>
 <li class="method public inherited"><a href="#last_query" title="last_query :: returns last executed query"><span class="description">returns last executed query</span><pre>last_query()</pre></a></li>
+<li class="method public inherited"><a href="#meta_data" title="meta_data :: returns encoded data from  table column meta_data(json encoded string)"><span class="description">returns encoded data from  table column meta_data(json encoded string)</span><pre>meta_data()</pre></a></li>
+<li class="method public inherited"><a href="#meta_item" title="meta_item :: returns value of some item in meta_data field"><span class="description">returns value of some item in meta_data field</span><pre>meta_item()</pre></a></li>
 <li class="method public inherited"><a href="#module_name" title="module_name :: Returns model name"><span class="description">Returns model name</span><pre>module_name()</pre></a></li>
 <li class="method public inherited"><a href="#new_record" title="new_record :: check if model has primary key"><span class="description">check if model has primary key</span><pre>new_record()</pre></a></li>
 <li class="method public "><a href="#roles_collection" title="roles_collection :: "><span class="description">roles_collection()
@@ -76,6 +77,7 @@
 <li class="method public inherited"><a href="#rules" title="rules :: user function to define validation rules"><span class="description">user function to define validation rules</span><pre>rules()</pre></a></li>
 <li class="method public inherited"><a href="#save" title="save :: function that execute query with user callback functions"><span class="description">function that execute query with user callback functions</span><pre>save()</pre></a></li>
 <li class="method public inherited"><a href="#select" title="select :: set parameters for SELECT query"><span class="description">set parameters for SELECT query</span><pre>select()</pre></a></li>
+<li class="method public inherited"><a href="#set_meta_item" title="set_meta_item :: add some item to the meta_data field"><span class="description">add some item to the meta_data field</span><pre>set_meta_item()</pre></a></li>
 <li class="method public inherited"><a href="#table_columns" title="table_columns :: returns array with table columns SQL query"><span class="description">returns array with table columns SQL query</span><pre>table_columns()</pre></a></li>
 <li class="method public inherited"><a href="#unique_validation" title="unique_validation :: validate unique value required Validation object"><span class="description">validate unique value required Validation object</span><pre>unique_validation()</pre></a></li>
 <li class="method public inherited"><a href="#update" title="update :: sets parameters for UPDATE query"><span class="description">sets parameters for UPDATE query</span><pre>update()</pre></a></li>
@@ -91,10 +93,12 @@
 <li class="method protected inherited"><a href="#exists" title="exists :: checks if value exists by some condition"><span class="description">checks if value exists by some condition</span><pre>exists()</pre></a></li>
 <li class="method protected inherited"><a href="#relations" title="relations :: sets relations for external models to this model"><span class="description">sets relations for external models to this model</span><pre>relations()</pre></a></li>
 <li class="nav-header private">» Private</li>
+<li class="method private inherited"><a href="#_relation" title="_relation :: get data for relation depends on relation option"><span class="description">get data for relation depends on relation option</span><pre>_relation()</pre></a></li>
 <li class="method private inherited"><a href="#auto_count_total" title="auto_count_total :: function to calculate total rows in database column"><span class="description">function to calculate total rows in database column</span><pre>auto_count_total()</pre></a></li>
 <li class="method private inherited"><a href="#clean" title="clean :: helper function to delete garbage after success query"><span class="description">helper function to delete garbage after success query</span><pre>clean()</pre></a></li>
 <li class="method private inherited"><a href="#db_table_name" title="db_table_name :: return a table name in plural form"><span class="description">return a table name in plural form</span><pre>db_table_name()</pre></a></li>
 <li class="method private inherited"><a href="#get_private_properties" title="get_private_properties :: gets properties and their values from some object"><span class="description">gets properties and their values from some object</span><pre>get_private_properties()</pre></a></li>
+<li class="method private inherited"><a href="#get_relation" title="get_relation :: returns relation data or null"><span class="description">returns relation data or null</span><pre>get_relation()</pre></a></li>
 <li class="method private inherited"><a href="#parse_responce" title="parse_responce :: append data to object according type of query"><span class="description">append data to object according type of query</span><pre>parse_responce()</pre></a></li>
 <li class="method private inherited"><a href="#prepare_for_query" title="prepare_for_query :: "><span class="description">prepare_for_query()
         </span><pre>prepare_for_query()</pre></a></li>
@@ -526,6 +530,62 @@ if they exists</p></p>
 <div class="subelement response"><code>null</code></div>
 </div></div>
 </div>
+<a name="meta_data" id="meta_data"></a><div class="element clickable method public meta_data" data-toggle="collapse" data-target=".meta_data .collapse">
+<h2>returns encoded data from  table column meta_data(json encoded string)</h2>
+<pre>meta_data() : void</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::meta_data()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::meta_data()</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a name="meta_item" id="meta_item"></a><div class="element clickable method public meta_item" data-toggle="collapse" data-target=".meta_item .collapse">
+<h2>returns value of some item in meta_data field</h2>
+<pre>meta_item(\$key $key, \$default $default) : mixed | null</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::meta_item()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::meta_item()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>\$key</code><p>(string)</p>
+</div>
+<div class="subelement argument">
+<h4>$default</h4>
+<code>\$default</code><p>mixed</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code><code>null</code>
+</div>
+</div></div>
+</div>
 <a name="module_name" id="module_name"></a><div class="element clickable method public module_name" data-toggle="collapse" data-target=".module_name .collapse">
 <h2>Returns model name</h2>
 <pre>module_name(string $glue) : string</pre>
@@ -672,6 +732,41 @@ if they exists</p></p>
 </div>
 <h3>Returns</h3>
 <div class="subelement response"><code><a href="../classes/Base_Model.html">\Base_Model</a></code></div>
+</div></div>
+</div>
+<a name="set_meta_item" id="set_meta_item"></a><div class="element clickable method public set_meta_item" data-toggle="collapse" data-target=".set_meta_item .collapse">
+<h2>add some item to the meta_data field</h2>
+<pre>set_meta_item(\$key $key, \$value $value) : void</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::set_meta_item()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::set_meta_item()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>\$key</code><ul>
+<li>string</li>
+</ul>
+</div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>\$value</code><ul>
+<li>mixed</li>
+</ul>
+</div>
 </div></div>
 </div>
 <a name="table_columns" id="table_columns"></a><div class="element clickable method public table_columns" data-toggle="collapse" data-target=".table_columns .collapse">
@@ -1037,6 +1132,34 @@ Model_User::destroy(array('login' => 'bla', ....));
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
+<a name="_relation" id="_relation"></a><div class="element clickable method private _relation" data-toggle="collapse" data-target="._relation .collapse">
+<h2>get data for relation depends on relation option</h2>
+<pre>_relation(\$name $name, \$relation $relation, \$filter $filter) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::_relation()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::_relation()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>\$name</code><p>string</p></div>
+<div class="subelement argument">
+<h4>$relation</h4>
+<code>\$relation</code><p>array</p></div>
+<div class="subelement argument">
+<h4>$filter</h4>
+<code>\$filter</code><p>array</p></div>
+</div></div>
+</div>
 <a name="auto_count_total" id="auto_count_total"></a><div class="element clickable method private auto_count_total" data-toggle="collapse" data-target=".auto_count_total .collapse">
 <h2>function to calculate total rows in database column</h2>
 <pre>auto_count_total() : mixed</pre>
@@ -1140,6 +1263,32 @@ Model_User::destroy(array('login' => 'bla', ....));
 <div class="subelement argument"><h4>$obj</h4></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="get_relation" id="get_relation"></a><div class="element clickable method private get_relation" data-toggle="collapse" data-target=".get_relation .collapse">
+<h2>returns relation data or null</h2>
+<pre>get_relation(\$name $name) : array | null</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::get_relation()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::get_relation()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>\$name</code><p>string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>null</code>
+</div>
 </div></div>
 </div>
 <a name="parse_responce" id="parse_responce"></a><div class="element clickable method private parse_responce" data-toggle="collapse" data-target=".parse_responce .collapse">
@@ -1727,7 +1876,7 @@ to that variable</p></p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-09-15T22:20:36+03:00.<br></footer></div>
+            generated on 2012-09-23T20:41:02+03:00.<br></footer></div>
 </div>
 </body>
 </html>

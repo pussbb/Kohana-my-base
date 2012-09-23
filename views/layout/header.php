@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="'en'">
+<html lang="<?php echo Language::get()->code;?>">
 <head>
-    <meta charset="utf-8">
+    <meta charset="<?php echo I18n::$encoding;?>"/>
 <?php
 echo "<title>$title</title>", PHP_EOL;
 

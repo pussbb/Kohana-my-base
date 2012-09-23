@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
+ * Parse php files for translatable items and creates or update tr files
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
@@ -12,7 +13,9 @@
 
 class Tools_Language extends Tools {
 
-
+    /**
+     * parsing php files for translatable items and creates or update tr files
+     */
     protected function parse_source()
     {
         self::check();
@@ -41,7 +44,11 @@ class Tools_Language extends Tools {
             }
         }
     }
-
+    /**
+     * checks if gettext tools is installed
+     * @static
+     * @throw Exception_Tools
+     */
     public static function check()
     {
         if ( ! self::app_exists('xgettext -V', '/xgettext \(GNU gettext-tools\)/'))

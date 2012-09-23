@@ -14,7 +14,7 @@
 class Exception_Json extends Exception {
     /**
      * sets human readable message for json_last_error
-     * @internal
+     * @ignore
      * @constructor
      * @access public
      * @return void

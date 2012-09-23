@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
+ * Compile cafeescript into js file
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
@@ -17,7 +18,7 @@ class Tools_CoffeeScript extends Tools {
      * @param $file_name
      * @param null $files
      * @throws Kohana_Exception
-     * @access private
+     * @access protected
      */
     protected function build_if_needed($file_name, $files = NULL)
     {
@@ -54,7 +55,11 @@ class Tools_CoffeeScript extends Tools {
             return;
         throw new Exception_Tools("coffescript compiler output for $destination \n ".$this->error());
     }
-
+    /**
+     * checks if coffeescript compiler is installed
+     * @static
+     * @throw Exception_Tools
+     */
     public static function check()
     {
         if ( ! self::app_exists('coffee -v', '/CoffeeScript version \d\.\d\.\d/'))

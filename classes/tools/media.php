@@ -157,7 +157,11 @@ class Tools_Media extends Tools {
             return;
         $this->eightpack_exec('jsbeautify', $file);
     }
-
+    /**
+     * checks if less compiler is installed
+     * @static
+     * @throw Exception_Tools
+     */
     public static function  check()
     {
     }

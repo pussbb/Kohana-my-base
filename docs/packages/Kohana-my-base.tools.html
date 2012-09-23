@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title><b>Kohana</b><i>My</i> Base » Kohana-my-base\access</title>
+<title><b>Kohana</b><i>My</i> Base » Kohana-my-base\tools</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -59,17 +59,16 @@
 <li class="nav-header">
 <i class="icon-map-marker"></i> Packages</li>
 <li>
-<a href="../packages/Kohana-my-base.access.html" title="access"><i class="icon-folder-open"></i>access</a><ul class="nav nav-list nav-packages"></ul>
+<a href="../packages/Kohana-my-base.tools.html" title="tools"><i class="icon-folder-open"></i>tools</a><ul class="nav nav-list nav-packages"></ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-class"></i> Classes</li>
-<li><a href="#ACL" title="Class to check user permissions for some actions
-&lt;code&gt;
- ACL::instance()-&gt;allowed($obj);
-&lt;/code&gt;">ACL</a></li>
-<li><a href="#Base_ACL" title="Base class to check user permision for some request">Base_ACL</a></li>
-<li><a href="#Base_Auth" title="Base class to manage roles for user">Base_Auth</a></li>
-<li><a href="#Auth" title="Class to check user(registered user, or just visitor .">Auth</a></li>
+<li><a href="#Tools_Less" title="Class to compile less file into css file">Tools_Less</a></li>
+<li><a href="#Tools_Media" title="Execute some external usefull tools (beautify and minize)
+http://ariya.ofilabs.com/2011/10/javascript-tools-for-continuous-integration.html">Tools_Media</a></li>
+<li><a href="#Tools_Language" title="Parse php files for translatable items and creates or update tr files">Tools_Language</a></li>
+<li><a href="#Tools_CoffeeScript" title="Compile cafeescript into js file">Tools_CoffeeScript</a></li>
+<li><a href="#Tools" title="main class to execute some external console app">Tools</a></li>
 </ul>
 </div>
 <div class="span8 package-contents">
@@ -78,41 +77,46 @@
 <a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../packages/Kohana-my-base.html">Kohana-my-base</a></li>
-<span class="divider">\</span><li class="active"><a href="../packages/Kohana-my-base.access.html">access</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/Kohana-my-base.tools.html">tools</a></li>
 </ul>
 <div class="package-indent">
 <h3>
 <i class="icon-custom icon-class"></i> Classes and interfaces</h3>
-<a name="ACL" id="ACL"></a><div class="element ajax clickable class" href="../classes/ACL.html">
-<h1>ACL<a href="../classes/ACL.html">¶</a>
+<a name="Tools" id="Tools"></a><div class="element ajax clickable class" href="../classes/Tools.html">
+<h1>Tools<a href="../classes/Tools.html">¶</a>
 </h1>
-<p class="short_description">Class to check user permissions for some actions
-<code>
- ACL::instance()->allowed($obj);
-</code></p>
+<p class="short_description">main class to execute some external console app</p>
 <div class="details collapse"></div>
-<a href="../classes/ACL.html" class="more">« More »</a>
+<a href="../classes/Tools.html" class="more">« More »</a>
 </div>
-<a name="Auth" id="Auth"></a><div class="element ajax clickable class" href="../classes/Auth.html">
-<h1>Auth<a href="../classes/Auth.html">¶</a>
+<a name="Tools_CoffeeScript" id="Tools_CoffeeScript"></a><div class="element ajax clickable class" href="../classes/Tools_CoffeeScript.html">
+<h1>Tools_CoffeeScript<a href="../classes/Tools_CoffeeScript.html">¶</a>
 </h1>
-<p class="short_description">Class to check user(registered user, or just visitor .</p>
+<p class="short_description">Compile cafeescript into js file</p>
 <div class="details collapse"></div>
-<a href="../classes/Auth.html" class="more">« More »</a>
+<a href="../classes/Tools_CoffeeScript.html" class="more">« More »</a>
 </div>
-<a name="Base_ACL" id="Base_ACL"></a><div class="element ajax clickable class" href="../classes/Base_ACL.html">
-<h1>Base_ACL<a href="../classes/Base_ACL.html">¶</a>
+<a name="Tools_Language" id="Tools_Language"></a><div class="element ajax clickable class" href="../classes/Tools_Language.html">
+<h1>Tools_Language<a href="../classes/Tools_Language.html">¶</a>
 </h1>
-<p class="short_description">Base class to check user permision for some request</p>
+<p class="short_description">Parse php files for translatable items and creates or update tr files</p>
 <div class="details collapse"></div>
-<a href="../classes/Base_ACL.html" class="more">« More »</a>
+<a href="../classes/Tools_Language.html" class="more">« More »</a>
 </div>
-<a name="Base_Auth" id="Base_Auth"></a><div class="element ajax clickable class" href="../classes/Base_Auth.html">
-<h1>Base_Auth<a href="../classes/Base_Auth.html">¶</a>
+<a name="Tools_Less" id="Tools_Less"></a><div class="element ajax clickable class" href="../classes/Tools_Less.html">
+<h1>Tools_Less<a href="../classes/Tools_Less.html">¶</a>
 </h1>
-<p class="short_description">Base class to manage roles for user</p>
+<p class="short_description">Class to compile less file into css file</p>
 <div class="details collapse"></div>
-<a href="../classes/Base_Auth.html" class="more">« More »</a>
+<a href="../classes/Tools_Less.html" class="more">« More »</a>
+</div>
+<a name="Tools_Media" id="Tools_Media"></a><div class="element ajax clickable class" href="../classes/Tools_Media.html">
+<h1>Tools_Media<a href="../classes/Tools_Media.html">¶</a>
+</h1>
+<p class="short_description">Execute some external usefull tools (beautify and minize)
+http://ariya.ofilabs.com/2011/10/javascript-tools-for-continuous-integration.html</p>
+<div class="details collapse"></div>
+<a href="../classes/Tools_Media.html" class="more">« More »</a>
 </div>
 </div>
 </div>

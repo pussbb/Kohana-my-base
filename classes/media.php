@@ -20,8 +20,8 @@
 
 class Media {
 
-    /*
-     * @internal
+    /**
+     * @ignore
      */
     public static function __callStatic($name, $arguments)
     {

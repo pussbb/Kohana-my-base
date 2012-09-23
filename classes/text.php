@@ -56,7 +56,8 @@ class Text extends Kohana_Text {
     /**
      * general function to delete html tags and html tag attributes
      * @static
-     * @param $data
+     * @param $text string
+     * @param $allowed_tags string
      * @return string
      */
     public function strip_tags($text, $allowed_tags = '<b><p><strong><br>')
@@ -75,7 +76,8 @@ class Text extends Kohana_Text {
 
     /**
      * strip ANSI escape color codes.
-     *
+     * @static
+     * @param $string string
      */
     public static function strip_ansi_color($string)
     {

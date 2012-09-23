@@ -1,5 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
+ * Gettext support
  * @see Base_I18n
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com

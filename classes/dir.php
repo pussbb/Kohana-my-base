@@ -59,7 +59,10 @@ class Dir {
 
     /**
      * returns founded files in directory recursivly
+     * @param $dir string
      * @param $condition string file extention or regexpr
+     * @param $array array|NULL
+     * @return array|null
      */
     public static function files($dir, $condition = null, &$array = array())
     {

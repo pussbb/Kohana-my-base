@@ -21,7 +21,6 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
-<li><a href="../packages/JSMin.html"><i class="icon-folder-open"></i> JSMin</a></li>
 <li><a href="../packages/Kohana-my-base.html"><i class="icon-folder-open"></i> Kohana-my-base</a></li>
 </ul>
 </li>
@@ -33,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">74</span></a></li>
+                <span class="label label-info">82</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -73,14 +72,12 @@ and auto load default bundle</span><pre>__construct()</pre></a></li>
 <li class="method public "><a href="#inline_style" title="inline_style :: return formatted string for inline style"><span class="description">return formatted string for inline style</span><pre>inline_style()</pre></a></li>
 <li class="method public inherited"><a href="#instance" title="instance :: "><span class="description">instance()
         </span><pre>instance()</pre></a></li>
+<li class="method public "><a href="#path_clean" title="path_clean :: return full url for media file without // in path"><span class="description">return full url for media file without // in path</span><pre>path_clean()</pre></a></li>
 <li class="method public "><a href="#scripts" title="scripts :: return a list with included javascript files"><span class="description">return a list with included javascript files</span><pre>scripts()</pre></a></li>
 <li class="method public "><a href="#styles" title="styles :: get all appended css files"><span class="description">get all appended css files</span><pre>styles()</pre></a></li>
 <li class="nav-header private">» Private</li>
-<li class="method private "><a href="#coffeescript" title="coffeescript :: compiles coffee script if needed"><span class="description">compiles coffee script if needed</span><pre>coffeescript()</pre></a></li>
 <li class="method private "><a href="#config" title="config :: get value from config"><span class="description">get value from config</span><pre>config()</pre></a></li>
 <li class="method private "><a href="#is_url" title="is_url :: checks if valid url"><span class="description">checks if valid url</span><pre>is_url()</pre></a></li>
-<li class="method private "><a href="#minize_script" title="minize_script :: minize javascript script using JSMin"><span class="description">minize javascript script using JSMin</span><pre>minize_script()</pre></a></li>
-<li class="method private "><a href="#need_compile" title="need_compile :: checks if coffee script exists"><span class="description">checks if coffee script exists</span><pre>need_compile()</pre></a></li>
 <li class="method private "><a href="#resource" title="resource :: return full url for media file"><span class="description">return full url for media file</span><pre>resource()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
@@ -377,6 +374,22 @@ if needed</p></p>
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
+<a name="path_clean" id="path_clean"></a><div class="element clickable method public path_clean" data-toggle="collapse" data-target=".path_clean .collapse">
+<h2>return full url for media file without // in path</h2>
+<pre>path_clean($file) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$file</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
 <a name="scripts" id="scripts"></a><div class="element clickable method public scripts" data-toggle="collapse" data-target=".scripts .collapse">
 <h2>return a list with included javascript files</h2>
 <pre>scripts() : array</pre>
@@ -399,29 +412,6 @@ if needed</p></p>
 </tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
-</div></div>
-</div>
-<a name="coffeescript" id="coffeescript"></a><div class="element clickable method private coffeescript" data-toggle="collapse" data-target=".coffeescript .collapse">
-<h2>compiles coffee script if needed</h2>
-<pre>coffeescript($file_name, null $files) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>private</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$file_name</h4></div>
-<div class="subelement argument">
-<h4>$files</h4>
-<code>null</code>
-</div>
-<h3>Exceptions</h3>
-<table class="table table-bordered"><tr>
-<th><code>\Kohana_Exception</code></th>
-<td></td>
-</tr></table>
 </div></div>
 </div>
 <a name="config" id="config"></a><div class="element clickable method private config" data-toggle="collapse" data-target=".config .collapse">
@@ -455,48 +445,6 @@ if needed</p></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>bool</code>TRUE if url is valid</div>
-</div></div>
-</div>
-<a name="minize_script" id="minize_script"></a><div class="element clickable method private minize_script" data-toggle="collapse" data-target=".minize_script .collapse">
-<h2>minize javascript script using JSMin</h2>
-<pre>minize_script($file) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>see</th>
-<td>\global\JSMin</td>
-</tr>
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$file</h4></div>
-</div></div>
-</div>
-<a name="need_compile" id="need_compile"></a><div class="element clickable method private need_compile" data-toggle="collapse" data-target=".need_compile .collapse">
-<h2>checks if coffee script exists</h2>
-<pre>need_compile(\$source $source, \$destination $destination) : bool</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>Returns TRUE if coffee script exists and he is newer than javascript script
-or if javascript file does not exists</p></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>private</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$source</h4>
-<code>\$source</code><p>full path to cofee script file</p></div>
-<div class="subelement argument">
-<h4>$destination</h4>
-<code>\$destination</code><p>full path to javascript file</p></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
 <a name="resource" id="resource"></a><div class="element clickable method private resource" data-toggle="collapse" data-target=".resource .collapse">
@@ -617,7 +565,7 @@ wich need to add to the template</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-09-15T22:20:35+03:00.<br></footer></div>
+            generated on 2012-09-23T20:41:02+03:00.<br></footer></div>
 </div>
 </body>
 </html>

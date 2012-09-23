@@ -12,18 +12,29 @@ if (Kohana::$environment == Kohana::PRODUCTION)
 
 if ( ! function_exists('tr'))
 {
-	function tr($string, array $values = NULL)
-	{
-        if (I18n::gettext_enabled()) 
-    		return vprintf(gettext($string), $values);
+    /**
+    * translate string via gettext
+    * or Kohana's translation function
+    * @param $string string
+    * @param $values array
+    * @return string
+    */
+    function tr($string, array $values = NULL)
+    {
+        if (I18n::gettext_enabled())
+            return vprintf(gettext($string), $values);
 
         preg_match_all('/%(?:\d+\$)?[+-]?(?:[ 0]|\'.{1})?-?\d*(?:\.\d+)?[bcdeEufFgGosxX]/', $str, $matches, PREG_PATTERN_ORDER);
         return __($string, array_combine($matches, $values));
-	}
+    }
 }
 
 if ( ! function_exists('debug'))
 {
+    /**
+    * helper function to print dump of var and exit if needed
+    *
+    */
     function debug()
     {
         $exit = FALSE;

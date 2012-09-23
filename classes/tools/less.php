@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
+ * Class to compile less file into css file 
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
@@ -13,10 +14,9 @@
 class Tools_Less extends Tools {
 
     /**
-     * compiles coffee script if needed
-     * @param $file_name
-     * @param null $files
-     * @throws Kohana_Exception
+     * compiles less file if needed
+     * @param $file_name string
+     * @throws Exception_Tools
      * @access private
      */
     protected function build_if_needed($file_name)
@@ -45,6 +45,11 @@ class Tools_Less extends Tools {
         throw new Exception_Tools("less compiler output for $destination \n $str");
     }
 
+    /**
+     * checks if less compiler is installed 
+     * @static
+     * @throw Exception_Tools
+     */
     public static function check()
     {
         if ( ! self::app_exists('lessc --v', '/lessc \d{0,}\.\d{0,}.\d{0,}/'))
