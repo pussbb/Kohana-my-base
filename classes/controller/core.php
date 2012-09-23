@@ -186,7 +186,7 @@ class Controller_Core extends Controller_Template {
      * @param $name
      * @param string $media
      */
-    public function register_css_file($name, $media = '')
+    public function add_css($name, $media = '')
     {
         Media::append_style($name, $media);
     }
@@ -195,7 +195,7 @@ class Controller_Core extends Controller_Template {
      * append javascript file
      * @param $name
      */
-    public function register_js_file($name)
+    public function add_js($name)
     {
         Media::append_script($name);
     }

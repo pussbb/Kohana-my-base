@@ -89,4 +89,10 @@ class Tools extends Singleton {
         return FALSE;
     }
 
+    public static function writable($dir)
+    {
+        if( ! is_writable($dir))
+            throw new Exception_Tools("You don't have permission to write in  $destination");
+    }
+    
 }

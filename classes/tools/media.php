@@ -10,6 +10,29 @@
  * @subpackage tools
  */
 
-class Media extends Tools {
+class Tools_Media extends Tools {
 
+
+/*
+$files = Dir::files(DOCROOT.'media/js', 'js');
+foreach($files as $file) {
+    Tools_Media::jsmin($file, 'min');
+}
+
+*/
+    protected function jsmin($file, $prefix = NULL)
+    {
+        if ($prefix && preg_match('/\.'.$prefix.'\.js/', $file))
+            return;
+        $ok = $this->exec(self::config('eightpack.jsmin')." $file");
+        if ( ! $ok)
+            throw new Exception_Tools($this->stdout);
+        Tools::writable($file);
+        file_put_contents(dirname($file).DIRECTORY_SEPARATOR.basename($file, '.js').".$prefix.js", $this->stdout);
+    }
+
+
+    public static function  check()
+    {
+    }
 }

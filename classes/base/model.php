@@ -233,18 +233,6 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     * @ignore
-     * @internal
-     * @return void
-     */
-    public function __destruct()
-    {
-        $this->clean();
-        $this->data = array();
-        $this->records = array();
-    }
-
-    /**
      * dynamically append variable to object
      *
      * <code>
