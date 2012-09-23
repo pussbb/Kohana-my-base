@@ -26,9 +26,9 @@ foreach($files as $file) {
             return;
         $ok = $this->exec(self::config('eightpack.jsmin')." $file");
         if ( ! $ok)
-            throw new Exception_Tools($this->stdout);
+            throw new Exception_Tools($this->error());
         Tools::writable($file);
-        file_put_contents(dirname($file).DIRECTORY_SEPARATOR.basename($file, '.js').".$prefix.js", $this->stdout);
+        file_put_contents(dirname($file).DIRECTORY_SEPARATOR.basename($file, '.js').".$prefix.js", $this->error());
     }
 
 

@@ -52,7 +52,7 @@ class Tools_CoffeeScript extends Tools {
 
         if ($this->exec($cmd))
             return;
-        throw new Exception_Tools("coffescript compiler output for $destination \n $this->stdout");
+        throw new Exception_Tools("coffescript compiler output for $destination \n ".$this->error());
     }
 
     public static function check()

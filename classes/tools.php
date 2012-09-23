@@ -94,5 +94,9 @@ class Tools extends Singleton {
         if( ! is_writable($dir))
             throw new Exception_Tools("You don't have permission to write in  $destination");
     }
-    
+
+    public function error()
+    {
+      return $this->stderr?:$this->stdout;
+    }
 }

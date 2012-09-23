@@ -22,7 +22,7 @@ class Tools_Language extends Tools {
         $ok = $this->exec('(find "'.DOCROOT.'" -type f  -iname "*.php" | xargs xgettext -D '.DOCROOT.' -o '.$template.' -L PHP -d="'.I18n::$domain.'" -p '.$base_dir.' --force-po --no-wrap --keyword="tr" --keyword="__" --keyword="_" --from-code="UTF-8") 2>&1');
 
         if ( ! $ok)
-            throw new Exception_Tools('parsing sources failed \n '.$this->stdout);
+            throw new Exception_Tools('parsing sources failed \n '.$this->error());
 
         File::sed($template, '/Content-Type: text\/plain; charset=CHARSET/', 'Content-Type: text/plain; charset=UTF-8');
         foreach (Model_Language::find_all()->records as $language) {
@@ -32,12 +32,12 @@ class Tools_Language extends Tools {
                 Dir::create_if_need($dir);
                 $ok = $this->exec('msginit --no-translator --locale='.$language->locale.' --input='.$template.' -o '.$tr_file);
                 if ( ! $ok)
-                    throw new Exception_Tools('init translation failed \n '.$this->stderr);
+                    throw new Exception_Tools('init translation failed \n '.$this->error());
             }
             else {
                 $ok = $this->exec('msgmerge --no-wrap -U  '.$tr_file.' '.$template);
                 if ( ! $ok)
-                    throw new Exception_Tools("updating translation failed \n ".$this->stderr);
+                    throw new Exception_Tools("updating translation failed \n ".$this->error());
             }
         }
     }
