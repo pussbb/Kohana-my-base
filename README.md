@@ -20,3 +20,5 @@ Binary packages
 [centos 6.03 x86-x64](http://qdrive.net/AlexB10696/file/257730/d748dc74e44a1658d93f7cd0e4410bfb)
 
 [kubuntu 12.04 x86-x64](http://qdrive.net/AlexB10696/file/257731/fd0c63e821185dc28a2ab799f9d54e30)
+
+[kubuntu 12.04 i686](http://qdrive.net/AlexB10696/file/257747/c1240fd76fb12d97c9114cd516c8b2c0)
