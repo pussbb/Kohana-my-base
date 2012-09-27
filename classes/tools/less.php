@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Class to compile less file into css file 
+ * Class to compile less file into css file
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
@@ -46,7 +46,7 @@ class Tools_Less extends Tools {
     }
 
     /**
-     * checks if less compiler is installed 
+     * checks if less compiler is installed
      * @static
      * @throw Exception_Tools
      */

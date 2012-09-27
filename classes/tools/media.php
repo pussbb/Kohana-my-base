@@ -6,7 +6,7 @@
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
- * @version 0.1.2 
+ * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
  * @category tools
  * @subpackage tools
@@ -26,6 +26,7 @@ class Tools_Media extends Tools {
   * </code>
   * @param $file string file name
   * @param $prefix string prefix for minimized file if null rewrites origin
+  * @access public
   * @return void
   */
     protected function jsmin($file, $prefix = 'min')
@@ -47,6 +48,7 @@ class Tools_Media extends Tools {
   * </code>
   * @param $file string file name
   * @param $prefix string prefix for minimized file if null rewrites origin
+  * @access public
   * @return void
   */
     protected function cssmin($file, $prefix = 'min')
@@ -69,6 +71,7 @@ class Tools_Media extends Tools {
     * </code>
     * @param $file string file name
     * @param $prefix string prefix for minimized file if null rewrites origin
+    * @access public
     * @return void
     */
     protected function minimize($file, $prefix = 'min')
@@ -85,6 +88,7 @@ class Tools_Media extends Tools {
     *
     * @param $file string file name
     * @param $prefix string prefix for minimized file if null rewrites origin
+    * @access public
     * @return void
     */
     private function eightpack_exec($app, $source_file, $dest_file = NULL)
@@ -107,6 +111,7 @@ class Tools_Media extends Tools {
     * </code>
     * @param $file string file name
     * @param $prefix string prefix to skip file (minimized not need to format)
+    * @access public
     * @return void
     */
     protected function beautify($file, $prefix = 'min')
@@ -129,6 +134,7 @@ class Tools_Media extends Tools {
     * </code>
     * @param $file string file name
     * @param $prefix string prefix to skip file (minimized not need to format)
+    * @access public
     * @return void
     */
     protected function css_beautify($file, $prefix = 'min')
@@ -149,6 +155,7 @@ class Tools_Media extends Tools {
     * </code>
     * @param $file string file name
     * @param $prefix string prefix to skip file (minimized not need to format)
+    * @access public
     * @return void
     */
     protected function js_beautify($file, $prefix = 'min')

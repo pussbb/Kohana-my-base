@@ -8,7 +8,7 @@ return array(
     ),
     'default' => array(
         'css' => array('1' => ''),
-        'js' => array(),
+        'js' => array('jquery/jquery.min',),
     ),
 );
 /*

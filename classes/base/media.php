@@ -66,13 +66,41 @@ class Base_Media extends Singleton{
     private $scripts = array();
 
     /**
+     * is coffee script compiler installed
+     * @access private
+     */
+    private $coffeescript = FALSE;
+
+    /**
+     * is less compiler installed
+     * @access private
+     */
+    private $less = FALSE;
+
+    /**
      * Initialize configuration settings
      * and auto load default bundle
+     * @ignore
      */
     public function __construct()
     {
         $this->config = Kohana::$config->load('media');
         $this->bundle('default');
+        try{
+            Tools_CoffeeScript::check();
+            $this->coffeescript = TRUE;
+        }
+        catch(Exception_Tools $e) {
+
+        }
+
+        try{
+            Tools_Less::check();
+            $this->less = TRUE;
+        }
+        catch(Exception_Tools $e) {
+
+        }
     }
 
     /**
@@ -217,7 +245,7 @@ class Base_Media extends Singleton{
      */
     public function append_style($file_name, $media = NULL, $check = FALSE)
     {
-        if ( Kohana::$environment != Kohana::PRODUCTION) {
+        if ( Kohana::$environment != Kohana::PRODUCTION && $this->less) {
             Tools_Less::build_if_needed($file_name);
         }
         if ($check && ! $this->find_file($file_name, 'css'))
@@ -254,7 +282,7 @@ class Base_Media extends Singleton{
             $file_name = Arr::get($file_name, 'name');
         }
 
-        if ( Kohana::$environment != Kohana::PRODUCTION) {
+        if ( Kohana::$environment != Kohana::PRODUCTION && $this->coffeescript) {
             Tools_CoffeeScript::build_if_needed($file_name, $files);
         }
         if ($check && ! $this->find_file($file_name, 'js'))
