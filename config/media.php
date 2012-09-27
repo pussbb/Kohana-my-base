@@ -7,8 +7,8 @@ return array(
         'path' => DOCROOT.'media'.DIRECTORY_SEPARATOR,
     ),
     'default' => array(
-        'css' => array('1' => ''),
-        'js' => array('jquery/jquery.min',),
+        'css' => array(),
+        'js' => array(),
     ),
 );
 /*
