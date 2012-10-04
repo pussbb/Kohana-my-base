@@ -26,10 +26,20 @@ class Base_Language {
      * @return language (model object)
      * @static
      */
-    public static function get()
+    public static function get($lang = NULL)
     {
         $language = Session::instance()->get('language');
-        return is_object($language) ? clone $language : self::get_default();
+        if ( ! is_object($language) && ! $lang) {
+            return self::get_default();
+        }
+        elseif ( ! is_object($language) ||
+          (is_object($language) && ($lang && $language->code != $lang))) {
+            try {
+                return self::get_lang($lang);
+            } catch(Exception $e) {
+            }
+        }
+        return $language;
     }
     /**
      * get default lang
@@ -38,13 +48,19 @@ class Base_Language {
      */
     public static function get_default()
     {
-    	$code = Kohana::$config->load('site.default_language');
-    	if ($code)
-    		$filter = array('code' => $code);
-    	else
-    		$filter = array('locale' => I18n::lang());
+        $code = Kohana::$config->load('site.default_language');
+        return self::get_lang($code);
+    }
+
+    private static function get_lang($code)
+    {
+        if ($code)
+            $filter = array('code' => $code);
+        else
+            $filter = array('locale' => I18n::lang());
+       
         $language = Model_Language::find($filter);
-        Session::instance()->set('language', $language);
+        self::set($language);
         return $language;
     }
 }

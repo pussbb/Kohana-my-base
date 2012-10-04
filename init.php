@@ -46,3 +46,11 @@ if ( ! function_exists('debug'))
             exit();
     }
 }
+
+Route::set('default', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array('lang' => "([a-zA-Z]{0,2})"))
+    ->defaults(array(
+        'lang' => NULL,
+        'controller' => 'welcome',
+        'action'     => 'index',
+    ));
+

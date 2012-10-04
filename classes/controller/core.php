@@ -53,7 +53,8 @@ class Controller_Core extends Controller_Template {
      */
     protected function set_language()
     {
-        $language = Language::get()->locale;
+        $lang = $this->request->param('lang');
+        $language = Language::get($lang)->locale;
         I18n::lang($language);
     }
 
@@ -67,7 +68,6 @@ class Controller_Core extends Controller_Template {
         $this->check_access();
 
         $this->view = new View();
-
         $this->template->set(array('content' => NULL, 'keywords'=> NULL, 'description'=> NULL, 'title'=> NULL));
     }
 
