@@ -24,7 +24,7 @@ class Collection {
         {
                 $result = array();
                 foreach ($collection as $item) {
-                        $result[$item->$key] = $item;
+                        $result[Object::property($item, $key)] = $item;
                 }
                 return $result;
         }
@@ -41,7 +41,7 @@ class Collection {
         {
                 $result = array();
                 foreach ($collection as $item) {
-                        $result[$item->$primary_key] = $item->$key;
+                        $result[Object::property($item, $primary_key)] = Object::property($item, $key);
                 }
                 return $result;
         }
@@ -57,11 +57,7 @@ class Collection {
         {
                 $result = array();
                 foreach ($collection as $item) {
-                        try {
-                                $result[] = $item->$key;
-                        } catch (Exception $e) {
-                                $result[] = NULL;
-                        }
+                    $result[] = Object::property($item, $key);
                 }
                 return $result;
         }
