@@ -15,7 +15,7 @@ class Object {
 
     public static  function property($obj, $name, $default = NULL)
     {
-        return property_exists($obj, $name)? $obj->$name: $default;
+        return property_exists($obj, $name)? $obj->{$name}: $default;
     }
 
 }

@@ -6,10 +6,6 @@ return array(
         'uri' => 'media/',
         'path' => DOCROOT.'media'.DIRECTORY_SEPARATOR,
     ),
-    'default' => array(
-        'css' => array(),
-        'js' => array(),
-    ),
 );
 /*
 Example

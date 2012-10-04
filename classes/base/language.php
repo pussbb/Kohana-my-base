@@ -58,7 +58,6 @@ class Base_Language {
             $filter = array('code' => $code);
         else
             $filter = array('locale' => I18n::lang());
-       
         $language = Model_Language::find($filter);
         self::set($language);
         return $language;

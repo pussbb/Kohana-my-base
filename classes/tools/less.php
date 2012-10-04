@@ -26,7 +26,7 @@ class Tools_Less extends Tools {
         $destination = $dest_path.$file_name.'.css';
         $source = $source_path.$file_name.'.less';
 
-        if ( ! self::need_compile($source, $destination))
+        if ( ! file_exists($source))
             return;
         $output_dir = pathinfo($destination, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR;
         Dir::create_if_need($output_dir);

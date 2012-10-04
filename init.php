@@ -42,12 +42,13 @@ if ( ! function_exists('debug'))
         if (is_bool(end($args)) && count($args) > 1)
             $exit = array_pop($args);
         echo call_user_func_array('Debug::vars', $args);
-        if ($exit)
-            exit();
+        if ($exit) exit(0);
     }
 }
 
-Route::set('default', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array('lang' => "([a-zA-Z]{0,2})"))
+$langs = Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
+$codes = implode('|', Collection::pluck($langs, 'code'));
+Route::set('default', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array('lang' => '('.$codes.')',))
     ->defaults(array(
         'lang' => NULL,
         'controller' => 'welcome',
