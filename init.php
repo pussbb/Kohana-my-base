@@ -47,8 +47,8 @@ if ( ! function_exists('debug'))
 }
 
 $langs = Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
-$codes = implode('|', Collection::pluck($langs, 'code'));
-Route::set('default', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array('lang' => '('.$codes.')',))
+$codes = implode('|', array_filter(Collection::pluck($langs, 'code')));
+Route::set('default', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array('lang' => "($codes)",))
     ->defaults(array(
         'lang' => NULL,
         'controller' => 'welcome',
