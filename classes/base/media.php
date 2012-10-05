@@ -130,6 +130,10 @@ class Base_Media extends Singleton{
             $this->append_style($file, $media);
         }
         foreach (Arr::get($bundle, 'js') as $file => $file_group) {
+            if (is_numeric($file)) {
+                $file = $file_group;
+                $file_group = NULL;
+            }
             $this->append_script($file, FALSE, $file_group);
         }
     }
