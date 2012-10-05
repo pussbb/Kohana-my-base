@@ -129,8 +129,8 @@ class Base_Media extends Singleton{
         foreach (Arr::get($bundle, 'css') as $file => $media) {
             $this->append_style($file, $media);
         }
-        foreach (Arr::get($bundle, 'js') as $file) {
-            $this->append_script($file);
+        foreach (Arr::get($bundle, 'js') as $file => $file_group) {
+            $this->append_script($file, FALSE, $file_group);
         }
     }
 
@@ -274,14 +274,8 @@ class Base_Media extends Singleton{
      * @param bool $check if TRUE first check file if its a remote it always will be FALSE
      * @access public
      */
-    public function append_script($file_name, $check = FALSE)
+    public function append_script($file_name, $check = FALSE, $files = NULL)
     {
-        $files = NULL;
-        if (Arr::is_array($file_name)) {
-            $files = Arr::get($file_name, 'files');
-            $file_name = Arr::get($file_name, 'name');
-        }
-
         if ( Kohana::$environment != Kohana::PRODUCTION && $this->coffeescript) {
             Tools_CoffeeScript::build_if_needed($file_name, $files);
         }
