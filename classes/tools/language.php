@@ -19,19 +19,19 @@ class Tools_Language extends Tools {
     protected function parse_source()
     {
         self::check();
-        $base_dir = I18n::base_dir();
+        $base_dir = GetText::base_dir();
         Dir::create_if_need($base_dir);
         $template = $base_dir.'template.po';
-        $ok = $this->exec('(find "'.DOCROOT.'" -type f  -iname "*.php" | xargs xgettext -D '.DOCROOT.' -o '.$template.' -L PHP -d="'.I18n::$domain.'" -p '.$base_dir.' --force-po --no-wrap --keyword="tr" --keyword="__" --keyword="_" --from-code="UTF-8") 2>&1');
+        $ok = $this->exec('(find "'.DOCROOT.'" -type f  -iname "*.php" | xargs xgettext -D '.DOCROOT.' -o '.$template.' -L PHP -d="'.GetText::$domain.'" -p '.$base_dir.' --force-po --no-wrap --keyword="tr" --keyword="__" --keyword="_" --from-code="UTF-8") 2>&1');
 
         if ( ! $ok)
             throw new Exception_Tools('parsing sources failed \n '.$this->error());
 
         File::sed($template, '/Content-Type: text\/plain; charset=CHARSET/', 'Content-Type: text/plain; charset=UTF-8');
         foreach (Model_Language::find_all()->records as $language) {
-            $tr_file = I18n::absolute_file_path($language->locale);
+            $tr_file = GetText::absolute_file_path($language->locale);
             if ( ! file_exists($tr_file)) {
-                $dir = I18n::tr_path($language->locale);
+                $dir = GetText::tr_path($language->locale);
                 Dir::create_if_need($dir);
                 $ok = $this->exec('msginit --no-translator --locale='.$language->locale.' --input='.$template.' -o '.$tr_file);
                 if ( ! $ok)
@@ -52,6 +52,6 @@ class Tools_Language extends Tools {
     public static function check()
     {
         if ( ! self::app_exists('xgettext -V', '/xgettext \(GNU gettext-tools\)/'))
-            throw new Exception_Tools('Gettext tools not installed. Details http://en.wikipedia.org/wiki/Gettext');
+            throw new Exception_Tools_Missing('Gettext tools not installed. Details http://en.wikipedia.org/wiki/Gettext');
     }
 }

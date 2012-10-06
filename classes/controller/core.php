@@ -55,7 +55,7 @@ class Controller_Core extends Controller_Template {
     {
         $lang = $this->request->param('lang');
         $language = Language::get($lang)->locale;
-        I18n::lang($language);
+        GetText::lang($language);
     }
 
     /**

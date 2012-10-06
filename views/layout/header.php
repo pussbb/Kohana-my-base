@@ -5,7 +5,7 @@
 <!--[if IE 8 ]><html class="ie ie8" lang="<?php echo $lang;?>"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="<?php echo $lang;?>"> <!--<![endif]-->
 <head>
-    <meta charset="<?php echo I18n::$encoding;?>"/>
+    <meta charset="<?php echo GetText::$encoding;?>"/>
 <?php
 echo "<title>$title</title>", PHP_EOL;
 

@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * Gettext support
- * @see Base_I18n
+ * @see Base_GetText
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
@@ -10,4 +10,4 @@
  * @subpackage extra
  * @category extra
  */
-class I18n extends Base_I18n {}
+class GetText extends Base_GetText {}

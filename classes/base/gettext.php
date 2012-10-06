@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Class adds extra functionality to Kohana_I18n to support tr from gettext
+ * Class adds extra functionality to Kohana_self to support tr from gettext
  *
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
@@ -10,7 +10,7 @@
  * @category template
  * @subpackage template
  */
-class Base_I18n extends Kohana_I18n {
+class Base_GetText extends Kohana_I18n {
 
     /**
      * @var  string   target language: en-us, es-es, zh-cn, etc
@@ -33,10 +33,10 @@ class Base_I18n extends Kohana_I18n {
     public static function lang($lang = 'en-EN')
     {
         $lang = parent::lang($lang);
-        setlocale (LC_ALL, $lang.'.'.I18n::$encoding);
-        bindtextdomain (I18n::$domain, self::base_dir());
-        textdomain (I18n::$domain);
-        bind_textdomain_codeset(I18n::$domain, I18n::$encoding);
+        setlocale (LC_ALL, $lang.'.'.self::$encoding);
+        bindtextdomain (self::$domain, self::base_dir());
+        textdomain (self::$domain);
+        bind_textdomain_codeset(self::$domain, self::$encoding);
         return $lang;
     }
     /**

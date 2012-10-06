@@ -46,6 +46,12 @@ if ( ! function_exists('debug'))
     }
 }
 
+
+/**
+ * Attach a file reader to config. Multiple readers are supported.
+ */
+Kohana::$config->attach(new Config_File);
+
 $langs = Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
 $codes = implode('|', array_filter(Collection::pluck($langs, 'code')));
 Route::set('default', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array('lang' => "($codes)",))

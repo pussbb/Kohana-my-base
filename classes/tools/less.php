@@ -53,7 +53,7 @@ class Tools_Less extends Tools {
     public static function check()
     {
         if ( ! self::app_exists('lessc --v', '/lessc \d{0,}\.\d{0,}.\d{0,}/'))
-            throw new Exception_Tools('Less compiler not installed. Please visit http://lesscss.org/');
+            throw new Exception_Tools_Missing('Less compiler not installed. Please visit http://lesscss.org/');
     }
 
 
