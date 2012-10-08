@@ -87,5 +87,27 @@ class Dir {
         return $array;
     }
 
+    /**
+     * returns founded directories in directory recursivly
+     * @param $dir string
+     * @param $names_only bool relative path or just a folder name
+     * @return array|null
+     */
+    public static function subdirs($dir, $names_only = TRUE)
+    {
+        $files = scandir($dir);
+        array_shift($files);    // remove '.' from array
+        array_shift($files);    // remove '..' from array
 
+        foreach ($files as $file) {
+            $file = Text::reduce_slashes($dir . '/' . $file);
+            if (is_dir($file)) {
+                if ($names_only)
+                    $array[] = pathinfo($file, PATHINFO_BASENAME);
+                else
+                    $array[] = $file;
+            }
+        }
+        return $array;
+    }
 }

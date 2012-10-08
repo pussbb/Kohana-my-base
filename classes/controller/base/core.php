@@ -46,7 +46,6 @@ class Controller_Base_Core extends Controller_Template {
      */
     private $filename = NULL;
 
-
     private $layout = NULL;
     /**
      * sets language by default
@@ -56,9 +55,10 @@ class Controller_Base_Core extends Controller_Template {
     protected function set_language()
     {
         $lang = $this->request->param('lang');
-        $language = Language::get($lang)->locale;
-        GetText::lang($language);
+        $language = Language::get($lang);
+        GetText::lang($language->locale);
     }
+
 
     /**
      * init base template and this

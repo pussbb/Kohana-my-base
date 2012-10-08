@@ -49,8 +49,7 @@ if ( ! function_exists('debug'))
 
 Kohana::$config->attach(new Config_File);
 
-
-Route::set('www', '((<lang>)(/)(<directory>)(/)(<controller>)(/<action>(/<id>)))', array(
+Route::set('www', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array(
   'lang' => Language::uri_check_codes(),
   ))
     ->defaults(array(
