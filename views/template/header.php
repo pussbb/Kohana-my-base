@@ -7,7 +7,7 @@
 <head>
     <meta charset="<?php echo GetText::$encoding;?>"/>
 <?php
-echo "<title>$title</title>", PHP_EOL;
+echo '<title>'.URL::title($title).'</title>', PHP_EOL;
 
 if ($favicon) {
     echo '<link rel ="shortcut icon" href="' .URL::base(TRUE, FALSE) . $favicon. '" type="image/x-icon" />';
