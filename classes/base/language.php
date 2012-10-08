@@ -62,4 +62,15 @@ class Base_Language {
         self::set($language);
         return $language;
     }
+
+    public static function all_codes()
+    {
+        $langs = Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
+        return array_filter(Collection::pluck($langs, 'code'));
+    }
+
+    public static function uri_check_codes()
+    {
+        return '('.implode('|', self::all_codes()).')';
+    }
 }

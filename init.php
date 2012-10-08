@@ -47,13 +47,11 @@ if ( ! function_exists('debug'))
 }
 
 
-
 Kohana::$config->attach(new Config_File);
 
-$langs = Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
-$codes = implode('|', array_filter(Collection::pluck($langs, 'code')));
-Route::set('www', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array(
-  'lang' => "($codes)",
+
+Route::set('www', '((<lang>)(/)(<directory>)(/)(<controller>)(/<action>(/<id>)))', array(
+  'lang' => Language::uri_check_codes(),
   ))
     ->defaults(array(
         'lang' => NULL,
