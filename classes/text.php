@@ -50,7 +50,7 @@ class Text extends Kohana_Text {
         } while ($old_data !== $data);
 
         // we are done...
-        return $data;
+        return self::remove_event_attributes($data);
     }
 
     /**
@@ -82,5 +82,50 @@ class Text extends Kohana_Text {
     public static function strip_ansi_color($string)
     {
       return preg_replace('/\e\[[;?0-9]*[0-9A-Za-z]/', ' ', $string);
+    }
+
+    ///http://stackoverflow.com/questions/9462104/remove-on-js-event-attributes-from-html-tags
+
+    public static $tag_on_defs = '(?(DEFINE)
+        (?<tagname> [a-z][^\s>/]*+    )
+        (?<attname> [^\s>/][^\s=>/]*+    )  # first char can be pretty much anything, including =
+        (?<attval>  (?>
+                        "[^"]*+" |
+                        \'[^\']*+\' |
+                        [^\s>]*+            # unquoted values can contain quotes, = and /
+                    )
+        )
+        (?<attrib>  (?&attname)
+                    (?: \s*+
+                        = \s*+
+                        (?&attval)
+                    )?+
+        )
+        (?<crap>    [^\s>]    )             # most crap inside tag is ignored, will eat the last / in self closing tags
+        (?<tag>     <(?&tagname)
+                    (?: \s*+                # spaces between attributes not required: <b/foo=">"style=color:red>bold red text</b>
+                        (?>
+                            (?&attrib) |    # order matters
+                            (?&crap)        # if not an attribute, eat the crap
+                        )
+                    )*+
+                    \s*+ /?+
+                    \s*+ >
+        )
+    )';
+
+
+    // removes onanything attributes from all matched HTML tags
+    public static function remove_event_attributes($html)
+    {
+        $re = '(?&tag)' . self::$tag_on_defs;
+        return preg_replace("~$re~xie", 'Text::remove_event_attributes_from_tag("$0")', $html);
+    }
+
+    // removes onanything attributes from a single opening tag
+    function remove_event_attributes_from_tag($tag)
+    {
+        $re = '( ^ <(?&tagname) ) | \G \s*+ (?> ((?&attrib)) | ((?&crap)) )' . self::$tag_on_defs;
+        return preg_replace("~$re~xie", '"$1$3"? "$0": (preg_match("/^on/i", "$2")? " ": "$0")', $tag);
     }
 }
