@@ -66,7 +66,7 @@ class Collection {
             return $result;
     }
 
-    public static function build_tree(array $collection, $key, $parent = NULL, $parent_key = 'parent_id')
+    public static function build_tree(array $collection,  $parent = NULL, $parent_key = 'parent_id', $key = 'id')
     {
         $result = array();
         foreach($collection as $item)
@@ -75,7 +75,7 @@ class Collection {
             {
                 $result[$item->$key] = array(
                   'object' => $item,
-                  'childs' => self::build_tree($collection, $key, $item->$key)
+                  'childs' => self::build_tree($collection, $item->$key)
                 );
             }
         }
