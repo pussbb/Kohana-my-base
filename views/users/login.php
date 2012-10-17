@@ -1,4 +1,3 @@
-
 <?php
 $general = Arr::get($errors, 'general');
 
@@ -6,7 +5,7 @@ if ( $general)
 {
     echo '<div class="alert alert-error">
         <a class="close" data-dismiss="alert" href="#">×</a>
-                <h4 class="alert-heading">'.__('warning').'!</h4>
+                <h4 class="alert-heading">'.tr('warning').'!</h4>
                 '.$general.'
                 </div>';
 }
@@ -19,21 +18,21 @@ echo $form->open( Url::site('users/login'), array('class' => 'form-horizontal'))
 echo $form->input(array(
     'name' => 'email',
     'template' => 'input_for_mail',
-    'label' => __('email_address'),
+    'label' => tr('email_address'),
     'attr' => array( 'class' => 'input-xlarge'),
-    'info' => __('valid_email_adrress')
+    'info' => tr('valid_email_adrress')
 ));
 
 echo $form->password(array(
     'name' => 'pswd',
-    'label' => __('password'),
+    'label' => tr('password'),
     'attr' => array( 'class' => 'input-xlarge')
 ));
 
 
 echo $form->form_actions(array(
     'buttons' => array(
-        array('submit', __('login'), array( 'class' => 'btn btn-primary', 'type' => 'submit'))
+        array('submit', tr('login'), array( 'class' => 'btn btn-primary', 'type' => 'submit'))
     )
 ));
 echo $form->close();
