@@ -12,7 +12,7 @@ class URL extends Kohana_URL {
 
   public static function site($uri = '', $protocol = TRUE, $index = TRUE)
   {
-    if ($uri && Request::current()->param('lang'))
+    if ($uri && (is_object(Request::current()) && Request::current()->param('lang')))
       $uri = Language::get()->code.'/'.$uri;
 
     return parent::site($uri, $protocol, $index);
