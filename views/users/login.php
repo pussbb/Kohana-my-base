@@ -13,12 +13,14 @@ echo '</p>';
 
 echo $form->input(array(
     'name' => 'email',
-    'template' => 'input_for_mail',
+    'template' => 'input_prepend',
+    'char' => '@',
 ));
 
 echo $form->password(array(
     'name' => 'pswd',
-    'template' => 'input_for_pswd',
+    'template' => 'input_prepend',
+    'icon' => 'lock',
 ));
 
 

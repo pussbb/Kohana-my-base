@@ -13,7 +13,8 @@ echo '</p>';
 
 echo $form->input(array(
     'name' => 'email',
-    'template' => 'input_for_mail',
+    'template' => 'input_prepend',
+    'char' => '@',
 ));
 
 echo $form->form_actions(array(

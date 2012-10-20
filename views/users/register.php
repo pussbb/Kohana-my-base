@@ -1,14 +1,14 @@
 
-<div class="reg-form">
+<div  id="authbox" class="reg-form">
 <?php
-var_dump($errors);
+
 $general = Arr::get($errors, 'general');
 
 if ( $general)
 {
     echo '<div class="alert alert-error">
         <a class="close" data-dismiss="alert" href="#">×</a>
-                <h4 class="alert-heading">'.__('warning').'!</h4>
+                <h4 class="alert-heading">'.tr('Warning').'!</h4>
                 '.$general.'
                 </div>';
 }
@@ -18,46 +18,45 @@ $form = new Pretty_Form(array(
     'template' => 'twitter_bootstrap',
 ));
 echo $form->open( Url::site('users/register'), array('class' => 'form-horizontal'));
-echo $form->legend(__('registration'));
+echo $form->legend(tr('registration'));
 echo $form->input(array(
     'name' => 'login',
-    'label' => 'login',
+    'label' => tr('Nickname'),
+    'template' => 'input_prepend',
+    'icon' => 'user',
     'attr' => array( 'class' => 'input-xlarge' ),
-    'info' => __('your_login')
+    'info' => tr('Your nickname')
 ));
 
 echo $form->input(array(
     'name' => 'email',
-    'template' => 'input_for_mail',
-    'label' => __('email_address'),
+    'template' => 'input_prepend',
+    'char' => '@',
+    'label' => tr('Email address'),
     'attr' => array( 'class' => 'input-xlarge'),
-    'info' => __('valid_email_adrress')
 ));
 
 echo $form->password(array(
     'name' => 'pswd',
-    'label' => __('password'),
+    'label' => tr('Password'),
+    'template' => 'input_prepend',
+    'icon' => 'lock',
     'attr' => array( 'class' => 'input-xlarge'),
-    'info' => __('at_least_6_characters')
+    'info' => tr('Must be at least 6 characters long')
 ));
 
 echo $form->password(array(
     'name' => 'pswd_confirmation',
-    'label' => __('password_confirmation'),
+    'label' => tr('Password confirmation'),
+    'template' => 'input_prepend',
+    'icon' => 'lock',
     'attr' => array( 'class' => 'input-xlarge'),
-    'info' => __('at_least_6_characters')
+    'info' => tr('Must be the same as password')
 ));
-
-//echo $form->checkbox(array(
-//    'name' => 'terms_of_use',
-//    'label' => __('terms_of_use'),
-//    'attr' => array(),
-//    'info' => __('terms_of_use')
-//));
 
 echo $form->form_actions(array(
     'buttons' => array(
-        array('submit', __('register'), array( 'class' => 'btn btn-primary', 'type' => 'submit'))
+        array('submit', tr('Register'), array( 'class' => 'btn btn-primary', 'type' => 'submit'))
     )
 ));
 echo $form->close();

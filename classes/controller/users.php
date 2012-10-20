@@ -52,7 +52,7 @@ class Controller_Users extends Controller_Core {
     public function action_register()
     {
         $this->errors = array();
-
+        $this->append_media('auth');
         if ( ! $_REQUEST)
             return ;
 

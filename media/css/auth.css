@@ -8,7 +8,6 @@
 
 #authbox {
   display: block;
-  height: 20%;
   min-height: 196px;
   background: #ffffff;
   box-shadow: 0 0 4px #000000;
@@ -17,6 +16,15 @@
   text-align: center;
   position: relative;
 }
+
+.reg-form {
+  width: 55%!important;
+}
+
+.reg-form .form-horizontal .controls {
+   margin-left: auto;
+}
+
 
 #authbox form{
   width:100%;

@@ -6,7 +6,12 @@ echo '<div class="control-group '. ($error ? ' error' : '').'">';
     }
     echo '<div class="controls">';
           echo '<div class="input-prepend">';
-                echo '<span class="add-on">@</span>';
+                $add_on = '';
+                if (isset($icon))
+                  $add_on = '<i class="icon-'.$icon.'"></i>';
+                elseif (isset($char))
+                    $add_on = $char;
+                echo '<span class="add-on">'.$add_on.'</span>';
                 echo Form::input($name, $value, $attr);
           echo '</div>';
     if ( $error)
