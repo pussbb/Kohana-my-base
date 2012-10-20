@@ -21,7 +21,9 @@ class Controller_Users extends Controller_Core {
 
     public function action_login()
     {
-        $this->view->errors = array();
+        $this->errors = array();
+        $this->set_filename('users/auth');
+        $this->append_media('auth');
 
         if ( ! $_REQUEST)
             return ;
@@ -31,13 +33,9 @@ class Controller_Users extends Controller_Core {
             'password' => Arr::get($_REQUEST, 'pswd'),
         ));
         if ( ! $model->login())
-        {
-            $this->view->errors = $model->errors();
-        }
+            $this->errors = $model->errors();
         else
-        {
             $this->redirect_user('login_success_uri');
-        }
     }
 
     private function redirect_user($condition)
@@ -46,9 +44,14 @@ class Controller_Users extends Controller_Core {
         $this->redirect($uri?:Kohana::$base_url);
     }
 
+    public function action_recovery()
+    {
+        return $this->redirect_user('login_success_uri');
+    }
+
     public function action_register()
     {
-        $this->view->errors = array();
+        $this->errors = array();
 
         if ( ! $_REQUEST)
             return ;
@@ -62,7 +65,7 @@ class Controller_Users extends Controller_Core {
         ));
         if ( ! $model->register())
         {
-            $this->view->errors = $model->errors();
+            $this->errors = $model->errors();
         }
         else
         {

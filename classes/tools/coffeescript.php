@@ -33,6 +33,8 @@ class Tools_CoffeeScript extends Tools {
             $join = ' -j '. $file_name.'.js';
             foreach($files as $file) {
                 $_source = $source_path.$file.'.coffee';
+                if (is_link($source))
+                  $source = readlink($source);
                 if ( ! $compile)
                     $compile = self::need_compile($_source, $destination);
                 $source .= ' ' . $_source;
@@ -40,6 +42,8 @@ class Tools_CoffeeScript extends Tools {
         }
         else {
             $source = $source_path.$file_name.'.coffee';
+            if (is_link($source))
+              $source = readlink($source);
             $compile = self::need_compile($source, $destination);
         }
 
@@ -49,7 +53,7 @@ class Tools_CoffeeScript extends Tools {
         $output_dir = pathinfo($destination, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR;
         Dir::create_if_need($output_dir);
 
-        $cmd = 'coffee -l -o '. $output_dir .' '.$join.' -c '.$source.'  2>&1';
+        $cmd = 'coffee -o '. $output_dir .' '.$join.' -c '.$source.' 2>&1';
 
         if ($this->exec($cmd))
             return;

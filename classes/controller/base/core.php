@@ -195,7 +195,7 @@ class Controller_Base_Core extends Controller_Template {
      * @param null $media
      * @param bool $check_file
      */
-    public function append_media($file_name, $media = NULL, $check_file = FALSE)
+    public function append_media($file_name, $media = NULL, $check_file = TRUE)
     {
         Media::append(array('css', 'js'), $file_name, $media, $check_file);
     }
