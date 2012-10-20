@@ -14,7 +14,7 @@ echo '</p>';
 echo $form->input(array(
     'name' => 'email',
     'template' => 'input_prepend',
-    'char' => '@',
+    'char' => '<b>@</b>',
 ));
 
 echo $form->form_actions(array(

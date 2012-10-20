@@ -18,7 +18,7 @@ $form = new Pretty_Form(array(
     'template' => 'twitter_bootstrap',
 ));
 echo $form->open( Url::site('users/register'), array('class' => 'form-horizontal'));
-echo $form->legend(tr('registration'));
+echo $form->legend(tr('Registration'));
 echo $form->input(array(
     'name' => 'login',
     'label' => tr('Nickname'),
@@ -31,7 +31,7 @@ echo $form->input(array(
 echo $form->input(array(
     'name' => 'email',
     'template' => 'input_prepend',
-    'char' => '@',
+    'char' => '<b>@</b>',
     'label' => tr('Email address'),
     'attr' => array( 'class' => 'input-xlarge'),
 ));
