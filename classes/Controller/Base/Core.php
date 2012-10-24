@@ -56,7 +56,7 @@ class Controller_Base_Core extends Controller_Template {
     {
         $lang = $this->request->param('lang');
         $language = Language::get($lang);
-        GetText::lang($language->locale);
+        Gettext::lang($language->locale);
     }
 
 
@@ -99,7 +99,7 @@ class Controller_Base_Core extends Controller_Template {
             throw new HTTP_Exception_403(__('access_deny'));
 
         if (!Auth::instance()->logged_in()) {
-            $this->redirect('users/login');
+            self::redirect('users/login');
             return;
         }
         else {
@@ -157,9 +157,9 @@ class Controller_Base_Core extends Controller_Template {
     public function current_request_structure()
     {
         return array_filter(array(
-                    $this->request->directory(),
-                    $this->request->controller(),
-                    $this->request->action(),
+                    strtolower($this->request->directory()),
+                    strtolower($this->request->controller()),
+                    strtolower($this->request->action()),
                 ));
     }
 
@@ -268,7 +268,7 @@ class Controller_Base_Core extends Controller_Template {
      * @param $url
      * @param int $code
      */
-    public function redirect($url, $code = 302)
+    public function redirect_to($url, $code = 302)
     {
         $this->check_auto_render();
         $this->auto_render = FALSE;

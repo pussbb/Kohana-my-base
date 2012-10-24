@@ -10,4 +10,4 @@
  * @subpackage extra
  * @category extra
  */
-class GetText extends Base_GetText {}
+class Gettext extends Base_Gettext {}

@@ -76,13 +76,13 @@ class Error
             // Create a text version of the exception
             $error->text = $e->getMessage();
 
-            if (Kohana::$is_cli)
+            /*if (Kohana::$is_cli)
             {
                 // Just display the text of the exception
                 echo "\n{$error->text}\n";
 
                 return TRUE;
-            }
+            }*/
 
             // Get the exception backtrace
             $error->trace = $e->getTrace();

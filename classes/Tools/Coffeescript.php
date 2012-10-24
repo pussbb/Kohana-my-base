@@ -11,7 +11,7 @@
  * @subpackage tools
  */
 
-class Tools_CoffeeScript extends Tools {
+class Tools_Coffeescript extends Tools {
 
     /**
      * compiles coffee script if needed

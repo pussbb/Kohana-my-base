@@ -15,7 +15,14 @@ class Request extends Kohana_Request {
     /**
     * @todo overloaded kohana's function need to watch for the changes
     */
-    public static function process_uri($uri, $routes = NULL)
+    /**
+     * Process a request to find a matching route
+     *
+     * @param   object  $request Request
+     * @param   array   $routes  Route
+     * @return  array
+     */
+    public static function process(Request $request, $routes = NULL)
     {
         // Load routes
         $routes = (empty($routes)) ? Route::all() : $routes;
@@ -25,7 +32,7 @@ class Request extends Kohana_Request {
         foreach ($routes as $name => $route)
         {
             // We found something suitable
-            if ($params = $route->matches($uri))
+            if ($params = $route->matches($request))
             {
                 return array(
                     'params' => $params,
@@ -35,6 +42,7 @@ class Request extends Kohana_Request {
         }
 
         return NULL;
+
     }
 }
 

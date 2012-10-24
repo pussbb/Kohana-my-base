@@ -258,7 +258,7 @@ class Base_Media extends Singleton{
     {
         if ( Kohana::$environment != Kohana::PRODUCTION) {
             try {
-                Tools_CoffeeScript::build_if_needed($file_name, $files);
+                Tools_Coffeescript::build_if_needed($file_name, $files);
             } catch(Exception_Tools_Missing $e) {
                 //@todo write to combine two or more files
             }

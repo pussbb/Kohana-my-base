@@ -10,7 +10,7 @@
  * @category template
  * @subpackage template
  */
-class Base_GetText extends Kohana_I18n {
+class Base_Gettext extends Kohana_I18n {
 
     /**
      * @var  string   target language: en-us, es-es, zh-cn, etc

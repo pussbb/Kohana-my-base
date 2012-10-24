@@ -54,6 +54,6 @@ Route::set('www', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array(
   ))
     ->defaults(array(
         'lang' => NULL,
-        'controller' => 'welcome',
+        'controller' => 'Welcome',
         'action'     => 'index',
     ));
