@@ -24,7 +24,7 @@ class Tools_Less extends Tools {
         $source_path = self::config('less.source_path');
         $dest_path = self::config('less.dest_path');
         $destination = $dest_path.$file_name.'.css';
-        $source = $source_path.$file_name.'.less';
+        $source = Kohana::find_file($source_path, $file_name, 'less');
 
         if ( ! self::need_compile($source, $destination))
             return;

@@ -32,7 +32,7 @@ class Tools_Coffeescript extends Tools {
         if (Arr::is_array($files)) {
             $join = ' -j '. $file_name.'.js';
             foreach($files as $file) {
-                $_source = $source_path.$file.'.coffee';
+                $_source = Kohana::find_file($source_path, $file, 'coffee');
                 if (is_link($source))
                   $source = readlink($source);
                 if ( ! $compile)
@@ -41,7 +41,7 @@ class Tools_Coffeescript extends Tools {
             }
         }
         else {
-            $source = $source_path.$file_name.'.coffee';
+            $source = Kohana::find_file($source_path, $file_name, 'coffee');
             if (is_link($source))
               $source = readlink($source);
             $compile = self::need_compile($source, $destination);

@@ -2,11 +2,11 @@
 
 return array(
     'coffeescript' => array(
-        'source_path' => DOCROOT.'coffee_scripts'.DIRECTORY_SEPARATOR,
+        'source_path' => 'coffee_scripts',
         'dest_path' => DOCROOT.'media'.DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR,
     ),
     'less' => array(
-        'source_path' => DOCROOT.'less'.DIRECTORY_SEPARATOR,
+        'source_path' => 'less',
         'dest_path' => DOCROOT.'media'.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR
     ),
     'eightpack' => array(
