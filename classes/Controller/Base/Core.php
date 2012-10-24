@@ -268,11 +268,9 @@ class Controller_Base_Core extends Controller_Template {
      * @param $url
      * @param int $code
      */
-    public function redirect_to($url, $code = 302)
+    public static function redirect($url = '', $code = 302)
     {
-        $this->check_auto_render();
-        $this->auto_render = FALSE;
-        $this->request->redirect(URL::site($url), $code);
+        parent::redirect(URL::site($url), $code);
     }
 
     /**

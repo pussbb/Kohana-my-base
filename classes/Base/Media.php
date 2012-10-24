@@ -198,7 +198,7 @@ class Base_Media extends Singleton{
         $file = $prefix.'/'.$file_name.'.'.$prefix;
         if ( strpos('static://', $file_name) === TRUE)
             return str_replace('static://', $this->path_clean($this->config('core.static_uri').$file));
-        return Url::base(TRUE,TRUE).$this->path_clean($this->config('core.uri').$file);
+        return URL::base(TRUE,TRUE).$this->path_clean($this->config('core.uri').$file);
     }
 
     /**

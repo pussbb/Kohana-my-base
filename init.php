@@ -46,7 +46,6 @@ if ( ! function_exists('debug'))
     }
 }
 
-
 Kohana::$config->attach(new Config_File);
 
 Route::set('www', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array(
