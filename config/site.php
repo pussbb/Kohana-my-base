@@ -6,5 +6,6 @@ return array(
     "title" => "Website title",
     'login_success_uri' => '/',
     'register_success_uri' => 'users/login',
+    'user_login_uri' => 'users/login'
 );
 

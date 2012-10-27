@@ -46,7 +46,18 @@ class Controller_Base_Core extends Controller_Template {
      */
     private $filename = NULL;
 
+    /**
+     * set layout name
+     * @var null
+     */
     private $layout = NULL;
+
+    /**
+     * array with settings from config 'site.php'
+     * @var null
+     */
+    private $config = NULL;
+
     /**
      * sets language by default
      * @return void
@@ -71,8 +82,21 @@ class Controller_Base_Core extends Controller_Template {
 
         $this->view = new View();
         $this->template->set(array('content' => NULL, 'keywords'=> NULL, 'description'=> NULL, 'title'=> NULL));
+
     }
 
+    /**
+     * get config item
+     * @param $key string see Arr::path $key param
+     * @param $defualt mixed defualt value if $key not found
+     * @return mixed
+     */
+    private function config_item($key, $defualt = NULL)
+    {
+        if ( ! $this->config)
+            $this->config = Kohana::$config->load('site');
+        return Arr::path($this->config, $key, $defualt);
+    }
     /**
      * sets current file name wich will be render
      * @param $filename
@@ -90,13 +114,13 @@ class Controller_Base_Core extends Controller_Template {
      */
     protected function check_access()
     {
-        if (!$this->request->is_initial() ||
-                !$this->check_access ||
-                Acl::instance()->allowed($this))
+        if ( ! $this->request->is_initial()
+              || ! $this->check_access
+              || Acl::instance()->allowed($this))
             return;
 
-        if (!Auth::instance()->logged_in() && ! $this->request->is_ajax())
-            return self::redirect('users/login');
+        if ( ! Auth::instance()->logged_in() && ! $this->request->is_ajax())
+            return self::redirect($this->config_item('user_login_uri'));
         else
             throw new HTTP_Exception_403(__('access_deny'));
     }
@@ -136,12 +160,12 @@ class Controller_Base_Core extends Controller_Template {
     {
         if ($this->template->title && !$title)
             return;
-        $default_title = Kohana::$config->load('site.title');
+        $default_title = $this->config_item('title');
         $delimiter = $title ? ' | ' : '';
         if ($default_title) {
             $title .= $delimiter . $default_title;
         }
-        $this->template->title = $title;
+        $this->template->title = URL::title($title);
     }
 
     /**
@@ -231,24 +255,26 @@ class Controller_Base_Core extends Controller_Template {
         return $this->request->is_ajax();
     }
 
+
+    public function is_put()
+    {
+        return $this->request->method() === 'PUT';
+    }
+
     /**
      * renders only view file name without template
      * @param string $file
      * @param array $view_data
      * @return mixed
      */
-    public function render_partial($file = '', $view_data = array())
+    public function render_partial($file = '',array $view_data = array())
     {
         $this->auto_render = FALSE;
         $this->set_filename($file);
-        if ($view_data)
-            $this->view->set($view_data);
-        $this->append_dynamic_properties($this->view);
+        $this->view->set(array_merge($view_data, $this->append_dynamic_properties()));
         $this->set_view_filename();
-
         $this->response->body($this->view->render());
-        $this->auto_render = FALSE;
-        parent::after();
+        $this->_safety_render();
     }
 
     /**
@@ -257,8 +283,7 @@ class Controller_Base_Core extends Controller_Template {
     public function render_nothing()
     {
        $this->response->body('');
-       $this->auto_render = FALSE;
-       parent::after();
+       $this->_safety_render();
     }
 
     /**
@@ -277,11 +302,18 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function render_json($data)
     {
-        $this->auto_render = FALSE;
+        
         $json = json_encode($data, JSON_HEX_TAG);
         $this->response->headers('Content-Type', 'application/json')
                 ->send_headers()
                 ->body($json);
+        $this->_safety_render();
+    }
+
+
+    private function _safety_render()
+    {
+        $this->auto_render = FALSE;
         parent::after();
     }
 
@@ -295,23 +327,13 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function after()
     {
-//         if (!$this->auto_render) {
-//             parent::after();
-//             return;
-//         }
-
         $this->set_view_filename();
 
         foreach ($this->bundles as $bundle) {
             Media::bundle($bundle);
         }
 
-        //set favicon (name from config: site.favicon)
-        $favicon = Kohana::$config->load('site.favicon', '');
-        if ($favicon) {
-            $this->set_favicon($favicon);
-        }
-
+        $this->set_favicon($this->config_item('favicon'));
         $this->media_by_default();
         $controller_vars = $this->append_dynamic_properties();
         $this->view->set($controller_vars);
@@ -351,14 +373,9 @@ class Controller_Base_Core extends Controller_Template {
     protected function set_view_filename()
     {
         if (!$this->filename) {
-            // i know it's bad, but we have to change $this->filename
-            // in unified way
-
-            $this->set_filename(
-                    implode('/', $this->current_request_structure())
-            );
+            $this->set_filename(Text::reduce_slashes(implode('/', $this->current_request_structure())));
         }
-        $this->view->set_filename(implode('/', $this->filename));
+        $this->view->set_filename(Text::reduce_slashes(implode('/', $this->filename)));
     }
 
 }
