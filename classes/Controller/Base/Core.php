@@ -95,16 +95,10 @@ class Controller_Base_Core extends Controller_Template {
                 Acl::instance()->allowed($this))
             return;
 
-        if ($this->request->is_ajax())
+        if (!Auth::instance()->logged_in() && ! $this->request->is_ajax())
+            return self::redirect('users/login');
+        else
             throw new HTTP_Exception_403(__('access_deny'));
-
-        if (!Auth::instance()->logged_in()) {
-            self::redirect('users/login');
-            return;
-        }
-        else {
-            throw new HTTP_Exception_403(__('access_deny'));
-        }
     }
 
     /**
@@ -245,14 +239,16 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function render_partial($file = '', $view_data = array())
     {
-        $this->check_auto_render();
         $this->auto_render = FALSE;
         $this->set_filename($file);
         if ($view_data)
             $this->view->set($view_data);
         $this->append_dynamic_properties($this->view);
         $this->set_view_filename();
-        return $this->response->body($this->view->render());
+
+        $this->response->body($this->view->render());
+        $this->auto_render = FALSE;
+        parent::after();
     }
 
     /**
@@ -260,7 +256,9 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function render_nothing()
     {
-        $this->render_partial('core/empty');
+       $this->response->body('');
+       $this->auto_render = FALSE;
+       parent::after();
     }
 
     /**
@@ -279,25 +277,12 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function render_json($data)
     {
-        $this->check_auto_render();
         $this->auto_render = FALSE;
         $json = json_encode($data, JSON_HEX_TAG);
         $this->response->headers('Content-Type', 'application/json')
                 ->send_headers()
                 ->body($json);
         parent::after();
-    }
-
-    /**
-     * checks if auto_render already false,
-     *
-     * it means you tried to render several views in one action
-     * @throws Kohana_Exception
-     */
-    protected function check_auto_render()
-    {
-        if (!$this->auto_render)
-            throw new Kohana_Exception("You have to render something (or redirect) only once per action");
     }
 
     public function set_layout($name)
@@ -310,10 +295,10 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function after()
     {
-        if (!$this->auto_render) {
-            parent::after();
-            return;
-        }
+//         if (!$this->auto_render) {
+//             parent::after();
+//             return;
+//         }
 
         $this->set_view_filename();
 
