@@ -3,7 +3,8 @@
 /**
  * Set the exception handler to use the Error module
  */
-set_exception_handler(array('Error', 'handler'));
+ //TODO watch for solution (currently Kohana always shows here excpetions)
+///set_exception_handler(array('Error', 'handler'));
 
 if (Kohana::$environment == Kohana::PRODUCTION)
 {
