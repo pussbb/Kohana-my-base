@@ -285,6 +285,7 @@ class Controller_Base_Core extends Controller_Template {
         $this->response->headers('Content-Type', 'application/json')
                 ->send_headers()
                 ->body($json);
+        parent::after();
     }
 
     /**

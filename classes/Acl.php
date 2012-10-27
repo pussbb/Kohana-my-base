@@ -14,4 +14,4 @@
  * @see  Base_ACL
  */
 
-class ACL extends Base_Acl {}
+class Acl extends Base_Acl {}
