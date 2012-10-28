@@ -11,9 +11,9 @@ class Model_Access_Rule extends Model
     public static function roles_collection($translation = FALSE)
     {
         return array(
-            self::ROLE_GUEST => $translation ? __('guest') : 'guest',
-            self::ROLE_USER => $translation ? __('user') : 'user',
-            self::ROLE_ADMIN => $translation ? __('admin') : 'admin',
+            self::ROLE_GUEST => $translation ? tr('guest') : 'guest',
+            self::ROLE_USER => $translation ? tr('user') : 'user',
+            self::ROLE_ADMIN => $translation ? tr('admin') : 'admin',
         );
     }
 }

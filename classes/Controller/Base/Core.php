@@ -122,7 +122,7 @@ class Controller_Base_Core extends Controller_Template {
         if ( ! Auth::instance()->logged_in() && ! $this->request->is_ajax())
             return self::redirect($this->config_item('user_login_uri'));
         else
-            throw new HTTP_Exception_403(__('access_deny'));
+            throw new HTTP_Exception_403(tr('Access deny'));
     }
 
     /**

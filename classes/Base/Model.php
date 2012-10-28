@@ -1379,7 +1379,7 @@ class Base_Model extends Kohana_Model {
         $obj = clone $this;
         $result = $obj->exists(array($field));
         if (($this->new_record() && $result) || ($result && $this->id !== $obj->id)) {
-            $validation->error($field, ' ' . __("already exists"));
+            $validation->error($field, ' ' . tr("already exists"));
             return;
         }
     }

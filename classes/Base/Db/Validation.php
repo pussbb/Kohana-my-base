@@ -41,21 +41,21 @@ class Base_Db_Validation {
         }
 
         if (!$is_nullable && !Valid::not_empty($value))
-            return __('must_not_be_empty');
+            return tr('Must not be empty');
 
         if (!Valid::numeric($value))
-            return __('must_be_valid_integer');
+            return tr('Must be valid integer');
 
         $min = Arr::get($rules, 'min');
         $max = Arr::get($rules, 'max');
         if (($min && $max) && !Valid::range($value, $min, $max))
-            return __('must_be_between_%1_and_%2', array('%1' => $min, '%2' => $max));
+            return tr('Must be between %d and %d', array($min,$max));
 
         if ($min && ($min > $value))
-            return __('must_be_greater_than_' . $min);
+            return tr('Must be greater than %d', array($min));
 
         if ($max && ($max < $value))
-            return __('must_be_less_than_' . $max);
+            return tr('Must be less than %d', array($max));
 
         return NULL;
     }
@@ -75,11 +75,11 @@ class Base_Db_Validation {
             return NULL;
 
         if (!Valid::not_empty($value))
-            return __('must_not_be_empty');
+            return tr('Must not be empty');
 
         $max = Arr::get($rules, 'max');
         if ($max && !Valid::max_length($value, $max))
-            return __('must_be_less_than_' . $max);
+            return tr('Must be less than %d',array($max));
 
         return NULL;
     }

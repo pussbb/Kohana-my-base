@@ -445,7 +445,7 @@ reappears, contact your system administrator or technical support guru.<br><br>
 <tr><td>&nbsp;</td></tr>
 
 <tr><td align="center" colspan="2">
-Click this link <?php echo HTML::anchor(URL::site('/'), UTF8::ucfirst(__('home')));?>  to continue _</font>
+Click this link <?php echo HTML::anchor(URL::site('/'), UTF8::ucfirst(tr('home')));?>  to continue _</font>
 
 </td></tr></table>
 

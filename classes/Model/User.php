@@ -62,7 +62,7 @@ class Model_User extends Model
         $result = $this->select('*', 1)->filter(array('email', 'password'))->exec();
         if ( ! $result)
         {
-            $this->add_error('general', __('user_not_found_or_wrong_password'));
+            $this->add_error('general', tr('User not found or wrong password'));
             return FALSE;
         }
         Auth::instance()->authorize($this);
@@ -72,9 +72,9 @@ class Model_User extends Model
     private function validate_login()
     {
         if ( ! Valid::email($this->email))
-            $this->add_error('email', __('must_be_valid_email'));
+            $this->add_error('email', tr('Must be valid email'));
         if ( ! Valid::not_empty($this->password))
-            $this->add_error('pswd', __('must_be_your_valid_password'));
+            $this->add_error('pswd', tr('Must be your valid password'));
         if ($this->errors())
             return FALSE;
 
@@ -88,9 +88,7 @@ class Model_User extends Model
                 'not_empty',
                 array('equals', array($this->pswd_confirmation, $this->password, 'password'))
             ),
-//            'terms_of_use' => array(
-//                'not_empty'
-//            ),
+
         );
     }
 
@@ -102,7 +100,7 @@ class Model_User extends Model
 
     public function register()
     {
-        $this->insert(array('login', 'email', 'password', 'api_key'));
+        $this->insert();
         $this->api_key = uniqid();
         $this->role_id = Model_Access_Rule::ROLE_USER;
         $this->meta_data = json_encode(array());

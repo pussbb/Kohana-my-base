@@ -18,11 +18,11 @@ $grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $user->em
             <table class="table table-condensed">
             <tbody>
             <tr>
-                <td><?php echo __('login');?></td>
+                <td><?php echo tr('Login');?></td>
                 <td><?php echo $user->login;?></td>
             </tr>
             <tr>
-                <td><?php echo __('email');?></td>
+                <td><?php echo tr('Email');?></td>
                 <td><?php echo $user->email?></td>
                 </tr>
             </tbody>
