@@ -12,6 +12,6 @@
  */
 class Exception_Tools extends Error {
 
-    protected $custom_view_file = "errors/tools";
+    protected static $custom_view_file = "errors/tools";
 
 }
