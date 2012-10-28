@@ -10,18 +10,8 @@
  * @category extra
  * @subpackage extra
  */
-class Exception_Tools extends Exception {
-    /**
-     * sets human readable message for external console applications
-     * @ignore
-     * @constructor
-     * @access public
-     * @return void
-     */
-    public function __construct($message , $code = 0)
-    {
-        ob_clean();
-        Kohana_Kohana_Exception::$error_view = "errors/tools";
-        parent::__construct($message);
-    }
+class Exception_Tools extends Error {
+
+    protected $custom_view_file = "errors/tools";
+
 }

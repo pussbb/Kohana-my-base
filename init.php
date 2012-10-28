@@ -4,12 +4,9 @@
  * Set the exception handler to use the Error module
  */
  //TODO watch for solution (currently Kohana always shows here excpetions)
-///set_exception_handler(array('Error', 'handler'));
+// Go back to the previous exception handler
 
-if (Kohana::$environment == Kohana::PRODUCTION)
-{
-    Kohana_Kohana_Exception::$error_view = "errors/500";
-}
+set_exception_handler(array('Error', 'handler'));
 
 if ( ! function_exists('tr'))
 {

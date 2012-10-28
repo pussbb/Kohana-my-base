@@ -270,7 +270,7 @@ class Base_Model extends Kohana_Model {
 
         $relation = $this->get_relation($name);
         if ( ! $relation)
-            throw new Kohana_Exception('property_not_exists_' . $name);
+            throw new Kohana_Exception('property not exists ' . $name);
         return $this->_relation($name, $relation);
     }
 
@@ -1378,7 +1378,7 @@ class Base_Model extends Kohana_Model {
     {
         $obj = clone $this;
         $result = $obj->exists(array($field));
-        if (($this->new_record() && $result) && ($result && $this->id !== $obj->id)) {
+        if (($this->new_record() && $result) || ($result && $this->id !== $obj->id)) {
             $validation->error($field, ' ' . __("already exists"));
             return;
         }

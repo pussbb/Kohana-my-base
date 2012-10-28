@@ -29,7 +29,7 @@
         <div class="alert alert-error">
             <?php
                 echo '<pre>';
-                echo  Arr::get( $error, 'message');
+                echo  $message;
                 echo '</pre>';
             ?>
             <br/>

@@ -68,7 +68,7 @@
 
             echo '<hr/>';
             echo '<div class="text">';
-                echo  Arr::get( $error, 'message');
+                echo  $message;
             echo '</div>';
             echo '<div class="links">';
                 echo HTML::anchor(URL::site('/'), UTF8::ucfirst(__('home')));
