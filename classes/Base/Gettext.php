@@ -32,12 +32,12 @@ class Base_Gettext extends Kohana_I18n {
      */
     public static function lang($lang = 'en-EN')
     {
-        $lang = parent::lang($lang);
-        setlocale (LC_ALL, $lang.'.'.self::$encoding);
+        $_lang = parent::lang($lang);
+        setlocale(LC_ALL, str_replace('-', '_', $lang).'.'.self::$encoding);
         bindtextdomain (self::$domain, self::base_dir());
         textdomain (self::$domain);
         bind_textdomain_codeset(self::$domain, self::$encoding);
-        return $lang;
+        return $_lang;
     }
     /**
      * directory with files with translation for given lang
