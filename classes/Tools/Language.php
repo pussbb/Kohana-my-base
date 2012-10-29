@@ -22,7 +22,7 @@ class Tools_Language extends Tools {
         $base_dir = Gettext::base_dir();
         Dir::create_if_need($base_dir);
         $template = $base_dir.'template.po';
-        $ok = $this->exec('(find "'.DOCROOT.'" -type f  -iname "*.php" | xargs xgettext -D '.DOCROOT.' -o '.$template.' -L PHP -d="'.Gettext::$domain.'" -p '.$base_dir.' --force-po --no-wrap --keyword="tr" --keyword="__" --keyword="_" --from-code="UTF-8") 2>&1');
+        $ok = $this->exec('(find "'.DOCROOT.'" -type f  -iname "*.php" | xargs xgettext -D '.DOCROOT.' -o '.$template.' -L PHP -d="'.Gettext::$domain.'" -p '.$base_dir.' --force-po --no-wrap --keyword="tr" --from-code="UTF-8") 2>&1');
 
         if ( ! $ok)
             throw new Exception_Tools('parsing sources failed \n '.$this->error());
