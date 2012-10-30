@@ -14,7 +14,7 @@
 
  class Error extends Kohana_Exception {
 
-    protected static $custom_view_file = NULL;
+    public static $custom_view_file = NULL;
     /**
      * Creates a new translated exception.
      *

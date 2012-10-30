@@ -10,8 +10,12 @@
  * @category extra
  * @subpackage extra
  */
-class Exception_Tools extends Error {
+class Exception_Tools extends Exception {
 
-    protected static $custom_view_file = "errors/tools";
-
+    public function __construct($message = "",  $code = 0, Exception $previous = NULL)
+    {
+        Error::$custom_view_file = "errors/tools";
+        Error::handler(new Exception($message, $code, $previous));
+        Error::$custom_view_file = NULL;
+    }
 }
