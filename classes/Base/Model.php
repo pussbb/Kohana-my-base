@@ -746,8 +746,11 @@ class Base_Model extends Kohana_Model {
      */
     public function filter($filter)
     {
-        if (!Arr::is_array($filter))
+        if ( ! Arr::is_array($filter))
             throw new Kohana_Exception('must be an array');
+
+        if ( ! $this->db_query)
+            $this->select();
 
         $table_columns = $this->table_columns();
         if ( ! Arr::is_assoc($filter)) {

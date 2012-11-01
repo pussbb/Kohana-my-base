@@ -34,6 +34,15 @@ class Model_User extends Model
         );
     }
 
+    public function labels()
+    {
+        return array(
+            'id' => tr('ID'),
+            'login' => tr('Login'),
+            'email' => tr('E-mail'),
+        );
+    }
+
     public function rules()
     {
         return array(
