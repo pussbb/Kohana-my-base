@@ -4,9 +4,6 @@
   margin-left: auto;
   margin-right: auto;
   position: relative;
-}
-
-#authbox {
   display: block;
   min-height: 196px;
   background: #ffffff;
@@ -15,63 +12,66 @@
   overflow: hidden !important;
   text-align: center;
   position: relative;
+
+    form{
+        width:100%;
+        height:100%;
+        position:relative;
+        top:0;
+        left:0;
+    }
+
+    p {
+        margin-top: 20px;
+        padding: 0 20px;
+    }
+
+    .form-actions {
+        padding: 14px 20px 15px;
+        margin-bottom: 0;
+        .pull-left {
+            margin-top: 2px;
+        }
+    }
+
+    .form-vertical {
+        margin-bottom: 0;
+    }
+
+    form#loginform {
+        z-index: 200;
+    }
+
+    form#recoverform {
+        z-index: 100;
+        opacity: 0;
+        display:none;
+
+        .form-actions {
+            margin-top: 27px;
+        }
+
+        .control-group {
+            margin: 23px 0;
+        }
+    }
 }
 
 .reg-form {
-  width: 55%!important;
+    width: 55%!important;
+
+    .form-horizontal  {
+        .controls {
+            margin-left: auto;
+        }
+    }
+    .help-block {
+        margin-top: 0px !important;
+        text-align: left;
+        padding-left: 39% !important;
+    }
 }
 
-.reg-form .form-horizontal .controls {
-   margin-left: auto;
-}
-
-#authbox form{
-  width:100%;
-  height:100%;
-  position:relative;
-  top:0;
-  left:0;
-}
-
-#authbox p {
-  margin-top: 20px;
-  padding: 0 20px;
-}
-
-.reg-form .help-block {
-  margin-top: 0px !important;
-  text-align: left;
-  padding-left: 39% !important;
-}
-
-#authbox .form-actions {
-  padding: 14px 20px 15px;
-}
-#authbox .form-actions .pull-left {
-  margin-top: 2px;
-}
-
-#authbox form#loginform {
-  z-index: 200;
-}
-
-#authbox form#recoverform {
-  z-index: 100;
-  opacity: 0;
-  display:none;
-}
-
-#authbox form#recoverform .form-actions {
-  margin-top: 27px;
-}
-
-#authbox form#recoverform .control-group {
-  margin: 23px 0;
-}
-
-.form-vertical, .form-actions {
-  margin-bottom: 0;
-}
 
 @media (max-width: 480px){
   #authbox {
