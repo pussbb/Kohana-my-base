@@ -327,6 +327,9 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function after()
     {
+        if ( ! $this->auto_render)
+            return parent::after();
+
         $this->set_view_filename();
 
         foreach ($this->bundles as $bundle) {

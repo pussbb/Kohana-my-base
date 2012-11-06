@@ -47,7 +47,8 @@ class Dir {
             $file = $dir . '/' . $file;
             if (is_dir($file)) {
                 Dir::rmdir($file);
-                rmdir($file);
+                if (file_exists($file))
+                  rmdir($file);
             } else {
                 unlink($file);
             }
