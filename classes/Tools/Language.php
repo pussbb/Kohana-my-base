@@ -44,6 +44,26 @@ class Tools_Language extends Tools {
             }
         }
     }
+
+    /**
+     * compile gettext source translations files
+     */
+    protected function compile_translations()
+    {
+        self::check();
+        foreach (Model_Language::find_all()->records as $language)
+        {
+            $tr_file = Gettext::absolute_file_path($language->locale);
+            if ( ! file_exists($tr_file))
+                continue;
+
+            $output = Gettext::tr_path($language->locale).Gettext::$domain.'.mo';
+            $ok = $this->exec("msgfmt -cv -o $output $tr_file");
+            if ( ! $ok)
+                throw new Exception_Tools("compiling translation failed \n ".$this->error());
+        }
+    }
+
     /**
      * checks if gettext tools is installed
      * @static

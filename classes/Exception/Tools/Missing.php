@@ -10,6 +10,6 @@
  * @category extra
  * @subpackage extra
  */
-class Exception_Tools_Missing extends Exception_Tools {
+class Exception_Tools_Missing extends Exception {
 
 }
