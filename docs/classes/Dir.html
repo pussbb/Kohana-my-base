@@ -1,0 +1,216 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title><b>Kohana</b><i>My</i> Base » \Dir</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html"><b>Kohana</b><i>My</i> Base</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Kohana-my-base.html"><i class="icon-folder-open"></i> Kohana-my-base</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">109</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">2</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#create_if_need" title="create_if_need :: checks if dir exists and if not creates it(can create '/dir1/dir2')"><span class="description">checks if dir exists and if not creates it(can create '/dir1/dir2')</span><pre>create_if_need()</pre></a></li>
+<li class="method public "><a href="#files" title="files :: returns founded files in directory recursivly"><span class="description">returns founded files in directory recursivly</span><pre>files()</pre></a></li>
+<li class="method public "><a href="#rmdir" title="rmdir :: removes dir and content"><span class="description">removes dir and content</span><pre>rmdir()</pre></a></li>
+<li class="method public "><a href="#subdirs" title="subdirs :: returns founded directories in directory recursivly"><span class="description">returns founded directories in directory recursivly</span><pre>subdirs()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CDir" id="\Dir"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Dir.html">Dir</a>
+</li>
+</ul>
+<div href="../classes/Dir.html" class="element class">
+<p class="short_description">Helper functions to work with directories</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Kohana-my-base.extra.html">Kohana-my-base</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 pussbb@gmail.com</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.gnu.org/copyleft/gpl.html">GNU GENERAL PUBLIC LICENSE v3</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>0.1.2</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/pussbb/Kohana-my-base">https://github.com/pussbb/Kohana-my-base</a></td>
+</tr>
+<tr>
+<th>category</th>
+<td>extra</td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>extra</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="create_if_need" id="create_if_need"></a><div class="element clickable method public create_if_need" data-toggle="collapse" data-target=".create_if_need .collapse">
+<h2>checks if dir exists and if not creates it(can create '/dir1/dir2')</h2>
+<pre>create_if_need(\$dir $dir) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dir</h4>
+<code>\$dir</code><p>string</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.exception.php">\Exception</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a name="files" id="files"></a><div class="element clickable method public files" data-toggle="collapse" data-target=".files .collapse">
+<h2>returns founded files in directory recursivly</h2>
+<pre>files(\$dir $dir, \$condition $condition, \$array $array) : array | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dir</h4>
+<code>\$dir</code><p>string</p></div>
+<div class="subelement argument">
+<h4>$condition</h4>
+<code>\$condition</code><p>string file extention or regexpr</p></div>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>\$array</code><p>array|NULL</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a name="rmdir" id="rmdir"></a><div class="element clickable method public rmdir" data-toggle="collapse" data-target=".rmdir .collapse">
+<h2>removes dir and content</h2>
+<pre>rmdir(\$dir $dir, \$self $self) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dir</h4>
+<code>\$dir</code><p>string</p></div>
+<div class="subelement argument">
+<h4>$self</h4>
+<code>\$self</code><p>bool</p></div>
+</div></div>
+</div>
+<a name="subdirs" id="subdirs"></a><div class="element clickable method public subdirs" data-toggle="collapse" data-target=".subdirs .collapse">
+<h2>returns founded directories in directory recursivly</h2>
+<pre>subdirs(\$dir $dir, \$names_only $names_only) : array | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dir</h4>
+<code>\$dir</code><p>string</p></div>
+<div class="subelement argument">
+<h4>$names_only</h4>
+<code>\$names_only</code><p>bool relative path or just a folder name</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>null</code>
+</div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-11-15T09:46:03+02:00.<br></footer></div>
+</div>
+</body>
+</html>

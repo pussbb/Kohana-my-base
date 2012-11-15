@@ -21,7 +21,6 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
-<li><a href="../packages/JSMin.html"><i class="icon-folder-open"></i> JSMin</a></li>
 <li><a href="../packages/Kohana-my-base.html"><i class="icon-folder-open"></i> Kohana-my-base</a></li>
 </ul>
 </li>
@@ -33,10 +32,10 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">66</span></a></li>
+                <span class="label label-info">109</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
-                <span class="label label-info">1</span>
+                <span class="label label-info">2</span>
 </li></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
                 <span class="label label-info">0</span></a></li>
@@ -64,13 +63,17 @@
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-function"></i> Functions</li>
-<li class="function  "><a href="#debug" title="debug :: "><span class="description">debug()
-        </span><pre>debug</pre></a></li>
+<li class="function  "><a href="#debug" title="debug :: helper function to print dump of var and exit if needed"><span class="description">helper function to print dump of var and exit if needed</span><pre>debug</pre></a></li>
+<li class="function  "><a href="#tr" title="tr :: translate string via gettext
+or Kohana's translation function"><span class="description">translate string via gettext
+or Kohana's translation function</span><pre>tr</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-class"></i> Classes</li>
-<li><a href="#Model_Access_Rule" title="Helper class to work with Base_Model">Model_Access_Rule</a></li>
+<li><a href="#Controller_Translations" title="Core template wich extends functionality of Controller_Template">Controller_Translations</a></li>
 <li><a href="#Model_User" title="Helper class to work with Base_Model">Model_User</a></li>
-<li><a href="#JSMinException" title="">JSMinException</a></li>
+<li><a href="#Model_Access_Rule" title="Helper class to work with Base_Model">Model_Access_Rule</a></li>
+<li><a href="#Model_Language" title="Helper class to work with Base_Model">Model_Language</a></li>
+<li><a href="#HTTP_Exception" title="">HTTP_Exception</a></li>
 </ul>
 </div>
 <div class="span8 package-contents">
@@ -84,25 +87,44 @@
 <h3>
 <i class="icon-custom icon-function"></i> Functions</h3>
 <a name="debug" id="debug"></a><div class="element clickable function  debug" data-toggle="collapse" data-target=".debug .collapse">
-<h2>debug()
-        </h2>
-<pre>debug($var, $exit) </pre>
+<h2>helper function to print dump of var and exit if needed</h2>
+<pre>debug() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="tr" id="tr"></a><div class="element clickable function  tr" data-toggle="collapse" data-target=".tr .collapse">
+<h2>translate string via gettext
+or Kohana's translation function</h2>
+<pre>tr(\$string $string, array $values) : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$var</h4></div>
-<div class="subelement argument"><h4>$exit</h4></div>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>\$string</code><p>string</p></div>
+<div class="subelement argument">
+<h4>$values</h4>
+<code>\$values</code><p>array</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <h3>
 <i class="icon-custom icon-class"></i> Classes and interfaces</h3>
-<a name="JSMinException" id="JSMinException"></a><div class="element ajax clickable class" href="../classes/JSMinException.html">
-<h1>JSMinException<a href="../classes/JSMinException.html">¶</a>
+<a name="Controller_Translations" id="Controller_Translations"></a><div class="element ajax clickable class" href="../classes/Controller_Translations.html">
+<h1>Controller_Translations<a href="../classes/Controller_Translations.html">¶</a>
+</h1>
+<p class="short_description">Core template wich extends functionality of Controller_Template</p>
+<div class="details collapse"></div>
+<a href="../classes/Controller_Translations.html" class="more">« More »</a>
+</div>
+<a name="HTTP_Exception" id="HTTP_Exception"></a><div class="element ajax clickable class" href="../classes/HTTP_Exception.html">
+<h1>HTTP_Exception<a href="../classes/HTTP_Exception.html">¶</a>
 </h1>
 <p class="short_description"></p>
 <div class="details collapse"></div>
-<a href="../classes/JSMinException.html" class="more">« More »</a>
+<a href="../classes/HTTP_Exception.html" class="more">« More »</a>
 </div>
 <a name="Model_Access_Rule" id="Model_Access_Rule"></a><div class="element ajax clickable class" href="../classes/Model_Access_Rule.html">
 <h1>Model_Access_Rule<a href="../classes/Model_Access_Rule.html">¶</a>
@@ -110,6 +132,13 @@
 <p class="short_description">Helper class to work with Base_Model</p>
 <div class="details collapse"></div>
 <a href="../classes/Model_Access_Rule.html" class="more">« More »</a>
+</div>
+<a name="Model_Language" id="Model_Language"></a><div class="element ajax clickable class" href="../classes/Model_Language.html">
+<h1>Model_Language<a href="../classes/Model_Language.html">¶</a>
+</h1>
+<p class="short_description">Helper class to work with Base_Model</p>
+<div class="details collapse"></div>
+<a href="../classes/Model_Language.html" class="more">« More »</a>
 </div>
 <a name="Model_User" id="Model_User"></a><div class="element ajax clickable class" href="../classes/Model_User.html">
 <h1>Model_User<a href="../classes/Model_User.html">¶</a>
@@ -124,7 +153,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-09-05T10:48:47+03:00.<br></footer></div>
+            generated on 2012-11-15T09:46:03+02:00.<br></footer></div>
 </div>
 </body>
 </html>

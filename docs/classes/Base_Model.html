@@ -21,7 +21,6 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
-<li><a href="../packages/JSMin.html"><i class="icon-folder-open"></i> JSMin</a></li>
 <li><a href="../packages/Kohana-my-base.html"><i class="icon-folder-open"></i> Kohana-my-base</a></li>
 </ul>
 </li>
@@ -33,10 +32,10 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">66</span></a></li>
+                <span class="label label-info">109</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
-                <span class="label label-info">1</span>
+                <span class="label label-info">2</span>
 </li></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
                 <span class="label label-info">0</span></a></li>
@@ -59,16 +58,7 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#__call" title="__call :: calls functions for Base_Model or DB clases in Kohana"><span class="description">calls functions for Base_Model or DB clases in Kohana</span><pre>__call()</pre></a></li>
-<li class="method public "><a href="#__construct" title="__construct :: Constructs the object"><span class="description">Constructs the object</span><pre>__construct()</pre></a></li>
-<li class="method public "><a href="#__get" title="__get :: get value of dynamically appended variable"><span class="description">get value of dynamically appended variable</span><pre>__get()</pre></a></li>
-<li class="method public "><a href="#__isset" title="__isset :: checks if dynamically appended variable exists"><span class="description">checks if dynamically appended variable exists</span><pre>__isset()</pre></a></li>
-<li class="method public "><a href="#__set" title="__set :: dynamically append variable to object"><span class="description">dynamically append variable to object</span><pre>__set()</pre></a></li>
-<li class="method public "><a href="#__toArray" title="__toArray :: returns assoc array of dynamically append variable"><span class="description">returns assoc array of dynamically append variable</span><pre>__toArray()</pre></a></li>
-<li class="method public "><a href="#__toString" title="__toString :: returns last query string"><span class="description">returns last query string</span><pre>__toString()</pre></a></li>
-<li class="method public "><a href="#__unset" title="__unset :: removes dynamically appended variable"><span class="description">removes dynamically appended variable</span><pre>__unset()</pre></a></li>
 <li class="method public "><a href="#add_error" title="add_error :: add error message to errors list"><span class="description">add error message to errors list</span><pre>add_error()</pre></a></li>
-<li class="method public "><a href="#columns" title="columns :: user function to define database table columns"><span class="description">user function to define database table columns</span><pre>columns()</pre></a></li>
 <li class="method public "><a href="#errors" title="errors :: returns assoc array with all errors"><span class="description">returns assoc array with all errors</span><pre>errors()</pre></a></li>
 <li class="method public "><a href="#filter" title="filter :: Helper function to create WHERE clause"><span class="description">Helper function to create WHERE clause</span><pre>filter()</pre></a></li>
 <li class="method public "><a href="#find" title="find :: find record in database table by condition"><span class="description">find record in database table by condition</span><pre>find()</pre></a></li>
@@ -78,30 +68,37 @@
 <li class="method public "><a href="#labels" title="labels :: user function to define representative labels for table fields"><span class="description">user function to define representative labels for table fields</span><pre>labels()</pre></a></li>
 <li class="method public "><a href="#last_inserted_id" title="last_inserted_id :: returns last inserted id"><span class="description">returns last inserted id</span><pre>last_inserted_id()</pre></a></li>
 <li class="method public "><a href="#last_query" title="last_query :: returns last executed query"><span class="description">returns last executed query</span><pre>last_query()</pre></a></li>
+<li class="method public "><a href="#meta_data" title="meta_data :: returns encoded data from  table column meta_data(json encoded string)"><span class="description">returns encoded data from  table column meta_data(json encoded string)</span><pre>meta_data()</pre></a></li>
+<li class="method public "><a href="#meta_item" title="meta_item :: returns value of some item in meta_data field"><span class="description">returns value of some item in meta_data field</span><pre>meta_item()</pre></a></li>
 <li class="method public "><a href="#module_name" title="module_name :: Returns model name"><span class="description">Returns model name</span><pre>module_name()</pre></a></li>
 <li class="method public "><a href="#new_record" title="new_record :: check if model has primary key"><span class="description">check if model has primary key</span><pre>new_record()</pre></a></li>
 <li class="method public "><a href="#rules" title="rules :: user function to define validation rules"><span class="description">user function to define validation rules</span><pre>rules()</pre></a></li>
 <li class="method public "><a href="#save" title="save :: function that execute query with user callback functions"><span class="description">function that execute query with user callback functions</span><pre>save()</pre></a></li>
 <li class="method public "><a href="#select" title="select :: set parameters for SELECT query"><span class="description">set parameters for SELECT query</span><pre>select()</pre></a></li>
+<li class="method public "><a href="#set_meta_item" title="set_meta_item :: add some item to the meta_data field"><span class="description">add some item to the meta_data field</span><pre>set_meta_item()</pre></a></li>
 <li class="method public "><a href="#table_columns" title="table_columns :: returns array with table columns SQL query"><span class="description">returns array with table columns SQL query</span><pre>table_columns()</pre></a></li>
 <li class="method public "><a href="#unique_validation" title="unique_validation :: validate unique value required Validation object"><span class="description">validate unique value required Validation object</span><pre>unique_validation()</pre></a></li>
 <li class="method public "><a href="#update" title="update :: sets parameters for UPDATE query"><span class="description">sets parameters for UPDATE query</span><pre>update()</pre></a></li>
 <li class="method public "><a href="#update_params" title="update_params :: helper function to append data to the object"><span class="description">helper function to append data to the object</span><pre>update_params()</pre></a></li>
 <li class="method public "><a href="#validate" title="validate :: simple function to validate data before save"><span class="description">simple function to validate data before save</span><pre>validate()</pre></a></li>
+<li class="method public "><a href="#with" title="with :: JOIN function alternative"><span class="description">JOIN function alternative</span><pre>with()</pre></a></li>
 <li class="nav-header protected">» Protected</li>
 <li class="method protected "><a href="#after_save" title="after_save :: user callback function wich calls after success executing query"><span class="description">user callback function wich calls after success executing query</span><pre>after_save()</pre></a></li>
 <li class="method protected "><a href="#before_save" title="before_save :: user function to make some operations before saving"><span class="description">user function to make some operations before saving</span><pre>before_save()</pre></a></li>
+<li class="method protected "><a href="#columns" title="columns :: user function to define database table columns"><span class="description">user function to define database table columns</span><pre>columns()</pre></a></li>
 <li class="method protected "><a href="#destroy" title="destroy :: creates DELETE query object"><span class="description">creates DELETE query object</span><pre>destroy()</pre></a></li>
 <li class="method protected "><a href="#exec" title="exec :: low level function to execute query"><span class="description">low level function to execute query</span><pre>exec()</pre></a></li>
 <li class="method protected "><a href="#exists" title="exists :: checks if value exists by some condition"><span class="description">checks if value exists by some condition</span><pre>exists()</pre></a></li>
+<li class="method protected "><a href="#relations" title="relations :: sets relations for external models to this model"><span class="description">sets relations for external models to this model</span><pre>relations()</pre></a></li>
 <li class="nav-header private">» Private</li>
+<li class="method private "><a href="#_relation" title="_relation :: get data for relation depends on relation option"><span class="description">get data for relation depends on relation option</span><pre>_relation()</pre></a></li>
 <li class="method private "><a href="#auto_count_total" title="auto_count_total :: function to calculate total rows in database column"><span class="description">function to calculate total rows in database column</span><pre>auto_count_total()</pre></a></li>
 <li class="method private "><a href="#clean" title="clean :: helper function to delete garbage after success query"><span class="description">helper function to delete garbage after success query</span><pre>clean()</pre></a></li>
 <li class="method private "><a href="#db_table_name" title="db_table_name :: return a table name in plural form"><span class="description">return a table name in plural form</span><pre>db_table_name()</pre></a></li>
 <li class="method private "><a href="#get_private_properties" title="get_private_properties :: gets properties and their values from some object"><span class="description">gets properties and their values from some object</span><pre>get_private_properties()</pre></a></li>
+<li class="method private "><a href="#get_relation" title="get_relation :: returns relation data or null"><span class="description">returns relation data or null</span><pre>get_relation()</pre></a></li>
 <li class="method private "><a href="#parse_responce" title="parse_responce :: append data to object according type of query"><span class="description">append data to object according type of query</span><pre>parse_responce()</pre></a></li>
-<li class="method private "><a href="#prepare_for_query" title="prepare_for_query :: "><span class="description">prepare_for_query()
-        </span><pre>prepare_for_query()</pre></a></li>
+<li class="method private "><a href="#prepare_for_query" title="prepare_for_query :: make some additional operations before execute query"><span class="description">make some additional operations before execute query</span><pre>prepare_for_query()</pre></a></li>
 <li class="method private "><a href="#query_type" title="query_type :: returns type of query 'select', 'update' ."><span class="description">returns type of query 'select', 'update' .</span><pre>query_type()</pre></a></li>
 <li class="method private "><a href="#sanitize" title="sanitize :: checks values of fields and convert to type of field"><span class="description">checks values of fields and convert to type of field</span><pre>sanitize()</pre></a></li>
 <li class="method private "><a href="#system_filters" title="system_filters :: execute commands wich get as array
@@ -146,6 +143,7 @@ e.g.</span><pre>system_filters()</pre></a></li>
 <li class="constant  "><a href="#BELONGS_TO" title="BELONGS_TO :: "><span class="description">BELONGS_TO</span><pre>BELONGS_TO</pre></a></li>
 <li class="constant  "><a href="#HAS_MANY" title="HAS_MANY :: "><span class="description">HAS_MANY</span><pre>HAS_MANY</pre></a></li>
 <li class="constant  "><a href="#HAS_ONE" title="HAS_ONE :: "><span class="description">HAS_ONE</span><pre>HAS_ONE</pre></a></li>
+<li class="constant  "><a href="#STAT" title="STAT :: "><span class="description">STAT</span><pre>STAT</pre></a></li>
 </ul>
 </div>
 <div class="span8">
@@ -197,154 +195,6 @@ e.g.</span><pre>system_filters()</pre></a></li>
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="__call" id="__call"></a><div class="element clickable method public __call" data-toggle="collapse" data-target=".__call .collapse">
-<h2>calls functions for Base_Model or DB clases in Kohana</h2>
-<pre>__call($name, $arguments) : mixed</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$name</h4></div>
-<div class="subelement argument"><h4>$arguments</h4></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>mixed</code></div>
-</div></div>
-</div>
-<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
-<h2>Constructs the object</h2>
-<pre>__construct(array $params) : void</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code>
-     $model = new Model_User(array(
-         'email' => 'domain@site.com',
-         .....
-     ));
-
-</code></pre></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$params</h4>
-<code>array</code>
-</div>
-</div></div>
-</div>
-<a name="__get" id="__get"></a><div class="element clickable method public __get" data-toggle="collapse" data-target=".__get .collapse">
-<h2>get value of dynamically appended variable</h2>
-<pre>__get($name) : mixed</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code>$model = new Model();
-$model->login = 'user';
-echo $model->login; // will output user
-</code></pre></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$name</h4></div>
-<h3>Exceptions</h3>
-<table class="table table-bordered"><tr>
-<th><code>\Kohana_Exception</code></th>
-<td></td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response"><code>mixed</code></div>
-</div></div>
-</div>
-<a name="__isset" id="__isset"></a><div class="element clickable method public __isset" data-toggle="collapse" data-target=".__isset .collapse">
-<h2>checks if dynamically appended variable exists</h2>
-<pre>__isset($name) : bool</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$name</h4></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>bool</code></div>
-</div></div>
-</div>
-<a name="__set" id="__set"></a><div class="element clickable method public __set" data-toggle="collapse" data-target=".__set .collapse">
-<h2>dynamically append variable to object</h2>
-<pre>__set($name, $value) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code>$model = new Model();
-$model->login = 'user';
-</code></pre></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$name</h4></div>
-<div class="subelement argument"><h4>$value</h4></div>
-</div></div>
-</div>
-<a name="__toArray" id="__toArray"></a><div class="element clickable method public __toArray" data-toggle="collapse" data-target=".__toArray .collapse">
-<h2>returns assoc array of dynamically append variable</h2>
-<pre>__toArray() : array | null</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code> $model = Model_User::find($id);
- var_dump((array)$model);
- //print
-array(
-  'login' => 'bla',
-  'email' => 'email@site.com',
-  ....
-)
-</code></pre></p>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>array</code><code>null</code>
-</div>
-</div></div>
-</div>
-<a name="__toString" id="__toString"></a><div class="element clickable method public __toString" data-toggle="collapse" data-target=".__toString .collapse">
-<h2>returns last query string</h2>
-<pre>__toString() : null | string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code> $model = Model_User::find($id);
- echo (string) $model; // returns SELECT * FROM ...
-</code></pre></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>null</code><code>string</code>
-</div>
-</div></div>
-</div>
-<a name="__unset" id="__unset"></a><div class="element clickable method public __unset" data-toggle="collapse" data-target=".__unset .collapse">
-<h2>removes dynamically appended variable</h2>
-<pre>__unset($name) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code>$model = new Model();
-$model->login = 'user';
-unset($model->login); //here
-</code></pre></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$name</h4></div>
-</div></div>
-</div>
 <a name="add_error" id="add_error"></a><div class="element clickable method public add_error" data-toggle="collapse" data-target=".add_error .collapse">
 <h2>add error message to errors list</h2>
 <pre>add_error(\$key $key, \$msg $msg) </pre>
@@ -362,20 +212,6 @@ unset($model->login); //here
 <div class="subelement argument">
 <h4>$msg</h4>
 <code>\$msg</code><p>string message</p></div>
-</div></div>
-</div>
-<a name="columns" id="columns"></a><div class="element clickable method public columns" data-toggle="collapse" data-target=".columns .collapse">
-<h2>user function to define database table columns</h2>
-<pre>columns() : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a name="errors" id="errors"></a><div class="element clickable method public errors" data-toggle="collapse" data-target=".errors .collapse">
@@ -610,6 +446,42 @@ if they exists</p></p>
 <div class="subelement response"><code>null</code></div>
 </div></div>
 </div>
+<a name="meta_data" id="meta_data"></a><div class="element clickable method public meta_data" data-toggle="collapse" data-target=".meta_data .collapse">
+<h2>returns encoded data from  table column meta_data(json encoded string)</h2>
+<pre>meta_data() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a name="meta_item" id="meta_item"></a><div class="element clickable method public meta_item" data-toggle="collapse" data-target=".meta_item .collapse">
+<h2>returns value of some item in meta_data field</h2>
+<pre>meta_item(\$key $key, \$default $default) : mixed | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>\$key</code><p>(string)</p>
+</div>
+<div class="subelement argument">
+<h4>$default</h4>
+<code>\$default</code><p>mixed</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code><code>null</code>
+</div>
+</div></div>
+</div>
 <a name="module_name" id="module_name"></a><div class="element clickable method public module_name" data-toggle="collapse" data-target=".module_name .collapse">
 <h2>Returns model name</h2>
 <pre>module_name(string $glue) : string</pre>
@@ -676,6 +548,10 @@ if they exists</p></p>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>rewrite</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$select_args</h4>
@@ -697,6 +573,31 @@ if they exists</p></p>
 </div>
 <h3>Returns</h3>
 <div class="subelement response"><code><a href="../classes/Base_Model.html">\Base_Model</a></code></div>
+</div></div>
+</div>
+<a name="set_meta_item" id="set_meta_item"></a><div class="element clickable method public set_meta_item" data-toggle="collapse" data-target=".set_meta_item .collapse">
+<h2>add some item to the meta_data field</h2>
+<pre>set_meta_item(\$key $key, \$value $value) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>\$key</code><ul>
+<li>string</li>
+</ul>
+</div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>\$value</code><ul>
+<li>mixed</li>
+</ul>
+</div>
 </div></div>
 </div>
 <a name="table_columns" id="table_columns"></a><div class="element clickable method public table_columns" data-toggle="collapse" data-target=".table_columns .collapse">
@@ -792,6 +693,31 @@ Also if some model has function rules() before saving data it will get from that
 <div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
+<a name="with" id="with"></a><div class="element clickable method public with" data-toggle="collapse" data-target=".with .collapse">
+<h2>JOIN function alternative</h2>
+<pre>with(\$name $name, \$foreign_key $foreign_key, \$field $field, \$comparison_key $comparison_key) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>\$name</code><p>string|object string can be name of some model or relation name,</p></div>
+<div class="subelement argument">
+<h4>$foreign_key</h4>
+<code>\$foreign_key</code><p>string</p></div>
+<div class="subelement argument">
+<h4>$field</h4>
+<code>\$field</code><p>string</p></div>
+<div class="subelement argument">
+<h4>$comparison_key</h4>
+<code>\$comparison_key</code><p>string</p></div>
+</div></div>
+</div>
 <a name="after_save" id="after_save"></a><div class="element clickable method protected after_save" data-toggle="collapse" data-target=".after_save .collapse">
 <h2>user callback function wich calls after success executing query</h2>
 <pre>after_save() : void</pre>
@@ -814,6 +740,26 @@ Also if some model has function rules() before saving data it will get from that
 <th>access</th>
 <td>protected</td>
 </tr></table>
+</div></div>
+</div>
+<a name="columns" id="columns"></a><div class="element clickable method protected columns" data-toggle="collapse" data-target=".columns .collapse">
+<h2>user function to define database table columns</h2>
+<pre>columns() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+<tr>
+<th>access</th>
+<td>protected</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a name="destroy" id="destroy"></a><div class="element clickable method protected destroy" data-toggle="collapse" data-target=".destroy .collapse">
@@ -877,6 +823,34 @@ Model_User::destroy(array('login' => 'bla', ....));
 </div>
 <h3>Returns</h3>
 <div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a name="relations" id="relations"></a><div class="element clickable method protected relations" data-toggle="collapse" data-target=".relations .collapse">
+<h2>sets relations for external models to this model</h2>
+<pre>relations() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="_relation" id="_relation"></a><div class="element clickable method private _relation" data-toggle="collapse" data-target="._relation .collapse">
+<h2>get data for relation depends on relation option</h2>
+<pre>_relation(\$name $name, \$relation $relation, \$filter $filter) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>\$name</code><p>string</p></div>
+<div class="subelement argument">
+<h4>$relation</h4>
+<code>\$relation</code><p>array</p></div>
+<div class="subelement argument">
+<h4>$filter</h4>
+<code>\$filter</code><p>array</p></div>
 </div></div>
 </div>
 <a name="auto_count_total" id="auto_count_total"></a><div class="element clickable method private auto_count_total" data-toggle="collapse" data-target=".auto_count_total .collapse">
@@ -946,6 +920,22 @@ Model_User::destroy(array('login' => 'bla', ....));
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
+<a name="get_relation" id="get_relation"></a><div class="element clickable method private get_relation" data-toggle="collapse" data-target=".get_relation .collapse">
+<h2>returns relation data or null</h2>
+<pre>get_relation(\$name $name) : array | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>\$name</code><p>string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>null</code>
+</div>
+</div></div>
+</div>
 <a name="parse_responce" id="parse_responce"></a><div class="element clickable method private parse_responce" data-toggle="collapse" data-target=".parse_responce .collapse">
 <h2>append data to object according type of query</h2>
 <pre>parse_responce($result) : bool</pre>
@@ -963,8 +953,7 @@ Model_User::destroy(array('login' => 'bla', ....));
 </div></div>
 </div>
 <a name="prepare_for_query" id="prepare_for_query"></a><div class="element clickable method private prepare_for_query" data-toggle="collapse" data-target=".prepare_for_query .collapse">
-<h2>prepare_for_query()
-        </h2>
+<h2>make some additional operations before execute query</h2>
 <pre>prepare_for_query() : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -1258,6 +1247,12 @@ to that variable</p></p>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
+<a name="STAT" id="STAT"> </a><div class="element clickable constant  STAT" data-toggle="collapse" data-target=".STAT .collapse">
+<h2>STAT</h2>
+<pre>STAT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
 </div>
 </div>
 </div>
@@ -1265,7 +1260,7 @@ to that variable</p></p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-09-05T10:48:47+03:00.<br></footer></div>
+            generated on 2012-11-15T09:46:04+02:00.<br></footer></div>
 </div>
 </body>
 </html>
