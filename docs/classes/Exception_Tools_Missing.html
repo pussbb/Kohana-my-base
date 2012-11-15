@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title><b>Kohana</b><i>My</i> Base » \Collection</title>
+<title><b>Kohana</b><i>My</i> Base » \Exception_Tools_Missing</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -58,24 +58,38 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#build_tree" title="build_tree :: Helper function to build tree array"><span class="description">Helper function to build tree array</span><pre>build_tree()</pre></a></li>
-<li class="method public "><a href="#for_select" title="for_select :: Create array for html form select from object."><span class="description">Create array for html form select from object.</span><pre>for_select()</pre></a></li>
-<li class="method public "><a href="#hash" title="hash :: Create assoc array by some key in object."><span class="description">Create assoc array by some key in object.</span><pre>hash()</pre></a></li>
-<li class="method public "><a href="#pluck" title="pluck :: Retrieves muliple single-key values from a list of object."><span class="description">Retrieves muliple single-key values from a list of object.</span><pre>pluck()</pre></a></li>
+<li class="method public "><a href="#__construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#__toString" title="__toString :: "><span class="description">__toString()
+        </span><pre>__toString()</pre></a></li>
+<li class="method public "><a href="#getCode" title="getCode :: "><span class="description">getCode()
+        </span><pre>getCode()</pre></a></li>
+<li class="method public "><a href="#getFile" title="getFile :: "><span class="description">getFile()
+        </span><pre>getFile()</pre></a></li>
+<li class="method public "><a href="#getLine" title="getLine :: "><span class="description">getLine()
+        </span><pre>getLine()</pre></a></li>
+<li class="method public "><a href="#getMessage" title="getMessage :: "><span class="description">getMessage()
+        </span><pre>getMessage()</pre></a></li>
+<li class="method public "><a href="#getPrevious" title="getPrevious :: "><span class="description">getPrevious()
+        </span><pre>getPrevious()</pre></a></li>
+<li class="method public "><a href="#getTrace" title="getTrace :: "><span class="description">getTrace()
+        </span><pre>getTrace()</pre></a></li>
+<li class="method public "><a href="#getTraceAsString" title="getTraceAsString :: "><span class="description">getTraceAsString()
+        </span><pre>getTraceAsString()</pre></a></li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CCollection" id="\Collection"></a><ul class="breadcrumb">
+<a name="%5CException_Tools_Missing" id="\Exception_Tools_Missing"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/global.html">global</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/Collection.html">Collection</a>
+<span class="divider">\</span><a href="../classes/Exception_Tools_Missing.html">Exception_Tools_Missing</a>
 </li>
 </ul>
-<div href="../classes/Collection.html" class="element class">
-<p class="short_description">Manipulate with array of objects</p>
+<div href="../classes/Exception_Tools_Missing.html" class="element class">
+<p class="short_description">sets human readable message for external console applications</p>
 <div class="details">
 <p class="long_description"></p>
 <table class="table table-bordered">
@@ -110,110 +124,121 @@
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="build_tree" id="build_tree"></a><div class="element clickable method public build_tree" data-toggle="collapse" data-target=".build_tree .collapse">
-<h2>Helper function to build tree array</h2>
-<pre>build_tree(array $collection, string | int $parent, string $parent_key, string $key) : array</pre>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
 <table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
+<th>inherited_from</th>
+<td>Exception::__construct()</td>
 </tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$collection</h4>
-<code>array</code><p>with objects</p></div>
-<div class="subelement argument">
-<h4>$parent</h4>
-<code>string</code><code>int</code><ul>
-<li>parent vaue</li>
-</ul>
-</div>
-<div class="subelement argument">
-<h4>$parent_key</h4>
-<code>string</code><ul>
-<li>key in object</li>
-</ul>
-</div>
-<div class="subelement argument">
-<h4>$key</h4>
-<code>string</code><ul>
-<li>$key in object</li>
-</ul>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="for_select" id="for_select"></a><div class="element clickable method public for_select" data-toggle="collapse" data-target=".for_select .collapse">
-<h2>Create array for html form select from object.</h2>
-<pre>for_select(array $collection, string $key, string $primary_key) : array</pre>
+<a name="__toString" id="__toString"></a><div class="element clickable method public __toString" data-toggle="collapse" data-target=".__toString .collapse">
+<h2>__toString()
+        </h2>
+<pre>__toString() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
 <table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
+<th>inherited_from</th>
+<td>Exception::__toString()</td>
 </tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$collection</h4>
-<code>array</code><p>with objects</p></div>
-<div class="subelement argument">
-<h4>$key</h4>
-<code>string</code>
-</div>
-<div class="subelement argument">
-<h4>$primary_key</h4>
-<code>string</code><p>(default 'id')</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="hash" id="hash"></a><div class="element clickable method public hash" data-toggle="collapse" data-target=".hash .collapse">
-<h2>Create assoc array by some key in object.</h2>
-<pre>hash(array $collection, string $key) : array</pre>
+<a name="getCode" id="getCode"></a><div class="element clickable method public getCode" data-toggle="collapse" data-target=".getCode .collapse">
+<h2>getCode()
+        </h2>
+<pre>getCode() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
 <table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
+<th>inherited_from</th>
+<td>Exception::getCode()</td>
 </tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$collection</h4>
-<code>array</code><p>with objects</p></div>
-<div class="subelement argument">
-<h4>$key</h4>
-<code>string</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="pluck" id="pluck"></a><div class="element clickable method public pluck" data-toggle="collapse" data-target=".pluck .collapse">
-<h2>Retrieves muliple single-key values from a list of object.</h2>
-<pre>pluck(array $collection, string $key) : array</pre>
+<a name="getFile" id="getFile"></a><div class="element clickable method public getFile" data-toggle="collapse" data-target=".getFile .collapse">
+<h2>getFile()
+        </h2>
+<pre>getFile() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
 <table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
+<th>inherited_from</th>
+<td>Exception::getFile()</td>
 </tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$collection</h4>
-<code>array</code><p>with objects</p></div>
-<div class="subelement argument">
-<h4>$key</h4>
-<code>string</code>
+</div></div>
 </div>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
+<a name="getLine" id="getLine"></a><div class="element clickable method public getLine" data-toggle="collapse" data-target=".getLine .collapse">
+<h2>getLine()
+        </h2>
+<pre>getLine() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>Exception::getLine()</td>
+</tr></table>
+</div></div>
+</div>
+<a name="getMessage" id="getMessage"></a><div class="element clickable method public getMessage" data-toggle="collapse" data-target=".getMessage .collapse">
+<h2>getMessage()
+        </h2>
+<pre>getMessage() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>Exception::getMessage()</td>
+</tr></table>
+</div></div>
+</div>
+<a name="getPrevious" id="getPrevious"></a><div class="element clickable method public getPrevious" data-toggle="collapse" data-target=".getPrevious .collapse">
+<h2>getPrevious()
+        </h2>
+<pre>getPrevious() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>Exception::getPrevious()</td>
+</tr></table>
+</div></div>
+</div>
+<a name="getTrace" id="getTrace"></a><div class="element clickable method public getTrace" data-toggle="collapse" data-target=".getTrace .collapse">
+<h2>getTrace()
+        </h2>
+<pre>getTrace() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>Exception::getTrace()</td>
+</tr></table>
+</div></div>
+</div>
+<a name="getTraceAsString" id="getTraceAsString"></a><div class="element clickable method public getTraceAsString" data-toggle="collapse" data-target=".getTraceAsString .collapse">
+<h2>getTraceAsString()
+        </h2>
+<pre>getTraceAsString() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>Exception::getTraceAsString()</td>
+</tr></table>
 </div></div>
 </div>
 </div>
@@ -223,7 +248,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-15T09:46:04+02:00.<br></footer></div>
+            generated on 2012-11-15T09:46:03+02:00.<br></footer></div>
 </div>
 </body>
 </html>

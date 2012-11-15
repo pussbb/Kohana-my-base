@@ -2,9 +2,10 @@
 
 /**
  * Set the exception handler to use the Error module
+ *
+ * TODO watch for solution (currently Kohana always shows here excpetions)
+ * Go back to the previous exception handler
  */
- //TODO watch for solution (currently Kohana always shows here excpetions)
-// Go back to the previous exception handler
 
 set_exception_handler(array('Error', 'handler'));
 
@@ -13,6 +14,7 @@ if ( ! function_exists('tr'))
     /**
     * translate string via gettext
     * or Kohana's translation function
+    *
     * @param $string string
     * @param $values array
     * @return string
@@ -31,7 +33,7 @@ if ( ! function_exists('debug'))
 {
     /**
     * helper function to print dump of var and exit if needed
-    *
+    * @param mixed
     */
     function debug()
     {

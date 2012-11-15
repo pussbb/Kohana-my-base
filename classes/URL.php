@@ -10,12 +10,22 @@
 
 class URL extends Kohana_URL {
 
-  public static function site($uri = '', $protocol = TRUE, $index = TRUE)
-  {
-    if ($uri && (is_object(Request::current()) && Request::current()->param('lang')))
-      $uri = Language::get()->code.'/'.$uri;
 
-    return parent::site($uri, $protocol, $index);
-    
-  }
+    /**
+     * generates url for site with lang code if it present in query
+     * @param string $uri
+     * @param mixed $protocol
+     * @param bool $index
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function site($uri = '', $protocol = TRUE, $index = TRUE)
+    {
+        if ($uri && (is_object(Request::current()) && Request::current()->param('lang')))
+        $uri = Language::get()->code.'/'.$uri;
+
+        return parent::site($uri, $protocol, $index);
+
+    }
 }

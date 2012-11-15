@@ -22,7 +22,8 @@ class Base_Language {
         Session::instance()->set('language', $language);
     }
     /**
-     * set current lang
+     * get current lang
+     * @param mixed $lang
      * @return language (model object)
      * @static
      */
@@ -52,6 +53,12 @@ class Base_Language {
         return self::get_lang($code);
     }
 
+    /**
+     * get lang
+     * @param string $code language code
+     * @return language (model object)
+     * @static
+     */
     private static function get_lang($code)
     {
         if ($code)
@@ -63,12 +70,22 @@ class Base_Language {
         return $language;
     }
 
+    /**
+     * get all available languages code
+     * @return array
+     * @static
+     */
     public static function all_codes()
     {
         $langs = Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
         return array_filter(Collection::pluck($langs, 'code'));
     }
 
+    /**
+     * php reg expr to match lang codes
+     * @return array
+     * @static
+     */
     public static function uri_check_codes()
     {
         return '('.implode('|', self::all_codes()).')';

@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title><b>Kohana</b><i>My</i> Base » \Controller_Users</title>
+<title><b>Kohana</b><i>My</i> Base » \Controller_Translations</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -58,23 +58,19 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#action_account_info" title="action_account_info :: "><span class="description">action_account_info()
-        </span><pre>action_account_info()</pre></a></li>
-<li class="method public "><a href="#action_login" title="action_login :: "><span class="description">action_login()
-        </span><pre>action_login()</pre></a></li>
-<li class="method public "><a href="#action_logout" title="action_logout :: "><span class="description">action_logout()
-        </span><pre>action_logout()</pre></a></li>
-<li class="method public "><a href="#action_recovery" title="action_recovery :: "><span class="description">action_recovery()
-        </span><pre>action_recovery()</pre></a></li>
-<li class="method public "><a href="#action_register" title="action_register :: "><span class="description">action_register()
-        </span><pre>action_register()</pre></a></li>
-<li class="method public "><a href="#action_settings" title="action_settings :: "><span class="description">action_settings()
-        </span><pre>action_settings()</pre></a></li>
+<li class="method public "><a href="#action_compile_translations" title="action_compile_translations :: "><span class="description">action_compile_translations()
+        </span><pre>action_compile_translations()</pre></a></li>
+<li class="method public "><a href="#action_index" title="action_index :: "><span class="description">action_index()
+        </span><pre>action_index()</pre></a></li>
+<li class="method public "><a href="#action_parse_sources" title="action_parse_sources :: "><span class="description">action_parse_sources()
+        </span><pre>action_parse_sources()</pre></a></li>
+<li class="method public "><a href="#action_update" title="action_update :: "><span class="description">action_update()
+        </span><pre>action_update()</pre></a></li>
 <li class="method public inherited"><a href="#after" title="after :: final function of the template"><span class="description">final function of the template</span><pre>after()</pre></a></li>
 <li class="method public inherited"><a href="#append_css" title="append_css :: append css file"><span class="description">append css file</span><pre>append_css()</pre></a></li>
 <li class="method public inherited"><a href="#append_js" title="append_js :: append javascript file"><span class="description">append javascript file</span><pre>append_js()</pre></a></li>
 <li class="method public inherited"><a href="#append_media" title="append_media :: try to append css and js for file"><span class="description">try to append css and js for file</span><pre>append_media()</pre></a></li>
-<li class="method public inherited"><a href="#before" title="before :: init base template and this"><span class="description">init base template and this</span><pre>before()</pre></a></li>
+<li class="method public "><a href="#before" title="before :: init base template and this"><span class="description">init base template and this</span><pre>before()</pre></a></li>
 <li class="method public inherited"><a href="#current_request_structure" title="current_request_structure :: returns request in array(dir, controller, action)"><span class="description">returns request in array(dir, controller, action)</span><pre>current_request_structure()</pre></a></li>
 <li class="method public inherited"><a href="#is_ajax" title="is_ajax :: checks if request is ajax"><span class="description">checks if request is ajax</span><pre>is_ajax()</pre></a></li>
 <li class="method public inherited"><a href="#is_delete" title="is_delete :: checks if request method is DELETE"><span class="description">checks if request method is DELETE</span><pre>is_delete()</pre></a></li>
@@ -99,107 +95,86 @@
 <li class="method private inherited"><a href="#_safety_render" title="_safety_render :: disable template render and call final method of parent class"><span class="description">disable template render and call final method of parent class</span><pre>_safety_render()</pre></a></li>
 <li class="method private inherited"><a href="#append_dynamic_properties" title="append_dynamic_properties :: append to view and tempalate dynamically append variable from $this"><span class="description">append to view and tempalate dynamically append variable from $this</span><pre>append_dynamic_properties()</pre></a></li>
 <li class="method private inherited"><a href="#config_item" title="config_item :: get config item"><span class="description">get config item</span><pre>config_item()</pre></a></li>
+<li class="method private "><a href="#get_translations" title="get_translations :: "><span class="description">get_translations()
+        </span><pre>get_translations()</pre></a></li>
 <li class="method private inherited"><a href="#media_by_default" title="media_by_default :: register css and js for current request structure"><span class="description">register css and js for current request structure</span><pre>media_by_default()</pre></a></li>
-<li class="method private "><a href="#redirect_user" title="redirect_user :: "><span class="description">redirect_user()
-        </span><pre>redirect_user()</pre></a></li>
+<li class="method private "><a href="#parse_translations" title="parse_translations :: "><span class="description">parse_translations()
+        </span><pre>parse_translations()</pre></a></li>
+<li class="method private "><a href="#save_translation" title="save_translation :: "><span class="description">save_translation()
+        </span><pre>save_translation()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
+<li class="property public "><a href="#%24languages" title="$languages :: "><span class="description">$languages</span><pre>$languages</pre></a></li>
 <li class="property public inherited"><a href="#%24template" title="$template :: base template file"><span class="description">base template file</span><pre>$template</pre></a></li>
 <li class="property public inherited"><a href="#%24view" title="$view :: Kohana View object"><span class="description">Kohana View object</span><pre>$view</pre></a></li>
 <li class="nav-header protected">» Protected</li>
 <li class="property protected inherited"><a href="#%24bundles" title="$bundles :: for children it's recommended to change this prefixes
 if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="description">for children it's recommended to change this prefixes
 if needed IN CONSTRUCTOR (to not damage changes in parent class)</span><pre>$bundles</pre></a></li>
-<li class="property protected inherited"><a href="#%24check_access" title="$check_access :: check Acl access (true means do the check)"><span class="description">check Acl access (true means do the check)</span><pre>$check_access</pre></a></li>
+<li class="property protected "><a href="#%24check_access" title="$check_access :: check Acl access (true means do the check)"><span class="description">check Acl access (true means do the check)</span><pre>$check_access</pre></a></li>
 <li class="nav-header private">» Private</li>
 <li class="property private inherited"><a href="#%24config" title="$config :: array with settings from config 'site.php'"><span class="description">array with settings from config 'site.php'</span><pre>$config</pre></a></li>
+<li class="property private "><a href="#%24ext" title="$ext :: "><span class="description">$ext</span><pre>$ext</pre></a></li>
 <li class="property private inherited"><a href="#%24filename" title="$filename :: set view file name wich will be rendered in template section 'content'"><span class="description">set view file name wich will be rendered in template section 'content'</span><pre>$filename</pre></a></li>
 <li class="property private inherited"><a href="#%24layout" title="$layout :: set layout name"><span class="description">set layout name</span><pre>$layout</pre></a></li>
+<li class="property private "><a href="#%24translations" title="$translations :: "><span class="description">$translations</span><pre>$translations</pre></a></li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CController_Users" id="\Controller_Users"></a><ul class="breadcrumb">
+<a name="%5CController_Translations" id="\Controller_Translations"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/global.html">global</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/Controller_Users.html">Controller_Users</a>
+<span class="divider">\</span><a href="../classes/Controller_Translations.html">Controller_Translations</a>
 </li>
 </ul>
-<div href="../classes/Controller_Users.html" class="element class">
-<p class="short_description">Kohana-my-base
-Attemp to create module with classes for Kohana framework,
-with main goal make developing web applications more easily(as for me)</p>
+<div href="../classes/Controller_Translations.html" class="element class">
+<p class="short_description">Core template wich extends functionality of Controller_Template</p>
 <div class="details">
 <p class="long_description"></p>
 <table class="table table-bordered">
 <tr>
 <th>package</th>
-<td><a href="../packages/Kohana-my-base.html">Kohana-my-base</a></td>
+<td><a href="../packages/Default.html">Kohana-my-base</a></td>
 </tr>
 <tr>
 <th>copyright</th>
 <td>2012 pussbb@gmail.com(alexnevpryaga@gmail.com)</td>
 </tr>
 <tr>
-<th>license</th>
-<td><a href="http://www.gnu.org/copyleft/gpl.html">GNU GENERAL PUBLIC LICENSE v3</a></td>
-</tr>
-<tr>
 <th>version</th>
 <td>0.1.2</td>
-</tr>
-<tr>
-<th>link</th>
-<td><a href="https://github.com/pussbb/Kohana-my-base">https://github.com/pussbb/Kohana-my-base</a></td>
-</tr>
-<tr>
-<th>subpackage</th>
-<td>template</td>
 </tr>
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="action_account_info" id="action_account_info"></a><div class="element clickable method public action_account_info" data-toggle="collapse" data-target=".action_account_info .collapse">
-<h2>action_account_info()
+<a name="action_compile_translations" id="action_compile_translations"></a><div class="element clickable method public action_compile_translations" data-toggle="collapse" data-target=".action_compile_translations .collapse">
+<h2>action_compile_translations()
         </h2>
-<pre>action_account_info() </pre>
+<pre>action_compile_translations() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
-<a name="action_login" id="action_login"></a><div class="element clickable method public action_login" data-toggle="collapse" data-target=".action_login .collapse">
-<h2>action_login()
+<a name="action_index" id="action_index"></a><div class="element clickable method public action_index" data-toggle="collapse" data-target=".action_index .collapse">
+<h2>action_index()
         </h2>
-<pre>action_login() </pre>
+<pre>action_index() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
-<a name="action_logout" id="action_logout"></a><div class="element clickable method public action_logout" data-toggle="collapse" data-target=".action_logout .collapse">
-<h2>action_logout()
+<a name="action_parse_sources" id="action_parse_sources"></a><div class="element clickable method public action_parse_sources" data-toggle="collapse" data-target=".action_parse_sources .collapse">
+<h2>action_parse_sources()
         </h2>
-<pre>action_logout() </pre>
+<pre>action_parse_sources() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
-<a name="action_recovery" id="action_recovery"></a><div class="element clickable method public action_recovery" data-toggle="collapse" data-target=".action_recovery .collapse">
-<h2>action_recovery()
+<a name="action_update" id="action_update"></a><div class="element clickable method public action_update" data-toggle="collapse" data-target=".action_update .collapse">
+<h2>action_update()
         </h2>
-<pre>action_recovery() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
-</div>
-<a name="action_register" id="action_register"></a><div class="element clickable method public action_register" data-toggle="collapse" data-target=".action_register .collapse">
-<h2>action_register()
-        </h2>
-<pre>action_register() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
-</div>
-<a name="action_settings" id="action_settings"></a><div class="element clickable method public action_settings" data-toggle="collapse" data-target=".action_settings .collapse">
-<h2>action_settings()
-        </h2>
-<pre>action_settings() </pre>
+<pre>action_update() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
@@ -305,20 +280,8 @@ with main goal make developing web applications more easily(as for me)</p>
 <a name="before" id="before"></a><div class="element clickable method public before" data-toggle="collapse" data-target=".before .collapse">
 <h2>init base template and this</h2>
 <pre>before() </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Controller_Base_Core::before()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Controller_Core::before()</td>
-</tr>
-</table>
-</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
 <a name="current_request_structure" id="current_request_structure"></a><div class="element clickable method public current_request_structure" data-toggle="collapse" data-target=".current_request_structure .collapse">
 <h2>returns request in array(dir, controller, action)</h2>
@@ -822,6 +785,13 @@ with main goal make developing web applications more easily(as for me)</p>
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
+<a name="get_translations" id="get_translations"></a><div class="element clickable method private get_translations" data-toggle="collapse" data-target=".get_translations .collapse">
+<h2>get_translations()
+        </h2>
+<pre>get_translations() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
 <a name="media_by_default" id="media_by_default"></a><div class="element clickable method private media_by_default" data-toggle="collapse" data-target=".media_by_default .collapse">
 <h2>register css and js for current request structure</h2>
 <pre>media_by_default(array $request_struct) </pre>
@@ -847,19 +817,38 @@ and directory/controller.action.css</p></p>
 </div>
 </div></div>
 </div>
-<a name="redirect_user" id="redirect_user"></a><div class="element clickable method private redirect_user" data-toggle="collapse" data-target=".redirect_user .collapse">
-<h2>redirect_user()
+<a name="parse_translations" id="parse_translations"></a><div class="element clickable method private parse_translations" data-toggle="collapse" data-target=".parse_translations .collapse">
+<h2>parse_translations()
         </h2>
-<pre>redirect_user($condition) </pre>
+<pre>parse_translations($filename) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$condition</h4></div>
+<div class="subelement argument"><h4>$filename</h4></div>
+</div></div>
+</div>
+<a name="save_translation" id="save_translation"></a><div class="element clickable method private save_translation" data-toggle="collapse" data-target=".save_translation .collapse">
+<h2>save_translation()
+        </h2>
+<pre>save_translation($identifier, $translation, $language) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$identifier</h4></div>
+<div class="subelement argument"><h4>$translation</h4></div>
+<div class="subelement argument"><h4>$language</h4></div>
 </div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24languages" id="$languages"> </a><div class="element clickable property public $languages" data-toggle="collapse" data-target=".$languages .collapse">
+<h2>$languages</h2>
+<pre>$languages </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
 <a name="%24template" id="$template"> </a><div class="element clickable property public $template" data-toggle="collapse" data-target=".$template .collapse">
 <h2>base template file</h2>
 <pre>$template : string</pre>
@@ -918,20 +907,8 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)</h2>
 <a name="%24check_access" id="$check_access"> </a><div class="element clickable property protected $check_access" data-toggle="collapse" data-target=".$check_access .collapse">
 <h2>check Acl access (true means do the check)</h2>
 <pre>$check_access : bool</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Controller_Base_Core::$$check_access</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Controller_Core::$$check_access</td>
-</tr>
-</table>
-</div></div>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
 <a name="%24config" id="$config"> </a><div class="element clickable property private $config" data-toggle="collapse" data-target=".$config .collapse">
 <h2>array with settings from config 'site.php'</h2>
@@ -950,6 +927,12 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)</h2>
 </tr>
 </table>
 </div></div>
+</div>
+<a name="%24ext" id="$ext"> </a><div class="element clickable property private $ext" data-toggle="collapse" data-target=".$ext .collapse">
+<h2>$ext</h2>
+<pre>$ext </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
 <a name="%24filename" id="$filename"> </a><div class="element clickable property private $filename" data-toggle="collapse" data-target=".$filename .collapse">
 <h2>set view file name wich will be rendered in template section 'content'</h2>
@@ -986,6 +969,12 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)</h2>
 </tr>
 </table>
 </div></div>
+</div>
+<a name="%24translations" id="$translations"> </a><div class="element clickable property private $translations" data-toggle="collapse" data-target=".$translations .collapse">
+<h2>$translations</h2>
+<pre>$translations </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
 </div>
 </div>

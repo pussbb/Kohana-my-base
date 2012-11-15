@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">82</span></a></li>
+                <span class="label label-info">109</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -58,9 +58,13 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#get" title="get :: set current lang"><span class="description">set current lang</span><pre>get()</pre></a></li>
+<li class="method public "><a href="#all_codes" title="all_codes :: get all available languages code"><span class="description">get all available languages code</span><pre>all_codes()</pre></a></li>
+<li class="method public "><a href="#get" title="get :: get current lang"><span class="description">get current lang</span><pre>get()</pre></a></li>
 <li class="method public "><a href="#get_default" title="get_default :: get default lang"><span class="description">get default lang</span><pre>get_default()</pre></a></li>
 <li class="method public "><a href="#set" title="set :: set current lang"><span class="description">set current lang</span><pre>set()</pre></a></li>
+<li class="method public "><a href="#uri_check_codes" title="uri_check_codes :: php reg expr to match lang codes"><span class="description">php reg expr to match lang codes</span><pre>uri_check_codes()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#get_lang" title="get_lang :: get lang"><span class="description">get lang</span><pre>get_lang()</pre></a></li>
 </ul>
 </div>
 <div class="span8">
@@ -109,9 +113,9 @@
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="get" id="get"></a><div class="element clickable method public get" data-toggle="collapse" data-target=".get .collapse">
-<h2>set current lang</h2>
-<pre>get() : \language</pre>
+<a name="all_codes" id="all_codes"></a><div class="element clickable method public all_codes" data-toggle="collapse" data-target=".all_codes .collapse">
+<h2>get all available languages code</h2>
+<pre>all_codes() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
@@ -119,6 +123,25 @@
 <th>static</th>
 <td></td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="get" id="get"></a><div class="element clickable method public get" data-toggle="collapse" data-target=".get .collapse">
+<h2>get current lang</h2>
+<pre>get(mixed $lang) : \language</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$lang</h4>
+<code>mixed</code>
+</div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>\language</code>(model object)</div>
@@ -156,6 +179,39 @@
 </div>
 </div></div>
 </div>
+<a name="uri_check_codes" id="uri_check_codes"></a><div class="element clickable method public uri_check_codes" data-toggle="collapse" data-target=".uri_check_codes .collapse">
+<h2>php reg expr to match lang codes</h2>
+<pre>uri_check_codes() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="get_lang" id="get_lang"></a><div class="element clickable method private get_lang" data-toggle="collapse" data-target=".get_lang .collapse">
+<h2>get lang</h2>
+<pre>get_lang(string $code) : \language</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$code</h4>
+<code>string</code><p>language code</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\language</code>(model object)</div>
+</div></div>
+</div>
 </div>
 </div>
 </div>
@@ -163,7 +219,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-09-23T20:41:02+03:00.<br></footer></div>
+            generated on 2012-11-15T09:46:04+02:00.<br></footer></div>
 </div>
 </body>
 </html>

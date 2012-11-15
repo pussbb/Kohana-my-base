@@ -957,7 +957,7 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
-     *
+     * make some additional operations before execute query
      * @access private
      * @return void
      */
@@ -1205,6 +1205,7 @@ class Base_Model extends Kohana_Model {
     /**
      * function returns proper array with values
      * @internal
+     * @param object $result DB_Result
      */
     private function parse_result($result)
     {

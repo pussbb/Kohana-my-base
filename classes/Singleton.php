@@ -16,11 +16,13 @@ abstract class Singleton {
     // according to php OOP model, it will be shared
     // between all children classes
     /**
+     * containce all created classes
      * @var array
      */
     protected static $instances = array();
 
     /**
+     * get object of some class. if Not exists it will create it
      * @static
      * @return mixed
      */

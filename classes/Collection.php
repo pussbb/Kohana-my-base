@@ -15,8 +15,8 @@
 class Collection {
     /**
       * Create assoc array by some key in object.
-      * @param $collection array with objects
-      * @param $key string
+      * @param array $collection  with objects
+      * @param string $key
       * @static
       * @return array
       */
@@ -31,9 +31,9 @@ class Collection {
 
     /**
       * Create array for html form select from object.
-      * @param $collection array with objects
-      * @param $key string
-      * @param $primary_key string (default 'id')
+      * @param array $collection  with objects
+      * @param string $key
+      * @param string $primary_key  (default 'id')
       * @static
       * @return array
       */
@@ -48,8 +48,8 @@ class Collection {
 
     /**
       * Retrieves muliple single-key values from a list of object.
-      * @param $collection array with objects
-      * @param $key string
+      * @param array $collection  with objects
+      * @param string $key
       * @static
       * @return array
       */
@@ -66,6 +66,15 @@ class Collection {
             return $result;
     }
 
+    /**
+      * Helper function to build tree array
+      * @param array $collection  with objects
+      * @param string|int $parent - parent vaue
+      * @param string $parent_key - key in object
+      * @param string $key - $key in object
+      * @static
+      * @return array
+      */
     public static function build_tree(array $collection,  $parent = NULL, $parent_key = 'parent_id', $key = 'id')
     {
         $result = array();

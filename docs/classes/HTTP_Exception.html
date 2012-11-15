@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title><b>Kohana</b><i>My</i> Base » Kohana-my-base\html</title>
+<title><b>Kohana</b><i>My</i> Base » \HTTP_Exception</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -52,45 +52,56 @@
                         </div></noscript>
 <div class="row">
 <div class="span4">
-<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
 <button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-map-marker"></i> Packages</li>
-<li>
-<a href="../packages/Kohana-my-base.html.html" title="html"><i class="icon-folder-open"></i>html</a><ul class="nav nav-list nav-packages"></ul>
-</li>
-<li class="nav-header">
-<i class="icon-custom icon-class"></i> Classes</li>
-<li><a href="#Pretty_Form" title="Helper class to render forms">Pretty_Form</a></li>
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#get_response" title="get_response :: Generate a Response for all Exceptions without a more specific override"><span class="description">Generate a Response for all Exceptions without a more specific override</span><pre>get_response()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#get_view_file" title="get_view_file :: "><span class="description">get_view_file()
+        </span><pre>get_view_file()</pre></a></li>
 </ul>
 </div>
-<div class="span8 package-contents">
-<ul class="breadcrumb">
+<div class="span8">
+<a name="%5CHTTP_Exception" id="\HTTP_Exception"></a><ul class="breadcrumb">
 <li>
-<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
-<li><a href="../packages/Kohana-my-base.html">Kohana-my-base</a></li>
-<span class="divider">\</span><li class="active"><a href="../packages/Kohana-my-base.html.html">html</a></li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/HTTP_Exception.html">HTTP_Exception</a>
+</li>
 </ul>
-<div class="package-indent">
+<div href="../classes/HTTP_Exception.html" class="element class"><div class="details">
 <h3>
-<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
-<a name="Pretty_Form" id="Pretty_Form"></a><div class="element ajax clickable class" href="../classes/Pretty_Form.html">
-<h1>Pretty_Form<a href="../classes/Pretty_Form.html">¶</a>
-</h1>
-<p class="short_description">Helper class to render forms</p>
-<div class="details collapse"></div>
-<a href="../classes/Pretty_Form.html" class="more">« More »</a>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="get_response" id="get_response"></a><div class="element clickable method public get_response" data-toggle="collapse" data-target=".get_response .collapse">
+<h2>Generate a Response for all Exceptions without a more specific override</h2>
+<pre>get_response() : \Response</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>The user should see a nice error page, however, if we are in development
+mode we should show the normal Kohana error page.</p></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Response</code></div>
+</div></div>
 </div>
+<a name="get_view_file" id="get_view_file"></a><div class="element clickable method private get_view_file" data-toggle="collapse" data-target=".get_view_file .collapse">
+<h2>get_view_file()
+        </h2>
+<pre>get_view_file() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
+</div></div>
 </div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-15T09:46:03+02:00.<br></footer></div>
+            generated on 2012-11-15T09:46:04+02:00.<br></footer></div>
 </div>
 </body>
 </html>

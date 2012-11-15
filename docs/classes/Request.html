@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title><b>Kohana</b><i>My</i> Base » \Collection</title>
+<title><b>Kohana</b><i>My</i> Base » \Request</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -58,30 +58,27 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#build_tree" title="build_tree :: Helper function to build tree array"><span class="description">Helper function to build tree array</span><pre>build_tree()</pre></a></li>
-<li class="method public "><a href="#for_select" title="for_select :: Create array for html form select from object."><span class="description">Create array for html form select from object.</span><pre>for_select()</pre></a></li>
-<li class="method public "><a href="#hash" title="hash :: Create assoc array by some key in object."><span class="description">Create assoc array by some key in object.</span><pre>hash()</pre></a></li>
-<li class="method public "><a href="#pluck" title="pluck :: Retrieves muliple single-key values from a list of object."><span class="description">Retrieves muliple single-key values from a list of object.</span><pre>pluck()</pre></a></li>
+<li class="method public "><a href="#process" title="process :: Process a request to find a matching route"><span class="description">Process a request to find a matching route</span><pre>process()</pre></a></li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CCollection" id="\Collection"></a><ul class="breadcrumb">
+<a name="%5CRequest" id="\Request"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/global.html">global</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/Collection.html">Collection</a>
+<span class="divider">\</span><a href="../classes/Request.html">Request</a>
 </li>
 </ul>
-<div href="../classes/Collection.html" class="element class">
-<p class="short_description">Manipulate with array of objects</p>
+<div href="../classes/Request.html" class="element class">
+<p class="short_description">Hack</p>
 <div class="details">
 <p class="long_description"></p>
 <table class="table table-bordered">
 <tr>
 <th>package</th>
-<td><a href="../packages/Kohana-my-base.extra.html">Kohana-my-base</a></td>
+<td><a href="../packages/Kohana-my-base.access.html">Kohana-my-base</a></td>
 </tr>
 <tr>
 <th>copyright</th>
@@ -101,117 +98,28 @@
 </tr>
 <tr>
 <th>category</th>
-<td>extra</td>
+<td>access</td>
 </tr>
 <tr>
 <th>subpackage</th>
-<td>extra</td>
+<td>access</td>
 </tr>
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="build_tree" id="build_tree"></a><div class="element clickable method public build_tree" data-toggle="collapse" data-target=".build_tree .collapse">
-<h2>Helper function to build tree array</h2>
-<pre>build_tree(array $collection, string | int $parent, string $parent_key, string $key) : array</pre>
+<a name="process" id="process"></a><div class="element clickable method public process" data-toggle="collapse" data-target=".process .collapse">
+<h2>Process a request to find a matching route</h2>
+<pre>process(\Request $request, array $routes) : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
-</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$collection</h4>
-<code>array</code><p>with objects</p></div>
+<h4>$request</h4>
+<code>object</code><p>Request</p></div>
 <div class="subelement argument">
-<h4>$parent</h4>
-<code>string</code><code>int</code><ul>
-<li>parent vaue</li>
-</ul>
-</div>
-<div class="subelement argument">
-<h4>$parent_key</h4>
-<code>string</code><ul>
-<li>key in object</li>
-</ul>
-</div>
-<div class="subelement argument">
-<h4>$key</h4>
-<code>string</code><ul>
-<li>$key in object</li>
-</ul>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
-</div></div>
-</div>
-<a name="for_select" id="for_select"></a><div class="element clickable method public for_select" data-toggle="collapse" data-target=".for_select .collapse">
-<h2>Create array for html form select from object.</h2>
-<pre>for_select(array $collection, string $key, string $primary_key) : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$collection</h4>
-<code>array</code><p>with objects</p></div>
-<div class="subelement argument">
-<h4>$key</h4>
-<code>string</code>
-</div>
-<div class="subelement argument">
-<h4>$primary_key</h4>
-<code>string</code><p>(default 'id')</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
-</div></div>
-</div>
-<a name="hash" id="hash"></a><div class="element clickable method public hash" data-toggle="collapse" data-target=".hash .collapse">
-<h2>Create assoc array by some key in object.</h2>
-<pre>hash(array $collection, string $key) : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$collection</h4>
-<code>array</code><p>with objects</p></div>
-<div class="subelement argument">
-<h4>$key</h4>
-<code>string</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
-</div></div>
-</div>
-<a name="pluck" id="pluck"></a><div class="element clickable method public pluck" data-toggle="collapse" data-target=".pluck .collapse">
-<h2>Retrieves muliple single-key values from a list of object.</h2>
-<pre>pluck(array $collection, string $key) : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$collection</h4>
-<code>array</code><p>with objects</p></div>
-<div class="subelement argument">
-<h4>$key</h4>
-<code>string</code>
-</div>
+<h4>$routes</h4>
+<code>array</code><p>Route</p></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
@@ -223,7 +131,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-15T09:46:04+02:00.<br></footer></div>
+            generated on 2012-11-15T09:46:03+02:00.<br></footer></div>
 </div>
 </body>
 </html>

@@ -42,6 +42,7 @@ class Controller_Base_Core extends Controller_Template {
     public $view = NULL;
 
     /**
+     * set view file name wich will be rendered in template section 'content'
      * @var null
      */
     private $filename = NULL;
@@ -240,6 +241,7 @@ class Controller_Base_Core extends Controller_Template {
     /**
      * checks if request method is DELETE
      * @return bool
+     * @access public
      */
     public function is_delete()
     {
@@ -249,16 +251,41 @@ class Controller_Base_Core extends Controller_Template {
     /**
      * checks if request is ajax
      * @return mixed
+     * @access public
      */
     public function is_ajax()
     {
         return $this->request->is_ajax();
     }
 
-
+    /**
+     * checks if request method is PUT
+     * @return bool
+     * @access public
+     */
     public function is_put()
     {
         return $this->request->method() === 'PUT';
+    }
+
+    /**
+     * checks if request method is POST
+     * @return bool
+     * @access public
+     */
+    public function is_post()
+    {
+        return $this->request->method() === 'POST';
+    }
+
+    /**
+     * checks if request method is GET
+     * @return bool
+     * @access public
+     */
+    public function is_get()
+    {
+        return $this->request->method() === 'GET';
     }
 
     /**
@@ -302,7 +329,7 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function render_json($data)
     {
-        
+
         $json = json_encode($data, JSON_HEX_TAG);
         $this->response->headers('Content-Type', 'application/json')
                 ->send_headers()
@@ -310,20 +337,32 @@ class Controller_Base_Core extends Controller_Template {
         $this->_safety_render();
     }
 
-
+    /**
+     * disable template render and call final method of parent class
+     * @return void
+     * @access private
+     */
     private function _safety_render()
     {
         $this->auto_render = FALSE;
         parent::after();
     }
 
+    /**
+     * set layout name
+     * @param string $name - relative path to the view file
+     * @return void
+     * @access public
+     */
     public function set_layout($name)
     {
         $this->layout = $name;
     }
 
     /**
-     * after
+     * final function of the template
+     * @return void
+     * @access public
      */
     public function after()
     {
@@ -351,7 +390,8 @@ class Controller_Base_Core extends Controller_Template {
 
     /**
      * append to view and tempalate dynamically append variable from $this
-     *
+     * @return array
+     * @access private
      */
     private function append_dynamic_properties()
     {
@@ -372,6 +412,8 @@ class Controller_Base_Core extends Controller_Template {
 
     /**
      * finally set the view filename (not possible to change back)
+     * @access protected
+     * @return void
      */
     protected function set_view_filename()
     {

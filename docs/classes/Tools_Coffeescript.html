@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title><b>Kohana</b><i>My</i> Base » \Tools_Less</title>
+<title><b>Kohana</b><i>My</i> Base » \Tools_Coffeescript</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -60,13 +60,13 @@
 <i class="icon-custom icon-method"></i> Methods</li>
 <li class="method public inherited"><a href="#app_exists" title="app_exists :: check if external app installed"><span class="description">check if external app installed</span><pre>app_exists()</pre></a></li>
 <li class="method public inherited"><a href="#can_call" title="can_call :: checks if function exists"><span class="description">checks if function exists</span><pre>can_call()</pre></a></li>
-<li class="method public "><a href="#check" title="check :: checks if less compiler is installed"><span class="description">checks if less compiler is installed</span><pre>check()</pre></a></li>
+<li class="method public "><a href="#check" title="check :: checks if coffeescript compiler is installed"><span class="description">checks if coffeescript compiler is installed</span><pre>check()</pre></a></li>
 <li class="method public inherited"><a href="#config" title="config :: get config item"><span class="description">get config item</span><pre>config()</pre></a></li>
 <li class="method public inherited"><a href="#error" title="error :: returns error wich retrun external app"><span class="description">returns error wich retrun external app</span><pre>error()</pre></a></li>
 <li class="method public inherited"><a href="#exec" title="exec :: run external app"><span class="description">run external app</span><pre>exec()</pre></a></li>
 <li class="method public inherited"><a href="#instance" title="instance :: get object of some class."><span class="description">get object of some class.</span><pre>instance()</pre></a></li>
 <li class="nav-header protected">» Protected</li>
-<li class="method protected "><a href="#build_if_needed" title="build_if_needed :: compiles less file if needed"><span class="description">compiles less file if needed</span><pre>build_if_needed()</pre></a></li>
+<li class="method protected "><a href="#build_if_needed" title="build_if_needed :: compiles coffee script if needed"><span class="description">compiles coffee script if needed</span><pre>build_if_needed()</pre></a></li>
 <li class="method protected inherited"><a href="#need_compile" title="need_compile :: checks if coffee script exists"><span class="description">checks if coffee script exists</span><pre>need_compile()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
@@ -79,17 +79,17 @@
 </ul>
 </div>
 <div class="span8">
-<a name="%5CTools_Less" id="\Tools_Less"></a><ul class="breadcrumb">
+<a name="%5CTools_Coffeescript" id="\Tools_Coffeescript"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/global.html">global</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/Tools_Less.html">Tools_Less</a>
+<span class="divider">\</span><a href="../classes/Tools_Coffeescript.html">Tools_Coffeescript</a>
 </li>
 </ul>
-<div href="../classes/Tools_Less.html" class="element class">
-<p class="short_description">Class to compile less file into css file</p>
+<div href="../classes/Tools_Coffeescript.html" class="element class">
+<p class="short_description">Compile cafeescript into js file</p>
 <div class="details">
 <p class="long_description"></p>
 <table class="table table-bordered">
@@ -166,7 +166,7 @@
 </div></div>
 </div>
 <a name="check" id="check"></a><div class="element clickable method public check" data-toggle="collapse" data-target=".check .collapse">
-<h2>checks if less compiler is installed</h2>
+<h2>checks if coffeescript compiler is installed</h2>
 <pre>check() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -260,22 +260,24 @@
 </div></div>
 </div>
 <a name="build_if_needed" id="build_if_needed"></a><div class="element clickable method protected build_if_needed" data-toggle="collapse" data-target=".build_if_needed .collapse">
-<h2>compiles less file if needed</h2>
-<pre>build_if_needed(\$file_name $file_name) </pre>
+<h2>compiles coffee script if needed</h2>
+<pre>build_if_needed($file_name, null $files) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
 <table class="table table-bordered"><tr>
 <th>access</th>
-<td>private</td>
+<td>protected</td>
 </tr></table>
 <h3>Parameters</h3>
+<div class="subelement argument"><h4>$file_name</h4></div>
 <div class="subelement argument">
-<h4>$file_name</h4>
-<code>\$file_name</code><p>string</p></div>
+<h4>$files</h4>
+<code>null</code>
+</div>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
-<th><code><a href="../classes/Exception_Tools.html">\Exception_Tools</a></code></th>
+<th><code>\Kohana_Exception</code></th>
 <td></td>
 </tr></table>
 </div></div>

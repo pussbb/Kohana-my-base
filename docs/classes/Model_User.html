@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">82</span></a></li>
+                <span class="label label-info">109</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -66,7 +66,7 @@
 <li class="method public inherited"><a href="#find_all" title="find_all :: find a collections of rows in database table"><span class="description">find a collections of rows in database table</span><pre>find_all()</pre></a></li>
 <li class="method public inherited"><a href="#get_table_columns" title="get_table_columns :: gets table columns"><span class="description">gets table columns</span><pre>get_table_columns()</pre></a></li>
 <li class="method public inherited"><a href="#insert" title="insert :: sets parameters for INSERT query"><span class="description">sets parameters for INSERT query</span><pre>insert()</pre></a></li>
-<li class="method public inherited"><a href="#labels" title="labels :: user function to define representative labels for table fields"><span class="description">user function to define representative labels for table fields</span><pre>labels()</pre></a></li>
+<li class="method public "><a href="#labels" title="labels :: user function to define representative labels for table fields"><span class="description">user function to define representative labels for table fields</span><pre>labels()</pre></a></li>
 <li class="method public inherited"><a href="#last_inserted_id" title="last_inserted_id :: returns last inserted id"><span class="description">returns last inserted id</span><pre>last_inserted_id()</pre></a></li>
 <li class="method public inherited"><a href="#last_query" title="last_query :: returns last executed query"><span class="description">returns last executed query</span><pre>last_query()</pre></a></li>
 <li class="method public "><a href="#login" title="login :: "><span class="description">login()
@@ -106,8 +106,7 @@
 <li class="method private inherited"><a href="#get_private_properties" title="get_private_properties :: gets properties and their values from some object"><span class="description">gets properties and their values from some object</span><pre>get_private_properties()</pre></a></li>
 <li class="method private inherited"><a href="#get_relation" title="get_relation :: returns relation data or null"><span class="description">returns relation data or null</span><pre>get_relation()</pre></a></li>
 <li class="method private inherited"><a href="#parse_responce" title="parse_responce :: append data to object according type of query"><span class="description">append data to object according type of query</span><pre>parse_responce()</pre></a></li>
-<li class="method private inherited"><a href="#prepare_for_query" title="prepare_for_query :: "><span class="description">prepare_for_query()
-        </span><pre>prepare_for_query()</pre></a></li>
+<li class="method private inherited"><a href="#prepare_for_query" title="prepare_for_query :: make some additional operations before execute query"><span class="description">make some additional operations before execute query</span><pre>prepare_for_query()</pre></a></li>
 <li class="method private inherited"><a href="#query_type" title="query_type :: returns type of query 'select', 'update' ."><span class="description">returns type of query 'select', 'update' .</span><pre>query_type()</pre></a></li>
 <li class="method private inherited"><a href="#sanitize" title="sanitize :: checks values of fields and convert to type of field"><span class="description">checks values of fields and convert to type of field</span><pre>sanitize()</pre></a></li>
 <li class="method private inherited"><a href="#system_filters" title="system_filters :: execute commands wich get as array
@@ -484,19 +483,9 @@ if they exists</p></p>
 <a name="labels" id="labels"></a><div class="element clickable method public labels" data-toggle="collapse" data-target=".labels .collapse">
 <h2>user function to define representative labels for table fields</h2>
 <pre>labels() : array</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Base_Model::labels()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Model::labels()</td>
-</tr>
-</table>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
@@ -1304,8 +1293,7 @@ Model_User::destroy(array('login' => 'bla', ....));
 </div></div>
 </div>
 <a name="prepare_for_query" id="prepare_for_query"></a><div class="element clickable method private prepare_for_query" data-toggle="collapse" data-target=".prepare_for_query .collapse">
-<h2>prepare_for_query()
-        </h2>
+<h2>make some additional operations before execute query</h2>
 <pre>prepare_for_query() : void</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1851,7 +1839,7 @@ to that variable</p></p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-09-23T20:41:02+03:00.<br></footer></div>
+            generated on 2012-11-15T09:46:03+02:00.<br></footer></div>
 </div>
 </body>
 </html>

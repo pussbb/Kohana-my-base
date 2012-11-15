@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title><b>Kohana</b><i>My</i> Base » \Language</title>
+<title><b>Kohana</b><i>My</i> Base » \Gettext</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -58,33 +58,39 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public inherited"><a href="#all_codes" title="all_codes :: get all available languages code"><span class="description">get all available languages code</span><pre>all_codes()</pre></a></li>
-<li class="method public inherited"><a href="#get" title="get :: get current lang"><span class="description">get current lang</span><pre>get()</pre></a></li>
-<li class="method public inherited"><a href="#get_default" title="get_default :: get default lang"><span class="description">get default lang</span><pre>get_default()</pre></a></li>
-<li class="method public inherited"><a href="#set" title="set :: set current lang"><span class="description">set current lang</span><pre>set()</pre></a></li>
-<li class="method public inherited"><a href="#uri_check_codes" title="uri_check_codes :: php reg expr to match lang codes"><span class="description">php reg expr to match lang codes</span><pre>uri_check_codes()</pre></a></li>
-<li class="nav-header private">» Private</li>
-<li class="method private inherited"><a href="#get_lang" title="get_lang :: get lang"><span class="description">get lang</span><pre>get_lang()</pre></a></li>
+<li class="method public inherited"><a href="#absolute_file_path" title="absolute_file_path :: get translation file"><span class="description">get translation file</span><pre>absolute_file_path()</pre></a></li>
+<li class="method public inherited"><a href="#base_dir" title="base_dir :: main directory for the translations"><span class="description">main directory for the translations</span><pre>base_dir()</pre></a></li>
+<li class="method public inherited"><a href="#gettext_enabled" title="gettext_enabled :: checks if gettext support enabled"><span class="description">checks if gettext support enabled</span><pre>gettext_enabled()</pre></a></li>
+<li class="method public inherited"><a href="#lang" title="lang :: set language"><span class="description">set language</span><pre>lang()</pre></a></li>
+<li class="method public inherited"><a href="#tr_path" title="tr_path :: directory with files with translation for given lang"><span class="description">directory with files with translation for given lang</span><pre>tr_path()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="property public inherited"><a href="#%24domain" title="$domain :: "><span class="description">&lt;p&gt;target language: en-us, es-es, zh-cn, etc&lt;/p&gt;
+</span><pre>$domain</pre></a></li>
+<li class="property public inherited"><a href="#%24encoding" title="$encoding :: "><span class="description">&lt;p&gt;target language: en-us, es-es, zh-cn, etc&lt;/p&gt;
+</span><pre>$encoding</pre></a></li>
+<li class="property public inherited"><a href="#%24lang" title="$lang :: "><span class="description">&lt;p&gt;target language: en-us, es-es, zh-cn, etc&lt;/p&gt;
+</span><pre>$lang</pre></a></li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CLanguage" id="\Language"></a><ul class="breadcrumb">
+<a name="%5CGettext" id="\Gettext"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/global.html">global</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/Language.html">Language</a>
+<span class="divider">\</span><a href="../classes/Gettext.html">Gettext</a>
 </li>
 </ul>
-<div href="../classes/Language.html" class="element class">
-<p class="short_description">Class to manipulate with user Lang</p>
+<div href="../classes/Gettext.html" class="element class">
+<p class="short_description">Gettext support</p>
 <div class="details">
 <p class="long_description"></p>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td>\global\Base_Language</td>
+<td>\global\Base_GetText</td>
 </tr>
 <tr>
 <th>package</th>
@@ -117,9 +123,9 @@
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="all_codes" id="all_codes"></a><div class="element clickable method public all_codes" data-toggle="collapse" data-target=".all_codes .collapse">
-<h2>get all available languages code</h2>
-<pre>all_codes() : array</pre>
+<a name="absolute_file_path" id="absolute_file_path"></a><div class="element clickable method public absolute_file_path" data-toggle="collapse" data-target=".absolute_file_path .collapse">
+<h2>get translation file</h2>
+<pre>absolute_file_path(\$lang $lang, \$ext $ext) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
@@ -129,43 +135,26 @@
 <td></td>
 </tr>
 <tr>
-<th>inherited_from</th>
-<td>\Base_Language::all_codes()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
-</div></div>
-</div>
-<a name="get" id="get"></a><div class="element clickable method public get" data-toggle="collapse" data-target=".get .collapse">
-<h2>get current lang</h2>
-<pre>get(mixed $lang) : \language</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>static</th>
-<td></td>
+<th>retun</th>
+<td>string absolute file path</td>
 </tr>
 <tr>
 <th>inherited_from</th>
-<td>\Base_Language::get()</td>
+<td>\Base_Gettext::absolute_file_path()</td>
 </tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$lang</h4>
-<code>mixed</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>\language</code>(model object)</div>
+<code>\$lang</code><p>string</p></div>
+<div class="subelement argument">
+<h4>$ext</h4>
+<code>\$ext</code><p>string</p></div>
 </div></div>
 </div>
-<a name="get_default" id="get_default"></a><div class="element clickable method public get_default" data-toggle="collapse" data-target=".get_default .collapse">
-<h2>get default lang</h2>
-<pre>get_default() : \default</pre>
+<a name="base_dir" id="base_dir"></a><div class="element clickable method public base_dir" data-toggle="collapse" data-target=".base_dir .collapse">
+<h2>main directory for the translations</h2>
+<pre>base_dir() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
@@ -175,18 +164,19 @@
 <td></td>
 </tr>
 <tr>
+<th>retun</th>
+<td>string absolute path</td>
+</tr>
+<tr>
 <th>inherited_from</th>
-<td>\Base_Language::get_default()</td>
+<td>\Base_Gettext::base_dir()</td>
 </tr>
 </table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>\default</code>language (model object)</div>
 </div></div>
 </div>
-<a name="set" id="set"></a><div class="element clickable method public set" data-toggle="collapse" data-target=".set .collapse">
-<h2>set current lang</h2>
-<pre>set(\$language $language) </pre>
+<a name="gettext_enabled" id="gettext_enabled"></a><div class="element clickable method public gettext_enabled" data-toggle="collapse" data-target=".gettext_enabled .collapse">
+<h2>checks if gettext support enabled</h2>
+<pre>gettext_enabled() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
@@ -196,60 +186,96 @@
 <td></td>
 </tr>
 <tr>
+<th>retun</th>
+<td>bool</td>
+</tr>
+<tr>
 <th>inherited_from</th>
-<td>\Base_Language::set()</td>
+<td>\Base_Gettext::gettext_enabled()</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a name="lang" id="lang"></a><div class="element clickable method public lang" data-toggle="collapse" data-target=".lang .collapse">
+<h2>set language</h2>
+<pre>lang($lang) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Base_Gettext::lang()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$lang</h4></div>
+</div></div>
+</div>
+<a name="tr_path" id="tr_path"></a><div class="element clickable method public tr_path" data-toggle="collapse" data-target=".tr_path .collapse">
+<h2>directory with files with translation for given lang</h2>
+<pre>tr_path(\$lang $lang) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+<tr>
+<th>retun</th>
+<td>string absolute path</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Gettext::tr_path()</td>
 </tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$language</h4>
-<code>\$language</code><p>(model object)</p>
+<h4>$lang</h4>
+<code>\$lang</code><p>string lang code 'en-EN'</p>
 </div>
 </div></div>
 </div>
-<a name="uri_check_codes" id="uri_check_codes"></a><div class="element clickable method public uri_check_codes" data-toggle="collapse" data-target=".uri_check_codes .collapse">
-<h2>php reg expr to match lang codes</h2>
-<pre>uri_check_codes() : array</pre>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24domain" id="$domain"> </a><div class="element clickable property public $domain" data-toggle="collapse" data-target=".$domain .collapse">
+<h2>&lt;p&gt;target language: en-us, es-es, zh-cn, etc&lt;/p&gt;
+</h2>
+<pre>$domain : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>static</th>
-<td></td>
-</tr>
-<tr>
+<table class="table table-bordered"><tr>
 <th>inherited_from</th>
-<td>\Base_Language::uri_check_codes()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
+<td>\Base_Gettext::$$domain</td>
+</tr></table>
 </div></div>
 </div>
-<a name="get_lang" id="get_lang"></a><div class="element clickable method private get_lang" data-toggle="collapse" data-target=".get_lang .collapse">
-<h2>get lang</h2>
-<pre>get_lang(string $code) : \language</pre>
+<a name="%24encoding" id="$encoding"> </a><div class="element clickable property public $encoding" data-toggle="collapse" data-target=".$encoding .collapse">
+<h2>&lt;p&gt;target language: en-us, es-es, zh-cn, etc&lt;/p&gt;
+</h2>
+<pre>$encoding : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>static</th>
-<td></td>
-</tr>
-<tr>
+<table class="table table-bordered"><tr>
 <th>inherited_from</th>
-<td>\Base_Language::get_lang()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$code</h4>
-<code>string</code><p>language code</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>\language</code>(model object)</div>
+<td>\Base_Gettext::$$encoding</td>
+</tr></table>
+</div></div>
+</div>
+<a name="%24lang" id="$lang"> </a><div class="element clickable property public $lang" data-toggle="collapse" data-target=".$lang .collapse">
+<h2>&lt;p&gt;target language: en-us, es-es, zh-cn, etc&lt;/p&gt;
+</h2>
+<pre>$lang : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Base_Gettext::$$lang</td>
+</tr></table>
 </div></div>
 </div>
 </div>
@@ -259,7 +285,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-15T09:46:04+02:00.<br></footer></div>
+            generated on 2012-11-15T09:46:03+02:00.<br></footer></div>
 </div>
 </body>
 </html>
