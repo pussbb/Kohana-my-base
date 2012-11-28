@@ -163,8 +163,7 @@ class Base_Model extends Kohana_Model {
         'with', // query with join of known relation
         'total_count', // for select will added total_count to count all rows if limit set
         'distinct',
-        'group_by',
-        'field_value_in'
+        'group_by'
     );
 
     /**
@@ -556,6 +555,109 @@ class Base_Model extends Kohana_Model {
     }
 
     /**
+     *  Helper function to return Kohana_Database SELECT object
+     *  data parsed throw Kohana My Base Model
+     *
+     * @access public
+     * @static
+     * @param array $filter
+     * @param null $limit
+     * @param null $offset
+     * @param null $cache
+     * @return Database_Query_Builder
+     */
+    public static function select_query($select, $filter = array(), $limit = NULL, $offset = NULL, $cache = NULL)
+    {
+        $klass = get_called_class();
+        return $klass::query(Database::SELECT, $select, $filter, $limit, $offset, $cache );
+    }
+
+    /**
+     *  Helper function to return Kohana_DB DELETE object
+     *  data parsed throw Kohana My Base Model
+     * @access public
+     * @static
+     * @param array $filter
+     * @return Database_Query_Builder
+     */
+    public static function delete_query($filter = array())
+    {
+        $klass = get_called_class();
+        return $klass::query(Database::DELETE, $filter);
+    }
+
+    /**
+     *  Helper function to return Kohana_DB INSERT object
+     *  data parsed throw Kohana My Base Model
+     *
+     * @access public
+     * @static
+     * @param array $filter
+     * @return Database_Query_Builder
+     */
+    public static function insert_query($filter = array())
+    {
+        $klass = get_called_class();
+        return $klass::query(Database::INSERT, $filter);
+    }
+
+    /**
+     *  Helper function to return Kohana_DB UPDATE object
+     *  data parsed throw Kohana My Base Model
+     *
+     * @access public
+     * @static
+     * @param mixed $primary_value
+     * @param array $filter
+     * @return Database_Query_Builder
+     */
+    public static function update_query($primary_value, $filter = array())
+    {
+        $klass = get_called_class();
+        return $klass::query(Database::UPDATE, $primary_value, $filter);
+    }
+
+    /**
+     *  Helper function to return Kohana_DB object
+     *  data parsed throw Kohana My Base Model
+     * @access public
+     * @static
+     * @return Database_Query_Builder
+     */
+    public static function query()
+    {
+        $args = func_get_args();
+        $klass = get_called_class();
+        $obj = new $klass();
+        switch (Arr::get($args, 0)) {
+            case Database::SELECT:
+                return $obj->select(Arr::get($args, 1), Arr::get($args, 3), Arr::get($args, 4), Arr::get($args, 5))
+                    ->filter(Arr::get($args, 2))
+                    ->db_query;
+                break;
+            case Database::DELETE:
+                return $obj->destroy(Arr::get($args, 1))
+                    ->db_query;
+                break;
+            case Database::INSERT:
+                return $obj->insert(Arr::get($args, 1))
+                    ->db_query;
+                break;
+            case Database::UPDATE:
+                $obj->{$obj->primary_key} = Arr::get($args, 1);
+                return $obj->update()
+                    ->update_params(Arr::get($args, 2))
+                    ->db_query;
+                break;
+            default:
+
+                break;
+
+        }
+        return NULL;
+    }
+
+    /**
      * returns array with table columns SQL query
      * @static
      * @param null $table
@@ -599,11 +701,6 @@ class Base_Model extends Kohana_Model {
      * @param $value
      * @access private
      */
-     /*
-     field_value_in e.g.
-      'field_value_in' => array('site_id', 'limit' => 1,  'status' => Model_Screenshot::STATUS_NEED_SCREENSHORT)
-        //'field_value_in' => array(array('site','id','site_id', 'limit' => 1),  'status' => Model_Screenshot::STATUS_NEED_SCREENSHORT)
-     */
     private function system_filters($key, $value)
     {
         switch ($key) {
@@ -621,34 +718,6 @@ class Base_Model extends Kohana_Model {
                 break;
             case 'group_by':
                 $this->db_query->group_by($value);
-                break;
-            case 'field_value_in':
-                $field = Arr::get($value, 0);
-                if ( ! $field)
-                    break;
-                $field = Arr::get($value, 0);
-                $field_ = $field;
-                $limit = NULL;
-                if (Arr::is_array($field)) {
-                    $klass = Helper_Model::class_name(Arr::get($field, 0));
-                    $field_ = Arr::get($field, 2);
-                    $limit = Arr::get($field, 'limit');
-                    $field = Arr::get($field, 1);
-                    if (! $field_)
-                        $field_ = $field;
-                }
-                else {
-                    $klass = get_called_class();
-                    $limit = Arr::get($value, 'limit');
-                    if ($limit)
-                        unset($value['limit']);
-                }
-                $obj = new $klass();
-
-                $obj->select($field, $limit);
-                array_shift($value);
-                $obj->filter($value);
-                $this->filter(array($field_ => $obj->db_query));
                 break;
             case 'with':
                 if (is_array($value)){
@@ -835,6 +904,8 @@ class Base_Model extends Kohana_Model {
 
                 if ($value instanceof Model)
                 {
+                    if ( ! $value->db_query)
+                        $value->select($value->primary_key);
                     $value = $value->db_query;
                 }
                 if ($value instanceof Database_Query_Builder_Select)
@@ -1372,6 +1443,7 @@ class Base_Model extends Kohana_Model {
         foreach ($array as $key => $value) {
             $this->$key = $value;
         }
+        return $this;
     }
 
     /**
