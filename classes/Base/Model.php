@@ -162,6 +162,9 @@ class Base_Model extends Kohana_Model {
         'offset', //offset ...
         'with', // query with join of known relation
         'total_count', // for select will added total_count to count all rows if limit set
+        'distinct',
+        'group_by',
+        'field_value_in'
     );
 
     /**
@@ -596,6 +599,11 @@ class Base_Model extends Kohana_Model {
      * @param $value
      * @access private
      */
+     /*
+     field_value_in e.g.
+      'field_value_in' => array('site_id', 'limit' => 1,  'status' => Model_Screenshot::STATUS_NEED_SCREENSHORT)
+        //'field_value_in' => array(array('site','id','site_id', 'limit' => 1),  'status' => Model_Screenshot::STATUS_NEED_SCREENSHORT)
+     */
     private function system_filters($key, $value)
     {
         switch ($key) {
@@ -607,6 +615,40 @@ class Base_Model extends Kohana_Model {
                 break;
             case 'total_count':
                 $this->count_total = TRUE;
+                break;
+            case 'distinct':
+                $this->db_query->distinct($value);
+                break;
+            case 'group_by':
+                $this->db_query->group_by($value);
+                break;
+            case 'field_value_in':
+                $field = Arr::get($value, 0);
+                if ( ! $field)
+                    break;
+                $field = Arr::get($value, 0);
+                $field_ = $field;
+                $limit = NULL;
+                if (Arr::is_array($field)) {
+                    $klass = Helper_Model::class_name(Arr::get($field, 0));
+                    $field_ = Arr::get($field, 2);
+                    $limit = Arr::get($field, 'limit');
+                    $field = Arr::get($field, 1);
+                    if (! $field_)
+                        $field_ = $field;
+                }
+                else {
+                    $klass = get_called_class();
+                    $limit = Arr::get($value, 'limit');
+                    if ($limit)
+                        unset($value['limit']);
+                }
+                $obj = new $klass();
+
+                $obj->select($field, $limit);
+                array_shift($value);
+                $obj->filter($value);
+                $this->filter(array($field_ => $obj->db_query));
                 break;
             case 'with':
                 if (is_array($value)){
@@ -650,11 +692,11 @@ class Base_Model extends Kohana_Model {
         $with_name = '';
         if (is_object($name)) {
             $model = $name;
-            $with_name = strtolower($model->module_name());
+            $with_name = strtolower($model::module_name());
         }
         elseif (Kohana::find_file('',strtolower(str_replace('_', DIRECTORY_SEPARATOR, $name)))) {
             $model = new $name();
-            $with_name = strtolower($model->module_name());
+            $with_name = strtolower($model::module_name());
         }
         elseif (Arr::get($this->relations(), $name)) {
             $klass = Arr::path($this->relations(), "$name.1");
@@ -790,9 +832,23 @@ class Base_Model extends Kohana_Model {
                 $comparison_key = 'IN';
             }
             if (is_object($value)) {
-                if (get_class($value) != 'Database_Expression')
-                    throw new Exception("Error Processing Request", 1);
-                $comparison_key = '';
+
+                if ($value instanceof Model)
+                {
+                    $value = $value->db_query;
+                }
+                if ($value instanceof Database_Query_Builder_Select)
+                {
+                    if ((bool)preg_match('/LIMIT/', $value->compile()))
+                        $comparison_key = '=';
+                    else
+                        $comparison_key = 'IN';
+                }
+                else {
+                    if (! $value instanceof Database_Expression )
+                        throw new Exception("Error Processing Request", 1);
+                    $comparison_key = '';
+                }
             }
             $this->db_query->where($this->query_field($key), $comparison_key, $this->sanitize($key, $value));
         }
