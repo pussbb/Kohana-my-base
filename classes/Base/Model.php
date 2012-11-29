@@ -1167,11 +1167,12 @@ class Base_Model extends Kohana_Model  implements Serializable {
                 break;
 
             case 'update':
-              foreach ($this->table_columns() as $field => $value) {
-                    if ($this->primary_key !== $field)
-                        $this->value($field, $this->sanitize($field, $this->{$field}));
-              }
-              break;
+                $columns = array_intersect_key($this->table_columns(), $this->data);
+                foreach ($columns as $field => $value) {
+                        if ($this->primary_key !== $field)
+                            $this->value($field, $this->sanitize($field, $this->{$field}));
+                }
+                break;
             default:
                 break;
         }
