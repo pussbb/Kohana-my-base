@@ -17,7 +17,7 @@
  * @subpackage database
  */
 
-class Base_Model extends Kohana_Model {
+class Base_Model extends Kohana_Model  implements Serializable {
 
     /**
      * array of model objects
@@ -304,6 +304,29 @@ class Base_Model extends Kohana_Model {
     public function __unset($name)
     {
         unset($this->data[$name]);
+    }
+
+    /**
+     * Serialize data only for that table everything else ignored
+     *
+     * @access public
+     * @return string
+     */
+    public function serialize()
+    {
+        return (string)serialize(Arr::extract($this->data, array_keys(self::table_columns())));
+    }
+
+    /**
+     * Unserialize data
+     *
+     * @param string $data
+     * @access public
+     * @return string
+     */
+    public function unserialize($data)
+    {
+        $this->data = unserialize($data);
     }
 
     /**
