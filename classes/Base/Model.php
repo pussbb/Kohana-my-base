@@ -461,7 +461,7 @@ class Base_Model extends Kohana_Model {
      *
      * <code>
      *  $model = Model_User::find($id);
-     *  var_dump((array)$model);
+     *  var_dump($model->__toArray());
      *  //print
      * array(
      *   'login' => 'bla',
@@ -474,7 +474,46 @@ class Base_Model extends Kohana_Model {
      */
     public function __toArray()
     {
-        return $this->data;
+        return $this->obj_to_array($this);
+    }
+
+    /**
+     * recursively parse data variable and convert all objects to assoc array
+     *
+     * @access private
+     * @return array
+     */
+    private function obj_to_array(Model $obj)
+    {
+        $result = array();
+        foreach($obj->data as $key => $value) {
+            if (is_object($value) && $obj instanceof Model) {
+                $value = $this->obj_to_array($value);
+            }
+            $result[$key] = $value;
+        }
+        return $result;
+    }
+
+    /**
+     * returns assoc array of dynamically append variable
+     *
+     * <code>
+     *  $model = Model_User::find($id);
+     *  var_dump($model->as_array());
+     *  //print
+     * array(
+     *   'login' => 'bla',
+     *   'email' => 'email@site.com',
+     *   ....
+     * )
+     * </code>
+     * @return array|null
+     * @internal
+     */
+    public function as_array()
+    {
+        return $this->__toArray();
     }
 
     /**
