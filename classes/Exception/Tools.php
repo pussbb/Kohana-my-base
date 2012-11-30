@@ -7,8 +7,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
- * @category extra
- * @subpackage extra
+ * @category exceptions
+ * @subpackage tools
  */
 class Exception_Tools extends Exception {
 

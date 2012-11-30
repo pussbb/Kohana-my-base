@@ -31,6 +31,9 @@ class Media {
 
         if (method_exists($media, $name))
             return call_user_func_array(array($media, $name), $arguments);
+        else
+            throw new Exception_MethodNotExists();
+
     }
 
 }

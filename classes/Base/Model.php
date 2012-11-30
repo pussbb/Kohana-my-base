@@ -272,7 +272,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
 
         $relation = $this->get_relation($name);
         if ( ! $relation)
-            throw new Kohana_Exception('property not exists ' . $name);
+            throw new Exception_Collection_PropertyNotExists();
         return $this->_relation($name, $relation);
     }
 
@@ -344,10 +344,9 @@ class Base_Model extends Kohana_Model  implements Serializable {
         if (method_exists($this->db_query, $name))
                 return call_user_func_array(array($this->db_query, $name), $arguments);
 
-
         $relation = $this->get_relation($name);
         if ( ! $relation)
-            throw new Exception("Unknown method $name");
+            throw new Exception_MethodNotExists();
 
         return $this->_relation($name, $relation, Arr::get($arguments, 0, array()));
     }
@@ -472,7 +471,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
                                         ->get('total_count');
                 break;
             default:
-                throw new Exception("Unknown relation type");
+                throw new Base_Db_Exception_UnknownRelationType();
                 break;
         }
         $this->data[$name] = $result;
@@ -570,7 +569,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
         }
         $result = $klass::find_all($filter, 1, NULL, $cache);
         if ( ! Arr::get($result->records, 0))
-            throw new Exception('record_not_found', 10);
+            throw new Base_Db_Exception_RecordNotFound();
 
         return $result->records[0];
     }
@@ -693,30 +692,26 @@ class Base_Model extends Kohana_Model  implements Serializable {
         $obj = new $klass();
         switch (Arr::get($args, 0)) {
             case Database::SELECT:
-                return $obj->select(Arr::get($args, 1), Arr::get($args, 3), Arr::get($args, 4), Arr::get($args, 5))
-                    ->filter(Arr::get($args, 2))
-                    ->db_query;
+                $obj->select(Arr::get($args, 1), Arr::get($args, 3), Arr::get($args, 4), Arr::get($args, 5))
+                    ->filter(Arr::get($args, 2));
                 break;
             case Database::DELETE:
-                return $obj->destroy(Arr::get($args, 1))
-                    ->db_query;
+                $obj->destroy(Arr::get($args, 1));
                 break;
             case Database::INSERT:
-                return $obj->insert(Arr::get($args, 1))
-                    ->db_query;
+                $obj->insert(Arr::get($args, 1));
                 break;
             case Database::UPDATE:
                 $obj->{$obj->primary_key} = Arr::get($args, 1);
-                return $obj->update()
-                    ->update_params(Arr::get($args, 2))
-                    ->db_query;
+                $obj->update()
+                    ->update_params(Arr::get($args, 2));
                 break;
             default:
-
+                throw new Base_Db_Exception_UnknownDatabaseQueryType();
                 break;
 
         }
-        return NULL;
+        return $obj->prepare_for_query()->db_query;
     }
 
     /**
@@ -839,7 +834,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
                 $field = Arr::path($this->relations(), "$name.3", $this->primary_key);
         }
         else{
-            throw new Exception("Unknown model");
+            throw new Exception_Collection_ModelNotFound();
         }
 
         if ( ! $foreign_key)
@@ -848,9 +843,11 @@ class Base_Model extends Kohana_Model  implements Serializable {
             $field = $this->primary_key;
 
         $model_fields = $model->query_columns_for_join();
+
         $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
-        $this->db_query->join(array($model->db_table, $model->module_name))
-                        ->on($model->query_field($foreign_key), $comparison_key, $this->query_field($field));
+        $this->db_query
+                ->join(array($model->db_table, $model->module_name))
+                   ->on($model->query_field($foreign_key), $comparison_key, $this->query_field($field));
         $this->with[$with_name] = array(
                 get_class($model),
                 Arr::path($model_fields, '*.1'),
@@ -868,13 +865,13 @@ class Base_Model extends Kohana_Model  implements Serializable {
     private function query_field($name, $delimiter = '.')
     {
         if ( ! $name)
-            throw new Exception("Database table column must not be empty");
+            throw new Base_Db_Exception_EmptyColumnName();
 
         if ( ! is_object($name))
             return $this->module_name.$delimiter.$name;
 
         if (get_class($name) != 'Database_Expression')
-           throw new Exception("Error Processing Request", 1);
+           throw new Exception_Collection_ObjectNotSupported();
         return $name;
     }
 
@@ -920,7 +917,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
     public function filter($filter)
     {
         if ( ! Arr::is_array($filter))
-            throw new Kohana_Exception('must be an array');
+            throw new Exception_Collection_InvalidArray();
 
         if ( ! $this->db_query)
             $this->select();
@@ -979,7 +976,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
                 }
                 else {
                     if (! $value instanceof Database_Expression )
-                        throw new Exception("Error Processing Request", 1);
+                        throw new Exception_Collection_ObjectNotSupported();
                     $comparison_key = '';
                 }
             }
@@ -1061,7 +1058,8 @@ class Base_Model extends Kohana_Model  implements Serializable {
      */
     public function update()
     {
-        $this->db_query = DB::update(array($this->db_table, $this->module_name))->where($this->query_field($this->primary_key), '=', $this->{$this->primary_key});
+        $this->db_query = DB::update(array($this->db_table, $this->module_name))
+                            ->where($this->query_field($this->primary_key), '=', $this->sanitize($this->primary_key, $this->{$this->primary_key}));
         return $this;
     }
 
@@ -1153,6 +1151,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
     private function prepare_for_query()
     {
         switch ($this->query_type()) {
+
             case 'insert':
                 $properties = $this->get_private_properties($this->db_query);
                 $columns = Arr::get($properties, '_columns', array_keys($this->table_columns()));
@@ -1166,14 +1165,18 @@ class Base_Model extends Kohana_Model  implements Serializable {
                 }
                 break;
 
+            case 'select':
+            case 'delete':
             case 'update':
                 $columns = array_intersect_key($this->table_columns(), $this->data);
+                $values = array();
                 foreach ($columns as $field => $value) {
-                        if ($this->primary_key !== $field)
-                            $this->value($field, $this->sanitize($field, $this->{$field}));
+                    $this->db_query->value($field, $this->sanitize($field, $this->{$field}));
                 }
                 break;
             default:
+                throw new Base_Db_Exception_UnknownDatabaseQueryType();
+
                 break;
         }
     }
@@ -1186,17 +1189,18 @@ class Base_Model extends Kohana_Model  implements Serializable {
      * @param $value
      * @return mixed
      */
-    private function sanitize($key, $value)
+    protected function sanitize($key, $value)
     {
         if (is_object($value))
             return $value;
-        $table_columns = $this->get_table_columns();
+        $table_columns = self::get_table_columns();
         $type = Arr::path($table_columns, $key . '.type');
+
         if (in_array(Arr::path($table_columns, $key . '.data_type'), array('date', 'datetime', 'time')))
             $type = Arr::path($table_columns, $key . '.data_type');
-        if ($type)
-            return Base_Db_Sanitize::value($type, $value);
-        return $value;
+
+        return Base_Db_Sanitize::value($type, $value);
+
     }
 
     /**
@@ -1602,7 +1606,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
     public function meta_data()
     {
         if ( ! isset($this->meta_data))
-            throw new Exception("Table does not have field meta_data", 1);
+            throw new Base_Db_Exception_MetaDataFieldMissing();
 
         if ($this->meta_data_cache)
             return $this->meta_data_cache;

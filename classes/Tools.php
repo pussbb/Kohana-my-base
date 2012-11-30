@@ -71,7 +71,7 @@ class Tools extends Singleton {
         return (bool)preg_match($pattern, implode('', $result));
     }
     /**
-     * run external app 
+     * run external app
      * @param $cmd string
      */
     public function exec($cmd)
@@ -93,7 +93,7 @@ class Tools extends Singleton {
         return proc_close($proc) == 0;
     }
 
-    
+
     /**
      * checks if coffee script exists
      *
@@ -131,6 +131,6 @@ class Tools extends Singleton {
      */
     public function error()
     {
-      return $this->stderr?:$this->stdout;
+        return $this->stderr?:$this->stdout;
     }
 }

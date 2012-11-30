@@ -57,11 +57,7 @@ class Collection {
     {
             $result = array();
             foreach ($collection as $item) {
-                try {
-                    $result[] = $item->$key;
-                } catch(Exception $e) {
-                    $result[] = NULL;
-                }
+                $result[] = Object::property($item, $key);
             }
             return $result;
     }
@@ -90,4 +86,23 @@ class Collection {
         }
         return $result;
     }
+
+    /**
+      * Helper function to check if property exists
+      * @param mixed $obj
+      * @param string|int $property
+      * @static
+      * @return boolen
+      */
+    public static function property_exists($obj, $property)
+    {
+        if (is_object($obj)) {
+            return property_exists($obj, $property);
+        }
+        else if (Arr::is_array($obj)) {
+            return isset($obj[$property]);
+        }
+        return FALSE;
+    }
+
 }

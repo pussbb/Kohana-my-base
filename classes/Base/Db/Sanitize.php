@@ -21,7 +21,7 @@ class Base_Db_Sanitize {
      */
     public static function int($value)
     {
-        return intval($value);
+        return (int)intval($value);
     }
 
     /**
@@ -77,9 +77,9 @@ class Base_Db_Sanitize {
      */
     public static function value($type, $value)
     {
-        if ( ! method_exists('Base_Db_Value', $type))
+        if ( ! method_exists('Base_Db_Sanitize', $type))
             return $value;
-        return Base_Db_Sanitize::$type($key, $value);
+        return Base_Db_Sanitize::$type($value);
     }
 
 }
