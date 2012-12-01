@@ -1179,7 +1179,7 @@ class Base_Model extends Base_Db_Model {
     public function validate(array $rules = NULL, array $data = NULL)
     {
         $data = $data ? $data : $this->data;
-        $rules = $rules ? $rules : $this->rules();
+        $rules = $rules ? $rules : array_intersect_key($this->rules(), $data );
         $validator = Validation::factory($data);
         foreach ($rules as $key => $rules) {
             foreach ($rules as $rule) {

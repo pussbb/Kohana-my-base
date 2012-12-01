@@ -161,15 +161,4 @@ class Base_Date extends Kohana_Date {
         return $months;
     }
 
-    /**
-     * Checks whether a string is a date
-     *
-     * @static
-     * @param  string date
-     * @return bool
-     */
-    public static function is_date($str)
-    {
-        return (boolean) strtotime($str);
-    }
 }

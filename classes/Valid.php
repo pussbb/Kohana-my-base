@@ -2,7 +2,7 @@
 
 /**
  * additional checks from http://www.maheshchari.com/60-validation-functions-with-php-2-part/
- * 
+ *
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
@@ -190,7 +190,7 @@ class Valid extends Kohana_Valid {
      * @param   string
      * @return  boolean
      */
-    public static function is_utf8($val)
+    public static function utf8($val)
     {
         return preg_match('%(?:[xC2-xDF][x80-xBF]|xE0[xA0-xBF][x80-xBF]|[xE1-xECxEExEF][x80-xBF]{2}|xED[x80-x9F][x80-xBF]|xF0[x90-xBF][x80-xBF]{2}|[xF1-xF3][x80-xBF]{3}|xF4[x80-x8F][x80-xBF]{2})+%xs', $val);
     }
@@ -204,5 +204,18 @@ class Valid extends Kohana_Valid {
       return (bool)preg_match('/^[\/|\%].+[\/|\%][isxeADSUXJu]{0,}$/', $val);
     }
 
+
+
+    /**
+     * Checks whether a string is a date
+     *
+     * @static
+     * @param  string date
+     * @return bool
+     */
+    public static function date($str)
+    {
+        return (boolean) strtotime($str);
+    }
 }
 

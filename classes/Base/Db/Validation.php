@@ -30,7 +30,7 @@ class Base_Db_Validation {
     public static function int($key, $value, $rules)
     {
         $is_nullable = (bool) Arr::get($rules, 'is_nullable');
-        if ($is_nullable)
+        if ($is_nullable && is_null($value) )
             return NULL;
 
         $extra = Arr::get($rules, 'extra');
@@ -40,10 +40,10 @@ class Base_Db_Validation {
                 return NULL;
         }
 
-        if (!$is_nullable && !Valid::not_empty($value))
+        if (! $is_nullable && ! Valid::not_empty($value))
             return tr('Must not be empty');
 
-        if (!Valid::numeric($value))
+        if (! Valid::numeric($value))
             return tr('Must be valid integer');
 
         $min = Arr::get($rules, 'min');
@@ -71,10 +71,10 @@ class Base_Db_Validation {
     public static function string($key, $value, $rules)
     {
         $is_nullable = (bool) Arr::get($rules, 'is_nullable');
-        if ($is_nullable)
+        if ($is_nullable && is_null($value) )
             return NULL;
 
-        if (!Valid::not_empty($value))
+        if (! Valid::not_empty($value))
             return tr('Must not be empty');
 
         $max = Arr::get($rules, 'max');
@@ -97,8 +97,9 @@ class Base_Db_Validation {
         foreach ($model->get_table_columns() as $key => $rules) {
             $type = Arr::get($rules, 'type');
             if (method_exists('Base_Db_Validation', $type)) {
-                $value = isset($model->$key) ? $model->$key : NULL;
-                $_result = Base_Db_Validation::$type($key, $value, $rules);
+                if ( ! Collection::property_exists($model, $key))
+                    continue;
+                $_result = Base_Db_Validation::$type($key, $model->$key, $rules);
                 if ($_result) {
                     $model->add_error($key, $_result);
                     $result = FALSE;

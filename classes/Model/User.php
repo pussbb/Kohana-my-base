@@ -50,13 +50,13 @@ class Model_User extends Model
                 'not_empty',
             ),
             'email' => array(
-                array('email', array($this->email, TRUE)),
+                array('email', array(Object::property($this, 'email'), TRUE)),
                 'email_domain',
                 'unique',
             ),
             'password' => array(
                 'not_empty',
-                array('min_length', array($this->password, 6)),
+                array('min_length', array(Object::property($this, 'password'), 6)),
             )
         );
     }
