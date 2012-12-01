@@ -27,7 +27,7 @@ class Base_Db_Sanitize {
         if (Arr::is_array($value)) {
             if (Arr::is_assoc($value))
                 $value = array_values($value);
-            return array_walk($value, 'intval');
+            return array_filter(array_map('intval', $value));
         }
         return (int)intval($value);
     }
