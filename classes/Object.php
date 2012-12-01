@@ -18,4 +18,21 @@ class Object {
         return property_exists($obj, $name)? $obj->{$name}: $default;
     }
 
+     /**
+     * gets properties and their values from some object
+     * @param $obj
+     * @return array
+     * @access private
+     */
+    public static function get_private_properties($obj)
+    {
+        $properties = array();
+        $reflecionObject = new ReflectionObject($obj);
+        $object_properties = $reflecionObject->getProperties(ReflectionProperty::IS_PRIVATE | ReflectionProperty::IS_PROTECTED);
+        foreach ($object_properties as $property) {
+            $property->setAccessible(true);
+            $properties[$property->getName()] = $property->getValue($obj);
+        }
+        return $properties;
+    }
 }

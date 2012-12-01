@@ -17,7 +17,7 @@
  * @subpackage database
  */
 
-class Base_Model extends Kohana_Model  implements Serializable {
+class Base_Model extends Base_Db_Model {
 
     /**
      * array of model objects
@@ -85,6 +85,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
      */
     private $db_table = NULL;
 
+
      /**
      * contains module name
      *
@@ -141,14 +142,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
      */
     private $last_query = NULL;
 
-    /**
-     * contain dynamically append variables
-     *
-     * or fields and value for the row
-     * @var array|null
-     * @access private
-     */
-    private $data = array();
+
 
     /**
      * defines system variables(commands)
@@ -307,29 +301,6 @@ class Base_Model extends Kohana_Model  implements Serializable {
     }
 
     /**
-     * Serialize data only for that table everything else ignored
-     *
-     * @access public
-     * @return string
-     */
-    public function serialize()
-    {
-        return (string)serialize(Arr::extract($this->data, array_keys(self::table_columns())));
-    }
-
-    /**
-     * Unserialize data
-     *
-     * @param string $data
-     * @access public
-     * @return string
-     */
-    public function unserialize($data)
-    {
-        $this->data = unserialize($data);
-    }
-
-    /**
      * calls functions for Base_Model or DB clases in Kohana
      * @param $name
      * @param $arguments
@@ -368,15 +339,14 @@ class Base_Model extends Kohana_Model  implements Serializable {
      */
     public static function __callStatic($name, $arguments)
     {
-        $klass_name = get_called_class();
+        $klass = get_called_class();
         switch ($name) {
             case 'destroy':
-                $klass = new $klass_name;
+                $obj = new $klass;
                 return $klass->destroy($arguments[0]);
                 break;
             case 'exists':
-                $klass = new $klass_name;
-                return $klass->exists(Arr::get($arguments, 0), Arr::get($arguments, 1), Arr::get($arguments, 2));
+                return  call_user_func_array(array(new $klass, $name), $arguments);
                 break;
             default:
                 break;
@@ -798,7 +768,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
      */
     public function query_columns_for_join()
     {
-        foreach (array_keys($this->table_columns()) as $column)
+        foreach (array_keys($this->get_table_columns()) as $column)
         {
             $result[] = array($this->query_field($column), $this->query_field($column, ':'));
         }
@@ -851,7 +821,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
         $this->with[$with_name] = array(
                 get_class($model),
                 Arr::path($model_fields, '*.1'),
-                array_keys($model->table_columns())
+                $this->table_fields()
             );
     }
 
@@ -922,7 +892,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
         if ( ! $this->db_query)
             $this->select();
 
-        $table_columns = $this->table_columns();
+        $table_columns = $this->get_table_columns();
         if ( ! Arr::is_assoc($filter)) {
             $fields = array();
             foreach ($filter as $field) {
@@ -955,8 +925,6 @@ class Base_Model extends Kohana_Model  implements Serializable {
                 continue;
             }
             if (Arr::is_array($value)) {
-                if ( ! $value)
-                    continue;
                 $comparison_key = 'IN';
             }
             if (is_object($value)) {
@@ -979,6 +947,9 @@ class Base_Model extends Kohana_Model  implements Serializable {
                         throw new Exception_Collection_ObjectNotSupported();
                     $comparison_key = '';
                 }
+            }
+            if ( is_null($value)) {
+                $comparison_key = 'IS';
             }
             $this->db_query->where($this->query_field($key), $comparison_key, $this->sanitize($key, $value));
         }
@@ -1045,9 +1016,9 @@ class Base_Model extends Kohana_Model  implements Serializable {
      * @param array|null $fields
      * @return Base_Model
      */
-    public function insert($fields = NULL)
+    public function insert($fields = array())
     {
-        $this->db_query = DB::insert($this->db_table, $fields);
+        $this->db_query = DB::insert($this->db_table, $fields?:$this->table_fields(TRUE));
         return $this;
     }
 
@@ -1119,29 +1090,11 @@ class Base_Model extends Kohana_Model  implements Serializable {
     protected function exists($filter, $limit = 1, $cache = NULL)
     {
         $this->select('*', $limit, NULL, $cache);
-        if (!$filter)
-            $filter = array($this->primary_key);
-
+        if ( ! $filter) $filter = array($this->primary_key);
         return $this->filter($filter)->exec();
     }
 
-    /**
-     * gets properties and their values from some object
-     * @param $obj
-     * @return array
-     * @access private
-     */
-    private function get_private_properties($obj)
-    {
-        $properties = array();
-        $reflecionObject = new ReflectionObject($obj);
-        $object_properties = $reflecionObject->getProperties(ReflectionProperty::IS_PRIVATE | ReflectionProperty::IS_PROTECTED);
-        foreach ($object_properties as $property) {
-            $property->setAccessible(true);
-            $properties[$property->getName()] = $property->getValue($obj);
-        }
-        return $properties;
-    }
+
 
     /**
      * make some additional operations before execute query
@@ -1151,11 +1104,11 @@ class Base_Model extends Kohana_Model  implements Serializable {
     private function prepare_for_query()
     {
         switch ($this->query_type()) {
-
             case 'insert':
-                $properties = $this->get_private_properties($this->db_query);
-                $columns = Arr::get($properties, '_columns', array_keys($this->table_columns()));
+                $properties = Object::get_private_properties($this->db_query);
+                $columns = Arr::get($properties, '_columns', $this->table_fields());
                 $values = Arr::get($properties, '_values');
+
                 if ($columns && ! $values) {
                     $data = array();
                     foreach ($columns as $field) {
@@ -1168,7 +1121,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
             case 'select':
             case 'delete':
             case 'update':
-                $columns = array_intersect_key($this->table_columns(), $this->data);
+                $columns = array_intersect_key($this->get_table_columns(), $this->data);
                 $values = array();
                 foreach ($columns as $field => $value) {
                     $this->db_query->value($field, $this->sanitize($field, $this->{$field}));
@@ -1193,7 +1146,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
     {
         if (is_object($value))
             return $value;
-        $table_columns = self::get_table_columns();
+        $table_columns = $this->get_table_columns();
         $type = Arr::path($table_columns, $key . '.type');
 
         if (in_array(Arr::path($table_columns, $key . '.data_type'), array('date', 'datetime', 'time')))
@@ -1277,16 +1230,12 @@ class Base_Model extends Kohana_Model  implements Serializable {
      * @return array
      * @access private
      */
-    private function table_fields()
+    private function table_fields($skip_primary_key = FALSE)
     {
-        $keys = array();
-        $table_columns = $this->get_table_columns();
-        foreach ($this->data as $key => $value) {
-            if ( ! array_key_exists($key, $table_columns))
-                continue;
-            $keys[] = $key;
-        }
-        return array_filter($keys);
+        $fileds = array_keys(array_intersect_key($this->table_columns(), $this->data));
+        if ( ! $skip_primary_key)
+            unset($fileds[$this->primary_key]);
+        return $fileds ;
     }
 
     /**
@@ -1299,9 +1248,9 @@ class Base_Model extends Kohana_Model  implements Serializable {
     {
         if ( ! $this->query_type()) {
             if ($this->new_record())
-                $this->insert($this->table_fields());
+                $this->insert($this->table_fields(true));
             else
-                $this->update($this->table_fields());
+                $this->update($this->table_fields(true));
         }
 
         if ( ! Base_Db_Validation::check($this) || ! $this->validate())
@@ -1408,7 +1357,7 @@ class Base_Model extends Kohana_Model  implements Serializable {
             return $this->count == 1?array($result->current()):$result->as_array();
 
         $_result = array();
-        $main_keys = array_keys($this->table_columns());
+        $main_keys = array_keys($this->get_table_columns());
         foreach ($result->as_array() as $row) {
             $_key = $row[$this->primary_key];
             if ( ! isset($_result[$_key]))

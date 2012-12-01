@@ -21,6 +21,14 @@ class Base_Db_Sanitize {
      */
     public static function int($value)
     {
+        if ( is_null($value))
+            return NULL;
+
+        if (Arr::is_array($value)) {
+            if (Arr::is_assoc($value))
+                $value = array_values($value);
+            return array_walk($value, 'intval');
+        }
         return (int)intval($value);
     }
 
@@ -32,6 +40,8 @@ class Base_Db_Sanitize {
      */
     public static function string($value)
     {
+        if ( ! $value)
+            return NULL;
         return (string)Text::xss_clean((string)$value);
     }
 
