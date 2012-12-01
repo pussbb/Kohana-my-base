@@ -768,7 +768,7 @@ class Base_Model extends Base_Db_Model {
      */
     public function query_columns_for_join()
     {
-        foreach (array_keys($this->get_table_columns()) as $column)
+        foreach ($this->table_fields() as $column)
         {
             $result[] = array($this->query_field($column), $this->query_field($column, ':'));
         }
@@ -1105,7 +1105,7 @@ class Base_Model extends Base_Db_Model {
     {
         switch ($this->query_type()) {
             case 'insert':
-                $properties = Object::get_private_properties($this->db_query);
+                $properties = Object::properties($this->db_query);
                 $columns = Arr::get($properties, '_columns', $this->table_fields());
                 $values = Arr::get($properties, '_values');
 
@@ -1253,8 +1253,10 @@ class Base_Model extends Base_Db_Model {
                 $this->update($this->table_fields(true));
         }
 
-        if ( ! Base_Db_Validation::check($this) || ! $this->validate())
-            return FALSE;
+        if ( in_array($this->query_type(), array('insert', 'update'))){
+            if ( ! Base_Db_Validation::check($this) || ! $this->validate())
+                return FALSE;
+        }
 
         $this->before_save();
         $this->prepare_for_query();

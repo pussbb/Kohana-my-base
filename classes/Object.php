@@ -24,15 +24,16 @@ class Object {
      * @return array
      * @access private
      */
-    public static function get_private_properties($obj)
+    public static function properties($obj)
     {
         $properties = array();
         $reflecionObject = new ReflectionObject($obj);
-        $object_properties = $reflecionObject->getProperties(ReflectionProperty::IS_PRIVATE | ReflectionProperty::IS_PROTECTED);
+        $object_properties = $reflecionObject->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED | ReflectionProperty::IS_PRIVATE);
         foreach ($object_properties as $property) {
-            $property->setAccessible(true);
+            $property->setAccessible(TRUE);
             $properties[$property->getName()] = $property->getValue($obj);
         }
         return $properties;
     }
+
 }

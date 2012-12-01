@@ -379,10 +379,13 @@ class Controller_Base_Core extends Controller_Template {
         $this->media_by_default();
         $controller_vars = $this->append_dynamic_properties();
         $this->view->set($controller_vars);
-        if ($this->layout)
-            $content = View::factory('layout/'.$this->layout, array('content' => $this->view->render())+$controller_vars);
-        else
+        if ($this->layout) {
+            $content = View::factory('layout/'.$this->layout,
+                array_merge(array('content' => $this->view->render()), $controller_vars));
+        }
+        else {
             $content = $this->view;
+        }
 
         $this->template->content = $content->render();
         parent::after();
@@ -395,18 +398,27 @@ class Controller_Base_Core extends Controller_Template {
      */
     private function append_dynamic_properties()
     {
+
         $reflection_object = new ReflectionClass($this);
         $properties = $reflection_object->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED | ReflectionProperty::IS_PRIVATE);
-        $system_variables = array('kohana_view_filename', 'kohana_view_data', 'filename');
+        $system_variables = array(
+            'kohana_view_filename',
+            'kohana_view_data',
+            'filename',
+            'layout',
+            'config'
+        );
         foreach ($properties as $property) {
             $system_variables[] = $property->getName();
         }
+
         $result = array();
         foreach (get_object_vars($this) as $key => $value) {
             if (in_array($key, $system_variables))
                 continue;
             $result[$key] = $value;
         }
+
         return $result;
     }
 
