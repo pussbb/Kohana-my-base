@@ -1400,7 +1400,7 @@ class Base_Model extends Base_Db_Model {
             switch ($property->getName()) {
                 case '_select':
                     $property->setValue($query, array(
-                        array(DB::expr('COUNT(*)'), 'total_count'),
+                        array(DB::expr('COUNT('.$this->primary_key.')'), 'total_count'),
                     ));
                     break;
                 case '_limit':
