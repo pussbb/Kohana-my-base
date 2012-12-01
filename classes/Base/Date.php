@@ -141,4 +141,35 @@ class Base_Date extends Kohana_Date {
         return $output;
     }
 
+    /**
+     * Number of months in a year. Value will hold month name
+     *
+     * @static
+     * @uses    Date::hours
+     * @return  array  Array from 1-12 with month names
+     */
+    public static function months_with_name()
+    {
+        $months = Date::hours();
+
+        for ($i = 1; $i <= 12; $i++)
+        {
+            $timestamp = mktime(0, 0, 0, $i, 1, 2005);
+            $months[$i] = date("M", $timestamp);
+        }
+
+        return $months;
+    }
+
+    /**
+     * Checks whether a string is a date
+     *
+     * @static
+     * @param  string date
+     * @return bool
+     */
+    public static function is_date($str)
+    {
+        return (boolean) strtotime($str);
+    }
 }
