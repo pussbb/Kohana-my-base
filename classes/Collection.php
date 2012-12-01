@@ -97,7 +97,12 @@ class Collection {
     public static function property_exists($obj, $property)
     {
         if (is_object($obj)) {
-            return property_exists($obj, $property);
+            try {
+                $obj->{$property};
+               return TRUE;
+           } catch(ErrorException $e) {
+               return FALSE;
+           }
         }
         else if (Arr::is_array($obj)) {
             return isset($obj[$property]);

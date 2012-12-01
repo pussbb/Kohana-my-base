@@ -13,16 +13,28 @@
 
 class Object {
 
-    public static  function property($obj, $name, $default = NULL)
+     /**
+     * gets property value only with public access
+     *
+     * @param $obj
+     * @param string $name
+     * @param mixed $default
+     * @return mixed
+     * @access public
+     * @static
+     */
+    public static function property($obj, $name, $default = NULL)
     {
-        return property_exists($obj, $name)? $obj->{$name}: $default;
+        return Collection::property_exists($obj, $name)? $obj->{$name}: $default;
     }
 
      /**
      * gets properties and their values from some object
+     *
      * @param $obj
      * @return array
-     * @access private
+     * @access public
+     * @static
      */
     public static function properties($obj)
     {
