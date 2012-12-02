@@ -20,7 +20,7 @@ class Base_Db_Sanitize {
      * @return array|int
      */
     public static function int($value)
-    {debug(is_string($value), true);
+    {
         if ( is_null($value) || (is_string($value) && !$value))
             return NULL;
 
