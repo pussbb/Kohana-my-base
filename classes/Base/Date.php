@@ -31,7 +31,9 @@ class Base_Date extends Kohana_Date {
         if (!$format) {
             $format = Kohana::$config->load('site')->get('date_formart', 'F j, Y, g:i a');
         }
-        return date($format, strtotime($date));
+        if ( ! is_numeric($date))
+            $date = strtotime($date);
+        return date($format, $date);
     }
 
     /**

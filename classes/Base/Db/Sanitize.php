@@ -53,7 +53,7 @@ class Base_Db_Sanitize {
      */
     public static function date($value)
     {
-        return Date::format($value, 'YYYY-MM-DD');
+        return Date::format($value, 'Y-m-d');
     }
 
      /**
@@ -64,7 +64,7 @@ class Base_Db_Sanitize {
      */
     public static function datetime($value)
     {
-        return Date::format($value, 'YYYY-MM-DD HH:MM:SS');
+        return Date::format($value,  'Y-m-d h:m:s');
     }
 
     /**

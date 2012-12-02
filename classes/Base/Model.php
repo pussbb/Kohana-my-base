@@ -1058,7 +1058,7 @@ class Base_Model extends Base_Db_Model {
 
         if (is_numeric($filter)) {
             $this->{$this->primary_key} = $filter;
-            $filter = array($this->primary_key => $filter, 'with' => 'access_rules');
+            $filter = array($this->primary_key => $filter);
         }
         return $this->filter($filter)->save();
     }
