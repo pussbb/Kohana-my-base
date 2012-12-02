@@ -219,7 +219,7 @@ class Base_Model extends Base_Db_Model {
     public function __construct($params = NULL)
     {
         if (Arr::is_array($params)) {
-            $this->data = $params;
+            $this->update_params($params);
         }
         if (is_numeric($params)) {
             $this->data[$this->primary_key] = $params;
@@ -1468,7 +1468,10 @@ class Base_Model extends Base_Db_Model {
      */
     public function update_params($array)
     {
+	$fields = $this->table_fields();
         foreach ($array as $key => $value) {
+            if (in_array($key, $fields))
+                $value = $this->sanitize($key, $value);
             $this->$key = $value;
         }
         return $this;
