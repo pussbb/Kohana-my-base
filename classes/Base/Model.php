@@ -814,7 +814,7 @@ class Base_Model extends Base_Db_Model {
             $field = $this->primary_key;
 
         $model_fields = $model->query_columns_for_join();
-        if ($this->db_query instanceof Kohana_Database_Query_Builder_Select)
+        if ($this->query_type() == 'select')
             $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
 
         $this->db_query
@@ -823,7 +823,7 @@ class Base_Model extends Base_Db_Model {
         $this->with[$with_name] = array(
                 get_class($model),
                 Arr::path($model_fields, '*.1'),
-                $this->table_fields()
+                $model->table_fields()
             );
     }
 
@@ -1239,10 +1239,13 @@ class Base_Model extends Base_Db_Model {
      */
     private function table_fields($skip_primary_key = FALSE)
     {
-        $fileds = array_keys(array_intersect_key($this->table_columns(), $this->data));
+	if ($this->data)
+	  $fields = array_keys(array_intersect_key($this->get_table_columns(), $this->data));
+	else
+	  $fields = array_keys($this->get_table_columns());
         if ( ! $skip_primary_key)
-            unset($fileds[$this->primary_key]);
-        return $fileds ;
+            unset($fields[$this->primary_key]);
+        return $fields ;
     }
 
     /**
