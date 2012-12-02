@@ -21,7 +21,7 @@ class Base_Db_Sanitize {
      */
     public static function int($value)
     {
-        if ( is_null($value))
+        if ( is_null($value) || (is_string($value) && !$value))
             return NULL;
 
         if (Arr::is_array($value)) {
