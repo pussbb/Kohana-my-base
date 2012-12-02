@@ -97,9 +97,10 @@ class Base_Db_Validation {
         foreach ($model->get_table_columns() as $key => $rules) {
             $type = Arr::get($rules, 'type');
             if (method_exists('Base_Db_Validation', $type)) {
-                if ( ! Collection::property_exists($model, $key))
+                if ( ! Collection::property_exists($model, $key)
+                    && $model->query_type() == 'update')
                     continue;
-                $_result = Base_Db_Validation::$type($key, $model->$key, $rules);
+                $_result = Base_Db_Validation::$type($key, Object::property($model, $key), $rules);
                 if ($_result) {
                     $model->add_error($key, $_result);
                     $result = FALSE;
