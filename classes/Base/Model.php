@@ -814,8 +814,9 @@ class Base_Model extends Base_Db_Model {
             $field = $this->primary_key;
 
         $model_fields = $model->query_columns_for_join();
+        if ($this->db_query instanceof Kohana_Database_Query_Builder_Select)
+            $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
 
-        $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
         $this->db_query
                 ->join(array($model->db_table, $model->module_name))
                    ->on($model->query_field($foreign_key), $comparison_key, $this->query_field($field));
