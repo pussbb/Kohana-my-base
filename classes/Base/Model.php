@@ -342,8 +342,8 @@ class Base_Model extends Base_Db_Model {
         $klass = get_called_class();
         switch ($name) {
             case 'destroy':
-                $obj = new $klass;
-                return $klass->destroy($arguments[0]);
+                $obj = new $klass();
+                return $obj->destroy($arguments[0]);
                 break;
             case 'exists':
                 return  call_user_func_array(array(new $klass, $name), $arguments);
@@ -768,6 +768,7 @@ class Base_Model extends Base_Db_Model {
      */
     public function query_columns_for_join()
     {
+        $result = array();
         foreach ($this->table_fields() as $column)
         {
             $result[] = array($this->query_field($column), $this->query_field($column, ':'));
@@ -1052,9 +1053,12 @@ class Base_Model extends Base_Db_Model {
      */
     protected function destroy($filter = NULL)
     {
-        $this->db_query = DB::delete($this->db_table);
-        if (!$filter)
-            $filter = array($this->primary_key);
+        $this->db_query = DB::delete(array($this->db_table, $this->module_name));
+
+        if (is_numeric($filter)) {
+            $this->{$this->primary_key} = $filter;
+            $filter = array($this->primary_key => $filter, 'with' => 'access_rules');
+        }
         return $this->filter($filter)->save();
     }
 
@@ -1119,13 +1123,14 @@ class Base_Model extends Base_Db_Model {
                 break;
 
             case 'select':
-            case 'delete':
             case 'update':
                 $columns = array_intersect_key($this->get_table_columns(), $this->data);
                 $values = array();
                 foreach ($columns as $field => $value) {
                     $this->db_query->value($field, $this->sanitize($field, $this->{$field}));
                 }
+                break;
+            case 'delete':
                 break;
             default:
                 throw new Base_Db_Exception_UnknownDatabaseQueryType();
@@ -1586,4 +1591,13 @@ class Base_Model extends Base_Db_Model {
         $this->meta_data = json_encode($meta_data);
     }
 
+    /**
+     * returns human readble name of some model
+     *
+     * @return string
+     */
+    public function representative_name()
+    {
+        return strtolower(str_replace('_', ' ', self::module_name()));
+    }
 }
