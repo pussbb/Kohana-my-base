@@ -53,6 +53,8 @@ class Base_Db_Sanitize {
      */
     public static function date($value)
     {
+        if (is_object($value) && $value instanceof Database_Expression)
+            return $value;
         return Date::format($value, 'Y-m-d');
     }
 
@@ -64,6 +66,8 @@ class Base_Db_Sanitize {
      */
     public static function datetime($value)
     {
+        if (is_object($value) && $value instanceof Database_Expression)
+            return $value;
         return Date::format($value,  'Y-m-d h:m:s');
     }
 
@@ -75,6 +79,8 @@ class Base_Db_Sanitize {
      */
     public static function time($value)
     {
+        if (is_object($value) && $value instanceof Database_Expression)
+            return $value;
         return Date::format($value, 'HH:MM:SS');
     }
 
