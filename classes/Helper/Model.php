@@ -18,7 +18,7 @@ class Helper_Model {
             strtolower(Request::current()->directory()),
             Inflector::plural(strtolower($model::module_name())), //controller
             $action,
-            $model->id,
+            Object::property($model, 'id'),
         );
         return URL::site(implode('/', array_filter($uri)));
     }
