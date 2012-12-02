@@ -17,7 +17,7 @@ $form = new Pretty_Form(array(
     'errors' => $errors,
     'template' => 'twitter_bootstrap',
 ));
-echo $form->open( Url::site('users/register'), array('class' => 'form-horizontal'));
+echo $form->open( URL::site('users/register'), array('class' => 'form-horizontal'));
 echo $form->legend(tr('Registration'));
 echo $form->input(array(
     'name' => 'login',
@@ -60,6 +60,6 @@ echo $form->form_actions(array(
     )
 ));
 echo $form->close();
-return;
+
 ?>
 </div>

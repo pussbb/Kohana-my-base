@@ -10,7 +10,7 @@
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
- * @version 0.1.2 
+ * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
  * @category html
  * @subpackage html
@@ -148,6 +148,32 @@ class Pretty_Form extends Singleton
         return $label_ . PHP_EOL . $input_;
     }
 
+    /**
+     * html input
+     * @param $params
+     * @return string
+     */
+    public function textarea($params)
+    {
+        if ($this->template) {
+            $template = Arr::get($params, 'template', 'textarea');
+            return $this->render_template($template, $params);
+        }
+
+        extract(Arr::extract($params, array('name', 'label', 'attr')));
+
+        $label_ = NULL;
+        $input_ = NULL;
+        $value = $this->value($params);
+
+        if ($label) {
+            $label_ = $this->label($name, $label);
+            $input_ = Form::textarea($name, $value, $this->for_label($name, $attr));
+        } else {
+            $input_ = Form::textarea($name, $value, $attr);
+        }
+        return $label_ . PHP_EOL . $input_;
+    }
     /**
      * inserts id to form element if label was defined
      * @param $name

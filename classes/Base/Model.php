@@ -1138,6 +1138,7 @@ class Base_Model extends Base_Db_Model {
 
                 break;
         }
+        return $this;
     }
 
     /**

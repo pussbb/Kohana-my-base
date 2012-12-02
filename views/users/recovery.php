@@ -5,7 +5,7 @@ $form = new Pretty_Form(array(
     'template' => 'twitter_bootstrap',
 ));
 
-echo $form->open( Url::site('users/recovery'), array('class' => 'form-vertical', 'id' => 'recoverform'));
+echo $form->open( URL::site('users/recovery'), array('class' => 'form-vertical', 'id' => 'recoverform'));
 
 echo '<p>';
   echo tr('Enter your e-mail address below and we will send you instructions how to recover a password.');
