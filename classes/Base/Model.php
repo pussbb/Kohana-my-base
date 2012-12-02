@@ -1263,6 +1263,8 @@ class Base_Model extends Base_Db_Model {
                 $this->update($this->table_fields(true));
         }
 
+        $this->update_params($this->data);
+
         if ( in_array($this->query_type(), array('insert', 'update'))){
             if ( ! Base_Db_Validation::check($this) || ! $this->validate())
                 return FALSE;
