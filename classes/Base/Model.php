@@ -424,7 +424,7 @@ class Base_Model extends Base_Db_Model {
         $klass = Arr::get($relation, 1);
         $foreign_key = Arr::get($relation, 2);
         $model_key = Arr::get($relation, 3, $this->primary_key);
-        $fiter[$foreign_key] = $this->$model_key;
+        $filter[$foreign_key] = $this->$model_key;
         switch ($type) {
             case Model::BELONGS_TO:
             case Model::HAS_ONE:
@@ -1274,6 +1274,7 @@ class Base_Model extends Base_Db_Model {
         $this->prepare_for_query();
 
         $responce = $this->exec();
+
         $this->after_save();
         return $responce;
     }
