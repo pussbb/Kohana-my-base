@@ -916,7 +916,7 @@ class Base_Model extends Base_Db_Model {
             }
         }
 
-        if ( ! array_filter($filter))
+        if (empty($filter))
             return $this;
 
         $this->db_query->where_open();
@@ -1239,10 +1239,10 @@ class Base_Model extends Base_Db_Model {
      */
     private function table_fields($skip_primary_key = FALSE)
     {
-	if ($this->data)
-	  $fields = array_keys(array_intersect_key($this->get_table_columns(), $this->data));
-	else
-	  $fields = array_keys($this->get_table_columns());
+        if ($this->data)
+            $fields = array_keys(array_intersect_key($this->get_table_columns(), $this->data));
+        else
+            $fields = array_keys($this->get_table_columns());
         if ( ! $skip_primary_key)
             unset($fields[$this->primary_key]);
         return $fields ;
