@@ -1349,7 +1349,9 @@ class Base_Model extends Base_Db_Model {
             case 'select':
                 $_result = $this->parse_result($result);
                 if ($this->count == 1) {
-                    $this->update_params($_result[0]);
+                   foreach ($_result[0] as $key => $value) {
+                        $this->$key = $value;
+                   }
                 }
                 $klass = get_called_class();
                 if ($this->count_total)
@@ -1358,7 +1360,11 @@ class Base_Model extends Base_Db_Model {
                 foreach ($_result as $record) {
                     if ( ! Arr::is_array($record) && ! Arr::is_assoc($record))
                         break;
-                    $this->records[] = new $klass($record);
+                    $obj =  new $klass();
+                    foreach ($record as $key => $value) {
+                        $obj->$key = $value;
+                    }
+                    $this->records[] = $obj;
                 }
                 $result = $result->count() > 0;
                 break;

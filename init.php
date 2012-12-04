@@ -21,7 +21,7 @@ if ( ! function_exists('tr'))
     */
     function tr($string, array $values = NULL)
     {
-        if (GetText::gettext_enabled())
+        if (Gettext::gettext_enabled())
             return vsprintf(gettext($string), $values);
 
         preg_match_all('/%(?:\d+\$)?[+-]?(?:[ 0]|\'.{1})?-?\d*(?:\.\d+)?[bcdeEufFgGosxX]/', $str, $matches, PREG_PATTERN_ORDER);
