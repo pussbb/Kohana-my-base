@@ -238,6 +238,7 @@ class Base_Model extends Base_Db_Model {
         $this->module_name = strtolower(self::module_name());
         $this->_table_columns = $this->get_table_columns();
         $this->_table_fields = array_keys($this->_table_columns);
+        parent::__construct($this->_table_fields);
     }
 
     /**

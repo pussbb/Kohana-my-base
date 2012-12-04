@@ -14,7 +14,12 @@
 
 class Base_Db_Model extends Kohana_Model  implements Serializable ,  ArrayAccess,  IteratorAggregate {
 
-        /**
+    private $fields = NULL;
+    public function __construct(array $fields = array())
+    {
+        $this->fields = $fields;
+    }
+     /**
      * contain dynamically append variables
      *
      * or fields and value for the row
@@ -31,8 +36,7 @@ class Base_Db_Model extends Kohana_Model  implements Serializable ,  ArrayAccess
      */
     public function serialize()
     {
-        $klass = get_called_class();
-        return (string)serialize(Arr::extract($this->data, array_keys($klass::table_columns())));
+        return (string)serialize(Arr::extract($this->data, $this->fields));
     }
 
     /**
