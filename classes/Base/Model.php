@@ -202,15 +202,6 @@ class Base_Model extends Base_Db_Model {
 
 
     /**
-     *
-     */
-    private $_table_fields = array();
-
-    /**
-     *
-     */
-    private $_table_columns = array();
-    /**
      * Constructs the object
      *
      * <code>
@@ -228,6 +219,8 @@ class Base_Model extends Base_Db_Model {
      */
     public function __construct($params = NULL)
     {
+        $this->_table_columns = $this->get_table_columns();
+        $this->_table_fields = array_keys($this->_table_columns);
         if (Arr::is_array($params)) {
             $this->update_params($params);
         }
@@ -236,9 +229,8 @@ class Base_Model extends Base_Db_Model {
         }
         $this->db_table = self::db_table_name();
         $this->module_name = strtolower(self::module_name());
-        $this->_table_columns = $this->get_table_columns();
-        $this->_table_fields = array_keys($this->_table_columns);
-        parent::__construct($this->_table_fields);
+
+
     }
 
     /**

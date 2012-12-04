@@ -12,13 +12,15 @@
  * @subpackage database
  */
 
-class Base_Db_Model extends Kohana_Model  implements Serializable ,  ArrayAccess,  IteratorAggregate {
+class Base_Db_Model extends Kohana_Model  implements Serializable, ArrayAccess,  IteratorAggregate {
 
-    private $fields = NULL;
-    public function __construct(array $fields = array())
-    {
-        $this->fields = $fields;
-    }
+    protected $_table_fields = NULL;
+
+
+    /**
+     *
+     */
+    protected $_table_columns = array();
      /**
      * contain dynamically append variables
      *
@@ -36,7 +38,13 @@ class Base_Db_Model extends Kohana_Model  implements Serializable ,  ArrayAccess
      */
     public function serialize()
     {
-        return (string)serialize(Arr::extract($this->data, $this->fields));
+        $data =array(
+            'data' => Arr::extract($this->data, $this->_table_fields),
+            '_table_fields' => $this->_table_fields,
+            '_table_columns' => $this->_table_columns
+        );
+
+        return (string)serialize($data);
     }
 
     /**
@@ -48,7 +56,13 @@ class Base_Db_Model extends Kohana_Model  implements Serializable ,  ArrayAccess
      */
     public function unserialize($data)
     {
-        $this->data = unserialize($data);
+        $data = unserialize($data);
+        if ( ! $data)
+            $data = array();
+        $this->data = Arr::get($data, 'data');
+        $this->_table_columns = Arr::get($data, '_table_columns');
+        $this->_table_fields = Arr::get($data, '_table_fields');
+
     }
 
 /**
@@ -68,7 +82,7 @@ class Base_Db_Model extends Kohana_Model  implements Serializable ,  ArrayAccess
      * @return string
      */
     public function offsetGet($key) {
-        return isset($this->data[$key]) ? $this->data[$key] : null;
+        return isset($this->data[$key]) ? $this->data[$key] : NULL;
     }
 
     /**
