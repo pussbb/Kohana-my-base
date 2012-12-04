@@ -200,6 +200,16 @@ class Base_Model extends Base_Db_Model {
      */
     const STAT = 4;
 
+
+    /**
+     *
+     */
+    private $_table_fields = array();
+
+    /**
+     *
+     */
+    private $_table_columns = array();
     /**
      * Constructs the object
      *
@@ -226,6 +236,8 @@ class Base_Model extends Base_Db_Model {
         }
         $this->db_table = self::db_table_name();
         $this->module_name = strtolower(self::module_name());
+        $this->_table_columns = $this->get_table_columns();
+        $this->_table_fields = array_keys($this->_table_columns);
     }
 
     /**
@@ -242,6 +254,8 @@ class Base_Model extends Base_Db_Model {
      */
     public function __set($name, $value)
     {
+        if (in_array($name, $this->_table_fields))
+            $value = $this->sanitize($name, $value);
         $this->data[$name] = $value;
     }
 
@@ -435,7 +449,7 @@ class Base_Model extends Base_Db_Model {
                 break;
             case Model::STAT:
                 $obj = new $klass();
-                $result = $obj->select(array(DB::expr('COUNT(*)'), 'total_count'))
+                $result = $obj->select(array(DB::expr('COUNT('.$this->primary_key.')'), 'total_count'))
                                 ->filter($filter)
                                     ->execute()
                                         ->get('total_count');
@@ -769,7 +783,7 @@ class Base_Model extends Base_Db_Model {
     public function query_columns_for_join()
     {
         $result = array();
-        foreach ($this->table_fields() as $column)
+        foreach ($this->_table_fields as $column)
         {
             $result[] = array($this->query_field($column), $this->query_field($column, ':'));
         }
@@ -823,7 +837,7 @@ class Base_Model extends Base_Db_Model {
         $this->with[$with_name] = array(
                 get_class($model),
                 Arr::path($model_fields, '*.1'),
-                $model->table_fields()
+                $model->_table_fields
             );
     }
 
@@ -894,11 +908,10 @@ class Base_Model extends Base_Db_Model {
         if ( ! $this->db_query)
             $this->select();
 
-        $table_columns = $this->get_table_columns();
         if ( ! Arr::is_assoc($filter)) {
             $fields = array();
             foreach ($filter as $field) {
-                if ( ! array_key_exists($field, $table_columns))
+                if ( ! array_key_exists($field, $this->_table_columns))
                     continue;
                 $fields[$field] = $this->$field;
             }
@@ -908,7 +921,7 @@ class Base_Model extends Base_Db_Model {
             //skip fields that are not in table
             //and if it's a system append them
             foreach ($filter as $key => $value) {
-                if (array_key_exists($key, $table_columns))
+                if (array_key_exists($key, $this->_table_columns))
                     continue;
                 if (in_array($key, $this->system_filters))
                     $this->system_filters($key, $filter[$key]);
@@ -1111,7 +1124,7 @@ class Base_Model extends Base_Db_Model {
         switch ($this->query_type()) {
             case 'insert':
                 $properties = Object::properties($this->db_query);
-                $columns = Arr::get($properties, '_columns', $this->table_fields());
+                $columns = Arr::get($properties, '_columns', $this->_table_fields);
                 $values = Arr::get($properties, '_values');
 
                 if ($columns && ! $values) {
@@ -1123,14 +1136,15 @@ class Base_Model extends Base_Db_Model {
                 }
                 break;
 
-            case 'select':
             case 'update':
-                $columns = array_intersect_key($this->get_table_columns(), $this->data);
+
                 $values = array();
-                foreach ($columns as $field => $value) {
+                foreach ($this->table_fields() as $field) {
                     $this->db_query->value($field, $this->sanitize($field, $this->{$field}));
                 }
                 break;
+
+            case 'select':
             case 'delete':
                 break;
             default:
@@ -1153,11 +1167,11 @@ class Base_Model extends Base_Db_Model {
     {
         if (is_object($value))
             return $value;
-        $table_columns = $this->get_table_columns();
-        $type = Arr::path($table_columns, $key . '.type');
 
-        if (in_array(Arr::path($table_columns, $key . '.data_type'), array('date', 'datetime', 'time')))
-            $type = Arr::path($table_columns, $key . '.data_type');
+        $type = Arr::path($this->_table_columns, $key . '.type');
+
+        if (in_array(Arr::path($this->_table_columns, $key . '.data_type'), array('date', 'datetime', 'time')))
+            $type = Arr::path($this->_table_columns, $key . '.data_type');
 
         return Base_Db_Sanitize::value($type, $value);
 
@@ -1235,14 +1249,14 @@ class Base_Model extends Base_Db_Model {
     /**
      * returns all table fields without field type and if value preset in model
      * @return array
-     * @access private
+     * @access public
      */
-    private function table_fields($skip_primary_key = FALSE)
+    public function table_fields($skip_primary_key = FALSE)
     {
         if ($this->data)
-            $fields = array_keys(array_intersect_key($this->get_table_columns(), $this->data));
+            $fields = array_keys(array_intersect_key($this->_table_columns, $this->data));
         else
-            $fields = array_keys($this->get_table_columns());
+            $fields = $this->_table_fields;
         if ( ! $skip_primary_key)
             unset($fields[$this->primary_key]);
         return $fields ;
@@ -1372,11 +1386,11 @@ class Base_Model extends Base_Db_Model {
             return $this->count == 1?array($result->current()):$result->as_array();
 
         $_result = array();
-        $main_keys = array_keys($this->get_table_columns());
+        //$main_keys = $this->_table_fields;
         foreach ($result->as_array() as $row) {
             $_key = $row[$this->primary_key];
             if ( ! isset($_result[$_key]))
-                $_result[$_key] = array_combine($main_keys, Arr::extract($row, $main_keys));
+                $_result[$_key] = array_combine($this->_table_fields, Arr::extract($row, $this->_table_fields));
 
             foreach ($this->with as $key => $value) {
                 $klass = Arr::get($value, 0);
@@ -1471,9 +1485,8 @@ class Base_Model extends Base_Db_Model {
      */
     public function update_params($array)
     {
-	$fields = $this->table_fields();
         foreach ($array as $key => $value) {
-            if (in_array($key, $fields))
+            if (in_array($key, $this->_table_fields))
                 $value = $this->sanitize($key, $value);
             $this->$key = $value;
         }
