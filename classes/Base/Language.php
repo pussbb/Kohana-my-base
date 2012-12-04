@@ -12,6 +12,8 @@
  */
 class Base_Language {
 
+
+    private static $lang_codes = array();
     /**
      * set current lang
      * @param $language (model object)
@@ -77,8 +79,11 @@ class Base_Language {
      */
     public static function all_codes()
     {
-        $langs = Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
-        return array_filter(Collection::pluck($langs, 'code'));
+        if ( ! self::$lang_codes) {
+            $langs = Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
+            self::$lang_codes = array_filter(Collection::pluck($langs, 'code'));
+        }
+        return self::$lang_codes;
     }
 
     /**

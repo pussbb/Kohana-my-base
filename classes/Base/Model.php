@@ -1277,8 +1277,6 @@ class Base_Model extends Base_Db_Model {
                 $this->update($this->table_fields(true));
         }
 
-        $this->update_params($this->data);
-
         if ( in_array($this->query_type(), array('insert', 'update'))){
             if ( ! Base_Db_Validation::check($this) || ! $this->validate())
                 return FALSE;
@@ -1394,9 +1392,11 @@ class Base_Model extends Base_Db_Model {
 
             foreach ($this->with as $key => $value) {
                 $klass = Arr::get($value, 0);
-                $_result[$_key][$key][] = new $klass(
-                    array_combine(Arr::get($value, 2), Arr::extract($row, Arr::get($value, 1)))
-                    );
+                $obj = new $klass;
+                foreach (array_combine(Arr::get($value, 2), Arr::extract($row, Arr::get($value, 1))) as $with_key => $with_value) {
+                    $obj->$with_key = $with_value;
+                }
+                $_result[$_key][$key][] = $obj;
             }
         }
         foreach ($_result as $key => $data) {
