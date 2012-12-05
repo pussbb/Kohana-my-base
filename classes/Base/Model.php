@@ -225,7 +225,7 @@ class Base_Model extends Base_Db_Model {
             $this->update_params($params);
         }
         if (is_numeric($params)) {
-            $this->data[$this->primary_key] = $params;
+            $this->data[$this->primary_key] = intval($params);
         }
         $this->db_table = self::db_table_name();
         $this->module_name = strtolower(self::module_name());
@@ -796,11 +796,11 @@ class Base_Model extends Base_Db_Model {
         $with_name = '';
         if (is_object($name)) {
             $model = $name;
-            $with_name = strtolower($model::module_name());
+            $with_name = strtolower($model->module_name);
         }
         elseif (Kohana::find_file('',strtolower(str_replace('_', DIRECTORY_SEPARATOR, $name)))) {
             $model = new $name();
-            $with_name = strtolower($model::module_name());
+            $with_name = strtolower($model->module_name);
         }
         elseif (Arr::get($this->relations(), $name)) {
             $klass = Arr::path($this->relations(), "$name.1");
@@ -982,7 +982,7 @@ class Base_Model extends Base_Db_Model {
      */
     public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
     {
-        $module_name = strtolower(self::module_name());
+        $module_name = strtolower($this->module_name);
         if ( ! Arr::is_array($select_args)) {
             $this->db_query = DB::select($this->query_field($select_args));
         }
@@ -1487,7 +1487,7 @@ class Base_Model extends Base_Db_Model {
         foreach ($array as $key => $value) {
             if (in_array($key, $this->_table_fields))
                 $value = $this->sanitize($key, $value);
-            $this->$key = $value;
+            $this->data[$key] = $value;
         }
         return $this;
     }
@@ -1621,6 +1621,6 @@ class Base_Model extends Base_Db_Model {
      */
     public function representative_name()
     {
-        return strtolower(str_replace('_', ' ', self::module_name()));
+        return strtolower(str_replace('_', ' ', $this->module_name));
     }
 }
