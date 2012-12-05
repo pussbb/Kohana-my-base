@@ -94,18 +94,29 @@ class Base_Db_Validation {
     {
         Base_Db_Validation::$new_record = $model->new_record();
         $result = TRUE;
+        $query_type = $model->query_type();
         foreach ($model->get_table_columns() as $key => $rules) {
-            $type = Arr::get($rules, 'type');
-            if (method_exists('Base_Db_Validation', $type)) {
-                if ( ! Collection::property_exists($model, $key)
-                    && $model->query_type() == 'update')
-                    continue;
-                $_result = Base_Db_Validation::$type($key, Object::property($model, $key), $rules);
-                if ($_result) {
-                    $model->add_error($key, $_result);
-                    $result = FALSE;
-                }
+            $value = Object::property($model, $key);
+            if ( ! $value && $query_type === 'update')
+                continue;
+
+            switch (Arr::get($rules, 'type')) {
+                case 'int':
+                    $_result = Base_Db_Validation::int($key, $value, $rules);
+                    break;
+                case 'string':
+                    $_result = Base_Db_Validation::string($key, $value, $rules);
+                    break;
+                default:
+                    $_result = TRUE;
+                    break;
             }
+
+            if ($_result) {
+                $model->add_error($key, $_result);
+                $result = FALSE;
+            }
+
         }
         return $result;
     }

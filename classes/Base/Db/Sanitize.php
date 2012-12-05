@@ -51,37 +51,11 @@ class Base_Db_Sanitize {
      * @param $value
      * @return mixed|string
      */
-    public static function date($value)
+    public static function date($value, $format)
     {
         if (is_object($value) && $value instanceof Database_Expression)
             return $value;
-        return Date::format($value, 'Y-m-d');
-    }
-
-     /**
-     * convert to string datetime to Mysql datetime format string
-     * @static
-     * @param $value
-     * @return mixed|string
-     */
-    public static function datetime($value)
-    {
-        if (is_object($value) && $value instanceof Database_Expression)
-            return $value;
-        return Date::format($value,  'Y-m-d h:m:s');
-    }
-
-    /**
-     * convert to string time to Mysql time format string
-     * @static
-     * @param $value
-     * @return mixed|string
-     */
-    public static function time($value)
-    {
-        if (is_object($value) && $value instanceof Database_Expression)
-            return $value;
-        return Date::format($value, 'HH:MM:SS');
+        return Date::format($value, $format);
     }
 
     /**
@@ -91,11 +65,45 @@ class Base_Db_Sanitize {
      * @param $value
      * @return mixed
      */
-    public static function value($type, $value)
+    public static function value($type, $value, $alias = NULL)
     {
-        if ( ! method_exists('Base_Db_Sanitize', $type))
-            return $value;
-        return Base_Db_Sanitize::$type($value);
+        switch ($type) {
+            case 'int':
+            case 'bigint':
+            case 'tinyint':
+            case 'mediumint':
+            case 'smallint':
+                return Base_Db_Sanitize::int($value);
+                break;
+            case 'string':
+            case 'longtext':
+            case 'mediumtext':
+            case 'text':
+            case 'nvarchar':
+            case 'varchar':
+            case 'mediumtext':
+            case 'tinytext':
+                return Base_Db_Sanitize::string($value);
+                break;
+            case 'date':
+                return Base_Db_Sanitize::date($value, 'Y-m-d');
+                break;
+            case 'datetime':
+                return Base_Db_Sanitize::date($value, 'Y-m-d h:m:s');
+                break;
+            case 'time':
+                return Base_Db_Sanitize::date($value, 'HH:MM:SS');
+                break;
+            case 'year':
+                return Base_Db_Sanitize::date($value, 'Y');
+                break;
+            default:
+                if ($alias)
+                    return Base_Db_Sanitize::value($alias, $value);
+                return $value;
+                break;
+        }
+//         return $value;
     }
 
 }

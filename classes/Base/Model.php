@@ -1161,12 +1161,11 @@ class Base_Model extends Base_Db_Model {
         if (is_object($value))
             return $value;
 
-        $type = Arr::path($this->_table_columns, $key . '.type');
-
-        if (in_array(Arr::path($this->_table_columns, $key . '.data_type'), array('date', 'datetime', 'time')))
-            $type = Arr::path($this->_table_columns, $key . '.data_type');
-
-        return Base_Db_Sanitize::value($type, $value);
+        return Base_Db_Sanitize::value(
+            Arr::path($this->_table_columns, $key . '.data_type'),
+            $value,
+            Arr::path($this->_table_columns, $key . '.type')
+        );
 
     }
 
