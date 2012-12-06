@@ -79,7 +79,7 @@ class Base_Language {
      */
     public static function all_codes()
     {
-        if ( ! self::$lang_codes) {
+        if (empty(self::$lang_codes)) {
             $langs = Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
             self::$lang_codes = array_filter(Collection::pluck($langs, 'code'));
         }

@@ -28,11 +28,11 @@ class Base_Date extends Kohana_Date {
      */
     public static function format($date, $format = NULL)
     {
-        if (!$format) {
+        if ( ! $format) {
             $format = Kohana::$config->load('site')->get('date_formart', 'F j, Y, g:i a');
         }
         if ( ! is_numeric($date))
-            $date = strtotime($date);
+            $date = self::today_if_null($date);
         return date($format, $date);
     }
 

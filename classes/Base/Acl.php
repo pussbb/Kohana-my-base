@@ -22,7 +22,7 @@ class Base_Acl extends Singleton{
     public function allowed($core)
     {
         $user = Auth::instance()->current_user();
-        if ( ! is_object($user))
+        if ( is_null($user))
             $role_id = Model_Access_Rule::ROLE_GUEST;
         else
             $role_id = $user->role_id;

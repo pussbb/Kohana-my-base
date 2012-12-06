@@ -67,7 +67,7 @@ class Base_Auth extends Singleton {
      */
     public function has_role($user_role)
     {
-        return $this->current_user()->role_id = $user_role;
+        return $this->current_user()->role_id === $user_role;
     }
 
     /**
