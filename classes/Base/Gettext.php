@@ -28,6 +28,10 @@ class Base_Gettext extends Kohana_I18n {
     public static $encoding = 'UTF-8';
 
     /**
+     * @var  string   target language: en-us, es-es, zh-cn, etc
+     */
+    public static $gettext_enabled = TRUE;
+    /**
      * set language
      */
     public static function lang($lang = 'en-EN')

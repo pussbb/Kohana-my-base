@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-
+Gettext::$gettext_enabled = Gettext::gettext_enabled();
 /**
  * Set the exception handler to use the Error module
  *
@@ -19,9 +19,10 @@ if ( ! function_exists('tr'))
     * @param $values array
     * @return string
     */
+
     function tr($string, array $values = NULL)
     {
-        if (Gettext::gettext_enabled())
+        if (Gettext::$gettext_enabled)
             return vsprintf(gettext($string), $values);
 
         preg_match_all('/%(?:\d+\$)?[+-]?(?:[ 0]|\'.{1})?-?\d*(?:\.\d+)?[bcdeEufFgGosxX]/', $str, $matches, PREG_PATTERN_ORDER);
