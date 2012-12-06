@@ -108,7 +108,7 @@ class Base_Db_Validation {
                     $_result = Base_Db_Validation::string($key, $value, $rules);
                     break;
                 default:
-                    $_result = TRUE;
+                    $_result = NULL;
                     break;
             }
 

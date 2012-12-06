@@ -29,7 +29,7 @@ class Base_Auth extends Singleton {
     public function current_user()
     {
         $user = Arr::get(Session::instance()->get('auth'), 'current_user');
-        return is_object($user) ? clone $user : NULL;
+        return is_object($user) && $user instanceof Model ? $user : NULL;
     }
 
     /**

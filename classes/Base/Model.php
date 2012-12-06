@@ -1341,7 +1341,7 @@ class Base_Model extends Base_Db_Model {
                 $_result = $this->parse_result($result);
                 if ($this->count == 1) {
                    foreach ($_result[0] as $key => $value) {
-                        $this->$key = $value;
+                        $this->data[$key] = $value;
                    }
                 }
                 $klass = get_called_class();
@@ -1353,7 +1353,7 @@ class Base_Model extends Base_Db_Model {
                         break;
                     $obj =  new $klass();
                     foreach ($record as $key => $value) {
-                        $obj->$key = $value;
+                        $obj->data[$key] = $value;
                     }
                     $this->records[] = $obj;
                 }
@@ -1382,17 +1382,17 @@ class Base_Model extends Base_Db_Model {
             return $this->count == 1?array($result->current()):$result->as_array();
 
         $_result = array();
-        //$main_keys = $this->_table_fields;
+
         foreach ($result->as_array() as $row) {
             $_key = $row[$this->primary_key];
             if ( ! isset($_result[$_key]))
                 $_result[$_key] = array_combine($this->_table_fields, Arr::extract($row, $this->_table_fields));
 
             foreach ($this->with as $key => $value) {
-                $klass = Arr::get($value, 0);
+                $klass = $value[0];
                 $obj = new $klass;
-                foreach (array_combine(Arr::get($value, 2), Arr::extract($row, Arr::get($value, 1))) as $with_key => $with_value) {
-                    $obj->$with_key = $with_value;
+                foreach ($value[1] as $index_key => $with_field) {
+                    $obj->data[$value[2][$index_key]] = $row[$with_field];
                 }
                 $_result[$_key][$key][] = $obj;
             }
