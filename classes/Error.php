@@ -55,6 +55,7 @@
         if (Request::$current !== NULL
                   && Request::current()->is_ajax() === TRUE
                   && Kohana::$environment !== Kohana::PRODUCTION) {
+            header('Content-Type: text/plain; charset='.Kohana::$charset, TRUE, 500);
             self::_print($e);
         }
 
