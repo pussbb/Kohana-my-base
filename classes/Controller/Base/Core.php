@@ -120,10 +120,14 @@ class Controller_Base_Core extends Controller_Template {
               || Acl::instance()->allowed($this))
             return;
 
-        if ( ! Auth::instance()->logged_in() && ! $this->request->is_ajax())
+        if ( ! Auth::instance()->logged_in() && ! $this->request->is_ajax()){
+            Cookie::set('auth_required_url', $this->request->url().http_build_query($this->request->query()) );
             return self::redirect($this->config_item('user_login_uri'));
-        else
+        }
+        else {
             throw new HTTP_Exception_403(tr('Access deny'));
+        }
+
     }
 
     /**

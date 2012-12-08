@@ -40,7 +40,14 @@ class Controller_Users extends Controller_Core {
 
     private function redirect_user($condition)
     {
-        $uri = Kohana::$config->load("site.$condition");
+        $requested_url = Cookie::get('auth_required_url');
+        if ( ! $requested_url) {
+            $uri = Kohana::$config->load("site.$condition");
+        }
+        else{
+            $uri = $requested_url;
+            Cookie::get('auth_required_url', NULL);
+        }
         $this->redirect($uri?:Kohana::$base_url);
     }
 
