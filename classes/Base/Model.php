@@ -854,6 +854,7 @@ class Base_Model extends Base_Db_Model {
         return $name;
     }
 
+
     /**
      * Helper function to create WHERE clause
      *
@@ -914,10 +915,10 @@ class Base_Model extends Base_Db_Model {
             //skip fields that are not in table
             //and if it's a system append them
             foreach ($filter as $key => $value) {
-                if (array_key_exists($key, $this->_table_columns))
-                    continue;
                 if (in_array($key, $this->system_filters))
                     $this->system_filters($key, $filter[$key]);
+                if (array_key_exists($key, $this->_table_columns) || strpos($key, '|| ') !== FALSE)
+                    continue;
                 unset($filter[$key]);
             }
         }
@@ -959,7 +960,13 @@ class Base_Model extends Base_Db_Model {
             if ( is_null($value)) {
                 $comparison_key = 'IS';
             }
-            $this->db_query->where($this->query_field($key), $comparison_key, $this->sanitize($key, $value));
+            if (strpos($key,'|| ') !== FALSE) {
+                $key = explode(' ', $key);
+                $this->db_query->or_where($this->query_field($key[1]), $comparison_key, $this->sanitize($key[1], $value));
+            }
+            else{
+                $this->db_query->where($this->query_field($key), $comparison_key, $this->sanitize($key, $value));
+            }
         }
         $this->db_query->where_close();
         return $this;
@@ -1066,7 +1073,10 @@ class Base_Model extends Base_Db_Model {
             $this->{$this->primary_key} = $filter;
             $filter = array($this->primary_key => $filter);
         }
-        return $this->filter($filter)->save();
+        $ok = $this->filter($filter)->save();
+        if ( ! $ok)
+            throw new Base_Db_Exception_NoRowEffected;
+        return TRUE;
     }
 
     /**

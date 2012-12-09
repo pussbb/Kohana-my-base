@@ -29,7 +29,7 @@ class Base_Acl extends Singleton{
 
         return Model_Access_Rule::exists(array(
             'role_id' => $role_id,
-            'directory' => $request_structure[0],
+            'directory' => Arr::get($request_structure, 0),
             'controller' => self::dbexpr($request_structure[1]),
             'action' => self::dbexpr($request_structure[2]),
         ), 1, 30000);

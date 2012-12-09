@@ -10,10 +10,10 @@
  * @category database
  * @subpackage exception
  */
-class Base_Db_Exception_UnknownDatabaseQueryType extends Exception {
+class Base_Db_Exception_NoRowEffected extends Exception {
 
-    protected $message = "Unknown database query type";
+    protected $message = "0 rows where deleted/updated";
 
-    protected $code= 105;
+    protected $code= 106;
 
 }
