@@ -157,7 +157,8 @@ class Base_Model extends Base_Db_Model {
         'with', // query with join of known relation
         'total_count', // for select will added total_count to count all rows if limit set
         'distinct',
-        'group_by'
+        'group_by',
+        'expression'
     );
 
     /**
@@ -763,6 +764,33 @@ class Base_Model extends Base_Db_Model {
                     $this->with($value);
                 }
                 break;
+            case 'expression':
+                /*
+                    $m = Model_News::find_all(array(
+                        'expression' => array(
+                            'YEAR(%s) = %s',
+                            'created_at' => 2010
+                        )
+                    ));
+                */
+                $expresion = $value[0];
+                unset($value[0]);
+
+                $values = array();
+                foreach($value as $key => $item)
+                {
+
+                    if (in_array($key, $this->_table_fields)){
+                        $field = $key;
+                        $values[] = $this->query_field($key, '.', TRUE);
+                    }
+                    else {
+                        $values[] = $key;
+                    }
+                    $values[] = '\''.Base_Db_Sanitize::string($item).'\'';
+                }
+                $this->db_query->where(NULL, NULL, DB::expr(vsprintf($expresion, $values)));
+                break;
             default:
                 # code...
                 break;
@@ -841,13 +869,18 @@ class Base_Model extends Base_Db_Model {
     * @param $name string
     * @param $delimiter string
     */
-    private function query_field($name, $delimiter = '.')
+    private function query_field($name, $delimiter = '.', $escape = FALSE)
     {
         if ( ! $name)
             throw new Base_Db_Exception_EmptyColumnName();
 
-        if ( ! is_object($name))
-            return $this->module_name.$delimiter.$name;
+        if ( ! is_object($name)){
+            if (!$escape)
+                return $this->module_name.$delimiter.$name;
+            else
+                return "`$this->module_name`$delimiter`$name`";
+        }
+
 
         if (get_class($name) != 'Database_Expression')
            throw new Exception_Collection_ObjectNotSupported();
