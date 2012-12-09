@@ -117,7 +117,7 @@ class Controller_Base_Core extends Controller_Template {
     {
         if ( ! $this->request->is_initial()
               || ! $this->check_access
-              || Acl::instance()->allowed($this))
+              || Acl::instance()->allowed($this->current_request_structure()))
             return;
 
         if ( ! Auth::instance()->logged_in() && ! $this->request->is_ajax()){

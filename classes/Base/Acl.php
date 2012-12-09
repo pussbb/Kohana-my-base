@@ -19,21 +19,19 @@ class Base_Acl extends Singleton{
      * @param $core (object) instance of Core template
      * @return bool on success returns TRUE otherwise FALSE
      */
-    public function allowed($core)
+    public function allowed($request_structure)
     {
         $user = Auth::instance()->current_user();
         if ( is_null($user))
             $role_id = Model_Access_Rule::ROLE_GUEST;
         else
-            $role_id = $user->role_id;
-
-        $current_request = $core->current_request_structure();
+            $role_id = array(Model_Access_Rule::ROLE_USER, $user->role_id);
 
         return Model_Access_Rule::exists(array(
             'role_id' => $role_id,
-            'directory' => Arr::get($current_request, 0),
-            'controller' => self::dbexpr(Arr::get($current_request, 1)),
-            'action' => self::dbexpr(Arr::get($current_request, 2)),
+            'directory' => $request_structure[0],
+            'controller' => self::dbexpr($request_structure[1]),
+            'action' => self::dbexpr($request_structure[2]),
         ), 1, 30000);
     }
 
