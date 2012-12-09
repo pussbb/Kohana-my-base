@@ -226,9 +226,9 @@ class Pretty_Form extends Singleton
         extract(Arr::extract($params, array('name', 'label', 'attr', 'buttons')));
         if ($label) {
             $label_ = $this->label($name, $label);
-            $input_ = Form::select($name, buttons, $value, $attr);
+            $input_ = Form::select($name, $buttons, $value, $attr);
         } else {
-            $input_ = Form::select($name, buttons, $value, $attr);
+            $input_ = Form::select($name, $buttons, $value, $attr);
         }
         return $label_ . PHP_EOL . $input_;
     }
