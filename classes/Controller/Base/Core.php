@@ -51,7 +51,7 @@ class Controller_Base_Core extends Controller_Template {
      * set layout name
      * @var null
      */
-    private $layout = NULL;
+    protected $layout = NULL;
 
     /**
      * array with settings from config 'site.php'
