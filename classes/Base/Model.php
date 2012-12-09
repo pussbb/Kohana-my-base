@@ -825,7 +825,7 @@ class Base_Model extends Base_Db_Model {
             $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
 
         $this->db_query
-                ->join(array($model->db_table, $model->module_name))
+                ->join(array($model->db_table, $model->module_name), 'LEFT')
                    ->on($model->query_field($foreign_key), $comparison_key, $this->query_field($field));
         $this->with[$with_name] = array(
                 get_class($model),
@@ -906,7 +906,7 @@ class Base_Model extends Base_Db_Model {
             foreach ($filter as $field) {
                 if ( ! array_key_exists($field, $this->_table_columns))
                     continue;
-                $fields[$field] = $this->$field;
+                $fields[$field] = Arr::get($this->data, $field);
             }
             $filter = $fields;
         }
