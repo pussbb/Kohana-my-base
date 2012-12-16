@@ -111,4 +111,19 @@ class Collection {
         return FALSE;
     }
 
+    /**
+    * Helper function to check if property exists
+    * @param mixed $obj
+    * @param string|int $property
+    * @static
+    * @return boolen
+    */
+    public static function property($obj, $property)
+    {
+        if (is_object($obj))
+            return Object::property($obj, $property);
+        else if (Arr::is_array($obj)) 
+            Arr::path($obj, $property);
+        return NULL;
+    }
 }

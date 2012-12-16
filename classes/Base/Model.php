@@ -356,6 +356,8 @@ class Base_Model extends Base_Db_Model {
             case 'exists':
                 return  call_user_func_array(array(new $klass, $name), $arguments);
                 break;
+            case 'table_labels':
+                return call_user_func_array(array(new $klass, 'labels'), $arguments);
             default:
                 break;
         }
@@ -757,7 +759,7 @@ class Base_Model extends Base_Db_Model {
             case 'with':
                 if (is_array($value)){
                     foreach ($value as $item) {
-                        $this->with($value);
+                        $this->with($item);
                     }
                 }
                 else {
@@ -1378,6 +1380,7 @@ class Base_Model extends Base_Db_Model {
         switch ($this->query_type()) {
             case 'insert':
                 $this->last_inserted_id = $result[0];
+                $this->{$this->primary_key} = $result[0];
                 $result = TRUE;
                 break;
             case 'select':
@@ -1468,7 +1471,7 @@ class Base_Model extends Base_Db_Model {
             switch ($property->getName()) {
                 case '_select':
                     $property->setValue($query, array(
-                        array(DB::expr('COUNT('.$this->primary_key.')'), 'total_count'),
+                        array(DB::expr('COUNT('.$this->query_field($this->primary_key).')'), 'total_count'),
                     ));
                     break;
                 case '_limit':
