@@ -445,7 +445,7 @@ class Base_Model extends Base_Db_Model {
                 break;
             case Model::STAT:
                 $obj = new $klass();
-                $result = $obj->select(array(DB::expr('COUNT('.$this->primary_key.')'), 'total_count'))
+                $result = $obj->select(array(DB::expr('COUNT('.$this->query_field($this->primary_key).')'), 'total_count'))
                                 ->filter($filter)
                                     ->execute()
                                         ->get('total_count');

@@ -109,7 +109,6 @@ class Model_User extends Model
 
     public function register()
     {
-        $this->insert();
         $this->api_key = uniqid();
         $this->role_id = Model_Access_Rule::ROLE_USER;
         $this->meta_data = json_encode(array());
