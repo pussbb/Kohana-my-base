@@ -67,9 +67,12 @@ class Dir {
      */
     public static function files($dir, $condition = null, &$array = array())
     {
+        if ( ! file_exists($dir))
+            return array();
         $files = scandir($dir);
         array_shift($files);    // remove '.' from array
         array_shift($files);    // remove '..' from array
+        $array = array();
 
         foreach ($files as $file) {
             $file = Text::reduce_slashes($dir . '/' . $file);
@@ -96,9 +99,12 @@ class Dir {
      */
     public static function subdirs($dir, $names_only = TRUE)
     {
+        if ( ! file_exists($dir))
+            return array();
         $files = scandir($dir);
         array_shift($files);    // remove '.' from array
         array_shift($files);    // remove '..' from array
+        $array = array();
 
         foreach ($files as $file) {
             $file = Text::reduce_slashes($dir . '/' . $file);
@@ -112,4 +118,22 @@ class Dir {
         return $array;
     }
 
+    /**
+     * returns directory listing
+     * @param $dir string
+     * @return array|null
+     */
+     public static function listing($dir)
+     {
+         if ( ! file_exists($dir))
+            return array();
+        $files = scandir($dir);
+        array_shift($files);    // remove '.' from array
+        array_shift($files);    // remove '..' from array
+        $array = array();
+        foreach ($files as $file) {
+            $array[] = Text::reduce_slashes($dir . '/' . $file);
+        }
+        return $array;
+     }
 }
