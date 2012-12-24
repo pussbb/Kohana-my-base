@@ -33,10 +33,10 @@ class Tools_Coffeescript extends Tools {
             $join = ' -j '. $file_name.'.js';
             foreach($files as $file) {
                 $_source = Kohana::find_file($source_path, $file, 'coffee');
-                if (is_link($source))
-                  $source = readlink($source);
-                if ( ! $compile)
-                    $compile = self::need_compile($_source, $destination);
+                if (is_link($_source))
+                  $_source = readlink($_source);
+                if (self::need_compile($_source, $destination))
+                    $compile = TRUE;
                 $source .= ' ' . $_source;
             }
         }
