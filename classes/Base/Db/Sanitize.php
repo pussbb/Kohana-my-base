@@ -42,7 +42,7 @@ class Base_Db_Sanitize {
     {
         if ( ! $value)
             return NULL;
-        return (string)Text::xss_clean((string)$value);
+        return (string)$value;
     }
 
     /**

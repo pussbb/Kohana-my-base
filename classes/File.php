@@ -32,4 +32,5 @@ class File extends Kohana_File {
         $file_content = preg_replace($pattern, $replacement, $file_content);
         file_put_contents($file, $file_content);
     }
+
 }
