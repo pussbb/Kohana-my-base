@@ -286,7 +286,7 @@ class Pretty_Form extends Singleton
 
     /**
      * returns error if exists
-     * @param $params
+     * @param $params string
      * @return mixed
      */
     private function error($params)
@@ -297,6 +297,18 @@ class Pretty_Form extends Singleton
             $name = $params;
         }
         return Arr::get($this->errors, $name);
+    }
+
+    /**
+     * returns general error msg if exists
+     *
+     * @return mixed
+     */
+    public function general_error()
+    {
+        if ( ! $this->error('general'))
+            return;
+        return $this->render_template('general', array('name' => 'general'));
     }
 
     /**

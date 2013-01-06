@@ -1,4 +1,4 @@
-<?php
+<?php defined('SYSPATH') or die('No direct script access.');
 
 echo '<div class="control-group '. ($error ? ' error' : '').'">';
 //     if ( $label){

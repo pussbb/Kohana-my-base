@@ -5,6 +5,7 @@ $form = new Pretty_Form(array(
     'template' => 'twitter_bootstrap',
 ));
 
+echo $form->general_error();
 echo $form->open( URL::site('users/login'), array('class' => 'form-vertical', 'id' => 'loginform'));
 
 echo '<p>';

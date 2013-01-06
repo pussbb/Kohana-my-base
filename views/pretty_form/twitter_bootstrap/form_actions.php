@@ -1,3 +1,4 @@
+<?php defined('SYSPATH') or die('No direct script access.');?>
 <div class="form-actions">
     <?php
         foreach($buttons as $button)

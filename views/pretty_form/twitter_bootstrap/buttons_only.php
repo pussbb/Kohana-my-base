@@ -1,4 +1,5 @@
-<?php
+<?php defined('SYSPATH') or die('No direct script access.');
+
 foreach($buttons as $button)
 {
     echo Form::button(

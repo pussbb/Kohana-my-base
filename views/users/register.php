@@ -2,21 +2,13 @@
 <div  id="authbox" class="reg-form">
 <?php
 
-$general = Arr::get($errors, 'general');
-
-if ( $general)
-{
-    echo '<div class="alert alert-error">
-        <a class="close" data-dismiss="alert" href="#">×</a>
-                <h4 class="alert-heading">'.tr('Warning').'!</h4>
-                '.$general.'
-                </div>';
-}
 
 $form = new Pretty_Form(array(
     'errors' => $errors,
     'template' => 'twitter_bootstrap',
 ));
+
+echo $form->general_error();
 echo $form->open( URL::site('users/register'), array('class' => 'form-horizontal'));
 echo $form->legend(tr('Registration'));
 echo $form->input(array(
