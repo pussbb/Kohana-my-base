@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">109</span></a></li>
+                <span class="label label-info">170</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -57,18 +57,29 @@
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#all_codes" title="all_codes :: get all available languages code"><span class="description">get all available languages code</span><pre>all_codes()</pre></a></li>
-<li class="method public "><a href="#get" title="get :: get current lang"><span class="description">get current lang</span><pre>get()</pre></a></li>
-<li class="method public "><a href="#get_default" title="get_default :: get default lang"><span class="description">get default lang</span><pre>get_default()</pre></a></li>
-<li class="method public "><a href="#set" title="set :: set current lang"><span class="description">set current lang</span><pre>set()</pre></a></li>
-<li class="method public "><a href="#uri_check_codes" title="uri_check_codes :: php reg expr to match lang codes"><span class="description">php reg expr to match lang codes</span><pre>uri_check_codes()</pre></a></li>
-<li class="nav-header private">» Private</li>
-<li class="method private "><a href="#get_lang" title="get_lang :: get lang"><span class="description">get lang</span><pre>get_lang()</pre></a></li>
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_all_codes" title="all_codes :: get all available languages code"><span class="description">get all available languages code</span><pre>all_codes()</pre></a></li>
+<li class="method public "><a href="#method_get" title="get :: get current lang"><span class="description">get current lang</span><pre>get()</pre></a></li>
+<li class="method public "><a href="#method_get_default" title="get_default :: get default lang"><span class="description">get default lang</span><pre>get_default()</pre></a></li>
+<li class="method public "><a href="#method_set" title="set :: set current lang"><span class="description">set current lang</span><pre>set()</pre></a></li>
+<li class="method public "><a href="#method_uri_check_codes" title="uri_check_codes :: php reg expr to match lang codes"><span class="description">php reg expr to match lang codes</span><pre>uri_check_codes()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method_get_lang" title="get_lang :: get lang"><span class="description">get lang</span><pre>get_lang()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="property private "><a href="#property_lang_codes" title="$lang_codes :: "><span class="description"></span><pre>$lang_codes</pre></a></li></ul>
+</li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CBase_Language" id="\Base_Language"></a><ul class="breadcrumb">
+<a id="\Base_Language"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
@@ -77,10 +88,10 @@
 <span class="divider">\</span><a href="../classes/Base_Language.html">Base_Language</a>
 </li>
 </ul>
-<div href="../classes/Base_Language.html" class="element class">
+<div class="element class">
 <p class="short_description">Class to manipulate with user Lang</p>
 <div class="details">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>package</th>
@@ -113,12 +124,12 @@
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="all_codes" id="all_codes"></a><div class="element clickable method public all_codes" data-toggle="collapse" data-target=".all_codes .collapse">
+<a id="method_all_codes"></a><div class="element clickable method public method_all_codes" data-toggle="collapse" data-target=".method_all_codes .collapse">
 <h2>get all available languages code</h2>
 <pre>all_codes() : array</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>static</th>
 <td></td>
@@ -127,12 +138,12 @@
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="get" id="get"></a><div class="element clickable method public get" data-toggle="collapse" data-target=".get .collapse">
+<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
 <h2>get current lang</h2>
 <pre>get(mixed $lang) : \language</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>static</th>
 <td></td>
@@ -147,12 +158,12 @@
 <code>\language</code>(model object)</div>
 </div></div>
 </div>
-<a name="get_default" id="get_default"></a><div class="element clickable method public get_default" data-toggle="collapse" data-target=".get_default .collapse">
+<a id="method_get_default"></a><div class="element clickable method public method_get_default" data-toggle="collapse" data-target=".method_get_default .collapse">
 <h2>get default lang</h2>
 <pre>get_default() : \default</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>static</th>
 <td></td>
@@ -162,29 +173,28 @@
 <code>\default</code>language (model object)</div>
 </div></div>
 </div>
-<a name="set" id="set"></a><div class="element clickable method public set" data-toggle="collapse" data-target=".set .collapse">
+<a id="method_set"></a><div class="element clickable method public method_set" data-toggle="collapse" data-target=".method_set .collapse">
 <h2>set current lang</h2>
-<pre>set(\$language $language) </pre>
-<div class="labels"></div>
+<pre>set($language) </pre>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>static</th>
 <td></td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$language</h4>
-<code>\$language</code><p>(model object)</p>
+<h4>$language</h4><p>(model object)</p>
 </div>
 </div></div>
 </div>
-<a name="uri_check_codes" id="uri_check_codes"></a><div class="element clickable method public uri_check_codes" data-toggle="collapse" data-target=".uri_check_codes .collapse">
+<a id="method_uri_check_codes"></a><div class="element clickable method public method_uri_check_codes" data-toggle="collapse" data-target=".method_uri_check_codes .collapse">
 <h2>php reg expr to match lang codes</h2>
 <pre>uri_check_codes() : array</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>static</th>
 <td></td>
@@ -193,12 +203,12 @@
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="get_lang" id="get_lang"></a><div class="element clickable method private get_lang" data-toggle="collapse" data-target=".get_lang .collapse">
+<a id="method_get_lang"></a><div class="element clickable method private method_get_lang" data-toggle="collapse" data-target=".method_get_lang .collapse">
 <h2>get lang</h2>
 <pre>get_lang(string $code) : \language</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>static</th>
 <td></td>
@@ -212,14 +222,22 @@
 <code>\language</code>(model object)</div>
 </div></div>
 </div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_lang_codes"> </a><div class="element clickable property private property_lang_codes" data-toggle="collapse" data-target=".property_lang_codes .collapse">
+<h2></h2>
+<pre>$lang_codes </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-15T09:46:04+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-01-07T10:48:42+02:00.<br></footer></div>
 </div>
 </body>
 </html>

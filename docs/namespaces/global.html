@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">109</span></a></li>
+                <span class="label label-info">170</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -73,33 +73,31 @@
 <div class="namespace-indent">
 <h3>
 <i class="icon-custom icon-function"></i> Functions</h3>
-<a name="debug" id="debug"></a><div class="element clickable function  debug" data-toggle="collapse" data-target=".debug .collapse">
+<a id="function_debug"></a><div class="element clickable function  function_debug" data-toggle="collapse" data-target=".function_debug .collapse">
 <h2>helper function to print dump of var and exit if needed</h2>
 <pre>debug() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="tr" id="tr"></a><div class="element clickable function  tr" data-toggle="collapse" data-target=".tr .collapse">
+<a id="function_tr"></a><div class="element clickable function  function_tr" data-toggle="collapse" data-target=".function_tr .collapse">
 <h2>translate string via gettext
 or Kohana's translation function</h2>
-<pre>tr(\$string $string, array $values) : string</pre>
+<pre>tr($string, array $values) : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$string</h4>
-<code>\$string</code><p>string</p></div>
+<h4>$string</h4><p>string</p></div>
 <div class="subelement argument">
-<h4>$values</h4>
-<code>\$values</code><p>array</p></div>
+<h4>$values</h4><p>array</p></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <h3>
 <i class="icon-custom icon-class"></i> Classes and interfaces</h3>
-<a name="Acl" id="Acl"></a><div class="element ajax clickable class" href="../classes/Acl.html">
+<div id="Acl" class="element ajax clickable class">
 <h1>Acl<a href="../classes/Acl.html">¶</a>
 </h1>
 <p class="short_description">Class to check user permissions for some actions
@@ -109,42 +107,91 @@ or Kohana's translation function</h2>
 <div class="details collapse"></div>
 <a href="../classes/Acl.html" class="more">« More »</a>
 </div>
-<a name="Admin_Modules" id="Admin_Modules"></a><div class="element ajax clickable class" href="../classes/Admin_Modules.html">
+<div id="Admin_Modules" class="element ajax clickable class">
 <h1>Admin_Modules<a href="../classes/Admin_Modules.html">¶</a>
 </h1>
 <p class="short_description">Module</p>
 <div class="details collapse"></div>
 <a href="../classes/Admin_Modules.html" class="more">« More »</a>
 </div>
-<a name="Auth" id="Auth"></a><div class="element ajax clickable class" href="../classes/Auth.html">
+<div id="Auth" class="element ajax clickable class">
 <h1>Auth<a href="../classes/Auth.html">¶</a>
 </h1>
 <p class="short_description">Class to check user(registered user, or just visitor .</p>
 <div class="details collapse"></div>
 <a href="../classes/Auth.html" class="more">« More »</a>
 </div>
-<a name="Base_Acl" id="Base_Acl"></a><div class="element ajax clickable class" href="../classes/Base_Acl.html">
+<div id="Base_Acl" class="element ajax clickable class">
 <h1>Base_Acl<a href="../classes/Base_Acl.html">¶</a>
 </h1>
 <p class="short_description">Base class to check user permision for some request</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_Acl.html" class="more">« More »</a>
 </div>
-<a name="Base_Auth" id="Base_Auth"></a><div class="element ajax clickable class" href="../classes/Base_Auth.html">
+<div id="Base_Auth" class="element ajax clickable class">
 <h1>Base_Auth<a href="../classes/Base_Auth.html">¶</a>
 </h1>
 <p class="short_description">Base class to manage roles for user</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_Auth.html" class="more">« More »</a>
 </div>
-<a name="Base_Date" id="Base_Date"></a><div class="element ajax clickable class" href="../classes/Base_Date.html">
+<div id="Base_Date" class="element ajax clickable class">
 <h1>Base_Date<a href="../classes/Base_Date.html">¶</a>
 </h1>
 <p class="short_description">Class wich adds some extra functions to Date class in Kohana</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_Date.html" class="more">« More »</a>
 </div>
-<a name="Base_Db_Sanitize" id="Base_Db_Sanitize"></a><div class="element ajax clickable class" href="../classes/Base_Db_Sanitize.html">
+<div id="Base_Db_Exception_EmptyColumnName" class="element ajax clickable class">
+<h1>Base_Db_Exception_EmptyColumnName<a href="../classes/Base_Db_Exception_EmptyColumnName.html">¶</a>
+</h1>
+<p class="short_description">DB Exception item not found in database table</p>
+<div class="details collapse"></div>
+<a href="../classes/Base_Db_Exception_EmptyColumnName.html" class="more">« More »</a>
+</div>
+<div id="Base_Db_Exception_MetaDataFieldMissing" class="element ajax clickable class">
+<h1>Base_Db_Exception_MetaDataFieldMissing<a href="../classes/Base_Db_Exception_MetaDataFieldMissing.html">¶</a>
+</h1>
+<p class="short_description">DB Exception item not found in database table</p>
+<div class="details collapse"></div>
+<a href="../classes/Base_Db_Exception_MetaDataFieldMissing.html" class="more">« More »</a>
+</div>
+<div id="Base_Db_Exception_NoRowEffected" class="element ajax clickable class">
+<h1>Base_Db_Exception_NoRowEffected<a href="../classes/Base_Db_Exception_NoRowEffected.html">¶</a>
+</h1>
+<p class="short_description">DB Exception item not found in database table</p>
+<div class="details collapse"></div>
+<a href="../classes/Base_Db_Exception_NoRowEffected.html" class="more">« More »</a>
+</div>
+<div id="Base_Db_Exception_RecordNotFound" class="element ajax clickable class">
+<h1>Base_Db_Exception_RecordNotFound<a href="../classes/Base_Db_Exception_RecordNotFound.html">¶</a>
+</h1>
+<p class="short_description">DB Exception item not found in database table</p>
+<div class="details collapse"></div>
+<a href="../classes/Base_Db_Exception_RecordNotFound.html" class="more">« More »</a>
+</div>
+<div id="Base_Db_Exception_UnknownDatabaseQueryType" class="element ajax clickable class">
+<h1>Base_Db_Exception_UnknownDatabaseQueryType<a href="../classes/Base_Db_Exception_UnknownDatabaseQueryType.html">¶</a>
+</h1>
+<p class="short_description">DB Exception item not found in database table</p>
+<div class="details collapse"></div>
+<a href="../classes/Base_Db_Exception_UnknownDatabaseQueryType.html" class="more">« More »</a>
+</div>
+<div id="Base_Db_Exception_UnknownRelationType" class="element ajax clickable class">
+<h1>Base_Db_Exception_UnknownRelationType<a href="../classes/Base_Db_Exception_UnknownRelationType.html">¶</a>
+</h1>
+<p class="short_description">DB Exception item not found in database table</p>
+<div class="details collapse"></div>
+<a href="../classes/Base_Db_Exception_UnknownRelationType.html" class="more">« More »</a>
+</div>
+<div id="Base_Db_Model" class="element ajax clickable class">
+<h1>Base_Db_Model<a href="../classes/Base_Db_Model.html">¶</a>
+</h1>
+<p class="short_description">Class to work with db queries easily</p>
+<div class="details collapse"></div>
+<a href="../classes/Base_Db_Model.html" class="more">« More »</a>
+</div>
+<div id="Base_Db_Sanitize" class="element ajax clickable class">
 <h1>Base_Db_Sanitize<a href="../classes/Base_Db_Sanitize.html">¶</a>
 </h1>
 <p class="short_description">Class to clean values in query
@@ -152,77 +199,77 @@ and convert them to type of the database table column type</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_Db_Sanitize.html" class="more">« More »</a>
 </div>
-<a name="Base_Db_Validation" id="Base_Db_Validation"></a><div class="element ajax clickable class" href="../classes/Base_Db_Validation.html">
+<div id="Base_Db_Validation" class="element ajax clickable class">
 <h1>Base_Db_Validation<a href="../classes/Base_Db_Validation.html">¶</a>
 </h1>
 <p class="short_description">Class to validate values in query according their type in db</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_Db_Validation.html" class="more">« More »</a>
 </div>
-<a name="Base_Gettext" id="Base_Gettext"></a><div class="element ajax clickable class" href="../classes/Base_Gettext.html">
+<div id="Base_Gettext" class="element ajax clickable class">
 <h1>Base_Gettext<a href="../classes/Base_Gettext.html">¶</a>
 </h1>
 <p class="short_description">Class adds extra functionality to Kohana_self to support tr from gettext</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_Gettext.html" class="more">« More »</a>
 </div>
-<a name="Base_Language" id="Base_Language"></a><div class="element ajax clickable class" href="../classes/Base_Language.html">
+<div id="Base_Language" class="element ajax clickable class">
 <h1>Base_Language<a href="../classes/Base_Language.html">¶</a>
 </h1>
 <p class="short_description">Class to manipulate with user Lang</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_Language.html" class="more">« More »</a>
 </div>
-<a name="Base_Media" id="Base_Media"></a><div class="element ajax clickable class" href="../classes/Base_Media.html">
+<div id="Base_Media" class="element ajax clickable class">
 <h1>Base_Media<a href="../classes/Base_Media.html">¶</a>
 </h1>
 <p class="short_description">Class to add javascripts and CSS to the main template</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_Media.html" class="more">« More »</a>
 </div>
-<a name="Base_Model" id="Base_Model"></a><div class="element ajax clickable class" href="../classes/Base_Model.html">
+<div id="Base_Model" class="element ajax clickable class">
 <h1>Base_Model<a href="../classes/Base_Model.html">¶</a>
 </h1>
 <p class="short_description">Class to work with db queries easily</p>
 <div class="details collapse"></div>
 <a href="../classes/Base_Model.html" class="more">« More »</a>
 </div>
-<a name="Collection" id="Collection"></a><div class="element ajax clickable class" href="../classes/Collection.html">
+<div id="Collection" class="element ajax clickable class">
 <h1>Collection<a href="../classes/Collection.html">¶</a>
 </h1>
 <p class="short_description">Manipulate with array of objects</p>
 <div class="details collapse"></div>
 <a href="../classes/Collection.html" class="more">« More »</a>
 </div>
-<a name="Controller_Base_Core" id="Controller_Base_Core"></a><div class="element ajax clickable class" href="../classes/Controller_Base_Core.html">
+<div id="Controller_Base_Core" class="element ajax clickable class">
 <h1>Controller_Base_Core<a href="../classes/Controller_Base_Core.html">¶</a>
 </h1>
 <p class="short_description">Core template wich extends functionality of Controller_Template</p>
 <div class="details collapse"></div>
 <a href="../classes/Controller_Base_Core.html" class="more">« More »</a>
 </div>
-<a name="Controller_Core" id="Controller_Core"></a><div class="element ajax clickable class" href="../classes/Controller_Core.html">
+<div id="Controller_Core" class="element ajax clickable class">
 <h1>Controller_Core<a href="../classes/Controller_Core.html">¶</a>
 </h1>
 <p class="short_description">Core template wich extends functionality of Controller_Template</p>
 <div class="details collapse"></div>
 <a href="../classes/Controller_Core.html" class="more">« More »</a>
 </div>
-<a name="Controller_Languages" id="Controller_Languages"></a><div class="element ajax clickable class" href="../classes/Controller_Languages.html">
+<div id="Controller_Languages" class="element ajax clickable class">
 <h1>Controller_Languages<a href="../classes/Controller_Languages.html">¶</a>
 </h1>
 <p class="short_description">Core template wich extends functionality of Controller_Template</p>
 <div class="details collapse"></div>
 <a href="../classes/Controller_Languages.html" class="more">« More »</a>
 </div>
-<a name="Controller_Translations" id="Controller_Translations"></a><div class="element ajax clickable class" href="../classes/Controller_Translations.html">
+<div id="Controller_Translations" class="element ajax clickable class">
 <h1>Controller_Translations<a href="../classes/Controller_Translations.html">¶</a>
 </h1>
 <p class="short_description">Core template wich extends functionality of Controller_Template</p>
 <div class="details collapse"></div>
 <a href="../classes/Controller_Translations.html" class="more">« More »</a>
 </div>
-<a name="Controller_Users" id="Controller_Users"></a><div class="element ajax clickable class" href="../classes/Controller_Users.html">
+<div id="Controller_Users" class="element ajax clickable class">
 <h1>Controller_Users<a href="../classes/Controller_Users.html">¶</a>
 </h1>
 <p class="short_description">Kohana-my-base
@@ -231,140 +278,182 @@ with main goal make developing web applications more easily(as for me)</p>
 <div class="details collapse"></div>
 <a href="../classes/Controller_Users.html" class="more">« More »</a>
 </div>
-<a name="Date" id="Date"></a><div class="element ajax clickable class" href="../classes/Date.html">
+<div id="Date" class="element ajax clickable class">
 <h1>Date<a href="../classes/Date.html">¶</a>
 </h1>
 <p class="short_description">Date class just to make easy call of Base_Date functions</p>
 <div class="details collapse"></div>
 <a href="../classes/Date.html" class="more">« More »</a>
 </div>
-<a name="Dir" id="Dir"></a><div class="element ajax clickable class" href="../classes/Dir.html">
+<div id="Dir" class="element ajax clickable class">
 <h1>Dir<a href="../classes/Dir.html">¶</a>
 </h1>
 <p class="short_description">Helper functions to work with directories</p>
 <div class="details collapse"></div>
 <a href="../classes/Dir.html" class="more">« More »</a>
 </div>
-<a name="Error" id="Error"></a><div class="element ajax clickable class" href="../classes/Error.html">
+<div id="Error" class="element ajax clickable class">
 <h1>Error<a href="../classes/Error.html">¶</a>
 </h1>
 <p class="short_description">Class .</p>
 <div class="details collapse"></div>
 <a href="../classes/Error.html" class="more">« More »</a>
 </div>
-<a name="Exception_Json" id="Exception_Json"></a><div class="element ajax clickable class" href="../classes/Exception_Json.html">
+<div id="Exception_Collection_InvalidArray" class="element ajax clickable class">
+<h1>Exception_Collection_InvalidArray<a href="../classes/Exception_Collection_InvalidArray.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/Exception_Collection_InvalidArray.html" class="more">« More »</a>
+</div>
+<div id="Exception_Collection_ObjectNotSupported" class="element ajax clickable class">
+<h1>Exception_Collection_ObjectNotSupported<a href="../classes/Exception_Collection_ObjectNotSupported.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/Exception_Collection_ObjectNotSupported.html" class="more">« More »</a>
+</div>
+<div id="Exception_Collection_PropertyNotExists" class="element ajax clickable class">
+<h1>Exception_Collection_PropertyNotExists<a href="../classes/Exception_Collection_PropertyNotExists.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/Exception_Collection_PropertyNotExists.html" class="more">« More »</a>
+</div>
+<div id="Exception_Json" class="element ajax clickable class">
 <h1>Exception_Json<a href="../classes/Exception_Json.html">¶</a>
 </h1>
 <p class="short_description">sets human readable message for json_last_error</p>
 <div class="details collapse"></div>
 <a href="../classes/Exception_Json.html" class="more">« More »</a>
 </div>
-<a name="Exception_Tools" id="Exception_Tools"></a><div class="element ajax clickable class" href="../classes/Exception_Tools.html">
+<div id="Exception_MethodNotExists" class="element ajax clickable class">
+<h1>Exception_MethodNotExists<a href="../classes/Exception_MethodNotExists.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/Exception_MethodNotExists.html" class="more">« More »</a>
+</div>
+<div id="Exception_ModelNotFound" class="element ajax clickable class">
+<h1>Exception_ModelNotFound<a href="../classes/Exception_ModelNotFound.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/Exception_ModelNotFound.html" class="more">« More »</a>
+</div>
+<div id="Exception_Tools" class="element ajax clickable class">
 <h1>Exception_Tools<a href="../classes/Exception_Tools.html">¶</a>
 </h1>
 <p class="short_description">sets human readable message for external console applications</p>
 <div class="details collapse"></div>
 <a href="../classes/Exception_Tools.html" class="more">« More »</a>
 </div>
-<a name="Exception_Tools_Missing" id="Exception_Tools_Missing"></a><div class="element ajax clickable class" href="../classes/Exception_Tools_Missing.html">
+<div id="Exception_Tools_Missing" class="element ajax clickable class">
 <h1>Exception_Tools_Missing<a href="../classes/Exception_Tools_Missing.html">¶</a>
 </h1>
 <p class="short_description">sets human readable message for external console applications</p>
 <div class="details collapse"></div>
 <a href="../classes/Exception_Tools_Missing.html" class="more">« More »</a>
 </div>
-<a name="File" id="File"></a><div class="element ajax clickable class" href="../classes/File.html">
+<div id="File" class="element ajax clickable class">
 <h1>File<a href="../classes/File.html">¶</a>
 </h1>
 <p class="short_description">Helper functions to work with files</p>
 <div class="details collapse"></div>
 <a href="../classes/File.html" class="more">« More »</a>
 </div>
-<a name="Gettext" id="Gettext"></a><div class="element ajax clickable class" href="../classes/Gettext.html">
+<div id="Gettext" class="element ajax clickable class">
 <h1>Gettext<a href="../classes/Gettext.html">¶</a>
 </h1>
 <p class="short_description">Gettext support</p>
 <div class="details collapse"></div>
 <a href="../classes/Gettext.html" class="more">« More »</a>
 </div>
-<a name="HTTP_Exception" id="HTTP_Exception"></a><div class="element ajax clickable class" href="../classes/HTTP_Exception.html">
+<div id="HTTP_Exception" class="element ajax clickable class">
 <h1>HTTP_Exception<a href="../classes/HTTP_Exception.html">¶</a>
 </h1>
 <p class="short_description"></p>
 <div class="details collapse"></div>
 <a href="../classes/HTTP_Exception.html" class="more">« More »</a>
 </div>
-<a name="Helper_Model" id="Helper_Model"></a><div class="element ajax clickable class" href="../classes/Helper_Model.html">
+<div id="Helper_Model" class="element ajax clickable class">
 <h1>Helper_Model<a href="../classes/Helper_Model.html">¶</a>
 </h1>
 <p class="short_description"></p>
 <div class="details collapse"></div>
 <a href="../classes/Helper_Model.html" class="more">« More »</a>
 </div>
-<a name="Language" id="Language"></a><div class="element ajax clickable class" href="../classes/Language.html">
+<div id="Language" class="element ajax clickable class">
 <h1>Language<a href="../classes/Language.html">¶</a>
 </h1>
 <p class="short_description">Class to manipulate with user Lang</p>
 <div class="details collapse"></div>
 <a href="../classes/Language.html" class="more">« More »</a>
 </div>
-<a name="Media" id="Media"></a><div class="element ajax clickable class" href="../classes/Media.html">
+<div id="Media" class="element ajax clickable class">
 <h1>Media<a href="../classes/Media.html">¶</a>
 </h1>
 <p class="short_description">Class just to make easy call Base_Media functions</p>
 <div class="details collapse"></div>
 <a href="../classes/Media.html" class="more">« More »</a>
 </div>
-<a name="Model" id="Model"></a><div class="element ajax clickable class" href="../classes/Model.html">
+<div id="Model" class="element ajax clickable class">
 <h1>Model<a href="../classes/Model.html">¶</a>
 </h1>
 <p class="short_description">Helper class to work with Base_Model</p>
 <div class="details collapse"></div>
 <a href="../classes/Model.html" class="more">« More »</a>
 </div>
-<a name="Model_Access_Rule" id="Model_Access_Rule"></a><div class="element ajax clickable class" href="../classes/Model_Access_Rule.html">
+<div id="Model_Access_Rule" class="element ajax clickable class">
 <h1>Model_Access_Rule<a href="../classes/Model_Access_Rule.html">¶</a>
 </h1>
 <p class="short_description">Helper class to work with Base_Model</p>
 <div class="details collapse"></div>
 <a href="../classes/Model_Access_Rule.html" class="more">« More »</a>
 </div>
-<a name="Model_Language" id="Model_Language"></a><div class="element ajax clickable class" href="../classes/Model_Language.html">
+<div id="Model_Language" class="element ajax clickable class">
 <h1>Model_Language<a href="../classes/Model_Language.html">¶</a>
 </h1>
 <p class="short_description">Helper class to work with Base_Model</p>
 <div class="details collapse"></div>
 <a href="../classes/Model_Language.html" class="more">« More »</a>
 </div>
-<a name="Model_User" id="Model_User"></a><div class="element ajax clickable class" href="../classes/Model_User.html">
+<div id="Model_User" class="element ajax clickable class">
 <h1>Model_User<a href="../classes/Model_User.html">¶</a>
 </h1>
 <p class="short_description">Helper class to work with Base_Model</p>
 <div class="details collapse"></div>
 <a href="../classes/Model_User.html" class="more">« More »</a>
 </div>
-<a name="Object" id="Object"></a><div class="element ajax clickable class" href="../classes/Object.html">
+<div id="Num" class="element ajax clickable class">
+<h1>Num<a href="../classes/Num.html">¶</a>
+</h1>
+<p class="short_description">get form http://pastie.org/981503</p>
+<div class="details collapse"></div>
+<a href="../classes/Num.html" class="more">« More »</a>
+</div>
+<div id="Object" class="element ajax clickable class">
 <h1>Object<a href="../classes/Object.html">¶</a>
 </h1>
 <p class="short_description">Helper class to safe get value from object</p>
 <div class="details collapse"></div>
 <a href="../classes/Object.html" class="more">« More »</a>
 </div>
-<a name="Pretty_Form" id="Pretty_Form"></a><div class="element ajax clickable class" href="../classes/Pretty_Form.html">
+<div id="Pretty_Form" class="element ajax clickable class">
 <h1>Pretty_Form<a href="../classes/Pretty_Form.html">¶</a>
 </h1>
 <p class="short_description">Helper class to render forms</p>
 <div class="details collapse"></div>
 <a href="../classes/Pretty_Form.html" class="more">« More »</a>
 </div>
-<a name="Request" id="Request"></a><div class="element ajax clickable class" href="../classes/Request.html">
+<div id="Request" class="element ajax clickable class">
 <h1>Request<a href="../classes/Request.html">¶</a>
 </h1>
 <p class="short_description">Hack</p>
 <div class="details collapse"></div>
 <a href="../classes/Request.html" class="more">« More »</a>
 </div>
-<a name="Singleton" id="Singleton"></a><div class="element ajax clickable class" href="../classes/Singleton.html">
+<div id="Singleton" class="element ajax clickable class">
 <h1>Singleton<a href="../classes/Singleton.html">¶</a>
 </h1>
 <p class="short_description">Kohana-my-base
@@ -373,42 +462,42 @@ with main goal make developing web applications more easily(as for me)</p>
 <div class="details collapse"></div>
 <a href="../classes/Singleton.html" class="more">« More »</a>
 </div>
-<a name="Text" id="Text"></a><div class="element ajax clickable class" href="../classes/Text.html">
+<div id="Text" class="element ajax clickable class">
 <h1>Text<a href="../classes/Text.html">¶</a>
 </h1>
 <p class="short_description">Class to add some extra functionality to Kohana's class Text</p>
 <div class="details collapse"></div>
 <a href="../classes/Text.html" class="more">« More »</a>
 </div>
-<a name="Tools" id="Tools"></a><div class="element ajax clickable class" href="../classes/Tools.html">
+<div id="Tools" class="element ajax clickable class">
 <h1>Tools<a href="../classes/Tools.html">¶</a>
 </h1>
 <p class="short_description">main class to execute some external console app</p>
 <div class="details collapse"></div>
 <a href="../classes/Tools.html" class="more">« More »</a>
 </div>
-<a name="Tools_Coffeescript" id="Tools_Coffeescript"></a><div class="element ajax clickable class" href="../classes/Tools_Coffeescript.html">
+<div id="Tools_Coffeescript" class="element ajax clickable class">
 <h1>Tools_Coffeescript<a href="../classes/Tools_Coffeescript.html">¶</a>
 </h1>
 <p class="short_description">Compile cafeescript into js file</p>
 <div class="details collapse"></div>
 <a href="../classes/Tools_Coffeescript.html" class="more">« More »</a>
 </div>
-<a name="Tools_Language" id="Tools_Language"></a><div class="element ajax clickable class" href="../classes/Tools_Language.html">
+<div id="Tools_Language" class="element ajax clickable class">
 <h1>Tools_Language<a href="../classes/Tools_Language.html">¶</a>
 </h1>
 <p class="short_description">Parse php files for translatable items and creates or update tr files</p>
 <div class="details collapse"></div>
 <a href="../classes/Tools_Language.html" class="more">« More »</a>
 </div>
-<a name="Tools_Less" id="Tools_Less"></a><div class="element ajax clickable class" href="../classes/Tools_Less.html">
+<div id="Tools_Less" class="element ajax clickable class">
 <h1>Tools_Less<a href="../classes/Tools_Less.html">¶</a>
 </h1>
 <p class="short_description">Class to compile less file into css file</p>
 <div class="details collapse"></div>
 <a href="../classes/Tools_Less.html" class="more">« More »</a>
 </div>
-<a name="Tools_Media" id="Tools_Media"></a><div class="element ajax clickable class" href="../classes/Tools_Media.html">
+<div id="Tools_Media" class="element ajax clickable class">
 <h1>Tools_Media<a href="../classes/Tools_Media.html">¶</a>
 </h1>
 <p class="short_description">Execute some external usefull tools (beautify and minize)
@@ -416,14 +505,21 @@ http://ariya.ofilabs.com/2011/10/javascript-tools-for-continuous-integration.htm
 <div class="details collapse"></div>
 <a href="../classes/Tools_Media.html" class="more">« More »</a>
 </div>
-<a name="URL" id="URL"></a><div class="element ajax clickable class" href="../classes/URL.html">
+<div id="URL" class="element ajax clickable class">
 <h1>URL<a href="../classes/URL.html">¶</a>
 </h1>
 <p class="short_description"></p>
 <div class="details collapse"></div>
 <a href="../classes/URL.html" class="more">« More »</a>
 </div>
-<a name="Valid" id="Valid"></a><div class="element ajax clickable class" href="../classes/Valid.html">
+<div id="Upload" class="element ajax clickable class">
+<h1>Upload<a href="../classes/Upload.html">¶</a>
+</h1>
+<p class="short_description">Extending Kohana Upload helper</p>
+<div class="details collapse"></div>
+<a href="../classes/Upload.html" class="more">« More »</a>
+</div>
+<div id="Valid" class="element ajax clickable class">
 <h1>Valid<a href="../classes/Valid.html">¶</a>
 </h1>
 <p class="short_description">additional checks from http://www.maheshchari.com/60-validation-functions-with-php-2-part/</p>
@@ -435,8 +531,8 @@ http://ariya.ofilabs.com/2011/10/javascript-tools-for-continuous-integration.htm
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-15T09:46:03+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-01-07T10:48:42+02:00.<br></footer></div>
 </div>
 </body>
 </html>
