@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">109</span></a></li>
+                <span class="label label-info">170</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -57,107 +57,146 @@
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public inherited"><a href="#add_error" title="add_error :: add error message to errors list"><span class="description">add error message to errors list</span><pre>add_error()</pre></a></li>
-<li class="method public "><a href="#before_save" title="before_save :: user function to make some operations before saving"><span class="description">user function to make some operations before saving</span><pre>before_save()</pre></a></li>
-<li class="method public inherited"><a href="#errors" title="errors :: returns assoc array with all errors"><span class="description">returns assoc array with all errors</span><pre>errors()</pre></a></li>
-<li class="method public inherited"><a href="#filter" title="filter :: Helper function to create WHERE clause"><span class="description">Helper function to create WHERE clause</span><pre>filter()</pre></a></li>
-<li class="method public inherited"><a href="#find" title="find :: find record in database table by condition"><span class="description">find record in database table by condition</span><pre>find()</pre></a></li>
-<li class="method public inherited"><a href="#find_all" title="find_all :: find a collections of rows in database table"><span class="description">find a collections of rows in database table</span><pre>find_all()</pre></a></li>
-<li class="method public inherited"><a href="#get_table_columns" title="get_table_columns :: gets table columns"><span class="description">gets table columns</span><pre>get_table_columns()</pre></a></li>
-<li class="method public inherited"><a href="#insert" title="insert :: sets parameters for INSERT query"><span class="description">sets parameters for INSERT query</span><pre>insert()</pre></a></li>
-<li class="method public "><a href="#labels" title="labels :: user function to define representative labels for table fields"><span class="description">user function to define representative labels for table fields</span><pre>labels()</pre></a></li>
-<li class="method public inherited"><a href="#last_inserted_id" title="last_inserted_id :: returns last inserted id"><span class="description">returns last inserted id</span><pre>last_inserted_id()</pre></a></li>
-<li class="method public inherited"><a href="#last_query" title="last_query :: returns last executed query"><span class="description">returns last executed query</span><pre>last_query()</pre></a></li>
-<li class="method public "><a href="#login" title="login :: "><span class="description">login()
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public inherited"><a href="#method_add_error" title="add_error :: add error message to errors list"><span class="description">add error message to errors list</span><pre>add_error()</pre></a></li>
+<li class="method public "><a href="#method_before_save" title="before_save :: user function to make some operations before saving"><span class="description">user function to make some operations before saving</span><pre>before_save()</pre></a></li>
+<li class="method public inherited"><a href="#method_delete_query" title="delete_query :: Helper function to return Kohana_DB DELETE object
+ data parsed throw Kohana My Base Model"><span class="description">Helper function to return Kohana_DB DELETE object
+ data parsed throw Kohana My Base Model</span><pre>delete_query()</pre></a></li>
+<li class="method public inherited"><a href="#method_errors" title="errors :: returns assoc array with all errors"><span class="description">returns assoc array with all errors</span><pre>errors()</pre></a></li>
+<li class="method public inherited"><a href="#method_filter" title="filter :: Helper function to create WHERE clause"><span class="description">Helper function to create WHERE clause</span><pre>filter()</pre></a></li>
+<li class="method public inherited"><a href="#method_find" title="find :: find record in database table by condition"><span class="description">find record in database table by condition</span><pre>find()</pre></a></li>
+<li class="method public inherited"><a href="#method_find_all" title="find_all :: find a collections of rows in database table"><span class="description">find a collections of rows in database table</span><pre>find_all()</pre></a></li>
+<li class="method public inherited"><a href="#method_getIterator" title="getIterator :: Get an interator for the data"><span class="description">Get an interator for the data</span><pre>getIterator()</pre></a></li>
+<li class="method public inherited"><a href="#method_get_table_columns" title="get_table_columns :: gets table columns"><span class="description">gets table columns</span><pre>get_table_columns()</pre></a></li>
+<li class="method public inherited"><a href="#method_insert" title="insert :: sets parameters for INSERT query"><span class="description">sets parameters for INSERT query</span><pre>insert()</pre></a></li>
+<li class="method public inherited"><a href="#method_insert_query" title="insert_query :: Helper function to return Kohana_DB INSERT object
+ data parsed throw Kohana My Base Model"><span class="description">Helper function to return Kohana_DB INSERT object
+ data parsed throw Kohana My Base Model</span><pre>insert_query()</pre></a></li>
+<li class="method public "><a href="#method_labels" title="labels :: user function to define representative labels for table fields"><span class="description">user function to define representative labels for table fields</span><pre>labels()</pre></a></li>
+<li class="method public inherited"><a href="#method_last_inserted_id" title="last_inserted_id :: returns last inserted id"><span class="description">returns last inserted id</span><pre>last_inserted_id()</pre></a></li>
+<li class="method public inherited"><a href="#method_last_query" title="last_query :: returns last executed query"><span class="description">returns last executed query</span><pre>last_query()</pre></a></li>
+<li class="method public "><a href="#method_login" title="login :: "><span class="description">login()
         </span><pre>login()</pre></a></li>
-<li class="method public inherited"><a href="#meta_data" title="meta_data :: returns encoded data from  table column meta_data(json encoded string)"><span class="description">returns encoded data from  table column meta_data(json encoded string)</span><pre>meta_data()</pre></a></li>
-<li class="method public inherited"><a href="#meta_item" title="meta_item :: returns value of some item in meta_data field"><span class="description">returns value of some item in meta_data field</span><pre>meta_item()</pre></a></li>
-<li class="method public inherited"><a href="#module_name" title="module_name :: Returns model name"><span class="description">Returns model name</span><pre>module_name()</pre></a></li>
-<li class="method public inherited"><a href="#new_record" title="new_record :: check if model has primary key"><span class="description">check if model has primary key</span><pre>new_record()</pre></a></li>
-<li class="method public "><a href="#register" title="register :: "><span class="description">register()
+<li class="method public inherited"><a href="#method_meta_data" title="meta_data :: returns encoded data from  table column meta_data(json encoded string)"><span class="description">returns encoded data from  table column meta_data(json encoded string)</span><pre>meta_data()</pre></a></li>
+<li class="method public inherited"><a href="#method_meta_item" title="meta_item :: returns value of some item in meta_data field"><span class="description">returns value of some item in meta_data field</span><pre>meta_item()</pre></a></li>
+<li class="method public inherited"><a href="#method_module_name" title="module_name :: Returns model name"><span class="description">Returns model name</span><pre>module_name()</pre></a></li>
+<li class="method public inherited"><a href="#method_new_record" title="new_record :: check if model has primary key"><span class="description">check if model has primary key</span><pre>new_record()</pre></a></li>
+<li class="method public inherited"><a href="#method_offsetExists" title="offsetExists :: Check if the given item exists"><span class="description">Check if the given item exists</span><pre>offsetExists()</pre></a></li>
+<li class="method public inherited"><a href="#method_offsetGet" title="offsetGet :: Get the given item"><span class="description">Get the given item</span><pre>offsetGet()</pre></a></li>
+<li class="method public inherited"><a href="#method_offsetSet" title="offsetSet :: Set the given header"><span class="description">Set the given header</span><pre>offsetSet()</pre></a></li>
+<li class="method public inherited"><a href="#method_offsetUnset" title="offsetUnset :: Unset the given item"><span class="description">Unset the given item</span><pre>offsetUnset()</pre></a></li>
+<li class="method public inherited"><a href="#method_query" title="query :: Helper function to return Kohana_DB object
+ data parsed throw Kohana My Base Model"><span class="description">Helper function to return Kohana_DB object
+ data parsed throw Kohana My Base Model</span><pre>query()</pre></a></li>
+<li class="method public "><a href="#method_register" title="register :: "><span class="description">register()
         </span><pre>register()</pre></a></li>
-<li class="method public "><a href="#registration_rules" title="registration_rules :: "><span class="description">registration_rules()
+<li class="method public "><a href="#method_registration_rules" title="registration_rules :: "><span class="description">registration_rules()
         </span><pre>registration_rules()</pre></a></li>
-<li class="method public "><a href="#relations" title="relations :: sets relations for external models to this model"><span class="description">sets relations for external models to this model</span><pre>relations()</pre></a></li>
-<li class="method public "><a href="#rules" title="rules :: user function to define validation rules"><span class="description">user function to define validation rules</span><pre>rules()</pre></a></li>
-<li class="method public inherited"><a href="#save" title="save :: function that execute query with user callback functions"><span class="description">function that execute query with user callback functions</span><pre>save()</pre></a></li>
-<li class="method public inherited"><a href="#select" title="select :: set parameters for SELECT query"><span class="description">set parameters for SELECT query</span><pre>select()</pre></a></li>
-<li class="method public inherited"><a href="#set_meta_item" title="set_meta_item :: add some item to the meta_data field"><span class="description">add some item to the meta_data field</span><pre>set_meta_item()</pre></a></li>
-<li class="method public inherited"><a href="#table_columns" title="table_columns :: returns array with table columns SQL query"><span class="description">returns array with table columns SQL query</span><pre>table_columns()</pre></a></li>
-<li class="method public inherited"><a href="#unique_validation" title="unique_validation :: validate unique value required Validation object"><span class="description">validate unique value required Validation object</span><pre>unique_validation()</pre></a></li>
-<li class="method public inherited"><a href="#update" title="update :: sets parameters for UPDATE query"><span class="description">sets parameters for UPDATE query</span><pre>update()</pre></a></li>
-<li class="method public inherited"><a href="#update_params" title="update_params :: helper function to append data to the object"><span class="description">helper function to append data to the object</span><pre>update_params()</pre></a></li>
-<li class="method public inherited"><a href="#validate" title="validate :: simple function to validate data before save"><span class="description">simple function to validate data before save</span><pre>validate()</pre></a></li>
-<li class="method public inherited"><a href="#with" title="with :: JOIN function alternative"><span class="description">JOIN function alternative</span><pre>with()</pre></a></li>
-<li class="nav-header protected">» Protected</li>
-<li class="method protected "><a href="#_columns" title="_columns :: "><span class="description">_columns()
+<li class="method public "><a href="#method_relations" title="relations :: sets relations for external models to this model"><span class="description">sets relations for external models to this model</span><pre>relations()</pre></a></li>
+<li class="method public inherited"><a href="#method_representative_name" title="representative_name :: returns human readble name of some model"><span class="description">returns human readble name of some model</span><pre>representative_name()</pre></a></li>
+<li class="method public "><a href="#method_rules" title="rules :: user function to define validation rules"><span class="description">user function to define validation rules</span><pre>rules()</pre></a></li>
+<li class="method public inherited"><a href="#method_save" title="save :: function that execute query with user callback functions"><span class="description">function that execute query with user callback functions</span><pre>save()</pre></a></li>
+<li class="method public inherited"><a href="#method_select" title="select :: set parameters for SELECT query"><span class="description">set parameters for SELECT query</span><pre>select()</pre></a></li>
+<li class="method public inherited"><a href="#method_select_query" title="select_query :: Helper function to return Kohana_Database SELECT object
+ data parsed throw Kohana My Base Model"><span class="description">Helper function to return Kohana_Database SELECT object
+ data parsed throw Kohana My Base Model</span><pre>select_query()</pre></a></li>
+<li class="method public inherited"><a href="#method_serialize" title="serialize :: Serialize data only for that table everything else ignored"><span class="description">Serialize data only for that table everything else ignored</span><pre>serialize()</pre></a></li>
+<li class="method public inherited"><a href="#method_set_meta_item" title="set_meta_item :: add some item to the meta_data field"><span class="description">add some item to the meta_data field</span><pre>set_meta_item()</pre></a></li>
+<li class="method public inherited"><a href="#method_table_columns" title="table_columns :: returns array with table columns SQL query"><span class="description">returns array with table columns SQL query</span><pre>table_columns()</pre></a></li>
+<li class="method public inherited"><a href="#method_table_fields" title="table_fields :: returns all table fields without field type and if value preset in model"><span class="description">returns all table fields without field type and if value preset in model</span><pre>table_fields()</pre></a></li>
+<li class="method public inherited"><a href="#method_unique_validation" title="unique_validation :: validate unique value required Validation object"><span class="description">validate unique value required Validation object</span><pre>unique_validation()</pre></a></li>
+<li class="method public inherited"><a href="#method_unserialize" title="unserialize :: Unserialize data"><span class="description">Unserialize data</span><pre>unserialize()</pre></a></li>
+<li class="method public inherited"><a href="#method_update" title="update :: sets parameters for UPDATE query"><span class="description">sets parameters for UPDATE query</span><pre>update()</pre></a></li>
+<li class="method public inherited"><a href="#method_update_params" title="update_params :: helper function to append data to the object"><span class="description">helper function to append data to the object</span><pre>update_params()</pre></a></li>
+<li class="method public inherited"><a href="#method_update_query" title="update_query :: Helper function to return Kohana_DB UPDATE object
+ data parsed throw Kohana My Base Model"><span class="description">Helper function to return Kohana_DB UPDATE object
+ data parsed throw Kohana My Base Model</span><pre>update_query()</pre></a></li>
+<li class="method public inherited"><a href="#method_validate" title="validate :: simple function to validate data before save"><span class="description">simple function to validate data before save</span><pre>validate()</pre></a></li>
+<li class="method public inherited"><a href="#method_with" title="with :: JOIN function alternative"><span class="description">JOIN function alternative</span><pre>with()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method__columns" title="_columns :: "><span class="description">_columns()
         </span><pre>_columns()</pre></a></li>
-<li class="method protected inherited"><a href="#after_save" title="after_save :: user callback function wich calls after success executing query"><span class="description">user callback function wich calls after success executing query</span><pre>after_save()</pre></a></li>
-<li class="method protected inherited"><a href="#columns" title="columns :: user function to define database table columns"><span class="description">user function to define database table columns</span><pre>columns()</pre></a></li>
-<li class="method protected inherited"><a href="#destroy" title="destroy :: creates DELETE query object"><span class="description">creates DELETE query object</span><pre>destroy()</pre></a></li>
-<li class="method protected inherited"><a href="#exec" title="exec :: low level function to execute query"><span class="description">low level function to execute query</span><pre>exec()</pre></a></li>
-<li class="method protected inherited"><a href="#exists" title="exists :: checks if value exists by some condition"><span class="description">checks if value exists by some condition</span><pre>exists()</pre></a></li>
-<li class="nav-header private">» Private</li>
-<li class="method private inherited"><a href="#_relation" title="_relation :: get data for relation depends on relation option"><span class="description">get data for relation depends on relation option</span><pre>_relation()</pre></a></li>
-<li class="method private inherited"><a href="#auto_count_total" title="auto_count_total :: function to calculate total rows in database column"><span class="description">function to calculate total rows in database column</span><pre>auto_count_total()</pre></a></li>
-<li class="method private inherited"><a href="#clean" title="clean :: helper function to delete garbage after success query"><span class="description">helper function to delete garbage after success query</span><pre>clean()</pre></a></li>
-<li class="method private inherited"><a href="#db_table_name" title="db_table_name :: return a table name in plural form"><span class="description">return a table name in plural form</span><pre>db_table_name()</pre></a></li>
-<li class="method private inherited"><a href="#get_private_properties" title="get_private_properties :: gets properties and their values from some object"><span class="description">gets properties and their values from some object</span><pre>get_private_properties()</pre></a></li>
-<li class="method private inherited"><a href="#get_relation" title="get_relation :: returns relation data or null"><span class="description">returns relation data or null</span><pre>get_relation()</pre></a></li>
-<li class="method private inherited"><a href="#parse_responce" title="parse_responce :: append data to object according type of query"><span class="description">append data to object according type of query</span><pre>parse_responce()</pre></a></li>
-<li class="method private inherited"><a href="#prepare_for_query" title="prepare_for_query :: make some additional operations before execute query"><span class="description">make some additional operations before execute query</span><pre>prepare_for_query()</pre></a></li>
-<li class="method private inherited"><a href="#query_type" title="query_type :: returns type of query 'select', 'update' ."><span class="description">returns type of query 'select', 'update' .</span><pre>query_type()</pre></a></li>
-<li class="method private inherited"><a href="#sanitize" title="sanitize :: checks values of fields and convert to type of field"><span class="description">checks values of fields and convert to type of field</span><pre>sanitize()</pre></a></li>
-<li class="method private inherited"><a href="#system_filters" title="system_filters :: execute commands wich get as array
+<li class="method protected inherited"><a href="#method_after_save" title="after_save :: user callback function wich calls after success executing query"><span class="description">user callback function wich calls after success executing query</span><pre>after_save()</pre></a></li>
+<li class="method protected inherited"><a href="#method_columns" title="columns :: user function to define database table columns"><span class="description">user function to define database table columns</span><pre>columns()</pre></a></li>
+<li class="method protected inherited"><a href="#method_destroy" title="destroy :: creates DELETE query object"><span class="description">creates DELETE query object</span><pre>destroy()</pre></a></li>
+<li class="method protected inherited"><a href="#method_exec" title="exec :: low level function to execute query"><span class="description">low level function to execute query</span><pre>exec()</pre></a></li>
+<li class="method protected inherited"><a href="#method_exists" title="exists :: checks if value exists by some condition"><span class="description">checks if value exists by some condition</span><pre>exists()</pre></a></li>
+<li class="method protected inherited"><a href="#method_sanitize" title="sanitize :: checks values of fields and convert to type of field"><span class="description">checks values of fields and convert to type of field</span><pre>sanitize()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="method private inherited"><a href="#method__relation" title="_relation :: get data for relation depends on relation option"><span class="description">get data for relation depends on relation option</span><pre>_relation()</pre></a></li>
+<li class="method private inherited"><a href="#method_auto_count_total" title="auto_count_total :: function to calculate total rows in database column"><span class="description">function to calculate total rows in database column</span><pre>auto_count_total()</pre></a></li>
+<li class="method private inherited"><a href="#method_clean" title="clean :: helper function to delete garbage after success query"><span class="description">helper function to delete garbage after success query</span><pre>clean()</pre></a></li>
+<li class="method private inherited"><a href="#method_db_table_name" title="db_table_name :: return a table name in plural form"><span class="description">return a table name in plural form</span><pre>db_table_name()</pre></a></li>
+<li class="method private inherited"><a href="#method_get_relation" title="get_relation :: returns relation data or null"><span class="description">returns relation data or null</span><pre>get_relation()</pre></a></li>
+<li class="method private inherited"><a href="#method_obj_to_array" title="obj_to_array :: recursively parse data variable and convert all objects to assoc array"><span class="description">recursively parse data variable and convert all objects to assoc array</span><pre>obj_to_array()</pre></a></li>
+<li class="method private inherited"><a href="#method_parse_responce" title="parse_responce :: append data to object according type of query"><span class="description">append data to object according type of query</span><pre>parse_responce()</pre></a></li>
+<li class="method private inherited"><a href="#method_prepare_for_query" title="prepare_for_query :: make some additional operations before execute query"><span class="description">make some additional operations before execute query</span><pre>prepare_for_query()</pre></a></li>
+<li class="method private inherited"><a href="#method_query_type" title="query_type :: returns type of query 'select', 'update' ."><span class="description">returns type of query 'select', 'update' .</span><pre>query_type()</pre></a></li>
+<li class="method private inherited"><a href="#method_system_filters" title="system_filters :: execute commands wich get as array
 e.g."><span class="description">execute commands wich get as array
 e.g.</span><pre>system_filters()</pre></a></li>
-<li class="method private inherited"><a href="#table_fields" title="table_fields :: returns all table fields without field type and if value preset in model"><span class="description">returns all table fields without field type and if value preset in model</span><pre>table_fields()</pre></a></li>
-<li class="method private "><a href="#validate_login" title="validate_login :: "><span class="description">validate_login()
+<li class="method private "><a href="#method_validate_login" title="validate_login :: "><span class="description">validate_login()
         </span><pre>validate_login()</pre></a></li>
+</ul>
+</li>
 <li class="nav-header">
-<i class="icon-custom icon-property"></i> Properties</li>
-<li class="property public inherited"><a href="#%24count" title="$count :: number of total records"><span class="description">number of total records</span><pre>$count</pre></a></li>
-<li class="property public inherited"><a href="#%24per_page" title="$per_page :: default value for limit rows"><span class="description">default value for limit rows</span><pre>$per_page</pre></a></li>
-<li class="property public inherited"><a href="#%24records" title="$records :: array of model objects"><span class="description">array of model objects</span><pre>$records</pre></a></li>
-<li class="nav-header protected">» Protected</li>
-<li class="property protected inherited"><a href="#%24auto_clean" title="$auto_clean :: Enable or disable cleaning garbage"><span class="description">Enable or disable cleaning garbage</span><pre>$auto_clean</pre></a></li>
-<li class="property protected inherited"><a href="#%24db_query" title="$db_query :: DB object for queries(uses Kohana's DB class)"><span class="description">DB object for queries(uses Kohana's DB class)</span><pre>$db_query</pre></a></li>
-<li class="property protected inherited"><a href="#%24last_inserted_id" title="$last_inserted_id :: last inserted row in db for table"><span class="description">last inserted row in db for table</span><pre>$last_inserted_id</pre></a></li>
-<li class="property protected "><a href="#%24order" title="$order :: Sets defualt ordering for DB query"><span class="description">Sets defualt ordering for DB query</span><pre>$order</pre></a></li>
-<li class="property protected inherited"><a href="#%24primary_key" title="$primary_key :: sets the primary key name
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public inherited"><a href="#property_count" title="$count :: number of total records"><span class="description"></span><pre>$count</pre></a></li>
+<li class="property public inherited"><a href="#property_per_page" title="$per_page :: default value for limit rows"><span class="description"></span><pre>$per_page</pre></a></li>
+<li class="property public inherited"><a href="#property_records" title="$records :: array of model objects"><span class="description"></span><pre>$records</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected inherited"><a href="#property__table_columns" title="$_table_columns :: "><span class="description"></span><pre>$_table_columns</pre></a></li>
+<li class="property protected inherited"><a href="#property__table_fields" title="$_table_fields :: "><span class="description"></span><pre>$_table_fields</pre></a></li>
+<li class="property protected inherited"><a href="#property_auto_clean" title="$auto_clean :: Enable or disable cleaning garbage"><span class="description"></span><pre>$auto_clean</pre></a></li>
+<li class="property protected inherited"><a href="#property_data" title="$data :: contain dynamically append variables"><span class="description"></span><pre>$data</pre></a></li>
+<li class="property protected inherited"><a href="#property_db_query" title="$db_query :: DB object for queries(uses Kohana's DB class)"><span class="description"></span><pre>$db_query</pre></a></li>
+<li class="property protected inherited"><a href="#property_last_inserted_id" title="$last_inserted_id :: last inserted row in db for table"><span class="description"></span><pre>$last_inserted_id</pre></a></li>
+<li class="property protected "><a href="#property_order" title="$order :: Sets defualt ordering for DB query"><span class="description"></span><pre>$order</pre></a></li>
+<li class="property protected inherited"><a href="#property_primary_key" title="$primary_key :: sets the primary key name
 &lt;code&gt;
  &lt;?php
     class Model_User extends Model{
          protected $primary_key = 'email';
     }
  ?&gt;
-&lt;/code&gt;"><span class="description">sets the primary key name
-&lt;code&gt;
- &lt;?php
-    class Model_User extends Model{
-         protected $primary_key = 'email';
-    }
- ?&gt;
-&lt;/code&gt;</span><pre>$primary_key</pre></a></li>
-<li class="property protected inherited"><a href="#%24validate" title="$validate :: controls if need to validate data"><span class="description">controls if need to validate data</span><pre>$validate</pre></a></li>
-<li class="nav-header private">» Private</li>
-<li class="property private inherited"><a href="#%24count_total" title="$count_total :: Count all rows with the same conditions or not"><span class="description">Count all rows with the same conditions or not</span><pre>$count_total</pre></a></li>
-<li class="property private inherited"><a href="#%24data" title="$data :: contain dynamically append variables"><span class="description">contain dynamically append variables</span><pre>$data</pre></a></li>
-<li class="property private inherited"><a href="#%24db_table" title="$db_table :: contains database table name"><span class="description">contains database table name</span><pre>$db_table</pre></a></li>
-<li class="property private inherited"><a href="#%24errors" title="$errors :: assoc array of errors for this model"><span class="description">assoc array of errors for this model</span><pre>$errors</pre></a></li>
-<li class="property private inherited"><a href="#%24last_query" title="$last_query :: Last normal SQL query executed as string"><span class="description">Last normal SQL query executed as string</span><pre>$last_query</pre></a></li>
-<li class="property private inherited"><a href="#%24system_filters" title="$system_filters :: defines system variables(commands)"><span class="description">defines system variables(commands)</span><pre>$system_filters</pre></a></li>
+&lt;/code&gt;"><span class="description"></span><pre>$primary_key</pre></a></li>
+<li class="property protected inherited"><a href="#property_validate" title="$validate :: controls if need to validate data"><span class="description"></span><pre>$validate</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private inherited"><a href="#property_count_total" title="$count_total :: Count all rows with the same conditions or not"><span class="description"></span><pre>$count_total</pre></a></li>
+<li class="property private inherited"><a href="#property_db_table" title="$db_table :: contains database table name"><span class="description"></span><pre>$db_table</pre></a></li>
+<li class="property private inherited"><a href="#property_errors" title="$errors :: assoc array of errors for this model"><span class="description"></span><pre>$errors</pre></a></li>
+<li class="property private inherited"><a href="#property_last_query" title="$last_query :: Last normal SQL query executed as string"><span class="description"></span><pre>$last_query</pre></a></li>
+<li class="property private inherited"><a href="#property_system_filters" title="$system_filters :: defines system variables(commands)"><span class="description"></span><pre>$system_filters</pre></a></li>
+</ul>
+</li>
 <li class="nav-header">
-<i class="icon-custom icon-constant"></i> Constants</li>
-<li class="constant  inherited"><a href="#BELONGS_TO" title="BELONGS_TO :: "><span class="description">BELONGS_TO</span><pre>BELONGS_TO</pre></a></li>
-<li class="constant  inherited"><a href="#HAS_MANY" title="HAS_MANY :: "><span class="description">HAS_MANY</span><pre>HAS_MANY</pre></a></li>
-<li class="constant  inherited"><a href="#HAS_ONE" title="HAS_ONE :: "><span class="description">HAS_ONE</span><pre>HAS_ONE</pre></a></li>
-<li class="constant  inherited"><a href="#STAT" title="STAT :: "><span class="description">STAT</span><pre>STAT</pre></a></li>
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  inherited"><a href="#constant_BELONGS_TO" title="BELONGS_TO :: "><span class="description">BELONGS_TO</span><pre>BELONGS_TO</pre></a></li>
+<li class="constant  inherited"><a href="#constant_HAS_MANY" title="HAS_MANY :: "><span class="description">HAS_MANY</span><pre>HAS_MANY</pre></a></li>
+<li class="constant  inherited"><a href="#constant_HAS_ONE" title="HAS_ONE :: "><span class="description">HAS_ONE</span><pre>HAS_ONE</pre></a></li>
+<li class="constant  inherited"><a href="#constant_STAT" title="STAT :: "><span class="description">STAT</span><pre>STAT</pre></a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CModel_User" id="\Model_User"></a><ul class="breadcrumb">
+<a id="\Model_User"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
@@ -166,13 +205,13 @@ e.g.</span><pre>system_filters()</pre></a></li>
 <span class="divider">\</span><a href="../classes/Model_User.html">Model_User</a>
 </li>
 </ul>
-<div href="../classes/Model_User.html" class="element class">
+<div class="element class">
 <p class="short_description">Helper class to work with Base_Model</p>
 <div class="details">
-<p class="long_description"><pre><code>$m = new Model_User::find_all(array(
+<div class="long_description"><pre><code>$m = new Model_User::find_all(array(
    'login' => 'bla'
 ))
-</code></pre></p>
+</code></pre></div>
 <table class="table table-bordered">
 <tr>
 <th>package</th>
@@ -189,12 +228,12 @@ e.g.</span><pre>system_filters()</pre></a></li>
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="add_error" id="add_error"></a><div class="element clickable method public add_error" data-toggle="collapse" data-target=".add_error .collapse">
+<a id="method_add_error"></a><div class="element clickable method public method_add_error" data-toggle="collapse" data-target=".method_add_error .collapse">
 <h2>add error message to errors list</h2>
-<pre>add_error(\$key $key, \$msg $msg) </pre>
+<pre>add_error($key, $msg) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -211,25 +250,59 @@ e.g.</span><pre>system_filters()</pre></a></li>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$key</h4>
-<code>\$key</code><p>string name of the field</p></div>
+<h4>$key</h4><p>string name of the field</p></div>
 <div class="subelement argument">
-<h4>$msg</h4>
-<code>\$msg</code><p>string message</p></div>
+<h4>$msg</h4><p>string message</p></div>
 </div></div>
 </div>
-<a name="before_save" id="before_save"></a><div class="element clickable method public before_save" data-toggle="collapse" data-target=".before_save .collapse">
+<a id="method_before_save"></a><div class="element clickable method public method_before_save" data-toggle="collapse" data-target=".method_before_save .collapse">
 <h2>user function to make some operations before saving</h2>
 <pre>before_save() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="errors" id="errors"></a><div class="element clickable method public errors" data-toggle="collapse" data-target=".errors .collapse">
+<a id="method_delete_query"></a><div class="element clickable method public method_delete_query" data-toggle="collapse" data-target=".method_delete_query .collapse">
+<h2>Helper function to return Kohana_DB DELETE object
+ data parsed throw Kohana My Base Model</h2>
+<pre>delete_query(array $filter) : \Database_Query_Builder</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::delete_query()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::delete_query()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filter</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Database_Query_Builder</code></div>
+</div></div>
+</div>
+<a id="method_errors"></a><div class="element clickable method public method_errors" data-toggle="collapse" data-target=".method_errors .collapse">
 <h2>returns assoc array with all errors</h2>
 <pre>errors() : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -248,12 +321,12 @@ e.g.</span><pre>system_filters()</pre></a></li>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="filter" id="filter"></a><div class="element clickable method public filter" data-toggle="collapse" data-target=".filter .collapse">
+<a id="method_filter"></a><div class="element clickable method public method_filter" data-toggle="collapse" data-target=".method_filter .collapse">
 <h2>Helper function to create WHERE clause</h2>
-<pre>filter(\$filter $filter) : <a href="../classes/Base_Model.html">\Base_Model</a></pre>
+<pre>filter($filter) : <a href="../classes/Base_Model.html">\Base_Model</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>what for to rewrite?</p>
+<div class="long_description"><p>what for to rewrite?</p>
 
 <ul>
   <li>this function build more safe where condition for queries</li>
@@ -286,11 +359,11 @@ e.g. of assoc array</p>
 </code></pre>
 
 <p>Also values of fields can be array . In this case comparison key will be IN
-Also supports DB::expr as value</p></p>
+Also supports DB::expr as value</p></div>
 <table class="table table-bordered">
 <tr>
 <th>uses</th>
-<td>\global\Database_Query_Builder_Where</td>
+<td>functions</td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -303,8 +376,7 @@ Also supports DB::expr as value</p></p>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$filter</h4>
-<code>\$filter</code><p>array</p></div>
+<h4>$filter</h4><p>array</p></div>
 <h3>Exceptions</h3>
 <table class="table table-bordered">
 <tr>
@@ -320,12 +392,14 @@ Also supports DB::expr as value</p></p>
 <div class="subelement response"><code><a href="../classes/Base_Model.html">\Base_Model</a></code></div>
 </div></div>
 </div>
-<a name="find" id="find"></a><div class="element clickable method public find" data-toggle="collapse" data-target=".find .collapse">
+<a id="method_find"></a><div class="element clickable method public method_find" data-toggle="collapse" data-target=".method_find .collapse">
 <h2>find record in database table by condition</h2>
 <pre>find($filter, null $cache) : mixed</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code> //if we need to find by primary key
+<div class="long_description"><pre><code> //if we need to find by primary key
  $model = Model_User::find($some_value);
  // complex condition
  $model = Model_User::find(array(
@@ -336,7 +410,7 @@ Also supports DB::expr as value</p></p>
  echo $model->login;// output 'bla'
 </code></pre>
 
-<p>if row was not found Exception will be called</p></p>
+<p>if row was not found Exception will be called</p></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -366,12 +440,14 @@ Also supports DB::expr as value</p></p>
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
-<a name="find_all" id="find_all"></a><div class="element clickable method public find_all" data-toggle="collapse" data-target=".find_all .collapse">
+<a id="method_find_all"></a><div class="element clickable method public method_find_all" data-toggle="collapse" data-target=".method_find_all .collapse">
 <h2>find a collections of rows in database table</h2>
 <pre>find_all(array $filter, null $limit, null $offset, null $cache) : mixed</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code> // complex condition only
+<div class="long_description"><pre><code> // complex condition only
  $model = Model_User::find_all(array(
    'login' => 'bla',
    ....
@@ -391,7 +467,7 @@ e.g. delete</p>
 {
  $_model->destroy();//can be everything from Base_Model
 }
-</code></pre></p>
+</code></pre></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -427,13 +503,37 @@ e.g. delete</p>
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
-<a name="get_table_columns" id="get_table_columns"></a><div class="element clickable method public get_table_columns" data-toggle="collapse" data-target=".get_table_columns .collapse">
+<a id="method_getIterator"></a><div class="element clickable method public method_getIterator" data-toggle="collapse" data-target=".method_getIterator .collapse">
+<h2>Get an interator for the data</h2>
+<pre>getIterator() : <a href="http://php.net/manual/en/class.arrayiterator.php">\ArrayIterator</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Base_Db_Model::getIterator()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::getIterator()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::getIterator()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="http://php.net/manual/en/class.arrayiterator.php">\ArrayIterator</a></code></div>
+</div></div>
+</div>
+<a id="method_get_table_columns"></a><div class="element clickable method public method_get_table_columns" data-toggle="collapse" data-target=".method_get_table_columns .collapse">
 <h2>gets table columns</h2>
 <pre>get_table_columns() : mixed</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>if model has method columns
-sql query will not execute to get column name and it type</p></p>
+<div class="long_description"><p>if model has method columns
+sql query will not execute to get column name and it type</p></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -448,19 +548,19 @@ sql query will not execute to get column name and it type</p></p>
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
-<a name="insert" id="insert"></a><div class="element clickable method public insert" data-toggle="collapse" data-target=".insert .collapse">
+<a id="method_insert"></a><div class="element clickable method public method_insert" data-toggle="collapse" data-target=".method_insert .collapse">
 <h2>sets parameters for INSERT query</h2>
 <pre>insert(array | null $fields) : <a href="../classes/Base_Model.html">\Base_Model</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>$fields can be sets as array
+<div class="long_description"><p>$fields can be sets as array
 e.g. of not assoc array</p>
 
 <pre><code>  array('login', 'email');
 </code></pre>
 
 <p>if you call function save() all values for fields will be automatical get from object
-if they exists</p></p>
+if they exists</p></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -480,22 +580,58 @@ if they exists</p></p>
 <div class="subelement response"><code><a href="../classes/Base_Model.html">\Base_Model</a></code></div>
 </div></div>
 </div>
-<a name="labels" id="labels"></a><div class="element clickable method public labels" data-toggle="collapse" data-target=".labels .collapse">
+<a id="method_insert_query"></a><div class="element clickable method public method_insert_query" data-toggle="collapse" data-target=".method_insert_query .collapse">
+<h2>Helper function to return Kohana_DB INSERT object
+ data parsed throw Kohana My Base Model</h2>
+<pre>insert_query(array $filter) : \Database_Query_Builder</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::insert_query()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::insert_query()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filter</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Database_Query_Builder</code></div>
+</div></div>
+</div>
+<a id="method_labels"></a><div class="element clickable method public method_labels" data-toggle="collapse" data-target=".method_labels .collapse">
 <h2>user function to define representative labels for table fields</h2>
 <pre>labels() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="last_inserted_id" id="last_inserted_id"></a><div class="element clickable method public last_inserted_id" data-toggle="collapse" data-target=".last_inserted_id .collapse">
+<a id="method_last_inserted_id"></a><div class="element clickable method public method_last_inserted_id" data-toggle="collapse" data-target=".method_last_inserted_id .collapse">
 <h2>returns last inserted id</h2>
 <pre>last_inserted_id() : null</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -510,12 +646,12 @@ if they exists</p></p>
 <div class="subelement response"><code>null</code></div>
 </div></div>
 </div>
-<a name="last_query" id="last_query"></a><div class="element clickable method public last_query" data-toggle="collapse" data-target=".last_query .collapse">
+<a id="method_last_query"></a><div class="element clickable method public method_last_query" data-toggle="collapse" data-target=".method_last_query .collapse">
 <h2>returns last executed query</h2>
 <pre>last_query() : null</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -530,19 +666,19 @@ if they exists</p></p>
 <div class="subelement response"><code>null</code></div>
 </div></div>
 </div>
-<a name="login" id="login"></a><div class="element clickable method public login" data-toggle="collapse" data-target=".login .collapse">
+<a id="method_login"></a><div class="element clickable method public method_login" data-toggle="collapse" data-target=".method_login .collapse">
 <h2>login()
         </h2>
 <pre>login() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="meta_data" id="meta_data"></a><div class="element clickable method public meta_data" data-toggle="collapse" data-target=".meta_data .collapse">
+<a id="method_meta_data"></a><div class="element clickable method public method_meta_data" data-toggle="collapse" data-target=".method_meta_data .collapse">
 <h2>returns encoded data from  table column meta_data(json encoded string)</h2>
 <pre>meta_data() : void</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -559,12 +695,12 @@ if they exists</p></p>
 </table>
 </div></div>
 </div>
-<a name="meta_item" id="meta_item"></a><div class="element clickable method public meta_item" data-toggle="collapse" data-target=".meta_item .collapse">
+<a id="method_meta_item"></a><div class="element clickable method public method_meta_item" data-toggle="collapse" data-target=".method_meta_item .collapse">
 <h2>returns value of some item in meta_data field</h2>
-<pre>meta_item(\$key $key, \$default $default) : mixed | null</pre>
+<pre>meta_item($key, $default) : mixed | null</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -581,24 +717,24 @@ if they exists</p></p>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$key</h4>
-<code>\$key</code><p>(string)</p>
+<h4>$key</h4><p>(string)</p>
 </div>
 <div class="subelement argument">
-<h4>$default</h4>
-<code>\$default</code><p>mixed</p></div>
+<h4>$default</h4><p>mixed</p></div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>mixed</code><code>null</code>
 </div>
 </div></div>
 </div>
-<a name="module_name" id="module_name"></a><div class="element clickable method public module_name" data-toggle="collapse" data-target=".module_name .collapse">
+<a id="method_module_name"></a><div class="element clickable method public method_module_name" data-toggle="collapse" data-target=".method_module_name .collapse">
 <h2>Returns model name</h2>
 <pre>module_name(string $glue) : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>e.g. Model_User::module_name() will return 'User'</p></p>
+<div class="long_description"><p>e.g. Model_User::module_name() will return 'User'</p></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -627,12 +763,12 @@ if they exists</p></p>
 <code>string</code>name of current module</div>
 </div></div>
 </div>
-<a name="new_record" id="new_record"></a><div class="element clickable method public new_record" data-toggle="collapse" data-target=".new_record .collapse">
+<a id="method_new_record"></a><div class="element clickable method public method_new_record" data-toggle="collapse" data-target=".method_new_record .collapse">
 <h2>check if model has primary key</h2>
 <pre>new_record() : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -647,46 +783,213 @@ if they exists</p></p>
 <div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
-<a name="register" id="register"></a><div class="element clickable method public register" data-toggle="collapse" data-target=".register .collapse">
+<a id="method_offsetExists"></a><div class="element clickable method public method_offsetExists" data-toggle="collapse" data-target=".method_offsetExists .collapse">
+<h2>Check if the given item exists</h2>
+<pre>offsetExists(string $key) : boolean</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Base_Db_Model::offsetExists()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::offsetExists()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::offsetExists()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a id="method_offsetGet"></a><div class="element clickable method public method_offsetGet" data-toggle="collapse" data-target=".method_offsetGet .collapse">
+<h2>Get the given item</h2>
+<pre>offsetGet(string $key) : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Base_Db_Model::offsetGet()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::offsetGet()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::offsetGet()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_offsetSet"></a><div class="element clickable method public method_offsetSet" data-toggle="collapse" data-target=".method_offsetSet .collapse">
+<h2>Set the given header</h2>
+<pre>offsetSet(string $key, string $value) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Base_Db_Model::offsetSet()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::offsetSet()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::offsetSet()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code>
+</div>
+</div></div>
+</div>
+<a id="method_offsetUnset"></a><div class="element clickable method public method_offsetUnset" data-toggle="collapse" data-target=".method_offsetUnset .collapse">
+<h2>Unset the given item</h2>
+<pre>offsetUnset(string $key) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Base_Db_Model::offsetUnset()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::offsetUnset()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::offsetUnset()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+</div></div>
+</div>
+<a id="method_query"></a><div class="element clickable method public method_query" data-toggle="collapse" data-target=".method_query .collapse">
+<h2>Helper function to return Kohana_DB object
+ data parsed throw Kohana My Base Model</h2>
+<pre>query() : \Database_Query_Builder</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::query()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::query()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Database_Query_Builder</code></div>
+</div></div>
+</div>
+<a id="method_register"></a><div class="element clickable method public method_register" data-toggle="collapse" data-target=".method_register .collapse">
 <h2>register()
         </h2>
 <pre>register() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="registration_rules" id="registration_rules"></a><div class="element clickable method public registration_rules" data-toggle="collapse" data-target=".registration_rules .collapse">
+<a id="method_registration_rules"></a><div class="element clickable method public method_registration_rules" data-toggle="collapse" data-target=".method_registration_rules .collapse">
 <h2>registration_rules()
         </h2>
 <pre>registration_rules() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="relations" id="relations"></a><div class="element clickable method public relations" data-toggle="collapse" data-target=".relations .collapse">
+<a id="method_relations"></a><div class="element clickable method public method_relations" data-toggle="collapse" data-target=".method_relations .collapse">
 <h2>sets relations for external models to this model</h2>
 <pre>relations() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="rules" id="rules"></a><div class="element clickable method public rules" data-toggle="collapse" data-target=".rules .collapse">
+<a id="method_representative_name"></a><div class="element clickable method public method_representative_name" data-toggle="collapse" data-target=".method_representative_name .collapse">
+<h2>returns human readble name of some model</h2>
+<pre>representative_name() : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::representative_name()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::representative_name()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_rules"></a><div class="element clickable method public method_rules" data-toggle="collapse" data-target=".method_rules .collapse">
 <h2>user function to define validation rules</h2>
 <pre>rules() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="save" id="save"></a><div class="element clickable method public save" data-toggle="collapse" data-target=".save .collapse">
+<a id="method_save"></a><div class="element clickable method public method_save" data-toggle="collapse" data-target=".method_save .collapse">
 <h2>function that execute query with user callback functions</h2>
 <pre>save() : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -705,12 +1008,12 @@ if they exists</p></p>
 <div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
-<a name="select" id="select"></a><div class="element clickable method public select" data-toggle="collapse" data-target=".select .collapse">
+<a id="method_select"></a><div class="element clickable method public method_select" data-toggle="collapse" data-target=".method_select .collapse">
 <h2>set parameters for SELECT query</h2>
 <pre>select(string | array $select_args, null $limit, null $offset, null $cache) : <a href="../classes/Base_Model.html">\Base_Model</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -726,7 +1029,11 @@ if they exists</p></p>
 <h4>$select_args</h4>
 <code>string</code><code>array</code><p>can be</p>
 
-<ul> <li>string - e.g. '*'</li> <li> single array - e.g. array('id','user_id') first field name, second his alias name in sql -> `id` AS `user_id`</li> <li> multidementional array - e.g. array( array('id','user_id'), array('login','user_login')...)</li> </ul>
+<ul>
+  <li>string - e.g. '*'</li>
+  <li> single array - e.g. array('id','user_id') first field name, second his alias name in sql -> `id` AS `user_id`</li>
+  <li> multidementional array - e.g. array( array('id','user_id'), array('login','user_login')...)</li>
+</ul>
 </div>
 <div class="subelement argument">
 <h4>$limit</h4>
@@ -744,12 +1051,89 @@ if they exists</p></p>
 <div class="subelement response"><code><a href="../classes/Base_Model.html">\Base_Model</a></code></div>
 </div></div>
 </div>
-<a name="set_meta_item" id="set_meta_item"></a><div class="element clickable method public set_meta_item" data-toggle="collapse" data-target=".set_meta_item .collapse">
-<h2>add some item to the meta_data field</h2>
-<pre>set_meta_item(\$key $key, \$value $value) : void</pre>
+<a id="method_select_query"></a><div class="element clickable method public method_select_query" data-toggle="collapse" data-target=".method_select_query .collapse">
+<h2>Helper function to return Kohana_Database SELECT object
+ data parsed throw Kohana My Base Model</h2>
+<pre>select_query($select, array $filter, null $limit, null $offset, null $cache) : \Database_Query_Builder</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::select_query()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::select_query()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$select</h4></div>
+<div class="subelement argument">
+<h4>$filter</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>null</code>
+</div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>null</code>
+</div>
+<div class="subelement argument">
+<h4>$cache</h4>
+<code>null</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Database_Query_Builder</code></div>
+</div></div>
+</div>
+<a id="method_serialize"></a><div class="element clickable method public method_serialize" data-toggle="collapse" data-target=".method_serialize .collapse">
+<h2>Serialize data only for that table everything else ignored</h2>
+<pre>serialize() : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Db_Model::serialize()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::serialize()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::serialize()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_set_meta_item"></a><div class="element clickable method public method_set_meta_item" data-toggle="collapse" data-target=".method_set_meta_item .collapse">
+<h2>add some item to the meta_data field</h2>
+<pre>set_meta_item($key, $value) : void</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -766,25 +1150,25 @@ if they exists</p></p>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$key</h4>
-<code>\$key</code><ul>
+<h4>$key</h4><ul>
 <li>string</li>
 </ul>
 </div>
 <div class="subelement argument">
-<h4>$value</h4>
-<code>\$value</code><ul>
+<h4>$value</h4><ul>
 <li>mixed</li>
 </ul>
 </div>
 </div></div>
 </div>
-<a name="table_columns" id="table_columns"></a><div class="element clickable method public table_columns" data-toggle="collapse" data-target=".table_columns .collapse">
+<a id="method_table_columns"></a><div class="element clickable method public method_table_columns" data-toggle="collapse" data-target=".method_table_columns .collapse">
 <h2>returns array with table columns SQL query</h2>
 <pre>table_columns(null $table) : array</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -808,12 +1192,38 @@ if they exists</p></p>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="unique_validation" id="unique_validation"></a><div class="element clickable method public unique_validation" data-toggle="collapse" data-target=".unique_validation .collapse">
+<a id="method_table_fields"></a><div class="element clickable method public method_table_fields" data-toggle="collapse" data-target=".method_table_fields .collapse">
+<h2>returns all table fields without field type and if value preset in model</h2>
+<pre>table_fields($skip_primary_key) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::table_fields()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::table_fields()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$skip_primary_key</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_unique_validation"></a><div class="element clickable method public method_unique_validation" data-toggle="collapse" data-target=".method_unique_validation .collapse">
 <h2>validate unique value required Validation object</h2>
 <pre>unique_validation($validation, $field) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -829,12 +1239,45 @@ if they exists</p></p>
 <div class="subelement argument"><h4>$field</h4></div>
 </div></div>
 </div>
-<a name="update" id="update"></a><div class="element clickable method public update" data-toggle="collapse" data-target=".update .collapse">
+<a id="method_unserialize"></a><div class="element clickable method public method_unserialize" data-toggle="collapse" data-target=".method_unserialize .collapse">
+<h2>Unserialize data</h2>
+<pre>unserialize(string $data) : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Db_Model::unserialize()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::unserialize()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::unserialize()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_update"></a><div class="element clickable method public method_update" data-toggle="collapse" data-target=".method_update .collapse">
 <h2>sets parameters for UPDATE query</h2>
 <pre>update() : <a href="../classes/Base_Model.html">\Base_Model</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -853,18 +1296,18 @@ if they exists</p></p>
 <div class="subelement response"><code><a href="../classes/Base_Model.html">\Base_Model</a></code></div>
 </div></div>
 </div>
-<a name="update_params" id="update_params"></a><div class="element clickable method public update_params" data-toggle="collapse" data-target=".update_params .collapse">
+<a id="method_update_params"></a><div class="element clickable method public method_update_params" data-toggle="collapse" data-target=".method_update_params .collapse">
 <h2>helper function to append data to the object</h2>
 <pre>update_params($array) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code>$params = array(
+<div class="long_description"><pre><code>$params = array(
    'login' => 'blabla'
    ....
 )
 $model->update_params($params);
 echo $model->login;// output 'blabla'
-</code></pre></p>
+</code></pre></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -883,12 +1326,52 @@ echo $model->login;// output 'blabla'
 <div class="subelement argument"><h4>$array</h4></div>
 </div></div>
 </div>
-<a name="validate" id="validate"></a><div class="element clickable method public validate" data-toggle="collapse" data-target=".validate .collapse">
+<a id="method_update_query"></a><div class="element clickable method public method_update_query" data-toggle="collapse" data-target=".method_update_query .collapse">
+<h2>Helper function to return Kohana_DB UPDATE object
+ data parsed throw Kohana My Base Model</h2>
+<pre>update_query(mixed $primary_value, array $filter) : \Database_Query_Builder</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::update_query()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::update_query()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$primary_value</h4>
+<code>mixed</code>
+</div>
+<div class="subelement argument">
+<h4>$filter</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Database_Query_Builder</code></div>
+</div></div>
+</div>
+<a id="method_validate"></a><div class="element clickable method public method_validate" data-toggle="collapse" data-target=".method_validate .collapse">
 <h2>simple function to validate data before save</h2>
 <pre>validate(array $rules, array $data) : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code>$additional_rules = array(
+<div class="long_description"><pre><code>$additional_rules = array(
      'pswd_confirmation' => array(
        'not_empty',
        array('equals', array($this->pswd_confirmation, $this->password, 'password'))
@@ -898,7 +1381,7 @@ echo $model->login;// output 'blabla'
 </code></pre>
 
 <p>Creating rules simmilar to Kohana's Validation
-Also if some model has function rules() before saving data it will get from that function and validate data</p></p>
+Also if some model has function rules() before saving data it will get from that function and validate data</p></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -922,12 +1405,12 @@ Also if some model has function rules() before saving data it will get from that
 <div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
-<a name="with" id="with"></a><div class="element clickable method public with" data-toggle="collapse" data-target=".with .collapse">
+<a id="method_with"></a><div class="element clickable method public method_with" data-toggle="collapse" data-target=".method_with .collapse">
 <h2>JOIN function alternative</h2>
-<pre>with(\$name $name, \$foreign_key $foreign_key, \$field $field, \$comparison_key $comparison_key) </pre>
+<pre>with($name, $foreign_key, $field, $comparison_key) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -944,32 +1427,28 @@ Also if some model has function rules() before saving data it will get from that
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$name</h4>
-<code>\$name</code><p>string|object string can be name of some model or relation name,</p></div>
+<h4>$name</h4><p>string|object string can be name of some model or relation name,</p></div>
 <div class="subelement argument">
-<h4>$foreign_key</h4>
-<code>\$foreign_key</code><p>string</p></div>
+<h4>$foreign_key</h4><p>string</p></div>
 <div class="subelement argument">
-<h4>$field</h4>
-<code>\$field</code><p>string</p></div>
+<h4>$field</h4><p>string</p></div>
 <div class="subelement argument">
-<h4>$comparison_key</h4>
-<code>\$comparison_key</code><p>string</p></div>
+<h4>$comparison_key</h4><p>string</p></div>
 </div></div>
 </div>
-<a name="_columns" id="_columns"></a><div class="element clickable method protected _columns" data-toggle="collapse" data-target="._columns .collapse">
+<a id="method__columns"></a><div class="element clickable method protected method__columns" data-toggle="collapse" data-target=".method__columns .collapse">
 <h2>_columns()
         </h2>
 <pre>_columns() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="after_save" id="after_save"></a><div class="element clickable method protected after_save" data-toggle="collapse" data-target=".after_save .collapse">
+<a id="method_after_save"></a><div class="element clickable method protected method_after_save" data-toggle="collapse" data-target=".method_after_save .collapse">
 <h2>user callback function wich calls after success executing query</h2>
 <pre>after_save() : void</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -986,12 +1465,14 @@ Also if some model has function rules() before saving data it will get from that
 </table>
 </div></div>
 </div>
-<a name="columns" id="columns"></a><div class="element clickable method protected columns" data-toggle="collapse" data-target=".columns .collapse">
+<a id="method_columns"></a><div class="element clickable method protected method_columns" data-toggle="collapse" data-target=".method_columns .collapse">
 <h2>user function to define database table columns</h2>
 <pre>columns() : array</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -1014,12 +1495,12 @@ Also if some model has function rules() before saving data it will get from that
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="destroy" id="destroy"></a><div class="element clickable method protected destroy" data-toggle="collapse" data-target=".destroy .collapse">
+<a id="method_destroy"></a><div class="element clickable method protected method_destroy" data-toggle="collapse" data-target=".method_destroy .collapse">
 <h2>creates DELETE query object</h2>
 <pre>destroy(null $filter) : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>if $filter not specified will search by primary key
+<div class="long_description"><p>if $filter not specified will search by primary key
 usage example</p>
 
 <pre><code>$model->destroy() // if we already have object
@@ -1027,7 +1508,7 @@ usage example</p>
 Model_User::destroy($id);
 //or
 Model_User::destroy(array('login' => 'bla', ....));
-</code></pre></p>
+</code></pre></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1051,12 +1532,12 @@ Model_User::destroy(array('login' => 'bla', ....));
 <div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
-<a name="exec" id="exec"></a><div class="element clickable method protected exec" data-toggle="collapse" data-target=".exec .collapse">
+<a id="method_exec"></a><div class="element clickable method protected method_exec" data-toggle="collapse" data-target=".method_exec .collapse">
 <h2>low level function to execute query</h2>
 <pre>exec() : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -1071,12 +1552,12 @@ Model_User::destroy(array('login' => 'bla', ....));
 <div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
-<a name="exists" id="exists"></a><div class="element clickable method protected exists" data-toggle="collapse" data-target=".exists .collapse">
+<a id="method_exists"></a><div class="element clickable method protected method_exists" data-toggle="collapse" data-target=".method_exists .collapse">
 <h2>checks if value exists by some condition</h2>
 <pre>exists(array $filter, int $limit, null $cache) : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1107,12 +1588,35 @@ Model_User::destroy(array('login' => 'bla', ....));
 <div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
-<a name="_relation" id="_relation"></a><div class="element clickable method private _relation" data-toggle="collapse" data-target="._relation .collapse">
-<h2>get data for relation depends on relation option</h2>
-<pre>_relation(\$name $name, \$relation $relation, \$filter $filter) </pre>
+<a id="method_sanitize"></a><div class="element clickable method protected method_sanitize" data-toggle="collapse" data-target=".method_sanitize .collapse">
+<h2>checks values of fields and convert to type of field</h2>
+<pre>sanitize($key, $value) : mixed</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::sanitize()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::sanitize()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$key</h4></div>
+<div class="subelement argument"><h4>$value</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method__relation"></a><div class="element clickable method private method__relation" data-toggle="collapse" data-target=".method__relation .collapse">
+<h2>get data for relation depends on relation option</h2>
+<pre>_relation($name, $relation, $filter) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -1125,22 +1629,19 @@ Model_User::destroy(array('login' => 'bla', ....));
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$name</h4>
-<code>\$name</code><p>string</p></div>
+<h4>$name</h4><p>string</p></div>
 <div class="subelement argument">
-<h4>$relation</h4>
-<code>\$relation</code><p>array</p></div>
+<h4>$relation</h4><p>array</p></div>
 <div class="subelement argument">
-<h4>$filter</h4>
-<code>\$filter</code><p>array</p></div>
+<h4>$filter</h4><p>array</p></div>
 </div></div>
 </div>
-<a name="auto_count_total" id="auto_count_total"></a><div class="element clickable method private auto_count_total" data-toggle="collapse" data-target=".auto_count_total .collapse">
+<a id="method_auto_count_total"></a><div class="element clickable method private method_auto_count_total" data-toggle="collapse" data-target=".method_auto_count_total .collapse">
 <h2>function to calculate total rows in database column</h2>
 <pre>auto_count_total() : mixed</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1159,12 +1660,12 @@ Model_User::destroy(array('login' => 'bla', ....));
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
-<a name="clean" id="clean"></a><div class="element clickable method private clean" data-toggle="collapse" data-target=".clean .collapse">
+<a id="method_clean"></a><div class="element clickable method private method_clean" data-toggle="collapse" data-target=".method_clean .collapse">
 <h2>helper function to delete garbage after success query</h2>
 <pre>clean() : void</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1181,12 +1682,14 @@ Model_User::destroy(array('login' => 'bla', ....));
 </table>
 </div></div>
 </div>
-<a name="db_table_name" id="db_table_name"></a><div class="element clickable method private db_table_name" data-toggle="collapse" data-target=".db_table_name .collapse">
+<a id="method_db_table_name"></a><div class="element clickable method private method_db_table_name" data-toggle="collapse" data-target=".method_db_table_name .collapse">
 <h2>return a table name in plural form</h2>
 <pre>db_table_name(string $glue) : mixed</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>Model_User::db_table_name() = <code>users</code></p></p>
+<div class="long_description"><p>Model_User::db_table_name() = <code>users</code></p></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -1214,38 +1717,12 @@ Model_User::destroy(array('login' => 'bla', ....));
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
-<a name="get_private_properties" id="get_private_properties"></a><div class="element clickable method private get_private_properties" data-toggle="collapse" data-target=".get_private_properties .collapse">
-<h2>gets properties and their values from some object</h2>
-<pre>get_private_properties($obj) : array</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Base_Model::get_private_properties()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Model::get_private_properties()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$obj</h4></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
-</div></div>
-</div>
-<a name="get_relation" id="get_relation"></a><div class="element clickable method private get_relation" data-toggle="collapse" data-target=".get_relation .collapse">
+<a id="method_get_relation"></a><div class="element clickable method private method_get_relation" data-toggle="collapse" data-target=".method_get_relation .collapse">
 <h2>returns relation data or null</h2>
-<pre>get_relation(\$name $name) : array | null</pre>
+<pre>get_relation($name) : array | null</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -1258,20 +1735,45 @@ Model_User::destroy(array('login' => 'bla', ....));
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$name</h4>
-<code>\$name</code><p>string</p></div>
+<h4>$name</h4><p>string</p></div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code><code>null</code>
 </div>
 </div></div>
 </div>
-<a name="parse_responce" id="parse_responce"></a><div class="element clickable method private parse_responce" data-toggle="collapse" data-target=".parse_responce .collapse">
+<a id="method_obj_to_array"></a><div class="element clickable method private method_obj_to_array" data-toggle="collapse" data-target=".method_obj_to_array .collapse">
+<h2>recursively parse data variable and convert all objects to assoc array</h2>
+<pre>obj_to_array(\Model $obj) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>private</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::obj_to_array()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::obj_to_array()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$obj</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_parse_responce"></a><div class="element clickable method private method_parse_responce" data-toggle="collapse" data-target=".method_parse_responce .collapse">
 <h2>append data to object according type of query</h2>
 <pre>parse_responce($result) : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1292,12 +1794,12 @@ Model_User::destroy(array('login' => 'bla', ....));
 <div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
-<a name="prepare_for_query" id="prepare_for_query"></a><div class="element clickable method private prepare_for_query" data-toggle="collapse" data-target=".prepare_for_query .collapse">
+<a id="method_prepare_for_query"></a><div class="element clickable method private method_prepare_for_query" data-toggle="collapse" data-target=".method_prepare_for_query .collapse">
 <h2>make some additional operations before execute query</h2>
 <pre>prepare_for_query() : void</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1314,12 +1816,12 @@ Model_User::destroy(array('login' => 'bla', ....));
 </table>
 </div></div>
 </div>
-<a name="query_type" id="query_type"></a><div class="element clickable method private query_type" data-toggle="collapse" data-target=".query_type .collapse">
+<a id="method_query_type"></a><div class="element clickable method private method_query_type" data-toggle="collapse" data-target=".method_query_type .collapse">
 <h2>returns type of query 'select', 'update' .</h2>
 <pre>query_type() : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>..</p></p>
+<div class="long_description"><p>..</p></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -1334,36 +1836,13 @@ Model_User::destroy(array('login' => 'bla', ....));
 <div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
-<a name="sanitize" id="sanitize"></a><div class="element clickable method private sanitize" data-toggle="collapse" data-target=".sanitize .collapse">
-<h2>checks values of fields and convert to type of field</h2>
-<pre>sanitize($key, $value) : mixed</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Base_Model::sanitize()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Model::sanitize()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$key</h4></div>
-<div class="subelement argument"><h4>$value</h4></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>mixed</code></div>
-</div></div>
-</div>
-<a name="system_filters" id="system_filters"></a><div class="element clickable method private system_filters" data-toggle="collapse" data-target=".system_filters .collapse">
+<a id="method_system_filters"></a><div class="element clickable method private method_system_filters" data-toggle="collapse" data-target=".method_system_filters .collapse">
 <h2>execute commands wich get as array
 e.g.</h2>
 <pre>system_filters($key, $value) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><pre><code>$m = Model_User::find_all(array(
+<div class="long_description"><pre><code>$m = Model_User::find_all(array(
    'limit' => 2, //will set limit
 ));
 </code></pre>
@@ -1375,7 +1854,7 @@ e.g.</h2>
    in table with the same conditions from previous query ignoring limit
    and offset. Result of this query will be set to $count variable of this class
  </li>
-</ul></p>
+</ul></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1395,47 +1874,23 @@ e.g.</h2>
 <div class="subelement argument"><h4>$value</h4></div>
 </div></div>
 </div>
-<a name="table_fields" id="table_fields"></a><div class="element clickable method private table_fields" data-toggle="collapse" data-target=".table_fields .collapse">
-<h2>returns all table fields without field type and if value preset in model</h2>
-<pre>table_fields() : array</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Base_Model::table_fields()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Model::table_fields()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
-</div></div>
-</div>
-<a name="validate_login" id="validate_login"></a><div class="element clickable method private validate_login" data-toggle="collapse" data-target=".validate_login .collapse">
+<a id="method_validate_login"></a><div class="element clickable method private method_validate_login" data-toggle="collapse" data-target=".method_validate_login .collapse">
 <h2>validate_login()
         </h2>
 <pre>validate_login() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
-<a name="%24count" id="$count"> </a><div class="element clickable property public $count" data-toggle="collapse" data-target=".$count .collapse">
-<h2>number of total records</h2>
+<a id="property_count"> </a><div class="element clickable property public property_count" data-toggle="collapse" data-target=".property_count .collapse">
+<h2></h2>
 <pre>$count : int</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>by default count($this->records), but if system filter 'count_total'
+<div class="long_description"><p>by default count($this->records), but if system filter 'count_total'
 was specified. This variable will be contain count of all records in DB
-even if limit was set.</p></p>
+even if limit was set.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1452,12 +1907,12 @@ even if limit was set.</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24per_page" id="$per_page"> </a><div class="element clickable property public $per_page" data-toggle="collapse" data-target=".$per_page .collapse">
-<h2>default value for limit rows</h2>
+<a id="property_per_page"> </a><div class="element clickable property public property_per_page" data-toggle="collapse" data-target=".property_per_page .collapse">
+<h2></h2>
 <pre>$per_page : int</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1474,13 +1929,13 @@ even if limit was set.</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24records" id="$records"> </a><div class="element clickable property public $records" data-toggle="collapse" data-target=".$records .collapse">
-<h2>array of model objects</h2>
+<a id="property_records"> </a><div class="element clickable property public property_records" data-toggle="collapse" data-target=".property_records .collapse">
+<h2></h2>
 <pre>$records : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>if in select query more than one record
-was returned</p></p>
+<div class="long_description"><p>if in select query more than one record
+was returned</p></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1497,12 +1952,56 @@ was returned</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24auto_clean" id="$auto_clean"> </a><div class="element clickable property protected $auto_clean" data-toggle="collapse" data-target=".$auto_clean .collapse">
-<h2>Enable or disable cleaning garbage</h2>
+<a id="property__table_columns"> </a><div class="element clickable property protected property__table_columns" data-toggle="collapse" data-target=".property__table_columns .collapse">
+<h2></h2>
+<pre>$_table_columns </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Base_Db_Model::$$_table_columns</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::$$_table_columns</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::$$_table_columns</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property__table_fields"> </a><div class="element clickable property protected property__table_fields" data-toggle="collapse" data-target=".property__table_fields .collapse">
+<h2></h2>
+<pre>$_table_fields </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Base_Db_Model::$$_table_fields</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::$$_table_fields</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::$$_table_fields</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_auto_clean"> </a><div class="element clickable property protected property_auto_clean" data-toggle="collapse" data-target=".property_auto_clean .collapse">
+<h2></h2>
 <pre>$auto_clean : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1519,12 +2018,38 @@ was returned</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24db_query" id="$db_query"> </a><div class="element clickable property protected $db_query" data-toggle="collapse" data-target=".$db_query .collapse">
-<h2>DB object for queries(uses Kohana's DB class)</h2>
+<a id="property_data"> </a><div class="element clickable property protected property_data" data-toggle="collapse" data-target=".property_data .collapse">
+<h2></h2>
+<pre>$data : array | null</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>or fields and value for the row</p></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>private</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Db_Model::$$data</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::$$data</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::$$data</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_db_query"> </a><div class="element clickable property protected property_db_query" data-toggle="collapse" data-target=".property_db_query .collapse">
+<h2></h2>
 <pre>$db_query : object</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1541,13 +2066,13 @@ was returned</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24last_inserted_id" id="$last_inserted_id"> </a><div class="element clickable property protected $last_inserted_id" data-toggle="collapse" data-target=".$last_inserted_id .collapse">
-<h2>last inserted row in db for table</h2>
+<a id="property_last_inserted_id"> </a><div class="element clickable property protected property_last_inserted_id" data-toggle="collapse" data-target=".property_last_inserted_id .collapse">
+<h2></h2>
 <pre>$last_inserted_id : int</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>after insert some row to db, last inserted row id in db will be append
-to that variable</p></p>
+<div class="long_description"><p>after insert some row to db, last inserted row id in db will be append
+to that variable</p></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1564,30 +2089,23 @@ to that variable</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24order" id="$order"> </a><div class="element clickable property protected $order" data-toggle="collapse" data-target=".$order .collapse">
-<h2>Sets defualt ordering for DB query</h2>
+<a id="property_order"> </a><div class="element clickable property protected property_order" data-toggle="collapse" data-target=".property_order .collapse">
+<h2></h2>
 <pre>$order : array</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"><pre><code> <?php
+<div class="row collapse"><div class="detail-description"><div class="long_description"><pre><code> <?php
     class Model_User extends Model{
          protected $order = array('email', 'DESC');
     }
  ?>
-</code></pre></p></div></div>
+</code></pre></div></div></div>
 </div>
-<a name="%24primary_key" id="$primary_key"> </a><div class="element clickable property protected $primary_key" data-toggle="collapse" data-target=".$primary_key .collapse">
-<h2>sets the primary key name
-&lt;code&gt;
- &lt;?php
-    class Model_User extends Model{
-         protected $primary_key = 'email';
-    }
- ?&gt;
-&lt;/code&gt;</h2>
+<a id="property_primary_key"> </a><div class="element clickable property protected property_primary_key" data-toggle="collapse" data-target=".property_primary_key .collapse">
+<h2></h2>
 <pre>$primary_key : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1604,12 +2122,12 @@ to that variable</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24validate" id="$validate"> </a><div class="element clickable property protected $validate" data-toggle="collapse" data-target=".$validate .collapse">
-<h2>controls if need to validate data</h2>
+<a id="property_validate"> </a><div class="element clickable property protected property_validate" data-toggle="collapse" data-target=".property_validate .collapse">
+<h2></h2>
 <pre>$validate : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>when inserting or updating row</p></p>
+<div class="long_description"><p>when inserting or updating row</p></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1626,12 +2144,12 @@ to that variable</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24count_total" id="$count_total"> </a><div class="element clickable property private $count_total" data-toggle="collapse" data-target=".$count_total .collapse">
-<h2>Count all rows with the same conditions or not</h2>
+<a id="property_count_total"> </a><div class="element clickable property private property_count_total" data-toggle="collapse" data-target=".property_count_total .collapse">
+<h2></h2>
 <pre>$count_total : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>if need to make another one query to count all records ignoring limit and offset</p></p>
+<div class="long_description"><p>if need to make another one query to count all records ignoring limit and offset</p></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1648,34 +2166,12 @@ to that variable</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24data" id="$data"> </a><div class="element clickable property private $data" data-toggle="collapse" data-target=".$data .collapse">
-<h2>contain dynamically append variables</h2>
-<pre>$data : array | null</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>or fields and value for the row</p></p>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Base_Model::$$data</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Model::$$data</td>
-</tr>
-</table>
-</div></div>
-</div>
-<a name="%24db_table" id="$db_table"> </a><div class="element clickable property private $db_table" data-toggle="collapse" data-target=".$db_table .collapse">
-<h2>contains database table name</h2>
+<a id="property_db_table"> </a><div class="element clickable property private property_db_table" data-toggle="collapse" data-target=".property_db_table .collapse">
+<h2></h2>
 <pre>$db_table : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>Model_User ->(in database) table will be <code>users</code></p></p>
+<div class="long_description"><p>Model_User ->(in database) table will be <code>users</code></p></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1692,12 +2188,12 @@ to that variable</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24errors" id="$errors"> </a><div class="element clickable property private $errors" data-toggle="collapse" data-target=".$errors .collapse">
-<h2>assoc array of errors for this model</h2>
+<a id="property_errors"> </a><div class="element clickable property private property_errors" data-toggle="collapse" data-target=".property_errors .collapse">
+<h2></h2>
 <pre>$errors : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1714,12 +2210,12 @@ to that variable</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24last_query" id="$last_query"> </a><div class="element clickable property private $last_query" data-toggle="collapse" data-target=".$last_query .collapse">
-<h2>Last normal SQL query executed as string</h2>
+<a id="property_last_query"> </a><div class="element clickable property private property_last_query" data-toggle="collapse" data-target=".property_last_query .collapse">
+<h2></h2>
 <pre>$last_query : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1736,12 +2232,12 @@ to that variable</p></p>
 </table>
 </div></div>
 </div>
-<a name="%24system_filters" id="$system_filters"> </a><div class="element clickable property private $system_filters" data-toggle="collapse" data-target=".$system_filters .collapse">
-<h2>defines system variables(commands)</h2>
+<a id="property_system_filters"> </a><div class="element clickable property private property_system_filters" data-toggle="collapse" data-target=".property_system_filters .collapse">
+<h2></h2>
 <pre>$system_filters : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>wich can parse in filter function</p></p>
+<div class="long_description"><p>wich can parse in filter function</p></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -1760,12 +2256,12 @@ to that variable</p></p>
 </div>
 <h3>
 <i class="icon-custom icon-constant"></i> Constants</h3>
-<a name="BELONGS_TO" id="BELONGS_TO"> </a><div class="element clickable constant  BELONGS_TO" data-toggle="collapse" data-target=".BELONGS_TO .collapse">
+<a id="constant_BELONGS_TO"> </a><div class="element clickable constant  constant_BELONGS_TO" data-toggle="collapse" data-target=".constant_BELONGS_TO .collapse">
 <h2>BELONGS_TO</h2>
 <pre>BELONGS_TO </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -1778,12 +2274,12 @@ to that variable</p></p>
 </table>
 </div></div>
 </div>
-<a name="HAS_MANY" id="HAS_MANY"> </a><div class="element clickable constant  HAS_MANY" data-toggle="collapse" data-target=".HAS_MANY .collapse">
+<a id="constant_HAS_MANY"> </a><div class="element clickable constant  constant_HAS_MANY" data-toggle="collapse" data-target=".constant_HAS_MANY .collapse">
 <h2>HAS_MANY</h2>
 <pre>HAS_MANY </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -1796,12 +2292,12 @@ to that variable</p></p>
 </table>
 </div></div>
 </div>
-<a name="HAS_ONE" id="HAS_ONE"> </a><div class="element clickable constant  HAS_ONE" data-toggle="collapse" data-target=".HAS_ONE .collapse">
+<a id="constant_HAS_ONE"> </a><div class="element clickable constant  constant_HAS_ONE" data-toggle="collapse" data-target=".constant_HAS_ONE .collapse">
 <h2>HAS_ONE</h2>
 <pre>HAS_ONE </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -1814,12 +2310,12 @@ to that variable</p></p>
 </table>
 </div></div>
 </div>
-<a name="STAT" id="STAT"> </a><div class="element clickable constant  STAT" data-toggle="collapse" data-target=".STAT .collapse">
+<a id="constant_STAT"> </a><div class="element clickable constant  constant_STAT" data-toggle="collapse" data-target=".constant_STAT .collapse">
 <h2>STAT</h2>
 <pre>STAT </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -1838,8 +2334,8 @@ to that variable</p></p>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-15T09:46:03+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-01-07T10:48:42+02:00.<br></footer></div>
 </div>
 </body>
 </html>

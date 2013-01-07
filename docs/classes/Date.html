@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">109</span></a></li>
+                <span class="label label-info">170</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -57,22 +57,27 @@
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public inherited"><a href="#end_of_month" title="end_of_month :: Get the timestamp for last day of month"><span class="description">Get the timestamp for last day of month</span><pre>end_of_month()</pre></a></li>
-<li class="method public inherited"><a href="#end_of_week" title="end_of_week :: Get the timestamp for the last day of week"><span class="description">Get the timestamp for the last day of week</span><pre>end_of_week()</pre></a></li>
-<li class="method public inherited"><a href="#format" title="format :: print date in specific format(from config site)"><span class="description">print date in specific format(from config site)</span><pre>format()</pre></a></li>
-<li class="method public inherited"><a href="#month_days" title="month_days :: Get all days for month"><span class="description">Get all days for month</span><pre>month_days()</pre></a></li>
-<li class="method public inherited"><a href="#start_of_month" title="start_of_month :: Get the timestamp for first day of the month"><span class="description">Get the timestamp for first day of the month</span><pre>start_of_month()</pre></a></li>
-<li class="method public inherited"><a href="#start_of_week" title="start_of_week :: Get the timestamp for first day of week"><span class="description">Get the timestamp for first day of week</span><pre>start_of_week()</pre></a></li>
-<li class="method public inherited"><a href="#today_if_null" title="today_if_null :: convert date to a timestamp"><span class="description">convert date to a timestamp</span><pre>today_if_null()</pre></a></li>
-<li class="method public inherited"><a href="#week_days" title="week_days :: get days of week"><span class="description">get days of week</span><pre>week_days()</pre></a></li>
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public inherited"><a href="#method_end_of_month" title="end_of_month :: Get the timestamp for last day of month"><span class="description">Get the timestamp for last day of month</span><pre>end_of_month()</pre></a></li>
+<li class="method public inherited"><a href="#method_end_of_week" title="end_of_week :: Get the timestamp for the last day of week"><span class="description">Get the timestamp for the last day of week</span><pre>end_of_week()</pre></a></li>
+<li class="method public inherited"><a href="#method_format" title="format :: print date in specific format(from config site)"><span class="description">print date in specific format(from config site)</span><pre>format()</pre></a></li>
+<li class="method public inherited"><a href="#method_month_days" title="month_days :: Get all days for month"><span class="description">Get all days for month</span><pre>month_days()</pre></a></li>
+<li class="method public inherited"><a href="#method_months_with_name" title="months_with_name :: Number of months in a year."><span class="description">Number of months in a year.</span><pre>months_with_name()</pre></a></li>
+<li class="method public inherited"><a href="#method_start_of_month" title="start_of_month :: Get the timestamp for first day of the month"><span class="description">Get the timestamp for first day of the month</span><pre>start_of_month()</pre></a></li>
+<li class="method public inherited"><a href="#method_start_of_week" title="start_of_week :: Get the timestamp for first day of week"><span class="description">Get the timestamp for first day of week</span><pre>start_of_week()</pre></a></li>
+<li class="method public inherited"><a href="#method_today_if_null" title="today_if_null :: convert date to a timestamp"><span class="description">convert date to a timestamp</span><pre>today_if_null()</pre></a></li>
+<li class="method public inherited"><a href="#method_week_days" title="week_days :: get days of week"><span class="description">get days of week</span><pre>week_days()</pre></a></li>
+</ul>
+</li>
 <li class="nav-header">
-<i class="icon-custom icon-constant"></i> Constants</li>
-<li class="constant  inherited"><a href="#WEEK_START" title="WEEK_START :: which day does the week start on (0 - 6)"><span class="description">which day does the week start on (0 - 6)</span><pre>WEEK_START</pre></a></li>
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul><li class="constant  inherited"><a href="#constant_WEEK_START" title="WEEK_START :: which day does the week start on (0 - 6)"><span class="description">which day does the week start on (0 - 6)</span><pre>WEEK_START</pre></a></li></ul>
+</li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CDate" id="\Date"></a><ul class="breadcrumb">
+<a id="\Date"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
@@ -81,15 +86,15 @@
 <span class="divider">\</span><a href="../classes/Date.html">Date</a>
 </li>
 </ul>
-<div href="../classes/Date.html" class="element class">
+<div class="element class">
 <p class="short_description">Date class just to make easy call of Base_Date functions</p>
 <div class="details">
-<p class="long_description"><pre><code> Date::somefunction();
-</code></pre></p>
+<div class="long_description"><pre><code> Date::somefunction();
+</code></pre></div>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td>\global\Base_Date</td>
+<td><a href="">\global\Base_Date</a></td>
 </tr>
 <tr>
 <th>package</th>
@@ -122,12 +127,14 @@
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="end_of_month" id="end_of_month"></a><div class="element clickable method public end_of_month" data-toggle="collapse" data-target=".end_of_month .collapse">
+<a id="method_end_of_month"></a><div class="element clickable method public method_end_of_month" data-toggle="collapse" data-target=".method_end_of_month .collapse">
 <h2>Get the timestamp for last day of month</h2>
 <pre>end_of_month(null $date) : int</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -147,12 +154,14 @@
 <div class="subelement response"><code>int</code></div>
 </div></div>
 </div>
-<a name="end_of_week" id="end_of_week"></a><div class="element clickable method public end_of_week" data-toggle="collapse" data-target=".end_of_week .collapse">
+<a id="method_end_of_week"></a><div class="element clickable method public method_end_of_week" data-toggle="collapse" data-target=".method_end_of_week .collapse">
 <h2>Get the timestamp for the last day of week</h2>
 <pre>end_of_week(null $date) : int</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -172,12 +181,14 @@
 <div class="subelement response"><code>int</code></div>
 </div></div>
 </div>
-<a name="format" id="format"></a><div class="element clickable method public format" data-toggle="collapse" data-target=".format .collapse">
+<a id="method_format"></a><div class="element clickable method public method_format" data-toggle="collapse" data-target=".method_format .collapse">
 <h2>print date in specific format(from config site)</h2>
-<pre>format(\$date $date, \$format $format) : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<pre>format($date, $format) : string</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -190,22 +201,22 @@
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$date</h4>
-<code>\$date</code><p>string</p></div>
+<h4>$date</h4><p>string</p></div>
 <div class="subelement argument">
-<h4>$format</h4>
-<code>\$format</code><p>string</p></div>
+<h4>$format</h4><p>string</p></div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>foremated date</div>
 </div></div>
 </div>
-<a name="month_days" id="month_days"></a><div class="element clickable method public month_days" data-toggle="collapse" data-target=".month_days .collapse">
+<a id="method_month_days"></a><div class="element clickable method public method_month_days" data-toggle="collapse" data-target=".method_month_days .collapse">
 <h2>Get all days for month</h2>
 <pre>month_days(null $date, string $format) : array</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -229,12 +240,41 @@
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="start_of_month" id="start_of_month"></a><div class="element clickable method public start_of_month" data-toggle="collapse" data-target=".start_of_month .collapse">
+<a id="method_months_with_name"></a><div class="element clickable method public method_months_with_name" data-toggle="collapse" data-target=".method_months_with_name .collapse">
+<h2>Number of months in a year.</h2>
+<pre>months_with_name() : array</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Value will hold month name</p></div>
+<table class="table table-bordered">
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+<tr>
+<th>uses</th>
+<td>\Date::hours</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Date::months_with_name()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Array from 1-12 with month names</div>
+</div></div>
+</div>
+<a id="method_start_of_month"></a><div class="element clickable method public method_start_of_month" data-toggle="collapse" data-target=".method_start_of_month .collapse">
 <h2>Get the timestamp for first day of the month</h2>
 <pre>start_of_month(null $date) : int</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -254,12 +294,14 @@
 <div class="subelement response"><code>int</code></div>
 </div></div>
 </div>
-<a name="start_of_week" id="start_of_week"></a><div class="element clickable method public start_of_week" data-toggle="collapse" data-target=".start_of_week .collapse">
+<a id="method_start_of_week"></a><div class="element clickable method public method_start_of_week" data-toggle="collapse" data-target=".method_start_of_week .collapse">
 <h2>Get the timestamp for first day of week</h2>
 <pre>start_of_week(null $date) : int</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -279,12 +321,14 @@
 <div class="subelement response"><code>int</code></div>
 </div></div>
 </div>
-<a name="today_if_null" id="today_if_null"></a><div class="element clickable method public today_if_null" data-toggle="collapse" data-target=".today_if_null .collapse">
+<a id="method_today_if_null"></a><div class="element clickable method public method_today_if_null" data-toggle="collapse" data-target=".method_today_if_null .collapse">
 <h2>convert date to a timestamp</h2>
 <pre>today_if_null(null $date) : int</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>if valid otherwise current timestamp</p></p>
+<div class="long_description"><p>if valid otherwise current timestamp</p></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -304,12 +348,14 @@
 <div class="subelement response"><code>int</code></div>
 </div></div>
 </div>
-<a name="week_days" id="week_days"></a><div class="element clickable method public week_days" data-toggle="collapse" data-target=".week_days .collapse">
+<a id="method_week_days"></a><div class="element clickable method public method_week_days" data-toggle="collapse" data-target=".method_week_days .collapse">
 <h2>get days of week</h2>
 <pre>week_days(null $date) : array</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>static</th>
@@ -331,12 +377,12 @@
 </div>
 <h3>
 <i class="icon-custom icon-constant"></i> Constants</h3>
-<a name="WEEK_START" id="WEEK_START"> </a><div class="element clickable constant  WEEK_START" data-toggle="collapse" data-target=".WEEK_START .collapse">
+<a id="constant_WEEK_START"> </a><div class="element clickable constant  constant_WEEK_START" data-toggle="collapse" data-target=".constant_WEEK_START .collapse">
 <h2>which day does the week start on (0 - 6)</h2>
 <pre>WEEK_START </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\Base_Date::WEEK_START</td>
@@ -349,8 +395,8 @@
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-15T09:46:04+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-01-07T10:48:42+02:00.<br></footer></div>
 </div>
 </body>
 </html>

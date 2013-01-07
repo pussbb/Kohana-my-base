@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">109</span></a></li>
+                <span class="label label-info">170</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -63,97 +63,108 @@
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-function"></i> Functions</li>
-<li class="function  "><a href="#debug" title="debug :: helper function to print dump of var and exit if needed"><span class="description">helper function to print dump of var and exit if needed</span><pre>debug</pre></a></li>
-<li class="function  "><a href="#tr" title="tr :: translate string via gettext
+<li class="function  "><a href="#function_debug" title="debug :: helper function to print dump of var and exit if needed"><span class="description">helper function to print dump of var and exit if needed</span><pre>debug</pre></a></li>
+<li class="function  "><a href="#function_tr" title="tr :: translate string via gettext
 or Kohana's translation function"><span class="description">translate string via gettext
 or Kohana's translation function</span><pre>tr</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#HTTP_Exception" title="">HTTP_Exception</a></li>
 <li><a href="#Controller_Translations" title="Core template wich extends functionality of Controller_Template">Controller_Translations</a></li>
 <li><a href="#Model_User" title="Helper class to work with Base_Model">Model_User</a></li>
 <li><a href="#Model_Access_Rule" title="Helper class to work with Base_Model">Model_Access_Rule</a></li>
 <li><a href="#Model_Language" title="Helper class to work with Base_Model">Model_Language</a></li>
-<li><a href="#HTTP_Exception" title="">HTTP_Exception</a></li>
+<li><a href="#Num" title="get form http://pastie.org/981503">Num</a></li>
+<li><a href="#Upload" title="Extending Kohana Upload helper">Upload</a></li>
 </ul>
 </div>
 <div class="span8 package-contents">
-<ul class="breadcrumb">
-<li>
-<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
-</li>
-<li class="active"><a href="../packages/Default.html">Default</a></li>
-</ul>
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li class="active"><a href="../packages/Default.html">Default</a></li>
+</li></ul>
 <div class="package-indent">
 <h3>
 <i class="icon-custom icon-function"></i> Functions</h3>
-<a name="debug" id="debug"></a><div class="element clickable function  debug" data-toggle="collapse" data-target=".debug .collapse">
+<a id="function_debug"></a><div class="element clickable function  function_debug" data-toggle="collapse" data-target=".function_debug .collapse">
 <h2>helper function to print dump of var and exit if needed</h2>
 <pre>debug() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="tr" id="tr"></a><div class="element clickable function  tr" data-toggle="collapse" data-target=".tr .collapse">
+<a id="function_tr"></a><div class="element clickable function  function_tr" data-toggle="collapse" data-target=".function_tr .collapse">
 <h2>translate string via gettext
 or Kohana's translation function</h2>
-<pre>tr(\$string $string, array $values) : string</pre>
+<pre>tr($string, array $values) : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$string</h4>
-<code>\$string</code><p>string</p></div>
+<h4>$string</h4><p>string</p></div>
 <div class="subelement argument">
-<h4>$values</h4>
-<code>\$values</code><p>array</p></div>
+<h4>$values</h4><p>array</p></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <h3>
 <i class="icon-custom icon-class"></i> Classes and interfaces</h3>
-<a name="Controller_Translations" id="Controller_Translations"></a><div class="element ajax clickable class" href="../classes/Controller_Translations.html">
+<div id="Controller_Translations" class="element ajax clickable class">
 <h1>Controller_Translations<a href="../classes/Controller_Translations.html">¶</a>
 </h1>
 <p class="short_description">Core template wich extends functionality of Controller_Template</p>
 <div class="details collapse"></div>
 <a href="../classes/Controller_Translations.html" class="more">« More »</a>
 </div>
-<a name="HTTP_Exception" id="HTTP_Exception"></a><div class="element ajax clickable class" href="../classes/HTTP_Exception.html">
+<div id="HTTP_Exception" class="element ajax clickable class">
 <h1>HTTP_Exception<a href="../classes/HTTP_Exception.html">¶</a>
 </h1>
 <p class="short_description"></p>
 <div class="details collapse"></div>
 <a href="../classes/HTTP_Exception.html" class="more">« More »</a>
 </div>
-<a name="Model_Access_Rule" id="Model_Access_Rule"></a><div class="element ajax clickable class" href="../classes/Model_Access_Rule.html">
+<div id="Model_Access_Rule" class="element ajax clickable class">
 <h1>Model_Access_Rule<a href="../classes/Model_Access_Rule.html">¶</a>
 </h1>
 <p class="short_description">Helper class to work with Base_Model</p>
 <div class="details collapse"></div>
 <a href="../classes/Model_Access_Rule.html" class="more">« More »</a>
 </div>
-<a name="Model_Language" id="Model_Language"></a><div class="element ajax clickable class" href="../classes/Model_Language.html">
+<div id="Model_Language" class="element ajax clickable class">
 <h1>Model_Language<a href="../classes/Model_Language.html">¶</a>
 </h1>
 <p class="short_description">Helper class to work with Base_Model</p>
 <div class="details collapse"></div>
 <a href="../classes/Model_Language.html" class="more">« More »</a>
 </div>
-<a name="Model_User" id="Model_User"></a><div class="element ajax clickable class" href="../classes/Model_User.html">
+<div id="Model_User" class="element ajax clickable class">
 <h1>Model_User<a href="../classes/Model_User.html">¶</a>
 </h1>
 <p class="short_description">Helper class to work with Base_Model</p>
 <div class="details collapse"></div>
 <a href="../classes/Model_User.html" class="more">« More »</a>
 </div>
+<div id="Num" class="element ajax clickable class">
+<h1>Num<a href="../classes/Num.html">¶</a>
+</h1>
+<p class="short_description">get form http://pastie.org/981503</p>
+<div class="details collapse"></div>
+<a href="../classes/Num.html" class="more">« More »</a>
+</div>
+<div id="Upload" class="element ajax clickable class">
+<h1>Upload<a href="../classes/Upload.html">¶</a>
+</h1>
+<p class="short_description">Extending Kohana Upload helper</p>
+<div class="details collapse"></div>
+<a href="../classes/Upload.html" class="more">« More »</a>
+</div>
 </div>
 </div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-11-15T09:46:03+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-01-07T10:48:42+02:00.<br></footer></div>
 </div>
 </body>
 </html>
