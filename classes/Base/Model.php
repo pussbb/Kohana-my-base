@@ -1406,8 +1406,10 @@ class Base_Model extends Base_Db_Model {
                 $result = $result->count() > 0;
                 break;
             case 'delete':
-            case 'update':
                 $result = $result > 0;
+                break;
+            case 'update':
+                $result = $result > 0 || empty($this->errors);
                 break;
             default:
                 $result = TRUE;
