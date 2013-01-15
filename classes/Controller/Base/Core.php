@@ -15,6 +15,14 @@
 
 class Controller_Base_Core extends Controller_Template {
 
+    /**
+     * if request is XMLHttpRequest and controller whants to render view
+     * if this option enabled it will render only view. otherwise without manualy setting
+     * render mode it will render with template files
+     *
+     *@var bool
+     */
+    protected $ajax_auto_partial = TRUE;
      /**
      * base template file
      *
@@ -300,7 +308,6 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function render_partial($file = '',array $view_data = array())
     {
-        $this->auto_render = FALSE;
         $this->set_filename($file);
         $this->view->set(array_merge($view_data, $this->append_dynamic_properties()));
         $this->set_view_filename();
@@ -370,8 +377,12 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function after()
     {
+
         if ( ! $this->auto_render)
             return parent::after();
+
+        if ($this->ajax_auto_partial && $this->request->is_ajax())
+            return $this->render_partial();
 
         $this->set_view_filename();
 
