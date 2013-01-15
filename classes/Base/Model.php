@@ -547,10 +547,12 @@ class Base_Model extends Base_Db_Model {
         if (is_numeric($filter)) {
             $filter = array($klass->primary_key => $filter);
         }
-        $result = $klass::find_all($filter, 1, NULL, $cache);
+        $limit = 1;
+        if (isset($filter[$klass->primary_key]))
+            $limit = NULL;
+        $result = $klass::find_all($filter, $limit, NULL, $cache);
         if ( ! Arr::get($result->records, 0))
             throw new Base_Db_Exception_RecordNotFound();
-
         return $result->records[0];
     }
 
