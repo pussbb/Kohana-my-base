@@ -973,8 +973,7 @@ class Base_Model extends Base_Db_Model {
             if (Arr::is_array($value)) {
                 $comparison_key = 'IN';
             }
-            if (is_object($value)) {
-
+            else if (is_object($value)) {
                 if ($value instanceof Model)
                 {
                     if ( ! $value->db_query)
@@ -983,18 +982,17 @@ class Base_Model extends Base_Db_Model {
                 }
                 if ($value instanceof Database_Query_Builder_Select)
                 {
-                    if ((bool)preg_match('/LIMIT/', $value->compile()))
-                        $comparison_key = '=';
-                    else
-                        $comparison_key = 'IN';
+                    $value = DB::select()->from(array($value,'t'));
+                    $comparison_key = 'IN';
                 }
-                else {
-                    if (! $value instanceof Database_Expression )
-                        throw new Exception_Collection_ObjectNotSupported();
+                else if ($value instanceof Database_Expression ) {
                     $comparison_key = '';
                 }
+                else {
+                    throw new Exception_Collection_ObjectNotSupported();
+                }
             }
-            if ( is_null($value)) {
+            else if ( is_null($value)) {
                 $comparison_key = 'IS';
             }
             if (strpos($key,'|| ') !== FALSE) {
@@ -1027,12 +1025,12 @@ class Base_Model extends Base_Db_Model {
     public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
     {
         $module_name = strtolower($this->module_name);
-        if ( ! Arr::is_array($select_args)) {
+        if ( is_string($select_args)) {
             $this->db_query = DB::select($this->query_field($select_args));
         }
-        else {
+        else if (is_array($select_args)) {
             $fields = array();
-            if (Arr::is_array(Arr::get($select_args, 0))) {
+            if (Arr::is_assoc(Arr::get($select_args, 0))) {
                 foreach ($select_args as $field => $alias) {
                     $fields[] = array($this->query_field($field), $alias);
                 }
