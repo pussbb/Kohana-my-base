@@ -891,6 +891,17 @@ class Base_Model extends Base_Db_Model {
         return $name;
     }
 
+    /**
+     * checks if key contains special symbols to set different comparison keys
+     *
+     *@param $key - string
+     *@return bool
+     *@access private
+     */
+    private function sql_comparison($key)
+    {
+        return (bool)preg_match('/^\|\|\s|^>\s|^<\s|^<>\s|^\!\s/',$key, $matches);
+    }
 
     /**
      * Helper function to create WHERE clause
@@ -924,7 +935,6 @@ class Base_Model extends Base_Db_Model {
      * Also values of fields can be array . In this case comparison key will be IN
      * Also supports DB::expr as value
      *
-     * @todo add comperision key != for example
      * @uses Database_Query_Builder_Where functions
      * @param $filter array
      * @return Base_Model
@@ -952,9 +962,11 @@ class Base_Model extends Base_Db_Model {
             //skip fields that are not in table
             //and if it's a system append them
             foreach ($filter as $key => $value) {
-                if (in_array($key, $this->system_filters))
-                    $this->system_filters($key, $filter[$key]);
-                if (array_key_exists($key, $this->_table_columns) || strpos($key, '|| ') !== FALSE)
+                $_key = $key;
+                if ($this->sql_comparison($key))
+                    $_key = Arr::get(explode(' ', $key), 1);
+                if (array_key_exists($_key, $this->_table_columns)
+                    || in_array($_key, $this->system_filters))
                     continue;
                 unset($filter[$key]);
             }
@@ -995,13 +1007,27 @@ class Base_Model extends Base_Db_Model {
             else if ( is_null($value)) {
                 $comparison_key = 'IS';
             }
-            if (strpos($key,'|| ') !== FALSE) {
-                $key = explode(' ', $key);
-                $this->db_query->or_where($this->query_field($key[1]), $comparison_key, $this->sanitize($key[1], $value));
+            $clause = 'where';
+            if ($this->sql_comparison($key)) {
+                $key_parts = explode(' ', $key);
+                switch ($key_parts[0]) {
+                    case '||':
+                        $clause = 'or_where';
+                        $comparison_key = '=';
+                        $key = $key_parts[1];
+                        break;
+                    case '!':
+                        $comparison_key = '<>';
+                        $key = $key_parts[1];
+                        break;
+                    defualt:
+                        $comparison_key = $key_parts[0];
+                        $key = $key_parts[1];
+                        break;
+                }
             }
-            else{
-                $this->db_query->where($this->query_field($key), $comparison_key, $this->sanitize($key, $value));
-            }
+
+            $this->db_query->$clause($this->query_field($key), $comparison_key, $this->sanitize($key, $value));
         }
         $this->db_query->where_close();
         return $this;
