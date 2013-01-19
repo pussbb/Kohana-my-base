@@ -9,7 +9,7 @@
  * ))
  *</code>
  * @package Kohana-my-base
- * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
+ * @copyright 2013 pussbb@gmail.com(alexnevpryaga@gmail.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
@@ -183,6 +183,7 @@ class Base_Model extends Base_Db_Model {
      */
     private $meta_data_cache = NULL;
 
+    private $select_args = array();
     /**
      *
      */
@@ -547,10 +548,7 @@ class Base_Model extends Base_Db_Model {
         if (is_numeric($filter)) {
             $filter = array($klass->primary_key => $filter);
         }
-        $limit = 1;
-        if (isset($filter[$klass->primary_key]))
-            $limit = NULL;
-        $result = $klass::find_all($filter, $limit, NULL, $cache);
+        $result = $klass::find_all($filter, 1, NULL, $cache);
         if ( ! Arr::get($result->records, 0))
             throw new Base_Db_Exception_RecordNotFound();
         return $result->records[0];
@@ -949,39 +947,58 @@ class Base_Model extends Base_Db_Model {
         if ( ! $this->db_query)
             $this->select();
 
+        $system_filters = array();
+        $fields = array();
         if ( ! Arr::is_assoc($filter)) {
-            $fields = array();
             foreach ($filter as $field) {
                 if ( ! array_key_exists($field, $this->_table_columns))
                     continue;
                 $fields[$field] = Arr::get($this->data, $field);
             }
-            $filter = $fields;
         }
         else {
-            //skip fields that are not in table
-            //and if it's a system append them
             foreach ($filter as $key => $value) {
+                if (in_array($key, $this->system_filters)) {
+                    $system_filters[$key] = $value;
+                    unset($filter[$key]);
+                    continue;
+                }
                 $_key = $key;
                 if ($this->sql_comparison($key))
                     $_key = Arr::get(explode(' ', $key), 1);
-                if (array_key_exists($_key, $this->_table_columns)
-                    || in_array($_key, $this->system_filters))
+                if (array_key_exists($_key, $this->_table_columns)) {
+                    $fields[$key] = $value;
+                    unset($filter[$key]);
                     continue;
-                unset($filter[$key]);
+                }
             }
         }
+        $this->append_filter_fields($fields);
 
-        if (empty($filter))
-            return $this;
+        if ((isset($system_filters['limit']) || (bool)preg_match('/LIMIT/', $this->db_query->compile()))
+            && isset($system_filters['with'])) {
+            $db = clone $this->db_query;
 
+            $this->db_query
+                ->reset()
+                ->select(Arr::get($this->select_args, 0))
+                ->from(array($db, $this->module_name))
+                ->cached(Arr::get($this->select_args, 1));
+        }
+
+        foreach($system_filters as $key => $value) {
+             $this->system_filters($key, $value);
+        }
+
+//         debug($this->relations());
+        return $this;
+    }
+
+    private function append_filter_fields($fields)
+    {
         $this->db_query->where_open();
-        foreach ($filter as $key => $value) {
+        foreach ($fields as $key => $value) {
             $comparison_key = '=';
-            if (in_array($key, $this->system_filters)) {
-                $this->system_filters($key, $value);
-                continue;
-            }
             if (Arr::is_array($value)) {
                 $comparison_key = 'IN';
             }
@@ -994,7 +1011,7 @@ class Base_Model extends Base_Db_Model {
                 }
                 if ($value instanceof Database_Query_Builder_Select)
                 {
-                    $value = DB::select()->from(array($value,'t'));
+                    $value = DB::select()->from(array($value,'t'.mt_rand()));
                     $comparison_key = 'IN';
                 }
                 else if ($value instanceof Database_Expression ) {
@@ -1029,8 +1046,7 @@ class Base_Model extends Base_Db_Model {
 
             $this->db_query->$clause($this->query_field($key), $comparison_key, $this->sanitize($key, $value));
         }
-        $this->db_query->where_close();
-        return $this;
+        $this->db_query->where_close_empty();
     }
 
     /**
@@ -1050,9 +1066,10 @@ class Base_Model extends Base_Db_Model {
      */
     public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
     {
-        $module_name = strtolower($this->module_name);
+
         if ( is_string($select_args)) {
-            $this->db_query = DB::select($this->query_field($select_args));
+            $fields = $this->query_field($select_args);
+            $this->db_query = DB::select($fields);
         }
         else if (is_array($select_args)) {
             $fields = array();
@@ -1070,7 +1087,7 @@ class Base_Model extends Base_Db_Model {
                 $this->db_query = DB::select($fields);
             }
         }
-
+        $this->select_args = array($fields, $cache);
         $this->db_query->from(array($this->db_table, $this->module_name));
         $this->db_query->limit($limit)->offset($offset);
         if ($cache)
