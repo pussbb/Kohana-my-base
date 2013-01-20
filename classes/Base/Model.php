@@ -547,7 +547,7 @@ class Base_Model extends Base_Db_Model {
      * @return mixed
      * @throws Exception
      */
-    public static function find($filter, $cache = NULL)
+    public static function find($filter, $cache = FALSE)
     {
         $klass_name = get_called_class();
         $klass = new $klass_name;
@@ -593,7 +593,7 @@ class Base_Model extends Base_Db_Model {
      * @param null $cache
      * @return mixed
      */
-    public static function find_all($filter = array(), $limit = NULL, $offset = NULL, $cache = NULL)
+    public static function find_all($filter = array(), $limit = NULL, $offset = NULL, $cache = FALSE)
     {
         $klass_name = get_called_class();
         $obj = new $klass_name();
@@ -1097,7 +1097,7 @@ class Base_Model extends Base_Db_Model {
      * @return Base_Model
      * @todo rewrite
      */
-    public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = NULL)
+    public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = FALSE)
     {
 
         if ( is_string($select_args)) {
