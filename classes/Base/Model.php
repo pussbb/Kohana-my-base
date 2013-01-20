@@ -555,7 +555,6 @@ class Base_Model extends Base_Db_Model {
             $filter = array($klass->primary_key => $filter);
         }
         $result = $klass::find_all($filter, 1, NULL, $cache);
-        debug($result->last_query);
         if ( ! Arr::get($result->records, 0))
             throw new Base_Db_Exception_RecordNotFound();
         $_result = $result->records[0];
