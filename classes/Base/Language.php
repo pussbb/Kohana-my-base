@@ -67,7 +67,7 @@ class Base_Language {
             $filter = array('code' => $code);
         else
             $filter = array('locale' => I18n::lang());
-        $language = Model_Language::find($filter);
+        $language = Model_Language::find($filter, TRUE);
         self::set($language);
         return $language;
     }
@@ -80,12 +80,21 @@ class Base_Language {
     public static function all_codes()
     {
         if (empty(self::$lang_codes)) {
-            $langs = Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
+            $langs = self::available();
             self::$lang_codes = array_filter(Collection::pluck($langs, 'code'));
         }
         return self::$lang_codes;
     }
 
+    /**
+     * get all available languages
+     * @return array
+     * @static
+     */
+    public static function available()
+    {
+        return Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
+    }
     /**
      * php reg expr to match lang codes
      * @return array
