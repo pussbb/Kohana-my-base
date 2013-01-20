@@ -15,6 +15,7 @@
   <files>
     <directory>./</directory>
     <ignore>views/*</ignore>
+    <ignore>examples/*</ignore>
     <ignore>config/*</ignore>
     <ignore-hidden>on</ignore-hidden>
     <ignore-symlinks>off</ignore-symlinks>

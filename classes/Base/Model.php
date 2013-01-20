@@ -777,14 +777,6 @@ class Base_Model extends Base_Db_Model {
                 }
                 break;
             case 'expression':
-                /*
-                    $m = Model_News::find_all(array(
-                        'expression' => array(
-                            'YEAR(%s) = %s',
-                            'created_at' => 2010
-                        )
-                    ));
-                */
                 $expresion = $value[0];
                 unset($value[0]);
 

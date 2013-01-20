@@ -4444,7 +4444,7 @@ if needed&lt;/p&gt;</long-description>
       <error line="248" code="50015">Argument $files is missing from the Docblock of append_script()</error>
     </parse_markers>
   </file>
-  <file path="classes/Base/Model.php" hash="24d3797511814c1148d080c1a8a366a1" package="Default">
+  <file path="classes/Base/Model.php" hash="f045e342a165ed550882760819498356" package="Default">
     <class final="false" abstract="false" namespace="global" line="20" package="Kohana-my-base\database">
       <extends>\Base_Db_Model</extends>
       <name>Base_Model</name>
@@ -4468,8 +4468,8 @@ if needed&lt;/p&gt;</long-description>
         <full_name>BELONGS_TO</full_name>
         <value>1</value>
         <docblock line="192">
-          <description/>
-          <long-description/>
+          <description></description>
+          <long-description></long-description>
         </docblock>
       </constant>
       <constant namespace="global" line="199" package="Kohana-my-base\database">
@@ -4477,8 +4477,8 @@ if needed&lt;/p&gt;</long-description>
         <full_name>HAS_MANY</full_name>
         <value>2</value>
         <docblock line="196">
-          <description/>
-          <long-description/>
+          <description></description>
+          <long-description></long-description>
         </docblock>
       </constant>
       <constant namespace="global" line="203" package="Kohana-my-base\database">
@@ -4486,8 +4486,8 @@ if needed&lt;/p&gt;</long-description>
         <full_name>HAS_ONE</full_name>
         <value>3</value>
         <docblock line="200">
-          <description/>
-          <long-description/>
+          <description></description>
+          <long-description></long-description>
         </docblock>
       </constant>
       <constant namespace="global" line="208" package="Kohana-my-base\database">
@@ -4495,8 +4495,8 @@ if needed&lt;/p&gt;</long-description>
         <full_name>STAT</full_name>
         <value>4</value>
         <docblock line="205">
-          <description/>
-          <long-description/>
+          <description></description>
+          <long-description></long-description>
         </docblock>
       </constant>
       <property final="false" static="false" visibility="public" line="30" namespace="global" package="Default">
@@ -4517,7 +4517,7 @@ was returned&lt;/p&gt;</long-description>
         <default>10</default>
         <docblock line="32">
           <description>default value for limit rows</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="32" name="var" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
@@ -4567,7 +4567,7 @@ even if limit was set.&lt;/p&gt;</long-description>
     }
  ?&gt;
 &lt;/code&gt;</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="65" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
@@ -4591,7 +4591,7 @@ even if limit was set.&lt;/p&gt;</long-description>
         <default>NULL</default>
         <docblock line="89">
           <description>contains module name</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="89" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
@@ -4604,7 +4604,7 @@ even if limit was set.&lt;/p&gt;</long-description>
         <default>NULL</default>
         <docblock line="98">
           <description>DB object for queries(uses Kohana's DB class)</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="98" name="var" description="" type="object">
             <type by_reference="false">object</type>
           </tag>
@@ -4641,7 +4641,7 @@ to that variable&lt;/p&gt;</long-description>
         <default>TRUE</default>
         <docblock line="124">
           <description>Enable or disable cleaning garbage</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="124" name="var" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
@@ -4653,7 +4653,7 @@ to that variable&lt;/p&gt;</long-description>
         <default>array()</default>
         <docblock line="131">
           <description>assoc array of errors for this model</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="131" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -4665,7 +4665,7 @@ to that variable&lt;/p&gt;</long-description>
         <default>NULL</default>
         <docblock line="138">
           <description>Last normal SQL query executed as string</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="138" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
@@ -4701,7 +4701,7 @@ to that variable&lt;/p&gt;</long-description>
         <default>array()</default>
         <docblock line="173">
           <description>contains all necessary data to create appropriate model from join query</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="173" name="internal" description=""/>
         </docblock>
       </property>
@@ -4710,7 +4710,7 @@ to that variable&lt;/p&gt;</long-description>
         <default>NULL</default>
         <docblock line="180">
           <description>array from field meta_data(json string) - prevent multiplier usage of json_decode</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="180" name="internal" description=""/>
         </docblock>
       </property>
@@ -4719,7 +4719,7 @@ to that variable&lt;/p&gt;</long-description>
         <default>array()</default>
         <docblock line="186">
           <description>ignore it just a hack</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="186" name="internal" description=""/>
         </docblock>
       </property>
@@ -4765,12 +4765,12 @@ $model-&gt;login = 'user';
         </docblock>
         <argument line="255">
           <name>$name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="255">
           <name>$value</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -4795,7 +4795,7 @@ echo $model-&gt;login; // will output user
         </docblock>
         <argument line="276">
           <name>$name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -4804,7 +4804,7 @@ echo $model-&gt;login; // will output user
         <full_name>__isset</full_name>
         <docblock line="287">
           <description>checks if dynamically appended variable exists</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="287" name="param" description="" type="\" variable="$name"/>
           <tag line="287" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
@@ -4814,7 +4814,7 @@ echo $model-&gt;login; // will output user
         </docblock>
         <argument line="295">
           <name>$name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -4833,7 +4833,7 @@ unset($model-&gt;login); //here
         </docblock>
         <argument line="312">
           <name>$name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -4842,7 +4842,7 @@ unset($model-&gt;login); //here
         <full_name>__call</full_name>
         <docblock line="317">
           <description>calls functions for Base_Model or DB clases in Kohana</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="317" name="param" description="" type="\" variable="$name"/>
           <tag line="317" name="param" description="" type="\" variable="$arguments"/>
           <tag line="317" name="return" description="" type="mixed">
@@ -4852,12 +4852,12 @@ unset($model-&gt;login); //here
         </docblock>
         <argument line="324">
           <name>$name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="324">
           <name>$arguments</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -4881,12 +4881,12 @@ unset($model-&gt;login); //here
         </docblock>
         <argument line="354">
           <name>$name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="354">
           <name>$arguments</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -4953,7 +4953,7 @@ unset($model-&gt;login); //here
         <full_name>get_relation</full_name>
         <docblock line="421">
           <description>returns relation data or null</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="421" name="param" description="string" type="\" variable="$name"/>
           <tag line="421" name="return" description="" type="array|null">
             <type by_reference="false">array</type>
@@ -4962,7 +4962,7 @@ unset($model-&gt;login); //here
         </docblock>
         <argument line="426">
           <name>$name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -4971,19 +4971,19 @@ unset($model-&gt;login); //here
         <full_name>_relation</full_name>
         <docblock line="431">
           <description>get data for relation depends on relation option</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="431" name="param" description="string" type="\" variable="$name"/>
           <tag line="431" name="param" description="array" type="\" variable="$relation"/>
           <tag line="431" name="param" description="array" type="\" variable="$filter"/>
         </docblock>
         <argument line="437">
           <name>$name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="437">
           <name>$relation</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="437">
@@ -5018,7 +5018,7 @@ array(
         <full_name>obj_to_array</full_name>
         <docblock line="488">
           <description>recursively parse data variable and convert all objects to assoc array</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="488" name="param" description="(must be instanceof Base_Model)" type="object" variable="$obj">
             <type by_reference="false">object</type>
           </tag>
@@ -5029,7 +5029,7 @@ array(
         </docblock>
         <argument line="495">
           <name>$obj</name>
-          <default/>
+          <default></default>
           <type>\Model</type>
         </argument>
       </method>
@@ -5085,7 +5085,7 @@ array(
         </docblock>
         <argument line="550">
           <name>$filter</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="550">
@@ -5164,7 +5164,7 @@ e.g. delete&lt;/p&gt;
         <docblock line="607">
           <description>Helper function to return Kohana_Database SELECT object
  data parsed throw Kohana My Base Model</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="607" name="access" description="public"/>
           <tag line="607" name="static" description=""/>
           <tag line="607" name="param" description="" type="mixed" variable="$select">
@@ -5188,7 +5188,7 @@ e.g. delete&lt;/p&gt;
         </docblock>
         <argument line="620">
           <name>$select</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="620">
@@ -5218,7 +5218,7 @@ e.g. delete&lt;/p&gt;
         <docblock line="626">
           <description>Helper function to return Kohana_DB DELETE object
  data parsed throw Kohana My Base Model</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="626" name="access" description="public"/>
           <tag line="626" name="static" description=""/>
           <tag line="626" name="param" description="" type="array" variable="$filter">
@@ -5240,7 +5240,7 @@ e.g. delete&lt;/p&gt;
         <docblock line="640">
           <description>Helper function to return Kohana_DB INSERT object
  data parsed throw Kohana My Base Model</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="640" name="access" description="public"/>
           <tag line="640" name="static" description=""/>
           <tag line="640" name="param" description="" type="array" variable="$filter">
@@ -5262,7 +5262,7 @@ e.g. delete&lt;/p&gt;
         <docblock line="655">
           <description>Helper function to return Kohana_DB UPDATE object
  data parsed throw Kohana My Base Model</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="655" name="access" description="public"/>
           <tag line="655" name="static" description=""/>
           <tag line="655" name="param" description="" type="mixed" variable="$primary_value">
@@ -5277,7 +5277,7 @@ e.g. delete&lt;/p&gt;
         </docblock>
         <argument line="665">
           <name>$primary_value</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="665">
@@ -5292,7 +5292,7 @@ e.g. delete&lt;/p&gt;
         <docblock line="671">
           <description>Helper function to return Kohana_DB object
  data parsed throw Kohana My Base Model</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="671" name="access" description="public"/>
           <tag line="671" name="static" description=""/>
           <tag line="671" name="return" description="" type="\Database_Query_Builder">
@@ -5305,7 +5305,7 @@ e.g. delete&lt;/p&gt;
         <full_name>table_columns</full_name>
         <docblock line="707">
           <description>returns array with table columns SQL query</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="707" name="static" description=""/>
           <tag line="707" name="param" description="" type="null" variable="$table">
             <type by_reference="false">null</type>
@@ -5345,107 +5345,107 @@ e.g.</description>
         </docblock>
         <argument line="751">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="751">
           <name>$value</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="816" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="808" package="Kohana-my-base\database">
         <name>query_columns_for_join</name>
         <full_name>query_columns_for_join</full_name>
-        <docblock line="812">
+        <docblock line="804">
           <description>returns array with names all columns from db table for request with join</description>
-          <long-description/>
-          <tag line="812" name="internal" description=""/>
+          <long-description></long-description>
+          <tag line="804" name="internal" description=""/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="834" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="826" package="Kohana-my-base\database">
         <name>with</name>
         <full_name>with</full_name>
-        <docblock line="826">
+        <docblock line="818">
           <description>JOIN function alternative</description>
-          <long-description/>
-          <tag line="826" name="param" description="string|object string can be name of some model or relation name," type="\" variable="$name"/>
-          <tag line="826" name="param" description="string" type="\" variable="$foreign_key"/>
-          <tag line="826" name="param" description="string" type="\" variable="$field"/>
-          <tag line="826" name="param" description="string" type="\" variable="$comparison_key"/>
-          <tag line="826" name="access" description="public"/>
+          <long-description></long-description>
+          <tag line="818" name="param" description="string|object string can be name of some model or relation name," type="\" variable="$name"/>
+          <tag line="818" name="param" description="string" type="\" variable="$foreign_key"/>
+          <tag line="818" name="param" description="string" type="\" variable="$field"/>
+          <tag line="818" name="param" description="string" type="\" variable="$comparison_key"/>
+          <tag line="818" name="access" description="public"/>
         </docblock>
-        <argument line="834">
+        <argument line="826">
           <name>$name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="834">
+        <argument line="826">
           <name>$foreign_key</name>
           <default>NULL</default>
           <type/>
         </argument>
-        <argument line="834">
+        <argument line="826">
           <name>$field</name>
           <default>NULL</default>
           <type/>
         </argument>
-        <argument line="834">
+        <argument line="826">
           <name>$comparison_key</name>
           <default>'='</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="885" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="877" package="Kohana-my-base\database">
         <name>query_field</name>
         <full_name>query_field</full_name>
-        <docblock line="877">
+        <docblock line="869">
           <description>return filed name for query</description>
-          <long-description/>
-          <tag line="877" name="internal" description=""/>
-          <tag line="877" name="access" description="private"/>
-          <tag line="877" name="param" description="string" type="\" variable="$name"/>
-          <tag line="877" name="param" description="string" type="\" variable="$delimiter"/>
-          <tag line="877" name="param" description="bool" type="\" variable="$escape"/>
+          <long-description></long-description>
+          <tag line="869" name="internal" description=""/>
+          <tag line="869" name="access" description="private"/>
+          <tag line="869" name="param" description="string" type="\" variable="$name"/>
+          <tag line="869" name="param" description="string" type="\" variable="$delimiter"/>
+          <tag line="869" name="param" description="bool" type="\" variable="$escape"/>
         </docblock>
-        <argument line="885">
+        <argument line="877">
           <name>$name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="885">
+        <argument line="877">
           <name>$delimiter</name>
           <default>'.'</default>
           <type/>
         </argument>
-        <argument line="885">
+        <argument line="877">
           <name>$escape</name>
           <default>FALSE</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="910" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="902" package="Kohana-my-base\database">
         <name>sql_comparison</name>
         <full_name>sql_comparison</full_name>
-        <docblock line="903">
+        <docblock line="895">
           <description>checks if key contains special symbols to set different comparison keys</description>
-          <long-description/>
-          <tag line="903" name="param" description="- string" type="\" variable="$key"/>
-          <tag line="903" name="return" description="" type="bool">
+          <long-description></long-description>
+          <tag line="895" name="param" description="- string" type="\" variable="$key"/>
+          <tag line="895" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="903" name="access" description="private"/>
+          <tag line="895" name="access" description="private"/>
         </docblock>
-        <argument line="910">
+        <argument line="902">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="953" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="945" package="Kohana-my-base\database">
         <name>filter</name>
         <full_name>filter</full_name>
-        <docblock line="915">
+        <docblock line="907">
           <description>Helper function to create WHERE clause</description>
           <long-description>&lt;p&gt;what for to rewrite?&lt;/p&gt;
 
@@ -5481,98 +5481,98 @@ e.g. of assoc array&lt;/p&gt;
 
 &lt;p&gt;Also values of fields can be array . In this case comparison key will be IN
 Also supports DB::expr as value&lt;/p&gt;</long-description>
-          <tag line="915" name="uses" description="functions" refers="\Database_Query_Builder_Where"/>
-          <tag line="915" name="param" description="array" type="\" variable="$filter"/>
-          <tag line="915" name="return" description="" type="\Base_Model">
+          <tag line="907" name="uses" description="functions" refers="\Database_Query_Builder_Where"/>
+          <tag line="907" name="param" description="array" type="\" variable="$filter"/>
+          <tag line="907" name="return" description="" type="\Base_Model">
             <type by_reference="false">\Base_Model</type>
           </tag>
-          <tag line="915" name="throws" description="" type="\Kohana_Exception">
+          <tag line="907" name="throws" description="" type="\Kohana_Exception">
             <type by_reference="false">\Kohana_Exception</type>
           </tag>
-          <tag line="915" name="throws" description="" type="\Exception">
+          <tag line="907" name="throws" description="" type="\Exception">
             <type by_reference="false">\Exception</type>
           </tag>
         </docblock>
-        <argument line="953">
+        <argument line="945">
           <name>$filter</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1038" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1030" package="Kohana-my-base\database">
         <name>sql_filter_fields</name>
         <full_name>sql_filter_fields</full_name>
-        <docblock line="1029">
+        <docblock line="1021">
           <description>returns pure key and value wich already prepared to insert into query
 with provided comparison key etc.</description>
           <long-description>&lt;p&gt;..&lt;/p&gt;</long-description>
-          <tag line="1029" name="param" description="string" type="\" variable="$key"/>
-          <tag line="1029" name="param" description="mixed" type="\" variable="$value"/>
-          <tag line="1029" name="access" description="private"/>
-          <tag line="1029" name="return" description="" type="array">
+          <tag line="1021" name="param" description="string" type="\" variable="$key"/>
+          <tag line="1021" name="param" description="mixed" type="\" variable="$value"/>
+          <tag line="1021" name="access" description="private"/>
+          <tag line="1021" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="1038">
+        <argument line="1030">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="1038">
+        <argument line="1030">
           <name>$value</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1109" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1101" package="Kohana-my-base\database">
         <name>select</name>
         <full_name>select</full_name>
-        <docblock line="1094">
+        <docblock line="1086">
           <description>set parameters for SELECT query</description>
-          <long-description/>
-          <tag line="1094" name="param" description="can be &lt;ul&gt;&#10;  &lt;li&gt;string - e.g. '*'&lt;/li&gt;&#10;  &lt;li&gt; single array - e.g. array('id','user_id') first field name, second his alias name in sql -&gt; `id` AS `user_id`&lt;/li&gt;&#10;  &lt;li&gt; multidementional array - e.g. array( array('id','user_id'), array('login','user_login')...)&lt;/li&gt;&#10;&lt;/ul&gt;" type="string|array" variable="$select_args">
+          <long-description></long-description>
+          <tag line="1086" name="param" description="can be &lt;ul&gt;&#10;  &lt;li&gt;string - e.g. '*'&lt;/li&gt;&#10;  &lt;li&gt; single array - e.g. array('id','user_id') first field name, second his alias name in sql -&gt; `id` AS `user_id`&lt;/li&gt;&#10;  &lt;li&gt; multidementional array - e.g. array( array('id','user_id'), array('login','user_login')...)&lt;/li&gt;&#10;&lt;/ul&gt;" type="string|array" variable="$select_args">
             <type by_reference="false">string</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="1094" name="param" description="" type="null" variable="$limit">
+          <tag line="1086" name="param" description="" type="null" variable="$limit">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="1094" name="param" description="" type="null" variable="$offset">
+          <tag line="1086" name="param" description="" type="null" variable="$offset">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="1094" name="param" description="" type="null" variable="$cache">
+          <tag line="1086" name="param" description="" type="null" variable="$cache">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="1094" name="return" description="" type="\Base_Model">
+          <tag line="1086" name="return" description="" type="\Base_Model">
             <type by_reference="false">\Base_Model</type>
           </tag>
-          <tag line="1094" name="todo" description="rewrite"/>
+          <tag line="1086" name="todo" description="rewrite"/>
         </docblock>
-        <argument line="1109">
+        <argument line="1101">
           <name>$select_args</name>
           <default>'*'</default>
           <type/>
         </argument>
-        <argument line="1109">
+        <argument line="1101">
           <name>$limit</name>
           <default>NULL</default>
           <type/>
         </argument>
-        <argument line="1109">
+        <argument line="1101">
           <name>$offset</name>
           <default>NULL</default>
           <type/>
         </argument>
-        <argument line="1109">
+        <argument line="1101">
           <name>$cache</name>
           <default>NULL</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1154" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1146" package="Kohana-my-base\database">
         <name>insert</name>
         <full_name>insert</full_name>
-        <docblock line="1140">
+        <docblock line="1132">
           <description>sets parameters for INSERT query</description>
           <long-description>&lt;p&gt;$fields can be sets as array
 e.g. of not assoc array&lt;/p&gt;
@@ -5582,36 +5582,36 @@ e.g. of not assoc array&lt;/p&gt;
 
 &lt;p&gt;if you call function save() all values for fields will be automatical get from object
 if they exists&lt;/p&gt;</long-description>
-          <tag line="1140" name="param" description="" type="array|null" variable="$fields">
+          <tag line="1132" name="param" description="" type="array|null" variable="$fields">
             <type by_reference="false">array</type>
             <type by_reference="false">null</type>
           </tag>
-          <tag line="1140" name="return" description="" type="\Base_Model">
+          <tag line="1132" name="return" description="" type="\Base_Model">
             <type by_reference="false">\Base_Model</type>
           </tag>
         </docblock>
-        <argument line="1154">
+        <argument line="1146">
           <name>$fields</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1165" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1157" package="Kohana-my-base\database">
         <name>update</name>
         <full_name>update</full_name>
-        <docblock line="1160">
+        <docblock line="1152">
           <description>sets parameters for UPDATE query</description>
-          <long-description/>
-          <tag line="1160" name="return" description="" type="\Base_Model">
+          <long-description></long-description>
+          <tag line="1152" name="return" description="" type="\Base_Model">
             <type by_reference="false">\Base_Model</type>
           </tag>
-          <tag line="1160" name="access" description="public"/>
+          <tag line="1152" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1188" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1180" package="Kohana-my-base\database">
         <name>destroy</name>
         <full_name>destroy</full_name>
-        <docblock line="1172">
+        <docblock line="1164">
           <description>creates DELETE query object</description>
           <long-description>&lt;p&gt;if $filter not specified will search by primary key
 usage example&lt;/p&gt;
@@ -5622,128 +5622,128 @@ Model_User::destroy($id);
 //or
 Model_User::destroy(array('login' =&gt; 'bla', ....));
 &lt;/code&gt;&lt;/pre&gt;</long-description>
-          <tag line="1172" name="param" description="" type="null" variable="$filter">
+          <tag line="1164" name="param" description="" type="null" variable="$filter">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="1172" name="return" description="" type="bool">
+          <tag line="1164" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="1172" name="access" description="protected"/>
+          <tag line="1164" name="access" description="protected"/>
         </docblock>
-        <argument line="1188">
+        <argument line="1180">
           <name>$filter</name>
           <default>NULL</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1207" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1199" package="Kohana-my-base\database">
         <name>errors</name>
         <full_name>errors</full_name>
-        <docblock line="1202">
+        <docblock line="1194">
           <description>returns assoc array with all errors</description>
-          <long-description/>
-          <tag line="1202" name="return" description="" type="array">
+          <long-description></long-description>
+          <tag line="1194" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="1202" name="access" description="public"/>
+          <tag line="1194" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1218" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1210" package="Kohana-my-base\database">
         <name>add_error</name>
         <full_name>add_error</full_name>
-        <docblock line="1212">
+        <docblock line="1204">
           <description>add error message to errors list</description>
-          <long-description/>
-          <tag line="1212" name="param" description="string name of the field" type="\" variable="$key"/>
-          <tag line="1212" name="param" description="string message" type="\" variable="$msg"/>
-          <tag line="1212" name="access" description="public"/>
+          <long-description></long-description>
+          <tag line="1204" name="param" description="string name of the field" type="\" variable="$key"/>
+          <tag line="1204" name="param" description="string message" type="\" variable="$msg"/>
+          <tag line="1204" name="access" description="public"/>
         </docblock>
-        <argument line="1218">
+        <argument line="1210">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="1218">
+        <argument line="1210">
           <name>$msg</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1231" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1223" package="Kohana-my-base\database">
         <name>exists</name>
         <full_name>exists</full_name>
-        <docblock line="1223">
+        <docblock line="1215">
           <description>checks if value exists by some condition</description>
-          <long-description/>
-          <tag line="1223" name="param" description="Base_Model filter method first parameter" type="array" variable="$filter">
+          <long-description></long-description>
+          <tag line="1215" name="param" description="Base_Model filter method first parameter" type="array" variable="$filter">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="1223" name="param" description="" type="int" variable="$limit">
+          <tag line="1215" name="param" description="" type="int" variable="$limit">
             <type by_reference="false">int</type>
           </tag>
-          <tag line="1223" name="param" description="" type="null" variable="$cache">
+          <tag line="1215" name="param" description="" type="null" variable="$cache">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="1223" name="return" description="" type="bool">
+          <tag line="1215" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="1223" name="access" description="protected"/>
+          <tag line="1215" name="access" description="protected"/>
         </docblock>
-        <argument line="1231">
+        <argument line="1223">
           <name>$filter</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="1231">
+        <argument line="1223">
           <name>$limit</name>
           <default>1</default>
           <type/>
         </argument>
-        <argument line="1231">
+        <argument line="1223">
           <name>$cache</name>
           <default>NULL</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1245" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1237" package="Kohana-my-base\database">
         <name>prepare_for_query</name>
         <full_name>prepare_for_query</full_name>
-        <docblock line="1240">
+        <docblock line="1232">
           <description>make some additional operations before execute query</description>
-          <long-description/>
-          <tag line="1240" name="access" description="private"/>
-          <tag line="1240" name="return" description="" type="void">
+          <long-description></long-description>
+          <tag line="1232" name="access" description="private"/>
+          <tag line="1232" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1289" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1281" package="Kohana-my-base\database">
         <name>sanitize</name>
         <full_name>sanitize</full_name>
-        <docblock line="1281">
+        <docblock line="1273">
           <description>checks values of fields and convert to type of field</description>
-          <long-description/>
-          <tag line="1281" name="param" description="" type="\" variable="$key"/>
-          <tag line="1281" name="param" description="" type="\" variable="$value"/>
-          <tag line="1281" name="return" description="" type="mixed">
+          <long-description></long-description>
+          <tag line="1273" name="param" description="" type="\" variable="$key"/>
+          <tag line="1273" name="param" description="" type="\" variable="$value"/>
+          <tag line="1273" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="1289">
+        <argument line="1281">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="1289">
+        <argument line="1281">
           <name>$value</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1322" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1314" package="Kohana-my-base\database">
         <name>validate</name>
         <full_name>validate</full_name>
-        <docblock line="1302">
+        <docblock line="1294">
           <description>simple function to validate data before save</description>
           <long-description>&lt;pre&gt;&lt;code&gt;$additional_rules = array(
      'pswd_confirmation' =&gt; array(
@@ -5756,188 +5756,188 @@ Model_User::destroy(array('login' =&gt; 'bla', ....));
 
 &lt;p&gt;Creating rules simmilar to Kohana's Validation
 Also if some model has function rules() before saving data it will get from that function and validate data&lt;/p&gt;</long-description>
-          <tag line="1302" name="param" description="" type="array" variable="$rules">
+          <tag line="1294" name="param" description="" type="array" variable="$rules">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="1302" name="param" description="" type="array" variable="$data">
+          <tag line="1294" name="param" description="" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="1302" name="return" description="" type="bool">
+          <tag line="1294" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="1322">
+        <argument line="1314">
           <name>$rules</name>
           <default>NULL</default>
           <type>array</type>
         </argument>
-        <argument line="1322">
+        <argument line="1314">
           <name>$data</name>
           <default>NULL</default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1357" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1349" package="Kohana-my-base\database">
         <name>before_save</name>
         <full_name>before_save</full_name>
-        <docblock line="1352">
+        <docblock line="1344">
           <description>user function to make some operations before saving</description>
-          <long-description/>
-          <tag line="1352" name="access" description="protected"/>
+          <long-description></long-description>
+          <tag line="1344" name="access" description="protected"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1366" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1358" package="Kohana-my-base\database">
         <name>new_record</name>
         <full_name>new_record</full_name>
-        <docblock line="1362">
+        <docblock line="1354">
           <description>check if model has primary key</description>
-          <long-description/>
-          <tag line="1362" name="return" description="" type="bool">
+          <long-description></long-description>
+          <tag line="1354" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1378" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1370" package="Kohana-my-base\database">
         <name>table_fields</name>
         <full_name>table_fields</full_name>
-        <docblock line="1371">
+        <docblock line="1363">
           <description>returns all table fields without field type and if value preset in model</description>
-          <long-description/>
-          <tag line="1371" name="param" description="" type="bool" variable="$skip_primary_key">
+          <long-description></long-description>
+          <tag line="1363" name="param" description="" type="bool" variable="$skip_primary_key">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="1371" name="return" description="" type="array">
+          <tag line="1363" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="1371" name="access" description="public"/>
+          <tag line="1363" name="access" description="public"/>
         </docblock>
-        <argument line="1378">
+        <argument line="1370">
           <name>$skip_primary_key</name>
           <default>FALSE</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1395" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1387" package="Kohana-my-base\database">
         <name>save</name>
         <full_name>save</full_name>
-        <docblock line="1389">
+        <docblock line="1381">
           <description>function that execute query with user callback functions</description>
-          <long-description/>
-          <tag line="1389" name="return" description="" type="bool">
+          <long-description></long-description>
+          <tag line="1381" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="1389" name="access" description="public"/>
+          <tag line="1381" name="access" description="public"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1425" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1417" package="Kohana-my-base\database">
         <name>get_table_columns</name>
         <full_name>get_table_columns</full_name>
-        <docblock line="1418">
+        <docblock line="1410">
           <description>gets table columns</description>
           <long-description>&lt;p&gt;if model has method columns
 sql query will not execute to get column name and it type&lt;/p&gt;</long-description>
-          <tag line="1418" name="return" description="" type="mixed">
+          <tag line="1410" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1434" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1426" package="Kohana-my-base\database">
         <name>query_type</name>
         <full_name>query_type</full_name>
-        <docblock line="1430">
+        <docblock line="1422">
           <description>returns type of query 'select', 'update' .</description>
           <long-description>&lt;p&gt;..&lt;/p&gt;</long-description>
-          <tag line="1430" name="return" description="" type="string">
+          <tag line="1422" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1446" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1438" package="Kohana-my-base\database">
         <name>exec</name>
         <full_name>exec</full_name>
-        <docblock line="1442">
+        <docblock line="1434">
           <description>low level function to execute query</description>
-          <long-description/>
-          <tag line="1442" name="return" description="" type="bool">
+          <long-description></long-description>
+          <tag line="1434" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1465" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1457" package="Kohana-my-base\database">
         <name>parse_responce</name>
         <full_name>parse_responce</full_name>
-        <docblock line="1459">
+        <docblock line="1451">
           <description>append data to object according type of query</description>
-          <long-description/>
-          <tag line="1459" name="param" description="" type="\" variable="$result"/>
-          <tag line="1459" name="return" description="" type="bool">
+          <long-description></long-description>
+          <tag line="1451" name="param" description="" type="\" variable="$result"/>
+          <tag line="1451" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="1459" name="access" description="private"/>
+          <tag line="1451" name="access" description="private"/>
         </docblock>
-        <argument line="1465">
+        <argument line="1457">
           <name>$result</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1513" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1505" package="Kohana-my-base\database">
         <name>parse_result</name>
         <full_name>parse_result</full_name>
-        <docblock line="1508">
+        <docblock line="1500">
           <description>function returns proper array with values</description>
-          <long-description/>
-          <tag line="1508" name="internal" description=""/>
-          <tag line="1508" name="param" description="DB_Result" type="object" variable="$result">
+          <long-description></long-description>
+          <tag line="1500" name="internal" description=""/>
+          <tag line="1500" name="param" description="DB_Result" type="object" variable="$result">
             <type by_reference="false">object</type>
           </tag>
         </docblock>
-        <argument line="1513">
+        <argument line="1505">
           <name>$result</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1553" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1545" package="Kohana-my-base\database">
         <name>auto_count_total</name>
         <full_name>auto_count_total</full_name>
-        <docblock line="1548">
+        <docblock line="1540">
           <description>function to calculate total rows in database column</description>
-          <long-description/>
-          <tag line="1548" name="return" description="" type="mixed">
+          <long-description></long-description>
+          <tag line="1540" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="1548" name="access" description="private"/>
+          <tag line="1540" name="access" description="private"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1587" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1579" package="Kohana-my-base\database">
         <name>after_save</name>
         <full_name>after_save</full_name>
-        <docblock line="1582">
+        <docblock line="1574">
           <description>user callback function wich calls after success executing query</description>
-          <long-description/>
-          <tag line="1582" name="access" description="protected"/>
-          <tag line="1582" name="return" description="" type="void">
+          <long-description></long-description>
+          <tag line="1574" name="access" description="protected"/>
+          <tag line="1574" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1597" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="1589" package="Kohana-my-base\database">
         <name>clean</name>
         <full_name>clean</full_name>
-        <docblock line="1592">
+        <docblock line="1584">
           <description>helper function to delete garbage after success query</description>
-          <long-description/>
-          <tag line="1592" name="access" description="private"/>
-          <tag line="1592" name="return" description="" type="void">
+          <long-description></long-description>
+          <tag line="1584" name="access" description="private"/>
+          <tag line="1584" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1619" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1611" package="Kohana-my-base\database">
         <name>update_params</name>
         <full_name>update_params</full_name>
-        <docblock line="1605">
+        <docblock line="1597">
           <description>helper function to append data to the object</description>
           <long-description>&lt;pre&gt;&lt;code&gt;$params = array(
    'login' =&gt; 'blabla'
@@ -5946,171 +5946,171 @@ sql query will not execute to get column name and it type&lt;/p&gt;</long-descri
 $model-&gt;update_params($params);
 echo $model-&gt;login;// output 'blabla'
 &lt;/code&gt;&lt;/pre&gt;</long-description>
-          <tag line="1605" name="param" description="" type="\" variable="$array"/>
-          <tag line="1605" name="access" description="public"/>
+          <tag line="1597" name="param" description="" type="\" variable="$array"/>
+          <tag line="1597" name="access" description="public"/>
         </docblock>
-        <argument line="1619">
+        <argument line="1611">
           <name>$array</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1635" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1627" package="Kohana-my-base\database">
         <name>columns</name>
         <full_name>columns</full_name>
-        <docblock line="1629">
+        <docblock line="1621">
           <description>user function to define database table columns</description>
-          <long-description/>
-          <tag line="1629" name="static" description=""/>
-          <tag line="1629" name="return" description="" type="array">
+          <long-description></long-description>
+          <tag line="1621" name="static" description=""/>
+          <tag line="1621" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="1629" name="access" description="protected"/>
+          <tag line="1621" name="access" description="protected"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1644" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1636" package="Kohana-my-base\database">
         <name>rules</name>
         <full_name>rules</full_name>
-        <docblock line="1640">
+        <docblock line="1632">
           <description>user function to define validation rules</description>
-          <long-description/>
-          <tag line="1640" name="return" description="" type="array">
+          <long-description></long-description>
+          <tag line="1632" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1653" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1645" package="Kohana-my-base\database">
         <name>labels</name>
         <full_name>labels</full_name>
-        <docblock line="1649">
+        <docblock line="1641">
           <description>user function to define representative labels for table fields</description>
-          <long-description/>
-          <tag line="1649" name="return" description="" type="array">
+          <long-description></long-description>
+          <tag line="1641" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1662" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="1654" package="Kohana-my-base\database">
         <name>relations</name>
         <full_name>relations</full_name>
-        <docblock line="1658">
+        <docblock line="1650">
           <description>sets relations for external models to this model</description>
-          <long-description/>
-          <tag line="1658" name="return" description="" type="array">
+          <long-description></long-description>
+          <tag line="1650" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1670" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1662" package="Kohana-my-base\database">
         <name>last_inserted_id</name>
         <full_name>last_inserted_id</full_name>
-        <docblock line="1666">
+        <docblock line="1658">
           <description>returns last inserted id</description>
-          <long-description/>
-          <tag line="1666" name="return" description="" type="null">
+          <long-description></long-description>
+          <tag line="1658" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1679" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1671" package="Kohana-my-base\database">
         <name>last_query</name>
         <full_name>last_query</full_name>
-        <docblock line="1675">
+        <docblock line="1667">
           <description>returns last executed query</description>
-          <long-description/>
-          <tag line="1675" name="return" description="" type="null">
+          <long-description></long-description>
+          <tag line="1667" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1689" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1681" package="Kohana-my-base\database">
         <name>unique_validation</name>
         <full_name>unique_validation</full_name>
-        <docblock line="1684">
+        <docblock line="1676">
           <description>validate unique value required Validation object</description>
-          <long-description/>
-          <tag line="1684" name="param" description="" type="\" variable="$validation"/>
-          <tag line="1684" name="param" description="" type="\" variable="$field"/>
+          <long-description></long-description>
+          <tag line="1676" name="param" description="" type="\" variable="$validation"/>
+          <tag line="1676" name="param" description="" type="\" variable="$field"/>
         </docblock>
-        <argument line="1689">
+        <argument line="1681">
           <name>$validation</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="1689">
+        <argument line="1681">
           <name>$field</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1706" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1698" package="Kohana-my-base\database">
         <name>meta_item</name>
         <full_name>meta_item</full_name>
-        <docblock line="1699">
+        <docblock line="1691">
           <description>returns value of some item in meta_data field</description>
-          <long-description/>
-          <tag line="1699" name="param" description="(string)" type="\" variable="$key"/>
-          <tag line="1699" name="param" description="mixed" type="\" variable="$default"/>
-          <tag line="1699" name="access" description="public"/>
-          <tag line="1699" name="return" description="" type="mixed|null">
+          <long-description></long-description>
+          <tag line="1691" name="param" description="(string)" type="\" variable="$key"/>
+          <tag line="1691" name="param" description="mixed" type="\" variable="$default"/>
+          <tag line="1691" name="access" description="public"/>
+          <tag line="1691" name="return" description="" type="mixed|null">
             <type by_reference="false">mixed</type>
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="1706">
+        <argument line="1698">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="1706">
+        <argument line="1698">
           <name>$default</name>
           <default>NULL</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1719" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1711" package="Kohana-my-base\database">
         <name>meta_data</name>
         <full_name>meta_data</full_name>
-        <docblock line="1714">
+        <docblock line="1706">
           <description>returns encoded data from  table column meta_data(json encoded string)</description>
-          <long-description/>
-          <tag line="1714" name="access" description="public"/>
-          <tag line="1714" name="return" description="" type="void">
+          <long-description></long-description>
+          <tag line="1706" name="access" description="public"/>
+          <tag line="1706" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1743" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1735" package="Kohana-my-base\database">
         <name>set_meta_item</name>
         <full_name>set_meta_item</full_name>
-        <docblock line="1736">
+        <docblock line="1728">
           <description>add some item to the meta_data field</description>
-          <long-description/>
-          <tag line="1736" name="param" description="- string" type="\" variable="$key"/>
-          <tag line="1736" name="param" description="- mixed" type="\" variable="$value"/>
-          <tag line="1736" name="access" description="public"/>
-          <tag line="1736" name="return" description="" type="void">
+          <long-description></long-description>
+          <tag line="1728" name="param" description="- string" type="\" variable="$key"/>
+          <tag line="1728" name="param" description="- mixed" type="\" variable="$value"/>
+          <tag line="1728" name="access" description="public"/>
+          <tag line="1728" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="1743">
+        <argument line="1735">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="1743">
+        <argument line="1735">
           <name>$value</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1756" package="Kohana-my-base\database">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1748" package="Kohana-my-base\database">
         <name>representative_name</name>
         <full_name>representative_name</full_name>
-        <docblock line="1751">
+        <docblock line="1743">
           <description>returns human readble name of some model</description>
-          <long-description/>
-          <tag line="1751" name="return" description="" type="string">
+          <long-description></long-description>
+          <tag line="1743" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
