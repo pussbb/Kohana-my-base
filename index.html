@@ -35,6 +35,76 @@
           <h1>Kohana-my-base</h1>
           <p>Module with classes for Kohana framework, which makes developing more easily</p>
           <hr>
+          <h3>Base_Model simple usage</h3>
+          <p>
+            <pre>
+// find_all
+Model_Blog_Category::find_all();
+
+// find record
+Model_Blog_Category::find_all();
+
+//destroy 
+Model_Blog_Category::destroy($id);
+//or if you have already loaded obj
+$model->destroy();
+
+.........
+
+// relations
+$model = Model_Blog_Post::find(array(
+    'id' => 7,
+    'with' => 'contents',
+));
+// or
+$model = Model_Blog_Post::find(array(
+    'id' => 7,
+    'with' => array('contents', 'cotegory'),
+));
+
+ // relations and filter with relation field
+$model = Model_Blog_Post::find(array(
+    'id' => 7,
+    'with' => array('contents', 'cotegory'),
+    'contents.id' => 'uiuiu',
+));
+
+/**
+ * comparision keys for fields:
+ *  ! - NOT equals
+ *  <> - NOT equals
+ *  || - or where clause
+ *  < - less than
+ *  > - more than
+ */
+$model =  Model_Blog_Post_Content::find_all(array(
+    '! id' => 7,
+    '|| post_id' => 99,
+));
+
+// sub query
+$model =  Model_Blog_Post_Content::find_all(array(
+    '! id' => 7,
+    'post_id' => Model_Blog_Post::select_query('id',array('author_id' => 1), 1),
+));
+
+// using expression in where clause
+// generates YEAR(news.created_at) = 2010
+$model = Model_News::find_all(array(
+    'expression' => array(
+        'YEAR(%s) = %s',
+        'created_at' => 2010
+    )
+));
+
+// get original Kohana_DB class but initialized with Based_Model logic
+Model_Blog_Post::select_query();
+Model_Blog_Post::update_query();
+Model_Blog_Post::insert_query();
+Model_Blog_Post::delete_query();
+
+            </pre>
+          </p>
           <span class="credits left">Project maintained by <a href="https://github.com/pussbb">pussbb</a></span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
         </div>

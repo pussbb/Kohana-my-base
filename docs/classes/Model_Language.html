@@ -32,10 +32,10 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">170</span></a></li>
+                <span class="label label-info">166</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
-                <span class="label label-info">2</span>
+                <span class="label label-info">1</span>
 </li></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
                 <span class="label label-info">0</span></a></li>
@@ -132,6 +132,10 @@
 <li class="method private inherited"><a href="#method_parse_responce" title="parse_responce :: append data to object according type of query"><span class="description">append data to object according type of query</span><pre>parse_responce()</pre></a></li>
 <li class="method private inherited"><a href="#method_prepare_for_query" title="prepare_for_query :: make some additional operations before execute query"><span class="description">make some additional operations before execute query</span><pre>prepare_for_query()</pre></a></li>
 <li class="method private inherited"><a href="#method_query_type" title="query_type :: returns type of query 'select', 'update' ."><span class="description">returns type of query 'select', 'update' .</span><pre>query_type()</pre></a></li>
+<li class="method private inherited"><a href="#method_sql_comparison" title="sql_comparison :: checks if key contains special symbols to set different comparison keys"><span class="description">checks if key contains special symbols to set different comparison keys</span><pre>sql_comparison()</pre></a></li>
+<li class="method private inherited"><a href="#method_sql_filter_fields" title="sql_filter_fields :: returns pure key and value wich already prepared to insert into query
+with provided comparison key etc."><span class="description">returns pure key and value wich already prepared to insert into query
+with provided comparison key etc.</span><pre>sql_filter_fields()</pre></a></li>
 <li class="method private inherited"><a href="#method_system_filters" title="system_filters :: execute commands wich get as array
 e.g."><span class="description">execute commands wich get as array
 e.g.</span><pre>system_filters()</pre></a></li>
@@ -1027,7 +1031,7 @@ if they exists</p></div>
 <a id="method_select_query"></a><div class="element clickable method public method_select_query" data-toggle="collapse" data-target=".method_select_query .collapse">
 <h2>Helper function to return Kohana_Database SELECT object
  data parsed throw Kohana My Base Model</h2>
-<pre>select_query($select, array $filter, null $limit, null $offset, null $cache) : \Database_Query_Builder</pre>
+<pre>select_query(mixed $select, array $filter, null $limit, null $offset, null $cache) : \Database_Query_Builder</pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -1052,7 +1056,10 @@ if they exists</p></div>
 </tr>
 </table>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$select</h4></div>
+<div class="subelement argument">
+<h4>$select</h4>
+<code>mixed</code>
+</div>
 <div class="subelement argument">
 <h4>$filter</h4>
 <code>array</code>
@@ -1167,7 +1174,7 @@ if they exists</p></div>
 </div>
 <a id="method_table_fields"></a><div class="element clickable method public method_table_fields" data-toggle="collapse" data-target=".method_table_fields .collapse">
 <h2>returns all table fields without field type and if value preset in model</h2>
-<pre>table_fields($skip_primary_key) : array</pre>
+<pre>table_fields(bool $skip_primary_key) : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1186,7 +1193,10 @@ if they exists</p></div>
 </tr>
 </table>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$skip_primary_key</h4></div>
+<div class="subelement argument">
+<h4>$skip_primary_key</h4>
+<code>bool</code>
+</div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
@@ -1771,7 +1781,10 @@ Model_User::destroy(array('login' => 'bla', ....));
 </tr>
 </table>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$obj</h4></div>
+<div class="subelement argument">
+<h4>$obj</h4>
+<code>object</code><p>(must be instanceof Base_Model)</p>
+</div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
@@ -1842,6 +1855,66 @@ Model_User::destroy(array('login' => 'bla', ....));
 </table>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_sql_comparison"></a><div class="element clickable method private method_sql_comparison" data-toggle="collapse" data-target=".method_sql_comparison .collapse">
+<h2>checks if key contains special symbols to set different comparison keys</h2>
+<pre>sql_comparison($key) : bool</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>private</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::sql_comparison()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::sql_comparison()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4><ul>
+<li>string</li>
+</ul>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_sql_filter_fields"></a><div class="element clickable method private method_sql_filter_fields" data-toggle="collapse" data-target=".method_sql_filter_fields .collapse">
+<h2>returns pure key and value wich already prepared to insert into query
+with provided comparison key etc.</h2>
+<pre>sql_filter_fields($key, $value) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>..</p></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>private</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Base_Model::sql_filter_fields()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::sql_filter_fields()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4><p>string</p></div>
+<div class="subelement argument">
+<h4>$value</h4><p>mixed</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_system_filters"></a><div class="element clickable method private method_system_filters" data-toggle="collapse" data-target=".method_system_filters .collapse">
@@ -2352,7 +2425,7 @@ to that variable</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-01-07T10:48:42+02:00.<br></footer></div>
+            generated on 2013-01-20T11:01:31+02:00.<br></footer></div>
 </div>
 </body>
 </html>
