@@ -549,9 +549,12 @@ class Base_Model extends Base_Db_Model {
             $filter = array($klass->primary_key => $filter);
         }
         $result = $klass::find_all($filter, 1, NULL, $cache);
+        debug($result->last_query);
         if ( ! Arr::get($result->records, 0))
             throw new Base_Db_Exception_RecordNotFound();
-        return $result->records[0];
+        $_result = $result->records[0];
+        $_result->last_query = $result->last_query;
+        return $_result;
     }
 
     /**
@@ -842,7 +845,7 @@ class Base_Model extends Base_Db_Model {
                 $field = Arr::path($this->relations(), "$name.3", $this->primary_key);
         }
         else{
-            throw new Exception_Collection_ModelNotFound();
+            throw new Base_Db_Exception_UnknownRelation();
         }
 
         if ( ! $foreign_key)
@@ -877,7 +880,7 @@ class Base_Model extends Base_Db_Model {
             throw new Base_Db_Exception_EmptyColumnName();
 
         if ( ! is_object($name)){
-            if (!$escape)
+            if ( ! $escape)
                 return $this->module_name.$delimiter.$name;
             else
                 return "`$this->module_name`$delimiter`$name`";
@@ -973,12 +976,17 @@ class Base_Model extends Base_Db_Model {
                 }
             }
         }
-        $this->append_filter_fields($fields);
+        $this->db_query->where_open();
+        foreach ($fields as $key => $value) {
+            extract($this->sql_filter_fields($key, $value));
+            $this->db_query->$clause($this->query_field($key), $comparison_key, $this->sanitize($key, $value));
+        }
+        $this->db_query->where_close_empty();
 
         if ((isset($system_filters['limit']) || (bool)preg_match('/LIMIT/', $this->db_query->compile()))
-            && isset($system_filters['with'])) {
+            && isset($system_filters['with'])
+            && $this->query_type() === 'select') {
             $db = clone $this->db_query;
-
             $this->db_query
                 ->reset()
                 ->select(Arr::get($this->select_args, 0))
@@ -990,63 +998,80 @@ class Base_Model extends Base_Db_Model {
              $this->system_filters($key, $value);
         }
 
-//         debug($this->relations());
+        if ( ! $this->with)
+            return $this;
+
+        $this->db_query->where_open();
+        foreach($filter as $key => $value) {
+            extract($this->sql_filter_fields($key, $value));
+            $filter_parts = explode('.', $key);
+            $relation = Arr::get($this->with, $filter_parts[0]);
+            if ( ! $relation)
+                throw new Base_Db_Exception_UnknownRelation;
+
+            $klass = new $relation[0];
+            $key = $filter_parts[1];
+            $this->db_query->$clause($klass->query_field($key), $comparison_key, $klass->sanitize($key, $value));
+        }
+        $this->db_query->where_close_empty();
+
         return $this;
     }
 
-    private function append_filter_fields($fields)
+    private function sql_filter_fields($key, $value)
     {
-        $this->db_query->where_open();
-        foreach ($fields as $key => $value) {
-            $comparison_key = '=';
-            if (Arr::is_array($value)) {
+
+        $comparison_key = '=';
+        if (Arr::is_array($value)) {
+            $comparison_key = 'IN';
+        }
+        else if (is_object($value)) {
+            if ($value instanceof Model)
+            {
+                if ( ! $value->db_query)
+                    $value->select($value->primary_key);
+                $value = $value->db_query;
+            }
+            if ($value instanceof Database_Query_Builder_Select)
+            {
+                $value = DB::select()->from(array($value,'t'.mt_rand()));
                 $comparison_key = 'IN';
             }
-            else if (is_object($value)) {
-                if ($value instanceof Model)
-                {
-                    if ( ! $value->db_query)
-                        $value->select($value->primary_key);
-                    $value = $value->db_query;
-                }
-                if ($value instanceof Database_Query_Builder_Select)
-                {
-                    $value = DB::select()->from(array($value,'t'.mt_rand()));
-                    $comparison_key = 'IN';
-                }
-                else if ($value instanceof Database_Expression ) {
-                    $comparison_key = '';
-                }
-                else {
-                    throw new Exception_Collection_ObjectNotSupported();
-                }
+            else if ($value instanceof Database_Expression ) {
+                $comparison_key = '';
             }
-            else if ( is_null($value)) {
-                $comparison_key = 'IS';
+            else {
+                throw new Exception_Collection_ObjectNotSupported();
             }
-            $clause = 'where';
-            if ($this->sql_comparison($key)) {
-                $key_parts = explode(' ', $key);
-                switch ($key_parts[0]) {
-                    case '||':
-                        $clause = 'or_where';
-                        $comparison_key = '=';
-                        $key = $key_parts[1];
-                        break;
-                    case '!':
-                        $comparison_key = '<>';
-                        $key = $key_parts[1];
-                        break;
-                    defualt:
-                        $comparison_key = $key_parts[0];
-                        $key = $key_parts[1];
-                        break;
-                }
-            }
-
-            $this->db_query->$clause($this->query_field($key), $comparison_key, $this->sanitize($key, $value));
         }
-        $this->db_query->where_close_empty();
+        else if ( is_null($value)) {
+            $comparison_key = 'IS';
+        }
+        $clause = 'where';
+        if ($this->sql_comparison($key)) {
+            $key_parts = explode(' ', $key);
+            switch ($key_parts[0]) {
+                case '||':
+                    $clause = 'or_where';
+                    $comparison_key = '=';
+                    $key = $key_parts[1];
+                    break;
+                case '!':
+                    $comparison_key = '<>';
+                    $key = $key_parts[1];
+                    break;
+                defualt:
+                    $comparison_key = $key_parts[0];
+                    $key = $key_parts[1];
+                    break;
+            }
+        }
+        return array(
+            'comparison_key' => $comparison_key,
+            'key' => $key,
+            'value' => $value,
+            'clause' => $clause
+        );
     }
 
     /**
