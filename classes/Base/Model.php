@@ -183,7 +183,12 @@ class Base_Model extends Base_Db_Model {
      */
     private $meta_data_cache = NULL;
 
+    /**
+     * ignore it just a hack
+     * @internal
+     */
     private $select_args = array();
+
     /**
      *
      */
@@ -483,6 +488,7 @@ class Base_Model extends Base_Db_Model {
     /**
      * recursively parse data variable and convert all objects to assoc array
      *
+     * @param object $obj (must be instanceof Base_Model)
      * @access private
      * @return array
      */
@@ -604,6 +610,7 @@ class Base_Model extends Base_Db_Model {
      *
      * @access public
      * @static
+     * @param mixed $select
      * @param array $filter
      * @param null $limit
      * @param null $offset
@@ -873,6 +880,7 @@ class Base_Model extends Base_Db_Model {
     * @access private
     * @param $name string
     * @param $delimiter string
+    * @param $escape bool
     */
     private function query_field($name, $delimiter = '.', $escape = FALSE)
     {
@@ -1018,6 +1026,15 @@ class Base_Model extends Base_Db_Model {
         return $this;
     }
 
+    /**
+     * returns pure key and value wich already prepared to insert into query
+     * with provided comparison key etc...
+     *
+     *@param $key string
+     *@param $value mixed
+     *@access private
+     *@return array
+     */
     private function sql_filter_fields($key, $value)
     {
 
@@ -1353,6 +1370,8 @@ class Base_Model extends Base_Db_Model {
 
     /**
      * returns all table fields without field type and if value preset in model
+     *
+     * @param bool $skip_primary_key
      * @return array
      * @access public
      */

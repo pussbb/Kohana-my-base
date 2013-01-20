@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title><b>Kohana</b><i>My</i> Base » \Base_Db_Validation</title>
+<title><b>Kohana</b><i>My</i> Base » \Base_Db_Exception_UnknownRelation</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -57,40 +57,35 @@
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods
-                    <ul>
-<li class="method public "><a href="#method_check" title="check :: general function to check all fields"><span class="description">general function to check all fields</span><pre>check()</pre></a></li>
-<li class="method public "><a href="#method_int" title="int :: checks if value is integer and if it suites to db type of column"><span class="description">checks if value is integer and if it suites to db type of column</span><pre>int()</pre></a></li>
-<li class="method public "><a href="#method_string" title="string :: checks string and his max length"><span class="description">checks string and his max length</span><pre>string()</pre></a></li>
-</ul>
-</li>
-<li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
                     <ul></ul>
 </li>
-<li class="nav-header private">» Private
-                    <ul><li class="property private "><a href="#property_new_record" title="$new_record :: indicates if record is new"><span class="description"></span><pre>$new_record</pre></a></li></ul>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_code" title="$code :: "><span class="description"></span><pre>$code</pre></a></li>
+<li class="property protected "><a href="#property_message" title="$message :: "><span class="description"></span><pre>$message</pre></a></li>
+</ul>
 </li>
 </ul>
 </div>
 <div class="span8">
-<a id="\Base_Db_Validation"></a><ul class="breadcrumb">
+<a id="\Base_Db_Exception_UnknownRelation"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/global.html">global</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/Base_Db_Validation.html">Base_Db_Validation</a>
+<span class="divider">\</span><a href="../classes/Base_Db_Exception_UnknownRelation.html">Base_Db_Exception_UnknownRelation</a>
 </li>
 </ul>
 <div class="element class">
-<p class="short_description">Class to validate values in query according their type in db</p>
+<p class="short_description">DB Exception item not found in database table</p>
 <div class="details">
 <div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>package</th>
-<td><a href="../packages/Kohana-my-base.database.html">Kohana-my-base</a></td>
+<td><a href="../packages/Kohana-my-base.exception.html">Kohana-my-base</a></td>
 </tr>
 <tr>
 <th>copyright</th>
@@ -114,68 +109,20 @@
 </tr>
 <tr>
 <th>subpackage</th>
-<td>database</td>
+<td>exception</td>
 </tr>
 </table>
 <h3>
-<i class="icon-custom icon-method"></i> Methods</h3>
-<a id="method_check"></a><div class="element clickable method public method_check" data-toggle="collapse" data-target=".method_check .collapse">
-<h2>general function to check all fields</h2>
-<pre>check($model) : bool</pre>
-<div class="labels"><span class="label">Static</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$model</h4></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>bool</code></div>
-</div></div>
-</div>
-<a id="method_int"></a><div class="element clickable method public method_int" data-toggle="collapse" data-target=".method_int .collapse">
-<h2>checks if value is integer and if it suites to db type of column</h2>
-<pre>int($key, $value, $rules) : null</pre>
-<div class="labels"><span class="label">Static</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$key</h4></div>
-<div class="subelement argument"><h4>$value</h4></div>
-<div class="subelement argument"><h4>$rules</h4></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>null</code></div>
-</div></div>
-</div>
-<a id="method_string"></a><div class="element clickable method public method_string" data-toggle="collapse" data-target=".method_string .collapse">
-<h2>checks string and his max length</h2>
-<pre>string($key, $value, $rules) : null</pre>
-<div class="labels"><span class="label">Static</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$key</h4></div>
-<div class="subelement argument"><h4>$value</h4></div>
-<div class="subelement argument"><h4>$rules</h4></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>null</code></div>
-</div></div>
-</div>
-<h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
-<a id="property_new_record"> </a><div class="element clickable property private property_new_record" data-toggle="collapse" data-target=".property_new_record .collapse">
+<a id="property_code"> </a><div class="element clickable property protected property_code" data-toggle="collapse" data-target=".property_code .collapse">
 <h2></h2>
-<pre>$new_record : bool</pre>
+<pre>$code </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_message"> </a><div class="element clickable property protected property_message" data-toggle="collapse" data-target=".property_message .collapse">
+<h2></h2>
+<pre>$message </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>

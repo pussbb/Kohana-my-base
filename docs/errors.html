@@ -32,10 +32,10 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">170</span></a></li>
+                <span class="label label-info">166</span></a></li>
 <li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
-                <span class="label label-info">2</span>
+                <span class="label label-info">1</span>
 </li></ul></a></li>
 <li><a href="deprecated.html"><i class="icon-stop"></i> Deprecated elements 
                 <span class="label label-info">0</span></a></li>
@@ -99,6 +99,7 @@
 <li><a href="#classes/Base/Db/Sanitize.php"><i class="icon-file"></i>classes/Base/Db/Sanitize.php</a></li>
 <li><a href="#classes/Base/Db/Validation.php"><i class="icon-file"></i>classes/Base/Db/Validation.php</a></li>
 <li><a href="#classes/Base/Db/Exception/EmptyColumnName.php"><i class="icon-file"></i>classes/Base/Db/Exception/EmptyColumnName.php</a></li>
+<li><a href="#classes/Base/Db/Exception/UnknownRelation.php"><i class="icon-file"></i>classes/Base/Db/Exception/UnknownRelation.php</a></li>
 <li><a href="#classes/Base/Db/Exception/UnknownRelationType.php"><i class="icon-file"></i>classes/Base/Db/Exception/UnknownRelationType.php</a></li>
 <li><a href="#classes/Base/Db/Exception/NoRowEffected.php"><i class="icon-file"></i>classes/Base/Db/Exception/NoRowEffected.php</a></li>
 <li><a href="#classes/Base/Db/Exception/UnknownDatabaseQueryType.php"><i class="icon-file"></i>classes/Base/Db/Exception/UnknownDatabaseQueryType.php</a></li>
@@ -1299,6 +1300,35 @@
 </table></div>
 </div>
 <div class="package-contents">
+<a name="classes/Base/Db/Exception/UnknownRelation.php" id="classes/Base/Db/Exception/UnknownRelation.php"></a><h3>
+<i class="icon-file"></i>classes/Base/Db/Exception/UnknownRelation.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>0</td>
+<td>No page-level DocBlock was found in file classes/Base/Db/Exception/UnknownRelation.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $message</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $code</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
 <a name="classes/Base/Db/Exception/UnknownRelationType.php" id="classes/Base/Db/Exception/UnknownRelationType.php"></a><h3>
 <i class="icon-file"></i>classes/Base/Db/Exception/UnknownRelationType.php<small style="float: right;padding-right: 10px;">3</small>
 </h3>
@@ -1546,7 +1576,7 @@
 </div>
 <div class="package-contents">
 <a name="classes/Base/Model.php" id="classes/Base/Model.php"></a><h3>
-<i class="icon-file"></i>classes/Base/Model.php<small style="float: right;padding-right: 10px;">9</small>
+<i class="icon-file"></i>classes/Base/Model.php<small style="float: right;padding-right: 10px;">2</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -1562,43 +1592,8 @@
 </tr>
 <tr class="error">
 <td>error</td>
-<td>482</td>
-<td>Argument $obj is missing from the Docblock of obj_to_array()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>598</td>
-<td>Name of argument $select does not match with the DocBlock's name $filter in select_query()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>598</td>
-<td>Name of argument $filter does not match with the DocBlock's name $limit in select_query()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>598</td>
-<td>Name of argument $limit does not match with the DocBlock's name $offset in select_query()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>598</td>
-<td>Name of argument $offset does not match with the DocBlock's name $cache in select_query()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>598</td>
-<td>Argument $cache is missing from the Docblock of select_query()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>867</td>
-<td>Argument $escape is missing from the Docblock of query_field()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>1286</td>
-<td>Argument $skip_primary_key is missing from the Docblock of table_fields()</td>
+<td>488</td>
+<td>The type hint of the argument is incorrect for the type definition of the @param tag with argument $obj in obj_to_array()</td>
 </tr>
 </tbody>
 </table></div>
@@ -1785,7 +1780,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-01-07T10:48:43+02:00.<br></footer></div>
+            generated on 2013-01-20T10:30:48+02:00.<br></footer></div>
 </div>
 </body>
 </html>
