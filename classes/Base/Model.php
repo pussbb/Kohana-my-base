@@ -142,8 +142,6 @@ class Base_Model extends Base_Db_Model {
      */
     private $last_query = NULL;
 
-
-
     /**
      * defines system variables(commands)
      *
@@ -451,7 +449,7 @@ class Base_Model extends Base_Db_Model {
                 break;
             case Model::STAT:
                 $obj = new $klass();
-                $result = $obj->select(array(DB::expr('COUNT('.$this->query_field($this->primary_key).')'), 'total_count'))
+                $result = $obj->select(array(DB::expr('COUNT('.$obj->query_field($obj->primary_key).')'), 'total_count'))
                                 ->filter($filter)
                                     ->execute()
                                         ->get('total_count');
@@ -850,7 +848,7 @@ class Base_Model extends Base_Db_Model {
             $foreign_key = $model->primary_key;
         if ( ! $field)
             $field = $this->primary_key;
-
+        if ()
         $model_fields = $model->query_columns_for_join();
         if ($this->query_type() == 'select')
             $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
@@ -1061,7 +1059,6 @@ class Base_Model extends Base_Db_Model {
             switch ($key_parts[0]) {
                 case '||':
                     $clause = 'or_where';
-                    $comparison_key = '=';
                     $key = $key_parts[1];
                     break;
                 case '!':
@@ -1106,7 +1103,7 @@ class Base_Model extends Base_Db_Model {
         }
         else if (is_array($select_args)) {
             $fields = array();
-            if (Arr::is_assoc(Arr::get($select_args, 0))) {
+            if (Arr::is_assoc($select_args)) {
                 foreach ($select_args as $field => $alias) {
                     $fields[] = array($this->query_field($field), $alias);
                 }
@@ -1279,7 +1276,8 @@ class Base_Model extends Base_Db_Model {
      */
     protected function sanitize($key, $value)
     {
-        if (is_object($value))
+        if (is_object($value)
+            || (is_string($value) && (bool)preg_match('/\w\.\w/', $value, $matches)))
             return $value;
 
         return Base_Db_Sanitize::value(
