@@ -219,8 +219,8 @@ class Base_Model extends Base_Db_Model {
      * </code>
      * @param array $params
      * @access public
-     * @return void
-     * @internal
+     * @return \Base_Model
+     *   @internal
      */
     public function __construct($params = NULL)
     {
@@ -266,8 +266,8 @@ class Base_Model extends Base_Db_Model {
      * echo $model->login; // will output user
      * </code>
      * @param $name
+     * @throws Exception_Collection_PropertyNotExists
      * @return mixed
-     * @throws Kohana_Exception
      * @access public
      * @internal
      */
@@ -316,6 +316,7 @@ class Base_Model extends Base_Db_Model {
      * calls functions for Base_Model or DB classes in Kohana
      * @param $name
      * @param $arguments
+     * @throws Exception_MethodNotExists
      * @return mixed
      * @internal
      */
@@ -323,7 +324,7 @@ class Base_Model extends Base_Db_Model {
     {
 
         if (method_exists($this, $name))
-            return;
+            return call_user_func_array(array($this, $name), $arguments);
         if (method_exists($this->db_query, $name))
                 return call_user_func_array(array($this->db_query, $name), $arguments);
 
@@ -338,14 +339,14 @@ class Base_Model extends Base_Db_Model {
      * adds availability to call some functions as static
      *
      * <code>
-     *  Model::destroy($id);
-     *  Model::exists($params);
+     *  self::destroy($id);
+     *  self::exists($params);
      * </code>
      * @ignore
      * @static
      * @param $name
      * @param $arguments
-     * @return mixed
+     * @return mixed/NULL
      * @access public
      * @internal
      */
@@ -431,6 +432,8 @@ class Base_Model extends Base_Db_Model {
      * @param $name string
      * @param $relation array
      * @param $filter array
+     * @throws Base_Db_Exception_UnknownRelationType
+     * @return
      */
     private function _relation($name, $relation, $filter = array() )
     {
@@ -440,14 +443,14 @@ class Base_Model extends Base_Db_Model {
         $model_key = Arr::get($relation, 3, $this->primary_key);
         $filter[$foreign_key] = $this->$model_key;
         switch ($type) {
-            case Model::BELONGS_TO:
-            case Model::HAS_ONE:
+            case self::BELONGS_TO:
+            case self::HAS_ONE:
                 $result = $klass::find($filter);
                 break;
-            case Model::HAS_MANY:
+            case self::HAS_MANY:
                 $result = $klass::find_all($filter)->records;
                 break;
-            case Model::STAT:
+            case self::STAT:
                 $obj = new $klass();
                 $result = $obj->select(array(DB::expr('COUNT('.$obj->query_field($obj->primary_key).')'), 'total_count'))
                                 ->filter($filter)
@@ -486,15 +489,15 @@ class Base_Model extends Base_Db_Model {
     /**
      * recursively parse data variable and convert all objects to assoc array
      *
-     * @param object $obj (must be instanceof Base_Model)
+     * @param \Base_Model |object $obj (must be instanceof Base_Model)
      * @access private
      * @return array
      */
-    private function obj_to_array(Model $obj)
+    private function obj_to_array(Base_Model $obj)
     {
         $result = array();
         foreach($obj->data as $key => $value) {
-            if (is_object($value) && $obj instanceof Model) {
+            if (is_object($value) && $obj instanceof Base_Model) {
                 $value = $this->obj_to_array($value);
             }
             $result[$key] = $value;
@@ -541,9 +544,9 @@ class Base_Model extends Base_Db_Model {
      * if row was not found Exception will be called
      * @static
      * @param $filter
-     * @param null $cache
+     * @param bool|null $cache
+     * @throws Base_Db_Exception_RecordNotFound
      * @return mixed
-     * @throws Exception
      */
     public static function find($filter, $cache = FALSE)
     {
@@ -588,7 +591,7 @@ class Base_Model extends Base_Db_Model {
      * @param array $filter
      * @param null $limit
      * @param null $offset
-     * @param null $cache
+     * @param bool|null $cache
      * @return mixed
      */
     public static function find_all($filter = array(), $limit = NULL, $offset = NULL, $cache = FALSE)
@@ -670,6 +673,7 @@ class Base_Model extends Base_Db_Model {
      *  data parsed throw Kohana My Base Model
      * @access public
      * @static
+     * @throws Base_Db_Exception_UnknownDatabaseQueryType
      * @return Database_Query_Builder
      */
     public static function query()
@@ -726,7 +730,7 @@ class Base_Model extends Base_Db_Model {
     }
 
     /**
-     * execute commands wich get as array
+     * execute commands which get as array
      * e.g.
      * <code>
      * $m = Model_User::find_all(array(
@@ -774,7 +778,7 @@ class Base_Model extends Base_Db_Model {
                 }
                 break;
             case 'expression':
-                $expresion = $value[0];
+                $expression = $value[0];
                 unset($value[0]);
 
                 $values = array();
@@ -789,7 +793,7 @@ class Base_Model extends Base_Db_Model {
                     }
                     $values[] = '\''.Base_Db_Sanitize::string($item).'\'';
                 }
-                $this->db_query->where(NULL, NULL, DB::expr(vsprintf($expresion, $values)));
+                $this->db_query->where(NULL, NULL, DB::expr(vsprintf($expression, $values)));
                 break;
             default:
                 # code...
@@ -814,6 +818,8 @@ class Base_Model extends Base_Db_Model {
     /**
      * JOIN function alternative
      * @param $name string string can be name of some model or relation name,
+     * @throws Base_Db_Exception_UnknownRelation
+     * @return void
      * @access public
      */
     public function with($name)
@@ -835,7 +841,7 @@ class Base_Model extends Base_Db_Model {
             $field = $this->primary_key;
 
         $model_fields = array();
-        if ($type !== Model::STAT) {
+        if ($type !== self::STAT) {
             $model_fields = $model->query_columns_for_join();
         }
         else {
@@ -855,13 +861,16 @@ class Base_Model extends Base_Db_Model {
     }
 
     /**
-    * return filed name for query
-    * @internal
-    * @access private
-    * @param $name string
-    * @param $delimiter string
-    * @param $escape bool
-    */
+     * return filed name for query
+     * @internal
+     * @access private
+     * @param $name string
+     * @param $delimiter string
+     * @param $escape bool
+     * @throws Exception_Collection_ObjectNotSupported
+     * @throws Base_Db_Exception_EmptyColumnName
+     * @return object
+     */
     private function query_field($name, $delimiter = '.', $escape = FALSE)
     {
         if ( ! $name)
@@ -900,7 +909,7 @@ class Base_Model extends Base_Db_Model {
      *   <li>this function build more safe where condition for queries</li>
      *   <li>any field that are not describe in table ( see table_columns()) will be ignored</li>
      *   <li>each type for field will be cleaned and convert to their type in database </li>
-     *   <li>do not required setting values for fileds if you already have them in object. Just tell what field you need</li>
+     *   <li>do not required setting values for fields if you already have them in object. Just tell what field you need</li>
      * </ul>
      * can be changed in future, because supports only
      * <ul>
@@ -926,9 +935,9 @@ class Base_Model extends Base_Db_Model {
      *
      * @uses Database_Query_Builder_Where functions
      * @param $filter array
+     * @throws Exception_Collection_InvalidArray
+     * @throws Base_Db_Exception_UnknownRelation
      * @return Base_Model
-     * @throws Kohana_Exception
-     * @throws Exception
      */
     public function filter($filter)
     {
@@ -1010,40 +1019,16 @@ class Base_Model extends Base_Db_Model {
      * returns pure key and value which already prepared to insert into query
      * with provided comparison key etc...
      *
-     *@param $key string
-     *@param $value mixed
-     *@access private
-     *@return array
+     * @param $key string
+     * @param $value mixed
+     * @throws Exception_Collection_ObjectNotSupported
+     * @access private
+     * @return array
      */
     private function sql_filter_fields($key, $value)
     {
 
         $comparison_key = '=';
-        if (Arr::is_array($value)) {
-            $comparison_key = 'IN';
-        }
-        else if (is_object($value)) {
-            if ($value instanceof Model)
-            {
-                if ( ! $value->db_query)
-                    $value->select($value->primary_key);
-                $value = $value->db_query;
-            }
-            if ($value instanceof Database_Query_Builder_Select)
-            {
-                $value = DB::select()->from(array($value,'t'.mt_rand()));
-                $comparison_key = 'IN';
-            }
-            else if ($value instanceof Database_Expression ) {
-                $comparison_key = '';
-            }
-            else {
-                throw new Exception_Collection_ObjectNotSupported();
-            }
-        }
-        else if ( is_null($value)) {
-            $comparison_key = 'IS';
-        }
         $clause = 'where';
         if ($this->sql_comparison($key)) {
             $key_parts = explode(' ', $key);
@@ -1063,6 +1048,37 @@ class Base_Model extends Base_Db_Model {
                     break;
             }
         }
+        switch(gettype($value)) {
+            case 'array': {
+                $comparison_key =$comparison_key === '<>' ? 'NOT IN' : 'IN';
+                break;
+            }
+            case 'object': {
+                if ($value instanceof Base_Model)
+                {
+                    if ( ! $value->db_query)
+                        $value->select($value->primary_key);
+                    $value = $value->db_query;
+                }
+                if ($value instanceof Database_Query_Builder_Select)
+                {
+                    $value = DB::select()->from(array($value,'t'.mt_rand()));
+                    $comparison_key =$comparison_key === '<>' ? 'NOT IN' : 'IN';
+                }
+                else if ($value instanceof Database_Expression ) {
+                    $comparison_key = '';
+                }
+                else {
+                    throw new Exception_Collection_ObjectNotSupported();
+                }
+                break;
+            }
+            case 'NULL': {
+                $comparison_key = $comparison_key === '<>' ? 'NOT ' : 'IS';
+                break;
+            }
+        }
+
         return array(
             'comparison_key' => $comparison_key,
             'key' => $key,
@@ -1078,11 +1094,11 @@ class Base_Model extends Base_Db_Model {
      * @param string|array $select_args can be <ul>
      *   <li>string - e.g. '*'</li>
      *   <li> single array - e.g. array('id','user_id') first field name, second his alias name in sql -> `id` AS `user_id`</li>
-     *   <li> multidementional array - e.g. array( array('id','user_id'), array('login','user_login')...)</li>
+     *   <li> multidimensional array - e.g. array( array('id','user_id'), array('login','user_login')...)</li>
      * </ul>
      * @param null $limit
      * @param null $offset
-     * @param null $cache
+     * @param bool|null $cache
      * @return Base_Model
      * @todo rewrite
      */
@@ -1126,7 +1142,7 @@ class Base_Model extends Base_Db_Model {
      *   array('login', 'email');
      * </code>
      *
-     * if you call function save() all values for fields will be automatical get from object
+     * if you call function save() all values for fields will be automatically get from object
      * if they exists
      * @param array|null $fields
      * @return Base_Model
@@ -1162,6 +1178,7 @@ class Base_Model extends Base_Db_Model {
      * Model_User::destroy(array('login' => 'bla', ....));
      *</code>
      * @param null $filter
+     * @throws Base_Db_Exception_NoRowEffected
      * @return bool
      * @access protected
      */
@@ -1216,10 +1233,10 @@ class Base_Model extends Base_Db_Model {
     }
 
 
-
     /**
      * make some additional operations before execute query
      * @access private
+     * @throws Base_Db_Exception_UnknownDatabaseQueryType
      * @return object self
      */
     private function prepare_for_query()
@@ -1291,7 +1308,7 @@ class Base_Model extends Base_Db_Model {
      *   $this->validate($additional_rules);//check according rules
      * </code>
      *
-     * Creating rules simmilar to Kohana's Validation
+     * Creating rules similar to Kohana's Validation
      * Also if some model has function rules() before saving data it will get from that function and validate data
      *
      * @param array $rules
@@ -1486,6 +1503,7 @@ class Base_Model extends Base_Db_Model {
      * function returns proper array with values
      * @internal
      * @param object $result DB_Result
+     * @return mixed
      */
     private function parse_result($result)
     {
@@ -1501,12 +1519,12 @@ class Base_Model extends Base_Db_Model {
                 $_result[$_key] = array_combine($this->_table_fields, Arr::extract($row, $this->_table_fields));
 
             foreach ($this->with as $key => $value) {
-                if ($value[3] === Model::STAT){
+                if ($value[3] === self::STAT){
                     $_result[$_key][$key] = $row[$value[1][0]];
                     continue;
                 }
-                $one_record = $value[3] === Model::BELONGS_TO || $value[3] === Model::HAS_ONE;
-                if ( isset($_result[$_key][$key]) && is_object($_result[$_key][$key]) && $one_record)
+                $one_record = $value[3] === self::BELONGS_TO || $value[3] === self::HAS_ONE;
+                if ( isset($_result[$_key][$key]) && (is_object($_result[$_key][$key]) && $one_record))
                     continue;
                 $klass = $value[0];
                 $obj = new $klass;
@@ -1534,8 +1552,8 @@ class Base_Model extends Base_Db_Model {
     private function auto_count_total()
     {
         $query = clone $this->db_query;
-        $reflecionObject = new ReflectionObject($query);
-        $object_properties = $reflecionObject->getProperties(ReflectionProperty::IS_PROTECTED);
+        $reflectionObject = new ReflectionObject($query);
+        $object_properties = $reflectionObject->getProperties(ReflectionProperty::IS_PROTECTED);
         foreach ($object_properties as $property) {
             $property->setAccessible(true);
             switch ($property->getName()) {
@@ -1561,7 +1579,7 @@ class Base_Model extends Base_Db_Model {
     }
 
     /**
-     * user callback function wich calls after success executing query
+     * user callback function which calls after success executing query
      * @access protected
      * @return void
      */
@@ -1596,6 +1614,7 @@ class Base_Model extends Base_Db_Model {
      * </code>
      * @param $array
      * @access public
+     * @return object self
      */
     public function update_params($array)
     {
@@ -1694,6 +1713,8 @@ class Base_Model extends Base_Db_Model {
     /**
      * returns encoded data from  table column meta_data(json encoded string)
      * @access public
+     * @throws Exception_Json
+     * @throws Base_Db_Exception_MetaDataFieldMissing
      * @return array
      */
     public function meta_data()
@@ -1725,11 +1746,11 @@ class Base_Model extends Base_Db_Model {
         $meta_data = $this->meta_data();
         $meta_data[$key] = $value;
         $this->meta_data_cache[$key] = $value;
-        $this->meta_data = json_encode($meta_data);
+        $this->data['meta_data'] = json_encode($meta_data);
     }
 
     /**
-     * returns human readble name of some model
+     * returns human readable name of some model
      *
      * @return string
      */
