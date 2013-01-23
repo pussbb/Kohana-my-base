@@ -26,7 +26,7 @@ class Base_Db_Model extends Kohana_Model  implements Serializable, ArrayAccess, 
      *
      * or fields and value for the row
      * @var array|null
-     * @access private
+     * @access protected
      */
     protected  $data = array();
 

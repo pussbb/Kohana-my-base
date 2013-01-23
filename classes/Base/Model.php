@@ -48,7 +48,7 @@ class Base_Model extends Base_Db_Model {
     public $count = 0;
 
     /**
-     * Sets defualt ordering for DB query
+     * Sets default ordering for DB query
      *
      * <code>
      *  <?php
@@ -145,7 +145,7 @@ class Base_Model extends Base_Db_Model {
     /**
      * defines system variables(commands)
      *
-     * wich can parse in filter function
+     * which can parse in filter function
      * @var array
      * @access private
      */
@@ -313,7 +313,7 @@ class Base_Model extends Base_Db_Model {
     }
 
     /**
-     * calls functions for Base_Model or DB clases in Kohana
+     * calls functions for Base_Model or DB classes in Kohana
      * @param $name
      * @param $arguments
      * @return mixed
@@ -782,7 +782,6 @@ class Base_Model extends Base_Db_Model {
                 {
 
                     if (in_array($key, $this->_table_fields)){
-                        $field = $key;
                         $values[] = $this->query_field($key, '.', TRUE);
                     }
                     else {
@@ -814,52 +813,44 @@ class Base_Model extends Base_Db_Model {
 
     /**
      * JOIN function alternative
-     * @param $name string|object string can be name of some model or relation name,
-     * @param $foreign_key string
-     * @param $field string
-     * @param $comparison_key string
+     * @param $name string string can be name of some model or relation name,
      * @access public
      */
-    public function with($name, $foreign_key = NULL, $field = NULL, $comparison_key = '=')
+    public function with($name)
     {
-        $with_name = '';
-        if (is_object($name)) {
-            $model = $name;
-            $with_name = strtolower($model->module_name);
-        }
-        elseif (Kohana::find_file('',strtolower(str_replace('_', DIRECTORY_SEPARATOR, $name)))) {
-            $model = new $name();
-            $with_name = strtolower($model->module_name);
-        }
-        elseif (Arr::get($this->relations(), $name)) {
-            $klass = Arr::path($this->relations(), "$name.1");
-            $with_name = $name;
-            $model = new $klass();
-            if ( ! $foreign_key)
-                $foreign_key = Arr::path($this->relations(), "$name.2");
-            if ( ! $field)
-                $field = Arr::path($this->relations(), "$name.3", $this->primary_key);
-        }
-        else{
+
+        $klass = Arr::path($this->relations(), "$name.1");
+        if ( ! $klass)
             throw new Base_Db_Exception_UnknownRelation();
-        }
+
+        $type = Arr::path($this->relations(), "$name.0");
+        $foreign_key = Arr::path($this->relations(), "$name.2");
+        $field = Arr::path($this->relations(), "$name.3", $this->primary_key);
+
+        $model = new $klass();
 
         if ( ! $foreign_key)
             $foreign_key = $model->primary_key;
         if ( ! $field)
             $field = $this->primary_key;
-        if ()
-        $model_fields = $model->query_columns_for_join();
+
+        $model_fields = array();
+        if ($type !== Model::STAT) {
+            $model_fields = $model->query_columns_for_join();
+        }
+        else {
+            $model_fields[] = array(DB::expr('COUNT('.$model->query_field($model->primary_key).')'), $name);
+        }
         if ($this->query_type() == 'select')
             $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
-
         $this->db_query
                 ->join(array($model->db_table, $model->module_name), 'LEFT')
-                   ->on($model->query_field($foreign_key), $comparison_key, $this->query_field($field));
-        $this->with[$with_name] = array(
+                   ->on($model->query_field($foreign_key), '=', $this->query_field($field));
+        $this->with[$name] = array(
                 get_class($model),
                 Arr::path($model_fields, '*.1'),
-                $model->_table_fields
+                $model->_table_fields,
+                $type
             );
     }
 
@@ -1016,7 +1007,7 @@ class Base_Model extends Base_Db_Model {
     }
 
     /**
-     * returns pure key and value wich already prepared to insert into query
+     * returns pure key and value which already prepared to insert into query
      * with provided comparison key etc...
      *
      *@param $key string
@@ -1061,11 +1052,12 @@ class Base_Model extends Base_Db_Model {
                     $clause = 'or_where';
                     $key = $key_parts[1];
                     break;
-                case '!':
+                case '!' :
                     $comparison_key = '<>';
                     $key = $key_parts[1];
                     break;
-                defualt:
+
+                default:
                     $comparison_key = $key_parts[0];
                     $key = $key_parts[1];
                     break;
@@ -1228,7 +1220,7 @@ class Base_Model extends Base_Db_Model {
     /**
      * make some additional operations before execute query
      * @access private
-     * @return void
+     * @return object self
      */
     private function prepare_for_query()
     {
@@ -1248,8 +1240,6 @@ class Base_Model extends Base_Db_Model {
                 break;
 
             case 'update':
-
-                $values = array();
                 foreach ($this->table_fields() as $field) {
                     $this->db_query->value($field, $this->sanitize($field, $this->{$field}));
                 }
@@ -1313,19 +1303,17 @@ class Base_Model extends Base_Db_Model {
         $data = $data ? $data : $this->data;
         $rules = $rules ? $rules : array_intersect_key($this->rules(), $data );
         $validator = Validation::factory($data);
-        foreach ($rules as $key => $rules) {
-            foreach ($rules as $rule) {
-                if ($rule === 'unique')
-                    $rule = array(array($this, 'unique_validation'), array(':validation', ':field'));
+        foreach ($rules as $key => $rule) {
+            if ($rule === 'unique')
+                $rule = array(array($this, 'unique_validation'), array(':validation', ':field'));
 
-                if ( ! is_array($rule)) {
-                    $validator->rule($key, $rule);
-                    continue;
-                }
-                $validator->rule(
-                        $key, Arr::get($rule, 0, NULL), Arr::get($rule, 1, NULL)
-                );
+            if ( ! is_array($rule)) {
+                $validator->rule($key, $rule);
+                continue;
             }
+            $validator->rule(
+                    $key, Arr::get($rule, 0, NULL), Arr::get($rule, 1, NULL)
+            );
         }
         $validator->labels($this->labels());
         if ($validator->check())
@@ -1513,22 +1501,26 @@ class Base_Model extends Base_Db_Model {
                 $_result[$_key] = array_combine($this->_table_fields, Arr::extract($row, $this->_table_fields));
 
             foreach ($this->with as $key => $value) {
+                if ($value[3] === Model::STAT){
+                    $_result[$_key][$key] = $row[$value[1][0]];
+                    continue;
+                }
+                $one_record = $value[3] === Model::BELONGS_TO || $value[3] === Model::HAS_ONE;
+                if ( isset($_result[$_key][$key]) && is_object($_result[$_key][$key]) && $one_record)
+                    continue;
                 $klass = $value[0];
                 $obj = new $klass;
                 foreach ($value[1] as $index_key => $with_field) {
                     $obj->data[$value[2][$index_key]] = $row[$with_field];
                 }
-                $_result[$_key][$key][] = $obj;
+                if ($one_record)
+                    $_result[$_key][$key] = $obj;
+                else
+                    $_result[$_key][$key][] = $obj;
+
             }
         }
-        foreach ($_result as $key => $data) {
-            foreach ($this->with as $_key => $values) {
-                $relation_type = Arr::path($this->relations(), $_key.'.0');
-                if (isset($_result[$key][$_key])
-                        && ($relation_type == Model::BELONGS_TO || $relation_type == Model::HAS_ONE))
-                    $_result[$key][$_key] = $_result[$key][$_key][0];
-            }
-        }
+
         $this->count = count($_result);
         return array_values($_result);
 
@@ -1694,7 +1686,6 @@ class Base_Model extends Base_Db_Model {
      */
     public function meta_item($key, $default = NULL)
     {
-        $meta_data = $this->meta_data();
          if (strpos($key, '.') !== FALSE)
             return Arr::path($this->meta_data(), $key, $default);
         return Arr::get($this->meta_data(), $key, $default);
@@ -1703,7 +1694,7 @@ class Base_Model extends Base_Db_Model {
     /**
      * returns encoded data from  table column meta_data(json encoded string)
      * @access public
-     * @return void
+     * @return array
      */
     public function meta_data()
     {
