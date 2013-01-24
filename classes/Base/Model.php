@@ -983,11 +983,23 @@ class Base_Model extends Base_Db_Model {
             && isset($system_filters['with'])
             && $this->query_type() === 'select') {
             $db = clone $this->db_query;
+
+            if (array_key_exists('limit', $system_filters)) {
+                $db->limit($system_filters['limit']);
+                unset($system_filters['limit']);
+            }
+            if (array_key_exists('offset', $system_filters)) {
+                $db->offset($system_filters['offset']);
+                unset($system_filters['offset']);
+            }
+
             $this->db_query
                 ->reset()
+                ->offset(NULL)
                 ->select(Arr::get($this->select_args, 0))
                 ->from(array($db, $this->module_name))
                 ->cached(Arr::get($this->select_args, 1));
+
         }
 
         foreach($system_filters as $key => $value) {
@@ -1578,7 +1590,16 @@ class Base_Model extends Base_Db_Model {
                         array(DB::expr('COUNT('.$this->query_field($this->primary_key).')'), 'total_count'),
                     ));
                     break;
+                case '_from':
+                    $property->setValue($query, array(array($this->db_table, $this->module_name)));
+                    break;
                 case '_limit':
+                    $property->setValue($query, NULL);
+                    break;
+                case '_limit':
+                    $property->setValue($query, NULL);
+                    break;
+                case '_join':
                     $property->setValue($query, NULL);
                     break;
                 case '_offset':
