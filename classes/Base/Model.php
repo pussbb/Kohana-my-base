@@ -824,7 +824,6 @@ class Base_Model extends Base_Db_Model {
      */
     public function with($name)
     {
-
         $klass = Arr::path($this->relations(), "$name.1");
         if ( ! $klass)
             throw new Base_Db_Exception_UnknownRelation();
@@ -1073,6 +1072,24 @@ class Base_Model extends Base_Db_Model {
                 }
                 break;
             }
+            case 'string':
+                if((bool)preg_match('/\w\.\w/', $value, $matches))
+                {
+                    $parts = explode('.', $value);
+                    $relation = Arr::get($this->relations(), $parts[0]);
+                    if ( ! $relation)
+                        break;
+                    $klass = Arr::get($relation, 1);
+                    $obj = new $klass;
+                    if ( ! in_array($parts[1], $obj->_table_fields))
+                        break;
+                    $value = DB::expr($obj->query_field($parts[1],'.',  TRUE));
+
+                }
+                else if (in_array($value, $this->_table_fields)) {
+                    $value = DB::expr($this->query_field($value, '.', TRUE));
+                }
+                break;
             case 'NULL': {
                 $comparison_key = $comparison_key === '<>' ? 'NOT ' : 'IS';
                 break;
@@ -1283,8 +1300,7 @@ class Base_Model extends Base_Db_Model {
      */
     protected function sanitize($key, $value)
     {
-        if (is_object($value)
-            || (is_string($value) && (bool)preg_match('/\w\.\w/', $value, $matches)))
+        if (is_object($value))
             return $value;
 
         return Base_Db_Sanitize::value(
