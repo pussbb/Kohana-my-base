@@ -242,4 +242,30 @@ class Text extends Kohana_Text {
 
     }
 
+    /**
+     * return translated human readable full name of month
+     *
+     *@param string|integer number of month
+     *@static
+     *@access public
+     *@return string
+     */
+    public static function month_name($month_number)
+    {
+        $months = array(
+            tr('January'),
+            tr('February'),
+            tr('March'),
+            tr('April'),
+            tr('May'),
+            tr('June'),
+            tr('July'),
+            tr('August'),
+            tr('September'),
+            tr('October'),
+            tr('November'),
+            tr('December'),
+        );
+        return Arr::get($months, intval($month_number));
+    }
 }

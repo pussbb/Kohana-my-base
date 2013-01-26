@@ -51,6 +51,15 @@ $model = Model_News::find_all(array(
     )
 ));
 
+$year = $this->request->param('year');
+$month = $this->request->param('month');
+if ($month)
+    $expression = array('YEAR(%s) = %s AND MONTH(%s) = %s', 'created_at' => array($year, intval($month)));
+else
+    $expression = array('YEAR(%s) = %s ', 'created_at' => $year,);
+
+
+
 // get original Kohana_DB class but initialized with Based_Model logic
 Model_Blog_Post::select_query();
 Model_Blog_Post::update_query();

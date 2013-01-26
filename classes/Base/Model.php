@@ -785,13 +785,19 @@ class Base_Model extends Base_Db_Model {
                 foreach($value as $key => $item)
                 {
 
-                    if (in_array($key, $this->_table_fields)){
-                        $values[] = $this->query_field($key, '.', TRUE);
+                    if (in_array($key, $this->_table_fields))
+                        $key = $this->query_field($key, '.', TRUE);
+
+                    if (is_array($item)) {
+                        foreach($item as $_item) {
+                            $values[] = $key;
+                            $values[] = '\''.Base_Db_Sanitize::string($_item).'\'';
+                        }
                     }
                     else {
                         $values[] = $key;
+                        $values[] = '\''.Base_Db_Sanitize::string($item).'\'';
                     }
-                    $values[] = '\''.Base_Db_Sanitize::string($item).'\'';
                 }
                 $this->db_query->where(NULL, NULL, DB::expr(vsprintf($expression, $values)));
                 break;
