@@ -824,35 +824,33 @@ class Base_Model extends Base_Db_Model {
      */
     public function with($name)
     {
-        $klass = Arr::path($this->relations(), "$name.1");
-        if ( ! $klass)
+        $relation = Arr::get($this->relations(), $name);
+        if ( ! $relation)
             throw new Base_Db_Exception_UnknownRelation();
 
-        $type = Arr::path($this->relations(), "$name.0");
-        $foreign_key = Arr::path($this->relations(), "$name.2");
-        $field = Arr::path($this->relations(), "$name.3", $this->primary_key);
-
+        $klass = Arr::get($relation, 1);
         $model = new $klass();
-
-        if ( ! $foreign_key)
-            $foreign_key = $model->primary_key;
-        if ( ! $field)
-            $field = $this->primary_key;
+        $type = Arr::path($relation, 0);
+        $field = Arr::path($relation, 3, $this->primary_key);
+        $foreign_key = Arr::path($relation, 2, $model->primary_key);
 
         $model_fields = array();
         if ($type !== self::STAT) {
             $model_fields = $model->query_columns_for_join();
+            if ($this->query_type() == 'select')
+                $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
+            $this->db_query
+                ->join(array($model->db_table, $model->module_name), 'LEFT')
+                   ->on($model->query_field($foreign_key), '=', $this->query_field($field));
         }
         else {
             $model_fields[] = array(DB::expr('COUNT('.$model->query_field($model->primary_key).')'), $name);
+            $query = $model::select_query($model_fields[0], array($foreign_key => $this->query_field($field)));
+            $this->db_query->select(array($query, $name));
         }
-        if ($this->query_type() == 'select')
-            $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
-        $this->db_query
-                ->join(array($model->db_table, $model->module_name), 'LEFT')
-                   ->on($model->query_field($foreign_key), '=', $this->query_field($field));
+
         $this->with[$name] = array(
-                get_class($model),
+                $klass,
                 Arr::path($model_fields, '*.1'),
                 $model->_table_fields,
                 $type
@@ -1085,17 +1083,19 @@ class Base_Model extends Base_Db_Model {
                 break;
             }
             case 'string':
-                if((bool)preg_match('/\w\.\w/', $value, $matches))
+                if((bool)preg_match('/^[a-z_]+\.[a-z_]+$/', $value, $matches))
                 {
                     $parts = explode('.', $value);
                     $relation = Arr::get($this->relations(), $parts[0]);
-                    if ( ! $relation)
+                    if ( ! $relation) {
+                        $value = DB::expr($value);
                         break;
+                    }
                     $klass = Arr::get($relation, 1);
                     $obj = new $klass;
-                    if ( ! in_array($parts[1], $obj->_table_fields))
-                        break;
-                    $value = DB::expr($obj->query_field($parts[1],'.',  TRUE));
+                    debug($value);
+                    if (in_array($parts[1], $obj->_table_fields))
+                       $value = DB::expr($obj->query_field($parts[1],'.',  TRUE));
 
                 }
                 else if (in_array($value, $this->_table_fields)) {

@@ -12,7 +12,7 @@
 
 class Helper_Model {
 
-    public static function url($model, $action)
+    public static function url($model, $action = 'index')
     {
         $uri = array(
             strtolower(Request::current()->directory()),
