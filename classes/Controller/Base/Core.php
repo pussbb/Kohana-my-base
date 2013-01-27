@@ -90,8 +90,8 @@ class Controller_Base_Core extends Controller_Template {
         $this->check_access();
 
         $this->view = new View();
-        $this->template->set(array('content' => NULL, 'keywords'=> NULL, 'description'=> NULL, 'title'=> NULL));
-
+        if ($this->template)
+            $this->template->set(array('content' => NULL, 'keywords'=> NULL, 'description'=> NULL, 'title'=> NULL));
     }
 
     /**
@@ -309,7 +309,7 @@ class Controller_Base_Core extends Controller_Template {
     public function render_partial($file = '',array $view_data = array())
     {
         $this->set_filename($file);
-        $this->view->set(array_merge($view_data, $this->append_dynamic_properties()));
+        $this->view->set(array_merge($view_data, $this->dynamic_properties()));
         $this->set_view_filename();
         $this->response->body($this->view->render());
         $this->_safety_render();
@@ -392,7 +392,7 @@ class Controller_Base_Core extends Controller_Template {
 
         $this->set_favicon($this->config_item('favicon'));
         $this->media_by_default();
-        $controller_vars = $this->append_dynamic_properties();
+        $controller_vars = $this->dynamic_properties();
         $this->view->set($controller_vars);
         if ($this->layout) {
             $content = View::factory('layout/'.$this->layout,
@@ -409,20 +409,21 @@ class Controller_Base_Core extends Controller_Template {
     /**
      * append to view and tempalate dynamically append variable from $this
      * @return array
-     * @access private
+     * @access protected
      */
-    private function append_dynamic_properties()
+    protected function dynamic_properties(array $filter = array())
     {
 
         $reflection_object = new ReflectionClass($this);
         $properties = $reflection_object->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED | ReflectionProperty::IS_PRIVATE);
-        $system_variables = array(
+        $system_variables = array_merge(array(
             'kohana_view_filename',
             'kohana_view_data',
             'filename',
             'layout',
             'config'
-        );
+        ), $filter);
+
         foreach ($properties as $property) {
             $system_variables[] = $property->getName();
         }
