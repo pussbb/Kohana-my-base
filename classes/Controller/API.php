@@ -32,11 +32,17 @@ class Controller_API extends Controller_Base_Core {
         $this->responce_type = Arr::get($_REQUEST, 'format', self::JSON_FORMAT);
         if ($this->is_put()) {
             $action = $this->request->action();
-            $this->request->action("update_$action");
+            $action = $action === 'index' ? 'update' : "update_$action";
+            $this->request->action($action);
         }
         else if ($this->is_delete()) {
             $action = $this->request->action();
-            $this->request->action("destroy_$action");
+            $action = $action === 'index' ? 'destroy' : "destroy_$action";
+            $this->request->action($action);
+        } else {
+            $action = $this->request->action();
+            if ((bool)preg_match('/update|destroy/', $action, $matches))
+                throw new HTTP_Exception_403(tr('Access deny'));
         }
     }
 
