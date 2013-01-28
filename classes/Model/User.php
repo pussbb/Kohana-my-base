@@ -69,12 +69,13 @@ class Model_User extends Model
             return FALSE;
 
         $result = $this->select('*', 1)->filter(array('email', 'password'))->exec();
+
         if ( ! $result)
         {
             $this->add_error('general', tr('User not found or wrong password'));
             return FALSE;
         }
-        Auth::instance()->authorize($this);
+        Auth::instance()->authorize($this->records[0]);
         return TRUE;
     }
 
