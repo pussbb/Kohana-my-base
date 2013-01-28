@@ -716,6 +716,26 @@ class Base_Model extends Base_Db_Model {
         return $this->_loaded;
     }
 
+    public function has($name, $values = NULL)
+    {
+
+        $relation = Arr::get($this->relations(), $name);
+        if ( ! $relation)
+            throw new Base_Db_Exception_UnknownRelation();
+
+        $klass = Arr::get($relation, 1);
+        $model = new $klass();
+        $field = Arr::path($relation, 3, $this->primary_key);
+        $foreign_key = Arr::path($relation, 2, $model->primary_key);
+        if ( ! $values )
+            $values = $this->$field;
+        $select = array(DB::expr('COUNT('.$model->query_field($model->primary_key).')'), 'total_count');
+        $result = $model::select_query($select, array($foreign_key => $values))
+                        ->execute()
+                            ->get('total_count');
+        return $result > 0;
+    }
+
     /**
      * returns array with table columns SQL query
      * @static
