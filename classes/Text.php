@@ -60,7 +60,7 @@ class Text extends Kohana_Text {
      * @param $allowed_tags string
      * @return string
      */
-    public function strip_tags($text, $allowed_tags = '<b><p><strong><br>')
+    public static function strip_tags($text, $allowed_tags = '<b><p><strong><br>')
     {
         // remove all html tags except <b><p><strong><br>
         $text = strip_tags($text, $allowed_tags);
@@ -123,7 +123,7 @@ class Text extends Kohana_Text {
     }
 
     // removes onanything attributes from a single opening tag
-    function remove_event_attributes_from_tag($tag)
+    public static function remove_event_attributes_from_tag($tag)
     {
         $re = '( ^ <(?&tagname) ) | \G \s*+ (?> ((?&attrib)) | ((?&crap)) )' . self::$tag_on_defs;
         return preg_replace("~$re~xie", '"$1$3"? "$0": (preg_match("/^on/i", "$2")? " ": "$0")', $tag);
