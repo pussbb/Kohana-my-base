@@ -718,7 +718,6 @@ class Base_Model extends Base_Db_Model {
 
     public function has($name, $values = NULL)
     {
-
         $relation = Arr::get($this->relations(), $name);
         if ( ! $relation)
             throw new Base_Db_Exception_UnknownRelation();
@@ -1027,9 +1026,15 @@ class Base_Model extends Base_Db_Model {
                 $db->limit($system_filters['limit']);
                 unset($system_filters['limit']);
             }
+
             if (array_key_exists('offset', $system_filters)) {
                 $db->offset($system_filters['offset']);
                 unset($system_filters['offset']);
+            }
+
+            if ($this->order) {
+                call_user_func_array(array($db, 'order_by'), $this->order);
+                $this->order = array();
             }
 
             $this->db_query
