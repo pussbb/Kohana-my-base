@@ -1354,17 +1354,20 @@ class Base_Model extends Base_Db_Model {
         $data = $data ? $data : $this->data;
         $rules = $rules ? $rules : array_intersect_key($this->rules(), $data );
         $validator = Validation::factory($data);
-        foreach ($rules as $key => $rule) {
-            if ($rule === 'unique')
-                $rule = array(array($this, 'unique_validation'), array(':validation', ':field'));
+        foreach ($rules as $field_name => $_rules)
+        {
+            foreach ($_rules as $key => $rule) {
+                if ($rule === 'unique')
+                    $rule = array(array($this, 'unique_validation'), array(':validation', ':field'));
 
-            if ( ! is_array($rule)) {
-                $validator->rule($key, $rule);
-                continue;
+                if ( ! is_array($rule)) {
+                    $validator->rule($key, $rule);
+                    continue;
+                }
+                $validator->rule(
+                        $key, Arr::get($rule, 0, NULL), Arr::get($rule, 1, NULL)
+                );
             }
-            $validator->rule(
-                    $key, Arr::get($rule, 0, NULL), Arr::get($rule, 1, NULL)
-            );
         }
         $validator->labels($this->labels());
         if ($validator->check())
