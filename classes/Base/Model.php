@@ -182,6 +182,12 @@ class Base_Model extends Base_Db_Model {
     private $meta_data_cache = NULL;
 
     /**
+     *
+     * @internal
+     */
+    private $_loaded = FALSE;
+
+    /**
      * ignore it just a hack
      * @internal
      */
@@ -705,6 +711,11 @@ class Base_Model extends Base_Db_Model {
         return $obj->prepare_for_query()->db_query;
     }
 
+    public function loaded()
+    {
+        return $this->_loaded;
+    }
+
     /**
      * returns array with table columns SQL query
      * @static
@@ -830,6 +841,9 @@ class Base_Model extends Base_Db_Model {
      */
     public function with($name)
     {
+        if ($this->_loaded)
+            throw new Base_Db_Exception_LoadedModel;
+
         $relation = Arr::get($this->relations(), $name);
         if ( ! $relation)
             throw new Base_Db_Exception_UnknownRelation();
@@ -944,6 +958,7 @@ class Base_Model extends Base_Db_Model {
      */
     public function filter($filter)
     {
+
         if ( ! Arr::is_array($filter))
             throw new Exception_Collection_InvalidArray();
 
@@ -1139,6 +1154,8 @@ class Base_Model extends Base_Db_Model {
      */
     public function select($select_args = '*', $limit = NULL, $offset = NULL, $cache = FALSE)
     {
+        if ($this->_loaded)
+            throw new Base_Db_Exception_LoadedModel;
 
         if ( is_string($select_args)) {
             $fields = $this->query_field($select_args);
@@ -1184,6 +1201,8 @@ class Base_Model extends Base_Db_Model {
      */
     public function insert($fields = array())
     {
+        if ($this->_loaded)
+            throw new Base_Db_Exception_LoadedModel;
         $this->db_query = DB::insert($this->db_table, $fields?:$this->table_fields(TRUE));
         return $this;
     }
@@ -1503,11 +1522,7 @@ class Base_Model extends Base_Db_Model {
                 break;
             case 'select':
                 $_result = $this->parse_result($result);
-                if ($this->count == 1) {
-                   foreach ($_result[0] as $key => $value) {
-                        $this->data[$key] = $value;
-                   }
-                }
+
                 $klass = get_called_class();
                 if ($this->count_total)
                     $this->count = $this->auto_count_total();
@@ -1519,6 +1534,7 @@ class Base_Model extends Base_Db_Model {
                     foreach ($record as $key => $value) {
                         $obj->data[$key] = $value;
                     }
+                    $obj->_loaded = count($obj->data) > 0;
                     $this->records[] = $obj;
                 }
                 $result = $result->count() > 0;
@@ -1568,6 +1584,7 @@ class Base_Model extends Base_Db_Model {
                 foreach ($value[1] as $index_key => $with_field) {
                     $obj->data[$value[2][$index_key]] = $row[$with_field];
                 }
+                $obj->_loaded = count($obj->data) > 0;
                 if ($one_record)
                     $_result[$_key][$key] = $obj;
                 else
