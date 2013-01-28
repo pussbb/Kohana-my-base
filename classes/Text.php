@@ -253,18 +253,18 @@ class Text extends Kohana_Text {
     public static function month_name($month_number)
     {
         $months = array(
-            tr('January'),
-            tr('February'),
-            tr('March'),
-            tr('April'),
-            tr('May'),
-            tr('June'),
-            tr('July'),
-            tr('August'),
-            tr('September'),
-            tr('October'),
-            tr('November'),
-            tr('December'),
+            1 => tr('January'),
+            2 => tr('February'),
+            3 => tr('March'),
+            4 => tr('April'),
+            5 => tr('May'),
+            6 => tr('June'),
+            7 => tr('July'),
+            8 => tr('August'),
+            9 => tr('September'),
+            10 => tr('October'),
+            11 => tr('November'),
+            12 => tr('December'),
         );
         return Arr::get($months, intval($month_number));
     }
