@@ -7,7 +7,7 @@
       <docblock line="14">
         <description>translate string via gettext
 or Kohana's translation function</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="14" name="param" description="string" type="\global\" variable="$string"/>
         <tag line="14" name="param" description="array" type="\global\" variable="$values"/>
         <tag line="14" name="return" description="" type="string">
@@ -16,7 +16,7 @@ or Kohana's translation function</description>
       </docblock>
       <argument line="23">
         <name>$string</name>
-        <default/>
+        <default></default>
         <type/>
       </argument>
       <argument line="23">
@@ -30,7 +30,7 @@ or Kohana's translation function</description>
       <full_name>\debug</full_name>
       <docblock line="35">
         <description>helper function to print dump of var and exit if needed</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="35" name="param" description="" type="mixed" variable="">
           <type by_reference="false">mixed</type>
         </tag>
@@ -52,7 +52,7 @@ or Kohana's translation function</description>
 &lt;code&gt;
  ACL::instance()-&gt;allowed($obj);
 &lt;/code&gt;</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -210,7 +210,7 @@ or Kohana's translation function</description>
         <description>Kohana-my-base
 Attemp to create module with classes for Kohana framework,
 with main goal make developing web applications more easily(as for me)</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com(alexnevpryaga@gmail.com)"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -222,7 +222,7 @@ with main goal make developing web applications more easily(as for me)</descript
         <default>array()</default>
         <docblock line="18">
           <description>containce all created classes</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="18" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -1100,7 +1100,7 @@ with the ending if the text is longer than length.&lt;/p&gt;</long-description>
       <full_name>\Tools_Language</full_name>
       <docblock line="3">
         <description>Parse php files for translatable items and creates or update tr files</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="3" name="package" description="Kohana-my-base"/>
         <tag line="3" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="3" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -1114,7 +1114,7 @@ with the ending if the text is longer than length.&lt;/p&gt;</long-description>
         <full_name>parse_source</full_name>
         <docblock line="16">
           <description>parsing php files for translatable items and creates or update tr files</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="51" package="Kohana-my-base\tools">
@@ -1122,7 +1122,7 @@ with the ending if the text is longer than length.&lt;/p&gt;</long-description>
         <full_name>compile_translations</full_name>
         <docblock line="48">
           <description>compile gettext source translations files</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </method>
       <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="72" package="Kohana-my-base\tools">
@@ -1130,7 +1130,7 @@ with the ending if the text is longer than length.&lt;/p&gt;</long-description>
         <full_name>check</full_name>
         <docblock line="67">
           <description>checks if gettext tools is installed</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="67" name="static" description=""/>
           <tag line="67" name="throw" description="" type="\Exception_Tools">
             <type by_reference="false">\Exception_Tools</type>
@@ -1149,7 +1149,7 @@ with the ending if the text is longer than length.&lt;/p&gt;</long-description>
       <full_name>\Tools_Less</full_name>
       <docblock line="3">
         <description>Class to compile less file into css file</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="3" name="package" description="Kohana-my-base"/>
         <tag line="3" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="3" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -1163,7 +1163,7 @@ with the ending if the text is longer than length.&lt;/p&gt;</long-description>
         <full_name>build_if_needed</full_name>
         <docblock line="16">
           <description>compiles less file if needed</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="16" name="param" description="string" type="\" variable="$file_name"/>
           <tag line="16" name="throws" description="" type="\Exception_Tools">
             <type by_reference="false">\Exception_Tools</type>
@@ -1172,7 +1172,7 @@ with the ending if the text is longer than length.&lt;/p&gt;</long-description>
         </docblock>
         <argument line="22">
           <name>$file_name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -1181,7 +1181,7 @@ with the ending if the text is longer than length.&lt;/p&gt;</long-description>
         <full_name>check</full_name>
         <docblock line="48">
           <description>checks if less compiler is installed</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="48" name="static" description=""/>
           <tag line="48" name="throw" description="" type="\Exception_Tools">
             <type by_reference="false">\Exception_Tools</type>
@@ -1697,7 +1697,7 @@ or if javascript file does not exists&lt;/p&gt;</long-description>
         <description>Kohana-my-base
 Attemp to create module with classes for Kohana framework,
 with main goal make developing web applications more easily(as for me)</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com(alexnevpryaga@gmail.com)"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -1717,7 +1717,7 @@ with main goal make developing web applications more easily(as for me)</descript
         <full_name>redirect_user</full_name>
         <argument line="41">
           <name>$condition</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -1756,7 +1756,7 @@ with main goal make developing web applications more easily(as for me)</descript
       <full_name>\Controller_Core</full_name>
       <docblock line="3">
         <description>Core template wich extends functionality of Controller_Template</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="3" name="package" description="Kohana-my-base"/>
         <tag line="3" name="copyright" description="2012 pussbb@gmail.com(alexnevpryaga@gmail.com)"/>
         <tag line="3" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -2567,8 +2567,8 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
       <name>Language</name>
       <full_name>\Language</full_name>
       <docblock line="3">
-        <description/>
-        <long-description/>
+        <description></description>
+        <long-description></long-description>
         <tag line="3" name="see" description="\global\Base_Language" refers="\global\Base_Language"/>
         <tag line="3" name="package" description="Kohana-my-base"/>
         <tag line="3" name="copyright" description="2012 pussbb@gmail.com"/>
@@ -2824,7 +2824,7 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
       <full_name>\Gettext</full_name>
       <docblock line="2">
         <description>Gettext support</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="see" description="\global\Base_GetText" refers="\global\Base_GetText"/>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
@@ -2912,8 +2912,8 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
       <name>Exception_ModelNotFound</name>
       <full_name>\Exception_ModelNotFound</full_name>
       <docblock line="2">
-        <description/>
-        <long-description/>
+        <description></description>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -2945,7 +2945,7 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
       <full_name>\Exception_Tools_Missing</full_name>
       <docblock line="2">
         <description>sets human readable message for external console applications</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -2966,7 +2966,7 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
       <full_name>\Exception_Tools</full_name>
       <docblock line="2">
         <description>sets human readable message for external console applications</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3006,8 +3006,8 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
       <name>Exception_Collection_PropertyNotExists</name>
       <full_name>\Exception_Collection_PropertyNotExists</full_name>
       <docblock line="2">
-        <description/>
-        <long-description/>
+        <description></description>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3038,8 +3038,8 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
       <name>Exception_Collection_ObjectNotSupported</name>
       <full_name>\Exception_Collection_ObjectNotSupported</full_name>
       <docblock line="2">
-        <description/>
-        <long-description/>
+        <description></description>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3070,8 +3070,8 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
       <name>Exception_Collection_InvalidArray</name>
       <full_name>\Exception_Collection_InvalidArray</full_name>
       <docblock line="2">
-        <description/>
-        <long-description/>
+        <description></description>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3102,8 +3102,8 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
       <name>Exception_MethodNotExists</name>
       <full_name>\Exception_MethodNotExists</full_name>
       <docblock line="2">
-        <description/>
-        <long-description/>
+        <description></description>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3458,7 +3458,7 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
       <full_name>\Base_Auth</full_name>
       <docblock line="3">
         <description>Base class to manage roles for user</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="3" name="package" description="Kohana-my-base"/>
         <tag line="3" name="copyright" description="2012 pussbb@gmail.com(alexnevpryaga@gmail.com)"/>
         <tag line="3" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3472,12 +3472,12 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
         <full_name>authorize</full_name>
         <docblock line="16">
           <description>remember just logged in user</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="16" name="param" description="(object)" type="\" variable="$user"/>
         </docblock>
         <argument line="20">
           <name>$user</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -3486,7 +3486,7 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
         <full_name>current_user</full_name>
         <docblock line="25">
           <description>get current logged in user</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="25" name="return" description="if in session not valid object returns NULL otherwise object" type="object|null">
             <type by_reference="false">object</type>
             <type by_reference="false">null</type>
@@ -3498,7 +3498,7 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
         <full_name>logout</full_name>
         <docblock line="35">
           <description>destroy session for current logged in user</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="35" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
@@ -3509,7 +3509,7 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
         <full_name>logged_in</full_name>
         <docblock line="44">
           <description>checks if user logged in or just a visitor</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="44" name="return" description="if user loggged in  return TRUE otherwise FALSE" type="bool">
             <type by_reference="false">bool</type>
           </tag>
@@ -3534,7 +3534,7 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
         </docblock>
         <argument line="68">
           <name>$user_role</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -3543,7 +3543,7 @@ and directory/controller.action.css&lt;/p&gt;</long-description>
         <full_name>is_admin</full_name>
         <docblock line="73">
           <description>checks if user is admin</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="73" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
@@ -3678,7 +3678,7 @@ and convert them to type of the database table column type</description>
       <full_name>\Base_Db_Validation</full_name>
       <docblock line="3">
         <description>Class to validate values in query according their type in db</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="3" name="package" description="Kohana-my-base"/>
         <tag line="3" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="3" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3692,7 +3692,7 @@ and convert them to type of the database table column type</description>
         <default>FALSE</default>
         <docblock line="16">
           <description>indicates if record is new</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="16" name="var" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
@@ -3703,7 +3703,7 @@ and convert them to type of the database table column type</description>
         <full_name>int</full_name>
         <docblock line="22">
           <description>checks if value is integer and if it suites to db type of column</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="22" name="static" description=""/>
           <tag line="22" name="param" description="" type="\" variable="$key"/>
           <tag line="22" name="param" description="" type="\" variable="$value"/>
@@ -3714,17 +3714,17 @@ and convert them to type of the database table column type</description>
         </docblock>
         <argument line="30">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="30">
           <name>$value</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="30">
           <name>$rules</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -3733,7 +3733,7 @@ and convert them to type of the database table column type</description>
         <full_name>string</full_name>
         <docblock line="63">
           <description>checks string and his max length</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="63" name="static" description=""/>
           <tag line="63" name="param" description="" type="\" variable="$key"/>
           <tag line="63" name="param" description="" type="\" variable="$value"/>
@@ -3744,17 +3744,17 @@ and convert them to type of the database table column type</description>
         </docblock>
         <argument line="71">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="71">
           <name>$value</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="71">
           <name>$rules</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -3763,7 +3763,7 @@ and convert them to type of the database table column type</description>
         <full_name>check</full_name>
         <docblock line="87">
           <description>general function to check all fields</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="87" name="static" description=""/>
           <tag line="87" name="param" description="" type="\" variable="$model"/>
           <tag line="87" name="return" description="" type="bool">
@@ -3772,7 +3772,7 @@ and convert them to type of the database table column type</description>
         </docblock>
         <argument line="93">
           <name>$model</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -3788,7 +3788,7 @@ and convert them to type of the database table column type</description>
       <full_name>\Base_Db_Exception_EmptyColumnName</full_name>
       <docblock line="2">
         <description>DB Exception item not found in database table</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3819,7 +3819,7 @@ and convert them to type of the database table column type</description>
       <full_name>\Base_Db_Exception_UnknownRelation</full_name>
       <docblock line="2">
         <description>DB Exception item not found in database table</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3881,7 +3881,7 @@ and convert them to type of the database table column type</description>
       <full_name>\Base_Db_Exception_UnknownRelationType</full_name>
       <docblock line="2">
         <description>DB Exception item not found in database table</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3912,7 +3912,7 @@ and convert them to type of the database table column type</description>
       <full_name>\Base_Db_Exception_NoRowEffected</full_name>
       <docblock line="2">
         <description>DB Exception item not found in database table</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3943,7 +3943,7 @@ and convert them to type of the database table column type</description>
       <full_name>\Base_Db_Exception_UnknownDatabaseQueryType</full_name>
       <docblock line="2">
         <description>DB Exception item not found in database table</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -3974,7 +3974,7 @@ and convert them to type of the database table column type</description>
       <full_name>\Base_Db_Exception_RecordNotFound</full_name>
       <docblock line="2">
         <description>DB Exception item not found in database table</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -4005,7 +4005,7 @@ and convert them to type of the database table column type</description>
       <full_name>\Base_Db_Exception_MetaDataFieldMissing</full_name>
       <docblock line="2">
         <description>DB Exception item not found in database table</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -7087,7 +7087,7 @@ us = united states&lt;/p&gt;</long-description>
       <full_name>\Collection</full_name>
       <docblock line="3">
         <description>Manipulate with array of objects</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="3" name="package" description="Kohana-my-base"/>
         <tag line="3" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="3" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -7101,7 +7101,7 @@ us = united states&lt;/p&gt;</long-description>
         <full_name>hash</full_name>
         <docblock line="16">
           <description>Create assoc array by some key in object.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="16" name="param" description="with objects" type="array" variable="$collection">
             <type by_reference="false">array</type>
           </tag>
@@ -7115,12 +7115,12 @@ us = united states&lt;/p&gt;</long-description>
         </docblock>
         <argument line="23">
           <name>$collection</name>
-          <default/>
+          <default></default>
           <type>array</type>
         </argument>
         <argument line="23">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -7129,7 +7129,7 @@ us = united states&lt;/p&gt;</long-description>
         <full_name>for_select</full_name>
         <docblock line="32">
           <description>Create array for html form select from object.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="32" name="param" description="with objects" type="array" variable="$collection">
             <type by_reference="false">array</type>
           </tag>
@@ -7146,12 +7146,12 @@ us = united states&lt;/p&gt;</long-description>
         </docblock>
         <argument line="40">
           <name>$collection</name>
-          <default/>
+          <default></default>
           <type>array</type>
         </argument>
         <argument line="40">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="40">
@@ -7165,7 +7165,7 @@ us = united states&lt;/p&gt;</long-description>
         <full_name>pluck</full_name>
         <docblock line="49">
           <description>Retrieves muliple single-key values from a list of object.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="49" name="param" description="with objects" type="array" variable="$collection">
             <type by_reference="false">array</type>
           </tag>
@@ -7179,12 +7179,12 @@ us = united states&lt;/p&gt;</long-description>
         </docblock>
         <argument line="56">
           <name>$collection</name>
-          <default/>
+          <default></default>
           <type>array</type>
         </argument>
         <argument line="56">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -7193,7 +7193,7 @@ us = united states&lt;/p&gt;</long-description>
         <full_name>build_tree</full_name>
         <docblock line="65">
           <description>Helper function to build tree array</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="65" name="param" description="with objects" type="array" variable="$collection">
             <type by_reference="false">array</type>
           </tag>
@@ -7214,7 +7214,7 @@ us = united states&lt;/p&gt;</long-description>
         </docblock>
         <argument line="74">
           <name>$collection</name>
-          <default/>
+          <default></default>
           <type>array</type>
         </argument>
         <argument line="74">
@@ -7238,7 +7238,7 @@ us = united states&lt;/p&gt;</long-description>
         <full_name>property_exists</full_name>
         <docblock line="90">
           <description>Helper function to check if property exists</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="90" name="param" description="" type="mixed" variable="$obj">
             <type by_reference="false">mixed</type>
           </tag>
@@ -7253,12 +7253,12 @@ us = united states&lt;/p&gt;</long-description>
         </docblock>
         <argument line="97">
           <name>$obj</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="97">
           <name>$property</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -7267,7 +7267,7 @@ us = united states&lt;/p&gt;</long-description>
         <full_name>property</full_name>
         <docblock line="114">
           <description>Helper function to check if property exists</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="114" name="param" description="" type="mixed" variable="$obj">
             <type by_reference="false">mixed</type>
           </tag>
@@ -7282,12 +7282,12 @@ us = united states&lt;/p&gt;</long-description>
         </docblock>
         <argument line="121">
           <name>$obj</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="121">
           <name>$property</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -7506,7 +7506,7 @@ for display.</description>
       <full_name>\Model</full_name>
       <docblock line="2">
         <description>Helper class to work with Base_Model</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="see" description="\global\Base_Model" refers="\global\Base_Model"/>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com(alexnevpryaga@gmail.com)"/>
@@ -7528,7 +7528,7 @@ for display.</description>
       <full_name>\Object</full_name>
       <docblock line="2">
         <description>Helper class to safe get value from object</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="2" name="package" description="Kohana-my-base"/>
         <tag line="2" name="copyright" description="2012 pussbb@gmail.com"/>
         <tag line="2" name="license" description="http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3"/>
@@ -7542,7 +7542,7 @@ for display.</description>
         <full_name>property</full_name>
         <docblock line="16">
           <description>gets property value only with public access</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="16" name="param" description="" type="\" variable="$obj"/>
           <tag line="16" name="param" description="" type="string" variable="$name">
             <type by_reference="false">string</type>
@@ -7558,12 +7558,12 @@ for display.</description>
         </docblock>
         <argument line="26">
           <name>$obj</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="26">
           <name>$name</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="26">
@@ -7577,7 +7577,7 @@ for display.</description>
         <full_name>properties</full_name>
         <docblock line="31">
           <description>gets properties and their values from some object</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="31" name="param" description="" type="\" variable="$obj"/>
           <tag line="31" name="return" description="" type="array">
             <type by_reference="false">array</type>
@@ -7587,7 +7587,7 @@ for display.</description>
         </docblock>
         <argument line="39">
           <name>$obj</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -7603,14 +7603,14 @@ for display.</description>
       <full_name>\Upload</full_name>
       <docblock line="3">
         <description>Extending Kohana Upload helper</description>
-        <long-description/>
+        <long-description></long-description>
       </docblock>
       <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="14" package="Default">
         <name>get_max_size</name>
         <full_name>get_max_size</full_name>
         <docblock line="8">
           <description>Returns PHP max upload filesize</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="8" name="static" description=""/>
           <tag line="8" name="return" description="" type="int">
             <type by_reference="false">int</type>
