@@ -6,6 +6,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
+ * @category extra
+ * @subpackage extra
  */
 
 class HTML extends Kohana_HTML {
@@ -14,7 +16,7 @@ class HTML extends Kohana_HTML {
         /**
          * Creates a image link.
          *
-         *     echo HTML::img('media/img/logo.png', array('alt' => 'My Company'));
+         *     echo HTML::image('img/logo.png', array('alt' => 'My Company'));
          *
          * @param   string  $file       file name
          * @param   array   $attributes default attributes

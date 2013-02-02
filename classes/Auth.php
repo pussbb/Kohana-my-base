@@ -19,7 +19,7 @@
 class Auth extends Base_Auth {
 
     /**
-    * @ignore
+    * @internal
     */
     public static function __callStatic($name, $arguments)
     {

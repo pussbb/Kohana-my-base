@@ -55,7 +55,7 @@ class Valid extends Kohana_Valid {
 
       /**
       * Checks given value again MAC address of the computer
-      * @param   string   value
+      * @param   string
       * @return  boolean
       */
       public static function macaddress($val)

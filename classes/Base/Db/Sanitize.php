@@ -49,6 +49,7 @@ class Base_Db_Sanitize {
      * convert to string date to Mysql date format string
      * @static
      * @param $value
+     * @param $format
      * @return mixed|string
      */
     public static function date($value, $format)
@@ -63,6 +64,7 @@ class Base_Db_Sanitize {
      * @static
      * @param $type
      * @param $value
+     * @param null $alias
      * @return mixed
      */
     public static function value($type, $value, $alias = NULL)

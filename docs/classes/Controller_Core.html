@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">166</span></a></li>
+                <span class="label label-info">167</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">1</span>
@@ -85,6 +85,7 @@
 <li class="nav-header protected">» Protected
                     <ul>
 <li class="method protected inherited"><a href="#method_check_access" title="check_access :: check access for current request"><span class="description">check access for current request</span><pre>check_access()</pre></a></li>
+<li class="method protected inherited"><a href="#method_dynamic_properties" title="dynamic_properties :: append to view and tempalate dynamically append variable from $this"><span class="description">append to view and tempalate dynamically append variable from $this</span><pre>dynamic_properties()</pre></a></li>
 <li class="method protected inherited"><a href="#method_set_language" title="set_language :: sets language by default"><span class="description">sets language by default</span><pre>set_language()</pre></a></li>
 <li class="method protected inherited"><a href="#method_set_view_filename" title="set_view_filename :: finally set the view filename (not possible to change back)"><span class="description">finally set the view filename (not possible to change back)</span><pre>set_view_filename()</pre></a></li>
 </ul>
@@ -92,7 +93,6 @@
 <li class="nav-header private">» Private
                     <ul>
 <li class="method private inherited"><a href="#method__safety_render" title="_safety_render :: disable template render and call final method of parent class"><span class="description">disable template render and call final method of parent class</span><pre>_safety_render()</pre></a></li>
-<li class="method private inherited"><a href="#method_append_dynamic_properties" title="append_dynamic_properties :: append to view and tempalate dynamically append variable from $this"><span class="description">append to view and tempalate dynamically append variable from $this</span><pre>append_dynamic_properties()</pre></a></li>
 <li class="method private inherited"><a href="#method_config_item" title="config_item :: get config item"><span class="description">get config item</span><pre>config_item()</pre></a></li>
 <li class="method private inherited"><a href="#method_media_by_default" title="media_by_default :: register css and js for current request structure"><span class="description">register css and js for current request structure</span><pre>media_by_default()</pre></a></li>
 </ul>
@@ -556,6 +556,31 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 </tr></table>
 </div></div>
 </div>
+<a id="method_dynamic_properties"></a><div class="element clickable method protected method_dynamic_properties" data-toggle="collapse" data-target=".method_dynamic_properties .collapse">
+<h2>append to view and tempalate dynamically append variable from $this</h2>
+<pre>dynamic_properties(array $filter) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>protected</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::dynamic_properties()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filter</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
 <a id="method_set_language"></a><div class="element clickable method protected method_set_language" data-toggle="collapse" data-target=".method_set_language .collapse">
 <h2>sets language by default</h2>
 <pre>set_language() : void</pre>
@@ -610,26 +635,6 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 </table>
 </div></div>
 </div>
-<a id="method_append_dynamic_properties"></a><div class="element clickable method private method_append_dynamic_properties" data-toggle="collapse" data-target=".method_append_dynamic_properties .collapse">
-<h2>append to view and tempalate dynamically append variable from $this</h2>
-<pre>append_dynamic_properties() : array</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Controller_Base_Core::append_dynamic_properties()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
-</div></div>
-</div>
 <a id="method_config_item"></a><div class="element clickable method private method_config_item" data-toggle="collapse" data-target=".method_config_item .collapse">
 <h2>get config item</h2>
 <pre>config_item($key, $defualt) : mixed</pre>
@@ -653,21 +658,22 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 </div>
 <a id="method_media_by_default"></a><div class="element clickable method private method_media_by_default" data-toggle="collapse" data-target=".method_media_by_default .collapse">
 <h2>register css and js for current request structure</h2>
-<pre>media_by_default(array $request_struct) </pre>
+<pre>media_by_default() : void</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>tries to add default files
 in format directory/controller.action.js
 and directory/controller.action.css</p></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>private</td>
+</tr>
+<tr>
 <th>inherited_from</th>
 <td>\Controller_Base_Core::media_by_default()</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$request_struct</h4>
-<code>array</code>
-</div>
+</tr>
+</table>
 </div></div>
 </div>
 <h3>
@@ -776,7 +782,7 @@ render mode it will render with template files</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-01-20T11:01:30+02:00.<br></footer></div>
+            generated on 2013-02-02T16:32:43+02:00.<br></footer></div>
 </div>
 </body>
 </html>

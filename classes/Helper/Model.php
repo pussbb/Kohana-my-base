@@ -12,6 +12,16 @@
 
 class Helper_Model {
 
+    /**
+     * creates url for model.
+     * e.g
+     *   Model_User -> http://site/users
+     *
+     *
+     * @param $model
+     * @param string $action
+     * @return string
+     */
     public static function url($model, $action = 'index')
     {
         $uri = array(
@@ -24,6 +34,12 @@ class Helper_Model {
     }
 
 
+    /**
+     * returns model name e.g. 'user' -> 'Model_User'
+     *
+     * @param $name
+     * @return string
+     */
     public static function class_name($name)
     {
       if (! (bool)preg_match('/[Mm]odel/', $name))

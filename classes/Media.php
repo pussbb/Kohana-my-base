@@ -21,7 +21,7 @@
 class Media {
 
     /**
-     * @ignore
+     * @internal
      */
     public static function __callStatic($name, $arguments)
     {
@@ -30,8 +30,6 @@ class Media {
             return $media;
 
         return call_user_func_array(array($media, $name), $arguments);
-
-
     }
 
 }

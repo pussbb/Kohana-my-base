@@ -18,7 +18,7 @@ class Request extends Kohana_Request {
     /**
      * Process a request to find a matching route
      *
-     * @param   object  $request Request
+     * @param object|\Request $request Request
      * @param   array   $routes  Route
      * @return  array
      */

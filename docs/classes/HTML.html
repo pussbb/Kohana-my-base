@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title><b>Kohana</b><i>My</i> Base » \Helper_Model</title>
+<title><b>Kohana</b><i>My</i> Base » \HTML</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -57,20 +57,17 @@
 </div>
 <ul class="side-nav nav nav-list"><li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods
-                    <ul>
-<li class="method public "><a href="#method_class_name" title="class_name :: returns model name e.g."><span class="description">returns model name e.g.</span><pre>class_name()</pre></a></li>
-<li class="method public "><a href="#method_url" title="url :: creates url for model."><span class="description">creates url for model.</span><pre>url()</pre></a></li>
-</ul>
+                    <ul><li class="method public "><a href="#method_image" title="image :: Creates a image link."><span class="description">Creates a image link.</span><pre>image()</pre></a></li></ul>
 </li></ul>
 </div>
 <div class="span8">
-<a id="\Helper_Model"></a><ul class="breadcrumb">
+<a id="\HTML"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/global.html">global</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/Helper_Model.html">Helper_Model</a>
+<span class="divider">\</span><a href="../classes/HTML.html">HTML</a>
 </li>
 </ul>
 <div class="element class">
@@ -80,7 +77,7 @@
 <table class="table table-bordered">
 <tr>
 <th>package</th>
-<td><a href="../packages/Kohana-my-base.html">Kohana-my-base</a></td>
+<td><a href="../packages/Kohana-my-base.extra.html">Kohana-my-base</a></td>
 </tr>
 <tr>
 <th>copyright</th>
@@ -100,36 +97,45 @@
 </tr>
 <tr>
 <th>category</th>
-<td>helper</td>
+<td>extra</td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>extra</td>
 </tr>
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a id="method_class_name"></a><div class="element clickable method public method_class_name" data-toggle="collapse" data-target=".method_class_name .collapse">
-<h2>returns model name e.g.</h2>
-<pre>class_name($name) : string</pre>
+<a id="method_image"></a><div class="element clickable method public method_image" data-toggle="collapse" data-target=".method_image .collapse">
+<h2>Creates a image link.</h2>
+<pre>image(string $file, array $attributes, mixed $protocol, boolean $index) : string</pre>
 <div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>'user' -> 'Model_User'</p></div>
+<div class="long_description"><p>echo HTML::image('img/logo.png', array('alt' => 'My Company'));</p></div>
+<table class="table table-bordered">
+<tr>
+<th>uses</th>
+<td>\URL::base</td>
+</tr>
+<tr>
+<th>uses</th>
+<td>\HTML::attributes</td>
+</tr>
+</table>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$name</h4></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
-</div></div>
-</div>
-<a id="method_url"></a><div class="element clickable method public method_url" data-toggle="collapse" data-target=".method_url .collapse">
-<h2>creates url for model.</h2>
-<pre>url($model, string $action) : string</pre>
-<div class="labels"><span class="label">Static</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>e.g
-  Model_User -> http://site/users</p></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$model</h4></div>
 <div class="subelement argument">
-<h4>$action</h4>
-<code>string</code>
+<h4>$file</h4>
+<code>string</code><p>file name</p></div>
+<div class="subelement argument">
+<h4>$attributes</h4>
+<code>array</code><p>default attributes</p></div>
+<div class="subelement argument">
+<h4>$protocol</h4>
+<code>mixed</code><p>protocol to pass to URL::base()</p>
 </div>
+<div class="subelement argument">
+<h4>$index</h4>
+<code>boolean</code><p>include the index page</p></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
 </div></div>

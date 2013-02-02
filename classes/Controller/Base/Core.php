@@ -126,7 +126,7 @@ class Controller_Base_Core extends Controller_Template {
         if ( ! $this->request->is_initial()
               || ! $this->check_access
               || Acl::instance()->allowed($this->current_request_structure()))
-            return;
+            return TRUE;
 
         if ( ! Auth::instance()->logged_in() && ! $this->request->is_ajax()){
             Cookie::set('auth_required_url', $this->request->url().http_build_query($this->request->query()) );
@@ -237,9 +237,10 @@ class Controller_Base_Core extends Controller_Template {
      * tries to add default files
      * in format directory/controller.action.js
      * and directory/controller.action.css
-     * @param array $request_struct
+     * @access private
+     * @return void
      */
-    private function media_by_default($request_struct = array())
+    private function media_by_default()
     {
         $structure = $this->current_request_structure();
         $directory = NULL;
@@ -408,6 +409,7 @@ class Controller_Base_Core extends Controller_Template {
 
     /**
      * append to view and tempalate dynamically append variable from $this
+     * @param array $filter
      * @return array
      * @access protected
      */

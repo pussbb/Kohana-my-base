@@ -3,4 +3,4 @@
 $message = tr('Houston we have a problem');
 
 include Kohana::find_file('views', 'errors/default');
-?>
+

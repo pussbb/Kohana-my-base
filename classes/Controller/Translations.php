@@ -6,8 +6,6 @@ class Controller_Translations extends Controller_Core {
 
     protected $check_access = FALSE;
 
-    private static $ext = '.po';
-
     private $translations = NULL;
 
     public function before()

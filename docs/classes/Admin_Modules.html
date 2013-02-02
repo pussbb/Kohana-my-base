@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">166</span></a></li>
+                <span class="label label-info">167</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">1</span>
@@ -60,10 +60,8 @@
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
 <li class="method public inherited"><a href="#method_instance" title="instance :: get object of some class."><span class="description">get object of some class.</span><pre>instance()</pre></a></li>
-<li class="method public "><a href="#method_modules" title="modules :: "><span class="description">modules()
-        </span><pre>modules()</pre></a></li>
-<li class="method public "><a href="#method_register" title="register :: "><span class="description">register()
-        </span><pre>register()</pre></a></li>
+<li class="method public "><a href="#method_modules" title="modules :: returns full list of registered modules"><span class="description">returns full list of registered modules</span><pre>modules()</pre></a></li>
+<li class="method public "><a href="#method_register" title="register :: Register modules(links description) for admin area"><span class="description">Register modules(links description) for admin area</span><pre>register()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
@@ -147,16 +145,18 @@
 </div></div>
 </div>
 <a id="method_modules"></a><div class="element clickable method public method_modules" data-toggle="collapse" data-target=".method_modules .collapse">
-<h2>modules()
-        </h2>
-<pre>modules() </pre>
+<h2>returns full list of registered modules</h2>
+<pre>modules() : array</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
 </div>
 <a id="method_register"></a><div class="element clickable method public method_register" data-toggle="collapse" data-target=".method_register .collapse">
-<h2>register()
-        </h2>
-<pre>register($name, $path) </pre>
+<h2>Register modules(links description) for admin area</h2>
+<pre>register($name, $path) : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -181,7 +181,7 @@
 </div>
 <a id="property__modules"> </a><div class="element clickable property private property__modules" data-toggle="collapse" data-target=".property__modules .collapse">
 <h2></h2>
-<pre>$_modules </pre>
+<pre>$_modules : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
@@ -192,7 +192,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-01-20T11:01:31+02:00.<br></footer></div>
+            generated on 2013-02-02T16:32:43+02:00.<br></footer></div>
 </div>
 </body>
 </html>

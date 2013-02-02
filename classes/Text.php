@@ -78,6 +78,7 @@ class Text extends Kohana_Text {
      * strip ANSI escape color codes.
      * @static
      * @param $string string
+     * @return string
      */
     public static function strip_ansi_color($string)
     {
@@ -86,6 +87,9 @@ class Text extends Kohana_Text {
 
     ///http://stackoverflow.com/questions/9462104/remove-on-js-event-attributes-from-html-tags
 
+    /**
+     * @var string
+     */
     public static $tag_on_defs = '(?(DEFINE)
         (?<tagname> [a-z][^\s>/]*+    )
         (?<attname> [^\s>/][^\s=>/]*+    )  # first char can be pretty much anything, including =
@@ -115,14 +119,24 @@ class Text extends Kohana_Text {
     )';
 
 
-    // removes onanything attributes from all matched HTML tags
+    /**
+     * removes all on-  attributes from all matched HTML tags
+     *
+     * @param $html
+     * @return mixed
+     */
     public static function remove_event_attributes($html)
     {
         $re = '(?&tag)' . self::$tag_on_defs;
         return preg_replace("~$re~xie", 'Text::remove_event_attributes_from_tag("$0")', $html);
     }
 
-    // removes onanything attributes from a single opening tag
+    /**
+     * removes onanything attributes from a single opening tag
+     *
+     * @param $tag
+     * @return mixed
+     */
     public static function remove_event_attributes_from_tag($tag)
     {
         $re = '( ^ <(?&tagname) ) | \G \s*+ (?> ((?&attrib)) | ((?&crap)) )' . self::$tag_on_defs;

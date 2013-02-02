@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">166</span></a></li>
+                <span class="label label-info">167</span></a></li>
 <li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">1</span>
@@ -77,11 +77,13 @@
 <li><a href="#classes/Controller/Core.php"><i class="icon-file"></i>classes/Controller/Core.php</a></li>
 <li><a href="#classes/Controller/Translations.php"><i class="icon-file"></i>classes/Controller/Translations.php</a></li>
 <li><a href="#classes/Controller/Base/Core.php"><i class="icon-file"></i>classes/Controller/Base/Core.php</a></li>
+<li><a href="#classes/Controller/API.php"><i class="icon-file"></i>classes/Controller/API.php</a></li>
 <li><a href="#classes/Controller/Languages.php"><i class="icon-file"></i>classes/Controller/Languages.php</a></li>
 <li><a href="#classes/Language.php"><i class="icon-file"></i>classes/Language.php</a></li>
 <li><a href="#classes/Model/User.php"><i class="icon-file"></i>classes/Model/User.php</a></li>
 <li><a href="#classes/Model/Access/Rule.php"><i class="icon-file"></i>classes/Model/Access/Rule.php</a></li>
 <li><a href="#classes/Model/Language.php"><i class="icon-file"></i>classes/Model/Language.php</a></li>
+<li><a href="#classes/HTML.php"><i class="icon-file"></i>classes/HTML.php</a></li>
 <li><a href="#classes/File.php"><i class="icon-file"></i>classes/File.php</a></li>
 <li><a href="#classes/Gettext.php"><i class="icon-file"></i>classes/Gettext.php</a></li>
 <li><a href="#classes/Admin/Modules.php"><i class="icon-file"></i>classes/Admin/Modules.php</a></li>
@@ -100,6 +102,7 @@
 <li><a href="#classes/Base/Db/Validation.php"><i class="icon-file"></i>classes/Base/Db/Validation.php</a></li>
 <li><a href="#classes/Base/Db/Exception/EmptyColumnName.php"><i class="icon-file"></i>classes/Base/Db/Exception/EmptyColumnName.php</a></li>
 <li><a href="#classes/Base/Db/Exception/UnknownRelation.php"><i class="icon-file"></i>classes/Base/Db/Exception/UnknownRelation.php</a></li>
+<li><a href="#classes/Base/Db/Exception/LoadedModel.php"><i class="icon-file"></i>classes/Base/Db/Exception/LoadedModel.php</a></li>
 <li><a href="#classes/Base/Db/Exception/UnknownRelationType.php"><i class="icon-file"></i>classes/Base/Db/Exception/UnknownRelationType.php</a></li>
 <li><a href="#classes/Base/Db/Exception/NoRowEffected.php"><i class="icon-file"></i>classes/Base/Db/Exception/NoRowEffected.php</a></li>
 <li><a href="#classes/Base/Db/Exception/UnknownDatabaseQueryType.php"><i class="icon-file"></i>classes/Base/Db/Exception/UnknownDatabaseQueryType.php</a></li>
@@ -226,7 +229,7 @@
 </div>
 <div class="package-contents">
 <a name="classes/Helper/Model.php" id="classes/Helper/Model.php"></a><h3>
-<i class="icon-file"></i>classes/Helper/Model.php<small style="float: right;padding-right: 10px;">4</small>
+<i class="icon-file"></i>classes/Helper/Model.php<small style="float: right;padding-right: 10px;">2</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -244,16 +247,6 @@
 <td>critical</td>
 <td>2</td>
 <td>No short description for class \Helper_Model</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>15</td>
-<td>No DocBlock was found for method url()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>27</td>
-<td>No DocBlock was found for method class_name()</td>
 </tr>
 </tbody>
 </table></div>
@@ -298,7 +291,7 @@
 </tr>
 <tr class="error">
 <td>error</td>
-<td>35</td>
+<td>33</td>
 <td>No DocBlock was found for method get_view_file()</td>
 </tr>
 </tbody>
@@ -330,7 +323,7 @@
 </div>
 <div class="package-contents">
 <a name="classes/Auth.php" id="classes/Auth.php"></a><h3>
-<i class="icon-file"></i>classes/Auth.php<small style="float: right;padding-right: 10px;">1</small>
+<i class="icon-file"></i>classes/Auth.php<small style="float: right;padding-right: 10px;">4</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -338,16 +331,33 @@
 <th>Line</th>
 <th>Description</th>
 </tr></thead>
-<tbody><tr class="error">
+<tbody>
+<tr class="error">
 <td>error</td>
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Auth.php</td>
-</tr></tbody>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>21</td>
+<td>No short description for method __callStatic()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>21</td>
+<td>Argument $name is missing from the Docblock of __callStatic()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>21</td>
+<td>Argument $arguments is missing from the Docblock of __callStatic()</td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div class="package-contents">
 <a name="classes/Text.php" id="classes/Text.php"></a><h3>
-<i class="icon-file"></i>classes/Text.php<small style="float: right;padding-right: 10px;">4</small>
+<i class="icon-file"></i>classes/Text.php<small style="float: right;padding-right: 10px;">2</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -361,20 +371,10 @@
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Text.php</td>
 </tr>
-<tr class="error">
-<td>error</td>
-<td>89</td>
-<td>No DocBlock was found for property $tag_on_defs</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>119</td>
-<td>No DocBlock was found for method remove_event_attributes()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>126</td>
-<td>No DocBlock was found for method remove_event_attributes_from_tag()</td>
+<tr class="critical">
+<td>critical</td>
+<td>90</td>
+<td>No short description for property $tag_on_defs</td>
 </tr>
 </tbody>
 </table></div>
@@ -432,7 +432,7 @@
 </div>
 <div class="package-contents">
 <a name="classes/Tools/Media.php" id="classes/Tools/Media.php"></a><h3>
-<i class="icon-file"></i>classes/Tools/Media.php<small style="float: right;padding-right: 10px;">6</small>
+<i class="icon-file"></i>classes/Tools/Media.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -440,38 +440,11 @@
 <th>Line</th>
 <th>Description</th>
 </tr></thead>
-<tbody>
-<tr class="error">
+<tbody><tr class="error">
 <td>error</td>
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Tools/Media.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>86</td>
-<td>Name of argument $app does not match with the DocBlock's name $file in eightpack_exec()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>86</td>
-<td>Name of argument $source_file does not match with the DocBlock's name $prefix in eightpack_exec()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>86</td>
-<td>Argument $dest_file is missing from the Docblock of eightpack_exec()</td>
-</tr>
-<tr class="notice">
-<td>notice</td>
-<td>86</td>
-<td>Parameter $file could not be found in eightpack_exec()</td>
-</tr>
-<tr class="notice">
-<td>notice</td>
-<td>86</td>
-<td>Parameter $prefix could not be found in eightpack_exec()</td>
-</tr>
-</tbody>
+</tr></tbody>
 </table></div>
 </div>
 <div class="package-contents">
@@ -564,7 +537,7 @@
 </div>
 <div class="package-contents">
 <a name="classes/Controller/Translations.php" id="classes/Controller/Translations.php"></a><h3>
-<i class="icon-file"></i>classes/Controller/Translations.php<small style="float: right;padding-right: 10px;">14</small>
+<i class="icon-file"></i>classes/Controller/Translations.php<small style="float: right;padding-right: 10px;">13</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -596,51 +569,46 @@
 <tr class="error">
 <td>error</td>
 <td>9</td>
-<td>No DocBlock was found for property $ext</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>11</td>
 <td>No DocBlock was found for property $translations</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>13</td>
+<td>11</td>
 <td>No DocBlock was found for method before()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>19</td>
+<td>17</td>
 <td>No DocBlock was found for method action_index()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>26</td>
+<td>24</td>
 <td>No DocBlock was found for method action_update()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>47</td>
+<td>45</td>
 <td>No DocBlock was found for method action_parse_sources()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>53</td>
+<td>51</td>
 <td>No DocBlock was found for method action_compile_translations()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>59</td>
+<td>57</td>
 <td>No DocBlock was found for method parse_translations()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>104</td>
+<td>102</td>
 <td>No DocBlock was found for method get_translations()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>132</td>
+<td>130</td>
 <td>No DocBlock was found for method save_translation()</td>
 </tr>
 </tbody>
@@ -661,6 +629,65 @@
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Controller/Base/Core.php</td>
 </tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="classes/Controller/API.php" id="classes/Controller/API.php"></a><h3>
+<i class="icon-file"></i>classes/Controller/API.php<small style="float: right;padding-right: 10px;">9</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>0</td>
+<td>No page-level DocBlock was found in file classes/Controller/API.php</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>18</td>
+<td>No short description for property $template</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>22</td>
+<td>No short description for property $layout</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>26</td>
+<td>No short description for property $auto_render</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>30</td>
+<td>No short description for property $check_access</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>34</td>
+<td>No short description for property $ajax_auto_partial</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $responce_type</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>53</td>
+<td>No short description for method before()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>76</td>
+<td>No short description for method after()</td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div class="package-contents">
@@ -774,22 +801,22 @@
 </tr>
 <tr class="error">
 <td>error</td>
-<td>81</td>
+<td>82</td>
 <td>No DocBlock was found for method validate_login()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>93</td>
+<td>94</td>
 <td>No DocBlock was found for method registration_rules()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>104</td>
+<td>105</td>
 <td>No DocBlock was found for method before_save()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>110</td>
+<td>111</td>
 <td>No DocBlock was found for method register()</td>
 </tr>
 </tbody>
@@ -854,8 +881,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="classes/File.php" id="classes/File.php"></a><h3>
-<i class="icon-file"></i>classes/File.php<small style="float: right;padding-right: 10px;">3</small>
+<a name="classes/HTML.php" id="classes/HTML.php"></a><h3>
+<i class="icon-file"></i>classes/HTML.php<small style="float: right;padding-right: 10px;">2</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -867,19 +894,31 @@
 <tr class="error">
 <td>error</td>
 <td>0</td>
-<td>No page-level DocBlock was found in file classes/File.php</td>
+<td>No page-level DocBlock was found in file classes/HTML.php</td>
 </tr>
-<tr class="error">
-<td>error</td>
-<td>16</td>
-<td>Name of argument $replacement does not match with the DocBlock's name $replacment in sed()</td>
-</tr>
-<tr class="notice">
-<td>notice</td>
-<td>16</td>
-<td>Parameter $replacment could not be found in sed()</td>
+<tr class="critical">
+<td>critical</td>
+<td>2</td>
+<td>No short description for class \HTML</td>
 </tr>
 </tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="classes/File.php" id="classes/File.php"></a><h3>
+<i class="icon-file"></i>classes/File.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>0</td>
+<td>No page-level DocBlock was found in file classes/File.php</td>
+</tr></tbody>
 </table></div>
 </div>
 <div class="package-contents">
@@ -901,7 +940,7 @@
 </div>
 <div class="package-contents">
 <a name="classes/Admin/Modules.php" id="classes/Admin/Modules.php"></a><h3>
-<i class="icon-file"></i>classes/Admin/Modules.php<small style="float: right;padding-right: 10px;">4</small>
+<i class="icon-file"></i>classes/Admin/Modules.php<small style="float: right;padding-right: 10px;">2</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -915,20 +954,10 @@
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Admin/Modules.php</td>
 </tr>
-<tr class="error">
-<td>error</td>
+<tr class="critical">
+<td>critical</td>
 <td>16</td>
-<td>No DocBlock was found for property $_modules</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>18</td>
-<td>No DocBlock was found for method register()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>23</td>
-<td>No DocBlock was found for method modules()</td>
+<td>No short description for property $_modules</td>
 </tr>
 </tbody>
 </table></div>
@@ -1163,7 +1192,7 @@
 </div>
 <div class="package-contents">
 <a name="classes/Base/Acl.php" id="classes/Base/Acl.php"></a><h3>
-<i class="icon-file"></i>classes/Base/Acl.php<small style="float: right;padding-right: 10px;">3</small>
+<i class="icon-file"></i>classes/Base/Acl.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -1171,23 +1200,11 @@
 <th>Line</th>
 <th>Description</th>
 </tr></thead>
-<tbody>
-<tr class="error">
+<tbody><tr class="error">
 <td>error</td>
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Base/Acl.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>16</td>
-<td>Name of argument $request_structure does not match with the DocBlock's name $core in allowed()</td>
-</tr>
-<tr class="notice">
-<td>notice</td>
-<td>16</td>
-<td>Parameter $core could not be found in allowed()</td>
-</tr>
-</tbody>
+</tr></tbody>
 </table></div>
 </div>
 <div class="package-contents">
@@ -1226,7 +1243,7 @@
 </div>
 <div class="package-contents">
 <a name="classes/Base/Db/Sanitize.php" id="classes/Base/Db/Sanitize.php"></a><h3>
-<i class="icon-file"></i>classes/Base/Db/Sanitize.php<small style="float: right;padding-right: 10px;">3</small>
+<i class="icon-file"></i>classes/Base/Db/Sanitize.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -1234,23 +1251,11 @@
 <th>Line</th>
 <th>Description</th>
 </tr></thead>
-<tbody>
-<tr class="error">
+<tbody><tr class="error">
 <td>error</td>
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Base/Db/Sanitize.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>48</td>
-<td>Argument $format is missing from the Docblock of date()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>61</td>
-<td>Argument $alias is missing from the Docblock of value()</td>
-</tr>
-</tbody>
+</tr></tbody>
 </table></div>
 </div>
 <div class="package-contents">
@@ -1314,6 +1319,35 @@
 <td>error</td>
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Base/Db/Exception/UnknownRelation.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $message</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $code</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="classes/Base/Db/Exception/LoadedModel.php" id="classes/Base/Db/Exception/LoadedModel.php"></a><h3>
+<i class="icon-file"></i>classes/Base/Db/Exception/LoadedModel.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>0</td>
+<td>No page-level DocBlock was found in file classes/Base/Db/Exception/LoadedModel.php</td>
 </tr>
 <tr class="error">
 <td>error</td>
@@ -1518,10 +1552,10 @@
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Base/Language.php</td>
 </tr>
-<tr class="error">
-<td>error</td>
+<tr class="critical">
+<td>critical</td>
 <td>16</td>
-<td>No DocBlock was found for property $lang_codes</td>
+<td>No short description for property $lang_codes</td>
 </tr>
 </tbody>
 </table></div>
@@ -1552,7 +1586,7 @@
 </div>
 <div class="package-contents">
 <a name="classes/Base/Media.php" id="classes/Base/Media.php"></a><h3>
-<i class="icon-file"></i>classes/Base/Media.php<small style="float: right;padding-right: 10px;">2</small>
+<i class="icon-file"></i>classes/Base/Media.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -1560,18 +1594,11 @@
 <th>Line</th>
 <th>Description</th>
 </tr></thead>
-<tbody>
-<tr class="error">
+<tbody><tr class="error">
 <td>error</td>
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Base/Media.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>248</td>
-<td>Argument $files is missing from the Docblock of append_script()</td>
-</tr>
-</tbody>
+</tr></tbody>
 </table></div>
 </div>
 <div class="package-contents">
@@ -1590,10 +1617,10 @@
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Base/Model.php</td>
 </tr>
-<tr class="error">
-<td>error</td>
-<td>488</td>
-<td>The type hint of the argument is incorrect for the type definition of the @param tag with argument $obj in obj_to_array()</td>
+<tr class="critical">
+<td>critical</td>
+<td>184</td>
+<td>No short description for property $_loaded</td>
 </tr>
 </tbody>
 </table></div>
@@ -1617,7 +1644,7 @@
 </div>
 <div class="package-contents">
 <a name="classes/Request.php" id="classes/Request.php"></a><h3>
-<i class="icon-file"></i>classes/Request.php<small style="float: right;padding-right: 10px;">2</small>
+<i class="icon-file"></i>classes/Request.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -1625,18 +1652,11 @@
 <th>Line</th>
 <th>Description</th>
 </tr></thead>
-<tbody>
-<tr class="error">
+<tbody><tr class="error">
 <td>error</td>
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Request.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>18</td>
-<td>The type hint of the argument is incorrect for the type definition of the @param tag with argument $request in process()</td>
-</tr>
-</tbody>
+</tr></tbody>
 </table></div>
 </div>
 <div class="package-contents">
@@ -1658,7 +1678,7 @@
 </div>
 <div class="package-contents">
 <a name="classes/Media.php" id="classes/Media.php"></a><h3>
-<i class="icon-file"></i>classes/Media.php<small style="float: right;padding-right: 10px;">1</small>
+<i class="icon-file"></i>classes/Media.php<small style="float: right;padding-right: 10px;">4</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -1666,16 +1686,33 @@
 <th>Line</th>
 <th>Description</th>
 </tr></thead>
-<tbody><tr class="error">
+<tbody>
+<tr class="error">
 <td>error</td>
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Media.php</td>
-</tr></tbody>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>23</td>
+<td>No short description for method __callStatic()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>23</td>
+<td>Argument $name is missing from the Docblock of __callStatic()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>23</td>
+<td>Argument $arguments is missing from the Docblock of __callStatic()</td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div class="package-contents">
 <a name="classes/Num.php" id="classes/Num.php"></a><h3>
-<i class="icon-file"></i>classes/Num.php<small style="float: right;padding-right: 10px;">1</small>
+<i class="icon-file"></i>classes/Num.php<small style="float: right;padding-right: 10px;">2</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -1683,11 +1720,18 @@
 <th>Line</th>
 <th>Description</th>
 </tr></thead>
-<tbody><tr class="error">
+<tbody>
+<tr class="error">
 <td>error</td>
 <td>0</td>
 <td>No page-level DocBlock was found in file classes/Num.php</td>
-</tr></tbody>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>2</td>
+<td>Cannot have a @subpackage when a @package tag is not present</td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div class="package-contents">
@@ -1713,12 +1757,12 @@
 </tr>
 <tr class="error">
 <td>error</td>
-<td>37</td>
+<td>38</td>
 <td>No DocBlock was found for method _print()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>86</td>
+<td>87</td>
 <td>No DocBlock was found for method get_view_file()</td>
 </tr>
 </tbody>
@@ -1780,7 +1824,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-01-20T11:01:31+02:00.<br></footer></div>
+            generated on 2013-02-02T16:32:43+02:00.<br></footer></div>
 </div>
 </body>
 </html>

@@ -72,7 +72,7 @@ class Tools_Media extends Tools {
     * @param $file string file name
     * @param $prefix string prefix for minimized file if null rewrites origin
     * @access public
-    * @return void
+    * @return bool
     */
     protected function minimize($file, $prefix = 'min')
     {
@@ -84,13 +84,17 @@ class Tools_Media extends Tools {
     }
 
     /**
-    * execute console application and write changes to the file
-    *
-    * @param $file string file name
-    * @param $prefix string prefix for minimized file if null rewrites origin
-    * @access public
-    * @return void
-    */
+     * execute console application and write changes to the file
+     *
+     * @param $app
+     * @param $source_file
+     * @param null $dest_file
+     * @throws Exception_Tools
+     * @internal param string $file file name
+     * @internal param string $prefix prefix for minimized file if null rewrites origin
+     * @access public
+     * @return void
+     */
     private function eightpack_exec($app, $source_file, $dest_file = NULL)
     {
       $ok = $this->exec(self::config("eightpack.$app")." $source_file");
@@ -112,7 +116,7 @@ class Tools_Media extends Tools {
     * @param $file string file name
     * @param $prefix string prefix to skip file (minimized not need to format)
     * @access public
-    * @return void
+    * @return bool
     */
     protected function beautify($file, $prefix = 'min')
     {

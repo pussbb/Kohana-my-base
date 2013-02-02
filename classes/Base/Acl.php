@@ -16,7 +16,8 @@ class Base_Acl extends Singleton{
     /**
      * Checks if user allowed to view this page
      *
-     * @param $core (object) instance of Core template
+     * @param $request_structure
+     * @internal param $core (object) instance of Core template
      * @return bool on success returns TRUE otherwise FALSE
      */
     public function allowed($request_structure)

@@ -70,12 +70,13 @@ class Pretty_Form extends Singleton
      * gives availability to call methods from this jbject and Kohana_Form
      * @param $name
      * @param $arguments
+     * @throws Exception
      * @return mixed
      */
     public function __call($name, $arguments)
     {
         if (method_exists($this, $name))
-            return;
+            return call_user_func_array(array($this, $name), $arguments);;
         //call_user_func_array($this, $name, $arguments);
         if (method_exists('Form', $name))
             return call_user_func_array('Form::' . $name, $arguments);
@@ -307,7 +308,7 @@ class Pretty_Form extends Singleton
     public function general_error()
     {
         if ( ! $this->error('general'))
-            return;
+            return NULL;
         return $this->render_template('general', array('name' => 'general'));
     }
 

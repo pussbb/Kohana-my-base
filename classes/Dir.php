@@ -15,6 +15,7 @@ class Dir {
 
     /**
      * checks if dir exists and if not creates it(can create '/dir1/dir2')
+     *
      * @param $dir string
      * @access public
      * @static
@@ -32,6 +33,7 @@ class Dir {
 
     /**
      * removes dir and content
+     *
      * @param $dir string
      * @param $self bool
      * @access public
@@ -59,9 +61,10 @@ class Dir {
 
 
     /**
-     * returns founded files in directory recursivly
+     * returns founded files in directory recursively
+     *
      * @param $dir string
-     * @param $condition string file extention or regexpr
+     * @param $condition string file extension or regexpr
      * @param $array array|NULL
      * @return array|null
      */
@@ -92,7 +95,8 @@ class Dir {
     }
 
     /**
-     * returns founded directories in directory recursivly
+     * returns founded directories in directory recursively
+     *
      * @param $dir string
      * @param $names_only bool relative path or just a folder name
      * @return array|null
@@ -120,6 +124,7 @@ class Dir {
 
     /**
      * returns directory listing
+     *
      * @param $dir string
      * @return array|null
      */

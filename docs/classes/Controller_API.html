@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title><b>Kohana</b><i>My</i> Base » \Controller_Base_Core</title>
+<title><b>Kohana</b><i>My</i> Base » \Controller_API</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -60,55 +60,56 @@
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
 <li class="method public "><a href="#method_after" title="after :: final function of the template"><span class="description">final function of the template</span><pre>after()</pre></a></li>
-<li class="method public "><a href="#method_append_css" title="append_css :: append css file"><span class="description">append css file</span><pre>append_css()</pre></a></li>
-<li class="method public "><a href="#method_append_js" title="append_js :: append javascript file"><span class="description">append javascript file</span><pre>append_js()</pre></a></li>
-<li class="method public "><a href="#method_append_media" title="append_media :: try to append css and js for file"><span class="description">try to append css and js for file</span><pre>append_media()</pre></a></li>
+<li class="method public inherited"><a href="#method_append_css" title="append_css :: append css file"><span class="description">append css file</span><pre>append_css()</pre></a></li>
+<li class="method public inherited"><a href="#method_append_js" title="append_js :: append javascript file"><span class="description">append javascript file</span><pre>append_js()</pre></a></li>
+<li class="method public inherited"><a href="#method_append_media" title="append_media :: try to append css and js for file"><span class="description">try to append css and js for file</span><pre>append_media()</pre></a></li>
 <li class="method public "><a href="#method_before" title="before :: init base template and this"><span class="description">init base template and this</span><pre>before()</pre></a></li>
-<li class="method public "><a href="#method_current_request_structure" title="current_request_structure :: returns request in array(dir, controller, action)"><span class="description">returns request in array(dir, controller, action)</span><pre>current_request_structure()</pre></a></li>
-<li class="method public "><a href="#method_is_ajax" title="is_ajax :: checks if request is ajax"><span class="description">checks if request is ajax</span><pre>is_ajax()</pre></a></li>
-<li class="method public "><a href="#method_is_delete" title="is_delete :: checks if request method is DELETE"><span class="description">checks if request method is DELETE</span><pre>is_delete()</pre></a></li>
-<li class="method public "><a href="#method_is_get" title="is_get :: checks if request method is GET"><span class="description">checks if request method is GET</span><pre>is_get()</pre></a></li>
-<li class="method public "><a href="#method_is_post" title="is_post :: checks if request method is POST"><span class="description">checks if request method is POST</span><pre>is_post()</pre></a></li>
-<li class="method public "><a href="#method_is_put" title="is_put :: checks if request method is PUT"><span class="description">checks if request method is PUT</span><pre>is_put()</pre></a></li>
-<li class="method public "><a href="#method_redirect" title="redirect :: redirects to url without rendering anything"><span class="description">redirects to url without rendering anything</span><pre>redirect()</pre></a></li>
-<li class="method public "><a href="#method_render_json" title="render_json :: send response as json response"><span class="description">send response as json response</span><pre>render_json()</pre></a></li>
-<li class="method public "><a href="#method_render_nothing" title="render_nothing :: renders nothing"><span class="description">renders nothing</span><pre>render_nothing()</pre></a></li>
-<li class="method public "><a href="#method_render_partial" title="render_partial :: renders only view file name without template"><span class="description">renders only view file name without template</span><pre>render_partial()</pre></a></li>
-<li class="method public "><a href="#method_set_description" title="set_description :: sets description for current page"><span class="description">sets description for current page</span><pre>set_description()</pre></a></li>
-<li class="method public "><a href="#method_set_favicon" title="set_favicon :: sets favicon"><span class="description">sets favicon</span><pre>set_favicon()</pre></a></li>
-<li class="method public "><a href="#method_set_filename" title="set_filename :: sets current file name wich will be render"><span class="description">sets current file name wich will be render</span><pre>set_filename()</pre></a></li>
-<li class="method public "><a href="#method_set_keywords" title="set_keywords :: set keywords for page"><span class="description">set keywords for page</span><pre>set_keywords()</pre></a></li>
-<li class="method public "><a href="#method_set_layout" title="set_layout :: set layout name"><span class="description">set layout name</span><pre>set_layout()</pre></a></li>
-<li class="method public "><a href="#method_set_title" title="set_title :: sets title for current page"><span class="description">sets title for current page</span><pre>set_title()</pre></a></li>
+<li class="method public inherited"><a href="#method_current_request_structure" title="current_request_structure :: returns request in array(dir, controller, action)"><span class="description">returns request in array(dir, controller, action)</span><pre>current_request_structure()</pre></a></li>
+<li class="method public inherited"><a href="#method_is_ajax" title="is_ajax :: checks if request is ajax"><span class="description">checks if request is ajax</span><pre>is_ajax()</pre></a></li>
+<li class="method public inherited"><a href="#method_is_delete" title="is_delete :: checks if request method is DELETE"><span class="description">checks if request method is DELETE</span><pre>is_delete()</pre></a></li>
+<li class="method public inherited"><a href="#method_is_get" title="is_get :: checks if request method is GET"><span class="description">checks if request method is GET</span><pre>is_get()</pre></a></li>
+<li class="method public inherited"><a href="#method_is_post" title="is_post :: checks if request method is POST"><span class="description">checks if request method is POST</span><pre>is_post()</pre></a></li>
+<li class="method public inherited"><a href="#method_is_put" title="is_put :: checks if request method is PUT"><span class="description">checks if request method is PUT</span><pre>is_put()</pre></a></li>
+<li class="method public inherited"><a href="#method_redirect" title="redirect :: redirects to url without rendering anything"><span class="description">redirects to url without rendering anything</span><pre>redirect()</pre></a></li>
+<li class="method public inherited"><a href="#method_render_json" title="render_json :: send response as json response"><span class="description">send response as json response</span><pre>render_json()</pre></a></li>
+<li class="method public inherited"><a href="#method_render_nothing" title="render_nothing :: renders nothing"><span class="description">renders nothing</span><pre>render_nothing()</pre></a></li>
+<li class="method public inherited"><a href="#method_render_partial" title="render_partial :: renders only view file name without template"><span class="description">renders only view file name without template</span><pre>render_partial()</pre></a></li>
+<li class="method public inherited"><a href="#method_set_description" title="set_description :: sets description for current page"><span class="description">sets description for current page</span><pre>set_description()</pre></a></li>
+<li class="method public inherited"><a href="#method_set_favicon" title="set_favicon :: sets favicon"><span class="description">sets favicon</span><pre>set_favicon()</pre></a></li>
+<li class="method public inherited"><a href="#method_set_filename" title="set_filename :: sets current file name wich will be render"><span class="description">sets current file name wich will be render</span><pre>set_filename()</pre></a></li>
+<li class="method public inherited"><a href="#method_set_keywords" title="set_keywords :: set keywords for page"><span class="description">set keywords for page</span><pre>set_keywords()</pre></a></li>
+<li class="method public inherited"><a href="#method_set_layout" title="set_layout :: set layout name"><span class="description">set layout name</span><pre>set_layout()</pre></a></li>
+<li class="method public inherited"><a href="#method_set_title" title="set_title :: sets title for current page"><span class="description">sets title for current page</span><pre>set_title()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
-<li class="method protected "><a href="#method_check_access" title="check_access :: check access for current request"><span class="description">check access for current request</span><pre>check_access()</pre></a></li>
-<li class="method protected "><a href="#method_dynamic_properties" title="dynamic_properties :: append to view and tempalate dynamically append variable from $this"><span class="description">append to view and tempalate dynamically append variable from $this</span><pre>dynamic_properties()</pre></a></li>
-<li class="method protected "><a href="#method_set_language" title="set_language :: sets language by default"><span class="description">sets language by default</span><pre>set_language()</pre></a></li>
-<li class="method protected "><a href="#method_set_view_filename" title="set_view_filename :: finally set the view filename (not possible to change back)"><span class="description">finally set the view filename (not possible to change back)</span><pre>set_view_filename()</pre></a></li>
+<li class="method protected inherited"><a href="#method_check_access" title="check_access :: check access for current request"><span class="description">check access for current request</span><pre>check_access()</pre></a></li>
+<li class="method protected inherited"><a href="#method_dynamic_properties" title="dynamic_properties :: append to view and tempalate dynamically append variable from $this"><span class="description">append to view and tempalate dynamically append variable from $this</span><pre>dynamic_properties()</pre></a></li>
+<li class="method protected inherited"><a href="#method_set_language" title="set_language :: sets language by default"><span class="description">sets language by default</span><pre>set_language()</pre></a></li>
+<li class="method protected inherited"><a href="#method_set_view_filename" title="set_view_filename :: finally set the view filename (not possible to change back)"><span class="description">finally set the view filename (not possible to change back)</span><pre>set_view_filename()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
                     <ul>
-<li class="method private "><a href="#method__safety_render" title="_safety_render :: disable template render and call final method of parent class"><span class="description">disable template render and call final method of parent class</span><pre>_safety_render()</pre></a></li>
-<li class="method private "><a href="#method_config_item" title="config_item :: get config item"><span class="description">get config item</span><pre>config_item()</pre></a></li>
-<li class="method private "><a href="#method_media_by_default" title="media_by_default :: register css and js for current request structure"><span class="description">register css and js for current request structure</span><pre>media_by_default()</pre></a></li>
+<li class="method private inherited"><a href="#method__safety_render" title="_safety_render :: disable template render and call final method of parent class"><span class="description">disable template render and call final method of parent class</span><pre>_safety_render()</pre></a></li>
+<li class="method private inherited"><a href="#method_config_item" title="config_item :: get config item"><span class="description">get config item</span><pre>config_item()</pre></a></li>
+<li class="method private inherited"><a href="#method_media_by_default" title="media_by_default :: register css and js for current request structure"><span class="description">register css and js for current request structure</span><pre>media_by_default()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
                     <ul>
+<li class="property public "><a href="#property_auto_render" title="$auto_render :: "><span class="description"></span><pre>$auto_render</pre></a></li>
 <li class="property public "><a href="#property_template" title="$template :: base template file"><span class="description"></span><pre>$template</pre></a></li>
-<li class="property public "><a href="#property_view" title="$view :: Kohana View object"><span class="description"></span><pre>$view</pre></a></li>
+<li class="property public inherited"><a href="#property_view" title="$view :: Kohana View object"><span class="description"></span><pre>$view</pre></a></li>
 </ul>
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
 <li class="property protected "><a href="#property_ajax_auto_partial" title="$ajax_auto_partial :: if request is XMLHttpRequest and controller whants to render view
 if this option enabled it will render only view."><span class="description"></span><pre>$ajax_auto_partial</pre></a></li>
-<li class="property protected "><a href="#property_bundles" title="$bundles :: for children it's recommended to change this prefixes
+<li class="property protected inherited"><a href="#property_bundles" title="$bundles :: for children it's recommended to change this prefixes
 if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="description"></span><pre>$bundles</pre></a></li>
 <li class="property protected "><a href="#property_check_access" title="$check_access :: check Acl access (true means do the check)"><span class="description"></span><pre>$check_access</pre></a></li>
 <li class="property protected "><a href="#property_layout" title="$layout :: set layout name"><span class="description"></span><pre>$layout</pre></a></li>
@@ -116,24 +117,32 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 </li>
 <li class="nav-header private">» Private
                     <ul>
-<li class="property private "><a href="#property_config" title="$config :: array with settings from config 'site.php'"><span class="description"></span><pre>$config</pre></a></li>
-<li class="property private "><a href="#property_filename" title="$filename :: set view file name wich will be rendered in template section 'content'"><span class="description"></span><pre>$filename</pre></a></li>
+<li class="property private inherited"><a href="#property_config" title="$config :: array with settings from config 'site.php'"><span class="description"></span><pre>$config</pre></a></li>
+<li class="property private inherited"><a href="#property_filename" title="$filename :: set view file name wich will be rendered in template section 'content'"><span class="description"></span><pre>$filename</pre></a></li>
+<li class="property private "><a href="#property_responce_type" title="$responce_type :: "><span class="description"></span><pre>$responce_type</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  "><a href="#constant_JSON_FORMAT" title="JSON_FORMAT :: json format key"><span class="description">json format key</span><pre>JSON_FORMAT</pre></a></li>
+<li class="constant  "><a href="#constant_XML_FORMAT" title="XML_FORMAT :: xml format key"><span class="description">xml format key</span><pre>XML_FORMAT</pre></a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="span8">
-<a id="\Controller_Base_Core"></a><ul class="breadcrumb">
+<a id="\Controller_API"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/global.html">global</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/Controller_Base_Core.html">Controller_Base_Core</a>
+<span class="divider">\</span><a href="../classes/Controller_API.html">Controller_API</a>
 </li>
 </ul>
 <div class="element class">
-<p class="short_description">Core template wich extends functionality of Controller_Template</p>
+<p class="short_description">API template</p>
 <div class="details">
 <div class="long_description"></div>
 <table class="table table-bordered">
@@ -174,18 +183,23 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
+<th><code>\Kohana_Kohana_Exception</code></th>
+<td></td>
 </tr></table>
 </div></div>
 </div>
 <a id="method_append_css"></a><div class="element clickable method public method_append_css" data-toggle="collapse" data-target=".method_append_css .collapse">
 <h2>append css file</h2>
 <pre>append_css($name, string $media) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::append_css()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$name</h4></div>
 <div class="subelement argument">
@@ -197,9 +211,13 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_append_js"></a><div class="element clickable method public method_append_js" data-toggle="collapse" data-target=".method_append_js .collapse">
 <h2>append javascript file</h2>
 <pre>append_js($name) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::append_js()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$name</h4></div>
 </div></div>
@@ -207,7 +225,7 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_append_media"></a><div class="element clickable method public method_append_media" data-toggle="collapse" data-target=".method_append_media .collapse">
 <h2>try to append css and js for file</h2>
 <pre>append_media($file_name, null $media, bool $check_file) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><pre><code> $this->add_media('welcome.index');
 </code></pre>
@@ -215,6 +233,10 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <p>will append
 ./css/welcome.index.css
 ./js/welcome.index.js</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::append_media()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$file_name</h4></div>
 <div class="subelement argument">
@@ -231,14 +253,25 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <h2>init base template and this</h2>
 <pre>before() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code>\HTTP_Exception_403</code></th>
+<td></td>
+</tr></table>
+</div></div>
 </div>
 <a id="method_current_request_structure"></a><div class="element clickable method public method_current_request_structure" data-toggle="collapse" data-target=".method_current_request_structure .collapse">
 <h2>returns request in array(dir, controller, action)</h2>
 <pre>current_request_structure() : array</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::current_request_structure()</td>
+</tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
@@ -246,13 +279,19 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_is_ajax"></a><div class="element clickable method public method_is_ajax" data-toggle="collapse" data-target=".method_is_ajax .collapse">
 <h2>checks if request is ajax</h2>
 <pre>is_ajax() : mixed</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::is_ajax()</td>
+</tr>
+</table>
 <h3>Returns</h3>
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
@@ -260,13 +299,19 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_is_delete"></a><div class="element clickable method public method_is_delete" data-toggle="collapse" data-target=".method_is_delete .collapse">
 <h2>checks if request method is DELETE</h2>
 <pre>is_delete() : bool</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::is_delete()</td>
+</tr>
+</table>
 <h3>Returns</h3>
 <div class="subelement response"><code>bool</code></div>
 </div></div>
@@ -274,13 +319,19 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_is_get"></a><div class="element clickable method public method_is_get" data-toggle="collapse" data-target=".method_is_get .collapse">
 <h2>checks if request method is GET</h2>
 <pre>is_get() : bool</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::is_get()</td>
+</tr>
+</table>
 <h3>Returns</h3>
 <div class="subelement response"><code>bool</code></div>
 </div></div>
@@ -288,13 +339,19 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_is_post"></a><div class="element clickable method public method_is_post" data-toggle="collapse" data-target=".method_is_post .collapse">
 <h2>checks if request method is POST</h2>
 <pre>is_post() : bool</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::is_post()</td>
+</tr>
+</table>
 <h3>Returns</h3>
 <div class="subelement response"><code>bool</code></div>
 </div></div>
@@ -302,13 +359,19 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_is_put"></a><div class="element clickable method public method_is_put" data-toggle="collapse" data-target=".method_is_put .collapse">
 <h2>checks if request method is PUT</h2>
 <pre>is_put() : bool</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::is_put()</td>
+</tr>
+</table>
 <h3>Returns</h3>
 <div class="subelement response"><code>bool</code></div>
 </div></div>
@@ -316,9 +379,15 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_redirect"></a><div class="element clickable method public method_redirect" data-toggle="collapse" data-target=".method_redirect .collapse">
 <h2>redirects to url without rendering anything</h2>
 <pre>redirect($url, int $code) </pre>
-<div class="labels"><span class="label">Static</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::redirect()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$url</h4></div>
 <div class="subelement argument">
@@ -330,9 +399,13 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_render_json"></a><div class="element clickable method public method_render_json" data-toggle="collapse" data-target=".method_render_json .collapse">
 <h2>send response as json response</h2>
 <pre>render_json($data) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::render_json()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$data</h4></div>
 </div></div>
@@ -340,15 +413,25 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_render_nothing"></a><div class="element clickable method public method_render_nothing" data-toggle="collapse" data-target=".method_render_nothing .collapse">
 <h2>renders nothing</h2>
 <pre>render_nothing() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::render_nothing()</td>
+</tr></table>
+</div></div>
 </div>
 <a id="method_render_partial"></a><div class="element clickable method public method_render_partial" data-toggle="collapse" data-target=".method_render_partial .collapse">
 <h2>renders only view file name without template</h2>
 <pre>render_partial(string $file, array $view_data) : mixed</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::render_partial()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$file</h4>
@@ -365,9 +448,13 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_set_description"></a><div class="element clickable method public method_set_description" data-toggle="collapse" data-target=".method_set_description .collapse">
 <h2>sets description for current page</h2>
 <pre>set_description($description) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::set_description()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$description</h4></div>
 </div></div>
@@ -375,9 +462,13 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_set_favicon"></a><div class="element clickable method public method_set_favicon" data-toggle="collapse" data-target=".method_set_favicon .collapse">
 <h2>sets favicon</h2>
 <pre>set_favicon($icon_name) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::set_favicon()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$icon_name</h4></div>
 </div></div>
@@ -385,9 +476,13 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_set_filename"></a><div class="element clickable method public method_set_filename" data-toggle="collapse" data-target=".method_set_filename .collapse">
 <h2>sets current file name wich will be render</h2>
 <pre>set_filename($filename) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::set_filename()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$filename</h4></div>
 </div></div>
@@ -395,9 +490,13 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_set_keywords"></a><div class="element clickable method public method_set_keywords" data-toggle="collapse" data-target=".method_set_keywords .collapse">
 <h2>set keywords for page</h2>
 <pre>set_keywords($keywords) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::set_keywords()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$keywords</h4></div>
 </div></div>
@@ -405,13 +504,19 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_set_layout"></a><div class="element clickable method public method_set_layout" data-toggle="collapse" data-target=".method_set_layout .collapse">
 <h2>set layout name</h2>
 <pre>set_layout(string $name) : void</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::set_layout()</td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$name</h4>
@@ -424,9 +529,13 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_set_title"></a><div class="element clickable method public method_set_title" data-toggle="collapse" data-target=".method_set_title .collapse">
 <h2>sets title for current page</h2>
 <pre>set_title($title) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::set_title()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$title</h4></div>
 </div></div>
@@ -434,9 +543,13 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_check_access"></a><div class="element clickable method protected method_check_access" data-toggle="collapse" data-target=".method_check_access .collapse">
 <h2>check access for current request</h2>
 <pre>check_access() </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::check_access()</td>
+</tr></table>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
 <th><code>\HTTP_Exception_403</code></th>
@@ -447,13 +560,19 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_dynamic_properties"></a><div class="element clickable method protected method_dynamic_properties" data-toggle="collapse" data-target=".method_dynamic_properties .collapse">
 <h2>append to view and tempalate dynamically append variable from $this</h2>
 <pre>dynamic_properties(array $filter) : array</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>protected</td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::dynamic_properties()</td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$filter</h4>
@@ -466,45 +585,67 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_set_language"></a><div class="element clickable method protected method_set_language" data-toggle="collapse" data-target=".method_set_language .collapse">
 <h2>sets language by default</h2>
 <pre>set_language() : void</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>protected</td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::set_language()</td>
+</tr>
+</table>
 </div></div>
 </div>
 <a id="method_set_view_filename"></a><div class="element clickable method protected method_set_view_filename" data-toggle="collapse" data-target=".method_set_view_filename .collapse">
 <h2>finally set the view filename (not possible to change back)</h2>
 <pre>set_view_filename() : void</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>protected</td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::set_view_filename()</td>
+</tr>
+</table>
 </div></div>
 </div>
 <a id="method__safety_render"></a><div class="element clickable method private method__safety_render" data-toggle="collapse" data-target=".method__safety_render .collapse">
 <h2>disable template render and call final method of parent class</h2>
 <pre>_safety_render() : void</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>private</td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::_safety_render()</td>
+</tr>
+</table>
 </div></div>
 </div>
 <a id="method_config_item"></a><div class="element clickable method private method_config_item" data-toggle="collapse" data-target=".method_config_item .collapse">
 <h2>get config item</h2>
 <pre>config_item($key, $defualt) : mixed</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::config_item()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$key</h4><p>string see Arr::path $key param</p>
@@ -519,30 +660,48 @@ if needed IN CONSTRUCTOR (to not damage changes in parent class)"><span class="d
 <a id="method_media_by_default"></a><div class="element clickable method private method_media_by_default" data-toggle="collapse" data-target=".method_media_by_default .collapse">
 <h2>register css and js for current request structure</h2>
 <pre>media_by_default() : void</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>tries to add default files
 in format directory/controller.action.js
 and directory/controller.action.css</p></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>private</td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::media_by_default()</td>
+</tr>
+</table>
 </div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_auto_render"> </a><div class="element clickable property public property_auto_render" data-toggle="collapse" data-target=".property_auto_render .collapse">
+<h2></h2>
+<pre>$auto_render : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
 <a id="property_template"> </a><div class="element clickable property public property_template" data-toggle="collapse" data-target=".property_template .collapse">
 <h2></h2>
-<pre>$template : string</pre>
+<pre>$template : null</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"><p>but remember, in parent class it will become View object</p></div></div></div>
 </div>
 <a id="property_view"> </a><div class="element clickable property public property_view" data-toggle="collapse" data-target=".property_view .collapse">
 <h2></h2>
 <pre>$view : null</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::$$view</td>
+</tr></table>
+</div></div>
 </div>
 <a id="property_ajax_auto_partial"> </a><div class="element clickable property protected property_ajax_auto_partial" data-toggle="collapse" data-target=".property_ajax_auto_partial .collapse">
 <h2></h2>
@@ -554,8 +713,14 @@ render mode it will render with template files</p></div></div></div>
 <a id="property_bundles"> </a><div class="element clickable property protected property_bundles" data-toggle="collapse" data-target=".property_bundles .collapse">
 <h2></h2>
 <pre>$bundles : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::$$bundles</td>
+</tr></table>
+</div></div>
 </div>
 <a id="property_check_access"> </a><div class="element clickable property protected property_check_access" data-toggle="collapse" data-target=".property_check_access .collapse">
 <h2></h2>
@@ -572,12 +737,44 @@ render mode it will render with template files</p></div></div></div>
 <a id="property_config"> </a><div class="element clickable property private property_config" data-toggle="collapse" data-target=".property_config .collapse">
 <h2></h2>
 <pre>$config : null</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::$$config</td>
+</tr></table>
+</div></div>
 </div>
 <a id="property_filename"> </a><div class="element clickable property private property_filename" data-toggle="collapse" data-target=".property_filename .collapse">
 <h2></h2>
 <pre>$filename : null</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Controller_Base_Core::$$filename</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_responce_type"> </a><div class="element clickable property private property_responce_type" data-toggle="collapse" data-target=".property_responce_type .collapse">
+<h2></h2>
+<pre>$responce_type : null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_JSON_FORMAT"> </a><div class="element clickable constant  constant_JSON_FORMAT" data-toggle="collapse" data-target=".constant_JSON_FORMAT .collapse">
+<h2>json format key</h2>
+<pre>JSON_FORMAT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_XML_FORMAT"> </a><div class="element clickable constant  constant_XML_FORMAT" data-toggle="collapse" data-target=".constant_XML_FORMAT .collapse">
+<h2>xml format key</h2>
+<pre>XML_FORMAT </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>

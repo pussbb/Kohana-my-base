@@ -2,6 +2,7 @@
 
 /**
  * main class to execute some external console app
+ *
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
@@ -43,6 +44,8 @@ class Tools extends Singleton {
     /**
      * checks if function exists
      * @param $func_name string
+     * @return bool
+     * @static
      */
     public static function can_call($func_name = 'exec')
     {
@@ -52,6 +55,7 @@ class Tools extends Singleton {
      * get config item
      * @param $key string
      * @param $default string
+     * @return mixed
      * @static
      */
     public static function config($key, $default = NULL)
@@ -64,6 +68,7 @@ class Tools extends Singleton {
      * @param $cmd string
      * @param $pattern string reg expresion
      * @static
+     * @return bool
      */
     public static function app_exists($cmd, $pattern)
     {
@@ -73,6 +78,7 @@ class Tools extends Singleton {
     /**
      * run external app
      * @param $cmd string
+     * @return bool
      */
     public function exec($cmd)
     {
@@ -124,7 +130,7 @@ class Tools extends Singleton {
     public static function writable($dir)
     {
         if( ! is_writable($dir))
-            throw new Exception_Tools("You don't have permission to write in  $destination");
+            throw new Exception_Tools("You don't have permission to write in  $dir");
     }
     /**
      * returns error wich retrun external app

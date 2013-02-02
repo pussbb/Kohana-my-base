@@ -8,4 +8,3 @@ foreach($buttons as $button)
         Arr::get($button, 2)
     );
 }
-?>

@@ -17,7 +17,6 @@ class Controller_Languages extends Controller_Core {
             throw new Kohana_HTTP_Exception_403();
 
         Tools_Language::parse_source();
-        exit;
         $this->render_nothing();
     }
 }

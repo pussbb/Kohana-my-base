@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">166</span></a></li>
+                <span class="label label-info">167</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">1</span>
@@ -64,7 +64,7 @@
 <li class="method public "><a href="#method_append_inline_style" title="append_inline_style :: adds inline css"><span class="description">adds inline css</span><pre>append_inline_style()</pre></a></li>
 <li class="method public "><a href="#method_append_script" title="append_script :: add javasript file to the list"><span class="description">add javasript file to the list</span><pre>append_script()</pre></a></li>
 <li class="method public "><a href="#method_append_style" title="append_style :: add css file to the list"><span class="description">add css file to the list</span><pre>append_style()</pre></a></li>
-<li class="method public "><a href="#method_bundle" title="bundle :: Append colection of css and js files"><span class="description">Append colection of css and js files</span><pre>bundle()</pre></a></li>
+<li class="method public "><a href="#method_bundle" title="bundle :: Append collection of css and js files"><span class="description">Append collection of css and js files</span><pre>bundle()</pre></a></li>
 <li class="method public "><a href="#method_find_file" title="find_file :: function to find media file"><span class="description">function to find media file</span><pre>find_file()</pre></a></li>
 <li class="method public "><a href="#method_inline_script" title="inline_script :: return formatted string for inline javascript"><span class="description">return formatted string for inline javascript</span><pre>inline_script()</pre></a></li>
 <li class="method public "><a href="#method_inline_style" title="inline_style :: return formatted string for inline style"><span class="description">return formatted string for inline style</span><pre>inline_style()</pre></a></li>
@@ -222,7 +222,7 @@ wich need to add to the template"><span class="description"></span><pre>$styles<
 </div>
 <a id="method_append_script"></a><div class="element clickable method public method_append_script" data-toggle="collapse" data-target=".method_append_script .collapse">
 <h2>add javasript file to the list</h2>
-<pre>append_script($file_name, bool $check, $files) </pre>
+<pre>append_script($file_name, bool $check, null $files) : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>also tries to find coffee script file and compile them to js file
@@ -237,7 +237,10 @@ if needed</p></div>
 <div class="subelement argument">
 <h4>$check</h4>
 <code>bool</code><p>if TRUE first check file if its a remote it always will be FALSE</p></div>
-<div class="subelement argument"><h4>$files</h4></div>
+<div class="subelement argument">
+<h4>$files</h4>
+<code>null</code>
+</div>
 </div></div>
 </div>
 <a id="method_append_style"></a><div class="element clickable method public method_append_style" data-toggle="collapse" data-target=".method_append_style .collapse">
@@ -263,7 +266,7 @@ if needed</p></div>
 </div></div>
 </div>
 <a id="method_bundle"></a><div class="element clickable method public method_bundle" data-toggle="collapse" data-target=".method_bundle .collapse">
-<h2>Append colection of css and js files</h2>
+<h2>Append collection of css and js files</h2>
 <pre>bundle($name) : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -530,7 +533,7 @@ e.g. 'static://juery' -> 'http://static.local/js/jquery.js/'</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-01-20T11:01:31+02:00.<br></footer></div>
+            generated on 2013-02-02T16:32:43+02:00.<br></footer></div>
 </div>
 </body>
 </html>

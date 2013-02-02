@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title><b>Kohana</b><i>My</i> Base » Kohana-my-base\tools</title>
+<title><b>Kohana</b><i>My</i> Base » \Base_Db_Exception_LoadedModel</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -52,86 +52,80 @@
                         </div></noscript>
 <div class="row">
 <div class="span4">
-<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
 <button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-map-marker"></i> Packages</li>
-<li>
-<a href="../packages/Kohana-my-base.tools.html" title="tools"><i class="icon-folder-open"></i>tools</a><ul class="nav nav-list nav-packages"></ul>
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
 </li>
-<li class="nav-header">
-<i class="icon-custom icon-class"></i> Classes</li>
-<li><a href="#Tools_Language" title="Parse php files for translatable items and creates or update tr files">Tools_Language</a></li>
-<li><a href="#Tools_Less" title="Class to compile less file into css file">Tools_Less</a></li>
-<li><a href="#Tools_Coffeescript" title="Compile cafeescript into js file">Tools_Coffeescript</a></li>
-<li><a href="#Tools_Media" title="Execute some external usefull tools (beautify and minize)
-http://ariya.ofilabs.com/2011/10/javascript-tools-for-continuous-integration.html">Tools_Media</a></li>
-<li><a href="#Tools" title="main class to execute some external console app">Tools</a></li>
-<li><a href="#Exception_Tools_Missing" title="sets human readable message for external console applications">Exception_Tools_Missing</a></li>
-<li><a href="#Exception_Tools" title="sets human readable message for external console applications">Exception_Tools</a></li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_code" title="$code :: "><span class="description"></span><pre>$code</pre></a></li>
+<li class="property protected "><a href="#property_message" title="$message :: "><span class="description"></span><pre>$message</pre></a></li>
+</ul>
+</li>
 </ul>
 </div>
-<div class="span8 package-contents">
-<ul class="breadcrumb"><li>
-<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li><a href="../packages/Kohana-my-base.html">Kohana-my-base</a></li>
-<li class="active">
-<span class="divider">\</span><a href="../packages/Kohana-my-base.tools.html">tools</a>
+<div class="span8">
+<a id="\Base_Db_Exception_LoadedModel"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
-</li></ul>
-<div class="package-indent">
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Base_Db_Exception_LoadedModel.html">Base_Db_Exception_LoadedModel</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">DB Exception if model loaded</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Kohana-my-base.exception.html">Kohana-my-base</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 pussbb@gmail.com</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.gnu.org/copyleft/gpl.html">GNU GENERAL PUBLIC LICENSE v3</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>0.1.2</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/pussbb/Kohana-my-base">https://github.com/pussbb/Kohana-my-base</a></td>
+</tr>
+<tr>
+<th>category</th>
+<td>database</td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>exception</td>
+</tr>
+</table>
 <h3>
-<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
-<div id="Exception_Tools" class="element ajax clickable class">
-<h1>Exception_Tools<a href="../classes/Exception_Tools.html">¶</a>
-</h1>
-<p class="short_description">sets human readable message for external console applications</p>
-<div class="details collapse"></div>
-<a href="../classes/Exception_Tools.html" class="more">« More »</a>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_code"> </a><div class="element clickable property protected property_code" data-toggle="collapse" data-target=".property_code .collapse">
+<h2></h2>
+<pre>$code </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<div id="Exception_Tools_Missing" class="element ajax clickable class">
-<h1>Exception_Tools_Missing<a href="../classes/Exception_Tools_Missing.html">¶</a>
-</h1>
-<p class="short_description">sets human readable message for external console applications</p>
-<div class="details collapse"></div>
-<a href="../classes/Exception_Tools_Missing.html" class="more">« More »</a>
+<a id="property_message"> </a><div class="element clickable property protected property_message" data-toggle="collapse" data-target=".property_message .collapse">
+<h2></h2>
+<pre>$message </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<div id="Tools" class="element ajax clickable class">
-<h1>Tools<a href="../classes/Tools.html">¶</a>
-</h1>
-<p class="short_description">main class to execute some external console app</p>
-<div class="details collapse"></div>
-<a href="../classes/Tools.html" class="more">« More »</a>
-</div>
-<div id="Tools_Coffeescript" class="element ajax clickable class">
-<h1>Tools_Coffeescript<a href="../classes/Tools_Coffeescript.html">¶</a>
-</h1>
-<p class="short_description">Compile cafeescript into js file</p>
-<div class="details collapse"></div>
-<a href="../classes/Tools_Coffeescript.html" class="more">« More »</a>
-</div>
-<div id="Tools_Language" class="element ajax clickable class">
-<h1>Tools_Language<a href="../classes/Tools_Language.html">¶</a>
-</h1>
-<p class="short_description">Parse php files for translatable items and creates or update tr files</p>
-<div class="details collapse"></div>
-<a href="../classes/Tools_Language.html" class="more">« More »</a>
-</div>
-<div id="Tools_Less" class="element ajax clickable class">
-<h1>Tools_Less<a href="../classes/Tools_Less.html">¶</a>
-</h1>
-<p class="short_description">Class to compile less file into css file</p>
-<div class="details collapse"></div>
-<a href="../classes/Tools_Less.html" class="more">« More »</a>
-</div>
-<div id="Tools_Media" class="element ajax clickable class">
-<h1>Tools_Media<a href="../classes/Tools_Media.html">¶</a>
-</h1>
-<p class="short_description">Execute some external usefull tools (beautify and minize)
-http://ariya.ofilabs.com/2011/10/javascript-tools-for-continuous-integration.html</p>
-<div class="details collapse"></div>
-<a href="../classes/Tools_Media.html" class="more">« More »</a>
 </div>
 </div>
 </div>

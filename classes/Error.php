@@ -15,18 +15,19 @@
  class Error extends Kohana_Exception {
 
     public static $custom_view_file = NULL;
-    /**
-     * Creates a new translated exception.
-     *
-     *     throw new Kohana_Exception('Something went terrible wrong, :user',
-     *         array(':user' => $user));
-     *
-     * @param   string          $message    error message
-     * @param   array           $variables  translation variables
-     * @param   integer|string  $code       the exception code
-     * @param   Exception       $previous   Previous exception
-     * @return  void
-     */
+
+     /**
+      * Creates a new translated exception.
+      *
+      *     throw new Kohana_Exception('Something went terrible wrong, :user',
+      *         array(':user' => $user));
+      *
+      * @param   string          $message    error message
+      * @param   array           $variables  translation variables
+      * @param   integer|string  $code       the exception code
+      * @param   Exception       $previous   Previous exception
+      * @return \Error
+      */
     public function __construct($message = "", array $variables = NULL, $code = 0, Exception $previous = NULL)
     {
         if (PHP_SAPI == 'cli')
@@ -83,7 +84,7 @@
       }
     }
 
-    private static  function get_view_file($e)
+    private static function get_view_file($e)
     {
       $view_files = array(
         get_class($e).'/'. $e->getCode(),
@@ -91,6 +92,7 @@
         $e->getCode(),
         'default'
       );
+
       foreach($view_files as $view_file)
       {
           $_view_file = 'errors/'.$view_file;

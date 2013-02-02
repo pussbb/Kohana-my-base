@@ -33,6 +33,9 @@ class Base_Gettext extends Kohana_I18n {
     public static $gettext_enabled = TRUE;
     /**
      * set language
+     * @static
+     * @access public
+     * @return string
      */
     public static function lang($lang = 'en-EN')
     {
@@ -43,11 +46,12 @@ class Base_Gettext extends Kohana_I18n {
         bind_textdomain_codeset(self::$domain, self::$encoding);
         return $_lang;
     }
+
     /**
      * directory with files with translation for given lang
      * @static
      * @param $lang string lang code 'en-EN'
-     * @retun string absolute path
+     * @return string
      */
     public static function tr_path($lang = 'en-EN')
     {
@@ -73,7 +77,7 @@ class Base_Gettext extends Kohana_I18n {
      * @static
      * @param $lang string
      * @param $ext string
-     * @retun string absolute file path
+     * @return string
      */
     public static function absolute_file_path($lang = 'en-EN', $ext = 'po')
     {

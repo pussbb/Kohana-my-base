@@ -13,23 +13,38 @@
 
 class Admin_Modules extends Singleton {
 
-  private $_modules = array();
+    /**
+     * @var array
+     */
+    private $_modules = array();
 
-  public function register($name, $path)
-  {
-      $this->_modules[$name] = $path;
-  }
+    /**
+     * Register modules(links description) for admin area
+     *
+     * @param $name
+     * @param $path
+     * @return void
+     */
+    public function register($name, $path)
+    {
+          $this->_modules[$name] = $path;
+    }
 
-  public function modules()
-  {
-      $result = array();
-      foreach($this->_modules as $module_name => $path) {
-          $klass = 'Helper_Admin_Modules_'.ucfirst($module_name);
-          $result[] = array(
-            'info' => $klass::info(),
-            'menu' => $klass::menu_items(),
-          );
-      }
-      return $result;
-  }
+    /**
+     * returns full list of registered modules
+     *
+     * @return array
+     */
+    public function modules()
+    {
+        $result = array();
+        foreach($this->_modules as $module_name => $path) {
+            $klass = 'Helper_Admin_Modules_'.ucfirst($module_name);
+            $result[] = array(
+              'info' => $klass::info(),
+              'menu' => $klass::menu_items(),
+            );
+        }
+        return $result;
+    }
 }

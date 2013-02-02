@@ -15,10 +15,12 @@ class File extends Kohana_File {
 
     /**
      * function to raplace something in files
+     *
      * @static
      * @param $file - (string) - full path to the file
      * @param $pattern - (string) php reg expr pattern.
-     * @param $replacment - (string)
+     * @param $replacement
+     * @internal param $replacment - (string)
      * @access public
      * @return void
      */

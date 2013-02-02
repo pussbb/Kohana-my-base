@@ -16,6 +16,7 @@ class Base_Media extends Singleton{
 
     /**
      * configuration settings
+     *
      * @var array|null
      * @access private
      */
@@ -24,6 +25,7 @@ class Base_Media extends Singleton{
     /**
      * containce all css files
      * wich need to add to the template
+     *
      * @var array
      * @access private
      */
@@ -38,6 +40,7 @@ class Base_Media extends Singleton{
      * </style>
      * </code>
      * before tag </head>
+     *
      * @var string
      * @access private
      */
@@ -52,6 +55,7 @@ class Base_Media extends Singleton{
      * </script>
      * </code>
      * before tag </head>
+     *
      * @var string
      * @access private
      */
@@ -68,6 +72,7 @@ class Base_Media extends Singleton{
     /**
      * Initialize configuration settings
      * and auto load default bundle
+     *
      * @ignore
      */
     public function __construct()
@@ -78,6 +83,7 @@ class Base_Media extends Singleton{
 
     /**
      * get value from config
+     *
      * @param $key
      * @return mixed
      * @access private
@@ -90,7 +96,8 @@ class Base_Media extends Singleton{
     }
 
     /**
-     * Append colection of css and js files
+     * Append collection of css and js files
+     *
      * @param $name
      * @return void
      */
@@ -113,6 +120,7 @@ class Base_Media extends Singleton{
 
     /**
      * append media type to the list
+     *
      * @param $key type css or js
      * @param $name file name without file extension .css or .js
      * @param string|null $media for css files only e.g. 'screen'
@@ -153,6 +161,7 @@ class Base_Media extends Singleton{
      * ?>
      * </code>
      * will search file DOCROOT.'media/js/jquery.js'
+     *
      * @param $name file name without file extension .css or .js
      * @param $prefix css or js
      * @return string|null full path to the file or null if not found
@@ -169,6 +178,7 @@ class Base_Media extends Singleton{
 
     /**
      * checks if valid url
+     *
      * @param $uri
      * @return bool TRUE if url is valid
      * @access private
@@ -186,6 +196,7 @@ class Base_Media extends Singleton{
      * if stattic:// was specified at the begining of string
      * function return a url with static url wich must specified in config
      * e.g. 'static://juery' -> 'http://static.local/js/jquery.js/'
+     *
      * @param $file_name
      * @param $prefix
      * @return string
@@ -215,6 +226,7 @@ class Base_Media extends Singleton{
 
     /**
      * add css file to the list
+     *
      * @param $file_name file name without file extension .css or .js
      * @param string|null $media type for css  e.g. 'screen'
      * @param bool $check if TRUE first check file if its a remote it always will be FALSE
@@ -235,6 +247,7 @@ class Base_Media extends Singleton{
 
     /**
      * adds inline css
+     *
      * @param string $css
      * @access public
      */
@@ -250,8 +263,11 @@ class Base_Media extends Singleton{
      *
      * also tries to find coffee script file and compile them to js file
      * if needed
+     *
      * @param $file_name file name without file extension .css or .js
      * @param bool $check if TRUE first check file if its a remote it always will be FALSE
+     * @param null $files
+     * @return void
      * @access public
      */
     public function append_script($file_name, $check = FALSE, $files = NULL)
@@ -270,6 +286,7 @@ class Base_Media extends Singleton{
 
     /**
      * add inline javascript
+     *
      * @param string $js
      * @access public
      */
@@ -282,6 +299,7 @@ class Base_Media extends Singleton{
 
     /**
      * get all appended css files
+     *
      * @return array
      * @access public
      */
@@ -294,18 +312,20 @@ class Base_Media extends Singleton{
      * return formatted string for inline style
      *
      * all included inline styles already wrapped in tag <style>
+     *
      * @return string
      * @access public
      */
     public function inline_style()
     {
         if ( ! $this->inline_style)
-            return;
+            return '';
         return "\n<style type=\"text/css\">\n$this->inline_style\n</style>\n";
     }
 
     /**
      * return a list with included javascript files
+     *
      * @return array
      */
     public function scripts()
@@ -317,13 +337,14 @@ class Base_Media extends Singleton{
      * return formatted string for inline javascript
      *
      * all included inline script already wrapped in tag <script>
+     *
      * @return string
      * @access public
      */
     public function inline_script()
     {
         if ( ! $this->inline_script)
-            return;
+            return '';
         return "\n<script type=\"text/javascript\">\n$this->inline_script\n</script>\n";
     }
 

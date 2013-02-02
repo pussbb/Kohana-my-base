@@ -352,7 +352,7 @@ class Base_Model extends Base_Db_Model {
      * @static
      * @param $name
      * @param $arguments
-     * @return mixed/NULL
+     * @return mixed
      * @access public
      * @internal
      */
@@ -425,8 +425,10 @@ class Base_Model extends Base_Db_Model {
 
     /**
      * returns relation data or null
+     *
      * @param $name string
      * @return array|null
+     * @access private
      */
     private function get_relation($name)
     {
@@ -711,11 +713,24 @@ class Base_Model extends Base_Db_Model {
         return $obj->prepare_for_query()->db_query;
     }
 
+    /**
+     * checks if model was loaded from db or not
+     *
+     * @return bool
+     */
     public function loaded()
     {
         return $this->_loaded;
     }
 
+    /**
+     * cheks if model has records in relation model
+     *
+     * @param $name
+     * @param null $values
+     * @return bool
+     * @throws Base_Db_Exception_UnknownRelation
+     */
     public function has($name, $values = NULL)
     {
         $relation = Arr::get($this->relations(), $name);
@@ -854,6 +869,7 @@ class Base_Model extends Base_Db_Model {
     /**
      * JOIN function alternative
      * @param $name string string can be name of some model or relation name,
+     * @throws Base_Db_Exception_LoadedModel
      * @throws Base_Db_Exception_UnknownRelation
      * @return void
      * @access public
@@ -1174,6 +1190,7 @@ class Base_Model extends Base_Db_Model {
      * @param null $limit
      * @param null $offset
      * @param bool|null $cache
+     * @throws Base_Db_Exception_LoadedModel
      * @return Base_Model
      * @todo rewrite
      */
@@ -1222,6 +1239,7 @@ class Base_Model extends Base_Db_Model {
      * if you call function save() all values for fields will be automatically get from object
      * if they exists
      * @param array|null $fields
+     * @throws Base_Db_Exception_LoadedModel
      * @return Base_Model
      */
     public function insert($fields = array())

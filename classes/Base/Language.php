@@ -13,6 +13,9 @@
 class Base_Language {
 
 
+    /**
+     * @var array
+     */
     private static $lang_codes = array();
     /**
      * set current lang

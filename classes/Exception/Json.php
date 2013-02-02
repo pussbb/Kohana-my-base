@@ -17,7 +17,9 @@ class Exception_Json extends Exception {
      * @ignore
      * @constructor
      * @access public
-     * @return void
+     * @param string $message
+     * @param int $code
+     * @return \Exception_Json
      */
     public function __construct($message , $code)
     {

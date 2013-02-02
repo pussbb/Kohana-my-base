@@ -131,8 +131,8 @@ class Base_Date extends Kohana_Date {
         $time = Date::today_if_null($date);
         $output = array();
 
-        $startofweek = Date::start_of_week($date);
-        $endofweek = Date::end_of_week($date);
+        $startofweek = Date::start_of_week($time);
+        $endofweek = Date::end_of_week($time);
 
         $day = $startofweek;
 

@@ -15,17 +15,44 @@
 
 class Controller_API extends Controller_Base_Core {
 
+    /**
+     * @var null
+     */
     public $template = NULL;
+    /**
+     * @var null
+     */
     protected $layout = NULL;
+    /**
+     * @var bool
+     */
     public $auto_render = FALSE;
+    /**
+     * @var bool
+     */
     protected $check_access = FALSE;
+    /**
+     * @var bool
+     */
     protected $ajax_auto_partial = FALSE;
 
+    /**
+     * json format key
+     */
     const JSON_FORMAT = 'json';
+    /**
+     * xml format key
+     */
     const XML_FORMAT = 'xml';
 
+    /**
+     * @var null
+     */
     private $responce_type = NULL;
 
+    /**
+     * @throws HTTP_Exception_403
+     */
     public function before()
     {
         parent::before();
@@ -46,6 +73,9 @@ class Controller_API extends Controller_Base_Core {
         }
     }
 
+    /**
+     * @throws Kohana_Kohana_Exception
+     */
     public function after()
     {
 

@@ -1,6 +1,10 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 /**
  * get form http://pastie.org/981503
+ *
+ *
+ * @category extra
+ * @subpackage extra
  */
 class Num extends Kohana_Num {
 
