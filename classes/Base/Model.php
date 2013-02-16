@@ -1299,6 +1299,7 @@ class Base_Model extends Base_Db_Model {
         if (is_numeric($filter))
             $filter =array($this->primary_key => $filter);
 
+        $this->before_delete();
         $ok = $this->filter($filter)->save();
         if ( ! $ok)
             throw new Base_Db_Exception_NoRowEffected;
@@ -1715,6 +1716,16 @@ class Base_Model extends Base_Db_Model {
      * @return void
      */
     protected function after_save()
+    {
+        //user manipulations
+    }
+
+    /**
+     * user callback function before model will be removed
+     * @access protected
+     * @return void
+     */
+    protected function before_delete()
     {
         //user manipulations
     }
