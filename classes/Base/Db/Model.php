@@ -15,8 +15,6 @@
 class Base_Db_Model extends Kohana_Model  implements Serializable, ArrayAccess,  IteratorAggregate {
 
     protected $_table_fields = NULL;
-
-
     /**
      *
      */

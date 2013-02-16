@@ -1261,7 +1261,11 @@ class Base_Model extends Base_Db_Model {
     public function update()
     {
         $this->db_query = DB::update(array($this->db_table, $this->module_name))
-                            ->where($this->query_field($this->primary_key), '=', $this->sanitize($this->primary_key, $this->{$this->primary_key}));
+                            ->where(
+                                $this->query_field($this->primary_key),
+                                '=',
+                                $this->sanitize($this->primary_key, $this->data[$this->primary_key]
+                            ));
         return $this;
     }
 
@@ -1286,13 +1290,21 @@ class Base_Model extends Base_Db_Model {
     {
         $this->db_query = DB::delete(array($this->db_table, $this->module_name));
 
-        if (is_numeric($filter)) {
-            $this->{$this->primary_key} = $filter;
-            $filter = array($this->primary_key => $filter);
-        }
+        if ( ! $filter && ! $this->_loaded)
+            throw new Base_Db_Exception_NotLoadedNodel;
+
+        if ( ! $filter)
+            $filter =$this->data[$this->primary_key];
+
+        if (is_numeric($filter))
+            $filter =array($this->primary_key => $filter);
+
         $ok = $this->filter($filter)->save();
         if ( ! $ok)
             throw new Base_Db_Exception_NoRowEffected;
+
+        unset($this->data[$this->primary_key]);
+        $this->_loaded = FALSE;
         return TRUE;
     }
 
@@ -1358,7 +1370,7 @@ class Base_Model extends Base_Db_Model {
 
             case 'update':
                 foreach ($this->table_fields() as $field) {
-                    $this->db_query->value($field, $this->sanitize($field, $this->{$field}));
+                    $this->db_query->value($field, $this->sanitize($field, $this->data[$field]));
                 }
                 break;
 
@@ -1461,7 +1473,7 @@ class Base_Model extends Base_Db_Model {
      */
     public function new_record()
     {
-        return ! isset($this->{$this->primary_key});
+        return ! isset($this->data[$this->primary_key]);
     }
 
     /**
@@ -1563,8 +1575,9 @@ class Base_Model extends Base_Db_Model {
         switch ($this->query_type()) {
             case 'insert':
                 $this->last_inserted_id = $result[0];
-                $this->{$this->primary_key} = $result[0];
+                $this->data[$this->primary_key] = $result[0];
                 $result = TRUE;
+                $this->_loaded = TRUE;
                 break;
             case 'select':
                 $_result = $this->parse_result($result);
@@ -1582,6 +1595,7 @@ class Base_Model extends Base_Db_Model {
                     $this->records[] = $obj;
                 }
                 $result = $result->count() > 0;
+                $this->_loaded = TRUE;
                 break;
             case 'delete':
                 $result = $result > 0;
