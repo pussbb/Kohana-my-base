@@ -21,8 +21,12 @@ class URL extends Kohana_URL {
      */
     public static function site($uri = '', $protocol = TRUE, $index = TRUE)
     {
-        if ($uri && (is_object(Request::current()) && Request::current()->param('lang')))
-            $uri = Language::get()->code.'/'.$uri;
+
+        if ($uri && (is_object(Request::current()) && Request::current()->param('lang'))) {
+            $uri_check_codes = Language::uri_check_codes();
+            if (!(bool)preg_match("/^$uri_check_codes\//", $uri, $matches))
+                $uri = Language::get()->code.'/'.$uri;
+        }
 
         return parent::site($uri, $protocol, $index);
 
