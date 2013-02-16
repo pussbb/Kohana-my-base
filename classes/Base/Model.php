@@ -1426,11 +1426,11 @@ class Base_Model extends Base_Db_Model {
                     $rule = array(array($this, 'unique_validation'), array(':validation', ':field'));
 
                 if ( ! is_array($rule)) {
-                    $validator->rule($key, $rule);
+                    $validator->rule($field_name, $rule);
                     continue;
                 }
                 $validator->rule(
-                        $key, Arr::get($rule, 0, NULL), Arr::get($rule, 1, NULL)
+                        $field_name, Arr::get($rule, 0, NULL), Arr::get($rule, 1, NULL)
                 );
             }
         }
