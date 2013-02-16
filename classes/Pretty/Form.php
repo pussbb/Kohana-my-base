@@ -323,7 +323,8 @@ class Pretty_Form extends Singleton
         $file = $this->view_path . $this->template . DIRECTORY_SEPARATOR . $name;
         $data = Arr::merge(array('name' => NULL, 'label'=>NULL, 'attr'=>NULL, 'info'=>NULL, 'buttons'=>NULL), $params);
         $data['value'] = $this->value($params);
-        $data['error'] = $this->error($params);
+        if ( ! isset($data['error']))
+            $data['error'] = $this->error($params);
         return View::factory($file, $data)->render();
     }
 }

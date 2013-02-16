@@ -5,9 +5,9 @@ echo '<div class="control-group '. ($error ? ' error' : '').'">';
         echo Form::label($name, $label, array('class' => 'control-label'));
     }
     echo '<div class="controls">';
-          echo Form::textarea($name, $value, $attr);
     if ( $error)
         echo '<span class="help-inline">'. $error .'</span>';
+    echo Form::textarea($name, $value, $attr);
     if ( $info){
         echo '<p class="help-block">'. $info .'</p>';
     }
