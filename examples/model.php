@@ -65,3 +65,34 @@ Model_Blog_Post::select_query();
 Model_Blog_Post::update_query();
 Model_Blog_Post::insert_query();
 Model_Blog_Post::delete_query();
+
+
+/// test relations
+$m = Model_Blog_Post::find_all();
+foreach($m->records as $_m)
+{
+    debug($_m->author->email);
+    debug(count($_m->comments));
+    debug($_m->total_comments);
+    debug(count($_m->contents));
+    debug($_m->category->name);
+
+}
+exit;
+
+$m = Model_Blog_Post::find_all(array(
+    'with' => array('author', 'comments','total_comments', 'contents', 'category')
+));
+var_dump((string)$m);
+foreach($m->records as $_m)
+{
+    echo "\n<br>";
+    echo str_repeat('-', 34);
+    debug('post', $_m->id);
+    debug("user mail",$_m->author->email);
+    debug("comments", $_m->comments);
+    debug("total_comments",$_m->total_comments);
+    debug('contents',count($_m->contents));
+    debug('category',$_m->category->name);
+
+}

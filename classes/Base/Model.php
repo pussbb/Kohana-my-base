@@ -390,7 +390,7 @@ class Base_Model extends Base_Db_Model {
         $string = (string) $this->db_query;
         if ($string)
             return $string;
-        return $this->last_query;
+        return (string)$this->last_query;
     }
 
    /**
@@ -886,17 +886,20 @@ class Base_Model extends Base_Db_Model {
         $klass = Arr::get($relation, 1);
         $model = new $klass();
         $type = Arr::path($relation, 0);
-        $field = Arr::path($relation, 3, $this->primary_key);
         $foreign_key = Arr::path($relation, 2, $model->primary_key);
+        $field = Arr::path($relation, 3, $this->primary_key);
 
         $model_fields = array();
         if ($type !== self::STAT) {
             $model_fields = $model->query_columns_for_join();
             if ($this->query_type() == 'select')
                 $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
-            $this->db_query
-                ->join(array($model->db_table, $model->module_name), 'LEFT')
-                   ->on($model->query_field($foreign_key), '=', $this->query_field($field));
+
+            $this->db_query->join(array($model->db_table, $model->module_name), 'LEFT');
+            if ($type === self::HAS_MANY)
+                $this->db_query->on($this->query_field($field), '=', $model->query_field($foreign_key));
+            else
+                $this->db_query->on($this->query_field($foreign_key), '=', $model->query_field($field));
         }
         else {
             $model_fields[] = array(DB::expr('COUNT('.$model->query_field($model->primary_key).')'), $name);
@@ -1574,9 +1577,7 @@ class Base_Model extends Base_Db_Model {
                     if ( ! Arr::is_array($record) && ! Arr::is_assoc($record))
                         break;
                     $obj =  new $klass();
-                    foreach ($record as $key => $value) {
-                        $obj->data[$key] = $value;
-                    }
+                    $obj->data = $record;
                     $obj->_loaded = count($obj->data) > 0;
                     $this->records[] = $obj;
                 }
@@ -1628,11 +1629,21 @@ class Base_Model extends Base_Db_Model {
                     $obj->data[$value[2][$index_key]] = $row[$with_field];
                 }
                 $obj->_loaded = count($obj->data) > 0;
-                if ($one_record)
+                $key_field = Object::property($obj, $obj->primary_key);
+                if ($one_record) {
                     $_result[$_key][$key] = $obj;
-                else
-                    $_result[$_key][$key][] = $obj;
-
+                }
+                else if ( ! isset($_result[$_key][$key][$key_field]) ) {
+                    $_result[$_key][$key][$key_field] = $obj;
+                }
+            }
+        }
+        /// reset array keys for relations
+        foreach($_result as $key => $value) {
+            foreach ($this->with as $_key => $_value) {
+                if ( ! is_array($_result[$key][$_key]))
+                    continue;
+                $_result[$key][$_key] = array_values($_result[$key][$_key]);
             }
         }
 
