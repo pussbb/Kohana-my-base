@@ -798,10 +798,10 @@ class Base_Model extends Base_Db_Model {
     {
         switch ($key) {
             case 'limit':
-                $this->db_query->limit((int) $value);
+                $this->db_query->limit($value);
                 break;
             case 'offset':
-                $this->db_query->offset((int) $value);
+                $this->db_query->offset($value);
                 break;
             case 'total_count':
                 $this->count_total = TRUE;
@@ -1041,14 +1041,11 @@ class Base_Model extends Base_Db_Model {
             && $this->query_type() === 'select') {
             $db = clone $this->db_query;
 
-            if (array_key_exists('limit', $system_filters)) {
-                $db->limit($system_filters['limit']);
-                unset($system_filters['limit']);
-            }
-
-            if (array_key_exists('offset', $system_filters)) {
-                $db->offset($system_filters['offset']);
-                unset($system_filters['offset']);
+            foreach(array('limit', 'offset') as $key) {
+                if ( ! array_key_exists($key, $system_filters))
+                    continue;
+                $db->$key($system_filters[$key]);
+                unset($system_filters[$key]);
             }
 
             if ($this->order) {

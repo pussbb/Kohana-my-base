@@ -292,11 +292,11 @@ class Pretty_Form extends Singleton
      */
     private function error($params)
     {
-        if (Arr::is_array($params)) {
+        if (Arr::is_array($params))
             $name = Arr::get($params, 'name');
-        } else {
+        else
             $name = $params;
-        }
+
         return Arr::get($this->errors, $name);
     }
 
