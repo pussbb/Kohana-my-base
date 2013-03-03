@@ -57,7 +57,7 @@ class Collection {
     {
             $result = array();
             foreach ($collection as $item) {
-                $result[] = Object::property($item, $key);
+                $result[] = self::property($item, $key);
             }
             return $result;
     }
@@ -122,7 +122,7 @@ class Collection {
     {
         if (is_object($obj))
             return Object::property($obj, $property);
-        else if (Arr::is_array($obj)) 
+        else if (Arr::is_array($obj))
             Arr::path($obj, $property);
         return NULL;
     }
