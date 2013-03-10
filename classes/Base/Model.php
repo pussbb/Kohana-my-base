@@ -156,7 +156,8 @@ class Base_Model extends Base_Db_Model {
         'total_count', // for select will added total_count to count all rows if limit set
         'distinct',
         'group_by',
-        'expression'
+        'expression',
+        'order_by'
     );
 
     /**
@@ -812,6 +813,18 @@ class Base_Model extends Base_Db_Model {
             case 'group_by':
                 $this->db_query->group_by($value);
                 break;
+            case 'order_by':
+                $field = explode('.', $value[0]);
+                if (count($field) > 1)
+                {
+                    $model = Arr::path($this->with, $field[0].'.0');
+                    if ( ! $model)
+                        break;
+                    $obj = new $model;
+                    $value = array($obj->query_field($field[1]), $value[1]);
+                }
+                $this->db_query = call_user_func_array(array($this->db_query, 'order_by'), $value);
+                break;
             case 'with':
                 if (is_array($value)){
                     foreach ($value as $item) {
@@ -1061,7 +1074,7 @@ class Base_Model extends Base_Db_Model {
                 ->cached(Arr::get($this->select_args, 1));
 
         }
-
+        krsort($system_filters);
         foreach($system_filters as $key => $value) {
              $this->system_filters($key, $value);
         }
@@ -1697,6 +1710,9 @@ class Base_Model extends Base_Db_Model {
                 case '_offset':
                     $property->setValue($query, NULL);
                     break;
+                case '_order_by':
+                    $property->setValue($query, NULL);
+                    break;
                 case '_sql':
                     $property->setValue($query, NULL);
                     break;
@@ -1820,6 +1836,16 @@ class Base_Model extends Base_Db_Model {
         return $this->last_query;
     }
 
+    /**
+     * return array on wich filed sorting
+     *
+     * @access public
+     * @return mixed
+     */
+     public function order()
+     {
+        return $this->order;
+     }
     /**
      * validate unique value required Validation object
      * @param $validation
