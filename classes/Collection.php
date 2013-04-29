@@ -105,8 +105,8 @@ class Collection {
            }
 
         }
-        else if (Arr::is_array($obj)) {
-            return isset($obj[$property]);
+        else if (Arr::is_array($obj) && Arr::is_assoc($obj)) {
+            return array_key_exists($property, $obj);
         }
         return FALSE;
     }

@@ -280,7 +280,7 @@ class Base_Model extends Base_Db_Model {
      */
     public function __get($name)
     {
-        if (isset($this->$name))
+        if (array_key_exists($name, $this->data))
             return $this->data[$name];
 
         $relation = $this->get_relation($name);
@@ -1310,11 +1310,18 @@ class Base_Model extends Base_Db_Model {
             $filter =array($this->primary_key => $filter);
 
         $this->before_delete();
-        $ok = $this->filter($filter)->save();
-        if ( ! $ok)
-            throw new Base_Db_Exception_NoRowEffected;
-
-        unset($this->data[$this->primary_key]);
+        $db = Database::instance();
+        $db->begin();
+        try {
+            $this->filter($filter)->save();
+            $db->commit();
+        }
+        catch (Database_Exception $e) {
+            $db->rollback();
+            $this->add_error($this->primary_key, $e->message);
+            return FALSE;
+        }
+        $this->data = array();
         $this->_loaded = FALSE;
         return TRUE;
     }
@@ -1663,14 +1670,14 @@ class Base_Model extends Base_Db_Model {
                 }
             }
         }
-        /// reset array keys for relations
-        foreach($_result as $key => $value) {
-            foreach ($this->with as $_key => $_value) {
-                if ( ! is_array($_result[$key][$_key]))
-                    continue;
-                $_result[$key][$_key] = array_values($_result[$key][$_key]);
-            }
-        }
+//         /// reset array keys for relations
+//         foreach($_result as $key => $value) {
+//             foreach ($this->with as $_key => $_value) {
+//                 if ( ! is_array($_result[$key][$_key]))
+//                     continue;
+//                 $_result[$key][$_key] = array_values($_result[$key][$_key]);
+//             }
+//         }
 
         $this->count = count($_result);
         return array_values($_result);
