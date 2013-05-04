@@ -247,7 +247,7 @@ class Controller_Base_Core extends Controller_Template {
     {
         $structure = $this->request_structure();
         $directory = NULL;
-        if (Arr::get($structure, 0)) {
+        if (isset($structure[0])) {
             $directory = array_shift($structure) . '/';
         }
         $file_name = $directory . implode('.', $structure);
@@ -346,9 +346,10 @@ class Controller_Base_Core extends Controller_Template {
     {
 
         $json = json_encode($data, JSON_HEX_TAG);
-        $this->response->headers('Content-Type', 'application/json')
-                ->send_headers()
-                ->body($json);
+        $this->response
+            ->headers('Content-Type', 'application/json')
+            ->send_headers()
+            ->body($json);
         $this->_safety_render();
     }
 
@@ -385,7 +386,8 @@ class Controller_Base_Core extends Controller_Template {
         if ( ! $this->auto_render)
             return parent::after();
 
-        if ($this->ajax_auto_partial && $this->request->is_ajax())
+        if ($this->ajax_auto_partial
+            && $this->request->is_ajax())
             return $this->render_partial();
 
         $this->set_view();
