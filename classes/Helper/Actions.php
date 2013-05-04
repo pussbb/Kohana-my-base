@@ -72,7 +72,7 @@ class Helper_Actions {
         $attr = self::append_class($attr, 'action action_edit');
         return HTML::anchor(
             Helper_Model::url($model, 'edit'),
-           '<i class="icon-pencil"></i> '. tr('Edit %s', array($name)),
+           '<i class="icon-pencil"></i> '. tr('Edit'),
             array_merge(array(
                 'title' => tr('Edit %s', array($name)),
                 'rel' => 'tooltip'
@@ -86,7 +86,7 @@ class Helper_Actions {
         $attr = self::append_class($attr, 'action action_details');
         return HTML::anchor(
             Helper_Model::url($model, 'details'),
-           '<i class="icon-info-sign"></i> '. tr('View %s details', array($name)) .'&nbsp;',
+           '<i class="icon-info-sign"></i> '. tr('View') .'&nbsp;',
             array_merge(array(
                 'title' => tr('View %s details', array($name)),
                 'rel' => 'tooltip'

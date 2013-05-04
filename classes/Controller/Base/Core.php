@@ -23,6 +23,7 @@ class Controller_Base_Core extends Controller_Template {
      *@var bool
      */
     protected $ajax_auto_partial = TRUE;
+
      /**
      * base template file
      *
@@ -36,6 +37,7 @@ class Controller_Base_Core extends Controller_Template {
      * if needed IN CONSTRUCTOR (to not damage changes in parent class)
      * @var array
      */
+
     protected $bundles = array('');
 
     /**
@@ -43,6 +45,7 @@ class Controller_Base_Core extends Controller_Template {
      * @var bool
      */
     protected $check_access = TRUE;
+
     /**
      * Kohana View object
      * @var null
@@ -79,7 +82,6 @@ class Controller_Base_Core extends Controller_Template {
         Gettext::lang($language->locale);
     }
 
-
     /**
      * init base template and this
      */
@@ -106,6 +108,7 @@ class Controller_Base_Core extends Controller_Template {
             $this->config = Kohana::$config->load('site');
         return Arr::path($this->config, $key, $defualt);
     }
+
     /**
      * sets current file name wich will be render
      * @param $filename
@@ -125,7 +128,7 @@ class Controller_Base_Core extends Controller_Template {
     {
         if ( ! $this->request->is_initial()
               || ! $this->check_access
-              || Acl::instance()->allowed($this->current_request_structure()))
+              || Acl::instance()->allowed($this->request_structure()))
             return TRUE;
 
         if ( ! Auth::instance()->logged_in() && ! $this->request->is_ajax()){
@@ -185,7 +188,7 @@ class Controller_Base_Core extends Controller_Template {
      * returns request in array(dir, controller, action)
      * @return array
      */
-    public function current_request_structure()
+    public function request_structure()
     {
         return array_filter(array(
                     strtolower($this->request->directory()),
@@ -242,7 +245,7 @@ class Controller_Base_Core extends Controller_Template {
      */
     private function media_by_default()
     {
-        $structure = $this->current_request_structure();
+        $structure = $this->request_structure();
         $directory = NULL;
         if (Arr::get($structure, 0)) {
             $directory = array_shift($structure) . '/';
@@ -258,7 +261,7 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function is_delete()
     {
-        return $this->request->method() === 'DELETE';
+        return $this->request->method() === HTTP_Request::DELETE;
     }
 
     /**
@@ -278,7 +281,7 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function is_put()
     {
-        return $this->request->method() === 'PUT';
+        return $this->request->method() === HTTP_Request::PUT;
     }
 
     /**
@@ -288,7 +291,7 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function is_post()
     {
-        return $this->request->method() === 'POST';
+        return $this->request->method() === HTTP_Request::POST;
     }
 
     /**
@@ -298,7 +301,7 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function is_get()
     {
-        return $this->request->method() === 'GET';
+        return $this->request->method() === HTTP_Request::GET;
     }
 
     /**
@@ -311,7 +314,7 @@ class Controller_Base_Core extends Controller_Template {
     {
         $this->set_filename($file);
         $this->view->set(array_merge($view_data, $this->dynamic_properties()));
-        $this->set_view_filename();
+        $this->set_view();
         $this->response->body($this->view->render());
         $this->_safety_render();
     }
@@ -385,7 +388,7 @@ class Controller_Base_Core extends Controller_Template {
         if ($this->ajax_auto_partial && $this->request->is_ajax())
             return $this->render_partial();
 
-        $this->set_view_filename();
+        $this->set_view();
 
         foreach ($this->bundles as $bundle) {
             Media::bundle($bundle);
@@ -445,10 +448,10 @@ class Controller_Base_Core extends Controller_Template {
      * @access protected
      * @return void
      */
-    protected function set_view_filename()
+    protected function set_view()
     {
         if (!$this->filename) {
-            $this->set_filename(Text::reduce_slashes(implode('/', $this->current_request_structure())));
+            $this->set_filename(Text::reduce_slashes(implode('/', $this->request_structure())));
         }
         $this->view->set_filename(Text::reduce_slashes(implode('/', $this->filename)));
     }
