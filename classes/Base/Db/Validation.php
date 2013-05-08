@@ -90,14 +90,13 @@ class Base_Db_Validation {
      * @param $model
      * @return bool
      */
-    public static function check(&$model)
+    public static function check(&$model, $skip_empty = FALSE)
     {
         Base_Db_Validation::$new_record = $model->new_record();
         $result = TRUE;
-        $query_type = $model->query_type();
         foreach ($model->get_table_columns() as $key => $rules) {
             $value = Object::property($model, $key);
-            if ( ! $value && $query_type === 'update')
+            if ( ! $value && $skip_empty)
                 continue;
 
             switch (Arr::get($rules, 'type')) {

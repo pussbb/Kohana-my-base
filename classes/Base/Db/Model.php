@@ -12,9 +12,9 @@
  * @subpackage database
  */
 
-class Base_Db_Model extends Kohana_Model  implements Serializable, ArrayAccess,  IteratorAggregate {
+class Base_Db_Model extends Kohana_Model implements Serializable, ArrayAccess,  IteratorAggregate {
 
-    protected $_table_fields = NULL;
+    protected $_table_fields = array();
     /**
      *
      */
@@ -27,6 +27,53 @@ class Base_Db_Model extends Kohana_Model  implements Serializable, ArrayAccess, 
      * @access protected
      */
     protected  $data = array();
+
+    /**
+     * dynamically append variable to object
+     *
+     * <code>
+     * $model = new Model();
+     * $model->login = 'user';
+     * </code>
+     * @param $name
+     * @param $value
+     * @access public
+     * @internal
+     */
+    public function __set($name, $value)
+    {
+        $this->data[$name] = $value;
+    }
+
+    /**
+     * removes dynamically appended variable
+     *
+     * <code>
+     * $model = new Model();
+     * $model->login = 'user';
+     * unset($model->login); //here
+     * </code>
+     * @param $name
+     * @access public
+     * @internal
+     */
+    public function __unset($name)
+    {
+        unset($this->data[$name]);
+    }
+
+    /**
+     * checks if dynamically appended variable exists
+     *
+     * @param $name
+     * @return bool
+     * @access public
+     * @internal
+     */
+    public function __isset($name)
+    {
+        return array_key_exists($name, $this->data);
+    }
 
     /**
      * Serialize data only for that table everything else ignored

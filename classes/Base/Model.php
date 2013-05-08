@@ -233,35 +233,17 @@ class Base_Model extends Base_Db_Model {
     {
         $this->_table_columns = $this->get_table_columns();
         $this->_table_fields = array_keys($this->_table_columns);
-        if (Arr::is_array($params)) {
+
+        if (is_array($params)) {
             $this->update_params($params);
-        }
-        if (is_numeric($params)) {
+        } elseif (is_numeric($params)) {
             $this->data[$this->primary_key] = intval($params);
         }
+
         $this->db_table = self::db_table_name();
         $this->module_name = strtolower(self::module_name());
 
 
-    }
-
-    /**
-     * dynamically append variable to object
-     *
-     * <code>
-     * $model = new Model();
-     * $model->login = 'user';
-     * </code>
-     * @param $name
-     * @param $value
-     * @access public
-     * @internal
-     */
-    public function __set($name, $value)
-    {
-        if (in_array($name, $this->_table_fields))
-            $value = $this->sanitize($name, $value);
-        $this->data[$name] = $value;
     }
 
     /**
@@ -290,36 +272,6 @@ class Base_Model extends Base_Db_Model {
     }
 
     /**
-     * checks if dynamically appended variable exists
-     *
-     * @param $name
-     * @return bool
-     * @access public
-     * @internal
-     */
-    public function __isset($name)
-    {
-        return array_key_exists($name, $this->data);
-    }
-
-    /**
-     * removes dynamically appended variable
-     *
-     * <code>
-     * $model = new Model();
-     * $model->login = 'user';
-     * unset($model->login); //here
-     * </code>
-     * @param $name
-     * @access public
-     * @internal
-     */
-    public function __unset($name)
-    {
-        unset($this->data[$name]);
-    }
-
-    /**
      * calls functions for Base_Model or DB classes in Kohana
      * @param $name
      * @param $arguments
@@ -329,11 +281,8 @@ class Base_Model extends Base_Db_Model {
      */
     public function __call($name, $arguments)
     {
-
-        if (method_exists($this, $name))
-            return call_user_func_array(array($this, $name), $arguments);
         if (method_exists($this->db_query, $name))
-                return call_user_func_array(array($this->db_query, $name), $arguments);
+            return call_user_func_array(array($this->db_query, $name), $arguments);
 
         $relation = $this->get_relation($name);
         if ( ! $relation)
@@ -368,8 +317,6 @@ class Base_Model extends Base_Db_Model {
             case 'exists':
                 return  call_user_func_array(array(new $klass, $name), $arguments);
                 break;
-            case 'table_labels':
-                return call_user_func_array(array(new $klass, 'labels'), $arguments);
             default:
                 break;
         }
@@ -388,10 +335,7 @@ class Base_Model extends Base_Db_Model {
      */
     public function __toString()
     {
-        $string = (string) $this->db_query;
-        if ($string)
-            return $string;
-        return (string)$this->last_query;
+        return (string)$this->db_query ?: (string)$this->last_query;
     }
 
    /**
@@ -460,7 +404,7 @@ class Base_Model extends Base_Db_Model {
                 $result = $klass::find_all($filter)->records;
                 break;
             case self::STAT:
-                $obj = new $klass();
+                $obj = new $klass;
                 $result = $obj->select(array(DB::expr('COUNT('.$obj->query_field($obj->primary_key).')'), 'total_count'))
                                 ->filter($filter)
                                     ->execute()
@@ -475,40 +419,18 @@ class Base_Model extends Base_Db_Model {
     }
 
     /**
-     * returns assoc array of dynamically append variable
-     *
-     * <code>
-     *  $model = Model_User::find($id);
-     *  var_dump($model->__toArray());
-     *  //print
-     * array(
-     *   'login' => 'bla',
-     *   'email' => 'email@site.com',
-     *   ....
-     * )
-     * </code>
-     * @return array|null
-     * @internal
-     */
-    public function __toArray()
-    {
-        return $this->obj_to_array($this);
-    }
-
-    /**
      * recursively parse data variable and convert all objects to assoc array
      *
      * @param \Base_Model |object $obj (must be instanceof Base_Model)
      * @access private
      * @return array
      */
-    private function obj_to_array(Base_Model $obj)
+    private function obj_to_array()
     {
         $result = array();
-        foreach($obj->data as $key => $value) {
-            if (is_object($value) && $obj instanceof Base_Model) {
-                $value = $this->obj_to_array($value);
-            }
+        foreach($this->data as $key => $value) {
+            if (is_object($value) && $value instanceof Base_Model)
+                $value = $value->obj_to_array();
             $result[$key] = $value;
         }
         return $result;
@@ -532,7 +454,7 @@ class Base_Model extends Base_Db_Model {
      */
     public function as_array()
     {
-        return $this->__toArray();
+        return $this->obj_to_array();
     }
 
     /**
@@ -565,9 +487,8 @@ class Base_Model extends Base_Db_Model {
             $filter = array($klass->primary_key => $filter);
         }
         $result = $klass::find_all($filter, 1, NULL, $cache);
-        if ( ! Arr::get($result->records, 0))
+        if ( ! ($_result = Arr::get($result->records, 0)))
             throw new Base_Db_Exception_RecordNotFound();
-        $_result = $result->records[0];
         $_result->last_query = $result->last_query;
         return $_result;
     }
@@ -609,7 +530,6 @@ class Base_Model extends Base_Db_Model {
         $obj = new $klass_name();
         $obj->select('*', $limit, $offset, $cache);
         $obj->filter($filter)->exec();
-        $obj->data = array();
         return $obj;
     }
 
@@ -628,8 +548,7 @@ class Base_Model extends Base_Db_Model {
      */
     public static function select_query($select, $filter = array(), $limit = NULL, $offset = NULL, $cache = NULL)
     {
-        $klass = get_called_class();
-        return $klass::query(Database::SELECT, $select, $filter, $limit, $offset, $cache );
+        return self::query(Database::SELECT, $select, $filter, $limit, $offset, $cache );
     }
 
     /**
@@ -642,8 +561,7 @@ class Base_Model extends Base_Db_Model {
      */
     public static function delete_query($filter = array())
     {
-        $klass = get_called_class();
-        return $klass::query(Database::DELETE, $filter);
+        return self::query(Database::DELETE, $filter);
     }
 
     /**
@@ -657,8 +575,7 @@ class Base_Model extends Base_Db_Model {
      */
     public static function insert_query($filter = array())
     {
-        $klass = get_called_class();
-        return $klass::query(Database::INSERT, $filter);
+        return self::query(Database::INSERT, $filter);
     }
 
     /**
@@ -673,24 +590,23 @@ class Base_Model extends Base_Db_Model {
      */
     public static function update_query($primary_value, $filter = array())
     {
-        $klass = get_called_class();
-        return $klass::query(Database::UPDATE, $primary_value, $filter);
+        return self::query(Database::UPDATE, $primary_value, $filter);
     }
 
     /**
      *  Helper function to return Kohana_DB object
      *  data parsed throw Kohana My Base Model
-     * @access public
+     * @access private
      * @static
      * @throws Base_Db_Exception_UnknownDatabaseQueryType
      * @return Database_Query_Builder
      */
-    public static function query()
+    private static function query()
     {
         $args = func_get_args();
         $klass = get_called_class();
         $obj = new $klass();
-        switch (Arr::get($args, 0)) {
+        switch ($args[0]) {
             case Database::SELECT:
                 $obj->select(Arr::get($args, 1), Arr::get($args, 3), Arr::get($args, 4), Arr::get($args, 5))
                     ->filter(Arr::get($args, 2));
@@ -952,7 +868,7 @@ class Base_Model extends Base_Db_Model {
         }
 
 
-        if (get_class($name) != 'Database_Expression')
+        if (! ($name instanceof Database_Expression))
            throw new Exception_Collection_ObjectNotSupported();
         return $name;
     }
@@ -1168,7 +1084,6 @@ class Base_Model extends Base_Db_Model {
                     }
                     $klass = Arr::get($relation, 1);
                     $obj = new $klass;
-                    debug($value);
                     if (in_array($parts[1], $obj->_table_fields))
                        $value = DB::expr($obj->query_field($parts[1],'.',  TRUE));
 
@@ -1377,12 +1292,13 @@ class Base_Model extends Base_Db_Model {
                 $columns = Arr::get($properties, '_columns', $this->_table_fields);
                 $values = Arr::get($properties, '_values');
 
-                if ($columns && ! $values) {
+                if ( $columns && ! $values)
+                {
                     $data = array();
                     foreach ($columns as $field) {
                         $data[] = $this->sanitize($field, $this->$field);
                     }
-                    $this->db_query->values($data);
+                     $this->db_query->values($data);
                 }
                 break;
 
@@ -1520,15 +1436,13 @@ class Base_Model extends Base_Db_Model {
      */
     public function save()
     {
-        if ( ! $this->query_type()) {
-            if ($this->new_record())
-                $this->insert($this->table_fields(true));
-            else
-                $this->update($this->table_fields(true));
-        }
-
-        if ( in_array($this->query_type(), array('insert', 'update'))){
-            if ( ! Base_Db_Validation::check($this) || ! $this->validate())
+        if ( ! $this->_loaded)
+            $this->insert($this->table_fields(true));
+        else
+            $this->update($this->table_fields(true));
+        $query_type = $this->query_type();
+        if ( in_array($query_type, array('insert', 'update'))){
+            if ( ! Base_Db_Validation::check($this, $query_type==='update') || ! $this->validate())
                 return FALSE;
         }
 
@@ -1665,22 +1579,14 @@ class Base_Model extends Base_Db_Model {
                 if ($one_record) {
                     $_result[$_key][$key] = $obj;
                 }
-                else if ( ! isset($_result[$_key][$key][$key_field]) ) {
+                elseif ( ! isset($_result[$_key][$key][$key_field]) ) {
                     $_result[$_key][$key][$key_field] = $obj;
                 }
             }
         }
-//         /// reset array keys for relations
-//         foreach($_result as $key => $value) {
-//             foreach ($this->with as $_key => $_value) {
-//                 if ( ! is_array($_result[$key][$_key]))
-//                     continue;
-//                 $_result[$key][$_key] = array_values($_result[$key][$_key]);
-//             }
-//         }
 
         $this->count = count($_result);
-        return array_values($_result);
+        return $_result;
 
     }
 
@@ -1706,20 +1612,9 @@ class Base_Model extends Base_Db_Model {
                     $property->setValue($query, array(array($this->db_table, $this->module_name)));
                     break;
                 case '_limit':
-                    $property->setValue($query, NULL);
-                    break;
-                case '_limit':
-                    $property->setValue($query, NULL);
-                    break;
                 case '_join':
-                    $property->setValue($query, NULL);
-                    break;
                 case '_offset':
-                    $property->setValue($query, NULL);
-                    break;
                 case '_order_by':
-                    $property->setValue($query, NULL);
-                    break;
                 case '_sql':
                     $property->setValue($query, NULL);
                     break;
@@ -1778,11 +1673,9 @@ class Base_Model extends Base_Db_Model {
      * @access public
      * @return object self
      */
-    public function update_params($array)
+    public function update_params(array $array)
     {
         foreach ($array as $key => $value) {
-            if (in_array($key, $this->_table_fields))
-                $value = $this->sanitize($key, $value);
             $this->data[$key] = $value;
         }
         return $this;
@@ -1840,7 +1733,7 @@ class Base_Model extends Base_Db_Model {
      */
     public function last_query()
     {
-        return $this->last_query;
+        return (string)$this;
     }
 
     /**
@@ -1861,7 +1754,10 @@ class Base_Model extends Base_Db_Model {
     public function unique_validation($validation, $field)
     {
         $obj = clone $this;
-        $result = $obj->exists(array($field));
+
+        $result = $obj->exists(array(
+            $field => $this->$field,
+        ));
         if (($this->new_record() && $result) || ($result && $this->id !== $obj->id)) {
             $validation->error($field, ' ' . tr("already exists"));
             return;
@@ -1877,9 +1773,7 @@ class Base_Model extends Base_Db_Model {
      */
     public function meta_item($key, $default = NULL)
     {
-         if (strpos($key, '.') !== FALSE)
-            return Arr::path($this->meta_data(), $key, $default);
-        return Arr::get($this->meta_data(), $key, $default);
+        return Arr::path($this->meta_data(), $key, $default);
     }
 
     /**
@@ -1897,12 +1791,10 @@ class Base_Model extends Base_Db_Model {
         if ($this->meta_data_cache)
             return $this->meta_data_cache;
 
-        $data  = json_decode($this->meta_data, TRUE);
+        $data = json_decode($this->meta_data, TRUE);
         if (json_last_error() != JSON_ERROR_NONE)
             throw new Exception_Json(NULL, json_last_error());
 
-        if ( ! $data)
-            return array();
         return $data;
     }
 
