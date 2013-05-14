@@ -252,21 +252,13 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $this->db_table = self::db_table_name();
         $this->module_name = strtolower(self::module_name());
 
-        if (isset(self::$table_columns_cache[$this->db_table]))
-        {
-            $this->_table_columns = self::$table_columns_cache[$this->db_table];
-        }
-        else
+        if ( !( $this->_table_columns = Arr::get(self::$table_columns_cache, $this->db_table)) )
         {
             $this->_table_columns = $this->get_table_columns();
             self::$table_columns_cache[$this->db_table] = $this->_table_columns;
         }
 
-        if (isset(self::$table_fields_cache[$this->db_table]))
-        {
-            $this->_table_fields = self::$table_fields_cache[$this->db_table];
-        }
-        else
+        if ( ! ($this->_table_fields = Arr::get(self::$table_fields_cache,$this->db_table)) )
         {
             $this->_table_fields = array_keys($this->_table_columns);
             self::$table_fields_cache[$this->db_table] = $this->_table_fields;
@@ -1623,7 +1615,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     public function get_table_columns()
     {
-        return $this->columns()? : self::table_columns();
+        return $this->columns()? : self::table_columns($this->db_table);
     }
 
     /**
@@ -1634,8 +1626,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     {
         if ( ! $this->db_query)
             return NULL;
-        $klass_pieces = preg_split('/(?=[A-Z])/', get_class($this->db_query));
-        return strtolower(end($klass_pieces));
+        preg_match('/[.\w+_]+[_](\w+)$/', get_class($this->db_query), $matches);
+        return strtolower($matches[1]);
     }
 
     /**
@@ -1726,15 +1718,22 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                     continue;
                 }
                 $klass = $value[0];
-                $obj = new $klass;
+
+                $data = array();
                 foreach ($value[1] as $index_key => $with_field) {
-                    $obj->data[$value[2][$index_key]] = $row[$with_field];
+                    $data[$value[2][$index_key]] = $row[$with_field];
                 }
-                $obj->_loaded = count($obj->data) > 0;
-                $key_field = Object::property($obj, $obj->primary_key);
-                $obj = $key_field ? $obj : NULL;
+                $obj = NULL;
+                $key_field = NULL;
+                if (array_filter($data))
+                {
+                    $obj = new $klass;
+                    $obj->_loaded = TRUE;
+                    $obj->data = $data;
+                    $key_field = Object::property($obj, $obj->primary_key);
+                }
+
                 if ($value[3] !== self::HAS_MANY) {
-                    unset($this->with[$key]);
                     $_result[$_key][$key] = $obj;
                 }
                 elseif ( ! isset($_result[$_key][$key][$key_field]) ) {
@@ -1742,7 +1741,6 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 }
             }
         }
-
         $this->count = count($_result);
         return $_result;
 
