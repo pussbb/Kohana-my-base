@@ -17,7 +17,7 @@
  * @subpackage database
  */
 
-class Base_Model extends Base_Db_Model {
+class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
 
     /**
      * array of model objects
@@ -184,10 +184,27 @@ class Base_Model extends Base_Db_Model {
 
     /**
      *
-     * @internal
      */
     private $_loaded = FALSE;
 
+    /**
+     *
+     */
+    private $_table_fields = array();
+
+    /**
+     *
+     */
+    private $_table_columns = array();
+
+     /**
+     * contain dynamically append variables
+     *
+     * or fields and value for the row
+     * @var array|null
+     * @access protected
+     */
+    private $data = array();
     /**
      * ignore it just a hack
      * @internal
@@ -212,7 +229,8 @@ class Base_Model extends Base_Db_Model {
      */
     const STAT = 4;
 
-
+    private static $table_columns_cache = array();
+    private static $table_fields_cache = array();
     /**
      * Constructs the object
      *
@@ -231,8 +249,28 @@ class Base_Model extends Base_Db_Model {
      */
     public function __construct($params = NULL)
     {
-        $this->_table_columns = $this->get_table_columns();
-        $this->_table_fields = array_keys($this->_table_columns);
+        $this->db_table = self::db_table_name();
+        $this->module_name = strtolower(self::module_name());
+
+        if (isset(self::$table_columns_cache[$this->db_table]))
+        {
+            $this->_table_columns = self::$table_columns_cache[$this->db_table];
+        }
+        else
+        {
+            $this->_table_columns = $this->get_table_columns();
+            self::$table_columns_cache[$this->db_table] = $this->_table_columns;
+        }
+
+        if (isset(self::$table_fields_cache[$this->db_table]))
+        {
+            $this->_table_fields = self::$table_fields_cache[$this->db_table];
+        }
+        else
+        {
+            $this->_table_fields = array_keys($this->_table_columns);
+            self::$table_fields_cache[$this->db_table] = $this->_table_fields;
+        }
 
         if (is_array($params)) {
             $this->update_params($params);
@@ -240,20 +278,111 @@ class Base_Model extends Base_Db_Model {
             $this->data[$this->primary_key] = intval($params);
         }
 
-        $this->db_table = self::db_table_name();
-        $this->module_name = strtolower(self::module_name());
+    }
 
+    /**
+     * Serialize data only for that table everything else ignored
+     *
+     * @access public
+     * @return string
+     */
+    public function serialize()
+    {
+        $data =array(
+            'data' => Arr::extract($this->data, $this->_table_fields),
+            '_table_fields' => $this->_table_fields,
+            '_table_columns' => $this->_table_columns
+        );
 
+        return (string)serialize($data);
+    }
+
+    /**
+     * Unserialize data
+     *
+     * @param string $data
+     * @access public
+     * @return string
+     */
+    public function unserialize($data)
+    {
+        $data = unserialize($data);
+        if ( ! $data)
+            $data = array();
+        $this->data = Arr::get($data, 'data');
+        $this->_table_columns = Arr::get($data, '_table_columns');
+        $this->_table_fields = Arr::get($data, '_table_fields');
+
+    }
+
+/**
+     * Check if the given item exists
+     *
+     * @param string $key
+     * @return boolean
+     */
+    public function offsetExists($key) {
+        return isset($this->data[$key]);
+    }
+
+    /**
+     * Get the given item
+     *
+     * @param string $key
+     * @return string
+     */
+    public function offsetGet($key) {
+        return isset($this->data[$key]) ? $this->data[$key] : NULL;
+    }
+
+    /**
+     * Set the given header
+     *
+     * @param string $key
+     * @param string $value
+     */
+    public function offsetSet($key, $value) {
+        $this->data[$key] = $value;
+    }
+
+    /**
+     * Unset the given item
+     *
+     * @param string $key
+     */
+    public function offsetUnset($key) {
+        unset($this->data[$key]);
+    }
+
+    /**
+     * Get an interator for the data
+     *
+     * @return ArrayIterator
+     */
+    public function getIterator() {
+        return new ArrayIterator($this->data);
+    }
+
+    /**
+     * dynamically append variable to object
+     *
+     * <code>
+     * $model = new Model();
+     * $model->login = 'user';
+     * </code>
+     * @param $name
+     * @param $value
+     * @access public
+     * @internal
+     */
+    public function __set($name, $value)
+    {
+        $this->data[$name] = $this->sanitize($name, $value) ;
     }
 
     /**
      * get value of dynamically appended variable
      *
-     * <code>
-     * $model = new Model();
-     * $model->login = 'user';
-     * echo $model->login; // will output user
-     * </code>
      * @param $name
      * @throws Exception_Collection_PropertyNotExists
      * @return mixed
@@ -269,6 +398,36 @@ class Base_Model extends Base_Db_Model {
         if ( ! $relation)
             throw new Exception_Collection_PropertyNotExists();
         return $this->_relation($name, $relation);
+    }
+
+    /**
+     * removes dynamically appended variable
+     *
+     * <code>
+     * $model = new Model();
+     * $model->login = 'user';
+     * unset($model->login); //here
+     * </code>
+     * @param $name
+     * @access public
+     * @internal
+     */
+    public function __unset($name)
+    {
+        unset($this->data[$name]);
+    }
+
+    /**
+     * checks if dynamically appended variable exists
+     *
+     * @param $name
+     * @return bool
+     * @access public
+     * @internal
+     */
+    public function __isset($name)
+    {
+        return array_key_exists($name, $this->data);
     }
 
     /**
@@ -1566,9 +1725,6 @@ class Base_Model extends Base_Db_Model {
                     $_result[$_key][$key] = $row[$value[1][0]];
                     continue;
                 }
-                $one_record = $value[3] === self::BELONGS_TO || $value[3] === self::HAS_ONE;
-                if ( isset($_result[$_key][$key]) && (is_object($_result[$_key][$key]) && $one_record))
-                    continue;
                 $klass = $value[0];
                 $obj = new $klass;
                 foreach ($value[1] as $index_key => $with_field) {
@@ -1576,7 +1732,9 @@ class Base_Model extends Base_Db_Model {
                 }
                 $obj->_loaded = count($obj->data) > 0;
                 $key_field = Object::property($obj, $obj->primary_key);
-                if ($one_record) {
+                $obj = $key_field ? $obj : NULL;
+                if ($value[3] !== self::HAS_MANY) {
+                    unset($this->with[$key]);
                     $_result[$_key][$key] = $obj;
                 }
                 elseif ( ! isset($_result[$_key][$key][$key_field]) ) {
@@ -1676,7 +1834,7 @@ class Base_Model extends Base_Db_Model {
     public function update_params(array $array)
     {
         foreach ($array as $key => $value) {
-            $this->data[$key] = $value;
+            $this->data[$key] = $this->sanitize($key, $value);
         }
         return $this;
     }
@@ -1795,7 +1953,7 @@ class Base_Model extends Base_Db_Model {
         if (json_last_error() != JSON_ERROR_NONE)
             throw new Exception_Json(NULL, json_last_error());
 
-        return $data;
+        return $data?:array();
     }
 
     /**
