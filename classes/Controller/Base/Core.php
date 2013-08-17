@@ -41,12 +41,6 @@ class Controller_Base_Core extends Controller_Template {
     protected $bundles = array('');
 
     /**
-     *  check Acl access (true means do the check)
-     * @var bool
-     */
-    protected $check_access = TRUE;
-
-    /**
      * Kohana View object
      * @var null
      */
@@ -70,17 +64,6 @@ class Controller_Base_Core extends Controller_Template {
      */
     private $config = NULL;
 
-    /**
-     * sets language by default
-     * @return void
-     * @access protected
-     */
-    protected function set_language()
-    {
-        $lang = $this->request->param('lang');
-        $language = Language::get($lang);
-        Gettext::lang($language->locale);
-    }
 
     /**
      * init base template and this
@@ -88,9 +71,6 @@ class Controller_Base_Core extends Controller_Template {
     public function before()
     {
         parent::before();
-        $this->set_language();
-        $this->check_access();
-
         $this->view = new View();
         if ($this->template)
             $this->template->set(array('content' => NULL, 'keywords'=> NULL, 'description'=> NULL, 'title'=> NULL));
@@ -118,27 +98,6 @@ class Controller_Base_Core extends Controller_Template {
         if (!$filename)
             return;
         $this->filename = explode('/', $filename);
-    }
-
-    /**
-     * check access for current request
-     * @throws HTTP_Exception_403
-     */
-    protected function check_access()
-    {
-        if ( ! $this->request->is_initial()
-              || ! $this->check_access
-              || Acl::instance()->allowed($this->request_structure()))
-            return TRUE;
-
-        if ( ! Auth::instance()->logged_in() && ! $this->request->is_ajax()){
-            Cookie::set('auth_required_url', $this->request->url().http_build_query($this->request->query()) );
-            return self::redirect($this->config_item('user_login_uri'));
-        }
-        else {
-            throw new HTTP_Exception_403(tr('Access deny'));
-        }
-
     }
 
     /**
@@ -385,8 +344,10 @@ class Controller_Base_Core extends Controller_Template {
     public function after()
     {
 
-        if ( ! $this->auto_render)
-            return parent::after();
+        if ( ! $this->auto_render) {
+            parent::after();
+            return;
+        }
 
         if ($this->ajax_auto_partial
             && $this->request->is_ajax())
