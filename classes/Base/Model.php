@@ -592,17 +592,29 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      * @access private
      * @return array
      */
-    private function obj_to_array()
+
+    private function obj_to_array(Base_Model $obj)
     {
         $result = array();
-        foreach($this->data as $key => $value) {
-            if (is_object($value) && $value instanceof Base_Model)
-                $value = $value->obj_to_array();
+        foreach($obj->data as $key => $value) {
+            if (is_object($value) && $obj instanceof Base_Model) {
+                $value = $value->obj_to_array($value);
+            }
+            elseif (is_array($value)) {
+              $_result = array();
+              foreach($value as $record) {
+                if (is_object($record) && $record instanceof Base_Model) {
+                    $_result[] = $record->obj_to_array($record);
+                } else {
+                 $_result[] = $record;
+                }
+              }
+              $value = $_result;
+            }
             $result[$key] = $value;
         }
         return $result;
     }
-
     /**
      * returns assoc array of dynamically append variable
      *
@@ -621,7 +633,19 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     public function as_array()
     {
-        return $this->obj_to_array();
+        return $this->data?:$this->records;
+    }
+
+    public function as_deep_array()
+    {
+        if ($this->records) {
+            $result = array();
+            foreach($this->records as $record) {
+                $result[] = $this->obj_to_array($record);
+            }
+            return $result;
+        }
+        return $this->obj_to_array($this);
     }
 
     /**
@@ -1749,9 +1773,11 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                     $obj->data = $data;
                     $key_field = Object::property($obj, $obj->primary_key);
                 }
-
                 if ($value[3] !== self::HAS_MANY) {
                     $_result[$_key][$key] = $obj?:array();
+                }
+                elseif ( ! $key_field && ! isset($_result[$_key][$key])) {
+                    $_result[$_key][$key] = array();
                 }
                 elseif ( ! isset($_result[$_key][$key][$key_field]) ) {
                     $_result[$_key][$key][$key_field] = $obj;
