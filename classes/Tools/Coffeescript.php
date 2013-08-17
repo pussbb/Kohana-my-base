@@ -24,8 +24,8 @@ class Tools_Coffeescript extends Tools {
      */
     protected function build_if_needed($file_name, $files = NULL)
     {
-        $source_path = self::config('coffeescript.source_path');
-        $dest_path = self::config('coffeescript.dest_path');
+        $source_path = $this->config('coffeescript.source_path');
+        $dest_path = $this->config('coffeescript.dest_path');
         $destination = $dest_path.$file_name.'.js';
         $join = '';
         $source = '';
@@ -56,10 +56,7 @@ class Tools_Coffeescript extends Tools {
         Dir::create_if_need($output_dir);
 
         $cmd = 'coffee -o '. $output_dir .' '.$join.' -c '.$source.' 2>&1';
-
-        if ($this->exec($cmd))
-            return;
-        throw new Exception_Tools("coffescript compiler output for $destination \n ".$this->error());
+        $this->exec($cmd);
     }
 
     /**

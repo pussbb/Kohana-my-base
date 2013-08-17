@@ -99,7 +99,7 @@ class Controller_Base_Core extends Controller_Template {
     /**
      * get config item
      * @param $key string see Arr::path $key param
-     * @param $defualt mixed defualt value if $key not found
+     * @param $defualt mixed default value if $key not found
      * @return mixed
      */
     private function config_item($key, $defualt = NULL)
@@ -204,7 +204,7 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function append_css($name, $media = '')
     {
-        Media::append_style($name, $media);
+        Base_Media::instance()->append_style($name, $media);
     }
 
     /**
@@ -213,7 +213,7 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function append_js($name)
     {
-        Media::append_script($name);
+        Base_Media::instance()->append_script($name);
     }
 
     /**
@@ -231,7 +231,7 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function append_media($file_name, $media = NULL, $check_file = TRUE)
     {
-        Media::append(array('css', 'js'), $file_name, $media, $check_file);
+        Base_Media::instance()->append(array('css', 'js'), $file_name, $media, $check_file);
     }
 
     /**
@@ -251,7 +251,7 @@ class Controller_Base_Core extends Controller_Template {
             $directory = array_shift($structure) . '/';
         }
         $file_name = $directory . implode('.', $structure);
-        $this->append_media($file_name, NULL, TRUE);
+        Base_Media::instance()->append(array('css', 'js'), $file_name, NULL, TRUE);
     }
 
     /**
@@ -342,15 +342,17 @@ class Controller_Base_Core extends Controller_Template {
      * send response as json response
      * @param $data
      */
-    public function render_json($data)
+    public function render_json($data, $status_code = 200)
     {
 
         $json = json_encode($data, JSON_HEX_TAG);
         $this->response
             ->headers('Content-Type', 'application/json')
+            ->status($status_code)
             ->send_headers()
             ->body($json);
-        $this->_safety_render();
+        exit(0);
+        //$this->_safety_render();
     }
 
     /**
@@ -393,7 +395,7 @@ class Controller_Base_Core extends Controller_Template {
         $this->set_view();
 
         foreach ($this->bundles as $bundle) {
-            Media::bundle($bundle);
+            Base_Media::instance()->bundle($bundle);
         }
 
         $this->set_favicon($this->config_item('favicon'));

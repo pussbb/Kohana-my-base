@@ -25,11 +25,7 @@ class Media {
      */
     public static function __callStatic($name, $arguments)
     {
-        $media = Base_Media::instance();
-        if ($name === "instance")
-            return $media;
-
-        return call_user_func_array(array($media, $name), $arguments);
+        return call_user_func_array(array(Base_Media::instance(), $name), $arguments);
     }
 
 }

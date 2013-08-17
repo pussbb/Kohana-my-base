@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Model_Access_Rule extends Model
+class Model_Access_Rule extends Base_Model
 {
     const ROLE_GUEST = 0;
     const ROLE_USER = 1;

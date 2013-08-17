@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Model_Language extends Model
+class Model_Language extends Base_Model
 {
 
 }

@@ -20,16 +20,16 @@ class Base_Date extends Kohana_Date {
     const WEEK_START = 2;
 
     /**
-     * print date in specific format(from config site)
+     * print date in specific format(from configuration of the site)
      * @static
      * @param $date string
      * @param $format string
-     * @return string foremated date
+     * @return string formated date
      */
     public static function format($date, $format = NULL)
     {
         if ( ! $format) {
-            $format = Kohana::$config->load('site')->get('date_formart', 'F j, Y, g:i a');
+            $format = Kohana::$config->load('site')->get('date_format', 'F j, Y, g:i a');
         }
         if ( ! is_numeric($date))
             $date = self::today_if_null($date);
@@ -161,6 +161,29 @@ class Base_Date extends Kohana_Date {
         }
 
         return $months;
+    }
+
+
+    /**
+     * convert datetime string into internal datetime format
+     *
+     * @static
+     * @uses    Date::from_format
+     * @param string $date_str
+     * @param mixed $date_format
+     * @return  array  Array from 1-12 with month names
+     */
+    public static function from_format($date_str, $date_format = DATE_ISO8601)
+    {
+        $format = Kohana::$config->load('common.internal_datetime');
+        $date = DateTime::createFromFormat($date_format, $date_str);
+        if ( ! $date )
+        {
+            if (($timestamp = strtotime($date_str)) === false)
+                throw new  Kohana_Exception('Format date', "Could not format $date_str");
+            return date($format, $timestamp);
+        }
+        return $date->format($format);
     }
 
 }

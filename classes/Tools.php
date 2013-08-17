@@ -17,7 +17,7 @@ class Tools extends Singleton {
     /**
      * config
      */
-    private static $config = NULL;
+    public static $config = NULL;
      /**
      * stdout stream
      */
@@ -32,13 +32,16 @@ class Tools extends Singleton {
      */
     public static function __callStatic($name, $args)
     {
+      $klass = get_called_class();
+      return call_user_func_array(array($klass::instance(), $name), $args);
+    }
+
+    public function __construct()
+    {
       if (Kohana::$is_windows)
             throw new Exception_Tools('Sorry but your platform currently not supported');
-      if ( ! self::can_call('proc_open'))
+      if ( ! self::can_call('proc_open') )
            throw new Exception_Tools('Your system does not support to call proc_open');
-      $klass = get_called_class();
-      $klass::check();
-      return call_user_func_array(array($klass::instance(), $name), $args);
     }
 
     /**
@@ -58,10 +61,9 @@ class Tools extends Singleton {
      * @return mixed
      * @static
      */
-    public static function config($key, $default = NULL)
+    public function config($key, $default = NULL)
     {
-        self::$config = self::$config ?:Kohana::$config->load("tools");
-        return Arr::path(self::$config->as_array(), $key, $default);
+        return Arr::path(self::$config, $key, $default);
     }
     /**
      * check if external app installed
@@ -75,6 +77,16 @@ class Tools extends Singleton {
         exec($cmd, $result);
         return (bool)preg_match($pattern, implode('', $result));
     }
+
+    public static function append_command_option($command, array $cmd_options)
+    {
+        foreach($cmd_options as $option => $value) {
+            $value = $value ? escapeshellarg($value).' ' : '';
+            $command .= "$option $value";
+        }
+        return $command;
+    }
+
     /**
      * run external app
      * @param $cmd string
@@ -92,13 +104,20 @@ class Tools extends Singleton {
             $pipes,
             NULL
         );
+        stream_set_blocking($pipes[2], 0);
         $this->stdout = stream_get_contents($pipes[1]);
         fclose($pipes[1]);
         $this->stderr = stream_get_contents($pipes[2]);
         fclose($pipes[2]);
-        return proc_close($proc) == 0;
-    }
+        $return_value = proc_close($proc);
 
+        if ($this->stderr)
+            throw new Exception_Tools_ErrorOutput(Text::strip_ansi_color($this->stderr));
+/*
+        if ($this->stdout)
+            throw new Exception_Tools_ErrorOutput($this->stdout);*/
+        return $return_value;
+    }
 
     /**
      * checks if coffee script exists
@@ -140,3 +159,5 @@ class Tools extends Singleton {
         return $this->stderr?:$this->stdout;
     }
 }
+
+Tools::$config = Kohana::$config->load("tools")->as_array();

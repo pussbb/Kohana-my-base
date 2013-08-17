@@ -97,9 +97,7 @@ class Tools_Media extends Tools {
      */
     private function eightpack_exec($app, $source_file, $dest_file = NULL)
     {
-      $ok = $this->exec(self::config("eightpack.$app")." $source_file");
-      if ( ! $ok)
-          throw new Exception_Tools($this->error());
+      $this->exec(self::config("eightpack.$app")." $source_file");
       $file = $dest_file?:$source_file;
       file_put_contents($file, $this->stdout);
     }

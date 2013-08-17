@@ -31,6 +31,28 @@ class Base_Gettext extends Kohana_I18n {
      * @var  string   target language: en-us, es-es, zh-cn, etc
      */
     public static $gettext_enabled = TRUE;
+
+    public static $tr_func = NULL;
+
+    public static function init($gettext_enabled = TRUE)
+    {
+        self::$gettext_enabled = $gettext_enabled;
+        self::$tr_func = function($string, $values) {
+            return vsprintf(gettext($string), $values);
+        };
+        if ( ! self::$gettext_enabled ) {
+            self::$tr_func = function($string, $values) {
+                preg_match_all(
+                    '/%(?:\d+\$)?[+-]?(?:[ 0]|\'.{1})?-?\d*(?:\.\d+)?[bcdeEufFgGosxX]/',
+                    $str,
+                    $matches,
+                    PREG_PATTERN_ORDER
+                );
+                return __($string, array_combine($matches, $values));
+            };
+        }
+    }
+
     /**
      * set language
      * @static
@@ -91,5 +113,22 @@ class Base_Gettext extends Kohana_I18n {
     public static function gettext_enabled()
     {
         return Tools::can_call('gettext');
+    }
+
+}
+
+if ( ! function_exists('tr') )
+{
+    /**
+    * translate string via gettext
+    * or Kohana's translation function
+    *
+    * @param $string string
+    * @param $values array
+    * @return string
+    */
+    function tr($string, array $values = array())
+    {
+        return call_user_func(Base_Gettext::$tr_func, $string, $values);
     }
 }

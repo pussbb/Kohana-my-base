@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-Gettext::$gettext_enabled = Gettext::gettext_enabled();
+
 /**
  * Set the exception handler to use the Error module
  *
@@ -9,28 +9,27 @@ Gettext::$gettext_enabled = Gettext::gettext_enabled();
 
 set_exception_handler(array('Error', 'handler'));
 
-if ( ! function_exists('tr'))
-{
-    /**
-    * translate string via gettext
-    * or Kohana's translation function
-    *
-    * @param $string string
-    * @param $values array
-    * @return string
-    */
+Kohana::$config->attach(new Config_File);
 
-    function tr($string, array $values = NULL)
-    {
-        if (Gettext::$gettext_enabled)
-            return vsprintf(gettext($string), $values);
+Gettext::init();
 
-        preg_match_all('/%(?:\d+\$)?[+-]?(?:[ 0]|\'.{1})?-?\d*(?:\.\d+)?[bcdeEufFgGosxX]/', $str, $matches, PREG_PATTERN_ORDER);
-        return __($string, array_combine($matches, $values));
+if ( Kohana::$environment != Kohana::PRODUCTION) {
+    try {
+        Tools_Coffeescript::check();
+        Base_Media::register_media_handler('js', 'Tools_Coffeescript::build_if_needed');
     }
+    catch(Exception_Tools_Missing $e) {}
+    catch(Exception_Tools $e) {}
+
+    try {
+        Tools_Less::check();
+        Base_Media::register_media_handler('css', 'Tools_Less::build_if_needed');
+    }
+    catch(Exception_Tools_Missing $e) {}
+    catch(Exception_Tools $e) {}
 }
 
-if ( ! function_exists('debug'))
+if ( ! function_exists('debug') )
 {
     /**
     * helper function to print dump of var and exit if needed
@@ -46,8 +45,6 @@ if ( ! function_exists('debug'))
         if ($exit) exit(0);
     }
 }
-
-Kohana::$config->attach(new Config_File);
 
 Route::set('www', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array(
   'lang' => Language::uri_check_codes(),

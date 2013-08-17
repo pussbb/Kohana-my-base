@@ -12,7 +12,7 @@
  * @subpackage template
  */
 
-class Base_Media extends Singleton{
+class Base_Media extends Singleton {
 
     /**
      * configuration settings
@@ -69,6 +69,8 @@ class Base_Media extends Singleton{
      */
     private $scripts = array();
 
+    private static $media_handlers = array();
+
     /**
      * Initialize configuration settings
      * and auto load default bundle
@@ -93,6 +95,11 @@ class Base_Media extends Singleton{
          if (strpos($key, '.') !== FALSE)
             return Arr::path($this->config, $key);
         return Arr::get($this->config, $key);
+    }
+
+    public static function register_media_handler($type, $func)
+    {
+        Base_Media::$media_handlers[$type][] = $func;
     }
 
     /**
@@ -208,8 +215,8 @@ class Base_Media extends Singleton{
             return $file_name;
         $file = $prefix.'/'.$file_name.'.'.$prefix;
         if ( strpos('static://', $file_name) === TRUE)
-            return str_replace('static://', $this->path_clean($this->config('core.static_uri').$file));
-        return URL::base(TRUE,TRUE).$this->path_clean($this->config('core.uri').$file);
+            return str_replace('static://', $this->clean_path($this->config('core.static_uri').$file));
+        return URL::base(TRUE,TRUE).$this->clean_path($this->config('core.uri').$file);
     }
 
     /**
@@ -219,7 +226,7 @@ class Base_Media extends Singleton{
      * @return string
      * @access private
      */
-    public function path_clean($file)
+    public function clean_path($file)
     {
         return Text::reduce_slashes($file);
     }
@@ -234,11 +241,8 @@ class Base_Media extends Singleton{
      */
     public function append_style($file_name, $media = NULL, $check = FALSE)
     {
-        if ( Kohana::$environment != Kohana::PRODUCTION) {// && $this->less
-            try {
-                Tools_Less::build_if_needed($file_name);
-            } catch(Exception_Tools_Missing $e) {
-            }
+        foreach(Arr::get(self::$media_handlers, 'css', array()) as $handler) {
+            call_user_func($handler, $file_name);
         }
         if ($check && ! $this->find_file($file_name, 'css'))
             return;
@@ -272,12 +276,8 @@ class Base_Media extends Singleton{
      */
     public function append_script($file_name, $check = FALSE, $files = NULL)
     {
-        if ( Kohana::$environment != Kohana::PRODUCTION) {
-            try {
-                Tools_Coffeescript::build_if_needed($file_name, $files);
-            } catch(Exception_Tools_Missing $e) {
-                //@todo write to combine two or more files
-            }
+        foreach(Arr::get(self::$media_handlers, 'js', array()) as $handler) {
+            call_user_func($handler, $file_name, $files);
         }
         if ($check && ! $this->find_file($file_name, 'js'))
             return;

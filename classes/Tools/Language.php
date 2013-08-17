@@ -22,10 +22,7 @@ class Tools_Language extends Tools {
         $base_dir = Gettext::base_dir();
         Dir::create_if_need($base_dir);
         $template = $base_dir.'template.po';
-        $ok = $this->exec('(find "'.DOCROOT.'" -type f  -iname "*.php" | xargs xgettext -D '.DOCROOT.' -o '.$template.' -L PHP -d="'.Gettext::$domain.'" -p '.$base_dir.' --force-po --no-wrap --keyword="tr" --from-code="UTF-8") 2>&1');
-
-        if ( ! $ok)
-            throw new Exception_Tools('parsing sources failed \n '.$this->error());
+        $this->exec('(find "'.DOCROOT.'" -type f  -iname "*.php" | xargs xgettext -D '.DOCROOT.' -o '.$template.' -L PHP -d="'.Gettext::$domain.'" -p '.$base_dir.' --force-po --no-wrap --keyword="tr" --from-code="UTF-8") 2>&1');
 
         File::sed($template, '/Content-Type: text\/plain; charset=CHARSET/', 'Content-Type: text/plain; charset=UTF-8');
         foreach (Model_Language::find_all()->records as $language) {
@@ -33,14 +30,10 @@ class Tools_Language extends Tools {
             if ( ! file_exists($tr_file)) {
                 $dir = Gettext::tr_path($language->locale);
                 Dir::create_if_need($dir);
-                $ok = $this->exec('msginit --no-translator --locale='.$language->locale.' --input='.$template.' -o '.$tr_file);
-                if ( ! $ok)
-                    throw new Exception_Tools('init translation failed \n '.$this->error());
+                $this->exec('msginit --no-translator --locale='.$language->locale.' --input='.$template.' -o '.$tr_file);
             }
             else {
-                $ok = $this->exec('msgmerge --no-wrap -U  '.$tr_file.' '.$template);
-                if ( ! $ok)
-                    throw new Exception_Tools("updating translation failed \n ".$this->error());
+                $this->exec('msgmerge --no-wrap -U  '.$tr_file.' '.$template);
             }
         }
     }
@@ -58,9 +51,7 @@ class Tools_Language extends Tools {
                 continue;
 
             $output = Gettext::tr_path($language->locale).Gettext::$domain.'.mo';
-            $ok = $this->exec("msgfmt -cv -o $output $tr_file");
-            if ( ! $ok)
-                throw new Exception_Tools("compiling translation failed \n ".$this->error());
+            $this->exec("msgfmt -cv -o $output $tr_file");
         }
     }
 

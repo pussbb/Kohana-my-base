@@ -1,5 +1,6 @@
 
 $ ->
+
   login = $('#loginform')
   recover = $('#recoverform')
   authbox = $('#authbox')

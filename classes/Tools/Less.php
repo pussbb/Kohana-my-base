@@ -21,8 +21,8 @@ class Tools_Less extends Tools {
      */
     protected function build_if_needed($file_name)
     {
-        $source_path = self::config('less.source_path');
-        $dest_path = self::config('less.dest_path');
+        $source_path = $this->config('less.source_path');
+        $dest_path = $this->config('less.dest_path');
         $destination = $dest_path.$file_name.'.css';
         $source = Kohana::find_file($source_path, $file_name, 'less');
 
@@ -32,17 +32,12 @@ class Tools_Less extends Tools {
         Dir::create_if_need($output_dir);
 
         $cmd = 'lessc '.$source;
+        $this->exec($cmd);
 
-        if ( $this->exec($cmd))
-        {
-            if( ! is_writable(dirname($destination)))
-                throw new Exception_Tools("You don't have permission to write in  $destination");
-            file_put_contents($destination, $this->stdout);
-            return;
-        }
+        if( ! is_writable(dirname($destination)))
+            throw new Exception_Tools("You don't have permission to write in  $destination");
+        file_put_contents($destination, $this->stdout);
 
-        $str = Text::strip_ansi_color($this->stderr);
-        throw new Exception_Tools("less compiler output for $destination \n $str");
     }
 
     /**

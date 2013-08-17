@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Model_User extends Model
+class Model_User extends Base_Model
 {
 
 
@@ -20,13 +20,13 @@ class Model_User extends Model
     {
         return array(
             'access_rules' => array(
-                Model::HAS_MANY,
+                self::HAS_MANY,
                 'Model_Access_Rule',
                 'role_id',
                 'role_id'
             ),
             'total_rules' => array(
-                Model::STAT,
+                self::STAT,
                 'Model_Access_Rule',
                 'role_id',
                 'role_id'
