@@ -45,7 +45,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      * @var int
      * @access public
      */
-    public $count = 0;
+    public $total_count = 0;
 
     /**
      * Sets default ordering for DB query
@@ -167,7 +167,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      * @var bool
      * @access private
      */
-    private $count_total = FALSE;
+    private $_count_total = FALSE;
 
     /**
      * contains all necessary data to create appropriate model from join query
@@ -885,7 +885,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 $this->db_query->offset($value);
                 break;
             case 'total_count':
-                $this->count_total = TRUE;
+                $this->_count_total = TRUE;
                 break;
             case 'distinct':
                 $this->db_query->distinct($value);
@@ -1680,8 +1680,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 $_result = $this->parse_result($result);
 
                 $klass = get_called_class();
-                if ($this->count_total)
-                    $this->count = $this->auto_count_total();
+                if ($this->_count_total)
+                    $this->total_count = $this->auto_count_total();
 
                 foreach ($_result as $record) {
                     if ( ! is_array($record) && ! Arr::is_assoc($record))
@@ -1715,9 +1715,9 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     private function parse_result($result)
     {
-        $this->count = $result->count();
+        $this->total_count = $result->count();
         if ( ! $this->with )
-            return $this->count == 1?array($result->current()):$result->as_array();
+            return $this->total_count == 1?array($result->current()):$result->as_array();
 
         $_result = array();
 
@@ -1758,7 +1758,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 }
             }
         }
-        $this->count = count($_result);
+        $this->total_count = count($_result);
         return $_result;
 
     }
@@ -1826,7 +1826,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     private function clean()
     {
         $this->db_query = NULL;
-        $this->count_total = FALSE;
+        $this->_count_total = FALSE;
         $this->with = array();
         $this->errors = array();
     }
