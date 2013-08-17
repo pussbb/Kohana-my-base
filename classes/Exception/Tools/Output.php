@@ -10,6 +10,6 @@
  * @category exceptions
  * @subpackage tools
  */
-class Exception_Tools_Output extends Exception {
+class Exception_Tools_Output extends Exception_Tools {
 
 }

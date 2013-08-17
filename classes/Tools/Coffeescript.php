@@ -37,6 +37,7 @@ class Tools_Coffeescript extends Tools {
                 $_source = Kohana::find_file($source_path, $file, 'coffee');
                 if (is_link($_source))
                   $_source = readlink($_source);
+
                 if (self::need_compile($_source, $destination))
                     $compile = TRUE;
                 $source .= ' ' . $_source;
@@ -55,7 +56,7 @@ class Tools_Coffeescript extends Tools {
         $output_dir = pathinfo($destination, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR;
         Dir::create_if_need($output_dir);
 
-        $cmd = 'coffee -o '. $output_dir .' '.$join.' -c '.$source.' 2>&1';
+        $cmd = 'coffee -o '. $output_dir .' '.$join.' -c '.$source;
         $this->exec($cmd);
     }
 

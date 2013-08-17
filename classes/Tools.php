@@ -132,6 +132,7 @@ class Tools extends Singleton {
      */
     protected static function need_compile($source, $destination)
     {
+        clearstatcache();
 
         if( ! file_exists($source))
             return FALSE;
@@ -139,7 +140,8 @@ class Tools extends Singleton {
         if ( ! file_exists($destination))
             return TRUE;
 
-        if (filemtime($source) > filemtime($destination))
+        if ((filemtime($source) > filemtime($destination))
+            || (fileatime($source) > fileatime($destination)))
             return TRUE;
         return FALSE;
     }
