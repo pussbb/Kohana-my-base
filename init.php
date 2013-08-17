@@ -47,7 +47,7 @@ if ( ! function_exists('debug') )
 }
 
 Route::set('www', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array(
-  'lang' => Language::uri_check_codes(),
+  'lang' => Base_Language::uri_check_codes(),
   ))
     ->defaults(array(
         'lang' => NULL,

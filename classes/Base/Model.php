@@ -1493,7 +1493,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     protected function sanitize($key, $value)
     {
-        if (is_object($value) || ! $value)
+        if (is_object($value))
             return $value;
 
         $column = Arr::get($this->_table_columns, $key);

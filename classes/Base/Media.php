@@ -298,6 +298,17 @@ class Base_Media extends Singleton {
     }
 
     /**
+     * add javascript variable
+     *
+     * @param string $js
+     * @access public
+     */
+    public function append_js_var($name, $value)
+    {
+        $this->inline_script .= 'var '.$name.' = '.json_encode($value).";\n";
+    }
+
+    /**
      * get all appended css files
      *
      * @return array
