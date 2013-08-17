@@ -231,6 +231,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
 
     private static $table_columns_cache = array();
     private static $table_fields_cache = array();
+    private static $db_table_cache = array();
+    private static $module_name_cache = array();
     /**
      * Constructs the object
      *
@@ -247,19 +249,25 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      * @return \Base_Model
      *   @internal
      */
-    public function __construct($params = NULL)
+    public function __construct($params = NULL, $klass = NULL)
     {
-        $this->db_table = self::db_table_name();
-        $this->module_name = strtolower(self::module_name());
+        $klass = $klass?:get_called_class();
+        if ( ! ($this->db_table = Arr::get(self::$db_table_cache, $klass)) ) {
+            $this->db_table = self::db_table_name();
+            self::$db_table_cache[$klass] = $this->db_table;
+        }
 
-        if ( !( $this->_table_columns = Arr::get(self::$table_columns_cache, $this->db_table)) )
-        {
+        if ( ! ($this->module_name = Arr::get(self::$module_name_cache, $klass))) {
+            $this->module_name = strtolower(self::module_name());
+            self::$module_name_cache[$klass] = $this->module_name;
+        }
+
+        if ( !( $this->_table_columns = Arr::get(self::$table_columns_cache, $this->db_table)) ) {
             $this->_table_columns = $this->get_table_columns();
             self::$table_columns_cache[$this->db_table] = $this->_table_columns;
         }
 
-        if ( ! ($this->_table_fields = Arr::get(self::$table_fields_cache,$this->db_table)) )
-        {
+        if ( ! ($this->_table_fields = Arr::get(self::$table_fields_cache,$this->db_table)) ) {
             $this->_table_fields = array_keys($this->_table_columns);
             self::$table_fields_cache[$this->db_table] = $this->_table_fields;
         }
@@ -283,7 +291,9 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $data =array(
             'data' => Arr::extract($this->data, $this->_table_fields),
             '_table_fields' => $this->_table_fields,
-            '_table_columns' => $this->_table_columns
+            '_table_columns' => $this->_table_columns,
+            'db_table' => $this->db_table,
+            'module_name' => $this->module_name,
         );
 
         return (string)serialize($data);
@@ -298,12 +308,12 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     public function unserialize($data)
     {
-        $data = unserialize($data);
-        if ( ! $data)
-            $data = array();
-        $this->data = Arr::get($data, 'data');
-        $this->_table_columns = Arr::get($data, '_table_columns');
-        $this->_table_fields = Arr::get($data, '_table_fields');
+        $data = unserialize($data)?:array();
+        $this->data = $data['data'];
+        $this->_table_columns = $data['_table_columns'];
+        $this->_table_fields = $data['_table_fields'];
+        $this->module_name = $data['module_name'];
+        $this->db_table = $data['db_table'];
 
     }
 
@@ -462,11 +472,11 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $klass = get_called_class();
         switch ($name) {
             case 'destroy':
-                $obj = new $klass();
+                $obj = new $klass(NULL, $klass);
                 return $obj->destroy($arguments[0]);
                 break;
             case 'exists':
-                return  call_user_func_array(array(new $klass, $name), $arguments);
+                return  call_user_func_array(array(new $klass(NULL, $klass), $name), $arguments);
                 break;
             default:
                 break;
@@ -555,7 +565,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 $result = $klass::find_all($filter)->records;
                 break;
             case self::STAT:
-                $obj = new $klass;
+                $obj = new $klass(NULL, $klass);
                 $result = $obj->select(array(DB::expr('COUNT('.$obj->query_field($obj->primary_key).')'), 'total_count'))
                                 ->filter($filter)
                                     ->execute()
@@ -632,15 +642,16 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     public static function find($filter, $cache = FALSE)
     {
-        $klass_name = get_called_class();
-        $klass = new $klass_name;
+        $klass = get_called_class();
+        $obj = new $klass(NULL, $klass);
         if (is_numeric($filter)) {
             $filter = array($klass->primary_key => $filter);
         }
-        $result = $klass::find_all($filter, 1, NULL, $cache);
-        if ( ! ($_result = Arr::get($result->records, 0)))
+        $obj->select('*', 1, NULL, $cache);
+        $obj->filter($filter)->exec();
+        if ( ! ($_result = Arr::get($obj->records, 0)))
             throw new Base_Db_Exception_RecordNotFound();
-        $_result->last_query = $result->last_query;
+        $_result->last_query = $obj->last_query;
         return $_result;
     }
 
@@ -677,8 +688,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     public static function find_all($filter = array(), $limit = NULL, $offset = NULL, $cache = FALSE)
     {
-        $klass_name = get_called_class();
-        $obj = new $klass_name();
+        $klass = get_called_class();
+        $obj = new $klass(NULL, $klass);
         $obj->select('*', $limit, $offset, $cache);
         $obj->filter($filter)->exec();
         return $obj;
@@ -756,7 +767,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     {
         $args = func_get_args();
         $klass = get_called_class();
-        $obj = new $klass();
+        $obj = new $klass(NULL, $klass);
         switch ($args[0]) {
             case Database::SELECT:
                 $obj->select(Arr::get($args, 1), Arr::get($args, 3), Arr::get($args, 4), Arr::get($args, 5))
@@ -806,7 +817,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             throw new Base_Db_Exception_UnknownRelation();
 
         $klass = Arr::get($relation, 1);
-        $model = new $klass();
+        $model = new $klass(NULL, $klass);
         $field = Arr::path($relation, 3, $this->primary_key);
         $foreign_key = Arr::path($relation, 2, $model->primary_key);
         if ( ! $values )
@@ -964,7 +975,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             throw new Base_Db_Exception_UnknownRelation();
 
         $klass = Arr::get($relation, 1);
-        $model = new $klass();
+        $model = new $klass(NULL, $klass);
         $type = Arr::path($relation, 0);
         $foreign_key = Arr::path($relation, 2, $model->primary_key);
         $field = Arr::path($relation, 3, $this->primary_key);
@@ -1234,7 +1245,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                         break;
                     }
                     $klass = Arr::get($relation, 1);
-                    $obj = new $klass;
+                    $obj = new $klass(NULL, $klass);
                     if (in_array($parts[1], $obj->_table_fields))
                        $value = DB::expr($obj->query_field($parts[1],'.',  TRUE));
 
@@ -1672,7 +1683,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 foreach ($_result as $record) {
                     if ( ! Arr::is_array($record) && ! Arr::is_assoc($record))
                         break;
-                    $obj =  new $klass();
+                    $obj =  new $klass(NULL, $klass);
                     $obj->data = $record;
                     $obj->_loaded = count($obj->data) > 0;
                     $this->records[] = $obj;
@@ -1718,23 +1729,22 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                     continue;
                 }
                 $klass = $value[0];
-
                 $data = array();
                 foreach ($value[1] as $index_key => $with_field) {
                     $data[$value[2][$index_key]] = $row[$with_field];
                 }
                 $obj = NULL;
                 $key_field = NULL;
-                if (array_filter($data))
-                {
-                    $obj = new $klass;
+
+                if (array_filter($data)) {
+                    $obj = new $klass(NULL, $klass);
                     $obj->_loaded = TRUE;
                     $obj->data = $data;
                     $key_field = Object::property($obj, $obj->primary_key);
                 }
 
                 if ($value[3] !== self::HAS_MANY) {
-                    $_result[$_key][$key] = $obj;
+                    $_result[$_key][$key] = $obj?:array();
                 }
                 elseif ( ! isset($_result[$_key][$key][$key_field]) ) {
                     $_result[$_key][$key][$key_field] = $obj;
