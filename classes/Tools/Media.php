@@ -173,5 +173,6 @@ class Tools_Media extends Tools {
      */
     public static function  check()
     {
+        parent::check();
     }
 }

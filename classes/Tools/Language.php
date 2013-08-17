@@ -62,6 +62,7 @@ class Tools_Language extends Tools {
      */
     public static function check()
     {
+        parent::check();
         if ( ! self::app_exists('xgettext -V', '/xgettext \(GNU gettext-tools\)/'))
             throw new Exception_Tools_Missing('Gettext tools not installed. Details http://en.wikipedia.org/wiki/Gettext');
     }

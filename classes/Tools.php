@@ -36,7 +36,7 @@ class Tools extends Singleton {
       return call_user_func_array(array($klass::instance(), $name), $args);
     }
 
-    public function __construct()
+    public static function check()
     {
       if (Kohana::$is_windows)
             throw new Exception_Tools('Sorry but your platform currently not supported');

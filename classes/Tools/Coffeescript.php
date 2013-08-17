@@ -67,6 +67,7 @@ class Tools_Coffeescript extends Tools {
      */
     public static function check()
     {
+        parent::check();
         if ( ! self::app_exists('coffee -v', '/CoffeeScript version \d\.\d\.\d/'))
             throw new Exception_Tools_Missing('Coffee script compiler not installed. Please visit http://coffeescript.org');
     }
