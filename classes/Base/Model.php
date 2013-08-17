@@ -369,7 +369,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      * @return ArrayIterator
      */
     public function getIterator() {
-        return new ArrayIterator($this->data);
+        return new ArrayIterator($this->data?:$this->records);
     }
 
     /**
