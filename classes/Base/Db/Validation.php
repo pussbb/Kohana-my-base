@@ -47,7 +47,7 @@ class Base_Db_Validation {
             return tr('Must be valid integer');
 
         $min = Arr::get($rules, 'min');
-        $max = Arr::get($rules, 'max');
+        $max = Arr::get($rules, 'max', Arr::get($rules, 'character_maximum_length'));
         if (($min && $max) && !Valid::range($value, $min, $max))
             return tr('Must be between %d and %d', array($min,$max));
 
@@ -77,7 +77,7 @@ class Base_Db_Validation {
         if (! Valid::not_empty($value))
             return tr('Must not be empty');
 
-        $max = Arr::get($rules, 'max');
+        $max = Arr::get($rules, 'max', Arr::get($rules, 'character_maximum_length'));
         if ($max && !Valid::max_length($value, $max))
             return tr('Must be less than %d',array($max));
 

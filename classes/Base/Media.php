@@ -136,7 +136,7 @@ class Base_Media extends Singleton {
      */
     public function append($key, $name, $media = NULL, $check = FALSE)
     {
-        if (Arr::is_array($key))
+        if (is_array($key))
         {
             foreach ($key as $_key) {
                 $this->append($_key, $name, $media ,$check);
