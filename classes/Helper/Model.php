@@ -22,13 +22,13 @@ class Helper_Model {
      * @param string $action
      * @return string
      */
-    public static function url($model, $action = 'index')
+    public static function url($model, $action = 'index', $id = NULL)
     {
         $uri = array(
             strtolower(Request::current()->directory()),
             Inflector::plural(strtolower($model::module_name())), //controller
             $action,
-            Object::property($model, 'id'),
+            $id//Object::property($model, 'id'),
         );
         return URL::site(implode('/', array_filter($uri)));
     }

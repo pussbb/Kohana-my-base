@@ -10,6 +10,8 @@
 
 class URL extends Kohana_URL {
 
+
+    private static $lang_code = NULL;
     /**
      * generates url for site with lang code if it present in query
      * @param string $uri
@@ -22,14 +24,23 @@ class URL extends Kohana_URL {
     public static function site($uri = '', $protocol = TRUE, $index = TRUE)
     {
 
-        if ($uri && (is_object(Request::current()) && Request::current()->param('lang'))) {
-            $uri_check_codes = Language::uri_check_codes();
-            if (!(bool)preg_match("/^$uri_check_codes\//", $uri, $matches))
-                $uri = Language::get()->code.'/'.$uri;
+        if ($uri && self::$lang_code) {
+            if (strpos($uri, self::$lang_code.'/') === FALSE)
+                $uri = self::$lang_code.'/'.$uri;
         }
 
         return parent::site($uri, $protocol, $index);
 
+    }
+
+    public static function set_lang_code($code)
+    {
+        if ( ! $code ) {
+            self::$lang_code = NULL;
+            return;
+        }
+        if (in_array($code, Base_Language::all_codes()))
+            self::$lang_code = $code;
     }
 
     /**

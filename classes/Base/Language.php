@@ -17,6 +17,8 @@ class Base_Language {
      * @var array
      */
     private static $lang_codes = array();
+    private static $available_cache = array();
+
     /**
      * set current lang
      * @param $language (model object)
@@ -69,8 +71,7 @@ class Base_Language {
         if ($code)
             $filter = array('code' => $code);
         else
-            $filter = array('locale' => I18n::lang());
-        $language = Model_Language::find($filter, TRUE);
+        $language = Arr::get(self::$available_cache, $code, Model_Language::find($filter, TRUE));
         self::set($language);
         return $language;
     }
@@ -82,9 +83,8 @@ class Base_Language {
      */
     public static function all_codes()
     {
-        if (empty(self::$lang_codes)) {
-            $langs = self::available();
-            self::$lang_codes = array_filter(Collection::pluck($langs, 'code'));
+        if ( ! self::$lang_codes ) {
+            self::$lang_codes = array_keys(self::$available_cache?:self::available());
         }
         return self::$lang_codes;
     }
@@ -96,7 +96,12 @@ class Base_Language {
      */
     public static function available()
     {
-        return Model_Language::find_all(array(), NULL, NULL, TRUE)->records;
+        if ( ! self::$available_cache ) {
+            foreach(Model_Language::find_all() as $lang) {
+                self::$available_cache[$lang->code] = $lang;
+            }
+        }
+        return self::$available_cache;
     }
     /**
      * php reg expr to match lang codes

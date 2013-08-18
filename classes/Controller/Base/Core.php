@@ -71,6 +71,7 @@ class Controller_Base_Core extends Controller_Template {
     public function before()
     {
         parent::before();
+        $this->config = Kohana::$config->load('site')->as_array();
         $this->view = new View();
         if ($this->template)
             $this->template->set(array('content' => NULL, 'keywords'=> NULL, 'description'=> NULL, 'title'=> NULL));
@@ -82,10 +83,8 @@ class Controller_Base_Core extends Controller_Template {
      * @param $defualt mixed default value if $key not found
      * @return mixed
      */
-    private function config_item($key, $defualt = NULL)
+    protected function config_item($key, $defualt = NULL)
     {
-        if ( ! $this->config)
-            $this->config = Kohana::$config->load('site');
         return Arr::path($this->config, $key, $defualt);
     }
 
@@ -384,8 +383,7 @@ class Controller_Base_Core extends Controller_Template {
     protected function dynamic_properties(array $filter = array())
     {
 
-        $reflection_object = new ReflectionClass($this);
-        $properties = $reflection_object->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED | ReflectionProperty::IS_PRIVATE);
+        $properties = Object::properties($this);
         $system_variables = array_merge(array(
             'kohana_view_filename',
             'kohana_view_data',
@@ -393,11 +391,6 @@ class Controller_Base_Core extends Controller_Template {
             'layout',
             'config'
         ), $filter);
-
-        foreach ($properties as $property) {
-            $system_variables[] = $property->getName();
-        }
-
         $result = array();
         foreach (get_object_vars($this) as $key => $value) {
             if (in_array($key, $system_variables))

@@ -69,7 +69,10 @@ class Base_Media extends Singleton {
      */
     private $scripts = array();
 
-    private static $media_handlers = array();
+    private static $media_handlers = array(
+        'css' => array(),
+        'js' => array(),
+    );
 
     /**
      * Initialize configuration settings
@@ -79,7 +82,7 @@ class Base_Media extends Singleton {
      */
     public function __construct()
     {
-        $this->config = Kohana::$config->load('media');
+        $this->config = Kohana::$config->load('media')->as_array();
         $this->bundle('default');
     }
 
@@ -92,9 +95,14 @@ class Base_Media extends Singleton {
      */
     private function config($key)
     {
-         if (strpos($key, '.') !== FALSE)
-            return Arr::path($this->config, $key);
-        return Arr::get($this->config, $key);
+        $parts = explode('.', $key);
+        $data = $this->config;
+        foreach($parts as $part) {
+            $data = isset($data[$part]) ? $data[$part] : NULL;
+            if ( ! is_array($data))
+                return $data;
+        }
+        return $data;
     }
 
     public static function register_media_handler($type, $func)
@@ -110,13 +118,13 @@ class Base_Media extends Singleton {
      */
     public function bundle($name)
     {
-        $bundle = Arr::get($this->config, $name, array());
+        $bundle = Arr::get($this->config, $name);
         if ( ! $bundle)
             return;
-        foreach (Arr::get($bundle, 'css') as $file => $media) {
+        foreach (Arr::get($bundle, 'css', array()) as $file => $media) {
             $this->append_style($file, $media);
         }
-        foreach (Arr::get($bundle, 'js') as $file => $file_group) {
+        foreach (Arr::get($bundle, 'js', array()) as $file => $file_group) {
             if (is_numeric($file)) {
                 $file = $file_group;
                 $file_group = NULL;
@@ -241,7 +249,7 @@ class Base_Media extends Singleton {
      */
     public function append_style($file_name, $media = NULL, $check = FALSE)
     {
-        foreach(Arr::get(self::$media_handlers, 'css', array()) as $handler) {
+        foreach(self::$media_handlers['css'] as $handler) {
             call_user_func($handler, $file_name);
         }
         if ($check && ! $this->find_file($file_name, 'css'))
@@ -276,7 +284,7 @@ class Base_Media extends Singleton {
      */
     public function append_script($file_name, $check = FALSE, $files = NULL)
     {
-        foreach(Arr::get(self::$media_handlers, 'js', array()) as $handler) {
+        foreach(self::$media_handlers['js'] as $handler) {
             call_user_func($handler, $file_name, $files);
         }
         if ($check && ! $this->find_file($file_name, 'js'))

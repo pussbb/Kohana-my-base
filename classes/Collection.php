@@ -71,13 +71,15 @@ class Collection {
       * @static
       * @return array
       */
-    public static function build_tree(array $collection,  $parent = NULL, $parent_key = 'parent_id', $key = 'id')
+    public static function build_tree(array &$collection,  $parent = NULL, $parent_key = 'parent_id', $key = 'id')
     {
         $result = array();
-        foreach($collection as $item)
+        foreach($collection as $_key => $item)
         {
-            if ( $item->$parent_key == $parent)
+
+            if ( $item->$parent_key === $parent)
             {
+                unset($collection[$_key]);
                 $result[$item->$key] = array(
                   'object' => $item,
                   'childs' => self::build_tree($collection, $item->$key)

@@ -321,7 +321,7 @@ class Pretty_Form extends Singleton
     private function render_template($name, $params)
     {
         $file = $this->view_path . $this->template . DIRECTORY_SEPARATOR . $name;
-        $data = Arr::merge(array('name' => NULL, 'label'=>NULL, 'attr'=>NULL, 'info'=>NULL, 'buttons'=>NULL), $params);
+        $data = array_merge(array('name' => NULL, 'label'=>NULL, 'attr'=>NULL, 'info'=>NULL, 'buttons'=>NULL), $params);
         $data['value'] = $this->value($params);
         if ( ! isset($data['error']))
             $data['error'] = $this->error($params);

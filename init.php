@@ -11,7 +11,8 @@ set_exception_handler(array('Error', 'handler'));
 
 Kohana::$config->attach(new Config_File);
 
-Gettext::init();
+Base_Language::available();
+Base_Gettext::init();
 
 if ( Kohana::$environment != Kohana::PRODUCTION) {
     try {

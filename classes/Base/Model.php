@@ -1678,7 +1678,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         if ($this->order && $this->query_type() === 'select')
             call_user_func_array(array($this->db_query, 'order_by'), $this->order);
         $result = $this->db_query->execute();
-        $this->last_query = (string) $this->db_query;
+        $this->last_query =(string) $this->db_query;
         $responce = $this->parse_responce($result);
         if ($this->auto_clean)
             $this->clean();
@@ -1708,8 +1708,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                     $this->total_count = $this->auto_count_total();
 
                 foreach ($_result as $record) {
-                    if ( ! is_array($record) && ! Arr::is_assoc($record))
-                        break;
+//                     if ( ! is_array($record) && ! Arr::is_assoc($record))
+//                         break;
                     $obj =  new $klass(NULL, $klass);
                     $obj->data = $record;
                     $obj->_loaded = count($obj->data) > 0;
@@ -1771,7 +1771,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                     $obj = new $klass(NULL, $klass);
                     $obj->_loaded = TRUE;
                     $obj->data = $data;
-                    $key_field = Object::property($obj, $obj->primary_key);
+                    if (isset($obj->data[$obj->primary_key]))
+                        $key_field = $obj->data[$obj->primary_key];
                 }
                 if ($value[3] !== self::HAS_MANY) {
                     $_result[$_key][$key] = $obj?:array();
