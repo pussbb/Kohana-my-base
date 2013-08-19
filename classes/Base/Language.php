@@ -66,11 +66,9 @@ class Base_Language {
      * @return language (model object)
      * @static
      */
-    private static function get_lang($code)
+    private static function get_lang($code = NULL)
     {
-        if ($code)
-            $filter = array('code' => $code);
-        else
+        $filter = $code ? array('code' => $code) : array('locale' => I18n::lang());
         $language = Arr::get(self::$available_cache, $code, Model_Language::find($filter, TRUE));
         self::set($language);
         return $language;
