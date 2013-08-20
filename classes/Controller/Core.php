@@ -32,6 +32,7 @@ class Controller_Core extends Controller_Base_Core {
         $lang = $this->request->param('lang');
         URL::set_lang_code($lang);
         $language = Language::get($lang);
+        Language::set($language);
         Gettext::lang($language->locale);
     }
 

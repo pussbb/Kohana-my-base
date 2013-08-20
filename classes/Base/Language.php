@@ -42,10 +42,7 @@ class Base_Language {
         }
         elseif ( ! is_object($language) ||
           (is_object($language) && ($lang && $language->code != $lang))) {
-            try {
                 return self::get_lang($lang);
-            } catch(Exception $e) {
-            }
         }
         return $language;
     }
@@ -69,9 +66,7 @@ class Base_Language {
     private static function get_lang($code = NULL)
     {
         $filter = $code ? array('code' => $code) : array('locale' => I18n::lang());
-        $language = Arr::get(self::$available_cache, $code, Model_Language::find($filter, TRUE));
-        self::set($language);
-        return $language;
+        return Arr::get(self::$available_cache, $code, Model_Language::find($filter));
     }
 
     /**
@@ -81,10 +76,7 @@ class Base_Language {
      */
     public static function all_codes()
     {
-        if ( ! self::$lang_codes ) {
-            self::$lang_codes = array_keys(self::$available_cache?:self::available());
-        }
-        return self::$lang_codes;
+        return self::$lang_codes ?: array_keys(self::available());
     }
 
     /**

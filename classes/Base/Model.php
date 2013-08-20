@@ -848,8 +848,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
 
         $klass = Arr::get($relation, 1);
         $model = new $klass(NULL, $klass);
-        $field = Arr::path($relation, 3, $this->primary_key);
-        $foreign_key = Arr::path($relation, 2, $model->primary_key);
+        $field = Arr::get($relation, 3, $this->primary_key);
+        $foreign_key = Arr::get($relation, 2, $model->primary_key);
         if ( ! $values )
             $values = $this->$field;
         $select = array(DB::expr('COUNT('.$model->query_field($model->primary_key).')'), 'total_count');
@@ -921,10 +921,10 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 $field = explode('.', $value[0]);
                 if (count($field) > 1)
                 {
-                    $model = Arr::path($this->with, $field[0].'.0');
-                    if ( ! $model)
+                    $klass = Arr::path($this->with, $field[0].'.0');
+                    if ( ! $klass)
                         break;
-                    $obj = new $model;
+                    $obj = new $klass(NULL, $klass);
                     $value = array($obj->query_field($field[1]), $value[1]);
                 }
                 $this->db_query = call_user_func_array(array($this->db_query, 'order_by'), $value);
@@ -997,7 +997,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             throw new Base_Db_Exception_LoadedModel;
 
         $relation = Arr::get($this->relations(), $name);
-        if ( ! $relation)
+        if ( ! $relation )
             throw new Base_Db_Exception_UnknownRelation();
 
         $klass = $relation[1];
@@ -1009,7 +1009,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $model_fields = array();
         if ($type !== self::STAT) {
             $model_fields = $model->query_columns_for_join();
-            if ($this->query_type() == 'select')
+            if ($this->query_type() === 'select')
                 $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
 
             $this->db_query->join(array($model->db_table, $model->module_name), 'LEFT');
@@ -1048,15 +1048,10 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         if ( ! $name)
             throw new Base_Db_Exception_EmptyColumnName();
 
-        if ( ! is_object($name)){
-            if ( ! $escape)
-                return $this->module_name.$delimiter.$name;
-            else
-                return "`$this->module_name`$delimiter`$name`";
-        }
+        if ( ! is_object($name) )
+            return $escape ? "`$this->module_name`$delimiter`$name`" : $this->module_name.$delimiter.$name;
 
-
-        if (! ($name instanceof Database_Expression))
+        if (! ($name instanceof Database_Expression) )
            throw new Exception_Collection_ObjectNotSupported();
         return $name;
     }
@@ -1159,7 +1154,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             $db = clone $this->db_query;
 
             foreach(array('limit', 'offset') as $key) {
-                if ( ! array_key_exists($key, $system_filters))
+                if ( ! array_key_exists($key, $system_filters) )
                     continue;
                 $db->$key($system_filters[$key]);
                 unset($system_filters[$key]);
@@ -1183,7 +1178,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
              $this->system_filters($key, $value);
         }
 
-        if ( ! $this->with)
+        if ( ! $this->with )
             return $this;
 
         $this->db_query->where_open();
@@ -1191,12 +1186,13 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             extract($this->sql_filter_fields($key, $value));
             $filter_parts = explode('.', $key);
             $relation = Arr::get($this->with, $filter_parts[0]);
-            if ( ! $relation)
+            if ( ! $relation )
                 throw new Base_Db_Exception_UnknownRelation;
 
-            $klass = new $relation[0];
+            $klass = $relation[0];
+            $obj = new $klass(NULL, $klass);
             $key = $filter_parts[1];
-            $this->db_query->$clause($klass->query_field($key), $comparison_key, $klass->sanitize($key, $value));
+            $this->db_query->$clause($obj->query_field($key), $comparison_key, $obj->sanitize($key, $value));
         }
         $this->db_query->where_close_empty();
 
@@ -1238,7 +1234,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         }
         switch(gettype($value)) {
             case 'array': {
-                $comparison_key =$comparison_key === '<>' ? 'NOT IN' : 'IN';
+                $comparison_key = $comparison_key === '<>' ? 'NOT IN' : 'IN';
                 break;
             }
             case 'object': {
@@ -1266,7 +1262,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 {
                     $parts = explode('.', $value);
                     $relation = Arr::get($this->relations(), $parts[0]);
-                    if ( ! $relation) {
+                    if ( ! $relation ) {
                         $value = DB::expr($value);
                         break;
                     }
@@ -1403,10 +1399,10 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     {
         $this->db_query = DB::delete(array($this->db_table, $this->module_name));
 
-        if ( ! $filter && ! $this->_loaded)
+        if ( ! $filter && ! $this->_loaded )
             throw new Base_Db_Exception_NotLoadedNodel;
 
-        if ( ! $filter)
+        if ( ! $filter )
             $filter =$this->data[$this->primary_key];
 
         if (is_numeric($filter))
@@ -1775,7 +1771,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                         $key_field = $obj->data[$obj->primary_key];
                 }
                 if ($value[3] !== self::HAS_MANY) {
-                    $_result[$_key][$key] = $obj?:array();
+                    $_result[$_key][$key] = $obj?:NULL;
                 }
                 elseif ( ! $key_field && ! isset($_result[$_key][$key])) {
                     $_result[$_key][$key] = array();
@@ -1985,13 +1981,13 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     public function meta_data()
     {
-        if ( ! isset($this->meta_data))
+        if ( ! isset($this->data['meta_data']))
             throw new Base_Db_Exception_MetaDataFieldMissing();
 
         if ($this->meta_data_cache)
             return $this->meta_data_cache;
 
-        $data = json_decode($this->meta_data, TRUE);
+        $data = json_decode($this->data['meta_data'], TRUE);
         if (json_last_error() != JSON_ERROR_NONE)
             throw new Exception_Json(NULL, json_last_error());
 
