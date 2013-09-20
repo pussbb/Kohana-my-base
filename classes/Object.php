@@ -36,8 +36,11 @@ class Object {
      * @access public
      * @static
      */
-    public static function properties($obj)
+    public static function properties($obj, $all_properties = FALSE)
     {
+        if ( ! $all_properties )
+            return get_object_vars($obj);
+
         $properties = array();
         $reflecionObject = new ReflectionObject($obj);
         $object_properties = $reflecionObject->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED | ReflectionProperty::IS_PRIVATE);

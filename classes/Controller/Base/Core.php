@@ -44,7 +44,7 @@ class Controller_Base_Core extends Controller_Template {
      * Kohana View object
      * @var null
      */
-    public $view = NULL;
+    protected $view = NULL;
 
     /**
      * set view file name wich will be rendered in template section 'content'
@@ -64,7 +64,6 @@ class Controller_Base_Core extends Controller_Template {
      */
     private $config = NULL;
 
-
     /**
      * init base template and this
      */
@@ -73,8 +72,10 @@ class Controller_Base_Core extends Controller_Template {
         parent::before();
         $this->config = Kohana::$config->load('site')->as_array();
         $this->view = new View();
+
         if ($this->template)
-            $this->template->set(array('content' => NULL, 'keywords'=> NULL, 'description'=> NULL, 'title'=> NULL));
+            $this->template->set(array('content' => NULL, 'meta'=> array(), 'title'=> NULL));
+
     }
 
     /**
@@ -99,13 +100,21 @@ class Controller_Base_Core extends Controller_Template {
         $this->filename = explode('/', $filename);
     }
 
+    public function add_meta($key, $attr)
+    {
+        $this->template->meta[$key] = $attr;
+    }
+
     /**
      * set keywords for page
      * @param $keywords
      */
     public function set_keywords($keywords)
     {
-        $this->template->keywords = $keywords;
+        $this->add_meta('keywords', array(
+            'name' => 'keywords',
+            'content' => $keywords,
+        ));
     }
 
     /**
@@ -114,7 +123,10 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function set_description($description)
     {
-        $this->template->description = $description;
+        $this->add_meta('description', array(
+            'name' => 'description',
+            'content' => $description,
+        ));
     }
 
     /**
@@ -363,13 +375,12 @@ class Controller_Base_Core extends Controller_Template {
         $controller_vars = $this->dynamic_properties();
         $this->view->set($controller_vars);
         if ($this->layout) {
-            $content = View::factory('layout/'.$this->layout,
-                array_merge(array('content' => $this->view->render()), $controller_vars));
+            $controller_vars['content'] = $this->view->render();
+            $content = View::factory('layout/'.$this->layout, $controller_vars);
         }
         else {
             $content = $this->view;
         }
-
         $this->template->content = $content->render();
         parent::after();
     }
@@ -382,23 +393,14 @@ class Controller_Base_Core extends Controller_Template {
      */
     protected function dynamic_properties(array $filter = array())
     {
-
-        $properties = Object::properties($this);
         $system_variables = array_merge(array(
-            'kohana_view_filename',
-            'kohana_view_data',
-            'filename',
-            'layout',
-            'config'
+            'auto_render',
+            'template',
+            'request',
+            'response',
         ), $filter);
-        $result = array();
-        foreach (get_object_vars($this) as $key => $value) {
-            if (in_array($key, $system_variables))
-                continue;
-            $result[$key] = $value;
-        }
-
-        return $result;
+        $system_variables = array_combine($system_variables, $system_variables);
+        return array_diff_key(Object::properties($this), $system_variables);
     }
 
     /**

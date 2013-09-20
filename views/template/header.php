@@ -13,10 +13,8 @@ if ($favicon) {
     echo '<link rel ="shortcut icon" href="' .URL::base(TRUE, FALSE) . $favicon. '" type="image/x-icon" />';
 }
 
-foreach (array('keywords', 'description') as $property) {
-    if (!$property)
-        continue;
-    echo "<meta name=\"$property\" content=\"$property\"/>";
+foreach($meta as $key => $attr) {
+    echo '<meta '.HTML::attributes($attr).' />';
 }
 
 foreach ( Media::styles() as $file => $type) {

@@ -1472,7 +1472,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     {
         switch ($this->query_type()) {
             case 'insert':
-                $properties = Object::properties($this->db_query);
+                $properties = Object::properties($this->db_query, TRUE);
                 $columns = Arr::get($properties, '_columns', $this->_table_fields);
                 $values = Arr::get($properties, '_values');
 
