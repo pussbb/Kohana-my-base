@@ -37,15 +37,6 @@ class Controller_Base_API extends Controller_Base_Core {
     protected $ajax_auto_partial = FALSE;
 
     /**
-     * json format key
-     */
-    const JSON_FORMAT = 'json';
-    /**
-     * xml format key
-     */
-    const XML_FORMAT = 'xml';
-
-    /**
      * @var null
      */
     private $responce_type = NULL;
@@ -56,7 +47,6 @@ class Controller_Base_API extends Controller_Base_Core {
     public function before()
     {
         parent::before();
-        $this->responce_type = Arr::get($_REQUEST, 'format', self::JSON_FORMAT);
         if ($this->is_put()) {
             $action = $this->request->action();
             $action = $action === 'index' ? 'update' : "update_$action";
@@ -78,17 +68,18 @@ class Controller_Base_API extends Controller_Base_Core {
      */
     public function after()
     {
-        $data = $this->dynamic_properties(array('responce_type'));
+        $data = $this->dynamic_properties();
         if (count($data) == 1 && Arr::is_array(current($data)))
             $data = array_shift($data);
-        switch ($this->responce_type) {
-            case self::JSON_FORMAT:
+        switch (Request::accept_type()) {
+            case 'application/json':
                 $this->render_json($data);
                 break;
-            case self::XML_FORMAT:
+            case 'application/xml':
+                $this->render_xml($data);
                 break;
             default:
-                throw new Kohana_Kohana_Exception(500, 'Unknown format');
+                throw new HTTP_Exception_500('Unknown format');
                 break;
         }
     }

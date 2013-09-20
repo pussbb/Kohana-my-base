@@ -324,6 +324,66 @@ class Controller_Base_Core extends Controller_Template {
         exit(0);
         //$this->_safety_render();
     }
+    private function array2xml(array $data, $xml)
+    {
+        foreach($data as $key => $value)
+        {
+            switch (gettype($value)) {
+                case 'array':
+                    if (Arr::is_assoc($value)) {
+                        $sub_node = $this->array2xml($value,
+                                              new SimpleXMLElement("<$key/>"));
+                    }
+                    else {
+                        $sub_node = new SimpleXMLElement("<$key/>");
+                        foreach($value as $val) {
+                            $this->array2xml(array('item'=>$val), $sub_node);
+                        }
+                    }
+                    $toDom = dom_import_simplexml($xml);
+                    $fromDom = dom_import_simplexml($sub_node);
+                    $toDom->appendChild(
+                        $toDom->ownerDocument->importNode($fromDom, true)
+                    );
+                    break;
+                case 'string':
+                    $key = is_numeric($key) ? 'item' : $key;
+
+                    if ($value != strip_tags($value))
+                    {
+                        $node = dom_import_simplexml($xml);
+                        $fromDom = dom_import_simplexml(new SimpleXMLElement("<$key/>"));
+                        $fromDom->appendChild(
+                            $fromDom->ownerDocument->importNode($fromDom->ownerDocument->createCDATASection($value),true)
+                        );
+                        $node->appendChild(
+                            $node->ownerDocument->importNode($fromDom,true)
+                        );
+                    }
+                    else {
+                        $xml->addChild($key, $value);
+                    }
+                    break;
+                default:
+                    $key = is_numeric($key) ? 'item' : $key;
+                    $xml->addChild($key, $value);
+                    break;
+            }
+        }
+        return $xml;
+    }
+
+    public function render_xml($data, $status_code = 200)
+    {
+      $xml = new SimpleXMLElement('<response/>');
+      $data = is_array($data) ? $data : array($data);
+      $xml = $this->array2xml($data, $xml);
+        $this->response
+            ->headers('Content-Type', 'application/xml')
+            ->status($status_code)
+            ->send_headers()
+            ->body($xml->asXML());
+    }
 
     /**
      * disable template render and call final method of parent class
