@@ -310,7 +310,7 @@ class Controller_Base_Core extends Controller_Template {
 
     /**
      * send response as json response
-     * @param $data
+     * @param $data mixed
      */
     public function render_json($data, $status_code = 200)
     {
@@ -324,6 +324,13 @@ class Controller_Base_Core extends Controller_Template {
         exit(0);
         //$this->_safety_render();
     }
+
+     /**
+     * convert array into xml elements
+     * @param $data array
+     * @access private
+     * @return SimpleXMLElement object
+     */
     private function array2xml(array $data, $xml)
     {
         foreach($data as $key => $value)
@@ -373,6 +380,12 @@ class Controller_Base_Core extends Controller_Template {
         return $xml;
     }
 
+    /**
+     * send response as xml response
+     * @param $data
+     * @access public
+     * @return void
+     */
     public function render_xml($data, $status_code = 200)
     {
       $xml = new SimpleXMLElement('<response/>');
@@ -383,6 +396,7 @@ class Controller_Base_Core extends Controller_Template {
             ->status($status_code)
             ->send_headers()
             ->body($xml->asXML());
+      $this->_safety_render();
     }
 
     /**
@@ -470,10 +484,11 @@ class Controller_Base_Core extends Controller_Template {
      */
     protected function set_view()
     {
+        $file_name = $this->filename;
         if (!$this->filename) {
-            $this->set_filename(Text::reduce_slashes(implode('/', $this->request_structure())));
+            $file_name = $this->request_structure();
         }
-        $this->view->set_filename(Text::reduce_slashes(implode('/', $this->filename)));
+        $this->view->set_filename(Text::reduce_slashes(implode('/', $file_name)));
     }
 
 }
