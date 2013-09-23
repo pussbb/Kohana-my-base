@@ -3,7 +3,7 @@
 /**
  * Helper functions to work with directories
  * @package Kohana-my-base
- * @copyright 2012 pussbb@gmail.com
+ * @copyright 2013 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
@@ -17,16 +17,17 @@ class Dir {
      * checks if dir exists and if not creates it(can create '/dir1/dir2')
      *
      * @param $dir string
+     * @param $chmod integer  access permissions to file system object
      * @access public
      * @static
      * @throws Exception
      */
-    public static function create_if_need($dir)
+    public static function create_if_need($dir, $chmod = 0755)
     {
         $dir = Text::reduce_slashes($dir);
-        if ( ! file_exists($dir))
+        if ( ! file_exists($dir) || ! is_dir($dir) )
         {
-            if ( ! mkdir($dir, 0755, TRUE))
+            if ( ! mkdir($dir, $chmod, TRUE) )
                 throw new Exception('Could not create directory'.$dir);
         }
     }
