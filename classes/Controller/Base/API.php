@@ -71,16 +71,14 @@ class Controller_Base_API extends Controller_Base_Core {
         $data = $this->dynamic_properties();
         if (count($data) == 1 && Arr::is_array(current($data)))
             $data = array_shift($data);
-        switch (Request::accept_type()) {
-            case 'application/json':
-                $this->render_json($data);
-                break;
-            case 'application/xml':
-                $this->render_xml($data);
-                break;
-            default:
-                throw new HTTP_Exception_500('Unknown format');
-                break;
+        $accept_types = Request::accept_type();
+
+        if (array_key_exists('application/json', $accept_types)) {
+            $this->render_json($data);
+        } elseif (array_key_exists('application/xml', $accept_types)) {
+            $this->render_xml($data);
+        } else {
+            throw new HTTP_Exception_500('Unknown format');
         }
     }
 }
