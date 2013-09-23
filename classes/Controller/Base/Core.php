@@ -321,8 +321,7 @@ class Controller_Base_Core extends Controller_Template {
             ->status($status_code)
             ->send_headers()
             ->body($json);
-        exit(0);
-        //$this->_safety_render();
+        $this->_safety_render();
     }
 
      /**
@@ -335,11 +334,11 @@ class Controller_Base_Core extends Controller_Template {
     {
         foreach($data as $key => $value)
         {
+            $key = is_numeric($key) ? 'item' : $key;
             switch (gettype($value)) {
                 case 'array':
                     if (Arr::is_assoc($value)) {
-                        $sub_node = $this->array2xml($value,
-                                              new SimpleXMLElement("<$key/>"));
+                        $sub_node = $this->array2xml($value, new SimpleXMLElement("<$key/>"));
                     }
                     else {
                         $sub_node = new SimpleXMLElement("<$key/>");
@@ -354,8 +353,6 @@ class Controller_Base_Core extends Controller_Template {
                     );
                     break;
                 case 'string':
-                    $key = is_numeric($key) ? 'item' : $key;
-
                     if ($value != strip_tags($value))
                     {
                         $node = dom_import_simplexml($xml);
@@ -372,7 +369,6 @@ class Controller_Base_Core extends Controller_Template {
                     }
                     break;
                 default:
-                    $key = is_numeric($key) ? 'item' : $key;
                     $xml->addChild($key, $value);
                     break;
             }
@@ -391,11 +387,11 @@ class Controller_Base_Core extends Controller_Template {
       $xml = new SimpleXMLElement('<response/>');
       $data = is_array($data) ? $data : array($data);
       $xml = $this->array2xml($data, $xml);
-        $this->response
-            ->headers('Content-Type', 'application/xml')
-            ->status($status_code)
-            ->send_headers()
-            ->body($xml->asXML());
+
+      $this->response
+          ->headers('Content-Type', 'application/xml')//
+          ->status($status_code)
+          ->body($xml->asXML());
       $this->_safety_render();
     }
 
@@ -429,7 +425,7 @@ class Controller_Base_Core extends Controller_Template {
     public function after()
     {
 
-        if ( ! $this->auto_render) {
+        if ( ! $this->auto_render ) {
             parent::after();
             return;
         }

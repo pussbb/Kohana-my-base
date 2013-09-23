@@ -41,26 +41,46 @@ class Controller_Base_API extends Controller_Base_Core {
      */
     private $responce_type = NULL;
 
+    protected $allowed_methods = array(
+        HTTP_Request::PUT,
+        HTTP_Request::POST,
+        HTTP_Request::GET
+    );
     /**
      * @throws HTTP_Exception_403
      */
     public function before()
     {
         parent::before();
-        if ($this->is_put()) {
-            $action = $this->request->action();
-            $action = $action === 'index' ? 'update' : "update_$action";
-            $this->request->action($action);
+        $method = $this->request->method();
+        $action = $this->request->action();
+
+        if ( ! in_array($method, $this->allowed_methods)
+            || (bool)preg_match('/update|destroy/', $action, $matches))
+            throw new HTTP_Exception_405(tr('Method not allowed'));
+
+        if ($action === 'model')
+            return;
+
+        $_action = $action;
+        switch ($method) {
+            case HTTP_Request::GET:
+                break;
+            case HTTP_Request::POST:
+                $_action = $action === 'index' ? 'create' : "create_$action";
+                break;
+            case HTTP_Request::PUT:
+                $_action = $action === 'index' ? 'update' : "update_$action";
+                break;
+            case HTTP_Request::DELETE:
+                $_action = $action = $action === 'index' ? 'destroy' : "destroy_$action";
+                break;
+            default:
+                //
+                break;
         }
-        else if ($this->is_delete()) {
-            $action = $this->request->action();
-            $action = $action === 'index' ? 'destroy' : "destroy_$action";
-            $this->request->action($action);
-        } else {
-            $action = $this->request->action();
-            if ((bool)preg_match('/update|destroy/', $action, $matches))
-                throw new HTTP_Exception_403(tr('Access deny'));
-        }
+        $this->request->action($_action);
+
     }
 
     /**
@@ -80,5 +100,6 @@ class Controller_Base_API extends Controller_Base_Core {
         } else {
             throw new HTTP_Exception_500('Unknown format');
         }
+        parent::after();
     }
 }
