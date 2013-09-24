@@ -309,13 +309,45 @@ class Controller_Base_Core extends Controller_Template {
     }
 
     /**
+     *
+     * parse data and convert to appropriate format (especially objects to array)
+     *
+     * @param $data mixed
+     * @access private
+     */
+    private function prepare_json_data($data)
+    {
+        $result = array();
+        switch(gettype($data)) {
+            case 'array':
+                foreach($data as $key => $value) {
+                    $result[$key] = $this->prepare_json_data($value);
+                }
+                break;
+            case 'object':
+                if ($data instanceof IteratorAggregate ) {
+                    foreach($data as $key => $value) {
+                        $result[$key] = $this->prepare_json_data($value);
+                    }
+                } else {
+                    $result = Object::properties($value);
+                }
+                break;
+            default:
+                $result = $data;
+                break;
+        }
+        return $result;
+    }
+
+    /**
      * send response as json response
      * @param $data mixed
      */
     public function render_json($data, $status_code = 200)
     {
 
-        $json = json_encode($data, JSON_HEX_TAG);
+        $json = json_encode($this->prepare_json_data($data), JSON_HEX_TAG);
         $this->response
             ->headers('Content-Type', 'application/json')
             ->status($status_code)
