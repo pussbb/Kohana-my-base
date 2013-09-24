@@ -5,7 +5,7 @@
  *
  *
  * @package Kohana-my-base
- * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
+ * @copyright 2013 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
@@ -41,20 +41,48 @@ class Controller_Base_API extends Controller_Base_Core {
      */
     private $model = NULL;
 
+    /**
+     * list of allowed http methods
+     * @var array
+     */
     protected $allowed_methods = array(
         HTTP_Request::PUT,
         HTTP_Request::POST,
         HTTP_Request::GET
     );
 
+    /**
+     * limit records
+     * @var integer
+     */
     protected $limit = 25;
+
+    /**
+     * start select records from index
+     * @var integer
+     */
     protected $offset = NULL;
+
+    /**
+     * searching fields, if using Base_Model also can be loaded with relation
+     * @var array
+     */
     protected $filter = array();
+
+    /**
+     * fields needed to insert or update record in database
+     * @var array
+     */
     protected $params = array();
+
+    /**
+     * set status code of response
+     * @var integer
+     */
     protected $status_code = 200;
 
     /**
-     * @throws HTTP_Exception_403
+     * @throws HTTP_Exception_405
      */
     public function before()
     {
@@ -105,18 +133,28 @@ class Controller_Base_API extends Controller_Base_Core {
 
     }
 
-    protected function attach_response_data($data)
+    /**
+     *
+     * Attach some data to controller which will ouptut in response
+     *
+     * @access protected
+     * @param $data array
+     * @return void
+     */
+    protected function attach_response_data(array $data)
     {
         foreach($data as $key => $value) {
-            if (is_object($value)) {
-                $value = $value instanceof Base_Model
-                    ? $value->as_deep_array()
-                    : Object::properties($value);
-            }
             $this->$key = $value;
         }
     }
 
+    /**
+     *
+     * get records or record
+     *
+     * @access public
+     * @return void
+     */
     public function action_index()
     {
         $klass = Helper_Model::class_name($this->model);
@@ -125,6 +163,13 @@ class Controller_Base_API extends Controller_Base_Core {
         $this->attach_response_data($data);
     }
 
+     /**
+     *
+     * create new record
+     *
+     * @access public
+     * @return void
+     */
     public function action_create()
     {
         $klass = Helper_Model::class_name($this->model);
@@ -137,6 +182,13 @@ class Controller_Base_API extends Controller_Base_Core {
         }
     }
 
+    /**
+     *
+     * update record
+     *
+     * @access public
+     * @return void
+     */
     public function action_update($id)
     {
         if ( ! $id )
@@ -152,6 +204,13 @@ class Controller_Base_API extends Controller_Base_Core {
         }
     }
 
+    /**
+     *
+     * delete record
+     *
+     * @access public
+     * @return void
+     */
     public function action_destroy($id)
     {
         if ( ! $id )
@@ -168,8 +227,10 @@ class Controller_Base_API extends Controller_Base_Core {
     public function after()
     {
         $data = $this->dynamic_properties();
+
         if (count($data) == 1 && Arr::is_array(current($data)))
             $data = array_shift($data);
+
         $accept_types = Request::accept_type();
 
         if (array_key_exists('application/json', $accept_types)) {

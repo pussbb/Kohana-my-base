@@ -5,7 +5,7 @@
  *
  *
  * @package Kohana-my-base
- * @copyright 2012 pussbb@gmail.com(alexnevpryaga@gmail.com)
+ * @copyright 2013 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
  * @version 0.1.2
  * @link https://github.com/pussbb/Kohana-my-base
@@ -324,7 +324,15 @@ class Controller_Base_Core extends Controller_Template {
         $this->_safety_render();
     }
 
-
+    /**
+     *
+     * Insert SimpleXMLElement node into parent SimpleXMLElement node
+     *
+     * @access private
+     * @param $node SimpleXMLElement
+     * @param $sub_node SimpleXMLElement
+     * @return void
+     */
     private function append_xml_node(SimpleXMLElement $node, SimpleXMLElement $sub_node)
     {
         $toDom = dom_import_simplexml($node);

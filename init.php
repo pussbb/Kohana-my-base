@@ -47,12 +47,12 @@ if ( ! function_exists('debug') )
     }
 }
 
-Route::set('api', 'api/(<model_name>(/<id>))', array(
-    'id' => '\d+',
-  ))->defaults(array(
-   'controller' => 'API',
-   'action'     => 'model',
-));
+// Route::set('api', 'api/(<model_name>(/<id>))', array(
+//     'id' => '\d+',
+//   ))->defaults(array(
+//    'controller' => 'API',
+//    'action'     => 'model',
+// ));
 
 Route::set('www', '((<lang>)(/)(<controller>)(/<action>(/<id>)))', array(
   'lang' => Base_Language::uri_check_codes(),
