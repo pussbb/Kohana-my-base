@@ -39,28 +39,50 @@ class Controller_Base_API extends Controller_Base_Core {
     /**
      * @var null
      */
-    private $responce_type = NULL;
+    private $model = NULL;
 
     protected $allowed_methods = array(
         HTTP_Request::PUT,
         HTTP_Request::POST,
         HTTP_Request::GET
     );
+
+    protected $limit = 25;
+    protected $offset = NULL;
+    protected $filter = array();
+    protected $params = array();
+    protected $status_code = 200;
+
     /**
      * @throws HTTP_Exception_403
      */
     public function before()
     {
         parent::before();
+
         $method = $this->request->method();
         $action = $this->request->action();
+        $params = $_REQUEST;
+
+        if (isset($params['limit'])) {
+            $this->limit = $params['limit'];
+            unset($params['limit']);
+        }
+
+        if (isset($params['offset'])) {
+            $this->offset = $params['offset'];
+            unset($params['offset']);
+        }
+
+        if (isset($params['filter'])) {
+            $this->filter = $params['filter'];
+            unset($params['filter']);
+        }
+        $this->params = $params;
 
         if ( ! in_array($method, $this->allowed_methods)
             || (bool)preg_match('/update|destroy/', $action, $matches))
             throw new HTTP_Exception_405(tr('Method not allowed'));
-
-        if ($action === 'model')
-            return;
 
         $_action = $action;
         switch ($method) {
@@ -83,6 +105,63 @@ class Controller_Base_API extends Controller_Base_Core {
 
     }
 
+    protected function attach_response_data($data)
+    {
+        foreach($data as $key => $value) {
+            if (is_object($value)) {
+                $value = $value instanceof Base_Model
+                    ? $value->as_deep_array()
+                    : Object::properties($value);
+            }
+            $this->$key = $value;
+        }
+    }
+
+    public function action_index()
+    {
+        $klass = Helper_Model::class_name($this->model);
+        $id = $this->request->param('id');
+        $data = $id ? $klass::find($id) : $klass::find_all($this->filter, $this->limit, $this->limit);
+        $this->attach_response_data($data);
+    }
+
+    public function action_create()
+    {
+        $klass = Helper_Model::class_name($this->model);
+        $obj = new $klass($params);
+        if ($obj->save()) {
+            $this->attach_response_data($obj->as_array());
+        } else {
+            $this->attach_response_data($obj->all_errors());
+            $this->status_code = 400;
+        }
+    }
+
+    public function action_update($id)
+    {
+        if ( ! $id )
+            throw new HTTP_Exception_405(tr('Method not allowed'));
+
+        $klass = Helper_Model::class_name($this->model);
+        $obj = $klass::find($id);
+        if ($obj->save()) {
+            $this->attach_response_data($obj->as_array());
+        } else {
+            $this->attach_response_data($obj->all_errors());
+            $this->status_code = 400;
+        }
+    }
+
+    public function action_destroy($id)
+    {
+        if ( ! $id )
+            throw new HTTP_Exception_405(tr('Method not allowed'));
+
+        $klass = Helper_Model::class_name($this->model);
+        if ( ! $klass::destroy($id) )
+            throw new HTTP_Exception_500('colud not delete');
+    }
+
     /**
      * @throws Kohana_Kohana_Exception
      */
@@ -94,9 +173,9 @@ class Controller_Base_API extends Controller_Base_Core {
         $accept_types = Request::accept_type();
 
         if (array_key_exists('application/json', $accept_types)) {
-            $this->render_json($data);
+            $this->render_json($data, $this->status_code);
         } elseif (array_key_exists('application/xml', $accept_types)) {
-            $this->render_xml($data);
+            $this->render_xml($data, $this->status_code);
         } else {
             throw new HTTP_Exception_500('Unknown format');
         }

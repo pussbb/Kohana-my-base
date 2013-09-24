@@ -324,6 +324,16 @@ class Controller_Base_Core extends Controller_Template {
         $this->_safety_render();
     }
 
+
+    private function append_xml_node(SimpleXMLElement $node, SimpleXMLElement $sub_node)
+    {
+        $toDom = dom_import_simplexml($node);
+        $fromDom = dom_import_simplexml($sub_node);
+        $toDom->appendChild(
+            $toDom->ownerDocument->importNode($fromDom, true)
+        );
+    }
+
      /**
      * convert array into xml elements
      * @param $data array
@@ -346,11 +356,19 @@ class Controller_Base_Core extends Controller_Template {
                             $this->array2xml(array('item'=>$val), $sub_node);
                         }
                     }
-                    $toDom = dom_import_simplexml($xml);
-                    $fromDom = dom_import_simplexml($sub_node);
-                    $toDom->appendChild(
-                        $toDom->ownerDocument->importNode($fromDom, true)
-                    );
+                    $this->append_xml_node($xml, $sub_node);
+                    break;
+                case 'object':
+                    $sub_node = new SimpleXMLElement("<$key/>");
+                    if ($value instanceof IteratorAggregate) {
+                        foreach($value as $key => $val) {
+                            $this->array2xml(array($key => $val), $sub_node);
+                        }
+                    }
+                    else {
+                        $this->array2xml(Object::properties($value), $sub_node);
+                    }
+                    $this->append_xml_node($xml, $sub_node);
                     break;
                 case 'string':
                     if ($value != strip_tags($value))
