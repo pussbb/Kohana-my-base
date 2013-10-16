@@ -74,11 +74,8 @@ class Collection {
     public static function build_tree(array &$collection,  $parent = NULL, $parent_key = 'parent_id', $key = 'id')
     {
         $result = array();
-        foreach($collection as $_key => $item)
-        {
-
-            if ( $item->$parent_key === $parent)
-            {
+        foreach($collection as $_key => $item) {
+            if ( $item->$parent_key === $parent) {
                 unset($collection[$_key]);
                 $result[$item->$key] = array(
                   'object' => $item,
@@ -105,7 +102,6 @@ class Collection {
            } catch(Exception $e) {
                return FALSE;
            }
-
         }
         else if (Arr::is_array($obj) && Arr::is_assoc($obj)) {
             return array_key_exists($property, $obj);
@@ -122,10 +118,11 @@ class Collection {
     */
     public static function property($obj, $property)
     {
+        $result = NULL;
         if (is_object($obj))
-            return Object::property($obj, $property);
-        else if (Arr::is_array($obj))
-            Arr::path($obj, $property);
-        return NULL;
+            $result = Object::property($obj, $property);
+        else if (is_array($obj))
+            $result = Arr::path($obj, $property);
+        return $result;
     }
 }

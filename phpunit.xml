@@ -1,0 +1,19 @@
+<phpunit bootstrap="../unittest/bootstrap.php"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        forceCoversAnnotation="true"
+        convertWarningsToExceptions="true"
+        verbose="true"
+        stopOnFailure="false">
+
+    <testsuites>
+      <testsuite name="Database and Model Unit Tests">
+        <directory suffix=".php">tests/database</directory>
+      </testsuite>
+      <testsuite name="Other Unit Tests">
+        <directory suffix=".php">tests/other</directory>
+      </testsuite>
+    </testsuites>
+
+</phpunit>
