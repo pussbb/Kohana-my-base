@@ -17,15 +17,43 @@ class Object {
      * gets property value only with public access
      *
      * @param $obj
-     * @param string $name
+     * @param string $property
      * @param mixed $default
      * @return mixed
      * @access public
      * @static
      */
-    public static function property($obj, $name, $default = NULL)
+    public static function property($obj, $property, $default = NULL)
     {
-        return Collection::property_exists($obj, $name)? $obj->{$name}: $default;
+        if ( ! is_object($obj) )
+            throw new Exception_NotObject;
+
+        try {
+            return $obj->{$property};
+        } catch(Exception $e) {
+            return $default;
+        }
+    }
+
+     /**
+     * checks is property_exists
+     *
+     * @param $obj
+     * @param string $property
+     * @return bool
+     * @access public
+     * @static
+     */
+    public static function property_exists($obj, $property)
+    {
+         if ( ! is_object($obj) )
+            throw new Exception_NotObject;
+        try {
+            $obj->{$property};
+            return TRUE;
+        } catch(Exception $e) {
+            return FALSE;
+        }
     }
 
      /**
@@ -38,6 +66,9 @@ class Object {
      */
     public static function properties($obj, $all_properties = FALSE)
     {
+        if ( ! is_object($obj) )
+            throw new Exception_NotObject;
+
         if ( ! $all_properties )
             return get_object_vars($obj);
 

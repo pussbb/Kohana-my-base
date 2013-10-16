@@ -1,8 +1,11 @@
-
 <?php
 
-Class CollectionTest extends Unittest_TestCase
+class CollectionTest extends Unittest_TestCase
 {
+
+    /**
+     * @coversNothing
+     */
     function providerCollection()
     {
         return array(
@@ -23,6 +26,9 @@ Class CollectionTest extends Unittest_TestCase
         );
     }
 
+    /**
+     * @coversNothing
+     */
     function providerTree()
     {
         return array(
@@ -48,6 +54,7 @@ Class CollectionTest extends Unittest_TestCase
 
     /**
      * @dataProvider providerCollection
+     * @covers Collection::hash
      */
     function testHash($collection, $hash)
     {
@@ -59,6 +66,7 @@ Class CollectionTest extends Unittest_TestCase
 
     /**
      * @expectedException ErrorException
+     * @covers Collection::hash
      */
     function testHashMalformedParametrs()
     {
@@ -68,6 +76,7 @@ Class CollectionTest extends Unittest_TestCase
 
     /**
      * @dataProvider providerCollection
+     * @covers Collection::for_select
      */
     function testForSelect($collection, $hash, $select)
     {
@@ -80,6 +89,7 @@ Class CollectionTest extends Unittest_TestCase
     /**
      * @expectedException ErrorException
      * @dataProvider providerCollection
+     * @covers Collection::for_select
      */
     function testForSelectMalformedParametrs($collection)
     {
@@ -91,6 +101,7 @@ Class CollectionTest extends Unittest_TestCase
 
     /**
      * @dataProvider providerCollection
+     * @covers Collection::pluck
      */
     function testPluck($collection)
     {
@@ -102,6 +113,7 @@ Class CollectionTest extends Unittest_TestCase
 
     /**
      * @dataProvider providerTree
+     * @covers Collection::build_tree
      */
     function testBuildTree($collection, $tree)
     {
@@ -113,6 +125,7 @@ Class CollectionTest extends Unittest_TestCase
 
     /**
      * @dataProvider providerCollection
+     * @covers Collection::property_exists
      */
     function testPropertyExists($collection, $hash)
     {
@@ -125,6 +138,7 @@ Class CollectionTest extends Unittest_TestCase
 
     /**
      * @dataProvider providerCollection
+     * @covers Collection::property
      */
     function testProperty($collection, $hash)
     {

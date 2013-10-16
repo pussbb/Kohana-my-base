@@ -75,11 +75,13 @@ class Collection {
     {
         $result = array();
         foreach($collection as $_key => $item) {
-            if ( $item->$parent_key === $parent) {
+            $parent_item = self::property($item, $parent_key);
+            $item_key = self::property($item, $key);
+            if ( $parent_item === $parent) {
                 unset($collection[$_key]);
-                $result[$item->$key] = array(
+                $result[$item_key] = array(
                   'object' => $item,
-                  'childs' => self::build_tree($collection, $item->$key)
+                  'childs' => self::build_tree($collection, $item_key)
                 );
             }
         }
@@ -96,12 +98,7 @@ class Collection {
     public static function property_exists($obj, $property)
     {
         if (is_object($obj)) {
-           try {
-                $obj->{$property};
-               return TRUE;
-           } catch(Exception $e) {
-               return FALSE;
-           }
+            return Object::property_exists($obj, $property);
         }
         else if (Arr::is_array($obj) && Arr::is_assoc($obj)) {
             return array_key_exists($property, $obj);
@@ -122,7 +119,7 @@ class Collection {
         if (is_object($obj))
             $result = Object::property($obj, $property);
         else if (is_array($obj))
-            $result = Arr::path($obj, $property);
+            $result = Arr::get($obj, $property);
         return $result;
     }
 }

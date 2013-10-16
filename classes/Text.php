@@ -15,6 +15,10 @@ class Text extends Kohana_Text {
 
     /**
      * general function cleans from xss injections
+    *
+    * It was tested against *most* exploits here: http://ha.ckers.org/xss.html
+    * Those include the Actionscript and SSI samples, or any newer than Jan 2011
+    *
      * @static
      * @param $data
      * @return string
@@ -62,16 +66,8 @@ class Text extends Kohana_Text {
      */
     public static function strip_tags($text, $allowed_tags = '<b><p><strong><br>')
     {
-        // remove all html tags except <b><p><strong><br>
         $text = strip_tags($text, $allowed_tags);
-        // remove all html tags attributes for allowed tags
-        // (prevent js code injection by inserting onclick attribute)
-        $text = preg_replace(
-            "/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",
-            '<$1$2>',
-            $text
-        );
-        return $text;
+        return self::remove_event_attributes($text);
     }
 
     /**

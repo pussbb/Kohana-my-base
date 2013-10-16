@@ -15,5 +15,8 @@
         <directory suffix=".php">tests/other</directory>
       </testsuite>
     </testsuites>
-
+    <logging>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
+<!--         <log type="coverage-clover" target="clover.xml"/> -->
+    </logging>
 </phpunit>
