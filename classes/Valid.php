@@ -36,13 +36,13 @@ class Valid extends Kohana_Valid {
       * @param   string
       * @return  boolean
       */
-      public static function base64($val)
-      {
-          return (bool)!preg_match('/[^a-zA-Z0-9/+=]/', $val);
-      }
+//       public static function base64($val)
+//       {
+//           return (bool)!preg_match('/[A-Za-z0-9+\/=]/', $val);
+//       }
 
       /**
-      * Check given sting has script tags
+      * Check given string has script tags
       *
       *Use: There is a chance to hackers to include javascript code in our Input form elements such as Text area ,Text element.It is best practice * *to avoid such hacking in E-commerce applications.
       * @param   string
@@ -50,7 +50,7 @@ class Valid extends Kohana_Valid {
       */
       public static function jssafe($val)
       {
-          return (bool)(!preg_match("/<script[^>]*>[srn]*(<!--)?|(-->)?[srn]*</script>/", $val));
+          return (bool)(!preg_match("/<script[^>]*>[srn]*(<!--)?|(-->)?[srn]*<\/script>/", $val));
       }
 
       /**
@@ -60,7 +60,7 @@ class Valid extends Kohana_Valid {
       */
       public static function macaddress($val)
       {
-          return (bool)preg_match('/^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$/', $val);
+          return (bool)preg_match('/^([0-9a-fA-F][0-9a-fA-F]?(:|-)){5}([0-9a-fA-F][0-9a-fA-F])$/', $val);
       }
 
       /**
@@ -125,10 +125,10 @@ class Valid extends Kohana_Valid {
       * @param   string
       * @return  boolean
       */
-      public static function rgb($val)
-      {
-          return (bool)preg_match("/^(rgb(s*b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])bs*,s*b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])bs*,s*b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])bs*))|(rgb(s*(d?d%|100%)+s*,s*(d?d%|100%)+s*,s*(d?d%|100%)+s*))$/",     $val);
-      }
+//       public static function rgb($val)
+//       {
+//           return (bool)preg_match("/^(rgb(s*b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])bs*,s*b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])bs*,s*b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])bs*))|(rgb(s*(d?d%|100%)+s*,s*(d?d%|100%)+s*,s*(d?d%|100%)+s*))$/", $val);
+//       }
 
      /**
      * Time in 12 hours format with optional seconds
@@ -172,7 +172,7 @@ class Valid extends Kohana_Valid {
      */
     public static function token($val)
     {
-        return (bool)!preg_match('/s/', $val);
+        return (bool)!preg_match('/\s/', $val);
     }
 
     /**
@@ -182,7 +182,7 @@ class Valid extends Kohana_Valid {
      */
     public static function usssn($val)
     {
-        return (bool)preg_match("/^d{3}-d{2}-d{4}$/", $val);
+        return (bool)preg_match("/^\d{3}-\d{2}-\d{4}$/", $val);
     }
 
     /**
@@ -192,7 +192,7 @@ class Valid extends Kohana_Valid {
      */
     public static function utf8($val)
     {
-        return preg_match('%(?:[xC2-xDF][x80-xBF]|xE0[xA0-xBF][x80-xBF]|[xE1-xECxEExEF][x80-xBF]{2}|xED[x80-x9F][x80-xBF]|xF0[x90-xBF][x80-xBF]{2}|[xF1-xF3][x80-xBF]{3}|xF4[x80-x8F][x80-xBF]{2})+%xs', $val);
+        return (bool)preg_match('%(?:[xC2-xDF][x80-xBF]|xE0[xA0-xBF][x80-xBF]|[xE1-xECxEExEF][x80-xBF]{2}|xED[x80-x9F][x80-xBF]|xF0[x90-xBF][x80-xBF]{2}|[xF1-xF3][x80-xBF]{3}|xF4[x80-x8F][x80-xBF]{2})+%xs', $val);
     }
     /**
      * check given sting is regexpr string
