@@ -305,7 +305,7 @@ class Controller_Base_Core extends Controller_Template {
      */
     public static function redirect($url = '', $code = 302)
     {
-        parent::redirect(URL::site($url), $code);
+        parent::redirect(Valid::url($url)?$url:URL::site($url), $code);
     }
 
     /**
@@ -330,7 +330,7 @@ class Controller_Base_Core extends Controller_Template {
                         $result[$key] = $this->prepare_json_data($value);
                     }
                 } else {
-                    $result = Object::properties($value);
+                    $result = Object::properties($data);
                 }
                 break;
             default:
