@@ -39,7 +39,7 @@ class Controller_Base_API extends Controller_Base_Core {
     /**
      * @var null
      */
-    private $model = NULL;
+    protected  $model = NULL;
 
     /**
      * list of allowed http methods
@@ -91,6 +91,9 @@ class Controller_Base_API extends Controller_Base_Core {
         $method = $this->request->method();
         $action = $this->request->action();
         $params = $_REQUEST;
+        $this->limit = NULL;
+        $this->offset = NULL;
+        $this->filter = array();
 
         if (isset($params['limit'])) {
             $this->limit = $params['limit'];
@@ -129,8 +132,21 @@ class Controller_Base_API extends Controller_Base_Core {
                 //
                 break;
         }
+
         $this->request->action($_action);
 
+    }
+
+    public function execute()
+    {
+        try {
+            return parent::execute();
+        } catch(HTTP_Exception $e) {
+            $this->error = $e->getMessage();
+            $this->status_code = $e->getCode();
+            $this->after();
+            return $this->response;
+        }
     }
 
     /**
@@ -141,7 +157,7 @@ class Controller_Base_API extends Controller_Base_Core {
      * @param $data array
      * @return void
      */
-    protected function attach_response_data(array $data)
+    protected function attach_response_data($data)
     {
         foreach($data as $key => $value) {
             $this->$key = $value;
@@ -159,8 +175,12 @@ class Controller_Base_API extends Controller_Base_Core {
     {
         $klass = Helper_Model::class_name($this->model);
         $id = $this->request->param('id');
-        $data = $id ? $klass::find($id) : $klass::find_all($this->filter, $this->limit, $this->limit);
-        $this->attach_response_data($data);
+
+        if ($id)
+            $this->attach_response_data($klass::find($id)->as_array());
+        else
+            $this->result = $klass::find_all($this->filter, $this->limit, $this->offset)->records;
+
     }
 
      /**
@@ -173,13 +193,15 @@ class Controller_Base_API extends Controller_Base_Core {
     public function action_create()
     {
         $klass = Helper_Model::class_name($this->model);
-        $obj = new $klass($params);
+
+        $obj = new $klass($this->params);
         if ($obj->save()) {
             $this->attach_response_data($obj->as_array());
         } else {
             $this->attach_response_data($obj->all_errors());
             $this->status_code = 400;
         }
+
     }
 
     /**
@@ -217,8 +239,7 @@ class Controller_Base_API extends Controller_Base_Core {
             throw new HTTP_Exception_405(tr('Method not allowed'));
 
         $klass = Helper_Model::class_name($this->model);
-        if ( ! $klass::destroy($id) )
-            throw new HTTP_Exception_500('colud not delete');
+        $klass::destroy($id);
     }
 
     /**
@@ -233,12 +254,10 @@ class Controller_Base_API extends Controller_Base_Core {
 
         $accept_types = Request::accept_type();
 
-        if (array_key_exists('application/json', $accept_types)) {
-            $this->render_json($data, $this->status_code);
-        } elseif (array_key_exists('application/xml', $accept_types)) {
+        if (array_key_exists('application/xml', $accept_types)) {
             $this->render_xml($data, $this->status_code);
         } else {
-            throw new HTTP_Exception_500('Unknown format');
+            $this->render_json($data, $this->status_code);
         }
         parent::after();
     }

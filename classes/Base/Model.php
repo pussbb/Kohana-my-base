@@ -19,6 +19,8 @@
 
 class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
 
+    public static $CACHE_TABLE_COLUMNS = FALSE;
+
     /**
      * array of model objects
      *
@@ -597,16 +599,16 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     {
         $result = array();
         foreach($obj->data as $key => $value) {
-            if (is_object($value) && $obj instanceof Base_Model) {
-                $value = $value->obj_to_array($value);
+            if (is_object($value)) {
+                $value = $obj instanceof Base_Model ? $value->obj_to_array($value) : (array)$obj;
             }
             elseif (is_array($value)) {
               $_result = array();
-              foreach($value as $record) {
-                if (is_object($record) && $record instanceof Base_Model) {
-                    $_result[] = $record->obj_to_array($record);
+              foreach($value as $key => $record) {
+                if (is_object($record)) {
+                    $_result[$key] = $record instanceof Base_Model ? $record->obj_to_array($record) : (array)$record;
                 } else {
-                 $_result[] = $record;
+                 $_result[$key] = $record;
                 }
               }
               $value = $_result;
@@ -871,12 +873,15 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             $klass_name = get_called_class();
             $table = $klass_name::db_table_name();
         }
-        $columns = Kohana::cache($table . '_columns');
-        if ( ! $columns ) {
-            $columns = Database::instance()->list_columns($table);
-            Kohana::cache($table . '_columns', $columns, 3600 * 24 * 30);
-        }
-        return $columns;
+//         $columns = Base_Model::$CACHE_TABLE_COLUMNS
+//             ? Kohana::cache($table . '_columns')
+//             : array();
+//         if ( ! $columns ) {
+//             $columns = Database::instance()->list_columns($table);
+//             if (Base_Model::$CACHE_TABLE_COLUMNS)
+//                 Kohana::cache($table . '_columns', $columns, 3600 * 24 * 30);
+//         }
+        return Database::instance()->list_columns($table);
     }
 
     /**
@@ -1402,10 +1407,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         if ( ! $filter && ! $this->_loaded )
             throw new Base_Db_Exception_NotLoadedNodel;
 
-        if ( ! $filter )
-            $filter =$this->data[$this->primary_key];
-
-        if (is_numeric($filter))
+        if ( ! $filter || is_numeric($filter))
             $filter =array($this->primary_key => $filter);
 
         $this->before_delete();
