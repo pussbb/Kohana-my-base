@@ -21,7 +21,9 @@ class Base_Db_Sanitize {
      */
     public static function int($value)
     {
-        return (int)intval($value);
+        if ($value)
+            return (int)intval($value);
+        return NULL;
     }
 
     /**
@@ -44,8 +46,6 @@ class Base_Db_Sanitize {
      */
     public static function date($value, $format)
     {
-        if (is_object($value) && $value instanceof Database_Expression)
-            return $value;
         return Date::format($value, $format);
     }
 
@@ -59,6 +59,9 @@ class Base_Db_Sanitize {
      */
     public static function value($type, $value, $alias = NULL)
     {
+        if (is_object($value) && $value instanceof Database_Expression)
+            return $value;
+
         switch ($type) {
             case 'int':
             case 'bigint':
