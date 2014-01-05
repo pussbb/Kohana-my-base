@@ -98,7 +98,7 @@ class Base_Db_Validation {
             $value = Object::property($model, $key);
             if ( ! $value && $skip_empty)
                 continue;
-
+            $_result = NULL;
             switch (Arr::get($rules, 'type')) {
                 case 'int':
                     $_result = Base_Db_Validation::int($key, $value, $rules);

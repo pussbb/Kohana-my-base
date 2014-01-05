@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Class wich adds some extra functions to Date class in Kohana
+ * Class which adds some extra functions to Date class in Kohana
  *
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com

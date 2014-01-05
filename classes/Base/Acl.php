@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Base class to check user permision for some request
+ * Base class to check user permission for some request
  * @package Kohana-my-base
  * @copyright 2012 pussbb@gmail.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE v3
@@ -11,7 +11,7 @@
  * @subpackage access
  */
 
-class Base_Acl extends Singleton{
+class Base_Acl extends Singleton {
 
     /**
      * Checks if user allowed to view this page
