@@ -43,6 +43,7 @@ class Controller_Core extends Controller_Base_Core {
     {
         parent::before();
         $this->set_language();
+        $this->check_access();
     }
 
     /**

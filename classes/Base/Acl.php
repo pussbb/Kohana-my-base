@@ -42,7 +42,7 @@ class Base_Acl extends Singleton {
      * @param $value
      * @return mixed
      */
-    private static function dbexpr($value)
+    protected static function dbexpr($value)
     {
         return DB::expr('REGEXP "('.$value.'|\\\\*)"');
     }
