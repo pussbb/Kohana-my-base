@@ -34,7 +34,7 @@ class Base_Db_Sanitize {
      */
     public static function string($value)
     {
-        return (string)$value;
+        return is_null($value) ? NULL : (string)$value;
     }
 
     /**
