@@ -57,6 +57,7 @@ class Tools_Coffeescript extends Tools {
         Dir::create_if_need($output_dir);
 
         $cmd = 'coffee -o '. $output_dir .' '.$join.' -c '.$source;
+
         $this->exec($cmd);
     }
 

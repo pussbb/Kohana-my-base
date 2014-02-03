@@ -113,9 +113,9 @@ class Tools extends Singleton {
 
         if ($this->stderr)
             throw new Exception_Tools_ErrorOutput(Text::strip_ansi_color($this->stderr));
-/*
+
         if ($this->stdout)
-            throw new Exception_Tools_ErrorOutput($this->stdout);*/
+            throw new Exception_Tools_Output($this->stdout);
         return $return_value;
     }
 
@@ -134,10 +134,10 @@ class Tools extends Singleton {
     {
         clearstatcache();
 
-        if( ! file_exists($source))
+        if( ! file_exists($source) )
             return FALSE;
 
-        if ( ! file_exists($destination))
+        if ( ! file_exists($destination) )
             return TRUE;
 
         if ((filemtime($source) > filemtime($destination))

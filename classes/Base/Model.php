@@ -19,8 +19,6 @@
 
 class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
 
-    public static $CACHE_TABLE_COLUMNS = FALSE;
-
     /**
      * array of model objects
      *
@@ -375,6 +373,20 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     }
 
     /**
+     * create a setter and getter function name
+     *
+     * @param $name
+     * @throws Exception_Collection_PropertyNotExists
+     * @return mixed
+     * @access public
+     * @internal
+     */
+    private function mutator_func_name($name, $prefix)
+    {
+        return $prefix.implode(array_map('Text::ucfirst', explode('_', $name)));
+    }
+
+    /**
      * dynamically append variable to object
      *
      * <code>
@@ -388,7 +400,11 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     public function __set($name, $value)
     {
-        $this->data[$name] = $this->sanitize($name, $value) ;
+        $func = $this->mutator_func_name($name, 'set');
+        if (method_exists($this, $func))
+            $this->data[$name] = call_user_func_array(array($this, $func), array($value));
+        else
+            $this->data[$name] = $this->sanitize($name, $value) ;
     }
 
     /**
@@ -402,6 +418,9 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     public function __get($name)
     {
+        $func = $this->mutator_func_name($name, 'get');
+        if (method_exists($this, $func))
+            return call_user_func_array(array($this, $func), array(Arr::get($this->data, $name)));
         if (array_key_exists($name, $this->data))
             return $this->data[$name];
 
@@ -873,14 +892,6 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             $klass_name = get_called_class();
             $table = $klass_name::db_table_name();
         }
-//         $columns = Base_Model::$CACHE_TABLE_COLUMNS
-//             ? Kohana::cache($table . '_columns')
-//             : array();
-//         if ( ! $columns ) {
-//             $columns = Database::instance()->list_columns($table);
-//             if (Base_Model::$CACHE_TABLE_COLUMNS)
-//                 Kohana::cache($table . '_columns', $columns, 3600 * 24 * 30);
-//         }
         return Database::instance()->list_columns($table);
     }
 
@@ -1400,21 +1411,18 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      * @return bool
      * @access protected
      */
-    protected function destroy($filter = NULL)
+    protected function destroy()
     {
         $this->db_query = DB::delete(array($this->db_table, $this->module_name));
 
-        if ( ! $filter && ! $this->_loaded )
+        if ( ! $this->_loaded )
             throw new Base_Db_Exception_NotLoadedNodel;
-
-        if ( ! $filter || is_numeric($filter))
-            $filter =array($this->primary_key => $filter);
 
         $this->before_delete();
         $db = Database::instance();
         $db->begin();
         try {
-            $this->filter($filter)->save();
+            $this->filter(array($this->primary_key => $filter))->save();
             $db->commit();
         }
         catch (Database_Exception $e) {
@@ -1629,7 +1637,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             $this->update($this->table_fields(true));
         $query_type = $this->query_type();
         if ( in_array($query_type, array('insert', 'update'))){
-            if ( ! Base_Db_Validation::check($this, $query_type==='update') || ! $this->validate())
+            if ( ! Base_Db_Validation::check($this, $query_type==='update')
+                || ! $this->validate())
                 return FALSE;
         }
 
@@ -1874,7 +1883,13 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     public function update_params(array $array)
     {
         foreach ($array as $key => $value) {
-            $this->data[$key] = $this->sanitize($key, $value);
+            $func = $this->mutator_func_name($key, 'set');
+            if (method_exists($this, $func)) {
+                $this->data[$key] = call_user_func_array(array($this, $func), array($value));
+            }
+            else {
+                $this->data[$key] = $this->sanitize($key, $value);
+            }
         }
         return $this;
     }
