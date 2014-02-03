@@ -21,6 +21,8 @@ class Base_Db_Sanitize {
      */
     public static function int($value)
     {
+        if (is_array($value))
+            return array_map('intval', $value);
         if ($value)
             return (int)intval($value);
         return NULL;
@@ -34,7 +36,7 @@ class Base_Db_Sanitize {
      */
     public static function string($value)
     {
-        return (string)$value;
+        return is_null($value) ? NULL : (string)$value;
     }
 
     /**
