@@ -124,7 +124,8 @@ class Text extends Kohana_Text {
     public static function remove_event_attributes($html)
     {
         $re = '(?&tag)' . self::$tag_on_defs;
-        return preg_replace("~$re~xie", 'Text::remove_event_attributes_from_tag("$0")', $html);
+        $callback_fn = function($m){return Text::remove_event_attributes_from_tag($m[0]);};
+        return preg_replace_callback( "~$re~xi", $callback_fn, $html);
     }
 
     /**
@@ -136,7 +137,16 @@ class Text extends Kohana_Text {
     public static function remove_event_attributes_from_tag($tag)
     {
         $re = '( ^ <(?&tagname) ) | \G \s*+ (?> ((?&attrib)) | ((?&crap)) )' . self::$tag_on_defs;
-        return preg_replace("~$re~xie", '"$1$3"? "$0": (preg_match("/^on/i", "$2")? " ": "$0")', $tag);
+
+        $callback_func = function($x) {//var_dump($x);
+            if(isset($x[0]) && isset($x[3]))
+                 return $x[0];
+            elseif (preg_match("/^on/i", Arr::get($x, 2)))
+                return " ";
+            else
+                return $x[0];
+        };
+        return preg_replace_callback("~$re~xi", $callback_func, $tag);
     }
 
     /**

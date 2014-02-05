@@ -13,13 +13,13 @@ $model = Model_Blog_Post::find(array(
 // or
 $model = Model_Blog_Post::find(array(
     'id' => 7,
-    'with' => array('contents', 'cotegory'),
+    'with' => array('contents', 'category'),
 ));
 
  // relations and filter with relation field
 $model = Model_Blog_Post::find(array(
     'id' => 7,
-    'with' => array('contents', 'cotegory'),
+    'with' => array('contents', 'category'),
     'contents.id' => 'uiuiu',
 ));
 

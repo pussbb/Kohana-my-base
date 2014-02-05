@@ -63,8 +63,6 @@ class Model_User extends Base_Model
 
     public function login()
     {
-        $this->password = md5($this->password);
-
         if ( ! $this->validate_login())
             return FALSE;
 
@@ -102,10 +100,8 @@ class Model_User extends Base_Model
         );
     }
 
-    public function before_save()
-    {
-        if ($this->new_record())
-            $this->password = md5($this->password);
+    public function setPassword($value) {
+        return md5($value);
     }
 
     public function register()

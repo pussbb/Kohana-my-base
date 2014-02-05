@@ -48,7 +48,7 @@ class Base_Auth extends Singleton {
     public function logged_in()
     {
         $user = $this->current_user();
-        return ! is_null($user) && (is_object($user) && $user instanceof Model);
+        return ! is_null($user) && (is_object($user) && ($user instanceof Model || $user instanceof Base_Model));
     }
 
     /**
