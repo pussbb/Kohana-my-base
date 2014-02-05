@@ -10,6 +10,7 @@ class ModelTest extends Unittest_TestCase {
     {
         Model_User::find(-546456);
         Model_User::find('546456');
+
     }
 
     /**
@@ -89,5 +90,25 @@ class ModelTest extends Unittest_TestCase {
         $this->assertInstanceOf('Database_Query_Builder_Select', $d);
         $accepted = "SELECT `user`.* FROM `users` AS `user` WHERE (`user`.`id` = 0)";
         $this->assertEquals($accepted, (string)$d);
+    }
+
+    /**
+     *
+     */
+    function testUpdate(){
+        $all = Model_User::find_all();
+        foreach($all as $item)
+        {
+            $item->api_key = 'kkkk';
+            $item->save();
+        }
+        $new = new Model_User(array(
+            'api_key' => 'sdsd',
+            'login' => 'sdsad',
+            'email' => 'asdasd@sdd.com',
+            'password' => 'sd',
+        ));
+        $new->save();
+        var_dump($new->errors());
     }
 }

@@ -157,7 +157,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         'distinct',
         'group_by',
         'expression',
-        'order_by'
+        'order_by',
     );
 
     /**
@@ -233,6 +233,9 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     private static $table_fields_cache = array();
     private static $db_table_cache = array();
     private static $module_name_cache = array();
+
+    private $__changed_fields = array();
+
     /**
      * Constructs the object
      *
@@ -262,7 +265,6 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             self::$module_name_cache[$klass] = $this->module_name;
         }
 
-
         if ( !( $this->_table_columns = Arr::get(self::$table_columns_cache, $this->db_table)) ) {
             $this->_table_columns = $this->get_table_columns();
             self::$table_columns_cache[$this->db_table] = $this->_table_columns;
@@ -278,7 +280,6 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         } elseif (is_numeric($params)) {
             $this->data[$this->primary_key] = intval($params);
         }
-
     }
 
     /**
@@ -401,6 +402,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     public function __set($name, $value)
     {
         $func = $this->mutator_func_name($name, 'set');
+        $this->__changed_fields[] = $name;
         if (method_exists($this, $func))
             $this->data[$name] = call_user_func_array(array($this, $func), array($value));
         else
@@ -1513,7 +1515,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
 
             case 'update':
                 foreach ($this->table_fields() as $field) {
-                    $this->db_query->value($field, $this->sanitize($field, $this->data[$field]));
+                    if (in_array($field, $this->__changed_fields))
+                        $this->db_query->value($field, $this->sanitize($field, $this->data[$field]));
                 }
                 break;
 
@@ -1577,6 +1580,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $validator = Validation::factory($data);
         foreach ($rules as $field_name => $_rules)
         {
+            if ($this->__changed_fields && ! in_array($field_name, $this->__changed_fields))
+                continue;
             foreach ($_rules as $key => $rule) {
                 if ($rule === 'unique')
                     $rule = array(array($this, 'unique_validation'), array(':validation', ':field'));
@@ -1651,8 +1656,9 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         else
             $this->update($this->table_fields(true));
         $query_type = $this->query_type();
+
         if ( in_array($query_type, array('insert', 'update'))){
-            if ( ! Base_Db_Validation::check($this, $query_type==='update')
+            if ( ! Base_Db_Validation::check($this, $query_type==='update', $this->__changed_fields)
                 || ! $this->validate())
                 return FALSE;
         }
@@ -1701,10 +1707,11 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             call_user_func_array(array($this->db_query, 'order_by'), $this->order);
         $result = $this->db_query->execute();
         $this->last_query =(string) $this->db_query;
-        $responce = $this->parse_responce($result);
+        $response = $this->parse_responce($result);
+        $this->__changed_fields = array();
         if ($this->auto_clean)
             $this->clean();
-        return $responce;
+        return $response;
     }
 
     /**
@@ -1898,13 +1905,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     public function update_params(array $array)
     {
         foreach ($array as $key => $value) {
-            $func = $this->mutator_func_name($key, 'set');
-            if (method_exists($this, $func)) {
-                $this->data[$key] = call_user_func_array(array($this, $func), array($value));
-            }
-            else {
-                $this->data[$key] = $this->sanitize($key, $value);
-            }
+            $this->$key = $value;
         }
         return $this;
     }
