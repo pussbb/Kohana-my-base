@@ -109,6 +109,5 @@ class ModelTest extends Unittest_TestCase {
             'password' => 'sd',
         ));
         $new->save();
-        var_dump($new->errors());
     }
 }

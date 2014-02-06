@@ -104,6 +104,10 @@ class Model_User extends Base_Model
         return md5($value);
     }
 
+    public function setPswdConfirmation($value) {
+        return $this->setPassword($value);
+    }
+
     public function register()
     {
         $this->api_key = uniqid();

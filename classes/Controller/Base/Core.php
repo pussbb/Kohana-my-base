@@ -294,8 +294,11 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function render_nothing()
     {
-       $this->response->body('');
-       $this->_safety_render();
+        echo $this->response
+            ->status(200)
+            ->send_headers(TRUE)
+            ->body('');
+        exit(1);
     }
 
     /**
@@ -348,12 +351,12 @@ class Controller_Base_Core extends Controller_Template {
     {
 
         $json = json_encode($this->prepare_json_data($data), JSON_HEX_TAG);
-        $this->response
+        echo $this->response
             ->headers('Content-Type', 'application/json')
             ->status($status_code)
-            ->send_headers()
+            ->send_headers(TRUE)
             ->body($json);
-        $this->_safety_render();
+        exit(0);
     }
 
     /**
@@ -446,11 +449,12 @@ class Controller_Base_Core extends Controller_Template {
       $data = is_array($data) ? $data : array($data);
       $xml = $this->array2xml($data, $xml);
 
-      $this->response
+      echo $this->response
           ->headers('Content-Type', 'application/xml')//
           ->status($status_code)
+          ->send_headers(TRUE)
           ->body($xml->asXML());
-      $this->_safety_render();
+      exit(0);
     }
 
     /**

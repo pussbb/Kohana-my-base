@@ -12,7 +12,7 @@
  * @subpackage extra
  */
 
- class Error extends Kohana_Exception {
+class Error extends Kohana_Exception {
 
     public static $custom_view_file = NULL;
 

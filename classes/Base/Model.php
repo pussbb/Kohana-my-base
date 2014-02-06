@@ -1045,7 +1045,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
 
         $this->with[$name] = array(
                 $klass,
-                array_map(function($i){return $i[1];}, $model_fields),//Arr::path($model_fields, '*.1'),
+                array_map(function($i){return $i[1];}, $model_fields),
                 $model->_table_fields,
                 $type
             );
@@ -1507,7 +1507,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 {
                     $data = array();
                     foreach ($columns as $field) {
-                        $data[] = $this->sanitize($field, $this->data[$field]);
+                        $data[] = $this->data[$field];
                     }
                     $this->db_query->values($data);
                 }
@@ -1516,7 +1516,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             case 'update':
                 foreach ($this->table_fields() as $field) {
                     if (in_array($field, $this->__changed_fields))
-                        $this->db_query->value($field, $this->sanitize($field, $this->data[$field]));
+                        $this->db_query->value($field, $this->data[$field]);
                 }
                 break;
 
@@ -1702,10 +1702,9 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     protected function exec()
     {
-        $this->db_query->as_assoc();
         if ($this->order && $this->query_type() === 'select')
             call_user_func_array(array($this->db_query, 'order_by'), $this->order);
-        $result = $this->db_query->execute();
+        $result = $this->db_query->as_assoc()->execute();
         $this->last_query =(string) $this->db_query;
         $response = $this->parse_responce($result);
         $this->__changed_fields = array();

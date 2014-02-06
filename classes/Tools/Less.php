@@ -32,7 +32,11 @@ class Tools_Less extends Tools {
         Dir::create_if_need($output_dir);
 
         $cmd = 'lessc '.$source;
-        $this->exec($cmd);
+
+        try {
+            $this->exec($cmd);
+        } catch (Exception_Tools_Output $e) {}
+
 
         if( ! is_writable(dirname($destination)))
             throw new Exception_Tools("You don't have permission to write in  $destination");
