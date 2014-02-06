@@ -21,16 +21,14 @@ class URL extends Kohana_URL {
      * @access public
      * @return string
      */
-    public static function site($uri = '', $protocol = TRUE, $index = TRUE)
+    public static function site($uri = '', $protocol = TRUE, $index = TRUE, $append_lang = TRUE)
     {
-
         if ($uri && self::$lang_code) {
-            if (strpos($uri, self::$lang_code.'/') === FALSE)
+            if (strpos($uri, self::$lang_code.'/') === FALSE && $append_lang)
                 $uri = self::$lang_code.'/'.$uri;
         }
 
         return parent::site($uri, $protocol, $index);
-
     }
 
     public static function set_lang_code($code)
