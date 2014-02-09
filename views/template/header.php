@@ -13,25 +13,18 @@ if ($favicon) {
     echo '<link rel ="shortcut icon" href="' .URL::base(TRUE, FALSE) . $favicon. '" type="image/x-icon" />';
 }
 
+
 foreach($meta as $key => $attr) {
     echo '<meta '.HTML::attributes($attr).' />';
 }
-
-foreach ( Media::styles() as $file => $type) {
-    echo HTML::style($file, array('media' => $type)), PHP_EOL;
-}
-echo  Media::inline_style();
 ?>
-
 <script>
     var url_base = '<?php echo URL::base(true, true) ?>';
 </script>
 
 <?php
-foreach ( Media::scripts() as $file) {
-    echo HTML::script($file), PHP_EOL;
-}
-echo  Media::inline_script();
+echo Media::render(Base_Media::POSITION_HEAD);
 ?>
+
 </head>
     <body>

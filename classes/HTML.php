@@ -34,4 +34,36 @@ class HTML extends Kohana_HTML {
             }
             return parent::image($file, $attributes, $protocol, $index);
         }
+
+
+    /**
+     * Creates a script link.
+     *
+     *     echo HTML::script('media/js/jquery.min.js');
+     *
+     * @param   string  $file       file name
+     * @param   array   $attributes default attributes
+     * @param   mixed   $protocol   protocol to pass to URL::base()
+     * @param   boolean $index      include the index page
+     * @return  string
+     * @uses    URL::base
+     * @uses    HTML::attributes
+     */
+    public static function script($file, array $attributes = NULL, $protocol = NULL, $index = FALSE)
+    {
+        if (strpos($file, '://') === FALSE)
+        {
+            // Add the base URL
+            $file = URL::site($file, $protocol, $index);
+        }
+
+        // Set the script link
+        $attributes['src'] = $file;
+
+        // Set the script type
+        if ( ! isset($attributes['type']) )
+            $attributes['type'] = 'text/javascript';
+
+        return '<script'.HTML::attributes($attributes).'></script>';
+    }
 }
