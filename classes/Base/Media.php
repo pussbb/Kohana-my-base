@@ -89,7 +89,7 @@ class Base_Media extends Singleton {
     /**
      * @var array
      */
-    private $procceded_bundles = array();
+    private $processed_bundles = array();
 
     /**
      * @var array
@@ -159,13 +159,13 @@ class Base_Media extends Singleton {
             $depends = is_array($depends) ? $depends : explode(',' ,$depends);
             foreach(array_map('trim', $depends) as $dependency)
             {
-                if (in_array($dependency, $this->procceded_bundles))
+                if (in_array($dependency, $this->processed_bundles))
                     continue;
                 $this->bundle($dependency);
-                $this->procceded_bundles[] = $dependency;
+                $this->processed_bundles[] = $dependency;
             }
         }
-        $this->procceded_bundles[] = $name;
+        $this->processed_bundles[] = $name;
         foreach($bundle as $key => $items) {
             foreach($items as $name => $data) {
                 if (is_numeric($name)) {
