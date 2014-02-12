@@ -90,13 +90,14 @@ class Base_Db_Validation {
      * @param $model
      * @return bool
      */
-    public static function check(&$model, $skip_empty = FALSE)
+    public static function check(&$model, $skip_empty = FALSE, $expected = array())
     {
         Base_Db_Validation::$new_record = $model->new_record();
         $result = TRUE;
         foreach ($model->get_table_columns() as $key => $rules) {
             $value = Object::property($model, $key);
-            if ( ! $value && $skip_empty)
+            if ( ! $value && $skip_empty
+                || ($expected && ! in_array($key, $expected)))
                 continue;
             $_result = NULL;
             switch (Arr::get($rules, 'type')) {

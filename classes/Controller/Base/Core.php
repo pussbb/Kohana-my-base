@@ -100,6 +100,10 @@ class Controller_Base_Core extends Controller_Template {
         $this->filename = explode('/', $filename);
     }
 
+    /**
+     * @param $key
+     * @param $attr
+     */
     public function add_meta($key, $attr)
     {
         $this->template->meta[$key] = $attr;
@@ -172,18 +176,80 @@ class Controller_Base_Core extends Controller_Template {
      * @param $name
      * @param string $media
      */
-    public function append_css($name, $media = '')
+    public function append_css($name, $media = '', $check = FALSE , $position = NULL)
     {
-        Base_Media::instance()->append_style($name, $media);
+        Base_Media::instance()->append_style($name, $media, $check, $position);
     }
 
     /**
      * append javascript file
-     * @param $name
+     * @param $name string
      */
-    public function append_js($name)
+    public function append_js($name , $check = FALSE, $position = NULL)
     {
-        Base_Media::instance()->append_script($name);
+        Base_Media::instance()->append_script($name, NULL, $check, $position);
+    }
+
+    /**
+     * append coffeescript file
+     * @param $name string
+     */
+    public function append_coffeescript($name, $check = FALSE, $position = NULL )
+    {
+        Base_Media::instance()->append_coffee_script($name, NULL, $check, $position);
+    }
+
+    /**
+     * append coffeescript file
+     * @param $name string
+     */
+    public function append_less($name, $media = '', $check = FALSE, $posiotion = NULL)
+    {
+        Base_Media::instance()->append_less($name, array('media' => $media), $check, $posiotion);
+    }
+
+
+    /**
+     * adds inline css
+     *
+     * @param string $css
+     * @access public
+     */
+    public function append_inline_css($css , $position = NULL)
+    {
+        Base_Media::instance()->append_inline_css($css, $position);
+    }
+
+    /**
+     * add inline javascript
+     *
+     * @param string $js
+     * @access public
+     */
+    public function append_inline_js($js , $position = NULL)
+    {
+        Base_Media::instance()->append_inline_js($js, $position);
+    }
+
+    /**
+     * add javascript variable
+     *
+     * @param string $js
+     * @access public
+     */
+    public function append_js_var($name, $value, $position = NULL)
+    {
+        Base_Media::instance()->append_js_var($name, $value, $position);
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     * @param null $position
+     */
+    public function append_js_template($name, $value, $position = NULL)
+    {
+        Base_Media::instance()->append_js_template($name, $value, $position);
     }
 
     /**
@@ -199,9 +265,9 @@ class Controller_Base_Core extends Controller_Template {
      * @param null $media
      * @param bool $check_file
      */
-    public function append_media($file_name, $media = NULL, $check_file = TRUE)
+    public function append_media($file_name, $check = TRUE, $position = NULL)
     {
-        Base_Media::instance()->append(array('css', 'js'), $file_name, $media, $check_file);
+        Base_Media::instance()->append(Base_Media::$known_media_types, $file_name, NULL, $check, $position);
     }
 
     /**
@@ -221,7 +287,7 @@ class Controller_Base_Core extends Controller_Template {
             $directory = array_shift($structure) . '/';
         }
         $file_name = $directory . implode('.', $structure);
-        Base_Media::instance()->append(array('css', 'js'), $file_name, NULL, TRUE);
+        $this->append_media($file_name, TRUE);
     }
 
     /**
@@ -294,8 +360,11 @@ class Controller_Base_Core extends Controller_Template {
      */
     public function render_nothing()
     {
-       $this->response->body('');
-       $this->_safety_render();
+        echo $this->response
+            ->status(200)
+            ->send_headers(TRUE)
+            ->body('');
+        exit(1);
     }
 
     /**
@@ -348,12 +417,12 @@ class Controller_Base_Core extends Controller_Template {
     {
 
         $json = json_encode($this->prepare_json_data($data), JSON_HEX_TAG);
-        $this->response
+        echo $this->response
             ->headers('Content-Type', 'application/json')
             ->status($status_code)
-            ->send_headers()
+            ->send_headers(TRUE)
             ->body($json);
-        $this->_safety_render();
+        exit(0);
     }
 
     /**
@@ -446,11 +515,12 @@ class Controller_Base_Core extends Controller_Template {
       $data = is_array($data) ? $data : array($data);
       $xml = $this->array2xml($data, $xml);
 
-      $this->response
+      echo $this->response
           ->headers('Content-Type', 'application/xml')//
           ->status($status_code)
+          ->send_headers(TRUE)
           ->body($xml->asXML());
-      $this->_safety_render();
+      exit(0);
     }
 
     /**

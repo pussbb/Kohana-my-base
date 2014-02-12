@@ -23,9 +23,9 @@ class Base_Db_Sanitize {
     {
         if (is_array($value))
             return array_map('intval', $value);
-        if ($value)
-            return (int)intval($value);
-        return NULL;
+        if (is_null($value))
+            return NULL;
+        return intval($value);
     }
 
     /**

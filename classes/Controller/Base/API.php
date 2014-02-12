@@ -106,7 +106,8 @@ class Controller_Base_API extends Controller_Base_Core {
         }
 
         if (isset($params['filter'])) {
-            $this->filter = $params['filter'];
+            $this->filter = json_decode($params['filter'], TRUE);
+            $this->filter = $this->filter?:array();
             unset($params['filter']);
         }
         $this->params = $params;

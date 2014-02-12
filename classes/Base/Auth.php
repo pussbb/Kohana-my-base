@@ -29,9 +29,12 @@ class Base_Auth extends Singleton {
     public function current_user()
     {
         $user = Arr::get(Session::instance()->get('auth'), 'current_user');
-        return is_object($user) && $user instanceof Model ? $user : NULL;
+        return is_object($user) && $this->supported_objects($user) ? $user : NULL;
     }
 
+    private function supported_objects($user) {
+        return $user instanceof Model || $user instanceof Base_Model;
+    }
     /**
      * destroy session for current logged in user
      * @return void
@@ -48,7 +51,7 @@ class Base_Auth extends Singleton {
     public function logged_in()
     {
         $user = $this->current_user();
-        return ! is_null($user) && (is_object($user) && $user instanceof Model);
+        return ! is_null($user) && (is_object($user) && $this->supported_objects($user));
     }
 
     /**

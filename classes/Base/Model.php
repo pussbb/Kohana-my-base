@@ -157,7 +157,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         'distinct',
         'group_by',
         'expression',
-        'order_by'
+        'order_by',
     );
 
     /**
@@ -233,6 +233,9 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     private static $table_fields_cache = array();
     private static $db_table_cache = array();
     private static $module_name_cache = array();
+
+    private $__changed_fields = array();
+
     /**
      * Constructs the object
      *
@@ -262,7 +265,6 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             self::$module_name_cache[$klass] = $this->module_name;
         }
 
-
         if ( !( $this->_table_columns = Arr::get(self::$table_columns_cache, $this->db_table)) ) {
             $this->_table_columns = $this->get_table_columns();
             self::$table_columns_cache[$this->db_table] = $this->_table_columns;
@@ -278,7 +280,6 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         } elseif (is_numeric($params)) {
             $this->data[$this->primary_key] = intval($params);
         }
-
     }
 
     /**
@@ -401,6 +402,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     public function __set($name, $value)
     {
         $func = $this->mutator_func_name($name, 'set');
+        $this->__changed_fields[] = $name;
         if (method_exists($this, $func))
             $this->data[$name] = call_user_func_array(array($this, $func), array($value));
         else
@@ -484,7 +486,6 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      * adds availability to call some functions as static
      *
      * <code>
-     *  self::destroy($id);
      *  self::exists($params);
      * </code>
      * @ignore
@@ -499,7 +500,6 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     {
         $klass = get_called_class();
         switch ($name) {
-            case 'destroy':
             case 'exists':
                 return  call_user_func_array(array(new $klass(NULL, $klass), $name), $arguments);
                 break;
@@ -695,14 +695,17 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     {
         $klass = get_called_class();
         $obj = new $klass(NULL, $klass);
-        if (is_numeric($filter)) {
+        if ( ! is_array($filter) ) {
             $filter = array($obj->primary_key => $filter);
         }
         $obj->select('*', 1, NULL, $cache);
         $obj->filter($filter)->exec();
+
         if ( ! ($_result = Arr::get($obj->records, 0)))
             throw new Base_Db_Exception_RecordNotFound();
+
         $_result->last_query = $obj->last_query;
+
         return $_result;
     }
 
@@ -825,7 +828,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                     ->filter(Arr::get($args, 2));
                 break;
             case Database::DELETE:
-                $obj->destroy(Arr::get($args, 1));
+                $obj->destroy_query(Arr::get($args, 1));
                 break;
             case Database::INSERT:
                 $obj->insert(Arr::get($args, 1));
@@ -1042,7 +1045,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
 
         $this->with[$name] = array(
                 $klass,
-                array_map(function($i){return $i[1];}, $model_fields),//Arr::path($model_fields, '*.1'),
+                array_map(function($i){return $i[1];}, $model_fields),
                 $model->_table_fields,
                 $type
             );
@@ -1133,7 +1136,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
 
         $system_filters = array();
         $fields = array();
-        if ( ! Arr::is_assoc($filter)) {
+        if ( ! Arr::is_assoc($filter) ) {
             foreach ($filter as $field) {
                 if ( ! array_key_exists($field, $this->_table_columns))
                     continue;
@@ -1143,23 +1146,24 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         else {
             foreach ($filter as $key => $value) {
                 if (in_array($key, $this->system_filters)) {
-                    $system_filters[$key] = $value;
+                    $system_filters[trim($key, ' ')] = $value;
                     unset($filter[$key]);
                     continue;
                 }
                 $_key = $key;
                 if ($this->sql_comparison($key))
-                    $_key = Arr::get(explode(' ', $key), 1);
+                    $_key = Arr::get(explode(' ', trim($key, ' ')), 1);
                 if (array_key_exists($_key, $this->_table_columns)) {
-                    $fields[$key] = $value;
+                    $fields[trim($key, ' ')] = $value;
                     unset($filter[$key]);
                     continue;
                 }
             }
         }
         $this->db_query->where_open();
+
         foreach ($fields as $key => $value) {
-            extract($this->sql_filter_fields($key, $value));
+            extract($this->sql_filter_fields(trim($key, ' '), $value));
             $this->db_query->$clause($this->query_field($key), $comparison_key, $this->sanitize($key, $value));
         }
         $this->db_query->where_close_empty();
@@ -1189,9 +1193,10 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 ->cached(Arr::get($this->select_args, 1));
 
         }
+
         krsort($system_filters);
         foreach($system_filters as $key => $value) {
-             $this->system_filters($key, $value);
+             $this->system_filters(trim($key, ' '), $value);
         }
 
         if ( ! $this->with )
@@ -1199,7 +1204,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
 
         $this->db_query->where_open();
         foreach($filter as $key => $value) {
-            extract($this->sql_filter_fields($key, $value));
+            extract($this->sql_filter_fields(trim($key, ' '), $value));
             $filter_parts = explode('.', $key);
             $relation = Arr::get($this->with, $filter_parts[0]);
             if ( ! $relation )
@@ -1293,7 +1298,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 }
                 break;
             case 'NULL': {
-                $comparison_key = $comparison_key === '<>' ? 'NOT ' : 'IS';
+                $comparison_key = $comparison_key === '<>' ? 'IS NOT ' : 'IS';
                 break;
             }
         }
@@ -1394,6 +1399,22 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         return $this;
     }
 
+    private function destroy_query(array $filter_args = array())
+    {
+        $this->db_query = new Base_Db_Query_Builder_Delete(array($this->db_table, $this->module_name));
+
+
+        if (isset($this->data[$this->primary_key])) {
+            $filter_args = array(
+                $this->primary_key => $this->data[$this->primary_key],
+            );
+        }
+        if ( ! $filter_args ) {
+            $filter_args = Arr::extract($this->data, $this->table_fields());
+        }
+        $this->filter($filter_args);
+    }
+
     /**
      * creates DELETE query object
      *
@@ -1401,33 +1422,29 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      * usage example
      * <code>
      * $model->destroy() // if we already have object
-     * //or
-     * Model_User::destroy($id);
-     * //or
-     * Model_User::destroy(array('login' => 'bla', ....));
+     *
      *</code>
      * @param null $filter
      * @throws Base_Db_Exception_NoRowEffected
      * @return bool
      * @access protected
      */
-    protected function destroy()
+    public function destroy()
     {
-        $this->db_query = DB::delete(array($this->db_table, $this->module_name));
-
         if ( ! $this->_loaded )
             throw new Base_Db_Exception_NotLoadedNodel;
 
+        $this->destroy_query();
         $this->before_delete();
         $db = Database::instance();
         $db->begin();
         try {
-            $this->filter(array($this->primary_key => $filter))->save();
+            $this->save();
             $db->commit();
         }
         catch (Database_Exception $e) {
             $db->rollback();
-            $this->add_error($this->primary_key, $e->message);
+            $this->add_error($this->primary_key, $e->getMessage());
             return FALSE;
         }
         $this->data = array();
@@ -1467,7 +1484,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     protected function exists($filter, $limit = 1, $cache = NULL)
     {
         $this->select('*', $limit, NULL, $cache);
-        if ( ! $filter) $filter = array($this->primary_key);
+        if ( ! $filter ) $filter = array($this->primary_key);
         return $this->filter($filter)->exec();
     }
 
@@ -1490,15 +1507,16 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 {
                     $data = array();
                     foreach ($columns as $field) {
-                        $data[] = $this->sanitize($field, $this->$field);
+                        $data[] = $this->data[$field];
                     }
-                     $this->db_query->values($data);
+                    $this->db_query->values($data);
                 }
                 break;
 
             case 'update':
                 foreach ($this->table_fields() as $field) {
-                    $this->db_query->value($field, $this->sanitize($field, $this->data[$field]));
+                    if (in_array($field, $this->__changed_fields))
+                        $this->db_query->value($field, $this->data[$field]);
                 }
                 break;
 
@@ -1562,6 +1580,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $validator = Validation::factory($data);
         foreach ($rules as $field_name => $_rules)
         {
+            if ($this->__changed_fields && ! in_array($field_name, $this->__changed_fields))
+                continue;
             foreach ($_rules as $key => $rule) {
                 if ($rule === 'unique')
                     $rule = array(array($this, 'unique_validation'), array(':validation', ':field'));
@@ -1636,8 +1656,9 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         else
             $this->update($this->table_fields(true));
         $query_type = $this->query_type();
+
         if ( in_array($query_type, array('insert', 'update'))){
-            if ( ! Base_Db_Validation::check($this, $query_type==='update')
+            if ( ! Base_Db_Validation::check($this, $query_type==='update', $this->__changed_fields)
                 || ! $this->validate())
                 return FALSE;
         }
@@ -1645,10 +1666,10 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $this->before_save();
         $this->prepare_for_query();
 
-        $responce = $this->exec();
+        $response = $this->exec();
 
         $this->after_save();
-        return $responce;
+        return $response;
     }
 
     /**
@@ -1681,15 +1702,15 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     protected function exec()
     {
-        $this->db_query->as_assoc();
         if ($this->order && $this->query_type() === 'select')
             call_user_func_array(array($this->db_query, 'order_by'), $this->order);
-        $result = $this->db_query->execute();
+        $result = $this->db_query->as_assoc()->execute();
         $this->last_query =(string) $this->db_query;
-        $responce = $this->parse_responce($result);
+        $response = $this->parse_responce($result);
+        $this->__changed_fields = array();
         if ($this->auto_clean)
             $this->clean();
-        return $responce;
+        return $response;
     }
 
     /**
@@ -1883,13 +1904,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     public function update_params(array $array)
     {
         foreach ($array as $key => $value) {
-            $func = $this->mutator_func_name($key, 'set');
-            if (method_exists($this, $func)) {
-                $this->data[$key] = call_user_func_array(array($this, $func), array($value));
-            }
-            else {
-                $this->data[$key] = $this->sanitize($key, $value);
-            }
+            $this->$key = $value;
         }
         return $this;
     }
@@ -1950,7 +1965,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     }
 
     /**
-     * return array on wich filed sorting
+     * return array on which filed sorting
      *
      * @access public
      * @return mixed
@@ -1986,7 +2001,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     public function meta_item($key, $default = NULL)
     {
-        return Arr::path($this->meta_data(), $key, $default);
+        return Arr::get($this->meta_data(), $key, $default);
     }
 
     /**
