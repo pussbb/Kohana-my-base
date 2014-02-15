@@ -351,7 +351,7 @@ class Controller_Base_Core extends Controller_Template {
         $this->set_filename($file);
         $this->view->set(array_merge($view_data, $this->dynamic_properties()));
         $this->set_view();
-        $this->response
+        echo $this->response
             ->status(200)
             ->send_headers(TRUE)
             ->body($this->view->render());

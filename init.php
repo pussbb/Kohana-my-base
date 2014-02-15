@@ -28,10 +28,10 @@ if ( Kohana::$environment === Kohana::DEVELOPMENT ) {
     }
     catch(Exception_Tools_Missing $e) {}
     catch(Exception_Tools $e) {}
+    Kohana_Exception::$error_view = 'errors/_';
 }
 
-if ( ! function_exists('debug') )
-{
+if ( ! function_exists('debug') ) {
     /**
     * helper function to print dump of var and exit if needed
     * @param mixed

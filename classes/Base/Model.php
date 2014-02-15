@@ -62,6 +62,14 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     protected $order = array();
 
+
+    /**
+     * set manually table name in database
+     *
+     * @var null
+     */
+    protected $table_name = NULL;
+
     /**
      * sets the primary key name
      * <code>
@@ -98,9 +106,9 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     /**
      * DB object for queries(uses Kohana's DB class)
      * @var object
-     * @access protected
+     * @access private
      */
-    protected $db_query = NULL;
+    private $db_query = NULL;
 
     /**
      * last inserted row in db for table
@@ -229,11 +237,27 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
      */
     const STAT = 4;
 
+    /**
+     * @var array
+     */
     private static $table_columns_cache = array();
+    /**
+     * @var array
+     */
     private static $table_fields_cache = array();
+    /**
+     * @var array
+     */
     private static $db_table_cache = array();
+    /**
+     * @var array
+     */
     private static $module_name_cache = array();
 
+    /**
+     * @var array
+     * @ignore
+     */
     private $__changed_fields = array();
 
     /**
@@ -256,7 +280,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     {
         $klass = $klass?:get_called_class();
         if ( ! ($this->db_table = Arr::get(self::$db_table_cache, $klass)) ) {
-            $this->db_table = self::db_table_name();
+            $this->db_table = $this->table_name?:self::db_table_name();
             self::$db_table_cache[$klass] = $this->db_table;
         }
 
@@ -325,7 +349,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         self::$table_fields_cache[$this->db_table] = $this->_table_fields;
     }
 
-/**
+    /**
      * Check if the given item exists
      *
      * @param string $key
@@ -365,7 +389,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
     }
 
     /**
-     * Get an interator for the data
+     * Get an iterator for the data
      *
      * @return ArrayIterator
      */
@@ -661,6 +685,9 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         return $this->data?:$this->records;
     }
 
+    /**
+     * @return array
+     */
     public function as_deep_array()
     {
         if ($this->records) {
@@ -1081,7 +1108,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         if ( ! is_object($name) )
             return $escape ? "`$this->module_name`$delimiter`$name`" : $this->module_name.$delimiter.$name;
 
-        if (! ($name instanceof Database_Expression) )
+        if ( ! ($name instanceof Database_Expression) )
            throw new Exception_Collection_ObjectNotSupported();
         return $name;
     }
@@ -1410,6 +1437,10 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         return $this;
     }
 
+    /**
+     * @param array $filter_args
+     * @return $this
+     */
     private function destroy_query(array $filter_args = array())
     {
         $this->db_query = new Base_Db_Query_Builder_Delete(array($this->db_table, $this->module_name));
@@ -1424,6 +1455,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             $filter_args = Arr::extract($this->data, $this->table_fields());
         }
         $this->filter($filter_args);
+        return $this;
     }
 
     /**
@@ -1561,7 +1593,6 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
             $value,
             Arr::get($column, 'type')
         );
-
     }
 
     /**

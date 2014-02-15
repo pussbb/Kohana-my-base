@@ -21,7 +21,7 @@ class Controller_Users extends Controller_Core {
 
     public function action_login()
     {
-        $this->errors = array();
+
         $this->set_filename('users/auth');
         $this->append_media('auth');
 
