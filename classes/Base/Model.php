@@ -584,11 +584,13 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $foreign_key = $relation[2];
         $model_key = Arr::get($relation, 3, $this->primary_key);
         $filter[$foreign_key] = $this->data[$model_key];
-        
+
         switch ($type) {
             case self::BELONGS_TO:
-            case self::HAS_ONE:
                 $result = $klass::find(array($model_key=>$this->data[$foreign_key]));
+                break;
+            case self::HAS_ONE:
+                $result = $klass::find($filter);
                 break;
             case self::HAS_MANY:
                 $result = $klass::find_all($filter);
@@ -876,12 +878,19 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $model = new $klass(NULL, $klass);
         $field = Arr::get($relation, 3, $this->primary_key);
         $foreign_key = Arr::get($relation, 2, $model->primary_key);
+
         if ( ! $values )
-            $values = $this->$field;
+            $values = $this->data[$field];
         $select = array(DB::expr('COUNT('.$model->query_field($model->primary_key).')'), 'total_count');
-        $result = $model::select_query($select, array($foreign_key => $values))
+        $filter = array($foreign_key => $values);
+
+        if (Arr::get($relation, 0) === Base_Model::BELONGS_TO)
+            $filter = array($field => $this->data[$foreign_key]);
+
+        $result = $model::select_query($select, $filter)
                         ->execute()
                             ->get('total_count');
+
         return $result > 0;
     }
 
@@ -1034,7 +1043,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
                 $this->db_query = call_user_func_array(array($this->db_query , 'select'), $model_fields);
 
             $this->db_query->join(array($model->db_table, $model->module_name), 'LEFT');
-            if ($type === self::HAS_MANY)
+            if ($type === self::HAS_MANY or $type === self::HAS_ONE)
                 $this->db_query->on($this->query_field($field), '=', $model->query_field($foreign_key));
             else
                 $this->db_query->on($this->query_field($foreign_key), '=', $model->query_field($field));
