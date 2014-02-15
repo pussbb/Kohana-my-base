@@ -351,8 +351,11 @@ class Controller_Base_Core extends Controller_Template {
         $this->set_filename($file);
         $this->view->set(array_merge($view_data, $this->dynamic_properties()));
         $this->set_view();
-        $this->response->body($this->view->render());
-        $this->_safety_render();
+        $this->response
+            ->status(200)
+            ->send_headers(TRUE)
+            ->body($this->view->render());
+        exit(0);
     }
 
     /**
@@ -364,7 +367,7 @@ class Controller_Base_Core extends Controller_Template {
             ->status(200)
             ->send_headers(TRUE)
             ->body('');
-        exit(1);
+        exit(0);
     }
 
     /**
@@ -524,17 +527,6 @@ class Controller_Base_Core extends Controller_Template {
     }
 
     /**
-     * disable template render and call final method of parent class
-     * @return void
-     * @access private
-     */
-    private function _safety_render()
-    {
-        $this->auto_render = FALSE;
-        parent::after();
-    }
-
-    /**
      * set layout name
      * @param string $name - relative path to the view file
      * @return void
@@ -559,8 +551,10 @@ class Controller_Base_Core extends Controller_Template {
         }
 
         if ($this->ajax_auto_partial
-            && $this->request->is_ajax())
-            return $this->render_partial();
+            && $this->request->is_ajax()) {
+            $this->render_partial();
+            return;
+        }
 
         $this->set_view();
 

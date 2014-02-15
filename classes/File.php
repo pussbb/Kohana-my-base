@@ -41,7 +41,7 @@ class File extends Kohana_File {
      * @static
      * @param $absolute_file_name - (string) - full path to the file
      * @access public
-     * @return void
+     * @return bool
      */
     public static function delete($absolute_file_name)
     {
