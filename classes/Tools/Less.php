@@ -26,6 +26,8 @@ class Tools_Less extends Tools {
         $destination = $dest_path.$file_name.'.css';
         $source = Kohana::find_file($source_path, $file_name, 'less');
 
+        if ( ! $source )
+            return;
         if ( ! self::need_compile($source, $destination))
             return;
         $output_dir = pathinfo($destination, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR;

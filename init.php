@@ -14,7 +14,7 @@ Kohana::$config->attach(new Config_File);
 Base_Language::available();
 Base_Gettext::init();
 
-if ( Kohana::$environment != Kohana::DEVELOPMENT ) {
+if ( Kohana::$environment === Kohana::DEVELOPMENT ) {
     try {
         Tools_Coffeescript::check();
         Base_Media::register_media_handler('js', 'Tools_Coffeescript::build_if_needed');
