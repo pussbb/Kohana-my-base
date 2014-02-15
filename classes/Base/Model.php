@@ -583,8 +583,8 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $klass = $relation[1];
         $foreign_key = $relation[2];
         $model_key = Arr::get($relation, 3, $this->primary_key);
-
         $filter[$foreign_key] = $this->data[$model_key];
+        
         switch ($type) {
             case self::BELONGS_TO:
             case self::HAS_ONE:
