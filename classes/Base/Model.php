@@ -429,6 +429,7 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $relation = $this->get_relation($name);
         if ( ! $relation)
             throw new Exception_Collection_PropertyNotExists();
+
         return $this->_relation($name, $relation);
     }
 
@@ -582,14 +583,14 @@ class Base_Model implements Serializable, ArrayAccess,  IteratorAggregate {
         $klass = $relation[1];
         $foreign_key = $relation[2];
         $model_key = Arr::get($relation, 3, $this->primary_key);
-        $filter[$foreign_key] = $this->$model_key;
+        $filter[$model_key] = $this->$foreign_key;
         switch ($type) {
             case self::BELONGS_TO:
             case self::HAS_ONE:
                 $result = $klass::find($filter);
                 break;
             case self::HAS_MANY:
-                $result = $klass::find_all($filter)->records;
+                $result = $klass::find_all($filter);
                 break;
             case self::STAT:
                 $obj = new $klass(NULL, $klass);

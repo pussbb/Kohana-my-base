@@ -87,9 +87,17 @@ class Base_Language {
     public static function available()
     {
         if ( ! self::$available_cache ) {
-            foreach(Model_Language::find_all() as $lang) {
-                self::$available_cache[$lang->code] = $lang;
+            try {
+                foreach(Model_Language::find_all() as $lang) {
+                    self::$available_cache[$lang->code] = $lang;
+                }
+            } catch (Database_Exception $e) {
+                if ($e->getCode() === 1146)
+                    return self::$available_cache['en'] = (object)array('code'=>'en', 'locale'=>'en-EN', 'name' => 'English');
+                else
+                    throw $e;
             }
+
         }
         return self::$available_cache;
     }
