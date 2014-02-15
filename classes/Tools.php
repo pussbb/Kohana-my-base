@@ -154,7 +154,7 @@ class Tools extends Singleton {
             throw new Exception_Tools("You don't have permission to write in  $dir");
     }
     /**
-     * returns error wich retrun external app
+     * returns error whhich retrun external app
      */
     public function error()
     {

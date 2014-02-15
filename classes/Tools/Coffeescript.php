@@ -56,7 +56,7 @@ class Tools_Coffeescript extends Tools {
         $output_dir = pathinfo($destination, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR;
         Dir::create_if_need($output_dir);
 
-        $cmd = 'coffee -o '. $output_dir .' '.$join.' -c '.$source;
+        $cmd = 'coffee -m -o '. $output_dir .' '.$join.' -c '.$source;
 
         $this->exec($cmd);
     }
