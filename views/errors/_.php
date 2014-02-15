@@ -9,5 +9,5 @@
 if ($e instanceof Exception_Tools) {
     include Kohana::find_file('views', 'errors/tools');
 } else {
-    include Kohana::find_file('views', 'errors/error');
+    include Kohana::find_file('views', 'kohana/error');
 }

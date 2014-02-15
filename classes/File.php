@@ -101,7 +101,7 @@ class File extends Kohana_File {
     }
 
     /**
-     * get absoulute file directory name
+     * get absolute file directory name
      *
      * @static
      * @param $file - (string) - filename.
@@ -110,7 +110,10 @@ class File extends Kohana_File {
      */
     static public function dirname($file)
     {
-        return realpath(pathinfo($file, PATHINFO_DIRNAME)).DIRECTORY_SEPARATOR;
+        $dir_name = pathinfo($file, PATHINFO_DIRNAME);
+        if ( is_dir($dir_name) )
+            return realpath($dir_name).DIRECTORY_SEPARATOR;
+        return $dir_name;
     }
 
     /**

@@ -14,12 +14,6 @@
 class Base_Db_Validation {
 
     /**
-     * indicates if record is new
-     * @var bool
-     */
-    private static $new_record = FALSE;
-
-    /**
      * checks if value is integer and if it suites to db type of column
      * @static
      * @param $key
@@ -27,18 +21,15 @@ class Base_Db_Validation {
      * @param $rules
      * @return null
      */
-    public static function int($key, $value, $rules)
+    public static function int($key, $value, $rules, $new_record = FALSE)
     {
         $is_nullable = (bool) Arr::get($rules, 'is_nullable');
         if ($is_nullable && is_null($value) )
             return NULL;
 
         $extra = Arr::get($rules, 'extra');
-        if ($extra) {
-            if (preg_match('/auto_increment/i', $extra)
-                    && Base_Db_Validation::$new_record)
+        if ($extra && (preg_match('/auto_increment/i', $extra) && $new_record))
                 return NULL;
-        }
 
         if (! $is_nullable && ! Valid::not_empty($value))
             return tr('Must not be empty');
@@ -68,7 +59,7 @@ class Base_Db_Validation {
      * @param $rules
      * @return null
      */
-    public static function string($key, $value, $rules)
+    public static function string($key, $value, $rules, $new_record = FALSE)
     {
         $is_nullable = (bool) Arr::get($rules, 'is_nullable');
         if ($is_nullable && is_null($value) )
@@ -92,7 +83,7 @@ class Base_Db_Validation {
      */
     public static function check(&$model, $skip_empty = FALSE, $expected = array())
     {
-        Base_Db_Validation::$new_record = $model->new_record();
+        $new_record = $model->new_record();
         $result = TRUE;
         foreach ($model->get_table_columns() as $key => $rules) {
             $value = Object::property($model, $key);
@@ -102,10 +93,10 @@ class Base_Db_Validation {
             $_result = NULL;
             switch (Arr::get($rules, 'type')) {
                 case 'int':
-                    $_result = Base_Db_Validation::int($key, $value, $rules);
+                    $_result = Base_Db_Validation::int($key, $value, $rules, $new_record);
                     break;
                 case 'string':
-                    $_result = Base_Db_Validation::string($key, $value, $rules);
+                    $_result = Base_Db_Validation::string($key, $value, $rules, $new_record);
                     break;
                 default:
                     $_result = NULL;

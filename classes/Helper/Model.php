@@ -42,8 +42,7 @@ class Helper_Model {
      */
     public static function class_name($name)
     {
-      if (! (bool)preg_match('/[Mm]odel/', $name))
-        {
+      if (! (bool)preg_match('/[Mm]odel/', $name)) {
             $parts = explode('_', $name);
             array_unshift($parts, 'model');
             $name = implode('_', array_filter(array_map('ucfirst', $parts)));
