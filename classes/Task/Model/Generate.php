@@ -74,7 +74,7 @@ class Task_Model_Generate  extends Minion_Task {
                 Minion_CLI::write(" [ $key ] - $dir");
             }
 
-            $ready = Minion_CLI::read("Please make your choise", $choice);
+            $ready = Minion_CLI::read("Please make your choice", $choice);
             $dir = Arr::get($dirs, intval($ready) - 1, 0);
 
             $file = $dir.'classes'.DIRECTORY_SEPARATOR.$file.EXT;
