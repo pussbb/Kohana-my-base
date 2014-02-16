@@ -11,10 +11,9 @@ class Controller_Test extends Controller_Core {
 
     public function action_index()
     {
-        $db = Database::instance();
-        $tables = $db->query(Database::SELECT, 'SHOW TABLES;');
+        $tables = Database::instance()->list_tables();
+
         foreach($tables as $key => $table) {
-            $table = array_values($table)[0];
             $singular = Inflector::singular($table, 1);
             $model_name = Helper_Model::class_name($singular);
             $file = implode(DIRECTORY_SEPARATOR, explode('_', $model_name));
@@ -32,5 +31,6 @@ class Controller_Test extends Controller_Core {
 
         }
         var_dump(Database::instance()->list_columns('news'));
+        var_dump(Database::instance()->list_columns('access_rules'));
     }
 }
